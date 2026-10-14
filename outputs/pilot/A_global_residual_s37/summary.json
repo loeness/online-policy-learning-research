@@ -1,0 +1,43 @@
+{
+  "stage": "A",
+  "method": "global_residual",
+  "seed": 37,
+  "online_steps": 16384,
+  "online_elapsed_s": 10.540459400013788,
+  "evaluation_steps": 4446,
+  "evaluation_elapsed_s": 1.1030429000093136,
+  "online_cumulative_return": 4890.729999999582,
+  "online_reward_per_step": 0.298506469726537,
+  "evaluation": {
+    "shift_cw": {
+      "mean_return": 2.203125,
+      "success_rate": 1.0,
+      "episodes": 64,
+      "steps": 350
+    },
+    "source_after_shift": {
+      "mean_return": -0.9668750000000013,
+      "success_rate": 0.0,
+      "episodes": 64,
+      "steps": 4096
+    }
+  },
+  "peak_agent_state_bytes": 125797,
+  "peak_process_rss_bytes": 320724992,
+  "budget_bytes": 262144,
+  "updates": 1001,
+  "ppo_epochs": 253,
+  "created_nodes": 0,
+  "node_count": 1,
+  "policy_resets": 0,
+  "route_accuracy": 0.0,
+  "route_coverage": 0.0,
+  "limitations": [
+    "synthetic globally rotated actuators and slip",
+    "response dot/cross summary assumes planar action-response structure",
+    "no shared parent promotion/compression evaluated in AB",
+    "no calibrated policy-improvement safety gate",
+    "payload+rollout hard bound; process RSS reported separately",
+    "oracle_keep is diagnostic only"
+  ]
+}

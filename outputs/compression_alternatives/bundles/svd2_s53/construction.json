@@ -1,0 +1,60 @@
+{
+  "source_seed": 53,
+  "method": "svd2",
+  "construction_elapsed_s": 0.0027073000001109904,
+  "compression_optimizer_steps": 0,
+  "construction": {
+    "method": "svd2",
+    "active_nodes": [
+      1,
+      2
+    ],
+    "dtype": "float32",
+    "nodes": {
+      "1": {
+        "learned_coordinates": 136,
+        "index_count": 0,
+        "calibration_observations": 256
+      },
+      "2": {
+        "learned_coordinates": 136,
+        "index_count": 0,
+        "calibration_observations": 256
+      }
+    }
+  },
+  "distillation": null,
+  "construction_explicit_live_tensor_bytes_lower_bound": 108168,
+  "workspace_scope": "explicit tensors; excludes unmeasured autograd/BLAS temporaries and filesystem serialization copies",
+  "initial_representation": {
+    "storage": "svd2",
+    "dtype": "float32",
+    "persistent_policy_tensor_bytes": 40276,
+    "total_policy_bytes": 40276,
+    "base_and_head_tensor_bytes": 39188,
+    "residual_weight_factor_bytes": 1088,
+    "weight_factor_bytes": 1088,
+    "residual_value_bytes": 1088,
+    "coordinate_index_bytes": 0,
+    "index_bytes": 0,
+    "retained_coordinates": 272,
+    "learned_coordinate_count": 272,
+    "optimizer_tensor_bytes": 0,
+    "residual_optimizer_tensor_bytes": 0,
+    "adaptive_tensor_bytes": 1088
+  },
+  "bundle_bytes": 61122,
+  "predicted_warmed_adaptive_bytes": 3280,
+  "source_to_candidate_probability_probe": {
+    "max_probability_difference": 0.21544232964515686,
+    "mean_grid_KL_reference_to_candidate": 0.0020320748933303503,
+    "grid_observations": 19440
+  },
+  "roundtrip_probe": {
+    "max_probability_difference": 9.5367431640625e-07,
+    "mean_grid_KL_reference_to_candidate": -1.0079740783986444e-11,
+    "grid_observations": 19440
+  },
+  "base_actor_unchanged": true,
+  "optimizer_states_initially_empty": true
+}

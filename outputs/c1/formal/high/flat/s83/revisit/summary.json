@@ -1,0 +1,86 @@
+{
+  "online_steps": 8192,
+  "online_cumulative_return": 916.7400000001252,
+  "online_elapsed_s": 6.025939300000118,
+  "route_elapsed_s": 0.35685530003001986,
+  "online_process_cpu_s": 5.796875,
+  "optimizer_updates": 504,
+  "mode": "oracle",
+  "schedule": [
+    [
+      "A0",
+      2048
+    ],
+    [
+      "B0",
+      2048
+    ],
+    [
+      "A1",
+      2048
+    ],
+    [
+      "B1",
+      2048
+    ]
+  ],
+  "base_actor_unchanged": true,
+  "representation": {
+    "storage": "flat",
+    "persistent_policy_tensor_bytes": 48692,
+    "total_policy_bytes": 48692,
+    "base_and_head_tensor_bytes": 39188,
+    "residual_value_bytes": 9504,
+    "residual_weight_factor_bytes": 9504,
+    "weight_factor_bytes": 9504,
+    "coordinate_index_bytes": 0,
+    "index_bytes": 0,
+    "retained_coordinates": 2376,
+    "learned_coordinate_count": 2376,
+    "optimizer_tensor_bytes": 59536,
+    "residual_optimizer_tensor_bytes": 19056,
+    "adaptive_tensor_bytes": 28560
+  },
+  "max_core_bytes": 151222,
+  "rollout_bytes": 23552,
+  "max_agent_bytes": 174774,
+  "max_sampled_process_rss_bytes": 326144000,
+  "explicit_live_tensor_bytes_lower_bound": 153592,
+  "route_exact_accuracy": 1.0,
+  "route_family_accuracy": 1.0,
+  "parent_fallback_fraction": 0.0,
+  "foundation_fallback_fraction": 0.0,
+  "switch_first_correct": [
+    {
+      "context": "A0",
+      "switch_step": 0,
+      "startup": true,
+      "first_correct_delay": 0,
+      "observed_steps": 2048
+    },
+    {
+      "context": "B0",
+      "switch_step": 2048,
+      "startup": false,
+      "first_correct_delay": 0,
+      "observed_steps": 2048
+    },
+    {
+      "context": "A1",
+      "switch_step": 4096,
+      "startup": false,
+      "first_correct_delay": 0,
+      "observed_steps": 2048
+    },
+    {
+      "context": "B1",
+      "switch_step": 6144,
+      "startup": false,
+      "first_correct_delay": 0,
+      "observed_steps": 2048
+    }
+  ],
+  "calibration_interactions_added": 8192,
+  "unknown_switches_not_given_to_router": false,
+  "bundle_bytes": 149324
+}

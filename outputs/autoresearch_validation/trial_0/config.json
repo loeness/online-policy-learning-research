@@ -1,0 +1,25 @@
+{
+  "pretrain_transitions": 20000,
+  "bc_updates": 1500,
+  "learning_rate": 0.001,
+  "ent_coef": 0.04,
+  "route_window": 16,
+  "novelty_threshold": 0.3,
+  "a_steps": 8192,
+  "bout_steps": 4096,
+  "agent_budget_bytes": 262144,
+  "stage": "A",
+  "method": "global_residual",
+  "seed": 901,
+  "sequence": [
+    "cw"
+  ],
+  "steps": 8192,
+  "dataset": "data/pretrain_source.npz",
+  "checkpoint": "data/foundation.pt",
+  "oracle": false,
+  "hidden_labels_agent_visible": false,
+  "phase_C_shared_consolidation": false,
+  "gain_gate": "new residual uses are experimental online trials; no certified improvement gate in AB",
+  "switch_rule": "fixed external interaction-step clock; changes may occur inside episodes"
+}

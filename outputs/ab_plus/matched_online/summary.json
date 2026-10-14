@@ -1,0 +1,198 @@
+{
+  "config": {
+    "learning_rate": 0.01,
+    "ent_coef": 0.06,
+    "route_window": 16,
+    "novelty_threshold": 0.3,
+    "a_steps": 16384,
+    "stage_b_steps": 32768,
+    "bout_steps": 4096,
+    "agent_budget_bytes": 262144,
+    "source_seeds": [
+      41,
+      53,
+      67
+    ],
+    "seeds": [
+      41,
+      53,
+      67
+    ],
+    "source_root": "outputs/validated",
+    "dataset": "data/pretrain_source.npz",
+    "foundation": "data/foundation.pt",
+    "deployment_contexts": [
+      "normal",
+      "cw",
+      "ccw",
+      "cw_slip",
+      "ccw_slip"
+    ],
+    "contexts": [
+      "normal",
+      "cw",
+      "ccw",
+      "cw_slip",
+      "ccw_slip"
+    ],
+    "deployment_steps": 2048,
+    "early_window_steps": 128,
+    "evaluation_seed_offset": 400000,
+    "analytic_stages": [
+      "A",
+      "B"
+    ],
+    "analytic_window": 16,
+    "analytic_minimum_events": 5,
+    "continuation_sequence": [
+      "cw",
+      "ccw"
+    ],
+    "continuation_bout_steps": 4096,
+    "continuation_steps": 8192,
+    "deterministic": false
+  },
+  "runs": [
+    {
+      "seed": 41,
+      "stage": "A",
+      "variant": "global_residual",
+      "steps": 16384,
+      "evaluation_seed": 410041,
+      "context_schedule": [
+        "cw"
+      ],
+      "full_cumulative_reward": 4761.979999999518,
+      "complete_episode_success_rate": 0.9813345776948204,
+      "completed_episodes": 2143,
+      "successful_episodes": 2103,
+      "online_elapsed_s": 10.141387399999985,
+      "policy_updates": 1009,
+      "peak_accounted_state_bytes": 141538,
+      "max_sampled_process_rss_bytes": 323719168,
+      "initial_seed_alignment": "same initial environment and action RNG as analytic; own online trajectories",
+      "scope": "PPO from source-only foundation, not terminal-policy replay"
+    },
+    {
+      "seed": 53,
+      "stage": "A",
+      "variant": "global_residual",
+      "steps": 16384,
+      "evaluation_seed": 410053,
+      "context_schedule": [
+        "cw"
+      ],
+      "full_cumulative_reward": 4568.229999999386,
+      "complete_episode_success_rate": 0.9767666989351403,
+      "completed_episodes": 2066,
+      "successful_episodes": 2018,
+      "online_elapsed_s": 10.142201900000146,
+      "policy_updates": 976,
+      "peak_accounted_state_bytes": 141538,
+      "max_sampled_process_rss_bytes": 327688192,
+      "initial_seed_alignment": "same initial environment and action RNG as analytic; own online trajectories",
+      "scope": "PPO from source-only foundation, not terminal-policy replay"
+    },
+    {
+      "seed": 67,
+      "stage": "A",
+      "variant": "global_residual",
+      "steps": 16384,
+      "evaluation_seed": 410067,
+      "context_schedule": [
+        "cw"
+      ],
+      "full_cumulative_reward": 4788.729999999549,
+      "complete_episode_success_rate": 0.9794967381174278,
+      "completed_episodes": 2146,
+      "successful_episodes": 2102,
+      "online_elapsed_s": 10.264151599999877,
+      "policy_updates": 989,
+      "peak_accounted_state_bytes": 141602,
+      "max_sampled_process_rss_bytes": 331272192,
+      "initial_seed_alignment": "same initial environment and action RNG as analytic; own online trajectories",
+      "scope": "PPO from source-only foundation, not terminal-policy replay"
+    },
+    {
+      "seed": 41,
+      "stage": "B",
+      "variant": "history_keep",
+      "steps": 32768,
+      "evaluation_seed": 420041,
+      "context_schedule": [
+        "cw",
+        "ccw",
+        "cw",
+        "cw_slip",
+        "normal",
+        "ccw_slip",
+        "cw",
+        "ccw"
+      ],
+      "full_cumulative_reward": 8610.710000001436,
+      "complete_episode_success_rate": 0.9761843127103288,
+      "completed_episodes": 3863,
+      "successful_episodes": 3771,
+      "online_elapsed_s": 19.904274800000167,
+      "policy_updates": 1963,
+      "peak_accounted_state_bytes": 144409,
+      "max_sampled_process_rss_bytes": 332857344,
+      "initial_seed_alignment": "same initial environment and action RNG as analytic; own online trajectories",
+      "scope": "PPO from source-only foundation, not terminal-policy replay"
+    },
+    {
+      "seed": 53,
+      "stage": "B",
+      "variant": "history_keep",
+      "steps": 32768,
+      "evaluation_seed": 420053,
+      "context_schedule": [
+        "cw",
+        "ccw",
+        "cw",
+        "cw_slip",
+        "normal",
+        "ccw_slip",
+        "cw",
+        "ccw"
+      ],
+      "full_cumulative_reward": 9001.710000000607,
+      "complete_episode_success_rate": 0.9805992141453831,
+      "completed_episodes": 4072,
+      "successful_episodes": 3993,
+      "online_elapsed_s": 19.910923900000398,
+      "policy_updates": 1985,
+      "peak_accounted_state_bytes": 144473,
+      "max_sampled_process_rss_bytes": 335593472,
+      "initial_seed_alignment": "same initial environment and action RNG as analytic; own online trajectories",
+      "scope": "PPO from source-only foundation, not terminal-policy replay"
+    },
+    {
+      "seed": 67,
+      "stage": "B",
+      "variant": "history_keep",
+      "steps": 32768,
+      "evaluation_seed": 420067,
+      "context_schedule": [
+        "cw",
+        "ccw",
+        "cw",
+        "cw_slip",
+        "normal",
+        "ccw_slip",
+        "cw",
+        "ccw"
+      ],
+      "full_cumulative_reward": 8598.46000000133,
+      "complete_episode_success_rate": 0.9728274801332991,
+      "completed_episodes": 3901,
+      "successful_episodes": 3795,
+      "online_elapsed_s": 19.82569620000004,
+      "policy_updates": 1991,
+      "peak_accounted_state_bytes": 144473,
+      "max_sampled_process_rss_bytes": 338673664,
+      "initial_seed_alignment": "same initial environment and action RNG as analytic; own online trajectories",
+      "scope": "PPO from source-only foundation, not terminal-policy replay"
+    }
+  ]
+}

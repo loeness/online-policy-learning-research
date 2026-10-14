@@ -1,0 +1,854 @@
+{
+  "seed": 83,
+  "method": "dictionary",
+  "tier": "low",
+  "cap_bytes": 188416,
+  "seen": {
+    "online_steps": 32768,
+    "online_cumulative_return": 3560.459999999259,
+    "online_elapsed_s": 24.64394429999993,
+    "route_elapsed_s": 1.4998867000158498,
+    "online_process_cpu_s": 24.046875,
+    "optimizer_updates": 1969,
+    "mode": "oracle",
+    "schedule": [
+      [
+        "A0",
+        4096
+      ],
+      [
+        "B0",
+        4096
+      ],
+      [
+        "A1",
+        4096
+      ],
+      [
+        "B1",
+        4096
+      ],
+      [
+        "A0",
+        4096
+      ],
+      [
+        "B0",
+        4096
+      ],
+      [
+        "A1",
+        4096
+      ],
+      [
+        "B1",
+        4096
+      ]
+    ],
+    "base_actor_unchanged": true,
+    "representation": {
+      "storage": "dictionary",
+      "persistent_policy_tensor_bytes": 44300,
+      "total_policy_bytes": 44300,
+      "base_and_head_tensor_bytes": 39188,
+      "residual_value_bytes": 5112,
+      "residual_weight_factor_bytes": 5112,
+      "weight_factor_bytes": 5112,
+      "coordinate_index_bytes": 0,
+      "index_bytes": 0,
+      "retained_coordinates": 1278,
+      "learned_coordinate_count": 1278,
+      "optimizer_tensor_bytes": 50436,
+      "residual_optimizer_tensor_bytes": 9956,
+      "adaptive_tensor_bytes": 15068
+    },
+    "max_core_bytes": 130948,
+    "rollout_bytes": 23552,
+    "max_agent_bytes": 154500,
+    "max_sampled_process_rss_bytes": 326565888,
+    "explicit_live_tensor_bytes_lower_bound": 143268,
+    "route_exact_accuracy": 1.0,
+    "route_family_accuracy": 1.0,
+    "parent_fallback_fraction": 0.0,
+    "foundation_fallback_fraction": 0.0,
+    "switch_first_correct": [
+      {
+        "context": "A0",
+        "switch_step": 0,
+        "startup": true,
+        "first_correct_delay": 0,
+        "observed_steps": 4096
+      },
+      {
+        "context": "B0",
+        "switch_step": 4096,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 4096
+      },
+      {
+        "context": "A1",
+        "switch_step": 8192,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 4096
+      },
+      {
+        "context": "B1",
+        "switch_step": 12288,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 4096
+      },
+      {
+        "context": "A0",
+        "switch_step": 16384,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 4096
+      },
+      {
+        "context": "B0",
+        "switch_step": 20480,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 4096
+      },
+      {
+        "context": "A1",
+        "switch_step": 24576,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 4096
+      },
+      {
+        "context": "B1",
+        "switch_step": 28672,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 4096
+      }
+    ],
+    "calibration_interactions_added": 32768,
+    "unknown_switches_not_given_to_router": false,
+    "bundle_bytes": 129230
+  },
+  "seen_eval": {
+    "A0": {
+      "context": "A0",
+      "route": 1,
+      "seed": 83000,
+      "online_steps": 512,
+      "online_cumulative_return": 33.88999999999979,
+      "completed_episodes": 16,
+      "successful_episodes": 13,
+      "success_rate": 0.8125,
+      "unfinished_episode_steps": 56,
+      "unfinished_episode_return": -1.180000000000001,
+      "inference_elapsed_s": 0.16673549999813986,
+      "elapsed_s": 0.17257599999993545,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "A1": {
+      "context": "A1",
+      "route": 2,
+      "seed": 83001,
+      "online_steps": 512,
+      "online_cumulative_return": 110.6399999999995,
+      "completed_episodes": 34,
+      "successful_episodes": 33,
+      "success_rate": 0.9705882352941176,
+      "unfinished_episode_steps": 10,
+      "unfinished_episode_return": 2.2,
+      "inference_elapsed_s": 0.1701266000054602,
+      "elapsed_s": 0.17612589999998818,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B0": {
+      "context": "B0",
+      "route": 4,
+      "seed": 83003,
+      "online_steps": 512,
+      "online_cumulative_return": 125.6399999999995,
+      "completed_episodes": 38,
+      "successful_episodes": 38,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 5,
+      "unfinished_episode_return": 1.1,
+      "inference_elapsed_s": 0.16505319999942003,
+      "elapsed_s": 0.1708621999996467,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B1": {
+      "context": "B1",
+      "route": 5,
+      "seed": 83004,
+      "online_steps": 512,
+      "online_cumulative_return": 148.6399999999995,
+      "completed_episodes": 45,
+      "successful_episodes": 45,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 2,
+      "unfinished_episode_return": 0.44,
+      "inference_elapsed_s": 0.1672783999965759,
+      "elapsed_s": 0.17332070000020394,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    }
+  },
+  "cold": {
+    "A2": {
+      "foundation": {
+        "context": "A2",
+        "route": 0,
+        "seed": 83002,
+        "online_steps": 1024,
+        "online_cumulative_return": -22.97000000000003,
+        "completed_episodes": 17,
+        "successful_episodes": 2,
+        "success_rate": 0.11764705882352941,
+        "unfinished_episode_steps": 39,
+        "unfinished_episode_return": -2.17,
+        "inference_elapsed_s": 0.28156309998985307,
+        "elapsed_s": 0.2916368000001057,
+        "gradient_updates": 0,
+        "parameter_hash_unchanged": true,
+        "routing_mode": "oracle_diagnostic"
+      },
+      "shared_or_sibling_reuse": {
+        "context": "A2",
+        "route": 7,
+        "seed": 83002,
+        "online_steps": 1024,
+        "online_cumulative_return": 53.52999999999955,
+        "completed_episodes": 29,
+        "successful_episodes": 18,
+        "success_rate": 0.6206896551724138,
+        "unfinished_episode_steps": 0,
+        "unfinished_episode_return": 0.0,
+        "inference_elapsed_s": 0.36411529999168124,
+        "elapsed_s": 0.37592339999991964,
+        "gradient_updates": 0,
+        "parameter_hash_unchanged": true,
+        "routing_mode": "oracle_diagnostic"
+      }
+    },
+    "B2": {
+      "foundation": {
+        "context": "B2",
+        "route": 0,
+        "seed": 83005,
+        "online_steps": 1024,
+        "online_cumulative_return": -14.469999999999835,
+        "completed_episodes": 16,
+        "successful_episodes": 2,
+        "success_rate": 0.125,
+        "unfinished_episode_steps": 46,
+        "unfinished_episode_return": -2.379999999999999,
+        "inference_elapsed_s": 0.2898191999975097,
+        "elapsed_s": 0.3004273999999896,
+        "gradient_updates": 0,
+        "parameter_hash_unchanged": true,
+        "routing_mode": "oracle_diagnostic"
+      },
+      "shared_or_sibling_reuse": {
+        "context": "B2",
+        "route": 8,
+        "seed": 83005,
+        "online_steps": 1024,
+        "online_cumulative_return": 8.5300000000004,
+        "completed_episodes": 19,
+        "successful_episodes": 5,
+        "success_rate": 0.2631578947368421,
+        "unfinished_episode_steps": 60,
+        "unfinished_episode_return": -0.3000000000000014,
+        "inference_elapsed_s": 0.34476150000000416,
+        "elapsed_s": 0.3557850000001963,
+        "gradient_updates": 0,
+        "parameter_hash_unchanged": true,
+        "routing_mode": "oracle_diagnostic"
+      }
+    }
+  },
+  "heldout_initialization_s": 0.00011150000000270666,
+  "heldout": {
+    "online_steps": 16384,
+    "online_cumulative_return": 3235.4799999993247,
+    "online_elapsed_s": 12.220706999999948,
+    "route_elapsed_s": 0.7105128999578483,
+    "online_process_cpu_s": 11.875,
+    "optimizer_updates": 983,
+    "mode": "oracle",
+    "schedule": [
+      [
+        "A2",
+        8192
+      ],
+      [
+        "B2",
+        8192
+      ]
+    ],
+    "base_actor_unchanged": true,
+    "representation": {
+      "storage": "dictionary",
+      "persistent_policy_tensor_bytes": 44300,
+      "total_policy_bytes": 44300,
+      "base_and_head_tensor_bytes": 39188,
+      "residual_value_bytes": 5112,
+      "residual_weight_factor_bytes": 5112,
+      "weight_factor_bytes": 5112,
+      "coordinate_index_bytes": 0,
+      "index_bytes": 0,
+      "retained_coordinates": 1278,
+      "learned_coordinate_count": 1278,
+      "optimizer_tensor_bytes": 50732,
+      "residual_optimizer_tensor_bytes": 10252,
+      "adaptive_tensor_bytes": 15364
+    },
+    "max_core_bytes": 132786,
+    "rollout_bytes": 23552,
+    "max_agent_bytes": 156338,
+    "max_sampled_process_rss_bytes": 326115328,
+    "explicit_live_tensor_bytes_lower_bound": 143564,
+    "route_exact_accuracy": 1.0,
+    "route_family_accuracy": 1.0,
+    "parent_fallback_fraction": 0.0,
+    "foundation_fallback_fraction": 0.0,
+    "switch_first_correct": [
+      {
+        "context": "A2",
+        "switch_step": 0,
+        "startup": true,
+        "first_correct_delay": 0,
+        "observed_steps": 8192
+      },
+      {
+        "context": "B2",
+        "switch_step": 8192,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 8192
+      }
+    ],
+    "calibration_interactions_added": 16384,
+    "unknown_switches_not_given_to_router": false,
+    "bundle_bytes": 131056
+  },
+  "adapted_eval": {
+    "A0": {
+      "context": "A0",
+      "route": 1,
+      "seed": 83000,
+      "online_steps": 512,
+      "online_cumulative_return": 7.140000000000026,
+      "completed_episodes": 11,
+      "successful_episodes": 5,
+      "success_rate": 0.45454545454545453,
+      "unfinished_episode_steps": 1,
+      "unfinished_episode_return": -0.03,
+      "inference_elapsed_s": 0.1812165999986064,
+      "elapsed_s": 0.18717370000013034,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "A1": {
+      "context": "A1",
+      "route": 2,
+      "seed": 83001,
+      "online_steps": 512,
+      "online_cumulative_return": 116.88999999999952,
+      "completed_episodes": 35,
+      "successful_episodes": 35,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 11,
+      "unfinished_episode_return": 2.1700000000000004,
+      "inference_elapsed_s": 0.16355980000571435,
+      "elapsed_s": 0.16914719999977024,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "A2": {
+      "context": "A2",
+      "route": 3,
+      "seed": 83002,
+      "online_steps": 512,
+      "online_cumulative_return": 147.3899999999995,
+      "completed_episodes": 43,
+      "successful_episodes": 43,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 8,
+      "unfinished_episode_return": 1.76,
+      "inference_elapsed_s": 0.16050939999740876,
+      "elapsed_s": 0.16623610000033295,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B0": {
+      "context": "B0",
+      "route": 4,
+      "seed": 83003,
+      "online_steps": 512,
+      "online_cumulative_return": 50.889999999999574,
+      "completed_episodes": 18,
+      "successful_episodes": 17,
+      "success_rate": 0.9444444444444444,
+      "unfinished_episode_steps": 9,
+      "unfinished_episode_return": 1.48,
+      "inference_elapsed_s": 0.15980970001191963,
+      "elapsed_s": 0.16512820000025386,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B1": {
+      "context": "B1",
+      "route": 5,
+      "seed": 83004,
+      "online_steps": 512,
+      "online_cumulative_return": 141.88999999999953,
+      "completed_episodes": 43,
+      "successful_episodes": 43,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 7,
+      "unfinished_episode_return": 1.54,
+      "inference_elapsed_s": 0.18397679999679895,
+      "elapsed_s": 0.1907613000003039,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B2": {
+      "context": "B2",
+      "route": 6,
+      "seed": 83005,
+      "online_steps": 512,
+      "online_cumulative_return": 149.6399999999995,
+      "completed_episodes": 43,
+      "successful_episodes": 43,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 1,
+      "unfinished_episode_return": 0.22,
+      "inference_elapsed_s": 0.17638470000156303,
+      "elapsed_s": 0.1824587999999494,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    }
+  },
+  "revisit": {
+    "online_steps": 8192,
+    "online_cumulative_return": 1784.240000000152,
+    "online_elapsed_s": 5.882896699999947,
+    "route_elapsed_s": 0.34518120001121133,
+    "online_process_cpu_s": 5.875,
+    "optimizer_updates": 486,
+    "mode": "oracle",
+    "schedule": [
+      [
+        "A0",
+        2048
+      ],
+      [
+        "B0",
+        2048
+      ],
+      [
+        "A1",
+        2048
+      ],
+      [
+        "B1",
+        2048
+      ]
+    ],
+    "base_actor_unchanged": true,
+    "representation": {
+      "storage": "dictionary",
+      "persistent_policy_tensor_bytes": 44300,
+      "total_policy_bytes": 44300,
+      "base_and_head_tensor_bytes": 39188,
+      "residual_value_bytes": 5112,
+      "residual_weight_factor_bytes": 5112,
+      "weight_factor_bytes": 5112,
+      "coordinate_index_bytes": 0,
+      "index_bytes": 0,
+      "retained_coordinates": 1278,
+      "learned_coordinate_count": 1278,
+      "optimizer_tensor_bytes": 50732,
+      "residual_optimizer_tensor_bytes": 10252,
+      "adaptive_tensor_bytes": 15364
+    },
+    "max_core_bytes": 132850,
+    "rollout_bytes": 23552,
+    "max_agent_bytes": 156402,
+    "max_sampled_process_rss_bytes": 325836800,
+    "explicit_live_tensor_bytes_lower_bound": 143564,
+    "route_exact_accuracy": 1.0,
+    "route_family_accuracy": 1.0,
+    "parent_fallback_fraction": 0.0,
+    "foundation_fallback_fraction": 0.0,
+    "switch_first_correct": [
+      {
+        "context": "A0",
+        "switch_step": 0,
+        "startup": true,
+        "first_correct_delay": 0,
+        "observed_steps": 2048
+      },
+      {
+        "context": "B0",
+        "switch_step": 2048,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 2048
+      },
+      {
+        "context": "A1",
+        "switch_step": 4096,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 2048
+      },
+      {
+        "context": "B1",
+        "switch_step": 6144,
+        "startup": false,
+        "first_correct_delay": 0,
+        "observed_steps": 2048
+      }
+    ],
+    "calibration_interactions_added": 8192,
+    "unknown_switches_not_given_to_router": false,
+    "bundle_bytes": 131120
+  },
+  "final_eval": {
+    "A0": {
+      "context": "A0",
+      "route": 1,
+      "seed": 83000,
+      "online_steps": 512,
+      "online_cumulative_return": 140.3899999999995,
+      "completed_episodes": 42,
+      "successful_episodes": 42,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 1,
+      "unfinished_episode_return": 0.22,
+      "inference_elapsed_s": 0.16520690000152172,
+      "elapsed_s": 0.17095900000003894,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "A1": {
+      "context": "A1",
+      "route": 2,
+      "seed": 83001,
+      "online_steps": 512,
+      "online_cumulative_return": 141.8899999999995,
+      "completed_episodes": 42,
+      "successful_episodes": 42,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 11,
+      "unfinished_episode_return": 2.4200000000000004,
+      "inference_elapsed_s": 0.16322989999980564,
+      "elapsed_s": 0.1690379000001485,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "A2": {
+      "context": "A2",
+      "route": 3,
+      "seed": 83002,
+      "online_steps": 512,
+      "online_cumulative_return": 149.6399999999995,
+      "completed_episodes": 44,
+      "successful_episodes": 44,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 3,
+      "unfinished_episode_return": 0.66,
+      "inference_elapsed_s": 0.17601009999862072,
+      "elapsed_s": 0.18235749999985273,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B0": {
+      "context": "B0",
+      "route": 4,
+      "seed": 83003,
+      "online_steps": 512,
+      "online_cumulative_return": 150.8899999999995,
+      "completed_episodes": 44,
+      "successful_episodes": 44,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 6,
+      "unfinished_episode_return": 1.32,
+      "inference_elapsed_s": 0.15978490000497914,
+      "elapsed_s": 0.16560460000027888,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B1": {
+      "context": "B1",
+      "route": 5,
+      "seed": 83004,
+      "online_steps": 512,
+      "online_cumulative_return": 150.1399999999995,
+      "completed_episodes": 45,
+      "successful_episodes": 45,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 8,
+      "unfinished_episode_return": 1.76,
+      "inference_elapsed_s": 0.17029279999678693,
+      "elapsed_s": 0.1767257999999856,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B2": {
+      "context": "B2",
+      "route": 6,
+      "seed": 83005,
+      "online_steps": 512,
+      "online_cumulative_return": 147.8899999999995,
+      "completed_episodes": 42,
+      "successful_episodes": 42,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 8,
+      "unfinished_episode_return": 1.76,
+      "inference_elapsed_s": 0.17139130000077785,
+      "elapsed_s": 0.1775327999998808,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    }
+  },
+  "history": {
+    "online_steps": 6144,
+    "online_cumulative_return": 1684.180000000142,
+    "online_elapsed_s": 12.674683799999912,
+    "route_elapsed_s": 8.020594299978711,
+    "online_process_cpu_s": 12.453125,
+    "optimizer_updates": 384,
+    "mode": "calibrated_history",
+    "schedule": [
+      [
+        "B2",
+        1024
+      ],
+      [
+        "A0",
+        1024
+      ],
+      [
+        "B1",
+        1024
+      ],
+      [
+        "A2",
+        1024
+      ],
+      [
+        "B0",
+        1024
+      ],
+      [
+        "A1",
+        1024
+      ]
+    ],
+    "base_actor_unchanged": true,
+    "representation": {
+      "storage": "dictionary",
+      "persistent_policy_tensor_bytes": 44300,
+      "total_policy_bytes": 44300,
+      "base_and_head_tensor_bytes": 39188,
+      "residual_value_bytes": 5112,
+      "residual_weight_factor_bytes": 5112,
+      "weight_factor_bytes": 5112,
+      "coordinate_index_bytes": 0,
+      "index_bytes": 0,
+      "retained_coordinates": 1278,
+      "learned_coordinate_count": 1278,
+      "optimizer_tensor_bytes": 50732,
+      "residual_optimizer_tensor_bytes": 10252,
+      "adaptive_tensor_bytes": 15364
+    },
+    "max_core_bytes": 136498,
+    "rollout_bytes": 23552,
+    "max_agent_bytes": 160050,
+    "max_sampled_process_rss_bytes": 326553600,
+    "explicit_live_tensor_bytes_lower_bound": 143708,
+    "route_exact_accuracy": 0.9269205729166666,
+    "route_family_accuracy": 0.99072265625,
+    "parent_fallback_fraction": 0.062174479166666664,
+    "foundation_fallback_fraction": 0.00048828125,
+    "switch_first_correct": [
+      {
+        "context": "B2",
+        "switch_step": 0,
+        "startup": true,
+        "first_correct_delay": 3,
+        "observed_steps": 1024
+      },
+      {
+        "context": "A0",
+        "switch_step": 1024,
+        "startup": false,
+        "first_correct_delay": 11,
+        "observed_steps": 1024
+      },
+      {
+        "context": "B1",
+        "switch_step": 2048,
+        "startup": false,
+        "first_correct_delay": 10,
+        "observed_steps": 1024
+      },
+      {
+        "context": "A2",
+        "switch_step": 3072,
+        "startup": false,
+        "first_correct_delay": 24,
+        "observed_steps": 1024
+      },
+      {
+        "context": "B0",
+        "switch_step": 4096,
+        "startup": false,
+        "first_correct_delay": 28,
+        "observed_steps": 1024
+      },
+      {
+        "context": "A1",
+        "switch_step": 5120,
+        "startup": false,
+        "first_correct_delay": 14,
+        "observed_steps": 1024
+      }
+    ],
+    "calibration_interactions_added": 0,
+    "unknown_switches_not_given_to_router": true,
+    "bundle_bytes": 134704
+  },
+  "history_eval": {
+    "A0": {
+      "context": "A0",
+      "route": 1,
+      "seed": 83000,
+      "online_steps": 512,
+      "online_cumulative_return": 125.13999999999952,
+      "completed_episodes": 38,
+      "successful_episodes": 38,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 3,
+      "unfinished_episode_return": 0.15999999999999998,
+      "inference_elapsed_s": 0.1596423999972103,
+      "elapsed_s": 0.16524499999968612,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "A1": {
+      "context": "A1",
+      "route": 2,
+      "seed": 83001,
+      "online_steps": 512,
+      "online_cumulative_return": 144.1399999999995,
+      "completed_episodes": 43,
+      "successful_episodes": 43,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 3,
+      "unfinished_episode_return": 0.66,
+      "inference_elapsed_s": 0.1571964000090702,
+      "elapsed_s": 0.16284779999978127,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "A2": {
+      "context": "A2",
+      "route": 3,
+      "seed": 83002,
+      "online_steps": 512,
+      "online_cumulative_return": 149.1399999999995,
+      "completed_episodes": 44,
+      "successful_episodes": 44,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 1,
+      "unfinished_episode_return": 0.22,
+      "inference_elapsed_s": 0.1570200999944973,
+      "elapsed_s": 0.1628529000004164,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B0": {
+      "context": "B0",
+      "route": 4,
+      "seed": 83003,
+      "online_steps": 512,
+      "online_cumulative_return": 145.8899999999995,
+      "completed_episodes": 43,
+      "successful_episodes": 43,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 4,
+      "unfinished_episode_return": 0.88,
+      "inference_elapsed_s": 0.15835610000203815,
+      "elapsed_s": 0.1639897000000019,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B1": {
+      "context": "B1",
+      "route": 5,
+      "seed": 83004,
+      "online_steps": 512,
+      "online_cumulative_return": 146.3899999999995,
+      "completed_episodes": 44,
+      "successful_episodes": 44,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 10,
+      "unfinished_episode_return": 2.2,
+      "inference_elapsed_s": 0.1564400000029309,
+      "elapsed_s": 0.16208430000006047,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    },
+    "B2": {
+      "context": "B2",
+      "route": 6,
+      "seed": 83005,
+      "online_steps": 512,
+      "online_cumulative_return": 151.8899999999995,
+      "completed_episodes": 43,
+      "successful_episodes": 43,
+      "success_rate": 1.0,
+      "unfinished_episode_steps": 10,
+      "unfinished_episode_return": 2.2,
+      "inference_elapsed_s": 0.16260320000174033,
+      "elapsed_s": 0.16834269999981188,
+      "gradient_updates": 0,
+      "parameter_hash_unchanged": true,
+      "routing_mode": "oracle_diagnostic"
+    }
+  },
+  "history_scope": "hidden-label continuation with oracle-calibrated empirical prototypes; fixed tree and groups",
+  "train_interactions": 63488,
+  "evaluation_interactions": 15360
+}

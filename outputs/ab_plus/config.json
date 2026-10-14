@@ -1,0 +1,53 @@
+{
+  "learning_rate": 0.01,
+  "ent_coef": 0.06,
+  "route_window": 16,
+  "novelty_threshold": 0.3,
+  "a_steps": 16384,
+  "stage_b_steps": 32768,
+  "bout_steps": 4096,
+  "agent_budget_bytes": 262144,
+  "source_seeds": [
+    41,
+    53,
+    67
+  ],
+  "seeds": [
+    41,
+    53,
+    67
+  ],
+  "source_root": "outputs/validated",
+  "dataset": "data/pretrain_source.npz",
+  "foundation": "data/foundation.pt",
+  "deployment_contexts": [
+    "normal",
+    "cw",
+    "ccw",
+    "cw_slip",
+    "ccw_slip"
+  ],
+  "contexts": [
+    "normal",
+    "cw",
+    "ccw",
+    "cw_slip",
+    "ccw_slip"
+  ],
+  "deployment_steps": 2048,
+  "early_window_steps": 128,
+  "evaluation_seed_offset": 400000,
+  "analytic_stages": [
+    "A",
+    "B"
+  ],
+  "analytic_window": 16,
+  "analytic_minimum_events": 5,
+  "continuation_sequence": [
+    "cw",
+    "ccw"
+  ],
+  "continuation_bout_steps": 4096,
+  "continuation_steps": 8192,
+  "deterministic": false
+}
