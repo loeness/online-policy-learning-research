@@ -1,0 +1,40 @@
+{
+  "stage": "tree_bc",
+  "method": "tree",
+  "control": "bc",
+  "coefficient": 0.1,
+  "seed": 167,
+  "tier": "high",
+  "tier_config": {
+    "leaf_rank": 2,
+    "dictionary_rank": 12
+  },
+  "params": {
+    "learning_rate": 0.01,
+    "ent_coef": 0.06
+  },
+  "schedule": {
+    "seen_bout_steps": 4096,
+    "heldout_bout_steps": 8192,
+    "revisit_bout_steps": 2048,
+    "history_bout_steps": 1024,
+    "eval_steps": 512,
+    "cold_eval_steps": 1024
+  },
+  "validation": false,
+  "complete_agent_cap_bytes": 204800,
+  "adaptive_parameter_optimizer_cap_bytes": 30700,
+  "budget_classification": "original_compressed_budget",
+  "input_sha256": {
+    "configs\\c1_supplement.json": "be47e6f672372779fd4512a9b8969fa8eafd8b7d2007eed7968a25d0b83322f9",
+    "configs\\c1.json": "7e24e002dfcc80809e28c4d6f97d42ec5a7ad1055752eb8a56742ae3275ebde0",
+    "data\\foundation.pt": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+    "data\\pretrain_source.npz": "493c67dc07393a674deb6aa7ab5ba4feea3c1a48eacc16b37046a12606bc56f2",
+    "docs\\C1_SUPPLEMENT_PROTOCOL.md": "9d88bf3420bdb782426ba36691f720d530b519de4a3649ed1896515867d3f1db",
+    "src\\online_rl\\c1_supplement_experiment.py": "8fba8bb6d2fa5431221d8acdd308d5db47e46f8241071ec83416df96ef6b7aab",
+    "src\\online_rl\\c1_experiment.py": "5fa3e166d91c1043c124b9a842607c6e54b5f23d15af4453bdf2b11abceb04c7",
+    "src\\online_rl\\c1_continual_controls.py": "db2785a573a552f121287dbe24336120ac9f66882773d3ff5a1be69e316030db",
+    "src\\online_rl\\c1_modular_controls.py": "35eae8fca5e29e7fe0b4cca2cacc42231e42850e6ac9a31b39be455bf1fddda0",
+    "src\\online_rl\\c1_policy.py": "371fc881e960c63c01e0ae71c27b7fa22462e1b4985f8efd8c6862388ab2fb14"
+  }
+}

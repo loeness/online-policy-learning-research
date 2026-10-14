@@ -49,3 +49,56 @@ The low-tier tree had two old-task comparisons (2 of 12) that fell more than fiv
 - `scripts/run_compression_repair.py` hard-codes `outputs/compression_attempt` and has no `--output` option. A rerun must use an isolated copy/worktree containing the required primary bundles, or the runner should be parameterized before attempting a fresh-root reproduction.
 - `outputs/ab_plus/summary.json` uses reconstructed source checkpoint state and a declared new RNG arrangement because complete original RNG state was not saved. Label it reconstruction and new-stream evaluation, not exact continuation.
 
+
+## C1 supplemental controls and alternatives (2026-10-15)
+
+**Completed experimental inventory:** 57 formal neural runs and 39 validation
+runs completed without runtime or capacity failures. Step 1 additionally keeps
+12 formal and 4 validation model trajectories, frozen-tree/cleared-window
+matching diagnostics and the paired grouped-equivalence check. The declared
+non-overlapping research interaction ledger totals 7,205,888 steps, including
+post-training source probes. Original A/B/C1 and software integration-test
+interactions are excluded from that count. Current software checks: 148 passed.
+
+**Negative result for broad necessity/topology claims:** Without task IDs,
+Bayesian assignment controllers reached 100% actual online success in this
+synthetic bandwise command-permutation family, versus 10.10% for W0 without
+history. They update statistical beliefs even though neural gradient counts
+are zero. Tree and the same additive grouped representation were bitwise equal
+in paired PPO. C1 cannot claim the tree container itself is uniquely better or
+that neural weight updates are necessary for this particular family.
+
+**Weak methods and candidates retained:** Individually selected input-conditioned
+full adaptation reached only 34.80% mean final success, EWC 18.27%, behavior
+replay 26.84%. Low-tier tree replay also reduced final success to 94.37% from
+99.67%. All their validation candidates remain in the archive. The stronger
+full context-head architecture reached 96.12% in the separate matched-seed
+cohort, and EWC 80.61%; comparing those values with the first full architecture
+is not a paired architecture-only ablation. Full context-head seed 181 still
+ended A2 at 50%. EWC did improve source-root retention (64.51% to 96.29%) at an
+adaptation cost. Custom EWC/PPO replay is not a published SOTA replication.
+
+**Promising bounded representation:** Tree, trainable source-basis tensor, and
+hierarchical frozen-basis mixer each achieved 100% mean final success and
+3/3 all-six targets at fresh seeds 181/193/211. Hierarchical mixer kept all
+immediate old tasks at 100%, with 2,972 bytes of correction/Adam state plus a
+6-byte mask. Its complete state was about 149 KB, not a 3 KB full agent. The
+independent frozen-basis mixer was less reliable: seed 193 ended A0 at 22.2%,
+six-task mean 87.0%. All candidates and this failure cell are retained.
+
+**Reporting defect fixed transparently:** A PyTorch post-hook can fire at both
+Adam.step and LeafAdam.step for one actual update. Nine old tree+behavior-replay
+records (three validation and six formal) therefore overcounted optimizer
+calls by a factor of two. Policy updates were not doubled. Their raw JSON and
+checkpoints remain unchanged. Derived reports use the independent single-step
+counter preserved inside checkpoints; `optimizer_step_audit.json` contains
+both counts. Future code prevents the accounting error, and exact prior source
+is archived and hash-verified. The tensor launch document is also archived
+before post-run wording corrections about oracle IDs and the trainable critic.
+
+**Limits retained:** One W0, three deployment seeds per comparison, fixed
+families and visible-band structure, oracle IDs in main phases, calibrated
+bank in hidden history, larger full-reference budgets, and a favorable source
+output span. No dynamic tree, from-zero latent-context discovery, full-capacity
+replacement, calibrated policy-improvement gate, standard benchmark SOTA claim
+or C2/C3 execution. See `C1_SUPPLEMENT_CONCLUSIONS.md` and both full reports.

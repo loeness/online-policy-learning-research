@@ -69,3 +69,15 @@ The archive ignore policy was updated after that scan. The current `.gitignore` 
 - Individual run folders retain configuration, episode and step CSVs, capacity data, summaries, routers, and restorable `agent.zip` checkpoints. The C1 directory additionally retains `validation_ledger.json`, prechecks, validation screens, formal stages, and the figures used in the report.
 
 The filename-only scan found no names matching credential or private-key patterns. No file contents were read for that scan.
+
+## C1 supplement update (2026-10-15)
+
+The `codex/c1-strong-baselines` branch adds the complete ordered C1 controls,
+independent validation/formal alternatives, source probes, trajectory-derived
+interaction diagnostics, reports, figures and software checks. See
+`archive/C1_SUPPLEMENT_SNAPSHOT.md` for scope and
+`outputs/c1_supplement/complete_ledger.json` for disjoint experimental counts.
+The original `v0.1.0-ab-c1` tag and original data/result bytes are retained.
+The current branch manifest covers the larger archive; historical size figures
+above remain labeled as the original snapshot scan. Two exact source modules
+and the tensor launch document are preserved under `archive/source_versions`.

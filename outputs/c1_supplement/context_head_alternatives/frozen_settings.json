@@ -1,0 +1,141 @@
+{
+  "protocol": {
+    "method": "full_context_head",
+    "scope": "one shared full actor/critic, shared route and band biases, six small context heads",
+    "validation_seed": 923,
+    "formal_seeds": [
+      181,
+      193,
+      211
+    ],
+    "learning_rate_candidates": [
+      {
+        "learning_rate": 0.001,
+        "ent_coef": 0.06
+      },
+      {
+        "learning_rate": 0.003,
+        "ent_coef": 0.06
+      },
+      {
+        "learning_rate": 0.01,
+        "ent_coef": 0.06
+      }
+    ],
+    "ewc_coefficients": [
+      10.0,
+      100.0,
+      1000.0
+    ],
+    "source_sha256": {
+      "configs\\c1_supplement.json": "be47e6f672372779fd4512a9b8969fa8eafd8b7d2007eed7968a25d0b83322f9",
+      "configs\\c1.json": "7e24e002dfcc80809e28c4d6f97d42ec5a7ad1055752eb8a56742ae3275ebde0",
+      "data\\foundation.pt": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+      "data\\pretrain_source.npz": "493c67dc07393a674deb6aa7ab5ba4feea3c1a48eacc16b37046a12606bc56f2",
+      "docs\\C1_SUPPLEMENT_PROTOCOL.md": "9d88bf3420bdb782426ba36691f720d530b519de4a3649ed1896515867d3f1db",
+      "src\\online_rl\\c1_supplement_experiment.py": "d0c9db31d02b39350e83e620e11755e0ffd8639a7fc4c8e967a064e85477c22f",
+      "src\\online_rl\\c1_experiment.py": "5fa3e166d91c1043c124b9a842607c6e54b5f23d15af4453bdf2b11abceb04c7",
+      "src\\online_rl\\c1_continual_controls.py": "db2785a573a552f121287dbe24336120ac9f66882773d3ff5a1be69e316030db",
+      "src\\online_rl\\c1_modular_controls.py": "35eae8fca5e29e7fe0b4cca2cacc42231e42850e6ac9a31b39be455bf1fddda0",
+      "src\\online_rl\\c1_policy.py": "371fc881e960c63c01e0ae71c27b7fa22462e1b4985f8efd8c6862388ab2fb14",
+      "src/online_rl/c1_context_head_controls.py": "019729f80ae65391ccd01b22fa7e5f0fc2508dbdae3b6c3960760a4b013a02f1",
+      "src/online_rl/c1_context_head_experiment.py": "4f0bd213530d3f24c6e00906e99d137213f27860ab86f612759fa76010c77ded"
+    },
+    "capacity_bytes": 393216,
+    "budget_classification": "outside original adaptive caps; measured Pareto reference",
+    "continual_control": "task-free diagonal empirical-Fisher EWC; source Fisher 64; 2048-step cadence"
+  },
+  "shared_actor_selection": {
+    "kind": "shared_actor_context_head",
+    "selection_formula": "0.50 final mean success + 0.25 immediate old-task mean success + 0.25 heldout mean success",
+    "selected_candidate": 1,
+    "selected_params": {
+      "learning_rate": 0.003,
+      "ent_coef": 0.06
+    },
+    "selected_coefficient": 0.0,
+    "selected_score": 0.883768315018315,
+    "candidates": [
+      {
+        "candidate": 0,
+        "params": {
+          "learning_rate": 0.001,
+          "ent_coef": 0.06
+        },
+        "coefficient": 0.0,
+        "status": "complete",
+        "score": 0.7315972222222222,
+        "result_path": "outputs\\c1_supplement\\context_head_alternatives\\validation\\none\\candidate_00\\s923\\result.json"
+      },
+      {
+        "candidate": 1,
+        "params": {
+          "learning_rate": 0.003,
+          "ent_coef": 0.06
+        },
+        "coefficient": 0.0,
+        "status": "complete",
+        "score": 0.883768315018315,
+        "result_path": "outputs\\c1_supplement\\context_head_alternatives\\validation\\none\\candidate_01\\s923\\result.json"
+      },
+      {
+        "candidate": 2,
+        "params": {
+          "learning_rate": 0.01,
+          "ent_coef": 0.06
+        },
+        "coefficient": 0.0,
+        "status": "complete",
+        "score": 0.6000000000000001,
+        "result_path": "outputs\\c1_supplement\\context_head_alternatives\\validation\\none\\candidate_02\\s923\\result.json"
+      }
+    ]
+  },
+  "ewc_selection": {
+    "kind": "shared_actor_context_head_ewc",
+    "selection_formula": "0.50 final mean success + 0.25 immediate old-task mean success + 0.25 heldout mean success",
+    "selected_candidate": 0,
+    "selected_params": {
+      "learning_rate": 0.003,
+      "ent_coef": 0.06
+    },
+    "selected_coefficient": 10.0,
+    "selected_score": 0.6948863636363636,
+    "candidates": [
+      {
+        "candidate": 0,
+        "params": {
+          "learning_rate": 0.003,
+          "ent_coef": 0.06
+        },
+        "coefficient": 10.0,
+        "status": "complete",
+        "score": 0.6948863636363636,
+        "result_path": "outputs\\c1_supplement\\context_head_alternatives\\validation\\ewc\\candidate_00\\s923\\result.json"
+      },
+      {
+        "candidate": 1,
+        "params": {
+          "learning_rate": 0.003,
+          "ent_coef": 0.06
+        },
+        "coefficient": 100.0,
+        "status": "complete",
+        "score": 0.43931051587301584,
+        "result_path": "outputs\\c1_supplement\\context_head_alternatives\\validation\\ewc\\candidate_01\\s923\\result.json"
+      },
+      {
+        "candidate": 2,
+        "params": {
+          "learning_rate": 0.003,
+          "ent_coef": 0.06
+        },
+        "coefficient": 1000.0,
+        "status": "complete",
+        "score": 0.42766203703703703,
+        "result_path": "outputs\\c1_supplement\\context_head_alternatives\\validation\\ewc\\candidate_02\\s923\\result.json"
+      }
+    ]
+  },
+  "formal_started": false
+}

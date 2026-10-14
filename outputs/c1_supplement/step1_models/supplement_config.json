@@ -1,0 +1,106 @@
+{
+  "base_config": "configs/c1.json",
+  "output": "outputs/c1_supplement",
+  "validation_seeds": [
+    911
+  ],
+  "formal_seeds": [
+    131,
+    149,
+    167
+  ],
+  "source_checkpoint_seeds": [
+    71,
+    83,
+    97
+  ],
+  "validation_schedule": {
+    "seen_bout_steps": 2048,
+    "heldout_bout_steps": 4096,
+    "revisit_bout_steps": 1024,
+    "history_bout_steps": 512,
+    "eval_steps": 256,
+    "cold_eval_steps": 512
+  },
+  "formal_schedule": {
+    "seen_bout_steps": 4096,
+    "heldout_bout_steps": 8192,
+    "revisit_bout_steps": 2048,
+    "history_bout_steps": 1024,
+    "eval_steps": 512,
+    "cold_eval_steps": 1024
+  },
+  "compressed_candidates": [
+    {
+      "learning_rate": 0.003,
+      "ent_coef": 0.06
+    },
+    {
+      "learning_rate": 0.01,
+      "ent_coef": 0.06
+    },
+    {
+      "learning_rate": 0.003,
+      "ent_coef": 0.02
+    }
+  ],
+  "full_candidates": [
+    {
+      "learning_rate": 0.0003,
+      "ent_coef": 0.06
+    },
+    {
+      "learning_rate": 0.001,
+      "ent_coef": 0.06
+    },
+    {
+      "learning_rate": 0.003,
+      "ent_coef": 0.02
+    }
+  ],
+  "ewc_coefficients": [
+    10.0,
+    100.0,
+    1000.0
+  ],
+  "bc_coefficients": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "replay_capacity": 128,
+  "ewc_interval": 2048,
+  "ewc_sample_size": 64,
+  "original_adaptive_budget_bytes": {
+    "low": 15952,
+    "high": 30700
+  },
+  "original_agent_budget_bytes": {
+    "low": 188416,
+    "high": 204800
+  },
+  "full_reference_agent_budget_bytes": 393216,
+  "validation_selection": "0.50 * final_mean_success + 0.25 * immediate_old_mean_success + 0.25 * heldout_mean_success",
+  "model_candidates": [
+    {
+      "kind": "window_counts",
+      "window": 32
+    },
+    {
+      "kind": "window_assignment",
+      "window": 32
+    },
+    {
+      "kind": "adaptive_assignment",
+      "window": 32
+    }
+  ],
+  "temperature": 2.0,
+  "exploration_epsilon": 0.05,
+  "stage_order": [
+    "step1_models",
+    "step2_grouping",
+    "step3_tuning_and_continual"
+  ],
+  "scope": "C1 only; fixed family structure, calibrated history router for neural arms; no C2 or dynamic discovery"
+}

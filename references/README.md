@@ -1,6 +1,6 @@
 # Citation notes
 
-The bibliography contains 25 public references used by the baseline and related-work map in [the project note](../docs/BASELINES_AND_RELATED_WORK.md). Entries use the publisher or conference record when one is available, and the arXiv record for preprints or work without a formal proceedings entry. Bibliographic details were checked on 2026-10-14. URLs point to the record used to verify the entry; arXiv eprint fields identify the cited preprint version.
+The bibliography contains 28 public references used by the baseline and related-work map in [the project note](../docs/BASELINES_AND_RELATED_WORK.md). Entries use the publisher or conference record when one is available, and the arXiv record for preprints or work without a formal proceedings entry. The original 25 records were checked on 2026-10-14; three C1 supplement entries (EWC, Progress & Compress, LoRA-XS) were checked on 2026-10-15. URLs point to the record used to verify the entry; arXiv eprint fields identify the cited preprint version.
 
 ## Metadata decisions
 
@@ -16,3 +16,15 @@ The user's notes mention an unpublished supervisor argument. It is not included 
 ## Citation use
 
 The linked papers provide context for algorithms and evaluation design. Their results were obtained on their own tasks and protocols. They are not performance baselines for the custom navigation runs unless the same method is implemented and evaluated under the project's frozen environment, data, interaction budget, state accounting, and seeds.
+
+## C1 supplement attribution
+
+`Kirkpatrick2017EWC` identifies the original importance-weighted parameter
+regularizer; the experiment implements a task-free empirical-Fisher PPO
+adaptation. `Schwarz2018ProgressCompress` identifies acquisition/consolidation
+context; that algorithm was not run. `Balazy2024LoRAXS` identifies a close
+frozen-basis small-middle-matrix adapter precedent (arXiv v3 revised 2025-08-19).
+Our source-output mixers are C1 policy adapters, not its Transformer training
+setup. CLEAR's correct preprint is arXiv:1811.11682; PPO behavioral replay is
+only a partial inspired control. None of these custom comparisons constitutes
+a faithful reproduction of published SOTA.

@@ -1,6 +1,6 @@
 # Reproducibility
 
-The archive contains both the original experiment records and commands for fresh reruns. Fresh runs should write to a new output directory; several historical runners default to paths inside `outputs/` and would otherwise overwrite archive records. The expected quick software check is 82 tests. Full A/B+ and C1 runs execute many hundreds of thousands to over a million simulated transitions and are not quick checks.
+The archive contains both the original experiment records and commands for fresh reruns. Fresh runs should write to a new output directory; several historical runners default to paths inside `outputs/` and would otherwise overwrite archive records. The original snapshot software check contained 82 tests; C1 supplement checks add to that suite. The current recorded total is in `outputs/c1_supplement/software_checks.txt`. Full A/B+ and C1 runs execute many hundreds of thousands to over a million simulated transitions and are not quick checks.
 
 ## Environment
 
@@ -22,7 +22,7 @@ uv pip install --python .venv/bin/python --index-url https://download.pytorch.or
 .venv/bin/python -m pytest tests -q
 ```
 
-The test suite is expected to report `82 passed`. No tests generate experiment results. For provenance-sensitive reruns, verify the shared files before starting:
+The original snapshot reported `82 passed`. The expanded suite includes real short PPO integration checks and does not generate the archived formal experimental cohorts. No tests generate experiment results. For provenance-sensitive reruns, verify the shared files before starting:
 
 ```powershell
 Get-FileHash data\pretrain_source.npz -Algorithm SHA256
@@ -119,3 +119,52 @@ cp outputs/c1/representation_diagnostic.json outputs/c1_reproduction/representat
 - A/B+ terminal archives do not include the entire historical RNG state for the original training run. Reconstructed deployment bundles restore the stored policy, optimizer, and router state and use the explicitly recorded new RNG arrangement; they are not exact interrupted-run continuations.
 - Resource fields called serialized state or bundle bytes exclude process runtime and are distinct from separately sampled RSS. RSS is a sampled process measure, not a continuously measured hard peak.
 
+
+## Ordered C1 supplements
+
+The archived results are already present. Runners resume from existing complete
+records. For an independent reproduction, use an isolated repository copy with
+an empty supplemental output directory; retain the original C1 checkpoints
+needed by Step 1's frozen-tree diagnostic. Do not erase or replace the original
+A/B/C1 records in the research checkout. The current report/probe commands read
+the literal `outputs/c1_supplement` layout.
+
+Run sequentially from the repository root:
+
+```powershell
+.venv\Scripts\python.exe scripts/run_c1_models.py --mode all
+$env:C1_RUN_GROUPED_PPO_PARITY = '1'
+.venv\Scripts\python.exe -m pytest tests/test_c1_grouped_equivalence_online.py -q
+.venv\Scripts\python.exe scripts/run_c1_supplement.py --stage step2
+.venv\Scripts\python.exe scripts/run_c1_supplement.py --stage step3
+.venv\Scripts\python.exe scripts/run_c1_tensor_alternatives.py
+.venv\Scripts\python.exe scripts/run_c1_context_heads.py
+.venv\Scripts\python.exe scripts/audit_c1_optimizer_steps.py
+.venv\Scripts\python.exe scripts/check_c1_source_retention.py
+.venv\Scripts\python.exe scripts/report_c1_supplement.py
+.venv\Scripts\python.exe scripts/report_c1_alternatives.py
+```
+
+The Linux equivalents use `.venv/bin/python` and
+`C1_RUN_GROUPED_PPO_PARITY=1 .venv/bin/python -m pytest ...` for the opt-in paired
+PPO check. The source-retention probe requires all 57 formal neural records
+before evaluating. Hyperparameters are chosen on validation streams before the
+corresponding formal runs; failures and all candidates are retained.
+
+`archive/source_versions/c1_supplement_experiment_core.py` preserves the exact
+core-run source whose PyTorch nested step hook could double-count LeafAdam
+calls. Checkpoint `optimizer.step_count` increments once per real update. The
+sidecar audit corrects reporting, leaving raw JSON and checkpoint bytes
+unchanged. Current code prevents double-counting for future cohorts without
+changing PPO update behavior. The original Step 2 full-control module before
+the visible-band amendment is also archived and hash-verified; Step 3 uses the
+amended full-control module. These version differences are recorded, not
+retroactively substituted into historical hashes.
+
+The default large comparisons are CPU experiments with one Torch thread.
+Measured process CPU includes trace and capacity instrumentation. Byte caps
+apply to declared serialized agent plus numeric rollout state, not the whole
+Python/Torch process; RSS and live numeric estimates are separate. Full actor
+controls use a larger declared complete cap and remain outside the original
+adaptive actor budgets. They are not memory-matched victories or faithful
+SOTA reproductions.

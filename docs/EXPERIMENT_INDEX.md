@@ -1,6 +1,6 @@
 # Experiment index
 
-This index covers the archived A, B, B+, compression, and C1 work. The archive preserves exploratory runs, failed validation attempts, intermediate checkpoints, and negative results. C2 and later phases are outside the archive and are not implemented here.
+This index covers the archived A, B, B+, compression, original C1 and C1 supplemental work. The archive preserves exploratory runs, failed validation attempts, intermediate checkpoints, and negative results. C2 and later phases are outside the archive and are not implemented here.
 
 ## Read first
 
@@ -13,7 +13,28 @@ This index covers the archived A, B, B+, compression, and C1 work. The archive p
 | B+ controls | [outputs/ab_plus/结果解读.md](../outputs/ab_plus/结果解读.md) |
 | Primary Top-K screen and fixed repair | [outputs/compression_attempt/结果解读.md](../outputs/compression_attempt/结果解读.md), [repair/结果解读.md](../outputs/compression_attempt/repair/结果解读.md) |
 | Alternative compression comparison | [outputs/compression_alternatives/综合判断.md](../outputs/compression_alternatives/综合判断.md), [结果解读.md](../outputs/compression_alternatives/结果解读.md) |
-| C1 results and complete validation record | [outputs/c1/结果解读.md](../outputs/c1/结果解读.md), [validation_ledger.json](../outputs/c1/validation_ledger.json) |
+| Original C1 results and complete validation record | [outputs/c1/结果解读.md](../outputs/c1/结果解读.md), [validation_ledger.json](../outputs/c1/validation_ledger.json) |
+
+## C1 supplement added after the original snapshot
+
+| Evidence | Entry point |
+| --- | --- |
+| Three missing comparisons, full raw validation/formal records | [Supplement report](../outputs/c1_supplement/结果解读.md), [protocol](C1_SUPPLEMENT_PROTOCOL.md), [amendments](C1_SUPPLEMENT_AMENDMENTS.md) |
+| New compact representations and stronger full actor | [Alternative report](../outputs/c1_supplement/alternative_results.md), [report scope](C1_ALTERNATIVE_RESULTS.md) |
+| What the completed evidence supports | [C1_SUPPLEMENT_CONCLUSIONS.md](C1_SUPPLEMENT_CONCLUSIONS.md) |
+| Exact grouped/tree equivalence | [C1_GROUPED_EQUIVALENCE.md](C1_GROUPED_EQUIVALENCE.md), [paired PPO evidence](../outputs/c1_supplement/step2_grouping/equivalence/ppo_parity.json) |
+| Source-output span and favorable task prior | [C1_SOURCE_BASIS_DERIVATION.md](C1_SOURCE_BASIS_DERIVATION.md) |
+| Optimizer counter audit, original metrics preserved | [optimizer_step_audit.json](../outputs/c1_supplement/optimizer_step_audit.json) |
+| Source behavior after hidden deployment | [source_retention.json](../outputs/c1_supplement/source_retention.json) |
+| Exact source versions used in the original supplemental core | [source_versions](../archive/source_versions/), [cohort source hashes](../outputs/c1_supplement/cohort_source_manifest.json) |
+
+The main supplemental neural cohort has 39 formal and 24 validation runs with
+seeds 131/149/167 and 911. The separate alternatives have 18 formal and 15
+validation runs with deployment seeds 181/193/211 and validation seeds 919/923.
+Do not pool these cohorts as though all arms were measured on all six seeds.
+All start from the same single W0 checkpoint. Step 1 has twelve formal and four
+validation trajectories plus separate clear-history diagnostics. No C2/C3
+runner is executed by this supplement.
 
 ## Shared data and model inputs
 
