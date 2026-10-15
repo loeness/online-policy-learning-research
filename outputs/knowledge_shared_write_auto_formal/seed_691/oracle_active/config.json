@@ -1,0 +1,65 @@
+{
+  "stage": "S1b known context routes, unknown family groups",
+  "pilot_seed": 827,
+  "formal_seeds": [
+    677,
+    691,
+    709
+  ],
+  "conditions": [
+    "independent",
+    "oracle_active",
+    "auto_active",
+    "auto_frozen"
+  ],
+  "seen_sequence": [
+    "A0",
+    "B0",
+    "A1",
+    "B1",
+    "A0",
+    "B0",
+    "A1",
+    "B1"
+  ],
+  "heldout_sequence": [
+    "A2",
+    "B2"
+  ],
+  "pilot_seen_sequence": [
+    "A0",
+    "B0",
+    "A1",
+    "B1"
+  ],
+  "bout_steps": 4096,
+  "heldout_steps": 4096,
+  "pilot_bout_steps": 2048,
+  "pilot_heldout_steps": 2048,
+  "probe_steps_per_context": 512,
+  "cold_evaluation_episodes": 16,
+  "retention_evaluation_episodes": 8,
+  "pilot_cold_evaluation_episodes": 8,
+  "pilot_retention_evaluation_episodes": 4,
+  "freeze_after_seen_bouts": 2,
+  "local_learning_rate": 0.003,
+  "shared_learning_rate": 0.001,
+  "critic_learning_rate": 0.003,
+  "codec": "float32",
+  "actor_budget_bytes": 1024,
+  "whole_package_cap_bytes": 262144,
+  "optimizer_reset_at_commit": false,
+  "grouper": {
+    "max_groups": 2,
+    "min_overlap": 4,
+    "min_agreement": 0.6,
+    "min_cell_support": 2,
+    "novelty_max_agreement": 0.3
+  },
+  "evaluation_seed_offset": 50000,
+  "evaluation_context_seed_stride": 1000,
+  "probe_seed_tag": 32017,
+  "max_workers": 2,
+  "condition": "oracle_active",
+  "seed": 691
+}
