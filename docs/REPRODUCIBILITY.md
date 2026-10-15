@@ -168,3 +168,28 @@ Python/Torch process; RSS and live numeric estimates are separate. Full actor
 controls use a larger declared complete cap and remain outside the original
 adaptive actor budgets. They are not memory-matched victories or faithful
 SOTA reproductions.
+# 2026-10-15 bounded knowledge organization additions
+
+Use new output directories when reproducing these experiments; preserve the
+archived cohorts. The runner snapshots in each result directory record the
+exact code used, including pre-CLI amendments. All formal deployment seeds share
+one W0. The study report records the historical static-source limitation and
+the separate corrected revisit.
+
+```powershell
+python scripts/run_static_consolidation.py --phase formal --output outputs/knowledge_static_replication
+python scripts/run_static_consolidation.py --phase global_control --output outputs/knowledge_global_replication
+python scripts/run_knowledge_distillation.py --output outputs/knowledge_distillation_replication
+python scripts/run_task_free_identification.py --phase formal --output outputs/knowledge_identification_replication
+python scripts/run_knowledge_loop.py --phase formal --output-dir outputs/knowledge_loop_replication
+python scripts/run_knowledge_revisit_corrected.py --output outputs/knowledge_revisit_replication
+python -m pytest -q tests/test_compact_knowledge.py tests/test_task_free_router.py tests/test_knowledge_loop.py tests/test_knowledge_revisit.py
+```
+
+The distillation control reads the archived static reference CSV. The corrected
+revisit command reads the archived original online-loop checkpoints; using the
+newly replicated training endpoints requires changing that explicit input root.
+They are separate controls and do not overwrite their inputs. A restored loop
+checkpoint supports evaluation; it does not contain the environment/rollout
+state needed to resume training at an arbitrary interrupted step.
+

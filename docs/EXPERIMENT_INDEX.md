@@ -90,3 +90,22 @@ learner, dynamic-structure method, capacity-consolidation result, or C2 launch.
 Raw episodes, all checkpoints, provenance, and actual interaction accounting
 are under `outputs/pre_core_p0`; a reduced software smoke run is separately
 retained in `outputs/pre_core_p0_smoke` and excluded from the formal cohort.
+
+## Bounded knowledge organization, three-stage mechanism study
+
+Protocol: `docs/KNOWLEDGE_ORGANIZATION_PROTOCOL.md`, committed before formal runs.
+Main interpretation: `outputs/knowledge_organization_report/结果与研究判断.md`.
+
+| Cohort | Implementation | Results / scope |
+|---|---|---|
+| Static consolidation, 3 learned teachers × 5 budgets × 7 original codecs | `compact_knowledge.py`, `run_static_consolidation.py` | `outputs/knowledge_static_formal`; 277,327 interactions; oracle isolation only. Historical source-snapshot limitation recorded in `serialization_audit/source_provenance.json`. |
+| Independent global Top-K fairness control | Same codec/runner, explicit `global_control` phase | `outputs/knowledge_static_global_control`; 61,961 interactions; exact binary byte audit. |
+| Same-rank policy KL distillation | `scripts/run_knowledge_distillation.py` | `outputs/knowledge_distillation_control`; 32,106 evaluation interactions, no new fit interactions. Post-hoc declared control, 3 teachers × 3 budgets. |
+| From-zero task-free identification | `task_free_router.py`, `run_task_free_identification.py` | `outputs/knowledge_identification_formal`; 3 actual streams / 18,644 interactions, 27 same-stream evaluations; no label calibration, no active-exploration comparison. |
+| Unknown-boundary online loop | `scripts/run_knowledge_loop.py` | `outputs/knowledge_loop_formal`; 7 arms × 3 seeds × 32,768 steps = 688,128 training interactions. Legacy revisit consumes 105,844 extra steps and is excluded from persistence conclusions. |
+| Corrected paired revisit | `scripts/run_knowledge_revisit_corrected.py`; correction protocol in `docs/KNOWLEDGE_REVISIT_CORRECTION.md` | `outputs/knowledge_loop_revisit_corrected`; 1,728 episodes / 102,991 steps; no gradients, slot reuse clears obsolete corrections, episode-specific paired action streams. |
+| Pilots and aborted duplicate | Separate `knowledge_*_pilot` directories and `knowledge_static_formal/reproduction_7methods/ABORTED.json` | Completed pilots add 14,753 steps; aborted duplicate records at least 85,781 steps, not a valid formal result. No artifact is silently removed. |
+
+Derived plots and `analysis.json` live in `outputs/knowledge_organization_report`.
+New checks cover codec round trips/physical sizes, sparse-support routing,
+PPO log probabilities and GAE, held-out timing, generations, and revisit semantics.

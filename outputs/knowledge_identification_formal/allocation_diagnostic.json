@@ -1,0 +1,1431 @@
+{
+  "diagnostic": "Post-hoc allocation and eviction timing audit for the saved robust-bank W32 formal traces.",
+  "data_scope": {
+    "source": "outputs/knowledge_identification_formal/stream_seed_{331,347,359}.npz and steps_seed_{seed}_robust_bank_w32.csv.gz",
+    "new_environment_interactions": 0,
+    "learner_replays_or_parameter_updates": 0,
+    "observer_only_fields_used": [
+      "context_ids",
+      "segment_ids",
+      "observations",
+      "next_observations"
+    ]
+  },
+  "definitions": {
+    "true_context_switch": "An index where the observer-only context_id changes; adjacent scheduled segments with the same context are not treated as a switch.",
+    "steps_after_switch": "For a transition at index i, i - latest_true_switch_index + 1; the first transition after a switch counts as 1. Stream start is the initial boundary.",
+    "late_event_thresholds": "Strictly more than 64 or 128 completed transitions after the latest true context switch.",
+    "previous_8_steps_for_band": "The eight completed transitions immediately before allocation/eviction index i (indices max(0, i-8) through i-1); the current post-action transition is reported separately.",
+    "new_band_entry": "A transition into an x band not previously observed during the current contiguous true-context run.",
+    "pre_action_cell_status": "Uses the logged slot and untried_action. A resolved route with untried_action=false means at least one prior observation in that band/action cell, not proof of a contradiction. For slot=-1 unresolved routes, support is unknown even though the trace's fallback untried_action is true."
+  },
+  "seeds": [
+    {
+      "seed": 331,
+      "steps": 5774,
+      "true_context_switches": 11,
+      "allocations": {
+        "count": 15,
+        "steps_after_last_true_context_switch": {
+          "over_64": {
+            "count": 3,
+            "denominator": 15
+          },
+          "over_128": {
+            "count": 0,
+            "denominator": 15
+          }
+        },
+        "recent_x_band_evidence": {
+          "any_band_transition_in_previous_8_completed_steps": {
+            "count": 13,
+            "denominator": 15
+          },
+          "first_entry_to_band_in_current_true_context_run_previous_8_steps": {
+            "count": 5,
+            "denominator": 15
+          },
+          "allocation_transition_itself_crossed_band": {
+            "count": 1,
+            "denominator": 15
+          }
+        },
+        "action_time_cell_evidence_from_trace": {
+          "resolved_route_cell_was_previously_untried": {
+            "count": 0,
+            "denominator": 15
+          },
+          "resolved_route_cell_had_at_least_one_prior_observation": {
+            "count": 0,
+            "denominator": 15
+          },
+          "route_unresolved_support_unknown": {
+            "count": 15,
+            "denominator": 15
+          }
+        }
+      },
+      "evictions": {
+        "count": 9,
+        "steps_after_last_true_context_switch": {
+          "over_64": {
+            "count": 3,
+            "denominator": 9
+          },
+          "over_128": {
+            "count": 0,
+            "denominator": 9
+          }
+        },
+        "recent_x_band_evidence": {
+          "any_band_transition_in_previous_8_completed_steps": {
+            "count": 8,
+            "denominator": 9
+          },
+          "first_entry_to_band_in_current_true_context_run_previous_8_steps": {
+            "count": 3,
+            "denominator": 9
+          },
+          "allocation_transition_itself_crossed_band": {
+            "count": 0,
+            "denominator": 9
+          }
+        },
+        "action_time_cell_evidence_from_trace": {
+          "resolved_route_cell_was_previously_untried": {
+            "count": 0,
+            "denominator": 9
+          },
+          "resolved_route_cell_had_at_least_one_prior_observation": {
+            "count": 0,
+            "denominator": 9
+          },
+          "route_unresolved_support_unknown": {
+            "count": 9,
+            "denominator": 9
+          }
+        }
+      },
+      "generation_reuse_lost_to_eviction_diagnostic": {
+        "evictions_with_observer_mappable_generation": 9,
+        "evicted_generations_with_a_later_true_context_revisit": 2,
+        "denominator_for_revisit_opportunities": 9,
+        "with_an_alternate_active_generation_modal_for_same_context_at_eviction": 2,
+        "alternate_generation_observed_on_later_revisit": 2,
+        "no_preexisting_same_context_generation_observed_on_later_revisit": 0,
+        "eviction_opportunities": [
+          {
+            "step": 876,
+            "true_context_id": 2,
+            "true_context_run_start_step": 812,
+            "steps_after_true_context_switch": 65,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 2,
+            "allocated_generation": 6,
+            "evicted_slot": 2,
+            "evicted_generation": 2,
+            "evicted_generation_modal_context_id": 4,
+            "evicted_generation_modal_context_name": "B1",
+            "evicted_generation_prior_route_steps": 17,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 1323,
+              "end_step_exclusive": 1937,
+              "steps": 614,
+              "resolved_route_steps": 613,
+              "route_coverage": 0.998371335504886,
+              "generation_ids_observed": [
+                1,
+                6
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                1
+              ],
+              "alternate_generation_observed_on_revisit": true,
+              "allocations_during_revisit": 0
+            }
+          },
+          {
+            "step": 2550,
+            "true_context_id": 0,
+            "true_context_run_start_step": 2440,
+            "steps_after_true_context_switch": 111,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 3,
+            "allocated_generation": 11,
+            "evicted_slot": 3,
+            "evicted_generation": 7,
+            "evicted_generation_modal_context_id": 0,
+            "evicted_generation_modal_context_name": "A0",
+            "evicted_generation_prior_route_steps": 3,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 3849,
+              "end_step_exclusive": 4299,
+              "steps": 450,
+              "resolved_route_steps": 435,
+              "route_coverage": 0.9666666666666667,
+              "generation_ids_observed": [
+                8,
+                14
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                8
+              ],
+              "alternate_generation_observed_on_revisit": true,
+              "allocations_during_revisit": 0
+            }
+          }
+        ],
+        "interpretation": "An evicted generation cannot recur under its generation ID. These are post-hoc future-revisit opportunities; another slot may preserve a profile, and a fresh generation may be allocated later. Counts are correlational, not causal evidence that an eviction caused a missed reuse."
+      },
+      "trace_limits": {
+        "event_level_observe_reason_logged": false,
+        "event_level_predictive_probability_logged": false,
+        "generation_slot_consistency_mismatches": 0,
+        "contradiction_vs_novel_cell_classification": "Not directly logged. Resolved-route cell status only distinguishes at least one prior observation from no prior observation; unresolved route rows have unknown active-profile support."
+      }
+    },
+    {
+      "seed": 347,
+      "steps": 6452,
+      "true_context_switches": 10,
+      "allocations": {
+        "count": 36,
+        "steps_after_last_true_context_switch": {
+          "over_64": {
+            "count": 16,
+            "denominator": 36
+          },
+          "over_128": {
+            "count": 9,
+            "denominator": 36
+          }
+        },
+        "recent_x_band_evidence": {
+          "any_band_transition_in_previous_8_completed_steps": {
+            "count": 33,
+            "denominator": 36
+          },
+          "first_entry_to_band_in_current_true_context_run_previous_8_steps": {
+            "count": 5,
+            "denominator": 36
+          },
+          "allocation_transition_itself_crossed_band": {
+            "count": 0,
+            "denominator": 36
+          }
+        },
+        "action_time_cell_evidence_from_trace": {
+          "resolved_route_cell_was_previously_untried": {
+            "count": 0,
+            "denominator": 36
+          },
+          "resolved_route_cell_had_at_least_one_prior_observation": {
+            "count": 0,
+            "denominator": 36
+          },
+          "route_unresolved_support_unknown": {
+            "count": 36,
+            "denominator": 36
+          }
+        }
+      },
+      "evictions": {
+        "count": 30,
+        "steps_after_last_true_context_switch": {
+          "over_64": {
+            "count": 15,
+            "denominator": 30
+          },
+          "over_128": {
+            "count": 9,
+            "denominator": 30
+          }
+        },
+        "recent_x_band_evidence": {
+          "any_band_transition_in_previous_8_completed_steps": {
+            "count": 28,
+            "denominator": 30
+          },
+          "first_entry_to_band_in_current_true_context_run_previous_8_steps": {
+            "count": 4,
+            "denominator": 30
+          },
+          "allocation_transition_itself_crossed_band": {
+            "count": 0,
+            "denominator": 30
+          }
+        },
+        "action_time_cell_evidence_from_trace": {
+          "resolved_route_cell_was_previously_untried": {
+            "count": 0,
+            "denominator": 30
+          },
+          "resolved_route_cell_had_at_least_one_prior_observation": {
+            "count": 0,
+            "denominator": 30
+          },
+          "route_unresolved_support_unknown": {
+            "count": 30,
+            "denominator": 30
+          }
+        }
+      },
+      "generation_reuse_lost_to_eviction_diagnostic": {
+        "evictions_with_observer_mappable_generation": 30,
+        "evicted_generations_with_a_later_true_context_revisit": 11,
+        "denominator_for_revisit_opportunities": 30,
+        "with_an_alternate_active_generation_modal_for_same_context_at_eviction": 8,
+        "alternate_generation_observed_on_later_revisit": 0,
+        "no_preexisting_same_context_generation_observed_on_later_revisit": 11,
+        "eviction_opportunities": [
+          {
+            "step": 2216,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2206,
+            "steps_after_true_context_switch": 11,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 0,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": true,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 3,
+            "allocated_generation": 6,
+            "evicted_slot": 3,
+            "evicted_generation": 3,
+            "evicted_generation_modal_context_id": 2,
+            "evicted_generation_modal_context_name": "A2",
+            "evicted_generation_prior_route_steps": 12,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 4230,
+              "end_step_exclusive": 4865,
+              "steps": 635,
+              "resolved_route_steps": 501,
+              "route_coverage": 0.7889763779527559,
+              "generation_ids_observed": [
+                17,
+                18,
+                19,
+                20
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                1,
+                2
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 3
+            }
+          },
+          {
+            "step": 2231,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2206,
+            "steps_after_true_context_switch": 26,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": false,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 2,
+            "allocated_generation": 7,
+            "evicted_slot": 2,
+            "evicted_generation": 2,
+            "evicted_generation_modal_context_id": 2,
+            "evicted_generation_modal_context_name": "A2",
+            "evicted_generation_prior_route_steps": 63,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 4230,
+              "end_step_exclusive": 4865,
+              "steps": 635,
+              "resolved_route_steps": 501,
+              "route_coverage": 0.7889763779527559,
+              "generation_ids_observed": [
+                17,
+                18,
+                19,
+                20
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                1
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 3
+            }
+          },
+          {
+            "step": 2248,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2206,
+            "steps_after_true_context_switch": 43,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 1,
+            "allocated_generation": 8,
+            "evicted_slot": 1,
+            "evicted_generation": 1,
+            "evicted_generation_modal_context_id": 2,
+            "evicted_generation_modal_context_name": "A2",
+            "evicted_generation_prior_route_steps": 182,
+            "evicted_generation_context_purity": 0.9505494505494505,
+            "future_same_context_run": {
+              "start_step": 4230,
+              "end_step_exclusive": 4865,
+              "steps": 635,
+              "resolved_route_steps": 501,
+              "route_coverage": 0.7889763779527559,
+              "generation_ids_observed": [
+                17,
+                18,
+                19,
+                20
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 3
+            }
+          },
+          {
+            "step": 2274,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2206,
+            "steps_after_true_context_switch": 69,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 5,
+            "allocated_generation": 10,
+            "evicted_slot": 5,
+            "evicted_generation": 5,
+            "evicted_generation_modal_context_id": 3,
+            "evicted_generation_modal_context_name": "B0",
+            "evicted_generation_prior_route_steps": 6,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 4865,
+              "end_step_exclusive": 5349,
+              "steps": 484,
+              "resolved_route_steps": 390,
+              "route_coverage": 0.8057851239669421,
+              "generation_ids_observed": [
+                15,
+                18,
+                22,
+                24
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                4
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 4
+            }
+          },
+          {
+            "step": 2308,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2206,
+            "steps_after_true_context_switch": 103,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "conflict",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 0,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 3,
+            "allocated_generation": 11,
+            "evicted_slot": 3,
+            "evicted_generation": 6,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 6,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 5971,
+              "end_step_exclusive": 6452,
+              "steps": 481,
+              "resolved_route_steps": 196,
+              "route_coverage": 0.4074844074844075,
+              "generation_ids_observed": [
+                15,
+                22,
+                25,
+                26,
+                27,
+                30,
+                32,
+                33,
+                34,
+                35
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                9,
+                8,
+                7,
+                10
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 11
+            }
+          },
+          {
+            "step": 2337,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2206,
+            "steps_after_true_context_switch": 132,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "conflict",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 0,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 2,
+            "allocated_generation": 12,
+            "evicted_slot": 2,
+            "evicted_generation": 7,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 3,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 5971,
+              "end_step_exclusive": 6452,
+              "steps": 481,
+              "resolved_route_steps": 196,
+              "route_coverage": 0.4074844074844075,
+              "generation_ids_observed": [
+                15,
+                22,
+                25,
+                26,
+                27,
+                30,
+                32,
+                33,
+                34,
+                35
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                9,
+                8,
+                10
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 11
+            }
+          },
+          {
+            "step": 2391,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2206,
+            "steps_after_true_context_switch": 186,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "conflict",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 0,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 1,
+            "allocated_generation": 13,
+            "evicted_slot": 1,
+            "evicted_generation": 8,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 7,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 5971,
+              "end_step_exclusive": 6452,
+              "steps": 481,
+              "resolved_route_steps": 196,
+              "route_coverage": 0.4074844074844075,
+              "generation_ids_observed": [
+                15,
+                22,
+                25,
+                26,
+                27,
+                30,
+                32,
+                33,
+                34,
+                35
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                9,
+                12,
+                10
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 11
+            }
+          },
+          {
+            "step": 2733,
+            "true_context_id": 4,
+            "true_context_run_start_step": 2697,
+            "steps_after_true_context_switch": 37,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "conflict",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 1,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 2,
+            "allocated_generation": 16,
+            "evicted_slot": 2,
+            "evicted_generation": 12,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 1,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 5971,
+              "end_step_exclusive": 6452,
+              "steps": 481,
+              "resolved_route_steps": 196,
+              "route_coverage": 0.4074844074844075,
+              "generation_ids_observed": [
+                15,
+                22,
+                25,
+                26,
+                27,
+                30,
+                32,
+                33,
+                34,
+                35
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                9,
+                10
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 11
+            }
+          },
+          {
+            "step": 3207,
+            "true_context_id": 1,
+            "true_context_run_start_step": 3204,
+            "steps_after_true_context_switch": 4,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": true,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 5,
+            "allocated_generation": 17,
+            "evicted_slot": 5,
+            "evicted_generation": 10,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 55,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 5971,
+              "end_step_exclusive": 6452,
+              "steps": 481,
+              "resolved_route_steps": 196,
+              "route_coverage": 0.4074844074844075,
+              "generation_ids_observed": [
+                15,
+                22,
+                25,
+                26,
+                27,
+                30,
+                32,
+                33,
+                34,
+                35
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                9
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 11
+            }
+          },
+          {
+            "step": 4280,
+            "true_context_id": 2,
+            "true_context_run_start_step": 4230,
+            "steps_after_true_context_switch": 51,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 4,
+            "allocated_generation": 19,
+            "evicted_slot": 4,
+            "evicted_generation": 4,
+            "evicted_generation_modal_context_id": 3,
+            "evicted_generation_modal_context_name": "B0",
+            "evicted_generation_prior_route_steps": 566,
+            "evicted_generation_context_purity": 0.8674911660777385,
+            "future_same_context_run": {
+              "start_step": 4865,
+              "end_step_exclusive": 5349,
+              "steps": 484,
+              "resolved_route_steps": 390,
+              "route_coverage": 0.8057851239669421,
+              "generation_ids_observed": [
+                15,
+                18,
+                22,
+                24
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 4
+            }
+          },
+          {
+            "step": 4884,
+            "true_context_id": 3,
+            "true_context_run_start_step": 4865,
+            "steps_after_true_context_switch": 20,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 0,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": true,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 0,
+            "allocated_generation": 21,
+            "evicted_slot": 0,
+            "evicted_generation": 9,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 212,
+            "evicted_generation_context_purity": 0.8584905660377359,
+            "future_same_context_run": {
+              "start_step": 5971,
+              "end_step_exclusive": 6452,
+              "steps": 481,
+              "resolved_route_steps": 196,
+              "route_coverage": 0.4074844074844075,
+              "generation_ids_observed": [
+                15,
+                22,
+                25,
+                26,
+                27,
+                30,
+                32,
+                33,
+                34,
+                35
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 11
+            }
+          }
+        ],
+        "interpretation": "An evicted generation cannot recur under its generation ID. These are post-hoc future-revisit opportunities; another slot may preserve a profile, and a fresh generation may be allocated later. Counts are correlational, not causal evidence that an eviction caused a missed reuse."
+      },
+      "trace_limits": {
+        "event_level_observe_reason_logged": false,
+        "event_level_predictive_probability_logged": false,
+        "generation_slot_consistency_mismatches": 0,
+        "contradiction_vs_novel_cell_classification": "Not directly logged. Resolved-route cell status only distinguishes at least one prior observation from no prior observation; unresolved route rows have unknown active-profile support."
+      }
+    },
+    {
+      "seed": 359,
+      "steps": 6418,
+      "true_context_switches": 10,
+      "allocations": {
+        "count": 30,
+        "steps_after_last_true_context_switch": {
+          "over_64": {
+            "count": 13,
+            "denominator": 30
+          },
+          "over_128": {
+            "count": 5,
+            "denominator": 30
+          }
+        },
+        "recent_x_band_evidence": {
+          "any_band_transition_in_previous_8_completed_steps": {
+            "count": 24,
+            "denominator": 30
+          },
+          "first_entry_to_band_in_current_true_context_run_previous_8_steps": {
+            "count": 4,
+            "denominator": 30
+          },
+          "allocation_transition_itself_crossed_band": {
+            "count": 1,
+            "denominator": 30
+          }
+        },
+        "action_time_cell_evidence_from_trace": {
+          "resolved_route_cell_was_previously_untried": {
+            "count": 0,
+            "denominator": 30
+          },
+          "resolved_route_cell_had_at_least_one_prior_observation": {
+            "count": 0,
+            "denominator": 30
+          },
+          "route_unresolved_support_unknown": {
+            "count": 30,
+            "denominator": 30
+          }
+        }
+      },
+      "evictions": {
+        "count": 24,
+        "steps_after_last_true_context_switch": {
+          "over_64": {
+            "count": 10,
+            "denominator": 24
+          },
+          "over_128": {
+            "count": 4,
+            "denominator": 24
+          }
+        },
+        "recent_x_band_evidence": {
+          "any_band_transition_in_previous_8_completed_steps": {
+            "count": 18,
+            "denominator": 24
+          },
+          "first_entry_to_band_in_current_true_context_run_previous_8_steps": {
+            "count": 2,
+            "denominator": 24
+          },
+          "allocation_transition_itself_crossed_band": {
+            "count": 0,
+            "denominator": 24
+          }
+        },
+        "action_time_cell_evidence_from_trace": {
+          "resolved_route_cell_was_previously_untried": {
+            "count": 0,
+            "denominator": 24
+          },
+          "resolved_route_cell_had_at_least_one_prior_observation": {
+            "count": 0,
+            "denominator": 24
+          },
+          "route_unresolved_support_unknown": {
+            "count": 24,
+            "denominator": 24
+          }
+        }
+      },
+      "generation_reuse_lost_to_eviction_diagnostic": {
+        "evictions_with_observer_mappable_generation": 24,
+        "evicted_generations_with_a_later_true_context_revisit": 11,
+        "denominator_for_revisit_opportunities": 24,
+        "with_an_alternate_active_generation_modal_for_same_context_at_eviction": 7,
+        "alternate_generation_observed_on_later_revisit": 3,
+        "no_preexisting_same_context_generation_observed_on_later_revisit": 8,
+        "eviction_opportunities": [
+          {
+            "step": 935,
+            "true_context_id": 1,
+            "true_context_run_start_step": 932,
+            "steps_after_true_context_switch": 4,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "conflict",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 0,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 3,
+            "allocated_generation": 6,
+            "evicted_slot": 3,
+            "evicted_generation": 3,
+            "evicted_generation_modal_context_id": 3,
+            "evicted_generation_modal_context_name": "B0",
+            "evicted_generation_prior_route_steps": 9,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 3066,
+              "end_step_exclusive": 3675,
+              "steps": 609,
+              "resolved_route_steps": 608,
+              "route_coverage": 0.9983579638752053,
+              "generation_ids_observed": [
+                1,
+                17
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                1,
+                2,
+                4
+              ],
+              "alternate_generation_observed_on_revisit": true,
+              "allocations_during_revisit": 0
+            }
+          },
+          {
+            "step": 1449,
+            "true_context_id": 2,
+            "true_context_run_start_step": 1424,
+            "steps_after_true_context_switch": 26,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 1,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 4,
+            "allocated_generation": 8,
+            "evicted_slot": 4,
+            "evicted_generation": 4,
+            "evicted_generation_modal_context_id": 3,
+            "evicted_generation_modal_context_name": "B0",
+            "evicted_generation_prior_route_steps": 18,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 3066,
+              "end_step_exclusive": 3675,
+              "steps": 609,
+              "resolved_route_steps": 608,
+              "route_coverage": 0.9983579638752053,
+              "generation_ids_observed": [
+                1,
+                17
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                1,
+                2
+              ],
+              "alternate_generation_observed_on_revisit": true,
+              "allocations_during_revisit": 0
+            }
+          },
+          {
+            "step": 1499,
+            "true_context_id": 2,
+            "true_context_run_start_step": 1424,
+            "steps_after_true_context_switch": 76,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": false,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 2,
+            "allocated_generation": 9,
+            "evicted_slot": 2,
+            "evicted_generation": 2,
+            "evicted_generation_modal_context_id": 3,
+            "evicted_generation_modal_context_name": "B0",
+            "evicted_generation_prior_route_steps": 7,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 3066,
+              "end_step_exclusive": 3675,
+              "steps": 609,
+              "resolved_route_steps": 608,
+              "route_coverage": 0.9983579638752053,
+              "generation_ids_observed": [
+                1,
+                17
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                1
+              ],
+              "alternate_generation_observed_on_revisit": true,
+              "allocations_during_revisit": 0
+            }
+          },
+          {
+            "step": 1525,
+            "true_context_id": 2,
+            "true_context_run_start_step": 1424,
+            "steps_after_true_context_switch": 102,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": false,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 0,
+            "allocated_generation": 10,
+            "evicted_slot": 0,
+            "evicted_generation": 0,
+            "evicted_generation_modal_context_id": 4,
+            "evicted_generation_modal_context_name": "B1",
+            "evicted_generation_prior_route_steps": 503,
+            "evicted_generation_context_purity": 0.8846918489065606,
+            "future_same_context_run": {
+              "start_step": 4824,
+              "end_step_exclusive": 5358,
+              "steps": 534,
+              "resolved_route_steps": 530,
+              "route_coverage": 0.9925093632958801,
+              "generation_ids_observed": [
+                25
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 1
+            }
+          },
+          {
+            "step": 2082,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2045,
+            "steps_after_true_context_switch": 38,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 0,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 4,
+            "allocated_generation": 12,
+            "evicted_slot": 4,
+            "evicted_generation": 8,
+            "evicted_generation_modal_context_id": 2,
+            "evicted_generation_modal_context_name": "A2",
+            "evicted_generation_prior_route_steps": 8,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 2635,
+              "end_step_exclusive": 3066,
+              "steps": 431,
+              "resolved_route_steps": 425,
+              "route_coverage": 0.9860788863109049,
+              "generation_ids_observed": [
+                14,
+                17
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                7
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 1
+            }
+          },
+          {
+            "step": 2118,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2045,
+            "steps_after_true_context_switch": 74,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 3,
+            "allocated_generation": 14,
+            "evicted_slot": 3,
+            "evicted_generation": 6,
+            "evicted_generation_modal_context_id": 1,
+            "evicted_generation_modal_context_name": "A1",
+            "evicted_generation_prior_route_steps": 519,
+            "evicted_generation_context_purity": 0.9402697495183044,
+            "future_same_context_run": {
+              "start_step": 5358,
+              "end_step_exclusive": 5811,
+              "steps": 453,
+              "resolved_route_steps": 99,
+              "route_coverage": 0.2185430463576159,
+              "generation_ids_observed": [
+                17,
+                21,
+                22,
+                25,
+                26
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 1
+            }
+          },
+          {
+            "step": 2304,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2045,
+            "steps_after_true_context_switch": 260,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 5,
+            "allocated_generation": 15,
+            "evicted_slot": 5,
+            "evicted_generation": 7,
+            "evicted_generation_modal_context_id": 2,
+            "evicted_generation_modal_context_name": "A2",
+            "evicted_generation_prior_route_steps": 456,
+            "evicted_generation_context_purity": 0.9978070175438597,
+            "future_same_context_run": {
+              "start_step": 2635,
+              "end_step_exclusive": 3066,
+              "steps": 431,
+              "resolved_route_steps": 425,
+              "route_coverage": 0.9860788863109049,
+              "generation_ids_observed": [
+                14,
+                17
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 1
+            }
+          },
+          {
+            "step": 2438,
+            "true_context_id": 5,
+            "true_context_run_start_step": 2045,
+            "steps_after_true_context_switch": 394,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 4,
+            "allocated_generation": 16,
+            "evicted_slot": 4,
+            "evicted_generation": 12,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 4,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 5811,
+              "end_step_exclusive": 6418,
+              "steps": 607,
+              "resolved_route_steps": 496,
+              "route_coverage": 0.8171334431630972,
+              "generation_ids_observed": [
+                25,
+                27,
+                28,
+                29
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                11,
+                13,
+                14
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 3
+            }
+          },
+          {
+            "step": 2644,
+            "true_context_id": 2,
+            "true_context_run_start_step": 2635,
+            "steps_after_true_context_switch": 10,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "conflict",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": false,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 2,
+            "allocated_generation": 17,
+            "evicted_slot": 2,
+            "evicted_generation": 13,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 33,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 5811,
+              "end_step_exclusive": 6418,
+              "steps": 607,
+              "resolved_route_steps": 496,
+              "route_coverage": 0.8171334431630972,
+              "generation_ids_observed": [
+                25,
+                27,
+                28,
+                29
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                11,
+                14
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 3
+            }
+          },
+          {
+            "step": 3732,
+            "true_context_id": 0,
+            "true_context_run_start_step": 3675,
+            "steps_after_true_context_switch": 58,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "insufficient_support",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 0,
+            "any_band_transition_previous_8_steps": false,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 0,
+            "allocated_generation": 20,
+            "evicted_slot": 0,
+            "evicted_generation": 11,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 41,
+            "evicted_generation_context_purity": 1.0,
+            "future_same_context_run": {
+              "start_step": 5811,
+              "end_step_exclusive": 6418,
+              "steps": 607,
+              "resolved_route_steps": 496,
+              "route_coverage": 0.8171334431630972,
+              "generation_ids_observed": [
+                25,
+                27,
+                28,
+                29
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [
+                14
+              ],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 3
+            }
+          },
+          {
+            "step": 3744,
+            "true_context_id": 0,
+            "true_context_run_start_step": 3675,
+            "steps_after_true_context_switch": 70,
+            "pre_action_slot": null,
+            "pre_action_generation": null,
+            "pre_action_route_reason": "conflict",
+            "pre_action_cell_status": "route_unresolved_support_unknown",
+            "band": 2,
+            "any_band_transition_previous_8_steps": true,
+            "new_band_entry_in_true_run_previous_8_steps": false,
+            "current_transition_crossed_x_band": false,
+            "allocated_slot": 3,
+            "allocated_generation": 21,
+            "evicted_slot": 3,
+            "evicted_generation": 14,
+            "evicted_generation_modal_context_id": 5,
+            "evicted_generation_modal_context_name": "B2",
+            "evicted_generation_prior_route_steps": 190,
+            "evicted_generation_context_purity": 0.9789473684210527,
+            "future_same_context_run": {
+              "start_step": 5811,
+              "end_step_exclusive": 6418,
+              "steps": 607,
+              "resolved_route_steps": 496,
+              "route_coverage": 0.8171334431630972,
+              "generation_ids_observed": [
+                25,
+                27,
+                28,
+                29
+              ],
+              "evicted_generation_observed": false,
+              "active_alternate_generations_at_eviction": [],
+              "alternate_generation_observed_on_revisit": false,
+              "allocations_during_revisit": 3
+            }
+          }
+        ],
+        "interpretation": "An evicted generation cannot recur under its generation ID. These are post-hoc future-revisit opportunities; another slot may preserve a profile, and a fresh generation may be allocated later. Counts are correlational, not causal evidence that an eviction caused a missed reuse."
+      },
+      "trace_limits": {
+        "event_level_observe_reason_logged": false,
+        "event_level_predictive_probability_logged": false,
+        "generation_slot_consistency_mismatches": 0,
+        "contradiction_vs_novel_cell_classification": "Not directly logged. Resolved-route cell status only distinguishes at least one prior observation from no prior observation; unresolved route rows have unknown active-profile support."
+      }
+    }
+  ],
+  "aggregate": {
+    "allocations": {
+      "count": 81,
+      "steps_after_last_true_context_switch": {
+        "over_64": {
+          "count": 32,
+          "denominator": 81
+        },
+        "over_128": {
+          "count": 14,
+          "denominator": 81
+        }
+      },
+      "recent_x_band_evidence": {
+        "any_band_transition_in_previous_8_completed_steps": {
+          "count": 70,
+          "denominator": 81
+        },
+        "first_entry_to_band_in_current_true_context_run_previous_8_steps": {
+          "count": 14,
+          "denominator": 81
+        },
+        "allocation_transition_itself_crossed_band": {
+          "count": 2,
+          "denominator": 81
+        }
+      },
+      "action_time_cell_evidence_from_trace": {
+        "resolved_route_cell_was_previously_untried": {
+          "count": 0,
+          "denominator": 81
+        },
+        "resolved_route_cell_had_at_least_one_prior_observation": {
+          "count": 0,
+          "denominator": 81
+        },
+        "route_unresolved_support_unknown": {
+          "count": 81,
+          "denominator": 81
+        }
+      }
+    },
+    "evictions": {
+      "count": 63,
+      "steps_after_last_true_context_switch": {
+        "over_64": {
+          "count": 28,
+          "denominator": 63
+        },
+        "over_128": {
+          "count": 13,
+          "denominator": 63
+        }
+      },
+      "recent_x_band_evidence": {
+        "any_band_transition_in_previous_8_completed_steps": {
+          "count": 54,
+          "denominator": 63
+        },
+        "first_entry_to_band_in_current_true_context_run_previous_8_steps": {
+          "count": 9,
+          "denominator": 63
+        },
+        "allocation_transition_itself_crossed_band": {
+          "count": 0,
+          "denominator": 63
+        }
+      },
+      "action_time_cell_evidence_from_trace": {
+        "resolved_route_cell_was_previously_untried": {
+          "count": 0,
+          "denominator": 63
+        },
+        "resolved_route_cell_had_at_least_one_prior_observation": {
+          "count": 0,
+          "denominator": 63
+        },
+        "route_unresolved_support_unknown": {
+          "count": 63,
+          "denominator": 63
+        }
+      }
+    },
+    "known_slot_reuse_vs_novelty_evidence_as_implemented": {
+      "known_profile_reuse": "2 matching events across at least 2 cells; each matching slot cell needs support >=2 and predictive probability >=0.60.",
+      "new_profile_from_active_bank": "3 novelty events across at least 2 cells; a contradiction is triggered at cell support >=1 and predictive probability <0.30.",
+      "first_profile": "4 distinct moving band/action cells.",
+      "assessment": "This is asymmetric evidence: a new profile can be confirmed from sparse one-sample support per cell, while known-profile matching requires at least two samples. The source logic can therefore confuse partial cell profiles with new tasks. The saved trace lacks observe-time reason/probability, so the formal run cannot establish that this mechanism caused the observed splits."
+    }
+  }
+}

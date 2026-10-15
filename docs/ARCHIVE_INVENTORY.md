@@ -1,6 +1,6 @@
 # Research archive inventory
 
-Inventory date: 2026-10-14. This describes the existing A/B, B+, compression, and C1 research files in this workspace. C2 is outside the archive scope.
+Initial inventory date: 2026-10-14; expanded on 2026-10-15. The archive includes A/B, B+, compression, C1, P0, and the three-stage bounded knowledge-organization study. The new closed loop uses the controlled C1 environment; it is not a completed general-environment C2 benchmark. Historical size tables below describe their original snapshots; the manifest gives current counts and bytes.
 
 ## Coverage
 

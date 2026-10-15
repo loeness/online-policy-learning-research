@@ -1,0 +1,39 @@
+{
+  "max_contexts": 6,
+  "windows": [
+    8,
+    32,
+    64
+  ],
+  "primary_window": 32,
+  "alpha": 0.5,
+  "per_cell_count_cap": "window",
+  "first_profile_seed": {
+    "distinct_moving_band_action_cells": 4
+  },
+  "robust_novel_profile": {
+    "confirmation_events": 3,
+    "evidence": "supported contradictions",
+    "minimum_distinct_band_action_cells": 2
+  },
+  "naive_novel_profile": {
+    "confirmation_events": 3,
+    "evidence": "contradictions or unsupported cells",
+    "minimum_distinct_band_action_cells": 2
+  },
+  "known_profile_reuse": {
+    "minimum_distinct_band_action_cells": 2,
+    "minimum_predictive_probability": 0.6,
+    "minimum_cell_support": 2,
+    "matching_events": 2
+  },
+  "contradiction_detection": {
+    "minimum_cell_support": 1,
+    "predictive_probability_below": 0.3
+  },
+  "resolved_route": {
+    "minimum_posterior": 0.7,
+    "minimum_recent_supported_events": 2
+  },
+  "stationary_wall_transitions": "censored"
+}

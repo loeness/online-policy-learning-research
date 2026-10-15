@@ -1,0 +1,113 @@
+{
+  "phase": "pilot",
+  "seed": 997,
+  "arm": "evidence_gate",
+  "steps": 2048,
+  "total_reward": -43.19000000000116,
+  "reward_per_step": -0.021088867187500568,
+  "completed_episodes": 34,
+  "success_rate": 0.08823529411764706,
+  "training_environment_steps": 2048,
+  "validation_environment_steps": 512,
+  "revisit_environment_steps": 0,
+  "elapsed_seconds": 2.3948538999975426,
+  "process_cpu_seconds": 2.34375,
+  "process_rss_after_initialization_bytes": 328683520,
+  "process_rss_final_bytes": 329752576,
+  "steps_per_cpu_second": 873.8133333333334,
+  "actor_compact_numeric_bytes": 202,
+  "actor_compact_binary_file_bytes": 202,
+  "actor_compact_npz_file_bytes": 692,
+  "actor_budget_bytes": 320,
+  "critic_weight_bytes": 20228,
+  "critic_optimizer_bytes": 40480,
+  "anchor_replay_bytes": 70128,
+  "router_memory": {
+    "profile_counts": 1152,
+    "recent_window": 6024,
+    "novel_pending": 760,
+    "candidate_pending": 456,
+    "recovery_hits": 64,
+    "slot_metadata": 384,
+    "total": 8840,
+    "allocations": 2,
+    "evictions": 0,
+    "switches": 0,
+    "active_slots": [
+      0,
+      1
+    ]
+  },
+  "counts": {
+    "environment_steps": 2048,
+    "rollouts_trained": 6,
+    "minibatch_updates": 96,
+    "stale_actor_rows": 73,
+    "accepted": 1,
+    "rejected": 1,
+    "codec_commits": 1,
+    "optimizer_reset_parameters": 3,
+    "optimizer_reset_events": 4,
+    "slot_allocations": 2,
+    "slot_evictions": 0,
+    "local_trial_steps": 1536,
+    "validation_steps": 512
+  },
+  "slot_generation": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "checkpoint_file_bytes": 117611,
+  "source_snapshot_manifest": "source_snapshot/manifest.json",
+  "hidden_schedule": [
+    {
+      "segment_id": 0,
+      "start_step": 0,
+      "end_step": 1024,
+      "length": 1024,
+      "context": "A2"
+    },
+    {
+      "segment_id": 1,
+      "start_step": 1024,
+      "end_step": 2048,
+      "length": 1024,
+      "context": "B1"
+    }
+  ],
+  "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+  "protocol_sha256": "af4563b9b2d28b4cf0c92ce22639ab17d0dad15739cd119c0a34069a4c489725",
+  "custom_ppo": {
+    "rollout": 256,
+    "batch": 64,
+    "epochs": 4,
+    "learning_rate": 0.003,
+    "entropy": 0.06,
+    "gamma": 0.98,
+    "gae": 0.95,
+    "clip": 0.2,
+    "target_kl": 0.06,
+    "fit_rollouts_per_cycle": 3,
+    "heldout_rollouts_per_cycle": 1,
+    "manual_implementation_notes": [
+      "Advantages are normalized once across each 256-step rollout.",
+      "The value loss is MSE with coefficient 0.5; target-KL stopping is checked before the minibatch update.",
+      "Actor samples from a replaced router generation are masked; the shared critic still uses them.",
+      "No vectorized environments or SB3 rollout buffer are used in this single-stream harness."
+    ]
+  },
+  "checkpoint_scope": "policy, router/controller, bounded anchors, optimizer and RNG restoration for revisit; not a mid-run resume because environment, schedule position, and rollout state are not saved",
+  "source_prior_note": "",
+  "limitations": [
+    "C1 is a controlled six-context navigation simulator, not a general deployment benchmark.",
+    "The evidence gate is a finite empirical heuristic, not a certified safety guarantee.",
+    "Output-policy KL is used to rank compact candidates and check preservation; no gradient policy distillation is performed.",
+    "The adaptive_assignment baseline uses a source-transition prior and has a different state representation.",
+    "The checkpoint restores policy, router/controller, anchors, optimizer, and RNG for revisit; it lacks environment, schedule-position, and rollout state for arbitrary mid-run resume.",
+    "RSS samples are measured process resident-set sizes; component capacity fields are numeric payload or bounded Python-container estimates and exclude the shared W0 foundation allocation."
+  ]
+}

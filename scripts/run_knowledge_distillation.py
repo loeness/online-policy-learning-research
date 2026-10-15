@@ -1,6 +1,7 @@
 """Declared post-hoc policy-loss control for the static low-rank diagnostic."""
 from __future__ import annotations
 
+import argparse
 import csv
 import hashlib
 import json
@@ -100,8 +101,11 @@ def fit_student(teacher, matrix, budget, folder):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", default="outputs/knowledge_distillation_control")
+    args = parser.parse_args()
     torch.set_num_threads(1)
-    out = ROOT / "outputs/knowledge_distillation_control"
+    out = ROOT / args.output
     if (out / "summary.json").exists():
         raise FileExistsError("Completed experiment exists; preserve it.")
     out.mkdir(parents=True, exist_ok=True)
