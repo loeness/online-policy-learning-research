@@ -138,6 +138,7 @@ def restore_run(folder, stage="final"):
     payload = torch.load(folder / f"checkpoint_{stage}.pt", map_location="cpu", weights_only=False)
     agent, slots, base = make_agent(config["condition"], config["seed"], config)
     assert payload["foundation_sha256"] == sha(Path(base["foundation"]))
+    assert payload["slot_map"] == slots, "saved slot map differs from the configured factory"
     local, shared, groups = decode_shared_knowledge(payload["actor_binary"])
     agent.core.install_local_matrix(local)
     agent.core.install_shared_matrix(shared)
