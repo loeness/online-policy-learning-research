@@ -150,6 +150,8 @@ def test_auto_active_endpoint_checkpoint_restores_with_s1b_factory(tmp_path):
     config = runner.load_config()
     config.update(condition="auto_active", seed=809)
     agent, slots, base = runner.make_agent("auto_active", 809, config)
+    assert agent.core.shared_groups == 2
+    assert agent.core.slot_groups.tolist() == [-1] * 6
     profile = _profile()
     decision = runner.assign_probe_profile(agent, "A0", slots["A0"], profile)
     agent.probe_profiles["A0"] = profile.copy()
@@ -157,6 +159,7 @@ def test_auto_active_endpoint_checkpoint_restores_with_s1b_factory(tmp_path):
     with torch.no_grad():
         agent.core._nodes["1"].A.fill_(0.012)
         agent.core._shared_coefficients[decision["assigned_group"]].C.fill_(0.04)
+    agent.optimizer.step_count = 17
     folder = tmp_path / "seed_809" / "auto_active"
     folder.mkdir(parents=True)
     runner.write_json(folder / "config.json", config)
@@ -168,6 +171,7 @@ def test_auto_active_endpoint_checkpoint_restores_with_s1b_factory(tmp_path):
     assert restored.grouper is not None
     assert restored.grouper.active_groups == (0,)
     assert restored.core.group_for_slot(slots["A0"]) == 0
+    assert restored.optimizer.step_count == 17
     np.testing.assert_array_equal(restored.core.read_local_matrix(), agent.core.read_local_matrix())
     np.testing.assert_array_equal(restored.core.read_shared_matrix(), agent.core.read_shared_matrix())
     assert restored.probe_profiles["A0"].dtype == np.uint16
