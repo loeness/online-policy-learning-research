@@ -784,7 +784,14 @@ def audit_preboot_auto_pair(output: Path, seed: int, config: Mapping[str, Any]) 
         for name in active["critic"]
     ) and set(active["critic"]) == set(frozen["critic"])
     groups_match = torch.equal(active["slot_groups"], frozen["slot_groups"])
-    grouping_match = active["group_decisions"] == frozen["group_decisions"]
+    # Condition names differ by design; compare the actual grouping evidence.
+    grouping_match = [
+        {key: value for key, value in decision.items() if key != "condition"}
+        for decision in active["group_decisions"]
+    ] == [
+        {key: value for key, value in decision.items() if key != "condition"}
+        for decision in frozen["group_decisions"]
+    ]
     training_match = _read_training_prefix(active_folder / "steps.csv", boot_steps) == _read_training_prefix(
         frozen_folder / "steps.csv", boot_steps
     )
