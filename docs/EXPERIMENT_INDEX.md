@@ -70,3 +70,7 @@ The shared W0 checkpoint is not a per-seed pretraining cohort: A/B deployment se
 - Top-level `analysis.json`, reports, plots, `provenance.json`, and `checks.txt` are derived artifacts. They do not replace per-run records.
 - `outputs/c1/formal/.../history_eval` is a separate post-history evaluation. Its route is oracle-diagnostic; it measures the changed policy after the preceding hidden-label history continuation, not the hidden-label router's online decisions.
 
+
+## Research design after C1
+
+[Online knowledge-structure design](ONLINE_KNOWLEDGE_STRUCTURE_DESIGN.md) reviews existing tree/modular RL, identifies overlap, and proposes falsifiable shared-write, consolidation and fixed-budget decisions. It is literature and algorithm design, with no new experiments and no C2/C3 results.

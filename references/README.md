@@ -1,6 +1,6 @@
 # Citation notes
 
-The bibliography contains 28 public references used by the baseline and related-work map in [the project note](../docs/BASELINES_AND_RELATED_WORK.md). Entries use the publisher or conference record when one is available, and the arXiv record for preprints or work without a formal proceedings entry. The original 25 records were checked on 2026-10-14; three C1 supplement entries (EWC, Progress & Compress, LoRA-XS) were checked on 2026-10-15. URLs point to the record used to verify the entry; arXiv eprint fields identify the cited preprint version.
+The bibliography contains 40 public references used by the baseline and related-work map in [the project note](../docs/BASELINES_AND_RELATED_WORK.md). Entries use the publisher or conference record when one is available, and the arXiv record for preprints or work without a formal proceedings entry. The original 25 records were checked on 2026-10-14; three C1 supplement entries (EWC, Progress & Compress, LoRA-XS) were checked on 2026-10-15. URLs point to the record used to verify the entry; arXiv eprint fields identify the cited preprint version.
 
 ## Metadata decisions
 
@@ -28,3 +28,7 @@ Our source-output mixers are C1 policy adapters, not its Transformer training
 setup. CLEAR's correct preprint is arXiv:1811.11682; PPO behavioral replay is
 only a partial inspired control. None of these custom comparisons constitutes
 a faithful reproduction of published SOTA.
+
+## Online knowledge-structure design review
+
+Twelve additional primary references were checked on 2026-10-15 for `docs/ONLINE_KNOWLEDGE_STRUCTURE_DESIGN.md`: skill/state trees, compositional lifelong RL, task-agnostic adaptation, structure learning, rate-distortion, shared-gradient proposals and baseline-aware improvement. They are design context and proposed comparisons, not newly executed baselines. The cited primary texts show substantial overlap with individual mechanisms; this review does not certify field-wide novelty. No C2/C3 experiment was run.
