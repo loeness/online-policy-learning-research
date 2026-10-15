@@ -1,0 +1,132 @@
+{
+  "sources": {
+    "scripts\\run_knowledge_loop.py": {
+      "sha256": "5ed6d081c0e3381d2e22d9bcf280600909ac1f281c9e82f9c31067419fc26eb7",
+      "bytes": 68917
+    },
+    "docs\\KNOWLEDGE_ORGANIZATION_PROTOCOL.md": {
+      "sha256": "af4563b9b2d28b4cf0c92ce22639ab17d0dad15739cd119c0a34069a4c489725",
+      "bytes": 11434
+    },
+    "configs\\c1.json": {
+      "sha256": "7e24e002dfcc80809e28c4d6f97d42ec5a7ad1055752eb8a56742ae3275ebde0",
+      "bytes": 1035
+    },
+    "src\\online_rl\\compact_knowledge.py": {
+      "sha256": "df5ecb78b87caf77687b59fb524e986d145f755e97ac04bf9fbf42c2549b5cce",
+      "bytes": 23728
+    },
+    "src\\online_rl\\task_free_router.py": {
+      "sha256": "9dedd5827a11366467b64286b7f99fe0f78f97d25788258cad5b6dc1c06928c8",
+      "bytes": 32958
+    },
+    "src\\online_rl\\c1_envs.py": {
+      "sha256": "d02e46b65b7edfef1d0219116a2429e7dca139c8f6ffb14e4f9d8418cf642a55",
+      "bytes": 8441
+    },
+    "src\\online_rl\\c1_strong_models.py": {
+      "sha256": "b774d14d2ef3e0b9f9499699aa3b512282443911fd42a5f22758d3af5e0e0638",
+      "bytes": 25191
+    },
+    "src\\online_rl\\c1_tensor_controls.py": {
+      "sha256": "727f1b4fa80c76b7d516ec6a4d95255ec58566b0c487340f6c9855ddc1accfae",
+      "bytes": 16851
+    },
+    "src\\online_rl\\c1_tensor_experiment.py": {
+      "sha256": "d27ffb8fb2fdd7e74d952ecf39ab5fe5e44b0bf0da3f2b88baa282d5c144e513",
+      "bytes": 6686
+    },
+    "src\\online_rl\\c1_policy.py": {
+      "sha256": "371fc881e960c63c01e0ae71c27b7fa22462e1b4985f8efd8c6862388ab2fb14",
+      "bytes": 25602
+    },
+    "src\\online_rl\\c1_supplement_experiment.py": {
+      "sha256": "d0c9db31d02b39350e83e620e11755e0ffd8639a7fc4c8e967a064e85477c22f",
+      "bytes": 52761
+    },
+    "src\\online_rl\\policy.py": {
+      "sha256": "edf1d024abdfa00dfea262255a358e7ce5dfb92c1e003b2642714a0a56067c1d",
+      "bytes": 7288
+    },
+    "src\\online_rl\\experiment.py": {
+      "sha256": "1bf23a99f1ca62efe0bb0b8c5c67495b932b1c21a622e97ffc97e0c8269e0acc",
+      "bytes": 23600
+    },
+    "src\\online_rl\\envs.py": {
+      "sha256": "7d8952301e80834239330985739149b6f4066d3e1be9037282f3f3e58334d156",
+      "bytes": 9021
+    }
+  },
+  "foundation": {
+    "path": "D:\\MovedFromC\\ChatGPT\\online\\data\\foundation.pt",
+    "sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+    "bytes": 55477
+  },
+  "dataset": {
+    "path": "D:\\MovedFromC\\ChatGPT\\online\\data\\pretrain_source.npz",
+    "sha256": "493c67dc07393a674deb6aa7ab5ba4feea3c1a48eacc16b37046a12606bc56f2",
+    "bytes": 116878
+  },
+  "causal_harness_sources": {
+    "scripts\\run_knowledge_causal_ablation.py": {
+      "sha256": "18f44b0d39024ee933765012e7e5bc1e08892c73a0ea447f393f7fba7ae89714",
+      "bytes": 17507
+    },
+    "tests\\test_knowledge_causal_ablation.py": {
+      "sha256": "b9d8b99ab9134609cfe11541ac4a2629aa7593067da91e410dd285c62214f3c8",
+      "bytes": 4839
+    },
+    "source_snapshot/condition_patch.json": {
+      "sha256": "b4f88279bd1dc2790c4d1d16987ddeeacf26fd5369a236c56d2a02f3c01a482d",
+      "bytes": 1135
+    }
+  },
+  "condition_patch": {
+    "condition": "oracle_dense",
+    "underlying_original_arm": "int8",
+    "router": "privileged fixed context oracle",
+    "oracle_context_source": "external hidden schedule, before action",
+    "oracle_context_to_slot": {
+      "A0": 0,
+      "A1": 1,
+      "A2": 2,
+      "B0": 3,
+      "B1": 4,
+      "B2": 5
+    },
+    "oracle_confidence": 1.0,
+    "oracle_allocations": 0,
+    "oracle_lru": false,
+    "resource_comparison_fair": false,
+    "actor_codec_for_int8_arm": "dense_f32",
+    "actor_budget_bytes": 664,
+    "expected_actor_binary_bytes_at_full_shape": 664,
+    "head_count": 6,
+    "initial_head_values": "all zeros",
+    "max_context_slots": 6,
+    "rollout_steps": 256,
+    "fit_rollouts_per_1024_step_cycle": 3,
+    "heldout_rollouts_per_1024_step_cycle": 1,
+    "optimizer_reset_schedule": "existing reset at every consolidation cycle",
+    "legacy_evidence_gate_enabled": false,
+    "allocation_trial_preservation": false,
+    "run_revisit": false,
+    "paired_hidden_schedule_seed_offset": 7000,
+    "paired_environment_reset_seed_offset": 2200,
+    "paired_action_rng_seed_offset": 1100,
+    "oracle_is_unknown_task_algorithm_claim": false
+  },
+  "source_snapshot_scope": "original knowledge-loop source plus this harness and the exact per-condition runtime patch",
+  "post_run_protocol_supplement": {
+    "source_path": "docs/KNOWLEDGE_V2_VALIDATION.md",
+    "snapshot_path": "source_snapshot/docs/KNOWLEDGE_V2_VALIDATION.md",
+    "sha256": "f24731c1736f509553e80d0379eab7813dd9c00798d9eee9836607648164022a",
+    "bytes": 5410,
+    "protocol_commit": "36962eafe250804ae960637c5d068978af173993",
+    "protocol_commit_time": "2026-10-15T20:07:18+08:00",
+    "captured_after_run": true,
+    "protocol_was_frozen_before_formal_start": true,
+    "manifest_at_execution_backup": "source_snapshot/manifest_at_execution.json",
+    "note": "Post-run provenance supplement; original run CSVs, checkpoints, config, and execution-time manifest are preserved."
+  }
+}

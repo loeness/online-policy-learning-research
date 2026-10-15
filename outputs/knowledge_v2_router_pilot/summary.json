@@ -1,0 +1,205 @@
+{
+  "baseline": "robust_bank, window 32 from saved identification output",
+  "baseline_comparison": {
+    "331": {
+      "allocations": {
+        "evidence_router": 6,
+        "robust_bank_w32": 20
+      },
+      "evictions": {
+        "evidence_router": 0,
+        "robust_bank_w32": 14
+      },
+      "known_context_revisit_generation_reuse": {
+        "evidence_router": 0.565625,
+        "robust_bank_w32": 0.5390625
+      },
+      "offline_ari_including_unresolved": {
+        "evidence_router": 0.3965897674014087,
+        "robust_bank_w32": 0.4422857038676121
+      },
+      "resolved_route_completeness_macro_by_true_context": {
+        "evidence_router": 0.8469995896374951,
+        "robust_bank_w32": 0.763520450794141
+      },
+      "resolved_route_purity_by_slot_generation": {
+        "evidence_router": 0.8728323699421965,
+        "robust_bank_w32": 0.8368932038834952
+      },
+      "route_coverage": {
+        "evidence_router": 0.67578125,
+        "robust_bank_w32": 0.6705729166666666
+      }
+    }
+  },
+  "generated_environment_interactions": 0,
+  "input_directory": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_identification_pilot",
+  "input_manifest_sha256": "0f4a94c87b135a5cfd28d770f50268f6de139f9e2565e78c072eddb30c722114",
+  "offline_algorithm_evaluations": 1,
+  "phase": "pilot",
+  "records": [
+    {
+      "active_exploration": "not tested; the same behavior stream is used for all methods",
+      "active_slots_at_end": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "algorithm": "evidence_router",
+      "all_stream_resolved_route_changes": 0,
+      "allocations": 6,
+      "average_pre_action_confidence": 0.5159620434238456,
+      "average_pre_action_support": 0.7913464181205306,
+      "censored_seen_by_router": 16,
+      "evaluation_seconds": 0.26270459999796003,
+      "evictions": 0,
+      "gate_accepted_generation_correct_fraction_under_injective_warmup_mapping": 0.9388646288209607,
+      "gate_thresholds": {
+        "confidence_at_least": 0.8,
+        "support_at_least": 0.5
+      },
+      "known_context_revisit_generation_reuse": 0.565625,
+      "mean_seconds_per_step": 0.0003420632812473438,
+      "memory_bytes": {
+        "committed_evidence": 4332,
+        "profile_counts": 576,
+        "recent_window": 7176,
+        "slot_metadata": 424,
+        "state_dict_json_bytes": 1810,
+        "total": 12508
+      },
+      "moving_predictions_scored": 752,
+      "offline_ari_including_unresolved": 0.3965897674014087,
+      "per_step_output": "outputs\\knowledge_v2_router_pilot\\steps_seed_331_evidence_router_w32.csv.gz",
+      "physical_slot_ids_used": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "posthoc_injective_warmup_mapping": {
+        "0": 1,
+        "1": 4,
+        "3": 0,
+        "4": 3,
+        "5": 5
+      },
+      "pre_action_untried_fraction": 0.4440104166666667,
+      "redundant_slot_generations_by_posthoc_true_context": 0,
+      "resolved_route_completeness_macro_by_true_context": 0.8469995896374951,
+      "resolved_route_purity_by_slot_generation": 0.8728323699421965,
+      "revisit_change_latency_mean_steps_censored_at_segment_length": 27.8,
+      "revisit_change_latency_mean_steps_successful_only": 27.8,
+      "revisit_gate_accepted_fraction": 0.25,
+      "revisit_latency_censored_steps": 0,
+      "revisit_segments_missed": 0,
+      "revisit_segments_not_evaluable_no_warmup_generation": 1,
+      "revisit_segments_with_expected_generation": 5,
+      "route_changes_inside_true_stable_segment": 16,
+      "route_coverage": 0.67578125,
+      "seed": 331,
+      "steps": 768,
+      "stream_file": "outputs\\knowledge_identification_pilot\\stream_seed_331.npz",
+      "switches": 12,
+      "transition_accuracy": 0.6329787234042553,
+      "transition_logloss": 0.816069333846775,
+      "unique_route_slot_generations": 6,
+      "wall_censored_transitions": 16,
+      "warmup_gate_accepted_fraction": 0.3880208333333333,
+      "window": 32
+    }
+  ],
+  "source_sha256": {
+    "scripts\\evaluate_evidence_router.py": "a7057d64f4d84a8d68e9303e329f76e72b674224e53de22c2006a50a0aa2917e",
+    "scripts\\run_task_free_identification.py": "10d7f11b2b80d680801fdda7e46bf6614e4d5b5350ef231136bc5a778b10fc47",
+    "src\\online_rl\\evidence_router.py": "10d78b18d7393b44353ab99fdc34b53fcb8b99e31e06ffd734e42c249dfef278"
+  },
+  "source_snapshot_directory": "outputs\\knowledge_v2_router_pilot\\source_snapshot",
+  "streams": [
+    {
+      "seed": 331,
+      "source_schedule": [
+        {
+          "length": 64,
+          "segment": 0,
+          "start_step": 0,
+          "true_context": "A1"
+        },
+        {
+          "length": 64,
+          "segment": 1,
+          "start_step": 64,
+          "true_context": "B1"
+        },
+        {
+          "length": 64,
+          "segment": 2,
+          "start_step": 128,
+          "true_context": "A2"
+        },
+        {
+          "length": 64,
+          "segment": 3,
+          "start_step": 192,
+          "true_context": "B1"
+        },
+        {
+          "length": 64,
+          "segment": 4,
+          "start_step": 256,
+          "true_context": "A2"
+        },
+        {
+          "length": 64,
+          "segment": 5,
+          "start_step": 320,
+          "true_context": "A0"
+        },
+        {
+          "length": 64,
+          "segment": 6,
+          "start_step": 384,
+          "true_context": "B0"
+        },
+        {
+          "length": 64,
+          "segment": 7,
+          "start_step": 448,
+          "true_context": "B2"
+        },
+        {
+          "length": 64,
+          "segment": 8,
+          "start_step": 512,
+          "true_context": "A0"
+        },
+        {
+          "length": 64,
+          "segment": 9,
+          "start_step": 576,
+          "true_context": "B2"
+        },
+        {
+          "length": 64,
+          "segment": 10,
+          "start_step": 640,
+          "true_context": "A1"
+        },
+        {
+          "length": 64,
+          "segment": 11,
+          "start_step": 704,
+          "true_context": "B0"
+        }
+      ],
+      "steps": 768,
+      "stream_file": "outputs\\knowledge_identification_pilot\\stream_seed_331.npz",
+      "stream_sha256": "9d6a60ac94efc53b79b2fb2d685941442e0ca3423e3eeca21b43cf749caf077f"
+    }
+  ]
+}

@@ -109,3 +109,25 @@ Main interpretation: `outputs/knowledge_organization_report/结果与研究判�
 Derived plots and `analysis.json` live in `outputs/knowledge_organization_report`.
 New checks cover codec round trips/physical sizes, sparse-support routing,
 PPO log probabilities and GAE, held-out timing, generations, and revisit semantics.
+
+## V2 causal diagnosis and optimization (2026-10-15)
+
+Read [the full V2 report](../outputs/knowledge_v2_report/验证与优化结论.md),
+[frozen protocol](KNOWLEDGE_V2_VALIDATION.md),
+[implementation review](KNOWLEDGE_V2_IMPLEMENTATION_NOTES.md), and
+[endpoint evaluation design](KNOWLEDGE_V2_REVISIT.md).
+
+| Cohort | Implementation | Artifacts and scope |
+|---|---|---|
+| Common-stream router replay, pilot/formal | `scripts/evaluate_evidence_router.py`, `src/online_rl/evidence_router.py` | `outputs/knowledge_v2_router_{pilot,formal}`; existing recorded streams, zero new interactions; includes short-segment negative result. |
+| Six causal controls × 3 new seeds | `scripts/run_knowledge_causal_ablation.py` | `outputs/knowledge_causal_formal`; 589,824 steps. Allocation preservation, oracle routing, dense/int8 and old-gate controls. Oracle is diagnostic and not budget/information matched. Pilot separately contains 49,152 steps. |
+| Five V2 conditions × 3 new seeds | `scripts/run_knowledge_v2.py`, `scripts/knowledge_v2_components.py` | `outputs/knowledge_v2_formal`; 491,520 steps. New router, independent int8, old gate, nonblocking consolidation and single head. Same W0; 25% of each online stream reserved from PPO. Pilot separately contains 24,576 steps. |
+| Behavior-reference score diagnostic | `scripts/diagnose_knowledge_gate_score.py` | `outputs/knowledge_v2_score_diagnostic`; 8,192 steps, actions/rewards identical to original gate pilot, 4/10 score-sign disagreements. It returns the old score and is not a corrected-gate performance result. |
+| Restored endpoint persistence | `scripts/revisit_knowledge_v2.py`, `scripts/restore_knowledge_v2.py` | `outputs/knowledge_v2_revisit`; 15 endpoints, 1,440 paired episodes, 80,319 interactions, no gradients. Clear recent history; slot reuse clears obsolete corrections. |
+| Reporting and artifact audit | `scripts/report_knowledge_v2.py`, `scripts/audit_knowledge_v2.py` | `outputs/knowledge_v2_report`; plots, per-seed contrasts, means, raw-log/source/budget checks. No additional interactions. |
+
+All new interactions total 1,243,583. Main V2 enforces W0 file plus saved checkpoint
+≤256 KiB at each persistence operation. This is not a whole-process memory bound.
+Six true contexts fit six slots; capacity-saturated replacement has not been tested.
+Current V2 runners add output-directory options after these cohorts; exact execution
+versions remain in each run's source snapshot. See reproducibility instructions.

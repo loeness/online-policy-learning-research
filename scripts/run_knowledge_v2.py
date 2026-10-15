@@ -90,9 +90,9 @@ def trace_metrics(folder):
             "trace_allocations": allocation, "trace_evictions": evictions}
 
 
-def run(phase):
+def run(phase, output_dir=None):
     torch.set_num_threads(1)
-    output = ROOT / f"outputs/knowledge_v2_{phase}"
+    output = Path(output_dir).resolve() if output_dir is not None else ROOT / f"outputs/knowledge_v2_{phase}"
     seeds, steps = ((787,), 8192) if phase == "pilot" else ((541, 557, 569), 32768)
     conditions = tuple(CONDITIONS) if phase == "formal" else (
         "evidence_router_int8", "evidence_router_old_gate", "evidence_router_nonblocking")
@@ -131,4 +131,6 @@ def run(phase):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--phase", choices=("pilot", "formal"), default="pilot")
-    run(parser.parse_args().phase)
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
+    run(args.phase, args.output)

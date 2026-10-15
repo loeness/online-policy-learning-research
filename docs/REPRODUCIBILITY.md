@@ -193,3 +193,37 @@ They are separate controls and do not overwrite their inputs. A restored loop
 checkpoint supports evaluation; it does not contain the environment/rollout
 state needed to resume training at an arbitrary interrupted step.
 
+## V2 causal validation and optimized loop
+
+The V2 protocol was frozen at `36962ea` before formal execution. Exact executed
+sources are inside each run's `source_snapshot`; current runner versions add
+output-directory options after execution without changing the archived cohorts.
+All runners refuse to overwrite nonempty run directories. Use new directories:
+
+```powershell
+python scripts/evaluate_evidence_router.py --phase formal --output outputs/knowledge_router_replication
+python scripts/run_knowledge_causal_ablation.py --phase formal --formal-reviewed --output-dir outputs/knowledge_causal_replication
+python scripts/run_knowledge_v2.py --phase formal --output outputs/knowledge_v2_replication
+python scripts/revisit_knowledge_v2.py --input outputs/knowledge_v2_replication --output outputs/knowledge_v2_revisit_replication
+python -m pytest -q tests/test_evidence_router.py tests/test_knowledge_causal_ablation.py tests/test_knowledge_v2_components.py tests/test_knowledge_v2_harness.py tests/test_restore_knowledge_v2.py
+```
+
+The score diagnostic has a fixed archival output root; it has already run and
+refuses overwrite. Inspect its saved source and existing outputs. Reporting and
+audit commands operate on the original completed V2 cohort, without new interactions:
+
+```powershell
+python scripts/report_knowledge_v2.py
+python scripts/audit_knowledge_v2.py
+```
+
+The audit compares older `data/` and `outputs/` against the manifest in `b7cd1e1`,
+then checks the 33 formal raw streams, source snapshots, main-V2 checkpoint byte
+caps, episode pairing and interaction ledger. The report summarizes three new
+deployment seeds with one shared W0; it does not estimate independent pretraining
+variability or certify policy improvement. Restoring a V2 checkpoint requires
+`restore_v2` and its saved condition, rather than the V1 default router factory.
+The main recovery-package cap includes W0 plus serialized checkpoint, while
+transient workspaces and measured process RSS are separate quantities. Six
+contexts and six slots do not test saturated persistent capacity.
+

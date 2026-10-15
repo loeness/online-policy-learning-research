@@ -1,0 +1,149 @@
+{
+  "phase": "v2_pilot",
+  "seed": 787,
+  "arm": "evidence_gate",
+  "steps": 8192,
+  "total_reward": -126.01000000000815,
+  "reward_per_step": -0.015382080078125995,
+  "completed_episodes": 140,
+  "success_rate": 0.12857142857142856,
+  "training_environment_steps": 8192,
+  "validation_environment_steps": 2048,
+  "revisit_environment_steps": 0,
+  "elapsed_seconds": 8.627664499988896,
+  "process_cpu_seconds": 8.578125,
+  "process_rss_after_initialization_bytes": 324964352,
+  "process_rss_final_bytes": 327880704,
+  "steps_per_cpu_second": 954.9872495446266,
+  "actor_compact_numeric_bytes": 280,
+  "actor_compact_binary_file_bytes": 280,
+  "actor_compact_npz_file_bytes": 902,
+  "actor_budget_bytes": 320,
+  "critic_weight_bytes": 20228,
+  "critic_optimizer_bytes": 40480,
+  "anchor_replay_bytes": 176544,
+  "router_memory": {
+    "profile_counts": 576,
+    "recent_window": 6648,
+    "committed_evidence": 6352,
+    "slot_metadata": 424,
+    "total": 14000,
+    "allocations": 6,
+    "evictions": 0,
+    "switches": 3,
+    "active_slots": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "counts": {
+    "environment_steps": 8192,
+    "rollouts_trained": 24,
+    "minibatch_updates": 384,
+    "stale_actor_rows": 877,
+    "accepted": 2,
+    "rejected": 6,
+    "codec_commits": 2,
+    "optimizer_reset_parameters": 13,
+    "optimizer_reset_events": 14,
+    "slot_allocations": 6,
+    "slot_evictions": 0,
+    "local_trial_steps": 6144,
+    "validation_steps": 2048
+  },
+  "slot_generation": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "checkpoint_file_bytes": 169451,
+  "source_snapshot_manifest": "source_snapshot/manifest.json",
+  "hidden_schedule": [
+    {
+      "segment_id": 0,
+      "start_step": 0,
+      "end_step": 1536,
+      "length": 1536,
+      "context": "B1"
+    },
+    {
+      "segment_id": 1,
+      "start_step": 1536,
+      "end_step": 3500,
+      "length": 1964,
+      "context": "B2"
+    },
+    {
+      "segment_id": 2,
+      "start_step": 3500,
+      "end_step": 4556,
+      "length": 1056,
+      "context": "B0"
+    },
+    {
+      "segment_id": 3,
+      "start_step": 4556,
+      "end_step": 5957,
+      "length": 1401,
+      "context": "A2"
+    },
+    {
+      "segment_id": 4,
+      "start_step": 5957,
+      "end_step": 7014,
+      "length": 1057,
+      "context": "A1"
+    },
+    {
+      "segment_id": 5,
+      "start_step": 7014,
+      "end_step": 8192,
+      "length": 1178,
+      "context": "A0"
+    }
+  ],
+  "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+  "protocol_sha256": "af4563b9b2d28b4cf0c92ce22639ab17d0dad15739cd119c0a34069a4c489725",
+  "custom_ppo": {
+    "rollout": 256,
+    "batch": 64,
+    "epochs": 4,
+    "learning_rate": 0.003,
+    "entropy": 0.06,
+    "gamma": 0.98,
+    "gae": 0.95,
+    "clip": 0.2,
+    "target_kl": 0.06,
+    "fit_rollouts_per_cycle": 3,
+    "heldout_rollouts_per_cycle": 1,
+    "manual_implementation_notes": [
+      "Advantages are normalized once across each 256-step rollout.",
+      "The value loss is MSE with coefficient 0.5; target-KL stopping is checked before the minibatch update.",
+      "Actor samples from a replaced router generation are masked; the shared critic still uses them.",
+      "No vectorized environments or SB3 rollout buffer are used in this single-stream harness."
+    ]
+  },
+  "checkpoint_scope": "policy, router/controller, bounded anchors, optimizer and RNG restoration for revisit; not a mid-run resume because environment, schedule position, and rollout state are not saved",
+  "source_prior_note": "",
+  "limitations": [
+    "C1 is a controlled six-context navigation simulator, not a general deployment benchmark.",
+    "The evidence gate is a finite empirical heuristic, not a certified safety guarantee.",
+    "Output-policy KL is used to rank compact candidates and check preservation; no gradient policy distillation is performed.",
+    "The adaptive_assignment baseline uses a source-transition prior and has a different state representation.",
+    "The checkpoint restores policy, router/controller, anchors, optimizer, and RNG for revisit; it lacks environment, schedule-position, and rollout state for arbitrary mid-run resume.",
+    "RSS samples are measured process resident-set sizes; component capacity fields are numeric payload or bounded Python-container estimates and exclude the shared W0 foundation allocation."
+  ],
+  "condition": "evidence_router_old_gate",
+  "trace_steps": 8192,
+  "route_coverage": 0.84423828125,
+  "trace_allocations": 6,
+  "trace_evictions": 0,
+  "whole_committed_package_bytes": 224928
+}

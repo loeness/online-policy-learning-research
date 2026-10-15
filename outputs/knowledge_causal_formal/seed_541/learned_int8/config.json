@@ -1,0 +1,206 @@
+{
+  "phase": "formal",
+  "seed": 541,
+  "condition": "learned_int8",
+  "underlying_original_arm": "int8",
+  "steps": 32768,
+  "hidden_schedule_seed": 7541,
+  "hidden_schedule": [
+    {
+      "segment_id": 0,
+      "start_step": 0,
+      "end_step": 1263,
+      "length": 1263,
+      "context": "A0"
+    },
+    {
+      "segment_id": 1,
+      "start_step": 1263,
+      "end_step": 3280,
+      "length": 2017,
+      "context": "B0"
+    },
+    {
+      "segment_id": 2,
+      "start_step": 3280,
+      "end_step": 4746,
+      "length": 1466,
+      "context": "A2"
+    },
+    {
+      "segment_id": 3,
+      "start_step": 4746,
+      "end_step": 6699,
+      "length": 1953,
+      "context": "B1"
+    },
+    {
+      "segment_id": 4,
+      "start_step": 6699,
+      "end_step": 7958,
+      "length": 1259,
+      "context": "A1"
+    },
+    {
+      "segment_id": 5,
+      "start_step": 7958,
+      "end_step": 9110,
+      "length": 1152,
+      "context": "B2"
+    },
+    {
+      "segment_id": 6,
+      "start_step": 9110,
+      "end_step": 10517,
+      "length": 1407,
+      "context": "A1"
+    },
+    {
+      "segment_id": 7,
+      "start_step": 10517,
+      "end_step": 11808,
+      "length": 1291,
+      "context": "B1"
+    },
+    {
+      "segment_id": 8,
+      "start_step": 11808,
+      "end_step": 13295,
+      "length": 1487,
+      "context": "B2"
+    },
+    {
+      "segment_id": 9,
+      "start_step": 13295,
+      "end_step": 15267,
+      "length": 1972,
+      "context": "A0"
+    },
+    {
+      "segment_id": 10,
+      "start_step": 15267,
+      "end_step": 17140,
+      "length": 1873,
+      "context": "B0"
+    },
+    {
+      "segment_id": 11,
+      "start_step": 17140,
+      "end_step": 18964,
+      "length": 1824,
+      "context": "A2"
+    },
+    {
+      "segment_id": 12,
+      "start_step": 18964,
+      "end_step": 20451,
+      "length": 1487,
+      "context": "B1"
+    },
+    {
+      "segment_id": 13,
+      "start_step": 20451,
+      "end_step": 21992,
+      "length": 1541,
+      "context": "B0"
+    },
+    {
+      "segment_id": 14,
+      "start_step": 21992,
+      "end_step": 23795,
+      "length": 1803,
+      "context": "B2"
+    },
+    {
+      "segment_id": 15,
+      "start_step": 23795,
+      "end_step": 25380,
+      "length": 1585,
+      "context": "A0"
+    },
+    {
+      "segment_id": 16,
+      "start_step": 25380,
+      "end_step": 26972,
+      "length": 1592,
+      "context": "A1"
+    },
+    {
+      "segment_id": 17,
+      "start_step": 26972,
+      "end_step": 28388,
+      "length": 1416,
+      "context": "A2"
+    },
+    {
+      "segment_id": 18,
+      "start_step": 28388,
+      "end_step": 29592,
+      "length": 1204,
+      "context": "A1"
+    },
+    {
+      "segment_id": 19,
+      "start_step": 29592,
+      "end_step": 30652,
+      "length": 1060,
+      "context": "A2"
+    },
+    {
+      "segment_id": 20,
+      "start_step": 30652,
+      "end_step": 31695,
+      "length": 1043,
+      "context": "B1"
+    },
+    {
+      "segment_id": 21,
+      "start_step": 31695,
+      "end_step": 32768,
+      "length": 1073,
+      "context": "B0"
+    }
+  ],
+  "condition_order": [
+    "learned_int8",
+    "oracle_int8",
+    "learned_dense",
+    "oracle_dense",
+    "oracle_gate",
+    "learned_int8_preserve_trial"
+  ],
+  "condition_patch": {
+    "condition": "learned_int8",
+    "underlying_original_arm": "int8",
+    "router": "existing TaskFreeRouter",
+    "oracle_context_source": null,
+    "oracle_context_to_slot": null,
+    "oracle_confidence": null,
+    "oracle_allocations": null,
+    "oracle_lru": null,
+    "resource_comparison_fair": true,
+    "actor_codec_for_int8_arm": "int8",
+    "actor_budget_bytes": 320,
+    "expected_actor_binary_bytes_at_full_shape": 202,
+    "head_count": 6,
+    "initial_head_values": "all zeros",
+    "max_context_slots": 6,
+    "rollout_steps": 256,
+    "fit_rollouts_per_1024_step_cycle": 3,
+    "heldout_rollouts_per_1024_step_cycle": 1,
+    "optimizer_reset_schedule": "existing reset at every consolidation cycle",
+    "legacy_evidence_gate_enabled": false,
+    "allocation_trial_preservation": false,
+    "run_revisit": false,
+    "paired_hidden_schedule_seed_offset": 7000,
+    "paired_environment_reset_seed_offset": 2200,
+    "paired_action_rng_seed_offset": 1100,
+    "oracle_is_unknown_task_algorithm_claim": false
+  },
+  "same_w0_for_all_conditions": true,
+  "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+  "protocol_sha256": "af4563b9b2d28b4cf0c92ce22639ab17d0dad15739cd119c0a34069a4c489725",
+  "source_snapshot_manifest": "source_snapshot/manifest.json",
+  "source_snapshot_file_count": 17,
+  "run_revisit": false
+}

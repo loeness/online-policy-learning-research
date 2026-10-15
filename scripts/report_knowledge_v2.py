@@ -60,11 +60,23 @@ def verify_shared_controls():
     return results
 
 
+def aggregate_revisit(rows):
+    groups = defaultdict(list)
+    for row in rows:
+        groups[row["condition"]].append(row)
+    return [{"condition": condition, "seeds": len(values),
+             **{key: float(np.mean([v[key] for v in values])) for key in
+                ("retain_return", "zero_return", "retain_success", "zero_success", "mean_paired_return_gain")},
+             "paired_gain_by_seed": {str(v["seed"]): v["mean_paired_return_gain"] for v in values}}
+            for condition, values in groups.items()]
+
+
 def plot(rows, name, labels):
     groups = defaultdict(list)
     for row in rows:
         groups[row["condition"]].append(row)
-    fig, ax = plt.subplots(figsize=(10.5, 4.3), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(11.8, 4.8))
+    fig.subplots_adjust(left=.12, right=.99, bottom=.25, top=.86)
     for i, (condition, values) in enumerate(groups.items()):
         ys = [v["reward_per_step"] for v in values]
         ax.bar(i, np.mean(ys), color="#0072B2", alpha=.6)
@@ -74,8 +86,8 @@ def plot(rows, name, labels):
     ax.axhline(0, color="gray", linewidth=.7)
     ax.grid(axis="y", alpha=.2)
     ax.spines[["top", "right"]].set_visible(False)
-    fig.savefig(OUT / f"{name}.png", dpi=180, bbox_inches="tight")
-    fig.savefig(OUT / f"{name}.pdf", bbox_inches="tight")
+    fig.savefig(OUT / f"{name}.png", dpi=180, bbox_inches="tight", pad_inches=.15)
+    fig.savefig(OUT / f"{name}.pdf", bbox_inches="tight", pad_inches=.15)
     plt.close(fig)
 
 
@@ -83,6 +95,7 @@ def main():
     causal = read("outputs/knowledge_causal_formal/summary.json")
     online = read("outputs/knowledge_v2_formal/summary.json")
     router = read("outputs/knowledge_v2_router_formal/summary.json")
+    revisit = read("outputs/knowledge_v2_revisit/summary.json")
     assert len(causal["runs"]) == 18 and len(online["records"]) == 15
     OUT.mkdir(parents=True, exist_ok=True)
     shared = verify_shared_controls()
@@ -100,20 +113,27 @@ def main():
               "shared_control_integrity": shared,
               "new_formal_interactions": sum(r["training_environment_steps"] for r in causal["runs"]) + online["environment_steps"],
               "router_replay_new_interactions": router["generated_environment_interactions"],
+              "revisit": aggregate_revisit(revisit["records"]),
+              "revisit_interactions": revisit["environment_steps"],
+              "revisit_episodes": revisit["episodes"],
               "capacity_definition": "W0 file + committed checkpoint <=256KiB for main V2; temporary workspace measured separately.",
               "statistics": "Descriptive paired differences across three new deployment seeds, one common W0."}
     codecs = {}
     for condition in ("evidence_router_int8", "evidence_router_old_gate", "evidence_router_nonblocking"):
-        values, selected = [], Counter()
+        values, sampled, selected = [], [], Counter()
         for seed in (541, 557, 569):
             folder = ROOT / f"outputs/knowledge_v2_formal/seed_{seed}/{condition}"
             commits = list(csv.DictReader((folder / "commits.csv").open(encoding="utf-8")))
             assert len(commits) == 32
             values += [int(r["actor_bytes_after"]) for r in commits]
             selected.update(r["selected_codec"] for r in commits)
+            capacity = list(csv.DictReader((folder / "capacity.csv").open(encoding="utf-8")))
+            sampled += [int(r["actor_compact_bytes"]) for r in capacity]
         codecs[condition] = {"selected_codec_counts": dict(selected),
                              "mean_actor_bytes_after_commit": float(np.mean(values)),
-                             "peak_actor_bytes_after_commit": max(values)}
+                             "peak_actor_bytes_after_commit": max(values),
+                             "mean_actor_bytes_all_capacity_samples": float(np.mean(sampled)),
+                             "peak_actor_bytes_all_capacity_samples": max(sampled)}
     result["codec_occupancy"] = codecs
     (OUT / "analysis.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
     plot(online["records"], "online_v2", {

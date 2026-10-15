@@ -81,3 +81,15 @@ The original `v0.1.0-ab-c1` tag and original data/result bytes are retained.
 The current branch manifest covers the larger archive; historical size figures
 above remain labeled as the original snapshot scan. Two exact source modules
 and the tensor launch document are preserved under `archive/source_versions`.
+
+## V2 validation update (2026-10-15)
+
+The V2 additions preserve 9,134 existing data/output files byte-for-byte against
+the manifest at `b7cd1e1`. New causal controls, evidence-router comparisons,
+nonblocking consolidation, scoring diagnostics and restored endpoint evaluations
+are indexed in `EXPERIMENT_INDEX.md`. Their raw traces, source snapshots,
+checkpoints, plots, negative results and interaction ledger are included.
+`outputs/knowledge_v2_report/audit.json` records raw-log checks and 1,243,583 new
+interactions; same-stream router replay adds no interactions. The main V2 recovery
+package cap and its limited scope are recorded separately from archival file size.
+The current complete inventory remains `archive/manifest.json`.

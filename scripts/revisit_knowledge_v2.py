@@ -1,4 +1,5 @@
 """Factory-aware, slot-safe persistence test for the completed V2 endpoints."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -16,10 +17,11 @@ from scripts import run_knowledge_revisit_corrected as evaluation
 from scripts.restore_knowledge_v2 import restore_v2
 
 
-def main():
+def main(input_dir=None, output_dir=None):
     torch.set_num_threads(1)
-    cohort = json.loads((ROOT / "outputs/knowledge_v2_formal/summary.json").read_text())
-    output = ROOT / "outputs/knowledge_v2_revisit"
+    source_root = Path(input_dir).resolve() if input_dir is not None else ROOT / "outputs/knowledge_v2_formal"
+    cohort = json.loads((source_root / "summary.json").read_text())
+    output = Path(output_dir).resolve() if output_dir is not None else ROOT / "outputs/knowledge_v2_revisit"
     if output.exists() and any(output.iterdir()):
         raise FileExistsError("Preserve existing V2 revisit")
     output.mkdir(parents=True)
@@ -36,7 +38,7 @@ def main():
     inputs = {}
     for row in cohort["records"]:
         seed, condition = row["seed"], row["condition"]
-        folder = ROOT / f"outputs/knowledge_v2_formal/seed_{seed}/{condition}"
+        folder = source_root / f"seed_{seed}/{condition}"
         inputs[str((folder / "checkpoint_latest.pt").relative_to(ROOT))] = hashlib.sha256((folder / "checkpoint_latest.pt").read_bytes()).hexdigest()
         agent = restore_v2(folder)
         old_factory = evaluation.TaskFreeRouter
@@ -56,4 +58,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", type=Path)
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
+    main(args.input, args.output)
