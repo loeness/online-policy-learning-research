@@ -1,0 +1,49 @@
+{
+  "stage": "C1 same-dynamics reward-conflict diagnostic",
+  "validation_seed": 853,
+  "formal_seeds": [
+    773,
+    787,
+    797
+  ],
+  "conditions": [
+    "independent_conflict",
+    "shared_conflict",
+    "frozen_conflict"
+  ],
+  "modes": [
+    "plus",
+    "minus"
+  ],
+  "route_slots": {
+    "plus": 0,
+    "minus": 1
+  },
+  "probe_steps_per_mode": 512,
+  "formal_bout_steps": 8192,
+  "pilot_bout_steps": 2048,
+  "rollout_steps": 256,
+  "fit_rollouts_per_1024": 3,
+  "holdout_rollouts_per_1024": 1,
+  "local_learning_rate": 0.003,
+  "shared_learning_rate": 0.001,
+  "critic_learning_rate": 0.003,
+  "shared_group_count": 2,
+  "shared_group_used": 0,
+  "codec": "float32",
+  "actor_budget_bytes": 1024,
+  "whole_package_cap_bytes": 262144,
+  "formal_evaluation_episodes": 16,
+  "pilot_evaluation_episodes": 8,
+  "max_workers": 2,
+  "bout_steps": 8192,
+  "evaluation_episodes": 16,
+  "seeds": [
+    773,
+    787,
+    797
+  ],
+  "phase": "formal",
+  "condition": "frozen_conflict",
+  "seed": 797
+}

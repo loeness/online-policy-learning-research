@@ -135,3 +135,46 @@ All new interactions total 1,243,583. Main V2 enforces W0 file plus saved checkp
 Six true contexts fit six slots; capacity-saturated replacement has not been tested.
 Current V2 runners add output-directory options after these cohorts; exact execution
 versions remain in each run's source snapshot. See reproducibility instructions.
+
+## Active shared writes and local-capacity pressure (2026-10-16)
+
+These new cohorts preserve all V2 outputs. Read the
+[current shared-write structure](SHARED_WRITE_STRUCTURE_AND_LIMITS.md),
+[S1a report](../outputs/knowledge_shared_write_report/阶段S1a结果.md),
+[S1b report](../outputs/knowledge_shared_write_auto_report/阶段S1b结果.md), and
+[S2 report](../outputs/knowledge_shared_write_capacity_report/阶段S2结果.md).
+
+| Cohort | Frozen protocol / implementation | Results and scope |
+|---|---|---|
+| S1a, true online shared coefficients | `SHARED_WRITE_PROTOCOL.md`, `scripts/run_shared_write.py` | `outputs/knowledge_shared_write_formal`, 20 runs / 5 seeds; 1,010,652 total interactions. Known routes and families, float32 actor cap 1,024 B. Pilot separately 71,578 interactions. |
+| S1b, family-free grouping | `SHARED_WRITE_AUTO_PROTOCOL.md`, `scripts/run_shared_write_auto.py` | `outputs/knowledge_shared_write_auto_formal`, 12 runs / 3 seeds; 638,995 interactions including 36,864 probes. Routes and switch times still known. Pilot separately 85,783 interactions, including preserved postprocessing failure. |
+| S2, 12 contexts / 6 local slots | `SHARED_WRITE_CAPACITY_PROTOCOL.md`, `scripts/run_shared_write_capacity.py` | `outputs/knowledge_shared_write_capacity_formal`, 12 runs / 3 seeds; 1,442,340 interactions. Given families/IDs, LRU, actual int8 actor 204 B independent / 230 B shared under common 230 B cap. Pilot separately 154,631 interactions. |
+| Audits and figures | `scripts/report_shared_write*.py` | Corresponding `knowledge_shared_write*_report` folders. All calculations use saved raw logs; no additional interactions. |
+
+The six S1a/S1b/S2 formal and pilot cohorts total **3,403,979** new interactions.
+The same W0 is used throughout; S1's float32 and S2's int8 cohorts are separate.
+These tests support actual shared online learning and bounded local reuse, not
+automatic full-capacity organization or standard-benchmark SOTA.
+
+S2 checkpoint scope and the independent review are in
+[SHARED_WRITE_CAPACITY_REVIEW.md](SHARED_WRITE_CAPACITY_REVIEW.md).
+
+## S3: support, ambiguity and reward conflict (2026-10-16)
+
+- `outputs/knowledge_shared_write_support_diagnostic`: zero new interactions;
+  reuses 9,216 saved probe rows for prefix/censoring analysis. Family grouping
+  can be correct while A0/A1/A2 remain indistinguishable on actions 0/1.
+  Three synthetic tied-reference queries abstain. Protocol:
+  `docs/SHARED_WRITE_SUPPORT_DIAGNOSTIC.md`.
+- `outputs/knowledge_shared_write_conflict_formal`: nine runs / three seeds,
+  147,456 PPO-stream steps + 9,216 probes + 51,176 evaluation steps = 207,848
+  interactions. Pilot separately contains 24,543. Same A0 dynamics, opposite
+  signed reward, supplied route slots. It is a C1 conflict diagnostic, not a
+  standard benchmark or unknown-context algorithm. Protocol:
+  `docs/SHARED_WRITE_CONFLICT_PROTOCOL.md`.
+- Shared transfer lowers the untrained negative-objective return in all
+  three seeds (mean -0.5477). Later old-objective return changes are small
+  and mixed; no catastrophic-forgetting claim is made.
+
+All eight S1a/S1b/S2/S3 formal and pilot cohorts total **3,636,370** interactions.
+Offline diagnostic reads and report calculations are not additional interactions.

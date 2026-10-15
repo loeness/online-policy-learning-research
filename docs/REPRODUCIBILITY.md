@@ -227,3 +227,59 @@ The main recovery-package cap includes W0 plus serialized checkpoint, while
 transient workspaces and measured process RSS are separate quantities. Six
 contexts and six slots do not test saturated persistent capacity.
 
+## Actual online shared writes and local-capacity pressure (2026-10-16)
+
+Use new output directories; archived results are immutable inputs. All these
+experiments share `data/foundation.pt`, rather than independently pretraining
+one foundation per deployment seed. Two CPU workers, each with one Torch
+thread, were used. CUDA was unavailable in the installed CPU PyTorch runtime;
+no GPU timing or CPU/GPU speed comparison is claimed.
+
+```powershell
+python scripts/run_shared_write.py --phase pilot --output outputs/s1a_pilot_replication --workers 2
+python scripts/run_shared_write.py --phase formal --output outputs/s1a_replication --workers 2
+python scripts/report_shared_write.py --input outputs/s1a_replication --output outputs/s1a_report_replication
+python scripts/run_shared_write_auto.py --phase pilot --output outputs/s1b_pilot_replication --workers 2
+python scripts/run_shared_write_auto.py --phase formal --output outputs/s1b_replication --workers 2
+python scripts/report_shared_write_auto.py --input outputs/s1b_replication --output outputs/s1b_report_replication
+python scripts/run_shared_write_capacity.py --phase pilot --output outputs/s2_pilot_replication --workers 2
+python scripts/run_shared_write_capacity.py --phase formal --output outputs/s2_replication --workers 2
+python scripts/report_shared_write_capacity.py --input outputs/s2_replication --output outputs/s2_report_replication
+```
+
+The frozen protocols are `SHARED_WRITE_PROTOCOL.md`,
+`SHARED_WRITE_AUTO_PROTOCOL.md`, and `SHARED_WRITE_CAPACITY_PROTOCOL.md`.
+Each formal run snapshots its executed sources and dependencies. The report
+scripts check those snapshots against their own hashes, not current source
+hashes. S1a's later restore-map assertion, S1b's pilot dictionary-comparison
+repair, and S2's checkpoint wording clarification do not substitute new code
+for historical versions.
+
+S1a tests supplied groups, S1b discovers groups from 512 real probe steps per
+context with supplied routes, and S2 tests 12 known contexts with 6 local
+slots and supplied families. S1b pays probe costs even on held-out targets;
+its cold transfer is probe-mediated. S2's actor is quantized and reinstalled
+every 1,024 steps, while S1a/S1b retain float32 and Adam. The same-byte-cap
+comparisons still have different actual bytes. These cohorts must not be
+pooled as one unknown-context or memory-saving result.
+
+Saved state supports agent restoration and evaluation. It does not include
+the running environment, partial episode, or schedule position needed for
+exact trajectory continuation. W0 plus one checkpoint is measured against
+256 KiB; source, archived traces and historical checkpoints are reproducibility
+artifacts and not a retrieval store available to the deployed learner.
+
+The S3 support diagnostic reads saved S1b probes and generates no new environment
+steps. Its observer local-reference analysis is not an online routing decision.
+The reward-conflict experiment is a separate float32 cohort:
+
+```powershell
+python scripts/diagnose_shared_write_support.py --input outputs/s1b_replication --output outputs/s3_support_replication
+python scripts/run_shared_write_conflict.py --phase pilot --output outputs/s3_conflict_pilot_replication --workers 2
+python scripts/run_shared_write_conflict.py --phase formal --output outputs/s3_conflict_replication --workers 2
+```
+
+S3 uses identical transitions and reversed rewards with two supplied route slots.
+Goal reaching remains metadata in the negative-reward task; signed return is its
+score. Do not combine this cohort with S2 as an unknown-boundary capacity result.
+
