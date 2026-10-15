@@ -1,0 +1,2723 @@
+{
+  "diagnostic": "S3 offline shared-write evidence support and ambiguity diagnostic",
+  "input_root": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_auto_formal",
+  "output_root": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_support_diagnostic",
+  "inputs": {
+    "shared_write_auto_config": {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\configs\\shared_write_auto.json",
+      "sha256": "d082e40ae4c134aa81838c9d6086e08c7a432ca164f0f9dc0d7beed0cd7b295b"
+    },
+    "seed_677_independent_probe_steps": {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_auto_formal\\seed_677\\independent\\probe_steps.csv",
+      "sha256": "1bef1ea88f10591cdf43869e4d3d60b1250cb9bebd022dc75955b84d6f77cb6e",
+      "rows": 3072
+    },
+    "seed_691_independent_probe_steps": {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_auto_formal\\seed_691\\independent\\probe_steps.csv",
+      "sha256": "52a9f2029be4dfdd514854ee2e130dc6a73bf98496fa495e7576bd4f9264ae38",
+      "rows": 3072
+    },
+    "seed_709_independent_probe_steps": {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_auto_formal\\seed_709\\independent\\probe_steps.csv",
+      "sha256": "8bb682bd704486cf0c8ba531fb9bb952b26a06e2432e24e1315c86ed1430ec03",
+      "rows": 3072
+    }
+  },
+  "fixed_grouper_config": {
+    "max_groups": 2,
+    "min_overlap": 4,
+    "min_agreement": 0.6,
+    "min_cell_support": 2,
+    "novelty_max_agreement": 0.3
+  },
+  "formal_seeds": [
+    677,
+    691,
+    709
+  ],
+  "contexts_and_assignment_order": [
+    "A0",
+    "B0",
+    "A2",
+    "B2",
+    "A1",
+    "B1"
+  ],
+  "prefix_rows_per_context": [
+    16,
+    32,
+    64,
+    128,
+    256,
+    512
+  ],
+  "analysis_constraints": {
+    "only_independent_condition_probe_steps_csv": true,
+    "family_labels_used_only_for_pairwise_observer_audit_after_assignment": true,
+    "grouper_receives_numeric_profile_only": true,
+    "local_reference_names_used_only_after_all_assignments": true,
+    "local_reference_names_passed_to_grouper": false,
+    "local_reference_audit_is_observer_oracle_analysis": true,
+    "no_policy_reward_estimation": true,
+    "no_claim_of_safe_matching": true,
+    "no_new_environment_interactions": 0,
+    "offline_data_row_reads_are_not_new_interactions": true
+  },
+  "offline_data_accounting": {
+    "saved_probe_rows_per_seed": {
+      "677": 3072,
+      "691": 3072,
+      "709": 3072
+    },
+    "saved_probe_rows_total_read": 9216,
+    "historical_saved_probe_steps_total": 9216,
+    "prefix_profile_rows_scanned_offline": 18144,
+    "prefix_profile_rows_used_offline": 18144,
+    "action_censoring_rows_scanned_offline": 9216,
+    "action_censoring_rows_used_in_profiles_offline": 4512,
+    "local_reference_full_profile_rows_scanned_offline": 9216,
+    "local_reference_full_profile_rows_used_offline": 9216,
+    "local_reference_censored_query_profiles_reused_from_assignment": 4512,
+    "tie_test_profile_rows_reused_from_local_reference_audit": 4608,
+    "tie_test_additional_profile_rows_reprocessed_offline": 0,
+    "total_profile_source_rows_scanned_offline": 36576,
+    "total_profile_rows_used_offline": 31872,
+    "new_environment_interactions": 0,
+    "note": "Profile rows are replayed from saved CSV observations; reading or reprocessing them does not step an environment."
+  },
+  "prefix_and_censoring_results": [
+    {
+      "seed": 677,
+      "scenario": "prefix_16",
+      "plot_category": "prefix",
+      "x_value": 16,
+      "evidence_mode": "prefix_16",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 96,
+      "profile_rows_reprocessed_across_six_contexts": 96,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 2,
+      "unresolved_contexts": 4,
+      "assignment_coverage": 0.3333333333333333,
+      "mean_supported_cell_coverage": 0.3333333333333333,
+      "reason_counts": {
+        "first_group": 1,
+        "insufficient_overlap": 4,
+        "novel_group": 1
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 1,
+        "unresolved_pairs": 14,
+        "resolved_pair_coverage": 0.06666666666666667,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 0,
+          "true_negative": 1,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 677,
+      "scenario": "prefix_32",
+      "plot_category": "prefix",
+      "x_value": 32,
+      "evidence_mode": "prefix_32",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 192,
+      "profile_rows_reprocessed_across_six_contexts": 192,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 2,
+      "unresolved_contexts": 4,
+      "assignment_coverage": 0.3333333333333333,
+      "mean_supported_cell_coverage": 0.47222222222222227,
+      "reason_counts": {
+        "first_group": 1,
+        "insufficient_overlap": 4,
+        "novel_group": 1
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 1,
+        "unresolved_pairs": 14,
+        "resolved_pair_coverage": 0.06666666666666667,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 0,
+          "true_negative": 1,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 677,
+      "scenario": "prefix_64",
+      "plot_category": "prefix",
+      "x_value": 64,
+      "evidence_mode": "prefix_64",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 384,
+      "profile_rows_reprocessed_across_six_contexts": 384,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 3,
+      "unresolved_contexts": 3,
+      "assignment_coverage": 0.5,
+      "mean_supported_cell_coverage": 0.5833333333333334,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "max_groups_reached": 3,
+        "matched": 1
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 3,
+        "unresolved_pairs": 12,
+        "resolved_pair_coverage": 0.2,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 1,
+          "true_negative": 2,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 677,
+      "scenario": "prefix_128",
+      "plot_category": "prefix",
+      "x_value": 128,
+      "evidence_mode": "prefix_128",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 768,
+      "profile_rows_reprocessed_across_six_contexts": 768,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 5,
+      "unresolved_contexts": 1,
+      "assignment_coverage": 0.8333333333333334,
+      "mean_supported_cell_coverage": 0.9583333333333334,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "max_groups_reached": 1,
+        "matched": 3
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 10,
+        "unresolved_pairs": 5,
+        "resolved_pair_coverage": 0.6666666666666666,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 4,
+          "true_negative": 6,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 677,
+      "scenario": "prefix_256",
+      "plot_category": "prefix",
+      "x_value": 256,
+      "evidence_mode": "prefix_256",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 1536,
+      "profile_rows_reprocessed_across_six_contexts": 1536,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 1.0,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 677,
+      "scenario": "prefix_512",
+      "plot_category": "prefix",
+      "x_value": 512,
+      "evidence_mode": "prefix_512",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 3072,
+      "profile_rows_reprocessed_across_six_contexts": 3072,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 1.0,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 677,
+      "scenario": "offline_action_censoring_0_1",
+      "plot_category": "action_censored",
+      "x_value": 512,
+      "offline_evidence_censoring": true,
+      "retained_action_set": [
+        0,
+        1
+      ],
+      "source_elapsed_probe_steps_per_context": 512,
+      "evidence_mode": "offline_action_censoring_0_1",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 3072,
+      "profile_rows_reprocessed_across_six_contexts": 1551,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 0.5,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 691,
+      "scenario": "prefix_16",
+      "plot_category": "prefix",
+      "x_value": 16,
+      "evidence_mode": "prefix_16",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 96,
+      "profile_rows_reprocessed_across_six_contexts": 96,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 1,
+      "unresolved_contexts": 5,
+      "assignment_coverage": 0.16666666666666666,
+      "mean_supported_cell_coverage": 0.2916666666666667,
+      "reason_counts": {
+        "insufficient_profile_support": 1,
+        "first_group": 1,
+        "insufficient_overlap": 3,
+        "between_match_and_novelty": 1
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 0,
+        "unresolved_pairs": 15,
+        "resolved_pair_coverage": 0.0,
+        "pairwise_accuracy_over_resolved_pairs": null,
+        "pairwise_error_rate_over_resolved_pairs": null,
+        "confusion_counts": {
+          "true_positive": 0,
+          "true_negative": 0,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 691,
+      "scenario": "prefix_32",
+      "plot_category": "prefix",
+      "x_value": 32,
+      "evidence_mode": "prefix_32",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 192,
+      "profile_rows_reprocessed_across_six_contexts": 192,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 2,
+      "unresolved_contexts": 4,
+      "assignment_coverage": 0.3333333333333333,
+      "mean_supported_cell_coverage": 0.4444444444444444,
+      "reason_counts": {
+        "first_group": 1,
+        "insufficient_overlap": 2,
+        "novel_group": 1,
+        "max_groups_reached": 2
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 1,
+        "unresolved_pairs": 14,
+        "resolved_pair_coverage": 0.06666666666666667,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 0,
+          "true_negative": 1,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 691,
+      "scenario": "prefix_64",
+      "plot_category": "prefix",
+      "x_value": 64,
+      "evidence_mode": "prefix_64",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 384,
+      "profile_rows_reprocessed_across_six_contexts": 384,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 4,
+      "unresolved_contexts": 2,
+      "assignment_coverage": 0.6666666666666666,
+      "mean_supported_cell_coverage": 0.6944444444444443,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 2,
+        "max_groups_reached": 2
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 6,
+        "unresolved_pairs": 9,
+        "resolved_pair_coverage": 0.4,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 3,
+          "true_negative": 3,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 691,
+      "scenario": "prefix_128",
+      "plot_category": "prefix",
+      "x_value": 128,
+      "evidence_mode": "prefix_128",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 768,
+      "profile_rows_reprocessed_across_six_contexts": 768,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 5,
+      "unresolved_contexts": 1,
+      "assignment_coverage": 0.8333333333333334,
+      "mean_supported_cell_coverage": 0.8333333333333334,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 3,
+        "max_groups_reached": 1
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 10,
+        "unresolved_pairs": 5,
+        "resolved_pair_coverage": 0.6666666666666666,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 4,
+          "true_negative": 6,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 691,
+      "scenario": "prefix_256",
+      "plot_category": "prefix",
+      "x_value": 256,
+      "evidence_mode": "prefix_256",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 1536,
+      "profile_rows_reprocessed_across_six_contexts": 1536,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 1.0,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 691,
+      "scenario": "prefix_512",
+      "plot_category": "prefix",
+      "x_value": 512,
+      "evidence_mode": "prefix_512",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 3072,
+      "profile_rows_reprocessed_across_six_contexts": 3072,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 1.0,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 691,
+      "scenario": "offline_action_censoring_0_1",
+      "plot_category": "action_censored",
+      "x_value": 512,
+      "offline_evidence_censoring": true,
+      "retained_action_set": [
+        0,
+        1
+      ],
+      "source_elapsed_probe_steps_per_context": 512,
+      "evidence_mode": "offline_action_censoring_0_1",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 3072,
+      "profile_rows_reprocessed_across_six_contexts": 1469,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 0.5,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 709,
+      "scenario": "prefix_16",
+      "plot_category": "prefix",
+      "x_value": 16,
+      "evidence_mode": "prefix_16",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 96,
+      "profile_rows_reprocessed_across_six_contexts": 96,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 2,
+      "unresolved_contexts": 4,
+      "assignment_coverage": 0.3333333333333333,
+      "mean_supported_cell_coverage": 0.3055555555555555,
+      "reason_counts": {
+        "insufficient_profile_support": 2,
+        "first_group": 1,
+        "insufficient_overlap": 2,
+        "novel_group": 1
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 1,
+        "unresolved_pairs": 14,
+        "resolved_pair_coverage": 0.06666666666666667,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 0,
+          "true_negative": 1,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 709,
+      "scenario": "prefix_32",
+      "plot_category": "prefix",
+      "x_value": 32,
+      "evidence_mode": "prefix_32",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 192,
+      "profile_rows_reprocessed_across_six_contexts": 192,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 1,
+      "unresolved_contexts": 5,
+      "assignment_coverage": 0.16666666666666666,
+      "mean_supported_cell_coverage": 0.4305555555555556,
+      "reason_counts": {
+        "first_group": 1,
+        "insufficient_overlap": 4,
+        "between_match_and_novelty": 1
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 0,
+        "unresolved_pairs": 15,
+        "resolved_pair_coverage": 0.0,
+        "pairwise_accuracy_over_resolved_pairs": null,
+        "pairwise_error_rate_over_resolved_pairs": null,
+        "confusion_counts": {
+          "true_positive": 0,
+          "true_negative": 0,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 709,
+      "scenario": "prefix_64",
+      "plot_category": "prefix",
+      "x_value": 64,
+      "evidence_mode": "prefix_64",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 384,
+      "profile_rows_reprocessed_across_six_contexts": 384,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 2,
+      "unresolved_contexts": 4,
+      "assignment_coverage": 0.3333333333333333,
+      "mean_supported_cell_coverage": 0.5833333333333334,
+      "reason_counts": {
+        "first_group": 1,
+        "insufficient_overlap": 1,
+        "between_match_and_novelty": 1,
+        "novel_group": 1,
+        "max_groups_reached": 2
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 1,
+        "unresolved_pairs": 14,
+        "resolved_pair_coverage": 0.06666666666666667,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 0,
+          "true_negative": 1,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 709,
+      "scenario": "prefix_128",
+      "plot_category": "prefix",
+      "x_value": 128,
+      "evidence_mode": "prefix_128",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 768,
+      "profile_rows_reprocessed_across_six_contexts": 768,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 0.7638888888888888,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 709,
+      "scenario": "prefix_256",
+      "plot_category": "prefix",
+      "x_value": 256,
+      "evidence_mode": "prefix_256",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 1536,
+      "profile_rows_reprocessed_across_six_contexts": 1536,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 1.0,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 709,
+      "scenario": "prefix_512",
+      "plot_category": "prefix",
+      "x_value": 512,
+      "evidence_mode": "prefix_512",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 3072,
+      "profile_rows_reprocessed_across_six_contexts": 3072,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 1.0,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    },
+    {
+      "seed": 709,
+      "scenario": "offline_action_censoring_0_1",
+      "plot_category": "action_censored",
+      "x_value": 512,
+      "offline_evidence_censoring": true,
+      "retained_action_set": [
+        0,
+        1
+      ],
+      "source_elapsed_probe_steps_per_context": 512,
+      "evidence_mode": "offline_action_censoring_0_1",
+      "context_order": [
+        "A0",
+        "B0",
+        "A2",
+        "B2",
+        "A1",
+        "B1"
+      ],
+      "input_rows_loaded_for_seed": 3072,
+      "profile_source_rows_scanned_across_six_contexts": 3072,
+      "profile_rows_reprocessed_across_six_contexts": 1492,
+      "historical_source_probe_steps_by_context": {
+        "A0": 512,
+        "B0": 512,
+        "A2": 512,
+        "B2": 512,
+        "A1": 512,
+        "B1": 512
+      },
+      "assigned_contexts": 6,
+      "unresolved_contexts": 0,
+      "assignment_coverage": 1.0,
+      "mean_supported_cell_coverage": 0.5,
+      "reason_counts": {
+        "first_group": 1,
+        "novel_group": 1,
+        "matched": 4
+      },
+      "numeric_state_bytes": 192,
+      "pairwise_family_audit": {
+        "total_context_pairs": 15,
+        "resolved_pairs": 15,
+        "unresolved_pairs": 0,
+        "resolved_pair_coverage": 1.0,
+        "pairwise_accuracy_over_resolved_pairs": 1.0,
+        "pairwise_error_rate_over_resolved_pairs": 0.0,
+        "confusion_counts": {
+          "true_positive": 6,
+          "true_negative": 9,
+          "false_positive": 0,
+          "false_negative": 0
+        }
+      }
+    }
+  ],
+  "tied_prototype_pressure_tests": [
+    {
+      "seed": 677,
+      "diagnostic_type": "synthetic_tied_prototype_pressure_test",
+      "uses_saved_probe_profiles_offline": true,
+      "not_a_training_discovery_or_measured_group_assignment": true,
+      "state_construction": "directly populated DynamicsGrouper.state_dict group_counts from full A0 and A1 profiles as separate reference groups",
+      "query_construction": "A2 full profile masked to cells where full A0, A1, and A2 all have the same supported direction",
+      "reference_contexts": [
+        "A0",
+        "A1"
+      ],
+      "query_context": "A2",
+      "source_rows_reused_from_full_profile_audit": {
+        "A0": 512,
+        "A1": 512,
+        "A2": 512
+      },
+      "profile_rows_reused_from_full_profile_audit": 1536,
+      "additional_profile_rows_reprocessed": 0,
+      "common_equal_supported_cells": 6,
+      "query_supported_cells": 6,
+      "scores": {
+        "0": {
+          "overlap": 6,
+          "agreement": 1.0
+        },
+        "1": {
+          "overlap": 6,
+          "agreement": 1.0
+        }
+      },
+      "returned_group": -1,
+      "reason": "ambiguous_match",
+      "numeric_state_bytes": 192,
+      "new_environment_interactions": 0
+    },
+    {
+      "seed": 691,
+      "diagnostic_type": "synthetic_tied_prototype_pressure_test",
+      "uses_saved_probe_profiles_offline": true,
+      "not_a_training_discovery_or_measured_group_assignment": true,
+      "state_construction": "directly populated DynamicsGrouper.state_dict group_counts from full A0 and A1 profiles as separate reference groups",
+      "query_construction": "A2 full profile masked to cells where full A0, A1, and A2 all have the same supported direction",
+      "reference_contexts": [
+        "A0",
+        "A1"
+      ],
+      "query_context": "A2",
+      "source_rows_reused_from_full_profile_audit": {
+        "A0": 512,
+        "A1": 512,
+        "A2": 512
+      },
+      "profile_rows_reused_from_full_profile_audit": 1536,
+      "additional_profile_rows_reprocessed": 0,
+      "common_equal_supported_cells": 6,
+      "query_supported_cells": 6,
+      "scores": {
+        "0": {
+          "overlap": 6,
+          "agreement": 1.0
+        },
+        "1": {
+          "overlap": 6,
+          "agreement": 1.0
+        }
+      },
+      "returned_group": -1,
+      "reason": "ambiguous_match",
+      "numeric_state_bytes": 192,
+      "new_environment_interactions": 0
+    },
+    {
+      "seed": 709,
+      "diagnostic_type": "synthetic_tied_prototype_pressure_test",
+      "uses_saved_probe_profiles_offline": true,
+      "not_a_training_discovery_or_measured_group_assignment": true,
+      "state_construction": "directly populated DynamicsGrouper.state_dict group_counts from full A0 and A1 profiles as separate reference groups",
+      "query_construction": "A2 full profile masked to cells where full A0, A1, and A2 all have the same supported direction",
+      "reference_contexts": [
+        "A0",
+        "A1"
+      ],
+      "query_context": "A2",
+      "source_rows_reused_from_full_profile_audit": {
+        "A0": 512,
+        "A1": 512,
+        "A2": 512
+      },
+      "profile_rows_reused_from_full_profile_audit": 1536,
+      "additional_profile_rows_reprocessed": 0,
+      "common_equal_supported_cells": 6,
+      "query_supported_cells": 6,
+      "scores": {
+        "0": {
+          "overlap": 6,
+          "agreement": 1.0
+        },
+        "1": {
+          "overlap": 6,
+          "agreement": 1.0
+        }
+      },
+      "returned_group": -1,
+      "reason": "ambiguous_match",
+      "numeric_state_bytes": 192,
+      "new_environment_interactions": 0
+    }
+  ],
+  "action_censored_local_context_reference_audit": [
+    {
+      "diagnostic_type": "offline_action_censoring_local_context_reference_audit",
+      "oracle_observer_reference_only": true,
+      "reference_context_names_passed_to_grouper": false,
+      "reference_profiles_by_seed": "full saved probe profiles from the same seed, constructed after censored assignments",
+      "query_profiles": "the same action 0/1 censored profiles used for the grouper decisions",
+      "comparison_rule": "A reference is a fully covered no-conflict candidate when it supports every cell supported by the censored query and its direction agrees on each such cell.",
+      "contexts_with_multiple_fully_covered_no_conflict_references": 3,
+      "contexts_with_hidden_differences_on_unprobed_cells": 3,
+      "new_environment_interactions": 0,
+      "per_context": [
+        {
+          "seed": 677,
+          "query_context_audit_label_only": "A0",
+          "observer_family_audit_only": "A",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 0,
+          "censored_assignment_reason": "first_group",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "no_conflict_full_reference_count": 3,
+          "fully_covered_no_conflict_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "fully_covered_no_conflict_reference_count": 3,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": false,
+          "local_context_ambiguity_present": true,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [
+            "A2",
+            "A1"
+          ],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            }
+          }
+        },
+        {
+          "seed": 677,
+          "query_context_audit_label_only": "B0",
+          "observer_family_audit_only": "B",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 1,
+          "censored_assignment_reason": "novel_group",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "B0"
+          ],
+          "no_conflict_full_reference_count": 1,
+          "fully_covered_no_conflict_reference_names": [
+            "B0"
+          ],
+          "fully_covered_no_conflict_reference_count": 1,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "B0"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": true,
+          "local_context_ambiguity_present": false,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            }
+          }
+        },
+        {
+          "seed": 677,
+          "query_context_audit_label_only": "A2",
+          "observer_family_audit_only": "A",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 0,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "no_conflict_full_reference_count": 3,
+          "fully_covered_no_conflict_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "fully_covered_no_conflict_reference_count": 3,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": false,
+          "local_context_ambiguity_present": true,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [
+            "A0",
+            "A1"
+          ],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            }
+          }
+        },
+        {
+          "seed": 677,
+          "query_context_audit_label_only": "B2",
+          "observer_family_audit_only": "B",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 1,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "B2"
+          ],
+          "no_conflict_full_reference_count": 1,
+          "fully_covered_no_conflict_reference_names": [
+            "B2"
+          ],
+          "fully_covered_no_conflict_reference_count": 1,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "B2"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": true,
+          "local_context_ambiguity_present": false,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            }
+          }
+        },
+        {
+          "seed": 677,
+          "query_context_audit_label_only": "A1",
+          "observer_family_audit_only": "A",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 0,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "no_conflict_full_reference_count": 3,
+          "fully_covered_no_conflict_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "fully_covered_no_conflict_reference_count": 3,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": false,
+          "local_context_ambiguity_present": true,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [
+            "A0",
+            "A2"
+          ],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            }
+          }
+        },
+        {
+          "seed": 677,
+          "query_context_audit_label_only": "B1",
+          "observer_family_audit_only": "B",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 1,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "B1"
+          ],
+          "no_conflict_full_reference_count": 1,
+          "fully_covered_no_conflict_reference_names": [
+            "B1"
+          ],
+          "fully_covered_no_conflict_reference_count": 1,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "B1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": true,
+          "local_context_ambiguity_present": false,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            }
+          }
+        }
+      ],
+      "full_reference_profile_rows_scanned": 3072,
+      "full_reference_profile_rows_reused": 3072,
+      "censored_query_profiles_reused_from_assignment": 1551
+    },
+    {
+      "diagnostic_type": "offline_action_censoring_local_context_reference_audit",
+      "oracle_observer_reference_only": true,
+      "reference_context_names_passed_to_grouper": false,
+      "reference_profiles_by_seed": "full saved probe profiles from the same seed, constructed after censored assignments",
+      "query_profiles": "the same action 0/1 censored profiles used for the grouper decisions",
+      "comparison_rule": "A reference is a fully covered no-conflict candidate when it supports every cell supported by the censored query and its direction agrees on each such cell.",
+      "contexts_with_multiple_fully_covered_no_conflict_references": 3,
+      "contexts_with_hidden_differences_on_unprobed_cells": 3,
+      "new_environment_interactions": 0,
+      "per_context": [
+        {
+          "seed": 691,
+          "query_context_audit_label_only": "A0",
+          "observer_family_audit_only": "A",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 0,
+          "censored_assignment_reason": "first_group",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "no_conflict_full_reference_count": 3,
+          "fully_covered_no_conflict_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "fully_covered_no_conflict_reference_count": 3,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": false,
+          "local_context_ambiguity_present": true,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [
+            "A2",
+            "A1"
+          ],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            }
+          }
+        },
+        {
+          "seed": 691,
+          "query_context_audit_label_only": "B0",
+          "observer_family_audit_only": "B",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 1,
+          "censored_assignment_reason": "novel_group",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "B0"
+          ],
+          "no_conflict_full_reference_count": 1,
+          "fully_covered_no_conflict_reference_names": [
+            "B0"
+          ],
+          "fully_covered_no_conflict_reference_count": 1,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "B0"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": true,
+          "local_context_ambiguity_present": false,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            }
+          }
+        },
+        {
+          "seed": 691,
+          "query_context_audit_label_only": "A2",
+          "observer_family_audit_only": "A",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 0,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "no_conflict_full_reference_count": 3,
+          "fully_covered_no_conflict_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "fully_covered_no_conflict_reference_count": 3,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": false,
+          "local_context_ambiguity_present": true,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [
+            "A0",
+            "A1"
+          ],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            }
+          }
+        },
+        {
+          "seed": 691,
+          "query_context_audit_label_only": "B2",
+          "observer_family_audit_only": "B",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 1,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "B2"
+          ],
+          "no_conflict_full_reference_count": 1,
+          "fully_covered_no_conflict_reference_names": [
+            "B2"
+          ],
+          "fully_covered_no_conflict_reference_count": 1,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "B2"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": true,
+          "local_context_ambiguity_present": false,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            }
+          }
+        },
+        {
+          "seed": 691,
+          "query_context_audit_label_only": "A1",
+          "observer_family_audit_only": "A",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 0,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "no_conflict_full_reference_count": 3,
+          "fully_covered_no_conflict_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "fully_covered_no_conflict_reference_count": 3,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": false,
+          "local_context_ambiguity_present": true,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [
+            "A0",
+            "A2"
+          ],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            }
+          }
+        },
+        {
+          "seed": 691,
+          "query_context_audit_label_only": "B1",
+          "observer_family_audit_only": "B",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 1,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "B1"
+          ],
+          "no_conflict_full_reference_count": 1,
+          "fully_covered_no_conflict_reference_names": [
+            "B1"
+          ],
+          "fully_covered_no_conflict_reference_count": 1,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "B1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": true,
+          "local_context_ambiguity_present": false,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            }
+          }
+        }
+      ],
+      "full_reference_profile_rows_scanned": 3072,
+      "full_reference_profile_rows_reused": 3072,
+      "censored_query_profiles_reused_from_assignment": 1469
+    },
+    {
+      "diagnostic_type": "offline_action_censoring_local_context_reference_audit",
+      "oracle_observer_reference_only": true,
+      "reference_context_names_passed_to_grouper": false,
+      "reference_profiles_by_seed": "full saved probe profiles from the same seed, constructed after censored assignments",
+      "query_profiles": "the same action 0/1 censored profiles used for the grouper decisions",
+      "comparison_rule": "A reference is a fully covered no-conflict candidate when it supports every cell supported by the censored query and its direction agrees on each such cell.",
+      "contexts_with_multiple_fully_covered_no_conflict_references": 3,
+      "contexts_with_hidden_differences_on_unprobed_cells": 3,
+      "new_environment_interactions": 0,
+      "per_context": [
+        {
+          "seed": 709,
+          "query_context_audit_label_only": "A0",
+          "observer_family_audit_only": "A",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 0,
+          "censored_assignment_reason": "first_group",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "no_conflict_full_reference_count": 3,
+          "fully_covered_no_conflict_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "fully_covered_no_conflict_reference_count": 3,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": false,
+          "local_context_ambiguity_present": true,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [
+            "A2",
+            "A1"
+          ],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            }
+          }
+        },
+        {
+          "seed": 709,
+          "query_context_audit_label_only": "B0",
+          "observer_family_audit_only": "B",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 1,
+          "censored_assignment_reason": "novel_group",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "B0"
+          ],
+          "no_conflict_full_reference_count": 1,
+          "fully_covered_no_conflict_reference_names": [
+            "B0"
+          ],
+          "fully_covered_no_conflict_reference_count": 1,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "B0"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": true,
+          "local_context_ambiguity_present": false,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            }
+          }
+        },
+        {
+          "seed": 709,
+          "query_context_audit_label_only": "A2",
+          "observer_family_audit_only": "A",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 0,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "no_conflict_full_reference_count": 3,
+          "fully_covered_no_conflict_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "fully_covered_no_conflict_reference_count": 3,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": false,
+          "local_context_ambiguity_present": true,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [
+            "A0",
+            "A1"
+          ],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            }
+          }
+        },
+        {
+          "seed": 709,
+          "query_context_audit_label_only": "B2",
+          "observer_family_audit_only": "B",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 1,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "B2"
+          ],
+          "no_conflict_full_reference_count": 1,
+          "fully_covered_no_conflict_reference_names": [
+            "B2"
+          ],
+          "fully_covered_no_conflict_reference_count": 1,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "B2"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": true,
+          "local_context_ambiguity_present": false,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            }
+          }
+        },
+        {
+          "seed": 709,
+          "query_context_audit_label_only": "A1",
+          "observer_family_audit_only": "A",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 0,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "no_conflict_full_reference_count": 3,
+          "fully_covered_no_conflict_reference_names": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "fully_covered_no_conflict_reference_count": 3,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "A0",
+            "A2",
+            "A1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": false,
+          "local_context_ambiguity_present": true,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [
+            "A0",
+            "A2"
+          ],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            }
+          }
+        },
+        {
+          "seed": 709,
+          "query_context_audit_label_only": "B1",
+          "observer_family_audit_only": "B",
+          "action_censoring_mode": "offline_action_censoring_0_1",
+          "censored_assigned_group": 1,
+          "censored_assignment_reason": "matched",
+          "censored_supported_cells": 6,
+          "unprobed_actions_with_full_profile_support": [
+            2,
+            3
+          ],
+          "unprobed_full_profile_cells": 6,
+          "no_conflict_full_reference_names": [
+            "B1"
+          ],
+          "no_conflict_full_reference_count": 1,
+          "fully_covered_no_conflict_reference_names": [
+            "B1"
+          ],
+          "fully_covered_no_conflict_reference_count": 1,
+          "same_family_fully_covered_no_conflict_reference_names_audit_only": [
+            "B1"
+          ],
+          "other_family_fully_covered_no_conflict_reference_names_audit_only": [],
+          "local_context_identifiable_from_censored_profile": true,
+          "local_context_ambiguity_present": false,
+          "candidate_references_with_differences_hidden_on_unprobed_cells": [],
+          "reference_details": {
+            "A0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B0": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 5
+            },
+            "B2": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 2,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 2
+            },
+            "A1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 6,
+              "no_conflict_on_observed_overlap": false,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 4
+            },
+            "B1": {
+              "overlap_cells_on_censored_support": 6,
+              "conflicting_cells_on_censored_support": 0,
+              "no_conflict_on_observed_overlap": true,
+              "covers_all_query_supported_cells": true,
+              "full_profile_differences_on_unprobed_cells": 0
+            }
+          }
+        }
+      ],
+      "full_reference_profile_rows_scanned": 3072,
+      "full_reference_profile_rows_reused": 3072,
+      "censored_query_profiles_reused_from_assignment": 1492
+    }
+  ],
+  "interpretation_boundary": "This reports available transition support, unresolved decisions, and family agreement in these saved probes. The action-censored family grouping does not identify the individual local context when multiple full-profile references agree on observed actions and differ only on untried actions. It is not a policy-benefit estimate, a guarantee of safe sharing, or evidence of general family discovery."
+}
