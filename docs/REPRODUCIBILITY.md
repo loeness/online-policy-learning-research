@@ -277,9 +277,17 @@ The reward-conflict experiment is a separate float32 cohort:
 python scripts/diagnose_shared_write_support.py --input outputs/s1b_replication --output outputs/s3_support_replication
 python scripts/run_shared_write_conflict.py --phase pilot --output outputs/s3_conflict_pilot_replication --workers 2
 python scripts/run_shared_write_conflict.py --phase formal --output outputs/s3_conflict_replication --workers 2
+python scripts/report_shared_write_conflict.py --input outputs/s3_conflict_replication --output outputs/s3_conflict_report_replication
 ```
 
 S3 uses identical transitions and reversed rewards with two supplied route slots.
 Goal reaching remains metadata in the negative-reward task; signed return is its
 score. Do not combine this cohort with S2 as an unknown-boundary capacity result.
+
+Archive-only validation, with no new environment interactions:
+
+```powershell
+python scripts/audit_shared_write_archive.py
+python scripts/verify_archive.py
+```
 

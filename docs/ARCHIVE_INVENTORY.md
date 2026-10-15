@@ -93,3 +93,14 @@ checkpoints, plots, negative results and interaction ledger are included.
 interactions; same-stream router replay adds no interactions. The main V2 recovery
 package cap and its limited scope are recorded separately from archival file size.
 The current complete inventory remains `archive/manifest.json`.
+
+## Shared-write update (2026-10-16)
+
+The S1a/S1b/S2/S3 pilots and formal experiments, offline support diagnostics,
+source snapshots, exact actor/checkpoint files, figures, result interpretations
+and failed postprocessing record are included. Scope and separate byte/interaction
+accounting are in `archive/SHARED_WRITE_SNAPSHOT.md` and
+`outputs/shared_write_archive_audit/cohort_ledger.json`. All 12,625 older
+data/output files were checked unchanged against `5979956` before this extension.
+Use the regenerated manifest for current total file count and bytes; earlier
+tables remain historical snapshots.

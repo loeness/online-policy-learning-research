@@ -17,12 +17,14 @@
 
 先看当前核心报告：
 
+- [本轮按顺序完成的研究总结](outputs/shared_write_archive_audit/研究推进总结.md)
 - [当前真实共享写入结构与限制](docs/SHARED_WRITE_STRUCTURE_AND_LIMITS.md)
 - [S1a：共享参数持续在线学习](outputs/knowledge_shared_write_report/阶段S1a结果.md)
 - [S1b：去掉家族标签的实际探测分组](outputs/knowledge_shared_write_auto_report/阶段S1b结果.md)
 - [S2：12情境竞争6槽的容量压力](outputs/knowledge_shared_write_capacity_report/阶段S2结果.md)
 - [S3：证据支持与局部歧义](docs/SHARED_WRITE_SUPPORT_DIAGNOSTIC.md)
 - [S3：同动力学、奖励冲突的规程](docs/SHARED_WRITE_CONFLICT_PROTOCOL.md)
+- [S3：奖励冲突结果与实现审计](outputs/knowledge_shared_write_conflict_report/阶段S3结果.md)
 - [当前V2结构与算法详解](docs/KNOWLEDGE_V2_STRUCTURE_AND_ALGORITHM.md)
 - [V2：验证、算法优化及其仍未解决的问题](outputs/knowledge_v2_report/验证与优化结论.md) · [原始日志审计](outputs/knowledge_v2_report/audit.json)
 - [V2冻结规程](docs/KNOWLEDGE_V2_VALIDATION.md) · [实现复核与评分限制](docs/KNOWLEDGE_V2_IMPLEMENTATION_NOTES.md) · [终点重访设计](docs/KNOWLEDGE_V2_REVISIT.md)

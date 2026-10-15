@@ -175,6 +175,9 @@ S2 checkpoint scope and the independent review are in
 - Shared transfer lowers the untrained negative-objective return in all
   three seeds (mean -0.5477). Later old-objective return changes are small
   and mixed; no catastrophic-forgetting claim is made.
+- [S3 result and limits](../outputs/knowledge_shared_write_conflict_report/阶段S3结果.md),
+  `report.json`, raw audit checks and paired comparisons are in the report folder;
+  pilot 42/42 and formal 120/120 checks pass.
 
 All eight S1a/S1b/S2/S3 formal and pilot cohorts total **3,636,370** interactions.
 Offline diagnostic reads and report calculations are not additional interactions.

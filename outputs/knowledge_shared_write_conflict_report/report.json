@@ -1,0 +1,4073 @@
+{
+  "phase": "formal",
+  "input": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal",
+  "conditions": [
+    "independent_conflict",
+    "shared_conflict",
+    "frozen_conflict"
+  ],
+  "seeds": [
+    773,
+    787,
+    797
+  ],
+  "interaction_totals": {
+    "probe_steps": 9216,
+    "training_steps": 147456,
+    "evaluation_steps": 51176,
+    "total_interactions": 207848
+  },
+  "per_seed_condition_metrics": [
+    {
+      "seed": 773,
+      "condition": "frozen_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal\\seed_773\\frozen_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 16384,
+        "evaluation": 5549,
+        "total": 22957,
+        "fit": 12288,
+        "holdout": 4096
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 16384,
+        "evaluation_interactions": 5549,
+        "total_interactions": 22957,
+        "wall_seconds_descriptive": 12.8652366999886,
+        "cpu_seconds_descriptive": 12.796875,
+        "rss_bytes_at_end_descriptive": 325009408,
+        "sampled_peak_rss_bytes_descriptive": 325042176
+      },
+      "metrics": {
+        "plus_after_plus_return": 0.15500000000000103,
+        "plus_after_plus_goal_success": 0.375,
+        "plus_after_minus_return": 0.15500000000000103,
+        "plus_after_minus_goal_success": 0.375,
+        "plus_return_retention_delta": 0.0,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.4512499999999995,
+        "minus_after_plus_signed_return": 0.8137499999999991,
+        "minus_after_minus_signed_return": 1.9199999999999995,
+        "minus_cold_transfer_signed_return": -0.6375000000000004,
+        "minus_adaptation_gain_after_plus": 1.1062500000000004,
+        "minus_training_signed_reward_per_step": 0.022004394531250002,
+        "minus_goal_termination_rate_after_plus_metadata": 0.1875,
+        "minus_goal_termination_rate_after_minus_metadata": 0.0,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.0,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.4512499999999995,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.4512499999999995,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": 0.15500000000000103,
+            "goal_success_rate": 0.375,
+            "goal_termination_rate_metadata": 0.375,
+            "mean_steps": 47.4375,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 0.8137499999999991,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.1875,
+            "mean_steps": 59.9375,
+            "episodes": 16
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": 0.15500000000000103,
+            "goal_success_rate": 0.375,
+            "goal_termination_rate_metadata": 0.375,
+            "mean_steps": 47.4375,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.9199999999999995,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 44647,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 100124,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 5120,
+          "checkpoint": "train_00005120",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 6144,
+          "checkpoint": "train_00006144",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 7168,
+          "checkpoint": "train_00007168",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "train_00008192",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "after_plus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92119,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147596,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 9216,
+          "checkpoint": "train_00009216",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 10240,
+          "checkpoint": "train_00010240",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 11264,
+          "checkpoint": "train_00011264",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 12288,
+          "checkpoint": "train_00012288",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 13312,
+          "checkpoint": "train_00013312",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 14336,
+          "checkpoint": "train_00014336",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 15360,
+          "checkpoint": "train_00015360",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "train_00016384",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93345,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148822,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 773,
+      "condition": "independent_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal\\seed_773\\independent_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 16384,
+        "evaluation": 5768,
+        "total": 23176,
+        "fit": 12288,
+        "holdout": 4096
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 16384,
+        "evaluation_interactions": 5768,
+        "total_interactions": 23176,
+        "wall_seconds_descriptive": 13.276761200002511,
+        "cpu_seconds_descriptive": 13.09375,
+        "rss_bytes_at_end_descriptive": 323665920,
+        "sampled_peak_rss_bytes_descriptive": 323633152
+      },
+      "metrics": {
+        "plus_after_plus_return": -0.25499999999999917,
+        "plus_after_plus_goal_success": 0.3125,
+        "plus_after_minus_return": -0.25499999999999917,
+        "plus_after_minus_goal_success": 0.3125,
+        "plus_return_retention_delta": 0.0,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.4512499999999995,
+        "minus_after_plus_signed_return": 1.4512499999999995,
+        "minus_after_minus_signed_return": 1.8262499999999993,
+        "minus_cold_transfer_signed_return": 0.0,
+        "minus_adaptation_gain_after_plus": 0.3749999999999998,
+        "minus_training_signed_reward_per_step": 0.023530273437500002,
+        "minus_goal_termination_rate_after_plus_metadata": 0.0,
+        "minus_goal_termination_rate_after_minus_metadata": 0.0,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.0,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.4512499999999995,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.4512499999999995,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -0.25499999999999917,
+            "goal_success_rate": 0.3125,
+            "goal_termination_rate_metadata": 0.3125,
+            "mean_steps": 52.25,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.4512499999999995,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -0.25499999999999917,
+            "goal_success_rate": 0.3125,
+            "goal_termination_rate_metadata": 0.3125,
+            "mean_steps": 52.25,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.8262499999999993,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 44455,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 99932,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 5120,
+          "checkpoint": "train_00005120",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 6144,
+          "checkpoint": "train_00006144",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 7168,
+          "checkpoint": "train_00007168",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "train_00008192",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "after_plus",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 90998,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146475,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 9216,
+          "checkpoint": "train_00009216",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 10240,
+          "checkpoint": "train_00010240",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 11264,
+          "checkpoint": "train_00011264",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 12288,
+          "checkpoint": "train_00012288",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 13312,
+          "checkpoint": "train_00013312",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 14336,
+          "checkpoint": "train_00014336",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 15360,
+          "checkpoint": "train_00015360",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "train_00016384",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "after_minus",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92157,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147634,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 773,
+      "condition": "shared_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal\\seed_773\\shared_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 16384,
+        "evaluation": 5587,
+        "total": 22995,
+        "fit": 12288,
+        "holdout": 4096
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 16384,
+        "evaluation_interactions": 5587,
+        "total_interactions": 22995,
+        "wall_seconds_descriptive": 13.461216499999864,
+        "cpu_seconds_descriptive": 13.296875,
+        "rss_bytes_at_end_descriptive": 323350528,
+        "sampled_peak_rss_bytes_descriptive": 323379200
+      },
+      "metrics": {
+        "plus_after_plus_return": 0.15500000000000103,
+        "plus_after_plus_goal_success": 0.375,
+        "plus_after_minus_return": 0.13062500000000096,
+        "plus_after_minus_goal_success": 0.375,
+        "plus_return_retention_delta": -0.024375000000000063,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.4512499999999995,
+        "minus_after_plus_signed_return": 0.8137499999999991,
+        "minus_after_minus_signed_return": 1.8887499999999993,
+        "minus_cold_transfer_signed_return": -0.6375000000000004,
+        "minus_adaptation_gain_after_plus": 1.0750000000000002,
+        "minus_training_signed_reward_per_step": 0.022523193359375002,
+        "minus_goal_termination_rate_after_plus_metadata": 0.1875,
+        "minus_goal_termination_rate_after_minus_metadata": 0.0,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.10430505756927923,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.4512499999999995,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.4512499999999995,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": 0.15500000000000103,
+            "goal_success_rate": 0.375,
+            "goal_termination_rate_metadata": 0.375,
+            "mean_steps": 47.4375,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 0.8137499999999991,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.1875,
+            "mean_steps": 59.9375,
+            "episodes": 16
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": 0.13062500000000096,
+            "goal_success_rate": 0.375,
+            "goal_termination_rate_metadata": 0.375,
+            "mean_steps": 49.8125,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.8887499999999993,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 44647,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 100124,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 5120,
+          "checkpoint": "train_00005120",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 6144,
+          "checkpoint": "train_00006144",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 7168,
+          "checkpoint": "train_00007168",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "train_00008192",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "after_plus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92119,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147596,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 9216,
+          "checkpoint": "train_00009216",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 10240,
+          "checkpoint": "train_00010240",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 11264,
+          "checkpoint": "train_00011264",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 12288,
+          "checkpoint": "train_00012288",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 13312,
+          "checkpoint": "train_00013312",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 14336,
+          "checkpoint": "train_00014336",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 15360,
+          "checkpoint": "train_00015360",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "train_00016384",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93345,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148822,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 787,
+      "condition": "frozen_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal\\seed_787\\frozen_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 16384,
+        "evaluation": 5680,
+        "total": 23088,
+        "fit": 12288,
+        "holdout": 4096
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 16384,
+        "evaluation_interactions": 5680,
+        "total_interactions": 23088,
+        "wall_seconds_descriptive": 13.625824000002467,
+        "cpu_seconds_descriptive": 13.375,
+        "rss_bytes_at_end_descriptive": 324870144,
+        "sampled_peak_rss_bytes_descriptive": 325951488
+      },
+      "metrics": {
+        "plus_after_plus_return": -0.5350000000000004,
+        "plus_after_plus_goal_success": 0.1875,
+        "plus_after_minus_return": -0.5350000000000004,
+        "plus_after_minus_goal_success": 0.1875,
+        "plus_return_retention_delta": 0.0,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.25125,
+        "minus_after_plus_signed_return": 0.8325000000000001,
+        "minus_after_minus_signed_return": 1.4637499999999999,
+        "minus_cold_transfer_signed_return": -0.41874999999999984,
+        "minus_adaptation_gain_after_plus": 0.6312499999999998,
+        "minus_training_signed_reward_per_step": 0.027406005859375002,
+        "minus_goal_termination_rate_after_plus_metadata": 0.125,
+        "minus_goal_termination_rate_after_minus_metadata": 0.125,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.0,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.25125,
+            "goal_success_rate": 0.125,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 63.0625,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.25125,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 63.0625,
+            "episodes": 16
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -0.5350000000000004,
+            "goal_success_rate": 0.1875,
+            "goal_termination_rate_metadata": 0.1875,
+            "mean_steps": 54.8125,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 0.8325000000000001,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 60.5625,
+            "episodes": 16
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -0.5350000000000004,
+            "goal_success_rate": 0.1875,
+            "goal_termination_rate_metadata": 0.1875,
+            "mean_steps": 54.8125,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.4637499999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 58.6875,
+            "episodes": 16
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 44647,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 100124,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 5120,
+          "checkpoint": "train_00005120",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 6144,
+          "checkpoint": "train_00006144",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 7168,
+          "checkpoint": "train_00007168",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "train_00008192",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "after_plus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92119,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147596,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 9216,
+          "checkpoint": "train_00009216",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93468,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148945,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 10240,
+          "checkpoint": "train_00010240",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 11264,
+          "checkpoint": "train_00011264",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 12288,
+          "checkpoint": "train_00012288",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 13312,
+          "checkpoint": "train_00013312",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93468,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148945,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 14336,
+          "checkpoint": "train_00014336",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93468,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148945,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 15360,
+          "checkpoint": "train_00015360",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "train_00016384",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93468,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148945,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93281,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148758,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 787,
+      "condition": "independent_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal\\seed_787\\independent_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 16384,
+        "evaluation": 5964,
+        "total": 23372,
+        "fit": 12288,
+        "holdout": 4096
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 16384,
+        "evaluation_interactions": 5964,
+        "total_interactions": 23372,
+        "wall_seconds_descriptive": 12.811112900002627,
+        "cpu_seconds_descriptive": 12.703125,
+        "rss_bytes_at_end_descriptive": 324554752,
+        "sampled_peak_rss_bytes_descriptive": 325005312
+      },
+      "metrics": {
+        "plus_after_plus_return": -0.7731250000000005,
+        "plus_after_plus_goal_success": 0.125,
+        "plus_after_minus_return": -0.7731250000000005,
+        "plus_after_minus_goal_success": 0.125,
+        "plus_return_retention_delta": 0.0,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.25125,
+        "minus_after_plus_signed_return": 1.25125,
+        "minus_after_minus_signed_return": 1.6324999999999998,
+        "minus_cold_transfer_signed_return": 0.0,
+        "minus_adaptation_gain_after_plus": 0.38124999999999987,
+        "minus_training_signed_reward_per_step": 0.027680664062500002,
+        "minus_goal_termination_rate_after_plus_metadata": 0.125,
+        "minus_goal_termination_rate_after_minus_metadata": 0.0625,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.0,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.25125,
+            "goal_success_rate": 0.125,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 63.0625,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.25125,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 63.0625,
+            "episodes": 16
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -0.7731250000000005,
+            "goal_success_rate": 0.125,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 61.1875,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.25125,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 63.0625,
+            "episodes": 16
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -0.7731250000000005,
+            "goal_success_rate": 0.125,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 61.1875,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.6324999999999998,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0625,
+            "mean_steps": 61.1875,
+            "episodes": 16
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 44455,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 99932,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 5120,
+          "checkpoint": "train_00005120",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 6144,
+          "checkpoint": "train_00006144",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 7168,
+          "checkpoint": "train_00007168",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "train_00008192",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91266,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146743,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "after_plus",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 90998,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146475,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 9216,
+          "checkpoint": "train_00009216",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 10240,
+          "checkpoint": "train_00010240",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 11264,
+          "checkpoint": "train_00011264",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 12288,
+          "checkpoint": "train_00012288",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 13312,
+          "checkpoint": "train_00013312",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 14336,
+          "checkpoint": "train_00014336",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 15360,
+          "checkpoint": "train_00015360",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "train_00016384",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92335,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147812,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "after_minus",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92157,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147634,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 787,
+      "condition": "shared_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal\\seed_787\\shared_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 16384,
+        "evaluation": 5742,
+        "total": 23150,
+        "fit": 12288,
+        "holdout": 4096
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 16384,
+        "evaluation_interactions": 5742,
+        "total_interactions": 23150,
+        "wall_seconds_descriptive": 13.606463600008283,
+        "cpu_seconds_descriptive": 13.53125,
+        "rss_bytes_at_end_descriptive": 325083136,
+        "sampled_peak_rss_bytes_descriptive": 325468160
+      },
+      "metrics": {
+        "plus_after_plus_return": -0.5350000000000004,
+        "plus_after_plus_goal_success": 0.1875,
+        "plus_after_minus_return": -0.6512500000000006,
+        "plus_after_minus_goal_success": 0.1875,
+        "plus_return_retention_delta": -0.11625000000000019,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.25125,
+        "minus_after_plus_signed_return": 0.8325000000000001,
+        "minus_after_minus_signed_return": 1.3543749999999999,
+        "minus_cold_transfer_signed_return": -0.41874999999999984,
+        "minus_adaptation_gain_after_plus": 0.5218749999999998,
+        "minus_training_signed_reward_per_step": 0.027528076171875002,
+        "minus_goal_termination_rate_after_plus_metadata": 0.125,
+        "minus_goal_termination_rate_after_minus_metadata": 0.125,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.11770474973521503,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.25125,
+            "goal_success_rate": 0.125,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 63.0625,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.25125,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 63.0625,
+            "episodes": 16
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -0.5350000000000004,
+            "goal_success_rate": 0.1875,
+            "goal_termination_rate_metadata": 0.1875,
+            "mean_steps": 54.8125,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 0.8325000000000001,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 60.5625,
+            "episodes": 16
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -0.6512500000000006,
+            "goal_success_rate": 0.1875,
+            "goal_termination_rate_metadata": 0.1875,
+            "mean_steps": 58.6875,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.3543749999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 58.6875,
+            "episodes": 16
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 44647,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 100124,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 5120,
+          "checkpoint": "train_00005120",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 6144,
+          "checkpoint": "train_00006144",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 7168,
+          "checkpoint": "train_00007168",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "train_00008192",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "after_plus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92119,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147596,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 9216,
+          "checkpoint": "train_00009216",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 10240,
+          "checkpoint": "train_00010240",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93468,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148945,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 11264,
+          "checkpoint": "train_00011264",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 12288,
+          "checkpoint": "train_00012288",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 13312,
+          "checkpoint": "train_00013312",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 14336,
+          "checkpoint": "train_00014336",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 15360,
+          "checkpoint": "train_00015360",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "train_00016384",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93345,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148822,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 797,
+      "condition": "frozen_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal\\seed_797\\frozen_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 16384,
+        "evaluation": 5595,
+        "total": 23003,
+        "fit": 12288,
+        "holdout": 4096
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 16384,
+        "evaluation_interactions": 5595,
+        "total_interactions": 23003,
+        "wall_seconds_descriptive": 12.956694499996956,
+        "cpu_seconds_descriptive": 12.734375,
+        "rss_bytes_at_end_descriptive": 325505024,
+        "sampled_peak_rss_bytes_descriptive": 325738496
+      },
+      "metrics": {
+        "plus_after_plus_return": -0.4993749999999991,
+        "plus_after_plus_goal_success": 0.25,
+        "plus_after_minus_return": -0.4993749999999991,
+        "plus_after_minus_goal_success": 0.25,
+        "plus_return_retention_delta": 0.0,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.3774999999999993,
+        "minus_after_plus_signed_return": 0.7906249999999995,
+        "minus_after_minus_signed_return": 1.6806249999999994,
+        "minus_cold_transfer_signed_return": -0.5868749999999998,
+        "minus_adaptation_gain_after_plus": 0.8899999999999999,
+        "minus_training_signed_reward_per_step": 0.022401123046875006,
+        "minus_goal_termination_rate_after_plus_metadata": 0.1875,
+        "minus_goal_termination_rate_after_minus_metadata": 0.0625,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.0,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.3774999999999993,
+            "goal_success_rate": 0.0625,
+            "goal_termination_rate_metadata": 0.0625,
+            "mean_steps": 62.0625,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.3774999999999993,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0625,
+            "mean_steps": 62.0625,
+            "episodes": 16
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -0.4993749999999991,
+            "goal_success_rate": 0.25,
+            "goal_termination_rate_metadata": 0.25,
+            "mean_steps": 52.0625,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 0.7906249999999995,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.1875,
+            "mean_steps": 58.125,
+            "episodes": 16
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -0.4993749999999991,
+            "goal_success_rate": 0.25,
+            "goal_termination_rate_metadata": 0.25,
+            "mean_steps": 52.0625,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.6806249999999994,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0625,
+            "mean_steps": 63.3125,
+            "episodes": 16
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 44711,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 100188,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 5120,
+          "checkpoint": "train_00005120",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 6144,
+          "checkpoint": "train_00006144",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 7168,
+          "checkpoint": "train_00007168",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "train_00008192",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "after_plus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92183,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147660,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 9216,
+          "checkpoint": "train_00009216",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 10240,
+          "checkpoint": "train_00010240",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 11264,
+          "checkpoint": "train_00011264",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93596,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149073,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 12288,
+          "checkpoint": "train_00012288",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 13312,
+          "checkpoint": "train_00013312",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 14336,
+          "checkpoint": "train_00014336",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 15360,
+          "checkpoint": "train_00015360",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "train_00016384",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93345,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148822,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 797,
+      "condition": "independent_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal\\seed_797\\independent_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 16384,
+        "evaluation": 5689,
+        "total": 23097,
+        "fit": 12288,
+        "holdout": 4096
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 16384,
+        "evaluation_interactions": 5689,
+        "total_interactions": 23097,
+        "wall_seconds_descriptive": 13.599581300004502,
+        "cpu_seconds_descriptive": 13.5,
+        "rss_bytes_at_end_descriptive": 325578752,
+        "sampled_peak_rss_bytes_descriptive": 325763072
+      },
+      "metrics": {
+        "plus_after_plus_return": -0.5181249999999992,
+        "plus_after_plus_goal_success": 0.25,
+        "plus_after_minus_return": -0.5181249999999992,
+        "plus_after_minus_goal_success": 0.25,
+        "plus_return_retention_delta": 0.0,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.3774999999999993,
+        "minus_after_plus_signed_return": 1.3774999999999993,
+        "minus_after_minus_signed_return": 1.7168749999999997,
+        "minus_cold_transfer_signed_return": 0.0,
+        "minus_adaptation_gain_after_plus": 0.3393750000000004,
+        "minus_training_signed_reward_per_step": 0.024628906250000002,
+        "minus_goal_termination_rate_after_plus_metadata": 0.0625,
+        "minus_goal_termination_rate_after_minus_metadata": 0.0,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.0,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.3774999999999993,
+            "goal_success_rate": 0.0625,
+            "goal_termination_rate_metadata": 0.0625,
+            "mean_steps": 62.0625,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.3774999999999993,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0625,
+            "mean_steps": 62.0625,
+            "episodes": 16
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -0.5181249999999992,
+            "goal_success_rate": 0.25,
+            "goal_termination_rate_metadata": 0.25,
+            "mean_steps": 52.6875,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.3774999999999993,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0625,
+            "mean_steps": 62.0625,
+            "episodes": 16
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -0.5181249999999992,
+            "goal_success_rate": 0.25,
+            "goal_termination_rate_metadata": 0.25,
+            "mean_steps": 52.6875,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.7168749999999997,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 44455,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 99932,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 5120,
+          "checkpoint": "train_00005120",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 6144,
+          "checkpoint": "train_00006144",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 7168,
+          "checkpoint": "train_00007168",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "train_00008192",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "after_plus",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91062,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146539,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 9216,
+          "checkpoint": "train_00009216",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 10240,
+          "checkpoint": "train_00010240",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 11264,
+          "checkpoint": "train_00011264",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 12288,
+          "checkpoint": "train_00012288",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 13312,
+          "checkpoint": "train_00013312",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 14336,
+          "checkpoint": "train_00014336",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 15360,
+          "checkpoint": "train_00015360",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "train_00016384",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "after_minus",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92221,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147698,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 797,
+      "condition": "shared_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_formal\\seed_797\\shared_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 16384,
+        "evaluation": 5602,
+        "total": 23010,
+        "fit": 12288,
+        "holdout": 4096
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 16384,
+        "evaluation_interactions": 5602,
+        "total_interactions": 23010,
+        "wall_seconds_descriptive": 13.759214600009727,
+        "cpu_seconds_descriptive": 13.703125,
+        "rss_bytes_at_end_descriptive": 325136384,
+        "sampled_peak_rss_bytes_descriptive": 325558272
+      },
+      "metrics": {
+        "plus_after_plus_return": -0.4993749999999991,
+        "plus_after_plus_goal_success": 0.25,
+        "plus_after_minus_return": -0.49187499999999923,
+        "plus_after_minus_goal_success": 0.25,
+        "plus_return_retention_delta": 0.007499999999999896,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.3774999999999993,
+        "minus_after_plus_signed_return": 0.7906249999999995,
+        "minus_after_minus_signed_return": 1.7949999999999993,
+        "minus_cold_transfer_signed_return": -0.5868749999999998,
+        "minus_adaptation_gain_after_plus": 1.0043749999999998,
+        "minus_training_signed_reward_per_step": 0.022919921875000006,
+        "minus_goal_termination_rate_after_plus_metadata": 0.1875,
+        "minus_goal_termination_rate_after_minus_metadata": 0.0,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.11567554722838064,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.3774999999999993,
+            "goal_success_rate": 0.0625,
+            "goal_termination_rate_metadata": 0.0625,
+            "mean_steps": 62.0625,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.3774999999999993,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0625,
+            "mean_steps": 62.0625,
+            "episodes": 16
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -0.4993749999999991,
+            "goal_success_rate": 0.25,
+            "goal_termination_rate_metadata": 0.25,
+            "mean_steps": 52.0625,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 0.7906249999999995,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.1875,
+            "mean_steps": 58.125,
+            "episodes": 16
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -0.49187499999999923,
+            "goal_success_rate": 0.25,
+            "goal_termination_rate_metadata": 0.25,
+            "mean_steps": 51.8125,
+            "episodes": 16
+          },
+          "minus": {
+            "mean_return": 1.7949999999999993,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 16
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 44711,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 100188,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 5120,
+          "checkpoint": "train_00005120",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 6144,
+          "checkpoint": "train_00006144",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 7168,
+          "checkpoint": "train_00007168",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "train_00008192",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 8192,
+          "checkpoint": "after_plus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92183,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147660,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 9216,
+          "checkpoint": "train_00009216",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93596,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149073,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 10240,
+          "checkpoint": "train_00010240",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 11264,
+          "checkpoint": "train_00011264",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 12288,
+          "checkpoint": "train_00012288",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 13312,
+          "checkpoint": "train_00013312",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 14336,
+          "checkpoint": "train_00014336",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 15360,
+          "checkpoint": "train_00015360",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93596,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149073,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "train_00016384",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93596,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149073,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 16384,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93345,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148822,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    }
+  ],
+  "condition_means": {
+    "independent_conflict": {
+      "plus_after_plus_return": -0.5154166666666663,
+      "plus_after_plus_goal_success": 0.22916666666666666,
+      "plus_after_minus_return": -0.5154166666666663,
+      "plus_after_minus_goal_success": 0.22916666666666666,
+      "plus_return_retention_delta": 0.0,
+      "plus_goal_success_retention_delta": 0.0,
+      "minus_initial_signed_return": 1.3599999999999994,
+      "minus_after_plus_signed_return": 1.3599999999999994,
+      "minus_after_minus_signed_return": 1.7252083333333328,
+      "minus_cold_transfer_signed_return": 0.0,
+      "minus_adaptation_gain_after_plus": 0.36520833333333336,
+      "minus_training_signed_reward_per_step": 0.02527994791666667,
+      "minus_goal_termination_rate_after_plus_metadata": 0.0625,
+      "minus_goal_termination_rate_after_minus_metadata": 0.020833333333333332
+    },
+    "shared_conflict": {
+      "plus_after_plus_return": -0.29312499999999947,
+      "plus_after_plus_goal_success": 0.2708333333333333,
+      "plus_after_minus_return": -0.33749999999999963,
+      "plus_after_minus_goal_success": 0.2708333333333333,
+      "plus_return_retention_delta": -0.044375000000000116,
+      "plus_goal_success_retention_delta": 0.0,
+      "minus_initial_signed_return": 1.3599999999999994,
+      "minus_after_plus_signed_return": 0.8122916666666663,
+      "minus_after_minus_signed_return": 1.6793749999999994,
+      "minus_cold_transfer_signed_return": -0.5477083333333334,
+      "minus_adaptation_gain_after_plus": 0.8670833333333333,
+      "minus_training_signed_reward_per_step": 0.024323730468750002,
+      "minus_goal_termination_rate_after_plus_metadata": 0.16666666666666666,
+      "minus_goal_termination_rate_after_minus_metadata": 0.041666666666666664
+    },
+    "frozen_conflict": {
+      "plus_after_plus_return": -0.29312499999999947,
+      "plus_after_plus_goal_success": 0.2708333333333333,
+      "plus_after_minus_return": -0.29312499999999947,
+      "plus_after_minus_goal_success": 0.2708333333333333,
+      "plus_return_retention_delta": 0.0,
+      "plus_goal_success_retention_delta": 0.0,
+      "minus_initial_signed_return": 1.3599999999999994,
+      "minus_after_plus_signed_return": 0.8122916666666663,
+      "minus_after_minus_signed_return": 1.6881249999999994,
+      "minus_cold_transfer_signed_return": -0.5477083333333334,
+      "minus_adaptation_gain_after_plus": 0.8758333333333334,
+      "minus_training_signed_reward_per_step": 0.02393717447916667,
+      "minus_goal_termination_rate_after_plus_metadata": 0.16666666666666666,
+      "minus_goal_termination_rate_after_minus_metadata": 0.0625
+    }
+  },
+  "paired_contrasts": {
+    "shared_conflict_minus_independent_conflict": {
+      "plus_after_plus_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.15500000000000103,
+            "baseline": -0.25499999999999917,
+            "active_minus_baseline": 0.4100000000000002
+          },
+          {
+            "seed": 787,
+            "active": -0.5350000000000004,
+            "baseline": -0.7731250000000005,
+            "active_minus_baseline": 0.23812500000000014
+          },
+          {
+            "seed": 797,
+            "active": -0.4993749999999991,
+            "baseline": -0.5181249999999992,
+            "active_minus_baseline": 0.018750000000000044
+          }
+        ],
+        "mean_paired_difference": 0.22229166666666678
+      },
+      "plus_after_plus_goal_success": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.375,
+            "baseline": 0.3125,
+            "active_minus_baseline": 0.0625
+          },
+          {
+            "seed": 787,
+            "active": 0.1875,
+            "baseline": 0.125,
+            "active_minus_baseline": 0.0625
+          },
+          {
+            "seed": 797,
+            "active": 0.25,
+            "baseline": 0.25,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.041666666666666664
+      },
+      "plus_after_minus_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.13062500000000096,
+            "baseline": -0.25499999999999917,
+            "active_minus_baseline": 0.3856250000000001
+          },
+          {
+            "seed": 787,
+            "active": -0.6512500000000006,
+            "baseline": -0.7731250000000005,
+            "active_minus_baseline": 0.12187499999999996
+          },
+          {
+            "seed": 797,
+            "active": -0.49187499999999923,
+            "baseline": -0.5181249999999992,
+            "active_minus_baseline": 0.02624999999999994
+          }
+        ],
+        "mean_paired_difference": 0.17791666666666664
+      },
+      "plus_after_minus_goal_success": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.375,
+            "baseline": 0.3125,
+            "active_minus_baseline": 0.0625
+          },
+          {
+            "seed": 787,
+            "active": 0.1875,
+            "baseline": 0.125,
+            "active_minus_baseline": 0.0625
+          },
+          {
+            "seed": 797,
+            "active": 0.25,
+            "baseline": 0.25,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.041666666666666664
+      },
+      "plus_return_retention_delta": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": -0.024375000000000063,
+            "baseline": 0.0,
+            "active_minus_baseline": -0.024375000000000063
+          },
+          {
+            "seed": 787,
+            "active": -0.11625000000000019,
+            "baseline": 0.0,
+            "active_minus_baseline": -0.11625000000000019
+          },
+          {
+            "seed": 797,
+            "active": 0.007499999999999896,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.007499999999999896
+          }
+        ],
+        "mean_paired_difference": -0.044375000000000116
+      },
+      "plus_goal_success_retention_delta": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_initial_signed_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 1.4512499999999995,
+            "baseline": 1.4512499999999995,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 1.25125,
+            "baseline": 1.25125,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 1.3774999999999993,
+            "baseline": 1.3774999999999993,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_after_plus_signed_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.8137499999999991,
+            "baseline": 1.4512499999999995,
+            "active_minus_baseline": -0.6375000000000004
+          },
+          {
+            "seed": 787,
+            "active": 0.8325000000000001,
+            "baseline": 1.25125,
+            "active_minus_baseline": -0.41874999999999984
+          },
+          {
+            "seed": 797,
+            "active": 0.7906249999999995,
+            "baseline": 1.3774999999999993,
+            "active_minus_baseline": -0.5868749999999998
+          }
+        ],
+        "mean_paired_difference": -0.5477083333333334
+      },
+      "minus_after_minus_signed_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 1.8887499999999993,
+            "baseline": 1.8262499999999993,
+            "active_minus_baseline": 0.0625
+          },
+          {
+            "seed": 787,
+            "active": 1.3543749999999999,
+            "baseline": 1.6324999999999998,
+            "active_minus_baseline": -0.27812499999999996
+          },
+          {
+            "seed": 797,
+            "active": 1.7949999999999993,
+            "baseline": 1.7168749999999997,
+            "active_minus_baseline": 0.07812499999999956
+          }
+        ],
+        "mean_paired_difference": -0.04583333333333347
+      },
+      "minus_cold_transfer_signed_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": -0.6375000000000004,
+            "baseline": 0.0,
+            "active_minus_baseline": -0.6375000000000004
+          },
+          {
+            "seed": 787,
+            "active": -0.41874999999999984,
+            "baseline": 0.0,
+            "active_minus_baseline": -0.41874999999999984
+          },
+          {
+            "seed": 797,
+            "active": -0.5868749999999998,
+            "baseline": 0.0,
+            "active_minus_baseline": -0.5868749999999998
+          }
+        ],
+        "mean_paired_difference": -0.5477083333333334
+      },
+      "minus_adaptation_gain_after_plus": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 1.0750000000000002,
+            "baseline": 0.3749999999999998,
+            "active_minus_baseline": 0.7000000000000004
+          },
+          {
+            "seed": 787,
+            "active": 0.5218749999999998,
+            "baseline": 0.38124999999999987,
+            "active_minus_baseline": 0.1406249999999999
+          },
+          {
+            "seed": 797,
+            "active": 1.0043749999999998,
+            "baseline": 0.3393750000000004,
+            "active_minus_baseline": 0.6649999999999994
+          }
+        ],
+        "mean_paired_difference": 0.501875
+      },
+      "minus_training_signed_reward_per_step": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.022523193359375002,
+            "baseline": 0.023530273437500002,
+            "active_minus_baseline": -0.001007080078125
+          },
+          {
+            "seed": 787,
+            "active": 0.027528076171875002,
+            "baseline": 0.027680664062500002,
+            "active_minus_baseline": -0.000152587890625
+          },
+          {
+            "seed": 797,
+            "active": 0.022919921875000006,
+            "baseline": 0.024628906250000002,
+            "active_minus_baseline": -0.0017089843749999965
+          }
+        ],
+        "mean_paired_difference": -0.0009562174479166655
+      },
+      "minus_goal_termination_rate_after_plus_metadata": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.1875,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.1875
+          },
+          {
+            "seed": 787,
+            "active": 0.125,
+            "baseline": 0.125,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 0.1875,
+            "baseline": 0.0625,
+            "active_minus_baseline": 0.125
+          }
+        ],
+        "mean_paired_difference": 0.10416666666666667
+      },
+      "minus_goal_termination_rate_after_minus_metadata": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 0.125,
+            "baseline": 0.0625,
+            "active_minus_baseline": 0.0625
+          },
+          {
+            "seed": 797,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.020833333333333332
+      }
+    },
+    "shared_conflict_minus_frozen_conflict": {
+      "plus_after_plus_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.15500000000000103,
+            "baseline": 0.15500000000000103,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": -0.5350000000000004,
+            "baseline": -0.5350000000000004,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": -0.4993749999999991,
+            "baseline": -0.4993749999999991,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "plus_after_plus_goal_success": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.375,
+            "baseline": 0.375,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 0.1875,
+            "baseline": 0.1875,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 0.25,
+            "baseline": 0.25,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "plus_after_minus_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.13062500000000096,
+            "baseline": 0.15500000000000103,
+            "active_minus_baseline": -0.024375000000000063
+          },
+          {
+            "seed": 787,
+            "active": -0.6512500000000006,
+            "baseline": -0.5350000000000004,
+            "active_minus_baseline": -0.11625000000000019
+          },
+          {
+            "seed": 797,
+            "active": -0.49187499999999923,
+            "baseline": -0.4993749999999991,
+            "active_minus_baseline": 0.007499999999999896
+          }
+        ],
+        "mean_paired_difference": -0.044375000000000116
+      },
+      "plus_after_minus_goal_success": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.375,
+            "baseline": 0.375,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 0.1875,
+            "baseline": 0.1875,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 0.25,
+            "baseline": 0.25,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "plus_return_retention_delta": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": -0.024375000000000063,
+            "baseline": 0.0,
+            "active_minus_baseline": -0.024375000000000063
+          },
+          {
+            "seed": 787,
+            "active": -0.11625000000000019,
+            "baseline": 0.0,
+            "active_minus_baseline": -0.11625000000000019
+          },
+          {
+            "seed": 797,
+            "active": 0.007499999999999896,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.007499999999999896
+          }
+        ],
+        "mean_paired_difference": -0.044375000000000116
+      },
+      "plus_goal_success_retention_delta": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_initial_signed_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 1.4512499999999995,
+            "baseline": 1.4512499999999995,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 1.25125,
+            "baseline": 1.25125,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 1.3774999999999993,
+            "baseline": 1.3774999999999993,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_after_plus_signed_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.8137499999999991,
+            "baseline": 0.8137499999999991,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 0.8325000000000001,
+            "baseline": 0.8325000000000001,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 0.7906249999999995,
+            "baseline": 0.7906249999999995,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_after_minus_signed_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 1.8887499999999993,
+            "baseline": 1.9199999999999995,
+            "active_minus_baseline": -0.03125000000000022
+          },
+          {
+            "seed": 787,
+            "active": 1.3543749999999999,
+            "baseline": 1.4637499999999999,
+            "active_minus_baseline": -0.109375
+          },
+          {
+            "seed": 797,
+            "active": 1.7949999999999993,
+            "baseline": 1.6806249999999994,
+            "active_minus_baseline": 0.1143749999999999
+          }
+        ],
+        "mean_paired_difference": -0.00875000000000011
+      },
+      "minus_cold_transfer_signed_return": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": -0.6375000000000004,
+            "baseline": -0.6375000000000004,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": -0.41874999999999984,
+            "baseline": -0.41874999999999984,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": -0.5868749999999998,
+            "baseline": -0.5868749999999998,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_adaptation_gain_after_plus": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 1.0750000000000002,
+            "baseline": 1.1062500000000004,
+            "active_minus_baseline": -0.03125000000000022
+          },
+          {
+            "seed": 787,
+            "active": 0.5218749999999998,
+            "baseline": 0.6312499999999998,
+            "active_minus_baseline": -0.109375
+          },
+          {
+            "seed": 797,
+            "active": 1.0043749999999998,
+            "baseline": 0.8899999999999999,
+            "active_minus_baseline": 0.1143749999999999
+          }
+        ],
+        "mean_paired_difference": -0.00875000000000011
+      },
+      "minus_training_signed_reward_per_step": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.022523193359375002,
+            "baseline": 0.022004394531250002,
+            "active_minus_baseline": 0.000518798828125
+          },
+          {
+            "seed": 787,
+            "active": 0.027528076171875002,
+            "baseline": 0.027406005859375002,
+            "active_minus_baseline": 0.0001220703125
+          },
+          {
+            "seed": 797,
+            "active": 0.022919921875000006,
+            "baseline": 0.022401123046875006,
+            "active_minus_baseline": 0.000518798828125
+          }
+        ],
+        "mean_paired_difference": 0.0003865559895833333
+      },
+      "minus_goal_termination_rate_after_plus_metadata": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.1875,
+            "baseline": 0.1875,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 0.125,
+            "baseline": 0.125,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 0.1875,
+            "baseline": 0.1875,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_goal_termination_rate_after_minus_metadata": {
+        "per_seed": [
+          {
+            "seed": 773,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 787,
+            "active": 0.125,
+            "baseline": 0.125,
+            "active_minus_baseline": 0.0
+          },
+          {
+            "seed": 797,
+            "active": 0.0,
+            "baseline": 0.0625,
+            "active_minus_baseline": -0.0625
+          }
+        ],
+        "mean_paired_difference": -0.020833333333333332
+      }
+    }
+  },
+  "audit": {
+    "checks": [
+      {
+        "name": "root_summary_record_coverage",
+        "passed": true,
+        "details": "records=9; missing=[]; unexpected=[]"
+      },
+      {
+        "name": "root_condition_set",
+        "passed": true,
+        "details": "conditions=['independent_conflict', 'shared_conflict', 'frozen_conflict']"
+      },
+      {
+        "name": "773/frozen_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "773/frozen_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/16384/5549/22957; summary=1024/16384/5549/22957"
+      },
+      {
+        "name": "773/frozen_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/16384/5549/22957; ledger=1024/16384/5549/22957"
+      },
+      {
+        "name": "773/frozen_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=12288/16384 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "773/frozen_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -54.01000000000004, 'minus': 180.26000000000002}; minus task_success is blank"
+      },
+      {
+        "name": "773/frozen_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "773/frozen_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': '1f3e788475415715242ef5490e6a81525a2933331cc4917d61ec867a63bcb9a7', 'minus': '1f3e788475415715242ef5490e6a81525a2933331cc4917d61ec867a63bcb9a7'}; grouping=group 0"
+      },
+      {
+        "name": "773/frozen_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "773/frozen_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=19; actor bytes expected=738; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "773/frozen_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "773/frozen_conflict/frozen_shared_parameters_unchanged",
+        "passed": true,
+        "details": "max absolute shared delta=0.0"
+      },
+      {
+        "name": "773/frozen_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "773/independent_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "773/independent_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/16384/5768/23176; summary=1024/16384/5768/23176"
+      },
+      {
+        "name": "773/independent_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/16384/5768/23176; ledger=1024/16384/5768/23176"
+      },
+      {
+        "name": "773/independent_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=12288/16384 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "773/independent_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -78.01000000000005, 'minus': 192.76000000000002}; minus task_success is blank"
+      },
+      {
+        "name": "773/independent_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "773/independent_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': '1f3e788475415715242ef5490e6a81525a2933331cc4917d61ec867a63bcb9a7', 'minus': '1f3e788475415715242ef5490e6a81525a2933331cc4917d61ec867a63bcb9a7'}; grouping=disabled"
+      },
+      {
+        "name": "773/independent_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "773/independent_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=19; actor bytes expected=666; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "773/independent_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "773/independent_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "773/shared_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "773/shared_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/16384/5587/22995; summary=1024/16384/5587/22995"
+      },
+      {
+        "name": "773/shared_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/16384/5587/22995; ledger=1024/16384/5587/22995"
+      },
+      {
+        "name": "773/shared_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=12288/16384 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "773/shared_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -54.01000000000004, 'minus': 184.51000000000002}; minus task_success is blank"
+      },
+      {
+        "name": "773/shared_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "773/shared_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': '1f3e788475415715242ef5490e6a81525a2933331cc4917d61ec867a63bcb9a7', 'minus': '1f3e788475415715242ef5490e6a81525a2933331cc4917d61ec867a63bcb9a7'}; grouping=group 0"
+      },
+      {
+        "name": "773/shared_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "773/shared_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=19; actor bytes expected=738; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "773/shared_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "773/shared_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "787/frozen_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "787/frozen_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/16384/5680/23088; summary=1024/16384/5680/23088"
+      },
+      {
+        "name": "787/frozen_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/16384/5680/23088; ledger=1024/16384/5680/23088"
+      },
+      {
+        "name": "787/frozen_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=12288/16384 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "787/frozen_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -116.26000000000003, 'minus': 224.51000000000002}; minus task_success is blank"
+      },
+      {
+        "name": "787/frozen_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "787/frozen_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': '79121682748f58f0e3cde1e240b87705c3ed5e32c739aae5fde88a69a5392901', 'minus': '79121682748f58f0e3cde1e240b87705c3ed5e32c739aae5fde88a69a5392901'}; grouping=group 0"
+      },
+      {
+        "name": "787/frozen_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "787/frozen_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=19; actor bytes expected=738; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "787/frozen_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "787/frozen_conflict/frozen_shared_parameters_unchanged",
+        "passed": true,
+        "details": "max absolute shared delta=0.0"
+      },
+      {
+        "name": "787/frozen_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "787/independent_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "787/independent_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/16384/5964/23372; summary=1024/16384/5964/23372"
+      },
+      {
+        "name": "787/independent_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/16384/5964/23372; ledger=1024/16384/5964/23372"
+      },
+      {
+        "name": "787/independent_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=12288/16384 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "787/independent_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -113.51000000000002, 'minus': 226.76000000000002}; minus task_success is blank"
+      },
+      {
+        "name": "787/independent_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "787/independent_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': '79121682748f58f0e3cde1e240b87705c3ed5e32c739aae5fde88a69a5392901', 'minus': '79121682748f58f0e3cde1e240b87705c3ed5e32c739aae5fde88a69a5392901'}; grouping=disabled"
+      },
+      {
+        "name": "787/independent_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "787/independent_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=19; actor bytes expected=666; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "787/independent_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "787/independent_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "787/shared_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "787/shared_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/16384/5742/23150; summary=1024/16384/5742/23150"
+      },
+      {
+        "name": "787/shared_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/16384/5742/23150; ledger=1024/16384/5742/23150"
+      },
+      {
+        "name": "787/shared_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=12288/16384 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "787/shared_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -116.26000000000003, 'minus': 225.51000000000002}; minus task_success is blank"
+      },
+      {
+        "name": "787/shared_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "787/shared_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': '79121682748f58f0e3cde1e240b87705c3ed5e32c739aae5fde88a69a5392901', 'minus': '79121682748f58f0e3cde1e240b87705c3ed5e32c739aae5fde88a69a5392901'}; grouping=group 0"
+      },
+      {
+        "name": "787/shared_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "787/shared_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=19; actor bytes expected=738; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "787/shared_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "787/shared_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "797/frozen_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "797/frozen_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/16384/5595/23003; summary=1024/16384/5595/23003"
+      },
+      {
+        "name": "797/frozen_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/16384/5595/23003; ledger=1024/16384/5595/23003"
+      },
+      {
+        "name": "797/frozen_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=12288/16384 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "797/frozen_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -66.26000000000005, 'minus': 183.51000000000005}; minus task_success is blank"
+      },
+      {
+        "name": "797/frozen_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "797/frozen_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': 'f24b92d7399cc758dedae5346e95521e98bacbf4edb64c82c3cbbd0ba2ecf24b', 'minus': 'f24b92d7399cc758dedae5346e95521e98bacbf4edb64c82c3cbbd0ba2ecf24b'}; grouping=group 0"
+      },
+      {
+        "name": "797/frozen_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "797/frozen_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=19; actor bytes expected=738; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "797/frozen_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "797/frozen_conflict/frozen_shared_parameters_unchanged",
+        "passed": true,
+        "details": "max absolute shared delta=0.0"
+      },
+      {
+        "name": "797/frozen_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "797/independent_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "797/independent_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/16384/5689/23097; summary=1024/16384/5689/23097"
+      },
+      {
+        "name": "797/independent_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/16384/5689/23097; ledger=1024/16384/5689/23097"
+      },
+      {
+        "name": "797/independent_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=12288/16384 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "797/independent_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -53.510000000000055, 'minus': 201.76000000000002}; minus task_success is blank"
+      },
+      {
+        "name": "797/independent_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "797/independent_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': 'f24b92d7399cc758dedae5346e95521e98bacbf4edb64c82c3cbbd0ba2ecf24b', 'minus': 'f24b92d7399cc758dedae5346e95521e98bacbf4edb64c82c3cbbd0ba2ecf24b'}; grouping=disabled"
+      },
+      {
+        "name": "797/independent_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "797/independent_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=19; actor bytes expected=666; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "797/independent_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "797/independent_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "797/shared_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "797/shared_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/16384/5602/23010; summary=1024/16384/5602/23010"
+      },
+      {
+        "name": "797/shared_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/16384/5602/23010; ledger=1024/16384/5602/23010"
+      },
+      {
+        "name": "797/shared_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=12288/16384 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "797/shared_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -66.26000000000005, 'minus': 187.76000000000005}; minus task_success is blank"
+      },
+      {
+        "name": "797/shared_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "797/shared_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': 'f24b92d7399cc758dedae5346e95521e98bacbf4edb64c82c3cbbd0ba2ecf24b', 'minus': 'f24b92d7399cc758dedae5346e95521e98bacbf4edb64c82c3cbbd0ba2ecf24b'}; grouping=group 0"
+      },
+      {
+        "name": "797/shared_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "797/shared_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=19; actor bytes expected=738; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "797/shared_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "797/shared_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "773/paired_probe_dynamics_and_opposite_rewards",
+        "passed": true,
+        "details": "all-condition dynamics/actions match=True; exact reward sign reversal=True"
+      },
+      {
+        "name": "773/paired_evaluation_plans_across_conditions",
+        "passed": true,
+        "details": "matched stage/mode/episode reset and action seeds=True"
+      },
+      {
+        "name": "773/active_frozen_plus_prefix_and_after_plus_state",
+        "passed": true,
+        "details": "plus transition prefix: 8192 rows match on step, action, reward, log_prob, obs, next_obs; after_plus actor+critic exact=True"
+      },
+      {
+        "name": "773/plus_local_parameters_unchanged_during_minus",
+        "passed": true,
+        "details": "compared decoded plus local row in after_plus and after_minus for all conditions"
+      },
+      {
+        "name": "773/frozen_and_independent_plus_actions_unchanged",
+        "passed": true,
+        "details": "frozen=True; independent=True"
+      },
+      {
+        "name": "787/paired_probe_dynamics_and_opposite_rewards",
+        "passed": true,
+        "details": "all-condition dynamics/actions match=True; exact reward sign reversal=True"
+      },
+      {
+        "name": "787/paired_evaluation_plans_across_conditions",
+        "passed": true,
+        "details": "matched stage/mode/episode reset and action seeds=True"
+      },
+      {
+        "name": "787/active_frozen_plus_prefix_and_after_plus_state",
+        "passed": true,
+        "details": "plus transition prefix: 8192 rows match on step, action, reward, log_prob, obs, next_obs; after_plus actor+critic exact=True"
+      },
+      {
+        "name": "787/plus_local_parameters_unchanged_during_minus",
+        "passed": true,
+        "details": "compared decoded plus local row in after_plus and after_minus for all conditions"
+      },
+      {
+        "name": "787/frozen_and_independent_plus_actions_unchanged",
+        "passed": true,
+        "details": "frozen=True; independent=True"
+      },
+      {
+        "name": "797/paired_probe_dynamics_and_opposite_rewards",
+        "passed": true,
+        "details": "all-condition dynamics/actions match=True; exact reward sign reversal=True"
+      },
+      {
+        "name": "797/paired_evaluation_plans_across_conditions",
+        "passed": true,
+        "details": "matched stage/mode/episode reset and action seeds=True"
+      },
+      {
+        "name": "797/active_frozen_plus_prefix_and_after_plus_state",
+        "passed": true,
+        "details": "plus transition prefix: 8192 rows match on step, action, reward, log_prob, obs, next_obs; after_plus actor+critic exact=True"
+      },
+      {
+        "name": "797/plus_local_parameters_unchanged_during_minus",
+        "passed": true,
+        "details": "compared decoded plus local row in after_plus and after_minus for all conditions"
+      },
+      {
+        "name": "797/frozen_and_independent_plus_actions_unchanged",
+        "passed": true,
+        "details": "frozen=True; independent=True"
+      },
+      {
+        "name": "root_aggregate_interaction_ledger",
+        "passed": true,
+        "details": "recomputed={'probe_steps': 9216, 'training_steps': 147456, 'evaluation_steps': 51176, 'total_interactions': 207848}; summary={'probe_steps': 9216, 'training_steps': 147456, 'evaluation_steps': 51176, 'total_interactions': 207848}"
+      }
+    ],
+    "failed_assertions": []
+  },
+  "interpretation_boundary": "Minus goal_reached is environment termination metadata, not task success. Cold transfer (initial to after_plus) is reported separately from minus-stage adaptation (after_plus to after_minus). Results are descriptive; seeds are not treated as independent replications for significance claims."
+}

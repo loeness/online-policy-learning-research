@@ -1,0 +1,1119 @@
+{
+  "phase": "pilot",
+  "input": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_pilot",
+  "conditions": [
+    "independent_conflict",
+    "shared_conflict",
+    "frozen_conflict"
+  ],
+  "seeds": [
+    853
+  ],
+  "interaction_totals": {
+    "probe_steps": 3072,
+    "training_steps": 12288,
+    "evaluation_steps": 9183,
+    "total_interactions": 24543
+  },
+  "per_seed_condition_metrics": [
+    {
+      "seed": 853,
+      "condition": "frozen_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_pilot\\seed_853\\frozen_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 4096,
+        "evaluation": 3072,
+        "total": 8192,
+        "fit": 3072,
+        "holdout": 1024
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 4096,
+        "evaluation_interactions": 3072,
+        "total_interactions": 8192,
+        "wall_seconds_descriptive": 3.837429399995017,
+        "cpu_seconds_descriptive": 3.75,
+        "rss_bytes_at_end_descriptive": 324276224,
+        "sampled_peak_rss_bytes_descriptive": 324706304
+      },
+      "metrics": {
+        "plus_after_plus_return": -1.419999999999999,
+        "plus_after_plus_goal_success": 0.0,
+        "plus_after_minus_return": -1.419999999999999,
+        "plus_after_minus_goal_success": 0.0,
+        "plus_return_retention_delta": 0.0,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.419999999999999,
+        "minus_after_plus_signed_return": 1.419999999999999,
+        "minus_after_minus_signed_return": 1.544999999999999,
+        "minus_cold_transfer_signed_return": 0.0,
+        "minus_adaptation_gain_after_plus": 0.125,
+        "minus_training_signed_reward_per_step": 0.024995117187500006,
+        "minus_goal_termination_rate_after_plus_metadata": 0.0,
+        "minus_goal_termination_rate_after_minus_metadata": 0.0,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.0,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.419999999999999,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          },
+          "minus": {
+            "mean_return": 1.419999999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -1.419999999999999,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          },
+          "minus": {
+            "mean_return": 1.419999999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -1.419999999999999,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          },
+          "minus": {
+            "mean_return": 1.544999999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 44711,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 100188,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "after_plus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92119,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147596,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93345,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148822,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 853,
+      "condition": "independent_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_pilot\\seed_853\\independent_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 4096,
+        "evaluation": 3039,
+        "total": 8159,
+        "fit": 3072,
+        "holdout": 1024
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 4096,
+        "evaluation_interactions": 3039,
+        "total_interactions": 8159,
+        "wall_seconds_descriptive": 4.73269760000403,
+        "cpu_seconds_descriptive": 4.625,
+        "rss_bytes_at_end_descriptive": 323977216,
+        "sampled_peak_rss_bytes_descriptive": 324001792
+      },
+      "metrics": {
+        "plus_after_plus_return": -1.209999999999999,
+        "plus_after_plus_goal_success": 0.125,
+        "plus_after_minus_return": -1.209999999999999,
+        "plus_after_minus_goal_success": 0.125,
+        "plus_return_retention_delta": 0.0,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.419999999999999,
+        "minus_after_plus_signed_return": 1.419999999999999,
+        "minus_after_minus_signed_return": 1.0912499999999987,
+        "minus_cold_transfer_signed_return": 0.0,
+        "minus_adaptation_gain_after_plus": -0.3287500000000003,
+        "minus_training_signed_reward_per_step": 0.025239257812500006,
+        "minus_goal_termination_rate_after_plus_metadata": 0.0,
+        "minus_goal_termination_rate_after_minus_metadata": 0.25,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.0,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.419999999999999,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          },
+          "minus": {
+            "mean_return": 1.419999999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -1.209999999999999,
+            "goal_success_rate": 0.125,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 63.25,
+            "episodes": 8
+          },
+          "minus": {
+            "mean_return": 1.419999999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -1.209999999999999,
+            "goal_success_rate": 0.125,
+            "goal_termination_rate_metadata": 0.125,
+            "mean_steps": 63.25,
+            "episodes": 8
+          },
+          "minus": {
+            "mean_return": 1.0912499999999987,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.25,
+            "mean_steps": 61.375,
+            "episodes": 8
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 44455,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 99932,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91330,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146807,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "after_plus",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 91062,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 146539,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "after_minus",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92221,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147698,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    },
+    {
+      "seed": 853,
+      "condition": "shared_conflict",
+      "run_dir": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\knowledge_shared_write_conflict_pilot\\seed_853\\shared_conflict",
+      "counts": {
+        "probe": 1024,
+        "training": 4096,
+        "evaluation": 3072,
+        "total": 8192,
+        "fit": 3072,
+        "holdout": 1024
+      },
+      "costs": {
+        "probe_interactions": 1024,
+        "training_interactions": 4096,
+        "evaluation_interactions": 3072,
+        "total_interactions": 8192,
+        "wall_seconds_descriptive": 4.833275400000275,
+        "cpu_seconds_descriptive": 4.703125,
+        "rss_bytes_at_end_descriptive": 323739648,
+        "sampled_peak_rss_bytes_descriptive": 323760128
+      },
+      "metrics": {
+        "plus_after_plus_return": -1.419999999999999,
+        "plus_after_plus_goal_success": 0.0,
+        "plus_after_minus_return": -1.419999999999999,
+        "plus_after_minus_goal_success": 0.0,
+        "plus_return_retention_delta": 0.0,
+        "plus_goal_success_retention_delta": 0.0,
+        "minus_initial_signed_return": 1.419999999999999,
+        "minus_after_plus_signed_return": 1.419999999999999,
+        "minus_after_minus_signed_return": 1.419999999999999,
+        "minus_cold_transfer_signed_return": 0.0,
+        "minus_adaptation_gain_after_plus": 0.0,
+        "minus_training_signed_reward_per_step": 0.025239257812500006,
+        "minus_goal_termination_rate_after_plus_metadata": 0.0,
+        "minus_goal_termination_rate_after_minus_metadata": 0.0,
+        "minus_local_max_abs_after_plus": 0.0,
+        "old_plus_local_unchanged_during_minus": true,
+        "shared_parent_delta_l2_after_minus": 0.014248603832095919,
+        "minus_goal_metric_label": "environment termination metadata, not task success"
+      },
+      "evaluation_metrics": {
+        "initial": {
+          "plus": {
+            "mean_return": -1.419999999999999,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          },
+          "minus": {
+            "mean_return": 1.419999999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          }
+        },
+        "after_plus": {
+          "plus": {
+            "mean_return": -1.419999999999999,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          },
+          "minus": {
+            "mean_return": 1.419999999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          }
+        },
+        "after_minus": {
+          "plus": {
+            "mean_return": -1.419999999999999,
+            "goal_success_rate": 0.0,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          },
+          "minus": {
+            "mean_return": 1.419999999999999,
+            "goal_success_rate": null,
+            "goal_termination_rate_metadata": 0.0,
+            "mean_steps": 64.0,
+            "episodes": 8
+          }
+        }
+      },
+      "capacity": [
+        {
+          "step": 0,
+          "checkpoint": "initial",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 44711,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 100188,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 1024,
+          "checkpoint": "train_00001024",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92463,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147940,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "train_00002048",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92399,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147876,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 2048,
+          "checkpoint": "after_plus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 92119,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147596,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 3072,
+          "checkpoint": "train_00003072",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "train_00004096",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93532,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 149009,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        },
+        {
+          "step": 4096,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93345,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148822,
+          "actor_cap_bytes": 1024,
+          "whole_package_cap_bytes": 262144,
+          "passed": true
+        }
+      ],
+      "source_snapshot_file_count": 25
+    }
+  ],
+  "condition_means": {
+    "independent_conflict": {
+      "plus_after_plus_return": -1.209999999999999,
+      "plus_after_plus_goal_success": 0.125,
+      "plus_after_minus_return": -1.209999999999999,
+      "plus_after_minus_goal_success": 0.125,
+      "plus_return_retention_delta": 0.0,
+      "plus_goal_success_retention_delta": 0.0,
+      "minus_initial_signed_return": 1.419999999999999,
+      "minus_after_plus_signed_return": 1.419999999999999,
+      "minus_after_minus_signed_return": 1.0912499999999987,
+      "minus_cold_transfer_signed_return": 0.0,
+      "minus_adaptation_gain_after_plus": -0.3287500000000003,
+      "minus_training_signed_reward_per_step": 0.025239257812500006,
+      "minus_goal_termination_rate_after_plus_metadata": 0.0,
+      "minus_goal_termination_rate_after_minus_metadata": 0.25
+    },
+    "shared_conflict": {
+      "plus_after_plus_return": -1.419999999999999,
+      "plus_after_plus_goal_success": 0.0,
+      "plus_after_minus_return": -1.419999999999999,
+      "plus_after_minus_goal_success": 0.0,
+      "plus_return_retention_delta": 0.0,
+      "plus_goal_success_retention_delta": 0.0,
+      "minus_initial_signed_return": 1.419999999999999,
+      "minus_after_plus_signed_return": 1.419999999999999,
+      "minus_after_minus_signed_return": 1.419999999999999,
+      "minus_cold_transfer_signed_return": 0.0,
+      "minus_adaptation_gain_after_plus": 0.0,
+      "minus_training_signed_reward_per_step": 0.025239257812500006,
+      "minus_goal_termination_rate_after_plus_metadata": 0.0,
+      "minus_goal_termination_rate_after_minus_metadata": 0.0
+    },
+    "frozen_conflict": {
+      "plus_after_plus_return": -1.419999999999999,
+      "plus_after_plus_goal_success": 0.0,
+      "plus_after_minus_return": -1.419999999999999,
+      "plus_after_minus_goal_success": 0.0,
+      "plus_return_retention_delta": 0.0,
+      "plus_goal_success_retention_delta": 0.0,
+      "minus_initial_signed_return": 1.419999999999999,
+      "minus_after_plus_signed_return": 1.419999999999999,
+      "minus_after_minus_signed_return": 1.544999999999999,
+      "minus_cold_transfer_signed_return": 0.0,
+      "minus_adaptation_gain_after_plus": 0.125,
+      "minus_training_signed_reward_per_step": 0.024995117187500006,
+      "minus_goal_termination_rate_after_plus_metadata": 0.0,
+      "minus_goal_termination_rate_after_minus_metadata": 0.0
+    }
+  },
+  "paired_contrasts": {
+    "shared_conflict_minus_independent_conflict": {
+      "plus_after_plus_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": -1.419999999999999,
+            "baseline": -1.209999999999999,
+            "active_minus_baseline": -0.20999999999999996
+          }
+        ],
+        "mean_paired_difference": -0.20999999999999996
+      },
+      "plus_after_plus_goal_success": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.125,
+            "active_minus_baseline": -0.125
+          }
+        ],
+        "mean_paired_difference": -0.125
+      },
+      "plus_after_minus_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": -1.419999999999999,
+            "baseline": -1.209999999999999,
+            "active_minus_baseline": -0.20999999999999996
+          }
+        ],
+        "mean_paired_difference": -0.20999999999999996
+      },
+      "plus_after_minus_goal_success": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.125,
+            "active_minus_baseline": -0.125
+          }
+        ],
+        "mean_paired_difference": -0.125
+      },
+      "plus_return_retention_delta": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "plus_goal_success_retention_delta": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_initial_signed_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 1.419999999999999,
+            "baseline": 1.419999999999999,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_after_plus_signed_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 1.419999999999999,
+            "baseline": 1.419999999999999,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_after_minus_signed_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 1.419999999999999,
+            "baseline": 1.0912499999999987,
+            "active_minus_baseline": 0.3287500000000003
+          }
+        ],
+        "mean_paired_difference": 0.3287500000000003
+      },
+      "minus_cold_transfer_signed_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_adaptation_gain_after_plus": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": -0.3287500000000003,
+            "active_minus_baseline": 0.3287500000000003
+          }
+        ],
+        "mean_paired_difference": 0.3287500000000003
+      },
+      "minus_training_signed_reward_per_step": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.025239257812500006,
+            "baseline": 0.025239257812500006,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_goal_termination_rate_after_plus_metadata": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_goal_termination_rate_after_minus_metadata": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.25,
+            "active_minus_baseline": -0.25
+          }
+        ],
+        "mean_paired_difference": -0.25
+      }
+    },
+    "shared_conflict_minus_frozen_conflict": {
+      "plus_after_plus_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": -1.419999999999999,
+            "baseline": -1.419999999999999,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "plus_after_plus_goal_success": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "plus_after_minus_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": -1.419999999999999,
+            "baseline": -1.419999999999999,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "plus_after_minus_goal_success": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "plus_return_retention_delta": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "plus_goal_success_retention_delta": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_initial_signed_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 1.419999999999999,
+            "baseline": 1.419999999999999,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_after_plus_signed_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 1.419999999999999,
+            "baseline": 1.419999999999999,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_after_minus_signed_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 1.419999999999999,
+            "baseline": 1.544999999999999,
+            "active_minus_baseline": -0.125
+          }
+        ],
+        "mean_paired_difference": -0.125
+      },
+      "minus_cold_transfer_signed_return": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_adaptation_gain_after_plus": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.125,
+            "active_minus_baseline": -0.125
+          }
+        ],
+        "mean_paired_difference": -0.125
+      },
+      "minus_training_signed_reward_per_step": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.025239257812500006,
+            "baseline": 0.024995117187500006,
+            "active_minus_baseline": 0.000244140625
+          }
+        ],
+        "mean_paired_difference": 0.000244140625
+      },
+      "minus_goal_termination_rate_after_plus_metadata": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      },
+      "minus_goal_termination_rate_after_minus_metadata": {
+        "per_seed": [
+          {
+            "seed": 853,
+            "active": 0.0,
+            "baseline": 0.0,
+            "active_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": 0.0
+      }
+    }
+  },
+  "audit": {
+    "checks": [
+      {
+        "name": "root_summary_record_coverage",
+        "passed": true,
+        "details": "records=3; missing=[]; unexpected=[]"
+      },
+      {
+        "name": "root_condition_set",
+        "passed": true,
+        "details": "conditions=['independent_conflict', 'shared_conflict', 'frozen_conflict']"
+      },
+      {
+        "name": "853/frozen_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "853/frozen_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/4096/3072/8192; summary=1024/4096/3072/8192"
+      },
+      {
+        "name": "853/frozen_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/4096/3072/8192; ledger=1024/4096/3072/8192"
+      },
+      {
+        "name": "853/frozen_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=3072/4096 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "853/frozen_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -41.44000000000001, 'minus': 51.19000000000001}; minus task_success is blank"
+      },
+      {
+        "name": "853/frozen_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "853/frozen_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': '007d58afd995f26cd96972d8a7b519733d13cd9fab36602460e8fc3f5f6222da', 'minus': '007d58afd995f26cd96972d8a7b519733d13cd9fab36602460e8fc3f5f6222da'}; grouping=group 0"
+      },
+      {
+        "name": "853/frozen_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "853/frozen_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=7; actor bytes expected=738; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "853/frozen_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "853/frozen_conflict/frozen_shared_parameters_unchanged",
+        "passed": true,
+        "details": "max absolute shared delta=0.0"
+      },
+      {
+        "name": "853/frozen_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "853/independent_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "853/independent_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/4096/3039/8159; summary=1024/4096/3039/8159"
+      },
+      {
+        "name": "853/independent_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/4096/3039/8159; ledger=1024/4096/3039/8159"
+      },
+      {
+        "name": "853/independent_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=3072/4096 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "853/independent_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -40.69000000000001, 'minus': 51.69000000000001}; minus task_success is blank"
+      },
+      {
+        "name": "853/independent_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "853/independent_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': '007d58afd995f26cd96972d8a7b519733d13cd9fab36602460e8fc3f5f6222da', 'minus': '007d58afd995f26cd96972d8a7b519733d13cd9fab36602460e8fc3f5f6222da'}; grouping=disabled"
+      },
+      {
+        "name": "853/independent_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "853/independent_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=7; actor bytes expected=666; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "853/independent_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "853/independent_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "853/shared_conflict/required_artifacts",
+        "passed": true,
+        "details": "missing=[]"
+      },
+      {
+        "name": "853/shared_conflict/raw_counts_match_summary",
+        "passed": true,
+        "details": "raw probe/train/eval/total=1024/4096/3072/8192; summary=1024/4096/3072/8192"
+      },
+      {
+        "name": "853/shared_conflict/cost_ledger_counts_match_raw",
+        "passed": true,
+        "details": "raw=1024/4096/3072/8192; ledger=1024/4096/3072/8192"
+      },
+      {
+        "name": "853/shared_conflict/fresh_fit_holdout_schedule",
+        "passed": true,
+        "details": "unique/sequential=True/True; fit=3072/4096 (0.750); per-bout fit schedule=True; stale_actor_rows=0"
+      },
+      {
+        "name": "853/shared_conflict/signed_training_reward_and_episode_ledger",
+        "passed": true,
+        "details": "reward totals={'plus': -41.44000000000001, 'minus': 51.69000000000001}; minus task_success is blank"
+      },
+      {
+        "name": "853/shared_conflict/paired_evaluation_and_summary",
+        "passed": true,
+        "details": "evaluation stages=3; common mode/episode plan=True; minus task_success remains blank"
+      },
+      {
+        "name": "853/shared_conflict/reward_blind_probe_profiles",
+        "passed": true,
+        "details": "rebuilt hashes={'plus': '007d58afd995f26cd96972d8a7b519733d13cd9fab36602460e8fc3f5f6222da', 'minus': '007d58afd995f26cd96972d8a7b519733d13cd9fab36602460e8fc3f5f6222da'}; grouping=group 0"
+      },
+      {
+        "name": "853/shared_conflict/source_snapshot_hashes",
+        "passed": true,
+        "details": "manifest files=25; bad=[]"
+      },
+      {
+        "name": "853/shared_conflict/actor_and_checkpoint_byte_caps",
+        "passed": true,
+        "details": "measured checkpoints=7; actor bytes expected=738; actor cap=1024; W0+checkpoint cap=262144"
+      },
+      {
+        "name": "853/shared_conflict/stage_checkpoints_present",
+        "passed": true,
+        "details": "available stages=['after_minus', 'after_plus', 'initial']"
+      },
+      {
+        "name": "853/shared_conflict/minus_local_untrained_after_plus",
+        "passed": true,
+        "details": "maximum absolute minus local coefficient=0.0"
+      },
+      {
+        "name": "853/paired_probe_dynamics_and_opposite_rewards",
+        "passed": true,
+        "details": "all-condition dynamics/actions match=True; exact reward sign reversal=True"
+      },
+      {
+        "name": "853/paired_evaluation_plans_across_conditions",
+        "passed": true,
+        "details": "matched stage/mode/episode reset and action seeds=True"
+      },
+      {
+        "name": "853/active_frozen_plus_prefix_and_after_plus_state",
+        "passed": true,
+        "details": "plus transition prefix: 2048 rows match on step, action, reward, log_prob, obs, next_obs; after_plus actor+critic exact=True"
+      },
+      {
+        "name": "853/plus_local_parameters_unchanged_during_minus",
+        "passed": true,
+        "details": "compared decoded plus local row in after_plus and after_minus for all conditions"
+      },
+      {
+        "name": "853/frozen_and_independent_plus_actions_unchanged",
+        "passed": true,
+        "details": "frozen=True; independent=True"
+      },
+      {
+        "name": "root_aggregate_interaction_ledger",
+        "passed": true,
+        "details": "recomputed={'probe_steps': 3072, 'training_steps': 12288, 'evaluation_steps': 9183, 'total_interactions': 24543}; summary={'probe_steps': 3072, 'training_steps': 12288, 'evaluation_steps': 9183, 'total_interactions': 24543}"
+      }
+    ],
+    "failed_assertions": []
+  },
+  "interpretation_boundary": "Minus goal_reached is environment termination metadata, not task success. Cold transfer (initial to after_plus) is reported separately from minus-stage adaptation (after_plus to after_minus). Results are descriptive; seeds are not treated as independent replications for significance claims."
+}

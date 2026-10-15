@@ -1,0 +1,122 @@
+{
+  "valid": true,
+  "old_reference_commit": "5979956485113ef1907675baf37137d4cb2b1604",
+  "old_data_output_files_checked": 12625,
+  "old_files_changed_or_missing": [],
+  "cohorts": [
+    {
+      "path": "outputs/knowledge_shared_write_pilot",
+      "phase": "pilot",
+      "training_steps": 49152,
+      "probe_steps": 0,
+      "evaluation_steps": 22426,
+      "total_interactions": 71578
+    },
+    {
+      "path": "outputs/knowledge_shared_write_formal",
+      "phase": "formal",
+      "training_steps": 819200,
+      "probe_steps": 0,
+      "evaluation_steps": 191452,
+      "total_interactions": 1010652
+    },
+    {
+      "path": "outputs/knowledge_shared_write_auto_pilot",
+      "phase": "pilot",
+      "training_steps": 49152,
+      "probe_steps": 12288,
+      "evaluation_steps": 24343,
+      "total_interactions": 85783
+    },
+    {
+      "path": "outputs/knowledge_shared_write_auto_formal",
+      "phase": "formal",
+      "training_steps": 491520,
+      "probe_steps": 36864,
+      "evaluation_steps": 110611,
+      "total_interactions": 638995
+    },
+    {
+      "path": "outputs/knowledge_shared_write_capacity_pilot",
+      "phase": "pilot",
+      "training_steps": 98304,
+      "probe_steps": 0,
+      "evaluation_steps": 56327,
+      "total_interactions": 154631
+    },
+    {
+      "path": "outputs/knowledge_shared_write_capacity_formal",
+      "phase": "formal",
+      "training_steps": 1179648,
+      "probe_steps": 0,
+      "evaluation_steps": 262692,
+      "total_interactions": 1442340
+    },
+    {
+      "path": "outputs/knowledge_shared_write_conflict_pilot",
+      "phase": "pilot",
+      "training_steps": 12288,
+      "probe_steps": 3072,
+      "evaluation_steps": 9183,
+      "total_interactions": 24543
+    },
+    {
+      "path": "outputs/knowledge_shared_write_conflict_formal",
+      "phase": "formal",
+      "training_steps": 147456,
+      "probe_steps": 9216,
+      "evaluation_steps": 51176,
+      "total_interactions": 207848
+    }
+  ],
+  "totals": {
+    "training_steps": 2846720,
+    "probe_steps": 61440,
+    "evaluation_steps": 728210,
+    "total_interactions": 3636370
+  },
+  "report_audits": [
+    {
+      "path": "outputs/knowledge_shared_write_pilot_report/audit.json",
+      "checks": 10,
+      "failed_assertions": []
+    },
+    {
+      "path": "outputs/knowledge_shared_write_report/audit.json",
+      "checks": 50,
+      "failed_assertions": []
+    },
+    {
+      "path": "outputs/knowledge_shared_write_auto_pilot_report/audit.json",
+      "checks": 18,
+      "failed_assertions": []
+    },
+    {
+      "path": "outputs/knowledge_shared_write_auto_report/audit.json",
+      "checks": 51,
+      "failed_assertions": []
+    },
+    {
+      "path": "outputs/knowledge_shared_write_capacity_pilot_report/audit.json",
+      "checks": 50,
+      "failed_assertions": []
+    },
+    {
+      "path": "outputs/knowledge_shared_write_capacity_report/audit.json",
+      "checks": 148,
+      "failed_assertions": []
+    },
+    {
+      "path": "outputs/knowledge_shared_write_conflict_pilot_report/report.json",
+      "checks": 42,
+      "failed_assertions": []
+    },
+    {
+      "path": "outputs/knowledge_shared_write_conflict_report/report.json",
+      "checks": 120,
+      "failed_assertions": []
+    }
+  ],
+  "total_report_checks": 489,
+  "scope": "Experiment cohorts include training, probes and evaluation. Offline replay and reports generate zero new interactions. Unit-test fixtures are outside this cohort ledger. One shared W0; controlled diagnostics, not SOTA or a completed unknown-boundary organizer."
+}
