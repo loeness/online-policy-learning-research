@@ -17,6 +17,7 @@
 
 先看当前核心报告：
 
+- [当前V2结构与算法详解](docs/KNOWLEDGE_V2_STRUCTURE_AND_ALGORITHM.md)
 - [V2：验证、算法优化及其仍未解决的问题](outputs/knowledge_v2_report/验证与优化结论.md) · [原始日志审计](outputs/knowledge_v2_report/audit.json)
 - [V2冻结规程](docs/KNOWLEDGE_V2_VALIDATION.md) · [实现复核与评分限制](docs/KNOWLEDGE_V2_IMPLEMENTATION_NOTES.md) · [终点重访设计](docs/KNOWLEDGE_V2_REVISIT.md)
 - [有界知识组织：三步结果与研究判断](outputs/knowledge_organization_report/结果与研究判断.md)

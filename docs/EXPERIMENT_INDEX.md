@@ -112,6 +112,10 @@ PPO log probabilities and GAE, held-out timing, generations, and revisit semanti
 
 ## V2 causal diagnosis and optimization (2026-10-15)
 
+For the exact current actor, router, PPO update cycle, codec consolidation and
+unimplemented parts of the original research plan, read the
+[V2 structure and algorithm description](KNOWLEDGE_V2_STRUCTURE_AND_ALGORITHM.md).
+
 Read [the full V2 report](../outputs/knowledge_v2_report/验证与优化结论.md),
 [frozen protocol](KNOWLEDGE_V2_VALIDATION.md),
 [implementation review](KNOWLEDGE_V2_IMPLEMENTATION_NOTES.md), and
