@@ -1,0 +1,75 @@
+{
+  "created_utc": "2026-10-15T05:48:38Z",
+  "scope": "experimenter-isolated C1 local update and cross-context transfer diagnostic",
+  "smoke_test": false,
+  "formal_protocol_defaults": true,
+  "protocol_git_commit": "e8d715ae3d4a85173d0df3c80e90674780dc8a31",
+  "git_head_at_launch": "e4515be40e3d808743123631f062efc3fdfb8425",
+  "protocol_sha256": "1b531b6d85bd388cb7105fc93ca63f3799f53fa1ba7fe44c2a78e30a0be230f5",
+  "input_sha256": {
+    "docs\\PRE_CORE_VALIDATION_PROTOCOL.md": "1b531b6d85bd388cb7105fc93ca63f3799f53fa1ba7fe44c2a78e30a0be230f5",
+    "configs\\c1.json": "7e24e002dfcc80809e28c4d6f97d42ec5a7ad1055752eb8a56742ae3275ebde0",
+    "configs\\c1_supplement.json": "be47e6f672372779fd4512a9b8969fa8eafd8b7d2007eed7968a25d0b83322f9",
+    "data\\foundation.pt": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+    "requirements-lock.txt": "89c4076b219734a0048c6c9a3d292be8aa42bb6325859e57e7b139ac4ca475ef",
+    "src\\online_rl\\c1_envs.py": "d02e46b65b7edfef1d0219116a2429e7dca139c8f6ffb14e4f9d8418cf642a55",
+    "src\\online_rl\\c1_experiment.py": "5fa3e166d91c1043c124b9a842607c6e54b5f23d15af4453bdf2b11abceb04c7",
+    "src\\online_rl\\c1_policy.py": "371fc881e960c63c01e0ae71c27b7fa22462e1b4985f8efd8c6862388ab2fb14",
+    "src\\online_rl\\c1_tensor_controls.py": "727f1b4fa80c76b7d516ec6a4d95255ec58566b0c487340f6c9855ddc1accfae",
+    "src\\online_rl\\c1_tensor_experiment.py": "d27ffb8fb2fdd7e74d952ecf39ab5fe5e44b0bf0da3f2b88baa282d5c144e513",
+    "src\\online_rl\\compression.py": "bc62a863b5ddafeb8deb39b2c1a4b4b0aaf98313d60083249fc4bf9572944a7a",
+    "src\\online_rl\\compression_experiment.py": "1554310a96a560d36da8a8dd4ea314d3aad2105e2c800e88c0c3e26c95fec565",
+    "src\\online_rl\\experiment.py": "1bf23a99f1ca62efe0bb0b8c5c67495b932b1c21a622e97ffc97e0c8269e0acc",
+    "scripts\\run_pre_core_p0.py": "cb3ed0510e8ea1c95b46dfd61c48f6f557f8042696f2fd81a862585be7d2e983"
+  },
+  "environment": {
+    "python": "3.12.13 (main, Apr 14 2026, 14:31:26) [MSC v.1944 64 bit (AMD64)]",
+    "torch": "2.8.0+cpu",
+    "torch_cuda_available": false,
+    "torch_device": "cpu",
+    "torch_threads": 1,
+    "stable_baselines3": "2.8.0",
+    "gymnasium": "1.2.2",
+    "numpy": "2.5.4"
+  },
+  "diagnostic_boundaries": [
+    "one existing pretrained W0 foundation",
+    "context label selects only the fixed simulator during training and the target during evaluation",
+    "policy observations always use route 1 and never contain context or family labels",
+    "no context transition map, expert actions, or hidden context features enter policy updates",
+    "all six output_mixer slots are allocated; only route 1 is active and inactive slots are recorded",
+    "results do not measure task-free discovery, dynamic structure, or a budget advantage"
+  ],
+  "parameters": {
+    "seeds": [
+      271,
+      283,
+      307
+    ],
+    "sources": [
+      "A0",
+      "A1",
+      "A2",
+      "B0",
+      "B1",
+      "B2"
+    ],
+    "targets": [
+      "A0",
+      "A1",
+      "A2",
+      "B0",
+      "B1",
+      "B2"
+    ],
+    "train_steps_per_source_seed": 4096,
+    "evaluation_episodes_per_source_target_seed": 32,
+    "max_episode_steps": 64,
+    "route": 1,
+    "method": "output_mixer",
+    "learning_rate": 0.003,
+    "ent_coef": 0.06,
+    "temperature": 2.0,
+    "exploration_epsilon": 0.05
+  }
+}

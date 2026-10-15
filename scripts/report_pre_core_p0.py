@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 from pathlib import Path
@@ -90,6 +91,9 @@ def report(root: Path):
         scatter.append((gradient[offdiag], transfer[offdiag], same_family[offdiag]))
 
     mean_transfer = np.mean(transfer_matrices, axis=0)
+    self_transfers = [row for row in summary["transfer_summary"]["rows"] if row["source"] == row["target"]]
+    with (root / "baseline_episodes.csv").open(encoding="utf-8", newline="") as handle:
+        baseline_rows = list(csv.DictReader(handle))
     result = {
         "scope": "P0 descriptive association, one W0; no task-free discovery, capacity savings, or significance claim",
         "names": NAMES, "per_seed": per_seed,
@@ -101,6 +105,10 @@ def report(root: Path):
         "mean_other_family_gain": float(np.mean([row["mean_other_family_gain"] for row in rows])),
         "offdiag_positive_cells": sum(row["offdiag_positive"] for row in rows),
         "offdiag_negative_cells": sum(row["offdiag_negative"] for row in rows),
+        "baseline_mean_success": float(np.mean([int(row["success"]) for row in baseline_rows])),
+        "self_mean_success": float(np.mean([row["success_rate"] for row in self_transfers])),
+        "self_min_success": min(row["success_rate"] for row in self_transfers),
+        "self_max_success": max(row["success_rate"] for row in self_transfers),
         "summary_sha256": hashlib.sha256((root / "summary.json").read_bytes()).hexdigest(),
     }
     (root / "analysis.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -137,7 +145,8 @@ def report(root: Path):
     text += "## 固定规程与实际开销\n\n"
     text += f"3 部署种子×6 独立训练×4,096 PPO 步；每个目标配对32个完整回合。训练 {summary['training_interactions']:,} 步，基线评估 {summary['baseline_evaluation_interactions']:,} 步，候选评估 {summary['candidate_evaluation_interactions']:,} 步，总计 {summary['actual_total_interactions']:,} 实际仿真步。运行墙钟 {summary['elapsed_wall_s']:.2f} 秒，进程 CPU {summary['elapsed_process_cpu_s']:.2f} 秒（不含 Python 导入）。\n\n"
     text += "## 观测结果\n\n" + "\n".join(table) + "\n\n"
-    text += f"自身改善 {result['self_positive_runs']}/18；90个非对角单元中，正观测迁移 {result['offdiag_positive_cells']}，负观测迁移 {result['offdiag_negative_cells']}。同家族/跨家族是分析者事后按预声明标签汇总，不进入训练。梯度/修正相关是每个种子30个依赖单元的 Pearson 描述性相关，不提供独立样本显著性。\n\n"
+    text += f"自身改善 {result['self_positive_runs']}/18；90个非对角单元中，正观测迁移 {result['offdiag_positive_cells']}，负观测迁移 {result['offdiag_negative_cells']}。同家族/跨家族由分析者在运行后按事先固定的标签汇总，不进入训练。梯度/修正相关是每个种子30个依赖单元的 Pearson 描述性相关，不提供独立样本显著性。\n\n"
+    text += f"**绝对表现仍有限**：匹配温度/探索的零修正基线成功率均值 {result['baseline_mean_success']:.2%}，自身更新后 {result['self_mean_success']:.2%}，逐运行范围 {result['self_min_success']:.1%}–{result['self_max_success']:.1%}。这说明4,096步内有改善，不代表已经学会任务；所有运行仍低于原C1的80%参考目标（该目标不是本P0事后追加的通过门槛）。\n\n"
     text += "### 正 cosine 仍对应负观测迁移的单元\n\n"
     for row in rows:
         g = row["positive_cos_negative_observed_gain"]["gradient"]

@@ -102,3 +102,38 @@ bank in hidden history, larger full-reference budgets, and a favorable source
 output span. No dynamic tree, from-zero latent-context discovery, full-capacity
 replacement, calibrated policy-improvement gate, standard benchmark SOTA claim
 or C2/C3 execution. See `C1_SUPPLEMENT_CONCLUSIONS.md` and both full reports.
+
+## P0 pre-core transfer diagnostic (2026-10-15)
+
+The P0 protocol was frozen in commit `e8d715a` before formal results. All 18
+independent 4,096-step local PPO branches and 108 source-target evaluation
+batches completed. The formal ledger records 73,728 training and 235,623
+evaluation interactions, totaling 309,351; the reduced smoke run has 1,772
+separate interactions. Six focused pairing/route tests passed. All runs share
+one W0, fixed source-output coordinates and experimenter-isolated contexts;
+they do not implement automatic discovery or a C2 agent.
+
+**Positive but limited signal:** All 18 local updates improved their own paired
+mean episode return. Same-family off-diagonal transfer averaged +0.621 return
+per episode; other-family transfer averaged -0.113. Across 90 dependent
+off-diagonal cells, 51 had positive observed gains and 39 negative. This is
+descriptive evidence for selective reuse within this generator, not a
+statistically powered discovery of a universal sharing relation.
+
+**Incomplete learning and weak early signals retained:** Own-context success
+rose from a matched zero-correction average of 9.03% to 34.38%, with trained
+run success only 12.5%–75%. None reached the old C1 80% reference; this was not
+a new P0 acceptance threshold. First-rollout gradient cosine correlated with
+finite-update transfer at 0.582, 0.686 and 0.096 for seeds 271/283/307. There
+were 16 negative observed transfers among 58 positive-gradient-cosine cells.
+Those are noisy observed outcomes, not calibrated false-accept probabilities.
+The 4,096-step correction-cosine associations were stronger (0.811, 0.838,
+0.698) but required actually obtaining each local update. No real byte-saving
+consolidation, online policy-improvement gate, no-label stream discovery, or
+independent pretraining checkpoint comparison has been established.
+
+Full artifacts: `outputs/pre_core_p0/结果解读.md`, `analysis.json`, `summary.json`,
+paired episode CSVs, all branch checkpoints, gradients and provenance. Old
+experiment outputs remain unchanged. Formal CPU time was 126.52 seconds and
+wall time 129.90 seconds excluding imports; no CPU/GPU speed comparison is
+claimed.

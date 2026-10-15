@@ -25,6 +25,10 @@
 - [C1 三项补齐报告](outputs/c1_supplement/结果解读.md)
 - [更紧凑表示与更强全参数控制](outputs/c1_supplement/alternative_results.md)
 - [补齐后的研究判断](docs/C1_SUPPLEMENT_CONCLUSIONS.md)
+- [自动知识组织前需要明确的定义与猜想](docs/PRE_CORE_VALIDATION_PROTOCOL.md)
+- [P0：独立局部学习与跨情境迁移诊断](outputs/pre_core_p0/结果解读.md)
+
+P0 是 C1 后的隔离机制诊断：在统一修正坐标内学习，再由研究者交叉评估迁移；不是 C2、无标签结构发现或满容量整合。规程在正式运行前单独提交；原 A/B/C1 结果未重跑。
 
 这些是受控导航任务的探索性结果。三个部署种子共用同一预训练权重；C1 主要比较使用真值路由，隐藏标签续训使用此前有标签校准的原型。与 AMAGO、离线转在线算法等仅作相关工作分析，不能解释为在其标准基准上击败 SOTA。
 

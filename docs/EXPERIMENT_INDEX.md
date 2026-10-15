@@ -1,6 +1,6 @@
 # Experiment index
 
-This index covers the archived A, B, B+, compression, original C1 and C1 supplemental work. The archive preserves exploratory runs, failed validation attempts, intermediate checkpoints, and negative results. C2 and later phases are outside the archive and are not implemented here.
+This index covers the archived A, B, B+, compression, original C1, C1 supplemental work, and the subsequent isolated P0 diagnostic. The archive preserves exploratory runs, failed validation attempts, intermediate checkpoints, and negative results. C2 and later phases are outside the archive and are not implemented here.
 
 ## Read first
 
@@ -74,3 +74,19 @@ The shared W0 checkpoint is not a per-seed pretraining cohort: A/B deployment se
 ## Research design after C1
 
 [Online knowledge-structure design](ONLINE_KNOWLEDGE_STRUCTURE_DESIGN.md) reviews existing tree/modular RL, identifies overlap, and proposes falsifiable shared-write, consolidation and fixed-budget decisions. It is literature and algorithm design, with no new experiments and no C2/C3 results.
+
+### P0: pre-core transfer diagnostic
+
+[Frozen protocol and hypothesis gates](PRE_CORE_VALIDATION_PROTOCOL.md) separates
+the definitions required before automatic organization from hypotheses to test.
+The protocol was committed as `e8d715a` before formal P0 launch. The separate
+[P0 report](../outputs/pre_core_p0/结果解读.md) describes 18 independent local PPO
+updates (3 deployment seeds × 6 contexts), each applied unchanged to six targets
+with constant route 1 and paired 32-episode evaluation streams. The initial
+gradient and final correction vectors share the same 27-dimensional coordinates.
+All runs use one W0 and its favorable frozen source-output basis. Contexts are
+isolated by the experimenter; no family ID enters training. P0 is not a task-free
+learner, dynamic-structure method, capacity-consolidation result, or C2 launch.
+Raw episodes, all checkpoints, provenance, and actual interaction accounting
+are under `outputs/pre_core_p0`; a reduced software smoke run is separately
+retained in `outputs/pre_core_p0_smoke` and excluded from the formal cohort.
