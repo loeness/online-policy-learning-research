@@ -90,6 +90,60 @@ def _logits(core, obs):
         return core.get_distribution(obs).distribution.logits.detach().clone()
 
 
+def test_real_anchor_bank_old_route_reaches_gate_with_scalar_generation(agent_factory):
+    """Exercise the live bank-to-gate path, rather than a hand-built evidence dict."""
+    agent, _, config, _ = agent_factory()
+    config = {**config, "gate_gain": -100.0, "gate_kl": 100.0, "min_ess": 1}
+    for slot in (0, 1):
+        agent.core.set_slot_group(slot, 0, preserve_effective=False)
+        agent.slot_generation[slot] = 1
+
+    def rows_for(slot):
+        rows = []
+        for index in range(24):
+            obs = np.zeros(13, dtype=np.float32)
+            obs[-1] = slot + 1
+            rows.append(SimpleNamespace(
+                obs=obs, action=index % 4, log_prob=math.log(0.25),
+                probabilities=np.full(4, 0.25, dtype=np.float32),
+                advantage=float(index % 4 == 0), returns=0.0,
+                generation=1, episode_id=slot * 10 + index // 12,
+            ))
+        return rows
+
+    agent.anchors.add(1, 1, rows_for(1))
+    cycle = {
+        "slot": 0, "task_name": "A0+", "a_start": np.zeros((3, 3, 3)),
+        "c_start": np.zeros((3, 3)), "fit_band_counts": np.ones(3),
+    }
+    with torch.no_grad():
+        agent.core._shared_coefficients[0].C.fill_(0.001)
+    result = runner.finish_cycle(agent, cycle, rows_for(0), config)
+    assert result["old_anchor_references"] == [{"slot": 1, "generation": 1, "rows": 24}]
+    assert result["gate"]["old_slots"][0]["generation"] == 1
+
+
+def test_int8_live_commit_equals_the_saved_deployment_actor(agent_factory, tmp_path):
+    agent, base, config, _ = agent_factory(condition="reward_shared")
+    config = {**config, "actor_codec": "int8", "actor_budget_bytes": 236}
+    agent.run_config = config
+    rng = np.random.default_rng(712)
+    agent.core.install_local_matrix(rng.normal(size=(6, 27)).astype(np.float32))
+    agent.core.install_shared_matrix(rng.normal(size=(2, 9)).astype(np.float32))
+    cycle = {"slot": 0, "task_name": "A0+"}
+    result = runner.finish_cycle(agent, cycle, [], config)
+    assert result["actor_codec"] == "int8"
+    assert result["serialization_max_coefficient_error"] > 0
+    path = tmp_path / "deployment.pt"
+    runner.save_checkpoint(agent, path, runner._sha(Path(base["foundation"])))
+    payload = torch.load(path, weights_only=False)
+    local, shared, groups = runner.decode_actor(payload["actor_binary"])
+    live = runner._actor_arrays(agent.core)
+    assert np.array_equal(local, live[0])
+    assert np.array_equal(shared, live[1])
+    assert np.array_equal(groups, live[2])
+
+
 def test_compensated_candidate_and_rejection_keep_current_logits_and_other_group(agent_factory):
     agent, _, _, _ = agent_factory()
     core = agent.core

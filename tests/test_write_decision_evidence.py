@@ -97,6 +97,48 @@ def _conditional_reward_profiles():
     return window_x.profile(), window_constant.profile()
 
 
+def _profile_with_reward_model(
+    *,
+    sign: float = 1.0,
+    terminal_coef: float = 0.0,
+    observe_terminal: bool = True,
+    repeats: int = 4,
+):
+    """Build real transition samples with balanced movement and termination."""
+
+    window = EvidenceWindow(4 * repeats)
+    for action, (dx, dy) in _DIRECTIONS.items():
+        x, y = 4, 4
+        next_x, next_y = x + dx, y + dy
+        for repeat in range(repeats):
+            pattern = repeat % 4
+            toward = pattern in (0, 2)
+            goal_x, goal_y = (next_x, next_y) if toward else (x, y)
+            obs = _observation(x, y, goal_x, goal_y)
+            next_obs = _observation(next_x, next_y, goal_x, goal_y)
+            current_distance = abs(x - goal_x) + abs(y - goal_y)
+            next_distance = abs(next_x - goal_x) + abs(next_y - goal_y)
+            delta_distance = float((current_distance - next_distance) * 8)
+            terminated = bool(observe_terminal and pattern in (0, 1))
+            reward = sign * (0.1 * delta_distance + 2.0 + terminal_coef * float(terminated))
+            window.observe(obs, action, reward, next_obs, terminated)
+    return window.profile()
+
+
+def _rank_deficient_reward_profile():
+    window = EvidenceWindow(16)
+    for action, (dx, dy) in _DIRECTIONS.items():
+        x, y = 4, 4
+        next_x, next_y = x + dx, y + dy
+        for _ in range(4):
+            # Every row has the same reward movement feature (+8), making it
+            # collinear with the intercept despite nonzero diagonal support.
+            obs = _observation(x, y, next_x, next_y)
+            next_obs = _observation(next_x, next_y, next_x, next_y)
+            window.observe(obs, action, 2.8, next_obs, False)
+    return window.profile()
+
+
 def test_same_transition_map_with_opposite_reward_is_split_by_reward_evidence() -> None:
     cells = [(band, action, action) for band in range(2) for action in range(2)]
     positive, _ = _profile_for_cells(cells, repeats=4, reward_fn=lambda features: 0.2 * features[0] + 0.5)
@@ -123,6 +165,97 @@ def test_conditional_reward_fit_separates_equal_mean_streams() -> None:
     assert result.reason == "reward_mismatch"
     assert result.scores[0]["agreement"] == 1.0
     assert result.scores[0]["reward_cosine"] < 0.5
+
+
+def test_support_aware_reward_similarity_drops_unobserved_terminal_feature() -> None:
+    full = _profile_with_reward_model(terminal_coef=0.0, observe_terminal=True)
+    no_terminal = _profile_with_reward_model(observe_terminal=False)
+    groups = RewardAwareGroups(reward_support_aware=True)
+
+    assert groups.assign(full).group == 0
+    restored = RewardAwareGroups.from_state_dict(groups.state_dict())
+    assert restored.config == groups.config
+    assert restored.reward_support_aware is True
+    result = groups.assign(no_terminal, commit=False)
+    restored_result = restored.assign(no_terminal, commit=False)
+
+    assert result.group == 0 and result.reason == "matched"
+    assert restored_result == result
+    score = result.scores[0]
+    assert score["compared_feature_count"] == 2
+    assert score["compared_feature_mask"] == 0b011
+    assert score["dropped_unsupported_terminal"] == 1
+    assert score["reward_comparable"] == 1
+    assert score["reward_cosine"] >= 0.5
+
+
+def test_support_aware_opposite_reward_needs_observed_terminal_support() -> None:
+    positive = _profile_with_reward_model(sign=1.0, terminal_coef=0.2)
+    negative = _profile_with_reward_model(sign=-1.0, terminal_coef=0.2)
+    groups = RewardAwareGroups(reward_support_aware=True)
+
+    assert groups.assign(positive).group == 0
+    opposite = groups.assign(negative)
+    assert opposite.group == 1 and opposite.reason == "opposite_reward_group"
+    assert opposite.scores[0]["compared_feature_count"] == 3
+    assert opposite.scores[0]["compared_feature_mask"] == 0b111
+    assert opposite.scores[0]["dropped_unsupported_terminal"] == 0
+    assert opposite.scores[0]["reward_cosine"] <= -0.99
+
+
+def test_support_aware_no_terminal_profiles_compare_only_observed_features() -> None:
+    first = _profile_with_reward_model(terminal_coef=0.0, observe_terminal=False)
+    second = _profile_with_reward_model(terminal_coef=0.0, observe_terminal=False)
+    groups = RewardAwareGroups(reward_support_aware=True)
+
+    assert groups.assign(first).group == 0
+    result = groups.assign(second, commit=False)
+    assert result.group == 0 and result.reason == "matched"
+    assert result.scores[0]["compared_feature_count"] == 2
+    assert result.scores[0]["dropped_unsupported_terminal"] == 1
+
+
+def test_support_aware_low_reward_support_abstains_without_new_group() -> None:
+    full = _profile_with_reward_model(sign=1.0, repeats=4)
+    low_support_opposite = _profile_with_reward_model(sign=-1.0, repeats=2)
+    groups = RewardAwareGroups(reward_support_aware=True)
+
+    assert groups.assign(full).group == 0
+    result = groups.assign(low_support_opposite)
+    assert result.group == -1 and result.reason == "insufficient_reward_support"
+    assert groups.active_groups == (0,)
+
+
+def test_support_aware_rank_deficient_required_features_abstain() -> None:
+    profile = _rank_deficient_reward_profile()
+    groups = RewardAwareGroups(reward_support_aware=True)
+    assert groups.assign(profile).group == 0
+
+    result = groups.assign(profile, commit=False)
+    assert result.group == -1
+    assert result.reason == "insufficient_reward_identifiability"
+    assert result.scores[0]["compared_feature_count"] == 2
+    assert result.scores[0]["compared_feature_mask"] == 0b011
+    assert result.scores[0]["rank_identifiable"] == 0
+    assert result.scores[0]["reward_comparable"] == 0
+
+
+def test_support_aware_terminal_mismatch_without_observation_is_uncertain() -> None:
+    # This sample has no terminal feature observations, so a hypothetical
+    # terminal coefficient cannot be inferred from its zero XTy entry.
+    terminal_observed = _profile_with_reward_model(terminal_coef=0.1, observe_terminal=True)
+    terminal_unobserved = _profile_with_reward_model(
+        terminal_coef=-0.2, observe_terminal=False
+    )
+    groups = RewardAwareGroups(reward_support_aware=True)
+
+    assert groups.assign(terminal_observed).group == 0
+    result = groups.assign(terminal_unobserved, commit=False)
+    assert result.group == 0 and result.reason == "matched"
+    score = result.scores[0]
+    assert score["compared_feature_mask"] == 0b011
+    assert score["dropped_unsupported_terminal"] == 1
+    assert score["compared_feature_count"] == 2
 
 
 def test_insufficient_support_ambiguous_match_and_full_capacity_abstain() -> None:
@@ -198,6 +331,28 @@ def test_window_and_group_numeric_state_round_trip_and_validate() -> None:
     bad["reward_xty"] = bad["reward_xty"].astype(np.float64)
     with pytest.raises(ValueError, match="reward_xty"):
         RewardAwareGroups.from_state_dict(bad)
+
+
+def test_default_group_mode_state_restore_preserves_legacy_assignment_output() -> None:
+    first = _profile_with_reward_model(sign=1.0, terminal_coef=0.0)
+    opposite = _profile_with_reward_model(sign=-1.0, terminal_coef=0.0)
+    groups = RewardAwareGroups()
+    assert groups.reward_support_aware is False
+    groups.assign(first)
+    state = groups.state_dict()
+
+    restored = RewardAwareGroups.from_state_dict(state)
+    legacy_state = groups.state_dict()
+    legacy_state["config"].pop("reward_support_aware")
+    restored_legacy = RewardAwareGroups.from_state_dict(legacy_state)
+    expected = groups.assign(opposite, commit=False)
+
+    for candidate in (restored, restored_legacy):
+        actual = candidate.assign(opposite, commit=False)
+        assert actual.group == expected.group
+        assert actual.reason == expected.reason
+        assert actual.scores == expected.scores
+        assert candidate.reward_support_aware is False
 
 
 def test_window_ring_is_fixed_capacity_and_rejects_invalid_state_counts() -> None:

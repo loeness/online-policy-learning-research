@@ -268,7 +268,10 @@ def _make_agent(
             per_slot=int(config["anchors_per_slot"]),
             seed=seed + 779,
         ),
-        grouper=RewardAwareGroups(max_groups=2, mode=mode),
+        grouper=RewardAwareGroups(
+            max_groups=2, mode=mode,
+            reward_support_aware=bool(config.get("reward_support_aware", False)),
+        ),
         profiles=profiles,
         profile_reasons=["not_profiled"] * 6,
         counts=counts,
@@ -534,13 +537,15 @@ def _anchor_rows(rows: Sequence[Any]) -> list[dict[str, Any]]:
 
 def _old_group_evidence(agent, group: int, current_slot: int) -> list[dict[str, Any]]:
     evidence = []
-    for slot in range(6):
+    for slot in range(len(agent.slot_generation)):
         if slot == current_slot or agent.core.group_for_slot(slot) != group:
             continue
         generation = int(agent.slot_generation[slot])
         rows = agent.anchors.arrays(slot, generation)
         if len(rows["action"]):
-            evidence.append({"slot": slot, "generation": generation, **rows})
+            # Anchor arrays also contain one generation per row. The group
+            # evidence metadata is the scalar slot generation, not that array.
+            evidence.append({**rows, "slot": slot, "generation": generation})
     return evidence
 
 
@@ -922,10 +927,24 @@ def score_candidate(agent, **kwargs) -> dict[str, Any]:
 
 
 def _reset_actor_optimizer(agent) -> None:
-    parameters = [agent.core._nodes[str(slot + 1)].A for slot in range(6)]
+    parameters = [agent.core._nodes[str(slot + 1)].A for slot in range(len(agent.slot_generation))]
     parameters.extend(agent.core.shared_parameters())
     for parameter in parameters:
         agent.optimizer.state.pop(parameter, None)
+
+
+def roundtrip_actor(agent, config: Mapping[str, Any]) -> dict[str, Any]:
+    """Install exactly the bounded actor representation used at persistence."""
+    local, shared, groups = _actor_arrays(agent.core)
+    codec = str(config.get("actor_codec", "float32"))
+    encoded = encode_actor(local, shared, groups, codec=codec,
+                           budget_bytes=int(config["actor_budget_bytes"]))
+    a, c, g = decode_actor(encoded.data)
+    error = max(float(np.max(np.abs(a - local), initial=0)),
+                float(np.max(np.abs(c - shared), initial=0)))
+    _install_actor_arrays(agent.core, a, c, g)
+    return {"actor_codec": codec, "deployed_actor_bytes": encoded.nbytes,
+            "serialization_max_coefficient_error": error}
 
 
 def _finish_cycle(
@@ -964,6 +983,9 @@ def _finish_cycle(
             current_policy_preserved=True,
         )
         agent.counts["direct_commit_count"] += 1
+        record.update(roundtrip_actor(agent, config))
+        record["current_policy_preserved_before_serialization"] = True
+        record["current_policy_preserved"] = record["serialization_max_coefficient_error"] == 0
         _reset_actor_optimizer(agent)
         record["decision_cpu_s"] = time.process_time() - started
         agent.decision_cpu_s += record["decision_cpu_s"]
@@ -977,6 +999,9 @@ def _finish_cycle(
         record["counters"] = _record_gate_count(agent, accepted=False)
         if condition == "trial_rollback":
             agent.counts["trial_rollback_count"] += 1
+        record.update(roundtrip_actor(agent, config))
+        record["current_policy_preserved_before_serialization"] = True
+        record["current_policy_preserved"] = record["serialization_max_coefficient_error"] == 0
         _reset_actor_optimizer(agent)
         record["decision_cpu_s"] = time.process_time() - started
         agent.decision_cpu_s += record["decision_cpu_s"]
@@ -1048,10 +1073,12 @@ def _finish_cycle(
         candidate_local,
         candidate_shared,
         current_groups,
-        codec="float32",
+        codec=str(config.get("actor_codec", "float32")),
         budget_bytes=int(config["actor_budget_bytes"]),
     )
     decoded_local, decoded_shared, decoded_groups = decode_actor(encoded.data)
+    c_proposal = decoded_shared[group].reshape(3, 3).copy()
+    applied_delta = np.asarray(c_proposal - c_start, dtype=np.float32)
     evidence_partition = (
         _partition_evidence_report(
             agent, decoded_local, decoded_shared, reference_evidence, gate_evidence
@@ -1080,6 +1107,8 @@ def _finish_cycle(
     accepted = False
     if condition == "trial_rollback":
         reason = "trial_rollback_control"
+    elif not holdout_rows:
+        reason = "no_fresh_holdout_local_preserved"
     elif condition == "projected_gate" and projection_record is not None and not projection_record["satisfied"]:
         reason = "projection_infeasible"
     else:
@@ -1138,6 +1167,12 @@ def _finish_cycle(
             "trial_rollback": int(agent.counts["trial_rollback_count"]),
         },
     })
+    record.update(roundtrip_actor(agent, config))
+    record["current_policy_preserved_before_serialization"] = True
+    record["current_policy_preserved"] = (
+        str(config.get("actor_codec", "float32")) == "float32"
+        and record["serialization_max_coefficient_error"] == 0
+    )
     _reset_actor_optimizer(agent)
     record["decision_cpu_s"] = time.process_time() - started
     agent.decision_cpu_s += record["decision_cpu_s"]
@@ -1300,7 +1335,7 @@ def _optimizer_tensor_bytes(value: Any) -> int:
 def _checkpoint_payload(agent, foundation_sha: str) -> dict[str, Any]:
     local, shared, groups = _actor_arrays(agent.core)
     actor = encode_actor(
-        local, shared, groups, codec="float32",
+        local, shared, groups, codec=str(agent.run_config.get("actor_codec", "float32")),
         budget_bytes=int(agent.run_config["actor_budget_bytes"]),
     )
     return {

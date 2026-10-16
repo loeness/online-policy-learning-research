@@ -103,3 +103,28 @@ harm; a current cold gain above 0.05 with no audited old harm labels an audited
 benefit, only when old targets exist. These are descriptive small-sample
 diagnostic labels, not ground-truth safety/error-rate guarantees. Unsampled
 decisions remain undetermined.
+
+## Repaired validation revision, frozen before its interactions
+
+The first implementation cohort is retained under
+`outputs/write_decision_validation/FAILED_COHORT.json`: 16 attempted cells,
+9 complete, and 392,671 raw interactions (267,264 training, 22,016 probing,
+103,391 evaluation). Three gated conditions encountered a scalar-generation
+metadata collision when real old-route anchor arrays were scored. A regression
+test now exercises the actual AnchorBank-to-gate path.
+
+That cohort also revealed false reward mismatches: absence of terminal reward
+observations yielded a zero fitted terminal coefficient, which the full-vector
+cosine treated as a disagreement. The separate supported revision uses
+`configs/write_decision_supported.json` and `scripts/run_write_supported.py`.
+It compares only identifiable features supported by both profiles, while
+requiring an identifiable movement/intercept subspace. Missing terminal evidence
+does not verify terminal reward compatibility. The old mode remains available
+and unchanged by default. Validation seeds may be reused for this repair;
+formal seeds remain unused. Failed/cohort-revision results are not pooled.
+
+The stream runner uses `actor_codec=int8`: candidate validation and the next
+deployed actor both use its decoded bounded representation. All arms roundtrip
+at commit, including direct joint updates and local-preserving rejections.
+Quantization can perturb the otherwise algebraically preserved current policy;
+coefficient error is recorded separately from pre-serialization preservation.

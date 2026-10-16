@@ -33,6 +33,7 @@ _MIN_AGREEMENT = 0.6
 _NOVELTY_MAX_AGREEMENT = 0.3
 _MIN_REWARD_COSINE = 0.5
 _OPPOSITE_REWARD_COSINE = -0.5
+_MIN_NORMALIZED_GRAM_EIGENVALUE = 1e-6
 
 
 @dataclass(frozen=True)
@@ -355,6 +356,20 @@ def _reward_cosine(first: np.ndarray, second: np.ndarray) -> float:
     return float(np.clip(value, -1.0, 1.0))
 
 
+def _gram_identifiable(xtx: np.ndarray, features: np.ndarray) -> bool:
+    """Check whether a selected feature subspace has independent support."""
+
+    indices = np.asarray(features, dtype=np.int64)
+    gram = np.asarray(xtx, dtype=np.float64)[np.ix_(indices, indices)]
+    diagonal = np.diag(gram)
+    if not np.isfinite(gram).all() or np.any(diagonal <= 0.0):
+        return False
+    scales = np.sqrt(diagonal)
+    normalized = gram / np.outer(scales, scales)
+    minimum_eigenvalue = float(np.linalg.eigvalsh(normalized).min())
+    return minimum_eigenvalue >= _MIN_NORMALIZED_GRAM_EIGENVALUE
+
+
 class RewardAwareGroups:
     """Assign evidence to at most two groups using dynamics and reward fit."""
 
@@ -364,6 +379,7 @@ class RewardAwareGroups:
         min_support: int = 8,
         reward_min_samples: int = 16,
         mode: str = "reward",
+        reward_support_aware: bool = False,
     ) -> None:
         if isinstance(max_groups, bool):
             raise ValueError("max_groups must be one or two")
@@ -379,8 +395,11 @@ class RewardAwareGroups:
         )
         if mode not in ("reward", "dynamics"):
             raise ValueError("mode must be 'reward' or 'dynamics'")
+        if not isinstance(reward_support_aware, (bool, np.bool_)):
+            raise ValueError("reward_support_aware must be a boolean")
         self.max_groups = int(group_limit)
         self.mode = mode
+        self.reward_support_aware = bool(reward_support_aware)
         self._movement_counts = np.zeros((self.max_groups, *PROFILE_SHAPE), dtype=np.uint16)
         self._reward_xtx = np.zeros((self.max_groups, _FEATURES, _FEATURES), dtype=np.float32)
         self._reward_xty = np.zeros((self.max_groups, _FEATURES), dtype=np.float32)
@@ -388,12 +407,13 @@ class RewardAwareGroups:
         self._active = np.zeros(self.max_groups, dtype=np.uint8)
 
     @property
-    def config(self) -> dict[str, int | str]:
+    def config(self) -> dict[str, int | str | bool]:
         return {
             "max_groups": self.max_groups,
             "min_support": self.min_support,
             "reward_min_samples": self.reward_min_samples,
             "mode": self.mode,
+            "reward_support_aware": self.reward_support_aware,
         }
 
     @property
@@ -427,6 +447,88 @@ class RewardAwareGroups:
             return 0, 0.0
         agreement = int(np.count_nonzero(incoming[overlap_mask] == aggregate[overlap_mask]))
         return overlap, agreement / overlap
+
+    def _reward_similarity(
+        self,
+        xtx: np.ndarray,
+        xty: np.ndarray,
+        other_xtx: np.ndarray,
+        other_xty: np.ndarray,
+    ) -> dict[str, int | float]:
+        """Compare reward fits, optionally dropping unsupported features.
+
+        Feature bit 0 is movement delta, bit 1 is the intercept, and bit 2 is
+        termination. In support-aware mode, movement and intercept must each
+        have at least two observations in both profiles and a full-rank
+        normalized Gram subspace. Termination is compared only when both
+        profiles have seen it at least twice and identify the complete fit.
+        """
+
+        if not self.reward_support_aware:
+            cosine = _reward_cosine(_fit_coefficients(xtx, xty), _fit_coefficients(other_xtx, other_xty))
+            return {"reward_cosine": cosine}
+
+        first_gram = np.asarray(xtx, dtype=np.float64)
+        other_gram = np.asarray(other_xtx, dtype=np.float64)
+        first_support = np.diag(first_gram) >= 2.0
+        other_support = np.diag(other_gram) >= 2.0
+        mask = first_support & other_support
+        mask_value = sum((1 << index) for index, supported in enumerate(mask) if supported)
+        common = np.flatnonzero(mask)
+        required_supported = bool(mask[0] and mask[1])
+        dropped_terminal = int(not bool(mask[2]))
+        if not required_supported:
+            return {
+                "reward_cosine": 0.0,
+                "compared_feature_count": int(common.size),
+                "compared_feature_mask": int(mask_value),
+                "dropped_unsupported_terminal": dropped_terminal,
+                "rank_identifiable": 0,
+                "reward_comparable": 0,
+            }
+
+        required = np.asarray((0, 1), dtype=np.int64)
+        rank_identifiable = _gram_identifiable(first_gram, required) and _gram_identifiable(
+            other_gram, required
+        )
+        # If a profile has terminal observations, its complete fitted model
+        # must identify that term before its movement/intercept coefficients
+        # can be compared safely. A profile with no terminal observations has
+        # a zero terminal column; its supported 2-D model remains identifiable.
+        for gram, has_terminal_support in (
+            (first_gram, bool(first_support[2])),
+            (other_gram, bool(other_support[2])),
+        ):
+            if has_terminal_support:
+                full_features = np.asarray((0, 1, 2), dtype=np.int64)
+                rank_identifiable = rank_identifiable and _gram_identifiable(gram, full_features)
+        if not rank_identifiable:
+            return {
+                "reward_cosine": 0.0,
+                "compared_feature_count": int(common.size),
+                "compared_feature_mask": int(mask_value),
+                "dropped_unsupported_terminal": dropped_terminal,
+                "rank_identifiable": 0,
+                "reward_comparable": 0,
+            }
+
+        # Fit all visible features, then compare only the common supported
+        # subspace. This avoids folding an observed terminal effect into the
+        # intercept when the other profile has never observed termination.
+        first_coef = _fit_coefficients(xtx, xty)[common]
+        other_coef = _fit_coefficients(other_xtx, other_xty)[common]
+        first_norm = float(np.linalg.norm(first_coef))
+        other_norm = float(np.linalg.norm(other_coef))
+        comparable = first_norm > 1e-12 and other_norm > 1e-12
+        cosine = _reward_cosine(first_coef, other_coef) if comparable else 0.0
+        return {
+            "reward_cosine": cosine,
+            "compared_feature_count": int(common.size),
+            "compared_feature_mask": int(mask_value),
+            "dropped_unsupported_terminal": dropped_terminal,
+            "rank_identifiable": 1,
+            "reward_comparable": int(comparable),
+        }
 
     def _add_profile(
         self,
@@ -483,22 +585,25 @@ class RewardAwareGroups:
         movement_n = int(counts.sum(dtype=np.uint64))
         reward_supported = float(reward_n) >= self.reward_min_samples
         score_rows: dict[int, dict[str, int | float]] = {}
-        incoming_coef: np.ndarray | None = None
-        if reward_supported:
-            incoming_coef = _fit_coefficients(xtx, xty)
 
         for group in self.active_groups:
             overlap, agreement = self._score_dynamics(counts, group)
             group_reward_supported = float(self._reward_n[group]) >= self.reward_min_samples
-            cosine = 0.0
-            if reward_supported and group_reward_supported and incoming_coef is not None:
-                group_coef = _fit_coefficients(self._reward_xtx[group], self._reward_xty[group])
-                cosine = _reward_cosine(incoming_coef, group_coef)
+            both_reward_supported = reward_supported and group_reward_supported
+            if both_reward_supported or self.reward_support_aware:
+                reward_similarity = self._reward_similarity(
+                    xtx,
+                    xty,
+                    self._reward_xtx[group],
+                    self._reward_xty[group],
+                )
+            else:
+                reward_similarity = {"reward_cosine": 0.0}
             score_rows[group] = {
                 "overlap": overlap,
                 "agreement": agreement,
-                "reward_cosine": cosine,
-                "reward_supported": int(reward_supported and group_reward_supported),
+                **reward_similarity,
+                "reward_supported": int(both_reward_supported),
             }
 
         if movement_n < self.min_support or supported_count < _FIRST_GROUP_CELLS:
@@ -522,6 +627,7 @@ class RewardAwareGroups:
                 self.mode == "dynamics"
                 or (
                     score["reward_supported"]
+                    and score.get("reward_comparable", 1)
                     and score["reward_cosine"] >= _MIN_REWARD_COSINE
                 )
             )
@@ -564,6 +670,7 @@ class RewardAwareGroups:
         insufficient_overlap = False
         between_thresholds = False
         reward_mismatch = False
+        reward_unidentifiable = False
         for score in score_rows.values():
             overlap = int(score["overlap"])
             agreement = float(score["agreement"])
@@ -575,13 +682,21 @@ class RewardAwareGroups:
             reward_opposite = (
                 self.mode == "reward"
                 and bool(score["reward_supported"])
+                and bool(score.get("reward_comparable", 1))
                 and agreement >= _MIN_AGREEMENT
                 and float(score["reward_cosine"]) <= _OPPOSITE_REWARD_COSINE
             )
             if not (dynamics_novel or reward_opposite):
                 distinct_from_all = False
-                if self.mode == "reward" and agreement >= _MIN_AGREEMENT:
+                if (
+                    self.mode == "reward"
+                    and agreement >= _MIN_AGREEMENT
+                    and score["reward_supported"]
+                    and score.get("reward_comparable", 1)
+                ):
                     reward_mismatch = True
+                elif self.mode == "reward" and agreement >= _MIN_AGREEMENT:
+                    reward_unidentifiable = True
                 elif agreement > _NOVELTY_MAX_AGREEMENT:
                     between_thresholds = True
 
@@ -595,6 +710,7 @@ class RewardAwareGroups:
                     and score["overlap"] >= _MIN_OVERLAP
                     and score["agreement"] >= _MIN_AGREEMENT
                     and score["reward_supported"]
+                    and score.get("reward_comparable", 1)
                     and score["reward_cosine"] <= _OPPOSITE_REWARD_COSINE
                     for score in score_rows.values()
                 ) else "novel_group"
@@ -603,6 +719,8 @@ class RewardAwareGroups:
 
         if insufficient_overlap:
             return GroupAssignment(-1, "insufficient_overlap", score_rows)
+        if reward_unidentifiable:
+            return GroupAssignment(-1, "insufficient_reward_identifiability", score_rows)
         if reward_mismatch:
             return GroupAssignment(-1, "reward_mismatch", score_rows)
         if between_thresholds:
