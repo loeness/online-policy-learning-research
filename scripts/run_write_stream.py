@@ -448,8 +448,8 @@ def _reset_allocated_slot(agent, slot: int, *, reason: str) -> int:
     if agent.core.group_for_slot(slot) >= 0:
         agent.core.set_slot_group(slot, -1, preserve_effective=False)
     _clear_optimizer_state(agent, slot)
-    agent.anchors.clear_slot(slot)
     agent.slot_generation[slot] += 1
+    agent.anchors.add(slot, int(agent.slot_generation[slot]), [])
     agent.fitted_steps[slot] = 0
     agent.profiles["movement_counts"][slot].fill(0)
     agent.profiles["reward_xtx"][slot].fill(0.0)

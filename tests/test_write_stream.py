@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from online_rl.write_decision_router import WriteDecisionRouter  # noqa: E402
 from online_rl.policy import OBS_DIM, TreePolicy  # noqa: E402
 from online_rl.write_decision_policy import FlexibleSharedPolicy  # noqa: E402
+from online_rl.write_decision_gate import AnchorBank  # noqa: E402
 from scripts import run_knowledge_loop as loop  # noqa: E402
 from scripts import run_write_stream as stream  # noqa: E402
 
@@ -300,14 +301,16 @@ def test_generation_reset_clears_fitted_step_evidence() -> None:
         def group_for_slot(_slot: int) -> int:
             return -1
 
-    class Anchors:
-        @staticmethod
-        def clear_slot(_slot: int) -> None:
-            return None
+    anchors = AnchorBank(slots=1, per_slot=2, seed=7)
+    anchors.add(0, 2, [{
+        "obs": np.zeros(13), "action": 0, "log_prob": float(np.log(.25)),
+        "probabilities": np.full(4, .25), "advantage": 1.0,
+        "return": 1.0, "generation": 2, "episode_id": 1,
+    }])
 
     agent = SimpleNamespace(
         core=Core(), optimizer=SimpleNamespace(state={}), slots=1,
-        anchors=Anchors(), slot_generation=np.asarray([2], dtype=np.int64),
+        anchors=anchors, slot_generation=np.asarray([2], dtype=np.int64),
         fitted_steps=np.asarray([384], dtype=np.uint64),
         profiles={
             "movement_counts": np.ones((1, 3, 4, 4), dtype=np.uint16),
@@ -328,6 +331,8 @@ def test_generation_reset_clears_fitted_step_evidence() -> None:
     assert generation == 3
     assert agent.fitted_steps[0] == 0
     assert agent.counts["slot_allocations"] == 1
+    assert len(agent.anchors.arrays(0, 2)["action"]) == 0
+    assert agent.anchors.state_dict()["active_generations"][0] == 3
 
 
 def test_mixed_task_episode_is_reported_and_excluded_from_positive_denominator() -> None:
