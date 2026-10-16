@@ -8,11 +8,12 @@ import json
 from pathlib import Path
 import shutil
 import sys
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from scripts.report_write_stream import analyze_cohort  # noqa: E402
+from scripts.report_write_stream import analyze_cohort, _snapshot_audit  # noqa: E402
 
 
 SEEDS = (17, 29)
@@ -21,6 +22,33 @@ BASE_SEQUENCE = (
     "A0+", "A0-", "B0+", "B0-", "A1+", "A1-", "B1+", "B1-", "A2+", "A2-", "B2+", "B2-",
 )
 SEQUENCE = BASE_SEQUENCE + tuple(reversed(BASE_SEQUENCE))
+
+
+@pytest.mark.parametrize("flag,protocol", [
+    ({"budget_baseline": True}, "WRITE_BUDGET_BASELINE.md"),
+    ({"parent_recycle": False}, "WRITE_RECYCLE_PROTOCOL.md"),
+    ({"parent_recycle": True}, "WRITE_RECYCLE_PROTOCOL.md"),
+])
+def test_wrapper_snapshot_audit_uses_the_declared_wrapper_protocol(tmp_path, flag, protocol):
+    snapshot = tmp_path / "source_snapshot"
+    sources = {}
+    for name in ("WRITE_STREAM_PROTOCOL.md", protocol):
+        path = snapshot / "docs" / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(name, encoding="utf-8")
+        sources[f"docs/{name}"] = {"sha256": _sha(path), "bytes": path.stat().st_size}
+    manifest = {"sources": sources}
+    _write_json(snapshot / "manifest.json", manifest)
+    frozen = {**flag, "protocol_sha256": sources[f"docs/{protocol}"]["sha256"]}
+    checks = []
+    _snapshot_audit(tmp_path, {"source_manifest": manifest}, frozen, checks)
+    result = next(check for check in checks if check["name"] == "frozen_protocol_hash_matches_snapshot")
+    assert result["passed"] is True
+    frozen["protocol_sha256"] = "wrong_hash"
+    checks = []
+    _snapshot_audit(tmp_path, {"source_manifest": manifest}, frozen, checks)
+    result = next(check for check in checks if check["name"] == "frozen_protocol_hash_matches_snapshot")
+    assert result["passed"] is False
 
 
 def _write_json(path: Path, value) -> None:

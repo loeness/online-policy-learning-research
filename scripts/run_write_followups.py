@@ -27,6 +27,11 @@ def write(path, value):
 
 def main(wait_pid=None):
     LOGS.mkdir(parents=True, exist_ok=True)
+    attempt = datetime.now(timezone(timedelta(hours=8))).strftime("%Y%m%dT%H%M%S%f")
+    history = LOGS / "attempt_history" / attempt
+    if STATUS.exists():
+        history.mkdir(parents=True, exist_ok=True)
+        (history / STATUS.name).write_bytes(STATUS.read_bytes())
     state = {"started": datetime.now(timezone(timedelta(hours=8))).isoformat(),
              "max_training_workers": 2, "steps": [], "status": "running"}
     write(STATUS, state)
@@ -36,11 +41,23 @@ def main(wait_pid=None):
             state["steps"].append({"label": label, "status": "already_complete", "cohort": cohort})
             write(STATUS, state)
             return
+        if command[0] == "scripts/report_write_stream.py":
+            report_dir = (ROOT / command[command.index("--output") + 1]).resolve()
+            if (report_dir / "analysis.json").is_file():
+                state["steps"].append({"label": label, "status": "already_complete_report",
+                                       "output": str(report_dir)})
+                write(STATUS, state)
+                return
         entry = {"label": label, "command": command, "status": "running", "cohort": cohort}
         state["steps"].append(entry)
         write(STATUS, state)
         print(label, flush=True)
         started = time.perf_counter()
+        for suffix in ("stdout.log", "stderr.log"):
+            previous = LOGS / f"{label}.{suffix}"
+            if previous.exists():
+                history.mkdir(parents=True, exist_ok=True)
+                (history / previous.name).write_bytes(previous.read_bytes())
         with (LOGS / f"{label}.stdout.log").open("w", encoding="utf-8") as out, \
              (LOGS / f"{label}.stderr.log").open("w", encoding="utf-8") as err:
             process = subprocess.run([sys.executable, *command], cwd=ROOT, stdout=out, stderr=err,

@@ -219,7 +219,12 @@ def _snapshot_audit(run_dir: Path, run_record: Mapping[str, Any], frozen: Mappin
     source_results.update(external_results)
 
     protocol_hash = frozen.get("protocol_sha256")
-    copied_protocol = sources.get("docs/WRITE_STREAM_PROTOCOL.md", {}).get("sha256")
+    protocol_path = "docs/WRITE_STREAM_PROTOCOL.md"
+    if frozen.get("budget_baseline") is True:
+        protocol_path = "docs/WRITE_BUDGET_BASELINE.md"
+    elif "parent_recycle" in frozen:
+        protocol_path = "docs/WRITE_RECYCLE_PROTOCOL.md"
+    copied_protocol = sources.get(protocol_path, {}).get("sha256")
     protocol_ok = protocol_hash is None or protocol_hash == copied_protocol
     _new_check(checks, "frozen_protocol_hash_matches_snapshot", protocol_ok,
                copied_protocol, protocol_hash)

@@ -81,7 +81,9 @@ def resume(output: Path, interrupted: Path, selection_path: Path, workers: int =
     records.sort(key=lambda row: (row["seed"], row["condition"]))
     costs = {key: sum(row["costs"][key] for row in records)
              for key in ("training_steps", "probe_steps", "evaluation_steps", "total_interactions")}
-    result = {"phase": config["phase"], "conditions": config["conditions"], "seeds": config["seeds"],
+    result = {"phase": config["phase"], "base_sequence": config["base_sequence"],
+              "sequence": config["sequence"], "protocol_sha256": config["protocol_sha256"],
+              "conditions": config["conditions"], "seeds": config["seeds"],
               "records": records, "cohort_cost": costs, "resume_note": note}
     stream._write_json(output / "summary.json", result)
     print(json.dumps({"phase": result["phase"], "cohort_cost": costs}), flush=True)
