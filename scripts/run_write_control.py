@@ -14,7 +14,8 @@ sys.path.insert(0, str(ROOT))
 from scripts import run_write_supported
 
 wd = run_write_supported.runner
-wd.SOURCE_FILES = (*wd.SOURCE_FILES, Path("scripts/run_write_control.py"))
+wd.SOURCE_FILES = (*wd.SOURCE_FILES, Path("scripts/run_write_control.py"),
+                   Path("docs/WRITE_CONTROL_SUPPLEMENT.md"))
 
 
 def run(output, workers):
