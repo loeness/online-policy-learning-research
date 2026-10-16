@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -290,7 +291,12 @@ def test_partial_top_level_records_are_reported_as_pending(tmp_path: Path) -> No
     assert pending["expected_records"] == 4
 
 
-def test_stream_probe_reward_and_full_use_cross_cohort_pair(tmp_path: Path) -> None:
+@pytest.mark.parametrize("shared_name,baseline_name", [
+    ("write_stream_known", "write_stream_known_budget_baseline"),
+    ("write_detour_w0_17", "write_detour_budget_w0_17"),
+    ("write_detour_w0_29", "write_detour_budget_w0_29"),
+])
+def test_stream_probe_reward_and_full_use_cross_cohort_pair(tmp_path: Path, shared_name, baseline_name) -> None:
     root, output = tmp_path / "outputs", tmp_path / "report"
     shared = _record("trial_gate_relaxed", 0.3, 0.0)
     shared["per_task_observed_stream"] = {
@@ -300,13 +306,12 @@ def test_stream_probe_reward_and_full_use_cross_cohort_pair(tmp_path: Path) -> N
     shared["group_saturation"] = {"unassigned_step_fraction": 0.75}
     baseline = _record("independent7_lru", 0.2, 0.0)
     baseline["costs"].update(training_steps=12, probe_steps=0)
-    for name, record in (("write_stream_known", shared),
-                         ("write_stream_known_budget_baseline", baseline)):
+    for name, record in ((shared_name, shared), (baseline_name, baseline)):
         _dump(root / name / "summary.json", {
             "conditions": [record["condition"]], "seeds": [7], "records": [record],
         })
     analysis = build_report(root, output)
-    row = analysis["cohorts"]["write_stream_known"]["records"][0]
+    row = analysis["cohorts"][shared_name]["records"][0]
     assert abs(row["online_reward_per_stream_step"] - 0.1) < 1e-12
     assert row["online_reward_per_step"] == 0.3
     assert row["group_unassigned_training_fraction"] == 0.75
@@ -341,9 +346,11 @@ def test_parent_pairing_uses_same_stage_and_omits_unmatched_seeds(tmp_path: Path
             _dump(root / f"write_parent_{variant}_{stage}" / "summary.json", {
                 "conditions": ["reward_shared"], "seeds": [seed], "records": [record],
             })
+    _dump(root / "write_parent_selection" / "SKIPPED.json", {"formal_and_unknown_followup": "skipped"})
     analysis = build_report(root, tmp_path / "report")
     pairs = analysis["pairing"]["recycle_cumulative"]["pairs"]
     assert len(pairs) == 2
     assert all(pair["n_pairs"] == 1 for pair in pairs)
     assert all(pair["left"].split(":")[0].split("_")[-1] ==
                pair["right"].split(":")[0].split("_")[-1] for pair in pairs)
+    assert analysis["parent_followup_admission"]["SKIPPED.json"]["decision"]["formal_and_unknown_followup"] == "skipped"

@@ -795,6 +795,8 @@ def _build_pairs(root: Path, cohorts: dict[str, dict[str, Any]]) -> dict[str, An
         ("write_stream_known_budget_baseline", ("write_stream_known",)),
         ("write_stream_unknown_budget_baseline", ("write_stream_unknown",)),
         ("write_parent_unknown_budget_baseline", ("write_parent_cumulative_unknown", "write_parent_recycle_unknown")),
+        ("write_detour_budget_w0_17", ("write_detour_w0_17",)),
+        ("write_detour_budget_w0_29", ("write_detour_w0_29",)),
     ):
         baseline_cohort = cohorts.get(baseline_name)
         if not baseline_cohort:
@@ -996,6 +998,11 @@ def _analysis(root: Path, output_dir: Path) -> dict[str, Any]:
     collected = _collect_inputs(root, output_dir)
     audit = _source_audit(root)
     foundations = collected["auxiliary"].get("foundations")
+    admission = {}
+    for filename in ("selection.json", "formal_decision.json", "SKIPPED.json"):
+        source = root / "write_parent_selection" / filename
+        if source.is_file():
+            admission[filename] = {"source": _relative_path(source, root), "decision": _read_json(source)}
     limitations = [
         "正式 cohort 的 PROVENANCE_NOTE 记录了 docs-only hash 变异：代码和配置相同，但 strict source audit 不是 clean pass。",
         "cold_prior_binding 未经过 gate；stream 观测到的绑定结果不能解释为已验证安全写入。",
@@ -1005,6 +1012,9 @@ def _analysis(root: Path, output_dir: Path) -> dict[str, Any]:
         "报告只统计 summary/failed marker 明示的实验成本；本报告自身的合成单元测试不计入样本效率。",
         "CPU 时间是各 run CPU 秒求和；wall 时间是各 run wall duration 求和，不代表 cohort 端到端 makespan。",
         "Checkpoint、W0 与 actor 字节优先取物理文件长度；缺少可核对文件时会标记 capacity.json 回退来源，不把声明值伪装成实测。",
+        "236 B actor 上限和 256 KiB 完整持久包上限是双重约束；同上限并非物理包字节恰好相等，尚未验证只约束总持久字节时的最优分配。",
+        "完整数据利用基线只匹配 training + probe 交互总数，不匹配 known 每段停留时间、PPO 更新数或计算成本；跨 cohort 比较以全流奖励为准。",
+        "known 固定流中的 independent7_lru 与 independent7_lfu 轨迹结果相同；不能把二者当作额外独立验证。unknown 中二者可以不同。",
     ]
     return {
         "format": "write_investigation_report_v1",
@@ -1017,6 +1027,7 @@ def _analysis(root: Path, output_dir: Path) -> dict[str, Any]:
         "auxiliary_roots": collected["auxiliary"],
         "interaction_ledger": _sum_costs(collected),
         "pairing": _build_pairs(root, collected["cohorts"]),
+        "parent_followup_admission": admission,
         "source_audit": audit,
         "limitations": limitations,
         "source_links": _source_links(root, collected, audit),
@@ -1127,6 +1138,13 @@ def _write_markdown(analysis: dict[str, Any], root: Path, output_dir: Path) -> s
         lines.append("有 matched pair 时见 analysis.json 的 pairing.recycle_cumulative.pairs；只按同 seed、同 condition 配对。")
     else:
         lines.append("当前没有可配对的完成 cohort，不报告正向或负向效果。")
+
+    admission = analysis.get("parent_followup_admission", {})
+    if admission:
+        lines.extend(["", "### 预登记扩展门槛", ""])
+        for filename, row in admission.items():
+            lines.append(f"- {filename}：{_md_link(row['source'], root, output_dir)}；{json.dumps(row['decision'], ensure_ascii=False)}")
+        lines.append("未达到准入门槛而跳过的 formal/unknown 扩展不算运行成功、运行失败或 pending，也不虚构样本成本。")
 
     lines.extend(["", "## Pending 与失败结果", ""])
     if analysis["pending"]:
