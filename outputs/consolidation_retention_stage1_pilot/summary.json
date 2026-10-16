@@ -1,0 +1,733 @@
+{
+  "format": "consolidation_retention_stage1_v1",
+  "status": "completed",
+  "analysis_role": "exploratory",
+  "seeds": [
+    1009
+  ],
+  "methods": [
+    "local_only",
+    "mean",
+    "weighted",
+    "random"
+  ],
+  "targets": [
+    "A0+",
+    "A2+",
+    "B2+",
+    "A0-"
+  ],
+  "records": [
+    {
+      "seed": 1009,
+      "method": "local_only",
+      "path": "seed_1009\\local_only",
+      "source_slots": [
+        1,
+        0
+      ],
+      "target_group": 0,
+      "proposal": {
+        "method": "local_only",
+        "source_count": 2,
+        "coefficient_norm": 0.0,
+        "common_matrix": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            0,
+            1
+          ],
+          "max_effective_preservation_error": 0.0
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 0.0,
+        "raw_probability_max_error": 0.0,
+        "int8_logit_max_error": 0.036785125732421875,
+        "int8_mean_KL": 3.4213693250390257e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 332165120
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -0.670000000000001
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -0.670000000000001,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "A2+": {
+          "episode_returns": [
+            -2.6699999999999977
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -2.6699999999999977,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "B2+": {
+          "episode_returns": [
+            3.580000000000001
+          ],
+          "episode_lengths": [
+            14
+          ],
+          "goal_flags": [
+            1
+          ],
+          "positive_success_flags": [
+            1
+          ],
+          "mean_signed_return": 3.580000000000001,
+          "mean_goal_rate": 1.0,
+          "positive_success_rate": 1.0,
+          "evaluation_steps": 14
+        },
+        "A0-": {
+          "episode_returns": [
+            -0.07999999999999932
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -0.07999999999999932,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 206,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "426889a53bde48b7be8a3463dd938fa0f5231da7ac40474297039b829719edd8",
+      "cpu_s": 0.203125,
+      "wall_s": 0.23165639999206178
+    },
+    {
+      "seed": 1009,
+      "method": "mean",
+      "path": "seed_1009\\mean",
+      "source_slots": [
+        1,
+        0
+      ],
+      "target_group": 0,
+      "proposal": {
+        "method": "mean",
+        "source_count": 2,
+        "coefficient_norm": 0.4898010790348053,
+        "common_matrix": [
+          [
+            -0.3028997778892517,
+            0.053253207355737686,
+            0.35681429505348206
+          ],
+          [
+            0.059652604162693024,
+            0.06494539231061935,
+            -0.03140101954340935
+          ],
+          [
+            0.04089809209108353,
+            -0.056448303163051605,
+            -0.06620451807975769
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            0,
+            1
+          ],
+          "max_effective_preservation_error": 7.450580596923828e-09
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.9073486328125e-06,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.0335845947265625,
+        "int8_mean_KL": 3.0845992330270756e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 333565952
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            0.5799999999999985
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": 0.5799999999999985,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "A2+": {
+          "episode_returns": [
+            -2.669999999999997
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -2.669999999999997,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "B2+": {
+          "episode_returns": [
+            0.32999999999999874
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": 0.32999999999999874,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "A0-": {
+          "episode_returns": [
+            -0.07999999999999902
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -0.07999999999999902,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 256,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "436b7aa4b0dd96bb240e51fd881ac0260b03203df04aa5b22d9c6cf28c62d990",
+      "cpu_s": 0.21875,
+      "wall_s": 0.22807809998630546
+    },
+    {
+      "seed": 1009,
+      "method": "weighted",
+      "path": "seed_1009\\weighted",
+      "source_slots": [
+        1,
+        0
+      ],
+      "target_group": 0,
+      "proposal": {
+        "source_count": 2,
+        "row_counts": [
+          24,
+          24
+        ],
+        "row_count": 48,
+        "ridge_lambda": 0.14561618919031277,
+        "gram_eigenvalues": [
+          0.0055764784243008125,
+          76.08859823484576,
+          360.7543628576682
+        ],
+        "gram_condition": 64692.14715968351,
+        "coefficient_norm": 0.49235455024017005,
+        "method": "weighted",
+        "common_matrix": [
+          [
+            -0.07909213751554489,
+            -0.03851023316383362,
+            0.4017770290374756
+          ],
+          [
+            0.12690536677837372,
+            0.029343437403440475,
+            0.09756740927696228
+          ],
+          [
+            -0.061662230640649796,
+            0.03040042705833912,
+            -0.20503117144107819
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            0,
+            1
+          ],
+          "max_effective_preservation_error": 1.4901161193847656e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.9073486328125e-06,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.05499839782714844,
+        "int8_mean_KL": 4.170522672659219e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 334032896
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -0.170000000000001
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -0.170000000000001,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "A2+": {
+          "episode_returns": [
+            -2.6699999999999986
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -2.6699999999999986,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "B2+": {
+          "episode_returns": [
+            0.32999999999999874
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": 0.32999999999999874,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "A0-": {
+          "episode_returns": [
+            -0.0799999999999989
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -0.0799999999999989,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 256,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "b4d74a21152bf692d59ab19c907111ea7b2cda25ef6a0e2fbcffb8c54eacad24",
+      "cpu_s": 0.21875,
+      "wall_s": 0.22909390000859275
+    },
+    {
+      "seed": 1009,
+      "method": "random",
+      "path": "seed_1009\\random",
+      "source_slots": [
+        1,
+        0
+      ],
+      "target_group": 0,
+      "proposal": {
+        "source_count": 2,
+        "row_counts": [
+          24,
+          24
+        ],
+        "row_count": 48,
+        "ridge_lambda": 0.14561618919031277,
+        "gram_eigenvalues": [
+          0.0055764784243008125,
+          76.08859823484576,
+          360.7543628576682
+        ],
+        "gram_condition": 64692.14715968351,
+        "coefficient_norm": 0.49235454201698303,
+        "method": "random",
+        "seed": 95730,
+        "reference_norm": 0.49235454201698303,
+        "common_matrix": [
+          [
+            -0.012742945924401283,
+            -0.2837877869606018,
+            -0.008193301036953926
+          ],
+          [
+            -0.15987740457057953,
+            0.26965412497520447,
+            0.0480731837451458
+          ],
+          [
+            -0.07742605358362198,
+            0.22453652322292328,
+            -0.06820088624954224
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            0,
+            1
+          ],
+          "max_effective_preservation_error": 2.9802322387695312e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.9073486328125e-06,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.049714088439941406,
+        "int8_mean_KL": 6.0072735797068075e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 334327808
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -0.42000000000000104
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -0.42000000000000104,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "A2+": {
+          "episode_returns": [
+            -2.6699999999999977
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -2.6699999999999977,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "B2+": {
+          "episode_returns": [
+            -0.16999999999999954
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -0.16999999999999954,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        },
+        "A0-": {
+          "episode_returns": [
+            -0.0799999999999989
+          ],
+          "episode_lengths": [
+            64
+          ],
+          "goal_flags": [
+            0
+          ],
+          "positive_success_flags": [
+            0
+          ],
+          "mean_signed_return": -0.0799999999999989,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 64
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 256,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "c7c674eef0b544efbb81a7d1f3f0ba4eca36912c09674ebe4ed4f2d6411f7291",
+      "cpu_s": 0.265625,
+      "wall_s": 0.2742122999916319
+    }
+  ],
+  "source_audits": [
+    {
+      "seed": 1009,
+      "source": "outputs\\write_decision_causal_control\\seed_1009\\trial_rollback\\checkpoints\\checkpoint_step_00032768.pt",
+      "source_sha256": "e70439ddc0f40fb140ffced134cbfd4c62504e4b8b4a3f5bce29a60099b2569f",
+      "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+      "steps_by_task": {
+        "A0+": 8192,
+        "A0-": 8192,
+        "A1+": 8192,
+        "A1-": 8192,
+        "A2+": 0,
+        "A2-": 0
+      },
+      "source_slots": [
+        1,
+        0
+      ],
+      "source_group": 0,
+      "shared_max_abs": 0.0,
+      "source_anchor_evidence": [
+        {
+          "task": "A0+",
+          "slot": 1,
+          "generation": 1,
+          "rows": 24,
+          "episodes": 18
+        },
+        {
+          "task": "A1+",
+          "slot": 0,
+          "generation": 1,
+          "rows": 24,
+          "episodes": 17
+        }
+      ],
+      "unseen_target_training_steps": 0
+    }
+  ],
+  "cohort_cost": {
+    "source_training_steps_reused": 32768,
+    "new_training_steps": 0,
+    "new_evaluation_steps": 974,
+    "new_total_interactions": 974
+  },
+  "audit": {
+    "passed": true,
+    "failures": []
+  },
+  "protocol_sha256": "d785ef65cfa92a9246fe8d10ade1932190f5d2076399d72685e9e444fc1f28bf",
+  "cpu_s": 1.65625,
+  "wall_s": 1.9358773000130896,
+  "limitations": "Oracle fixed-route paid mechanism diagnostic, not deployment routing, capacity superiority, independent confirmation or SOTA. Unseen-to-source A2+ is exploratory validation. Negative targets deliberately test wrong parent reuse."
+}

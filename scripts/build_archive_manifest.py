@@ -21,9 +21,14 @@ EXCLUDED_DIRECTORIES = {
     ".archive-verification",
 }
 MANIFEST_PATH = "archive/manifest.json"
+LOCAL_INSTRUCTION_PATHS = frozenset({"agent.md", "agents.md"})
 CREDENTIAL_FILENAME_PATTERNS = (".env", ".env.*", "*.pem", "*.key")
 
 EXCLUSIONS = [
+    {
+        "paths_case_insensitive": ["Agent.md", "AGENTS.md"],
+        "reason": "Machine-local agent instructions; excluded before file contents are read.",
+    },
     {"pattern": ".git/**", "reason": "Git object database and repository metadata."},
     {"pattern": ".venv/**", "reason": "Locally installed Python environment."},
     {
@@ -70,6 +75,7 @@ def iter_archive_files():
             relative_path = path.relative_to(ROOT).as_posix()
             if (
                 relative_path == MANIFEST_PATH
+                or relative_path.casefold() in LOCAL_INSTRUCTION_PATHS
                 or path.suffix.lower() == ".pyc"
                 or any(
                     fnmatch.fnmatchcase(path.name, pattern)

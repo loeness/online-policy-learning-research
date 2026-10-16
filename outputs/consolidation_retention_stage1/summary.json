@@ -1,0 +1,3469 @@
+{
+  "format": "consolidation_retention_stage1_v1",
+  "status": "completed",
+  "analysis_role": "exploratory",
+  "seeds": [
+    1009,
+    1013,
+    1019
+  ],
+  "methods": [
+    "local_only",
+    "mean",
+    "weighted",
+    "random"
+  ],
+  "targets": [
+    "A0+",
+    "A2+",
+    "B2+",
+    "A0-"
+  ],
+  "records": [
+    {
+      "seed": 1009,
+      "method": "local_only",
+      "path": "seed_1009\\local_only",
+      "source_slots": [
+        1,
+        0
+      ],
+      "target_group": 0,
+      "proposal": {
+        "method": "local_only",
+        "source_count": 2,
+        "coefficient_norm": 0.0,
+        "common_matrix": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            0,
+            1
+          ],
+          "max_effective_preservation_error": 0.0
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 0.0,
+        "raw_probability_max_error": 0.0,
+        "int8_logit_max_error": 0.036785125732421875,
+        "int8_mean_KL": 3.4213693250390257e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 331739136
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -0.670000000000001,
+            -2.919999999999995,
+            -1.4200000000000008,
+            -1.9200000000000015,
+            0.8300000000000056,
+            -2.4199999999999986,
+            -0.6700000000000015,
+            0.07999999999999868
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -1.1387499999999993,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A2+": {
+          "episode_returns": [
+            -2.6699999999999977,
+            -2.1699999999999986,
+            -1.9200000000000015,
+            -2.170000000000001,
+            -1.1700000000000015,
+            -1.9200000000000015,
+            -1.6700000000000015,
+            -2.42
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -2.013750000000001,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "B2+": {
+          "episode_returns": [
+            3.580000000000001,
+            1.3300000000000076,
+            -1.4200000000000015,
+            3.9600000000000017,
+            -2.4199999999999986,
+            1.4099999999999988,
+            -1.4200000000000017,
+            -0.920000000000001
+          ],
+          "episode_lengths": [
+            14,
+            64,
+            64,
+            18,
+            64,
+            53,
+            64,
+            64
+          ],
+          "goal_flags": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.5125000000000008,
+          "mean_goal_rate": 0.375,
+          "positive_success_rate": 0.375,
+          "evaluation_steps": 405
+        },
+        "A0-": {
+          "episode_returns": [
+            -0.07999999999999932,
+            1.1700000000000008,
+            3.169999999999993,
+            1.4200000000000015,
+            2.919999999999995,
+            -2.4799999999999995,
+            1.170000000000001,
+            -0.5800000000000021
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            34,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.8387499999999988,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 482
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1911,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "426889a53bde48b7be8a3463dd938fa0f5231da7ac40474297039b829719edd8",
+      "cpu_s": 0.828125,
+      "wall_s": 0.8343076999881305
+    },
+    {
+      "seed": 1009,
+      "method": "mean",
+      "path": "seed_1009\\mean",
+      "source_slots": [
+        1,
+        0
+      ],
+      "target_group": 0,
+      "proposal": {
+        "method": "mean",
+        "source_count": 2,
+        "coefficient_norm": 0.4898010790348053,
+        "common_matrix": [
+          [
+            -0.3028997778892517,
+            0.053253207355737686,
+            0.35681429505348206
+          ],
+          [
+            0.059652604162693024,
+            0.06494539231061935,
+            -0.03140101954340935
+          ],
+          [
+            0.04089809209108353,
+            -0.056448303163051605,
+            -0.06620451807975769
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            0,
+            1
+          ],
+          "max_effective_preservation_error": 7.450580596923828e-09
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.9073486328125e-06,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.0335845947265625,
+        "int8_mean_KL": 3.0845992330270756e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 333398016
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            0.5799999999999985,
+            -2.9199999999999964,
+            2.3499999999999988,
+            -1.6700000000000013,
+            1.0799999999999985,
+            -2.419999999999998,
+            0.3299999999999985,
+            0.07999999999999868
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            55,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -0.32375000000000037,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.125,
+          "evaluation_steps": 503
+        },
+        "A2+": {
+          "episode_returns": [
+            -2.669999999999997,
+            -2.4199999999999986,
+            -1.9200000000000015,
+            -2.1700000000000004,
+            2.219999999999999,
+            -1.9200000000000015,
+            3.42,
+            1.569999999999999
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            51,
+            64,
+            11,
+            56
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "mean_signed_return": -0.48625000000000007,
+          "mean_goal_rate": 0.375,
+          "positive_success_rate": 0.375,
+          "evaluation_steps": 438
+        },
+        "B2+": {
+          "episode_returns": [
+            0.32999999999999874,
+            0.5799999999999987,
+            -1.9200000000000015,
+            -0.670000000000001,
+            -2.4199999999999986,
+            1.9799999999999995,
+            -3.4199999999999933,
+            -2.17
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            34,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": -0.9637499999999997,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.125,
+          "evaluation_steps": 482
+        },
+        "A0-": {
+          "episode_returns": [
+            -0.07999999999999902,
+            0.6700000000000008,
+            2.9199999999999964,
+            -2.799999999999999,
+            2.1700000000000004,
+            -2.7799999999999994,
+            -0.07999999999999888,
+            -0.5799999999999992
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            40,
+            64,
+            24,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -0.0699999999999997,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 448
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1871,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "436b7aa4b0dd96bb240e51fd881ac0260b03203df04aa5b22d9c6cf28c62d990",
+      "cpu_s": 0.78125,
+      "wall_s": 0.8109522999729961
+    },
+    {
+      "seed": 1009,
+      "method": "weighted",
+      "path": "seed_1009\\weighted",
+      "source_slots": [
+        1,
+        0
+      ],
+      "target_group": 0,
+      "proposal": {
+        "source_count": 2,
+        "row_counts": [
+          24,
+          24
+        ],
+        "row_count": 48,
+        "ridge_lambda": 0.14561618919031277,
+        "gram_eigenvalues": [
+          0.0055764784243008125,
+          76.08859823484576,
+          360.7543628576682
+        ],
+        "gram_condition": 64692.14715968351,
+        "coefficient_norm": 0.49235455024017005,
+        "method": "weighted",
+        "common_matrix": [
+          [
+            -0.07909213751554489,
+            -0.03851023316383362,
+            0.4017770290374756
+          ],
+          [
+            0.12690536677837372,
+            0.029343437403440475,
+            0.09756740927696228
+          ],
+          [
+            -0.061662230640649796,
+            0.03040042705833912,
+            -0.20503117144107819
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            0,
+            1
+          ],
+          "max_effective_preservation_error": 1.4901161193847656e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.9073486328125e-06,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.05499839782714844,
+        "int8_mean_KL": 4.170522672659219e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 331833344
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -0.170000000000001,
+            -2.919999999999995,
+            2.710000000000001,
+            -1.9200000000000015,
+            1.0799999999999985,
+            -2.419999999999998,
+            0.5799999999999985,
+            0.07999999999999868
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            43,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -0.37249999999999983,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.125,
+          "evaluation_steps": 491
+        },
+        "A2+": {
+          "episode_returns": [
+            -2.6699999999999986,
+            -2.4199999999999986,
+            -1.9200000000000015,
+            -2.1700000000000004,
+            -0.1700000000000013,
+            -1.9200000000000015,
+            3.42,
+            -0.4200000000000008
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            11,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "mean_signed_return": -1.0337500000000004,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.125,
+          "evaluation_steps": 459
+        },
+        "B2+": {
+          "episode_returns": [
+            0.32999999999999874,
+            1.5800000000000072,
+            -1.9200000000000015,
+            -0.6700000000000006,
+            -2.4199999999999986,
+            1.8899999999999992,
+            -3.419999999999995,
+            -2.1700000000000004
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            37,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": -0.8499999999999989,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.125,
+          "evaluation_steps": 485
+        },
+        "A0-": {
+          "episode_returns": [
+            -0.0799999999999989,
+            0.920000000000001,
+            3.1699999999999937,
+            -2.709999999999999,
+            2.9199999999999986,
+            -2.7799999999999994,
+            0.42000000000000115,
+            -0.5799999999999996
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            43,
+            64,
+            24,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.1599999999999997,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 451
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1886,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "b4d74a21152bf692d59ab19c907111ea7b2cda25ef6a0e2fbcffb8c54eacad24",
+      "cpu_s": 0.765625,
+      "wall_s": 0.8266555999871343
+    },
+    {
+      "seed": 1009,
+      "method": "random",
+      "path": "seed_1009\\random",
+      "source_slots": [
+        1,
+        0
+      ],
+      "target_group": 0,
+      "proposal": {
+        "source_count": 2,
+        "row_counts": [
+          24,
+          24
+        ],
+        "row_count": 48,
+        "ridge_lambda": 0.14561618919031277,
+        "gram_eigenvalues": [
+          0.0055764784243008125,
+          76.08859823484576,
+          360.7543628576682
+        ],
+        "gram_condition": 64692.14715968351,
+        "coefficient_norm": 0.49235454201698303,
+        "method": "random",
+        "seed": 95730,
+        "reference_norm": 0.49235454201698303,
+        "common_matrix": [
+          [
+            -0.012742945924401283,
+            -0.2837877869606018,
+            -0.008193301036953926
+          ],
+          [
+            -0.15987740457057953,
+            0.26965412497520447,
+            0.0480731837451458
+          ],
+          [
+            -0.07742605358362198,
+            0.22453652322292328,
+            -0.06820088624954224
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            0,
+            1
+          ],
+          "max_effective_preservation_error": 2.9802322387695312e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.9073486328125e-06,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.049714088439941406,
+        "int8_mean_KL": 6.0072735797068075e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 332337152
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -0.42000000000000104,
+            -2.919999999999995,
+            -1.420000000000001,
+            -1.9200000000000015,
+            -0.420000000000001,
+            -2.4199999999999986,
+            -1.6700000000000013,
+            0.07999999999999868
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -1.38875,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A2+": {
+          "episode_returns": [
+            -2.6699999999999977,
+            -2.169999999999998,
+            -1.9200000000000015,
+            -2.1700000000000004,
+            -1.1700000000000015,
+            -1.9200000000000015,
+            -1.6700000000000013,
+            -1.920000000000001
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -1.9512500000000004,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "B2+": {
+          "episode_returns": [
+            -0.16999999999999954,
+            3.3700000000000063,
+            -0.42000000000000104,
+            0.8300000000000056,
+            -2.4199999999999986,
+            1.4099999999999988,
+            -1.4200000000000015,
+            -0.670000000000001
+          ],
+          "episode_lengths": [
+            64,
+            46,
+            64,
+            64,
+            64,
+            53,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.06375000000000114,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.25,
+          "evaluation_steps": 483
+        },
+        "A0-": {
+          "episode_returns": [
+            -0.0799999999999989,
+            1.1700000000000008,
+            3.169999999999993,
+            1.420000000000001,
+            2.919999999999995,
+            -2.7799999999999994,
+            0.9200000000000013,
+            -0.5799999999999994
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            24,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.7699999999999991,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 472
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1979,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "c7c674eef0b544efbb81a7d1f3f0ba4eca36912c09674ebe4ed4f2d6411f7291",
+      "cpu_s": 0.859375,
+      "wall_s": 0.8937771999917459
+    },
+    {
+      "seed": 1013,
+      "method": "local_only",
+      "path": "seed_1013\\local_only",
+      "source_slots": [
+        5,
+        3
+      ],
+      "target_group": 0,
+      "proposal": {
+        "method": "local_only",
+        "source_count": 2,
+        "coefficient_norm": 0.0,
+        "common_matrix": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            3,
+            5
+          ],
+          "max_effective_preservation_error": 0.0
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 0.0,
+        "raw_probability_max_error": 0.0,
+        "int8_logit_max_error": 0.03753185272216797,
+        "int8_mean_KL": 5.264844682222337e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 333324288
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            3.6800000000000015,
+            -1.6700000000000013,
+            -2.4199999999999986,
+            -2.919999999999997,
+            -1.6700000000000013,
+            3.2200000000000077,
+            0.3299999999999985,
+            -1.1700000000000013
+          ],
+          "episode_lengths": [
+            19,
+            64,
+            64,
+            64,
+            64,
+            51,
+            64,
+            64
+          ],
+          "goal_flags": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": -0.3274999999999989,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.25,
+          "evaluation_steps": 454
+        },
+        "A2+": {
+          "episode_returns": [
+            -1.1700000000000013,
+            4.080000000000001,
+            -0.17000000000000073,
+            -0.17000000000000112,
+            -2.4199999999999995,
+            -2.1700000000000013,
+            -1.9200000000000015,
+            1.6899999999999995
+          ],
+          "episode_lengths": [
+            64,
+            14,
+            64,
+            64,
+            64,
+            64,
+            64,
+            52
+          ],
+          "goal_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "positive_success_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mean_signed_return": -0.28125000000000067,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.25,
+          "evaluation_steps": 450
+        },
+        "B2+": {
+          "episode_returns": [
+            -3.1699999999999937,
+            -1.1700000000000013,
+            -2.1700000000000004,
+            -0.6700000000000015,
+            -0.9200000000000015,
+            -2.669999999999997,
+            -2.919999999999995,
+            -1.1700000000000015
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -1.8574999999999988,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A0-": {
+          "episode_returns": [
+            0.6700000000000013,
+            1.1700000000000013,
+            2.170000000000001,
+            2.419999999999999,
+            1.9200000000000015,
+            1.6700000000000013,
+            3.1699999999999933,
+            2.669999999999997
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 1.9824999999999995,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1928,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "839034c7a343d6b4e544893a1c87ff569c8fd38c2bea7562a9df2c0ac4c9e0c9",
+      "cpu_s": 0.796875,
+      "wall_s": 0.8251854999980424
+    },
+    {
+      "seed": 1013,
+      "method": "mean",
+      "path": "seed_1013\\mean",
+      "source_slots": [
+        5,
+        3
+      ],
+      "target_group": 0,
+      "proposal": {
+        "method": "mean",
+        "source_count": 2,
+        "coefficient_norm": 0.4292440712451935,
+        "common_matrix": [
+          [
+            -0.2637058198451996,
+            0.10372063517570496,
+            0.30905699729919434
+          ],
+          [
+            0.028702491894364357,
+            -0.012853971682488918,
+            -0.031036660075187683
+          ],
+          [
+            0.029187344014644623,
+            -0.022542959079146385,
+            -0.07157581299543381
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            3,
+            5
+          ],
+          "max_effective_preservation_error": 1.4901161193847656e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.430511474609375e-06,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.029619693756103516,
+        "int8_mean_KL": 4.060218397750042e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 334299136
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            3.019999999999999,
+            -1.1700000000000013,
+            -2.4199999999999986,
+            -2.669999999999997,
+            -1.9200000000000013,
+            1.3300000000000076,
+            2.509999999999999,
+            -0.920000000000001
+          ],
+          "episode_lengths": [
+            41,
+            64,
+            64,
+            64,
+            64,
+            64,
+            58,
+            64
+          ],
+          "goal_flags": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "positive_success_flags": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "mean_signed_return": -0.27999999999999914,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.25,
+          "evaluation_steps": 483
+        },
+        "A2+": {
+          "episode_returns": [
+            -0.9200000000000012,
+            4.080000000000001,
+            1.8599999999999985,
+            2.8099999999999996,
+            -2.4199999999999995,
+            -2.1700000000000004,
+            -1.9200000000000015,
+            1.8099999999999996
+          ],
+          "episode_lengths": [
+            64,
+            14,
+            63,
+            23,
+            64,
+            64,
+            64,
+            48
+          ],
+          "goal_flags": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "positive_success_flags": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mean_signed_return": 0.39124999999999954,
+          "mean_goal_rate": 0.5,
+          "positive_success_rate": 0.5,
+          "evaluation_steps": 404
+        },
+        "B2+": {
+          "episode_returns": [
+            -3.169999999999994,
+            -2.1700000000000004,
+            -2.4199999999999986,
+            -1.9200000000000015,
+            -1.6700000000000015,
+            -2.669999999999997,
+            -2.919999999999995,
+            -1.6700000000000015
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -2.3262499999999986,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A0-": {
+          "episode_returns": [
+            0.6700000000000013,
+            1.170000000000001,
+            2.170000000000001,
+            2.4199999999999986,
+            1.9200000000000015,
+            1.9200000000000006,
+            -2.2299999999999995,
+            2.6699999999999977
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            34,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 1.3387500000000003,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 482
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1881,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "36448a898a5ae295e81d26f8e1fff489c6a1d8c8e88e1cbc4e6faa93b0bef863",
+      "cpu_s": 0.78125,
+      "wall_s": 0.8014881999988575
+    },
+    {
+      "seed": 1013,
+      "method": "weighted",
+      "path": "seed_1013\\weighted",
+      "source_slots": [
+        5,
+        3
+      ],
+      "target_group": 0,
+      "proposal": {
+        "source_count": 2,
+        "row_counts": [
+          24,
+          24
+        ],
+        "row_count": 48,
+        "ridge_lambda": 0.13523600046806689,
+        "gram_eigenvalues": [
+          0.021696135730347788,
+          77.65091933507897,
+          328.03535593339143
+        ],
+        "gram_condition": 15119.529118475562,
+        "coefficient_norm": 1.552579812537942,
+        "method": "weighted",
+        "common_matrix": [
+          [
+            0.7531599402427673,
+            -0.4589921832084656,
+            1.0172522068023682
+          ],
+          [
+            0.34392985701560974,
+            -0.3033076822757721,
+            0.2003355622291565
+          ],
+          [
+            -0.34217336773872375,
+            0.27784955501556396,
+            -0.3912513554096222
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            3,
+            5
+          ],
+          "max_effective_preservation_error": 2.9802322387695312e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.9073486328125e-06,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.11130046844482422,
+        "int8_mean_KL": 1.342575958465808e-05
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 332103680
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            3.019999999999999,
+            -1.4200000000000013,
+            -2.4199999999999986,
+            -2.9199999999999973,
+            -1.9200000000000002,
+            0.5800000000000047,
+            2.4799999999999986,
+            -1.170000000000001
+          ],
+          "episode_lengths": [
+            41,
+            64,
+            64,
+            64,
+            64,
+            64,
+            59,
+            64
+          ],
+          "goal_flags": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "positive_success_flags": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "mean_signed_return": -0.4712499999999995,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.25,
+          "evaluation_steps": 484
+        },
+        "A2+": {
+          "episode_returns": [
+            -0.920000000000001,
+            4.080000000000001,
+            2.850000000000001,
+            3.11,
+            -2.419999999999998,
+            -2.1700000000000004,
+            -1.9200000000000015,
+            -0.670000000000001
+          ],
+          "episode_lengths": [
+            64,
+            14,
+            30,
+            13,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.24250000000000005,
+          "mean_goal_rate": 0.375,
+          "positive_success_rate": 0.375,
+          "evaluation_steps": 377
+        },
+        "B2+": {
+          "episode_returns": [
+            -3.1699999999999933,
+            -2.17,
+            -2.419999999999999,
+            -1.4200000000000015,
+            -1.6700000000000013,
+            -2.669999999999997,
+            -2.919999999999995,
+            -1.6700000000000013
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -2.263749999999998,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A0-": {
+          "episode_returns": [
+            0.42000000000000104,
+            -0.07999999999999868,
+            2.170000000000001,
+            2.4199999999999986,
+            1.9200000000000015,
+            2.1699999999999995,
+            -2.2299999999999995,
+            2.669999999999997
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            34,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 1.1825,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 482
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1855,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "f0a8ad792aecac0d41de2a70ddcad989fae988d659132289336969a4b2917f57",
+      "cpu_s": 0.734375,
+      "wall_s": 0.7976291999802925
+    },
+    {
+      "seed": 1013,
+      "method": "random",
+      "path": "seed_1013\\random",
+      "source_slots": [
+        5,
+        3
+      ],
+      "target_group": 0,
+      "proposal": {
+        "source_count": 2,
+        "row_counts": [
+          24,
+          24
+        ],
+        "row_count": 48,
+        "ridge_lambda": 0.13523600046806689,
+        "gram_eigenvalues": [
+          0.021696135730347788,
+          77.65091933507897,
+          328.03535593339143
+        ],
+        "gram_condition": 15119.529118475562,
+        "coefficient_norm": 1.5525798797607422,
+        "method": "random",
+        "seed": 95734,
+        "reference_norm": 1.5525798797607422,
+        "common_matrix": [
+          [
+            0.20696383714675903,
+            0.3539862334728241,
+            0.2620410621166229
+          ],
+          [
+            0.5211884379386902,
+            1.138198971748352,
+            0.10364344716072083
+          ],
+          [
+            -0.6789699196815491,
+            -0.3646867871284485,
+            0.04272826015949249
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            3,
+            5
+          ],
+          "max_effective_preservation_error": 5.21540641784668e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.9073486328125e-06,
+        "raw_probability_max_error": 2.384185791015625e-07,
+        "int8_logit_max_error": 0.10139751434326172,
+        "int8_mean_KL": 2.3047230988367104e-05
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 333631488
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            0.07999999999999863,
+            -1.170000000000001,
+            -1.9200000000000013,
+            -1.9200000000000015,
+            -1.6700000000000015,
+            1.0800000000000047,
+            -0.17000000000000107,
+            -0.920000000000001
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -0.8262500000000005,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A2+": {
+          "episode_returns": [
+            3.42,
+            4.080000000000001,
+            0.3299999999999985,
+            0.07999999999999868,
+            -2.420000000000001,
+            3.2,
+            -1.9200000000000015,
+            2.8899999999999997
+          ],
+          "episode_lengths": [
+            11,
+            14,
+            64,
+            64,
+            64,
+            10,
+            64,
+            12
+          ],
+          "goal_flags": [
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "positive_success_flags": [
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "mean_signed_return": 1.2074999999999996,
+          "mean_goal_rate": 0.5,
+          "positive_success_rate": 0.5,
+          "evaluation_steps": 303
+        },
+        "B2+": {
+          "episode_returns": [
+            -2.1700000000000004,
+            -1.9200000000000013,
+            -2.419999999999999,
+            -1.9200000000000015,
+            -1.6700000000000015,
+            -2.669999999999997,
+            -2.1700000000000004,
+            -1.6700000000000013
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -2.0762500000000004,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A0-": {
+          "episode_returns": [
+            0.42000000000000104,
+            0.920000000000001,
+            1.9200000000000015,
+            1.9200000000000015,
+            1.9200000000000015,
+            1.9200000000000015,
+            -0.07999999999999868,
+            1.9200000000000015
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 1.3575000000000013,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1839,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "0e12ace334e7241dec686454de44b09a775616338b49a623c1189fda9116c998",
+      "cpu_s": 0.796875,
+      "wall_s": 0.8100209999829531
+    },
+    {
+      "seed": 1019,
+      "method": "local_only",
+      "path": "seed_1019\\local_only",
+      "source_slots": [
+        4,
+        3
+      ],
+      "target_group": 0,
+      "proposal": {
+        "method": "local_only",
+        "source_count": 2,
+        "coefficient_norm": 0.0,
+        "common_matrix": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            3,
+            4
+          ],
+          "max_effective_preservation_error": 0.0
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 0.0,
+        "raw_probability_max_error": 0.0,
+        "int8_logit_max_error": 0.03929328918457031,
+        "int8_mean_KL": 4.854621195522791e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 332820480
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -1.1700000000000015,
+            2.459999999999999,
+            0.33000000000000207,
+            -2.6699999999999977,
+            -1.4200000000000015,
+            -3.4199999999999924,
+            -1.4200000000000008,
+            -0.17000000000000082
+          ],
+          "episode_lengths": [
+            64,
+            43,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -0.9349999999999992,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.125,
+          "evaluation_steps": 491
+        },
+        "A2+": {
+          "episode_returns": [
+            -1.1700000000000013,
+            -0.9200000000000013,
+            -2.669999999999997,
+            4.520000000000001,
+            3.8000000000000007,
+            4.520000000000001,
+            -1.9200000000000015,
+            -1.4200000000000017
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            16,
+            15,
+            16,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.5925,
+          "mean_goal_rate": 0.375,
+          "positive_success_rate": 0.375,
+          "evaluation_steps": 367
+        },
+        "B2+": {
+          "episode_returns": [
+            -0.4200000000000005,
+            -1.6700000000000015,
+            -1.4200000000000015,
+            -2.6699999999999964,
+            -2.669999999999997,
+            4.300000000000001,
+            -1.6700000000000013,
+            -3.419999999999991
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            15,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": -1.2049999999999985,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.125,
+          "evaluation_steps": 463
+        },
+        "A0-": {
+          "episode_returns": [
+            0.42000000000000126,
+            2.1700000000000004,
+            1.1700000000000013,
+            1.4200000000000015,
+            0.17000000000000134,
+            2.919999999999993,
+            1.170000000000001,
+            0.6700000000000005
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 1.26375,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1833,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "46b812d60bed30f13711b5c1e8634eeca0f5354dc215f916083763bfd2edd3e8",
+      "cpu_s": 0.78125,
+      "wall_s": 0.8172965999983717
+    },
+    {
+      "seed": 1019,
+      "method": "mean",
+      "path": "seed_1019\\mean",
+      "source_slots": [
+        4,
+        3
+      ],
+      "target_group": 0,
+      "proposal": {
+        "method": "mean",
+        "source_count": 2,
+        "coefficient_norm": 0.4197961688041687,
+        "common_matrix": [
+          [
+            -0.2456996738910675,
+            0.0717625543475151,
+            0.2458217293024063
+          ],
+          [
+            0.06293744593858719,
+            -0.1052238717675209,
+            -0.1480732262134552
+          ],
+          [
+            0.06828083097934723,
+            0.09234830737113953,
+            0.01153071504086256
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            3,
+            4
+          ],
+          "max_effective_preservation_error": 1.210719347000122e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 9.5367431640625e-07,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.0356597900390625,
+        "int8_mean_KL": 3.4588870407437576e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 333959168
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -0.42000000000000104,
+            0.3299999999999985,
+            0.32999999999999907,
+            -1.9200000000000015,
+            -1.4200000000000015,
+            -2.419999999999998,
+            -1.1700000000000013,
+            3.830000000000001
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            14
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mean_signed_return": -0.35750000000000065,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.125,
+          "evaluation_steps": 462
+        },
+        "A2+": {
+          "episode_returns": [
+            0.07999999999999866,
+            1.259999999999999,
+            -2.6699999999999986,
+            0.07999999999999868,
+            -0.9200000000000009,
+            4.520000000000001,
+            -1.9200000000000015,
+            0.07999999999999871
+          ],
+          "episode_lengths": [
+            64,
+            58,
+            64,
+            64,
+            64,
+            16,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.06374999999999945,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.25,
+          "evaluation_steps": 458
+        },
+        "B2+": {
+          "episode_returns": [
+            -1.170000000000001,
+            -1.6700000000000015,
+            -1.6700000000000017,
+            -2.6699999999999973,
+            -2.669999999999997,
+            -0.42000000000000104,
+            -1.6700000000000013,
+            -3.4199999999999933
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -1.9199999999999993,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A0-": {
+          "episode_returns": [
+            0.1700000000000011,
+            -3.330000000000001,
+            0.6700000000000013,
+            1.4200000000000015,
+            -2.6100000000000008,
+            2.4199999999999964,
+            1.9200000000000002,
+            0.6700000000000006
+          ],
+          "episode_lengths": [
+            64,
+            14,
+            64,
+            64,
+            38,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.1662499999999999,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 436
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1868,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "ee30804e6014b519f804e79b7093671bf82b1d0104dc5f9be8a98966f7f934e2",
+      "cpu_s": 0.859375,
+      "wall_s": 0.8601950999873225
+    },
+    {
+      "seed": 1019,
+      "method": "weighted",
+      "path": "seed_1019\\weighted",
+      "source_slots": [
+        4,
+        3
+      ],
+      "target_group": 0,
+      "proposal": {
+        "source_count": 2,
+        "row_counts": [
+          24,
+          24
+        ],
+        "row_count": 48,
+        "ridge_lambda": 0.14408255168831763,
+        "gram_eigenvalues": [
+          0.00902987218690443,
+          85.04498353928312,
+          347.19361165348295
+        ],
+        "gram_condition": 38449.44916905915,
+        "coefficient_norm": 0.990397669955328,
+        "method": "weighted",
+        "common_matrix": [
+          [
+            0.41783851385116577,
+            -0.21518777310848236,
+            0.7039005160331726
+          ],
+          [
+            0.3681887090206146,
+            -0.29704761505126953,
+            0.0956699326634407
+          ],
+          [
+            0.06303378194570541,
+            0.1475551873445511,
+            -0.07627638429403305
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            3,
+            4
+          ],
+          "max_effective_preservation_error": 2.9802322387695312e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 1.9073486328125e-06,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.10329055786132812,
+        "int8_mean_KL": 7.779445829349485e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 332410880
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -1.1700000000000008,
+            2.219999999999999,
+            -0.4200000000000006,
+            -2.6699999999999977,
+            -1.6700000000000017,
+            -2.6699999999999986,
+            -2.1700000000000013,
+            3.830000000000001
+          ],
+          "episode_lengths": [
+            64,
+            51,
+            64,
+            64,
+            64,
+            64,
+            64,
+            14
+          ],
+          "goal_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "positive_success_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mean_signed_return": -0.5900000000000001,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.25,
+          "evaluation_steps": 449
+        },
+        "A2+": {
+          "episode_returns": [
+            -0.17000000000000123,
+            1.259999999999999,
+            -2.6699999999999973,
+            0.07999999999999868,
+            -0.9200000000000009,
+            4.520000000000001,
+            -1.9200000000000015,
+            0.07999999999999871
+          ],
+          "episode_lengths": [
+            64,
+            58,
+            64,
+            64,
+            64,
+            16,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.03249999999999961,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.25,
+          "evaluation_steps": 458
+        },
+        "B2+": {
+          "episode_returns": [
+            -1.170000000000001,
+            -0.9200000000000013,
+            -1.6700000000000017,
+            -2.6699999999999964,
+            -2.669999999999997,
+            0.8300000000000038,
+            -1.6700000000000015,
+            -3.4199999999999933
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -1.6699999999999986,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A0-": {
+          "episode_returns": [
+            0.6700000000000015,
+            -2.8499999999999996,
+            2.1700000000000013,
+            0.9200000000000013,
+            -2.0700000000000003,
+            2.919999999999995,
+            1.9200000000000015,
+            1.1700000000000008
+          ],
+          "episode_lengths": [
+            64,
+            30,
+            64,
+            64,
+            56,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 0.6062500000000002,
+          "mean_goal_rate": 0.25,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 470
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 1889,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "c9769e63a69d20286f90064ce48ad0774974d63e76fca3b15ac489cf8a557fa2",
+      "cpu_s": 0.828125,
+      "wall_s": 0.852849699993385
+    },
+    {
+      "seed": 1019,
+      "method": "random",
+      "path": "seed_1019\\random",
+      "source_slots": [
+        4,
+        3
+      ],
+      "target_group": 0,
+      "proposal": {
+        "source_count": 2,
+        "row_counts": [
+          24,
+          24
+        ],
+        "row_count": 48,
+        "ridge_lambda": 0.14408255168831763,
+        "gram_eigenvalues": [
+          0.00902987218690443,
+          85.04498353928312,
+          347.19361165348295
+        ],
+        "gram_condition": 38449.44916905915,
+        "coefficient_norm": 0.9903976917266846,
+        "method": "random",
+        "seed": 95740,
+        "reference_norm": 0.9903976917266846,
+        "common_matrix": [
+          [
+            -0.3689105808734894,
+            -0.08291482925415039,
+            -0.15999194979667664
+          ],
+          [
+            -0.4707240164279938,
+            -0.5915616154670715,
+            -0.06380394846200943
+          ],
+          [
+            -0.46694231033325195,
+            -0.0883767232298851,
+            -0.10429535061120987
+          ]
+        ],
+        "recomposition": {
+          "affected_slots": [
+            3,
+            4
+          ],
+          "max_effective_preservation_error": 2.9802322387695312e-08
+        }
+      },
+      "invariance": {
+        "raw_logit_max_error": 9.5367431640625e-07,
+        "raw_probability_max_error": 1.7881393432617188e-07,
+        "int8_logit_max_error": 0.06320953369140625,
+        "int8_mean_KL": 8.912224676186457e-06
+      },
+      "purge_audit": {
+        "passed": true,
+        "checks": {
+          "every_local_zero": true,
+          "other_parents_zero": true,
+          "optimizer_empty": true,
+          "all_anchor_buffers_empty": true,
+          "movement_profiles_zero": true,
+          "reward_profiles_zero": true,
+          "all_profiles_unseen": true,
+          "group_statistics_empty": true,
+          "critic_is_fresh_W0": true,
+          "online_counts_zero": true,
+          "no_online_rollout_or_history_payload": true,
+          "fixed_fresh_route": true,
+          "all_actor_gradients_disabled": true
+        },
+        "boundary": "fresh W0 learner plus only the retained common C"
+      },
+      "capacity": {
+        "actor_bytes": 230,
+        "actor_budget_bytes": 236,
+        "checkpoint_bytes": 58193,
+        "foundation_bytes": 55477,
+        "full_persistent_bytes": 113670,
+        "package_budget_bytes": 262144,
+        "anchor_array_bytes": 14088,
+        "profile_array_bytes": 900,
+        "grouper_array_bytes": 298,
+        "optimizer_tensor_bytes": 0,
+        "process_rss_bytes": 333918208
+      },
+      "targets": {
+        "A0+": {
+          "episode_returns": [
+            -0.17000000000000087,
+            0.3299999999999985,
+            0.8299999999999992,
+            -2.6699999999999973,
+            -1.170000000000001,
+            -3.4199999999999893,
+            -1.170000000000001,
+            0.5800000000000003
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -0.8574999999999989,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A2+": {
+          "episode_returns": [
+            -2.419999999999999,
+            -2.4199999999999955,
+            -2.6699999999999973,
+            0.07999999999999868,
+            -0.9200000000000012,
+            4.340000000000002,
+            -1.9200000000000015,
+            -2.669999999999996
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            22,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "mean_signed_return": -1.0749999999999986,
+          "mean_goal_rate": 0.125,
+          "positive_success_rate": 0.125,
+          "evaluation_steps": 470
+        },
+        "B2+": {
+          "episode_returns": [
+            0.07999999999999902,
+            -1.6700000000000013,
+            -0.6700000000000012,
+            -2.419999999999997,
+            -2.669999999999997,
+            -0.42000000000000104,
+            -1.6700000000000013,
+            -3.4199999999999915
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": -1.607499999999999,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        },
+        "A0-": {
+          "episode_returns": [
+            0.17000000000000107,
+            2.1700000000000004,
+            0.670000000000001,
+            0.9200000000000009,
+            2.1700000000000004,
+            2.919999999999993,
+            1.6700000000000013,
+            -0.07999999999999918
+          ],
+          "episode_lengths": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "goal_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "positive_success_flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_signed_return": 1.3262499999999997,
+          "mean_goal_rate": 0.0,
+          "positive_success_rate": 0.0,
+          "evaluation_steps": 512
+        }
+      },
+      "new_training_steps": 0,
+      "evaluation_steps": 2006,
+      "actor_frozen_during_eval": true,
+      "source_unchanged": true,
+      "post_delete_checkpoint_sha256": "0e241c40ac72aca63028b60c2857d0fa28f8a9239e7dba2b2ac93bdf38292215",
+      "cpu_s": 0.859375,
+      "wall_s": 0.9276905000151601
+    }
+  ],
+  "source_audits": [
+    {
+      "seed": 1009,
+      "source": "outputs\\write_decision_causal_control\\seed_1009\\trial_rollback\\checkpoints\\checkpoint_step_00032768.pt",
+      "source_sha256": "e70439ddc0f40fb140ffced134cbfd4c62504e4b8b4a3f5bce29a60099b2569f",
+      "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+      "steps_by_task": {
+        "A0+": 8192,
+        "A0-": 8192,
+        "A1+": 8192,
+        "A1-": 8192,
+        "A2+": 0,
+        "A2-": 0
+      },
+      "source_slots": [
+        1,
+        0
+      ],
+      "source_group": 0,
+      "shared_max_abs": 0.0,
+      "source_anchor_evidence": [
+        {
+          "task": "A0+",
+          "slot": 1,
+          "generation": 1,
+          "rows": 24,
+          "episodes": 18
+        },
+        {
+          "task": "A1+",
+          "slot": 0,
+          "generation": 1,
+          "rows": 24,
+          "episodes": 17
+        }
+      ],
+      "unseen_target_training_steps": 0
+    },
+    {
+      "seed": 1013,
+      "source": "outputs\\write_decision_causal_control\\seed_1013\\trial_rollback\\checkpoints\\checkpoint_step_00032768.pt",
+      "source_sha256": "1f4287a6a0ded76959df5fa46b476e1e14e09b7a9ffa706fc98b6c68a41016b1",
+      "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+      "steps_by_task": {
+        "A0+": 8192,
+        "A0-": 8192,
+        "A1+": 8192,
+        "A1-": 8192,
+        "A2+": 0,
+        "A2-": 0
+      },
+      "source_slots": [
+        5,
+        3
+      ],
+      "source_group": 0,
+      "shared_max_abs": 0.0,
+      "source_anchor_evidence": [
+        {
+          "task": "A0+",
+          "slot": 5,
+          "generation": 1,
+          "rows": 24,
+          "episodes": 19
+        },
+        {
+          "task": "A1+",
+          "slot": 3,
+          "generation": 1,
+          "rows": 24,
+          "episodes": 21
+        }
+      ],
+      "unseen_target_training_steps": 0
+    },
+    {
+      "seed": 1019,
+      "source": "outputs\\write_decision_causal_control\\seed_1019\\trial_rollback\\checkpoints\\checkpoint_step_00032768.pt",
+      "source_sha256": "32abff3779a042e40a5b03db028f928ec397985019aa0c831fff597b6236f0f6",
+      "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+      "steps_by_task": {
+        "A0+": 8192,
+        "A0-": 8192,
+        "A1+": 8192,
+        "A1-": 8192,
+        "A2+": 0,
+        "A2-": 0
+      },
+      "source_slots": [
+        4,
+        3
+      ],
+      "source_group": 0,
+      "shared_max_abs": 0.0,
+      "source_anchor_evidence": [
+        {
+          "task": "A0+",
+          "slot": 4,
+          "generation": 1,
+          "rows": 24,
+          "episodes": 18
+        },
+        {
+          "task": "A1+",
+          "slot": 3,
+          "generation": 1,
+          "rows": 24,
+          "episodes": 16
+        }
+      ],
+      "unseen_target_training_steps": 0
+    }
+  ],
+  "cohort_cost": {
+    "source_training_steps_reused": 98304,
+    "new_training_steps": 0,
+    "new_evaluation_steps": 22746,
+    "new_total_interactions": 22746
+  },
+  "audit": {
+    "passed": true,
+    "failures": []
+  },
+  "protocol_sha256": "d785ef65cfa92a9246fe8d10ade1932190f5d2076399d72685e9e444fc1f28bf",
+  "cpu_s": 10.5,
+  "wall_s": 10.885867500008317,
+  "limitations": "Oracle fixed-route paid mechanism diagnostic, not deployment routing, capacity superiority, independent confirmation or SOTA. Unseen-to-source A2+ is exploratory validation. Negative targets deliberately test wrong parent reuse."
+}

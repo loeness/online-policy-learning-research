@@ -17,7 +17,9 @@
 
 先看当前核心报告：
 
-- **[最新：在线共享写入、容量替换与强对照的完整判断](docs/WRITE_INVESTIGATION_REVIEW.md)**：16 个完成 cohort、100 个完成运行；含未知边界、两份独立预训练底座、全部新数据用于训练的独立对照。当前写入规则尚未证明容量优势，父模块重组验证为负；所有选择和失败保留。
+- **[最新：整合、删除局部知识与冻结复用](docs/CONSOLIDATION_RETENTION_STAGE1_REVIEW.md)**：3 个来源种子、4 方法、384 个主评估回合；简单平均对精确情境复现的回报增益为 +0.480，对相关变体为 +0.557（一个种子退步）。加权提取未胜简单平均，错误家族或冲突目标的强制复用有害；尚无自动路由、容量优势或独立确认结论。
+- [第一阶段完整报告与成本更正](outputs/consolidation_retention_stage1_report_v3/report.md) · [图表](outputs/consolidation_retention_stage1_report_v3/figure.png) · [原始主结果](outputs/consolidation_retention_stage1/summary.json) · [物理文件与配对核算](outputs/consolidation_retention_stage1/postrun_audit.json) · [冻结规程](docs/CONSOLIDATION_RETENTION_STAGE1_PROTOCOL.md)
+- **[上一轮：在线共享写入、容量替换与强对照的完整判断](docs/WRITE_INVESTIGATION_REVIEW.md)**：16 个完成 cohort、100 个完成运行；含未知边界、两份独立预训练底座、全部新数据用于训练的独立对照。当前写入规则尚未证明容量优势，父模块重组验证为负；所有选择和失败保留。
 - [最新算法与待验证修改](docs/WRITE_INVESTIGATION_METHOD.md) · [逐 seed 结果与完整成本](outputs/write_investigation_report/report.md) · [机器可读汇总](outputs/write_investigation_report/analysis.json)
 - [最新六面板图](outputs/write_investigation_figures/write_investigation_focus.png) · [当前流式账本审计索引](outputs/write_current_reports/index.json)
 

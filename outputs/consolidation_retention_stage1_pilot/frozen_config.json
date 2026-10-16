@@ -1,0 +1,44 @@
+{
+  "format": "consolidation_retention_stage1_config_v1",
+  "analysis_role": "exploratory",
+  "source_root": "outputs/write_decision_causal_control",
+  "source_condition": "trial_rollback",
+  "source_checkpoint_step": 32768,
+  "seeds": [
+    1009
+  ],
+  "source_tasks": [
+    "A0+",
+    "A1+"
+  ],
+  "required_source_training_steps_each": 8192,
+  "methods": [
+    "local_only",
+    "mean",
+    "weighted",
+    "random"
+  ],
+  "targets": [
+    "A0+",
+    "A2+",
+    "B2+",
+    "A0-"
+  ],
+  "domain": "navigation",
+  "episodes": 1,
+  "max_episode_steps": 64,
+  "ridge_relative": 0.001,
+  "random_norm_reference": "weighted",
+  "random_seed_offset": 94721,
+  "evaluation_reset_offset": 180000,
+  "evaluation_action_offset": 280000,
+  "pre_codec_logit_tolerance": 1e-05,
+  "actor_codec": "int8",
+  "actor_budget_bytes": 236,
+  "package_budget_bytes": 262144,
+  "target_route": "same forced source-parent group on one fresh local slot for all four targets",
+  "deletion": "Fresh W0 learner; transfer only extracted parent C. Every local tensor, online critic, optimizer, anchors, profiles, group statistics, counters and history is fresh. Target actor frozen; no PPO.",
+  "limitations": "Oracle fixed-route paid mechanism diagnostic, not deployment routing, capacity superiority, independent confirmation or SOTA. Unseen-to-source A2+ is exploratory validation. Negative targets deliberately test wrong parent reuse.",
+  "max_torch_threads": 1,
+  "pilot_override": true
+}

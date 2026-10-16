@@ -1,0 +1,270 @@
+{
+  "seed": 1019,
+  "method": "local_only",
+  "path": "seed_1019\\local_only",
+  "source_slots": [
+    4,
+    3
+  ],
+  "target_group": 0,
+  "proposal": {
+    "method": "local_only",
+    "source_count": 2,
+    "coefficient_norm": 0.0,
+    "common_matrix": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "recomposition": {
+      "affected_slots": [
+        3,
+        4
+      ],
+      "max_effective_preservation_error": 0.0
+    }
+  },
+  "invariance": {
+    "raw_logit_max_error": 0.0,
+    "raw_probability_max_error": 0.0,
+    "int8_logit_max_error": 0.03929328918457031,
+    "int8_mean_KL": 4.854621195522791e-06
+  },
+  "purge_audit": {
+    "passed": true,
+    "checks": {
+      "every_local_zero": true,
+      "other_parents_zero": true,
+      "optimizer_empty": true,
+      "all_anchor_buffers_empty": true,
+      "movement_profiles_zero": true,
+      "reward_profiles_zero": true,
+      "all_profiles_unseen": true,
+      "group_statistics_empty": true,
+      "critic_is_fresh_W0": true,
+      "online_counts_zero": true,
+      "no_online_rollout_or_history_payload": true,
+      "fixed_fresh_route": true,
+      "all_actor_gradients_disabled": true
+    },
+    "boundary": "fresh W0 learner plus only the retained common C"
+  },
+  "capacity": {
+    "actor_bytes": 230,
+    "actor_budget_bytes": 236,
+    "checkpoint_bytes": 58193,
+    "foundation_bytes": 55477,
+    "full_persistent_bytes": 113670,
+    "package_budget_bytes": 262144,
+    "anchor_array_bytes": 14088,
+    "profile_array_bytes": 900,
+    "grouper_array_bytes": 298,
+    "optimizer_tensor_bytes": 0,
+    "process_rss_bytes": 332820480
+  },
+  "targets": {
+    "A0+": {
+      "episode_returns": [
+        -1.1700000000000015,
+        2.459999999999999,
+        0.33000000000000207,
+        -2.6699999999999977,
+        -1.4200000000000015,
+        -3.4199999999999924,
+        -1.4200000000000008,
+        -0.17000000000000082
+      ],
+      "episode_lengths": [
+        64,
+        43,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64
+      ],
+      "goal_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "positive_success_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "mean_signed_return": -0.9349999999999992,
+      "mean_goal_rate": 0.125,
+      "positive_success_rate": 0.125,
+      "evaluation_steps": 491
+    },
+    "A2+": {
+      "episode_returns": [
+        -1.1700000000000013,
+        -0.9200000000000013,
+        -2.669999999999997,
+        4.520000000000001,
+        3.8000000000000007,
+        4.520000000000001,
+        -1.9200000000000015,
+        -1.4200000000000017
+      ],
+      "episode_lengths": [
+        64,
+        64,
+        64,
+        16,
+        15,
+        16,
+        64,
+        64
+      ],
+      "goal_flags": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "positive_success_flags": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "mean_signed_return": 0.5925,
+      "mean_goal_rate": 0.375,
+      "positive_success_rate": 0.375,
+      "evaluation_steps": 367
+    },
+    "B2+": {
+      "episode_returns": [
+        -0.4200000000000005,
+        -1.6700000000000015,
+        -1.4200000000000015,
+        -2.6699999999999964,
+        -2.669999999999997,
+        4.300000000000001,
+        -1.6700000000000013,
+        -3.419999999999991
+      ],
+      "episode_lengths": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        15,
+        64,
+        64
+      ],
+      "goal_flags": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "positive_success_flags": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "mean_signed_return": -1.2049999999999985,
+      "mean_goal_rate": 0.125,
+      "positive_success_rate": 0.125,
+      "evaluation_steps": 463
+    },
+    "A0-": {
+      "episode_returns": [
+        0.42000000000000126,
+        2.1700000000000004,
+        1.1700000000000013,
+        1.4200000000000015,
+        0.17000000000000134,
+        2.919999999999993,
+        1.170000000000001,
+        0.6700000000000005
+      ],
+      "episode_lengths": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64
+      ],
+      "goal_flags": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "positive_success_flags": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "mean_signed_return": 1.26375,
+      "mean_goal_rate": 0.0,
+      "positive_success_rate": 0.0,
+      "evaluation_steps": 512
+    }
+  },
+  "new_training_steps": 0,
+  "evaluation_steps": 1833,
+  "actor_frozen_during_eval": true,
+  "source_unchanged": true,
+  "post_delete_checkpoint_sha256": "46b812d60bed30f13711b5c1e8634eeca0f5354dc215f916083763bfd2edd3e8",
+  "cpu_s": 0.78125,
+  "wall_s": 0.8172965999983717
+}
