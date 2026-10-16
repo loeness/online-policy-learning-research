@@ -1,5 +1,13 @@
 # Experiment index
 
+## Latest write-decision investigation (2026-10-16)
+
+[Full interpretation](WRITE_INVESTIGATION_REVIEW.md) · [algorithm and limits](WRITE_INVESTIGATION_METHOD.md) · [seed-level report](../outputs/write_investigation_report/report.md) · [current stream audits](../outputs/write_current_reports/index.json).
+
+Sixteen completed cohorts contain 100 completed runs, including validation and pilots. The new ledger records at least 5,278,326 interactions including failed and interrupted attempts; this is separate from earlier project totals. The controlled sharing effect does not establish superiority of the benefit gate. Capacity, unknown-boundary, and both shifted-foundation comparisons favor the stronger independent full-use control in mean online reward. Parent recycling validation is negative; its formal/unknown expansion was skipped by the declared rule.
+
+The `write_*` runners, frozen source copies, holdout/gate/route logs, int8 actors, complete checkpoints, failure markers, repair provenance, and figures remain archived. No C2/C3 standard benchmark or SOTA reproduction is implied.
+
 This index covers the archived A, B, B+, compression, original C1, C1 supplemental work, and the subsequent isolated P0 diagnostic. The archive preserves exploratory runs, failed validation attempts, intermediate checkpoints, and negative results. C2 and later phases are outside the archive and are not implemented here.
 
 ## Read first

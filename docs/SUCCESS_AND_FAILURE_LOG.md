@@ -1,5 +1,14 @@
 # Success and failure log
 
+## Latest ordered write investigation (2026-10-16)
+
+- Controlled trial sharing beats retention of the same trial update only in the current local module on all three seeds, but its mean is below simple reward-aware sharing.
+- Finite-capacity and unknown-boundary shared rules lose to an interaction-budget-matched full-use independent learner; both independent-W0 detour checks also lose to that control.
+- Parent recycling executed 26 times and lowered ungrouped coverage, while mean online reward decreased for both conditions. Formal/unknown follow-ups were skipped by the preset validation gate.
+- Initial anchor-generation and reward-support bugs, an interrupted unknown cohort, and a final-evaluation deepcopy bug retain their raw costs. The deepcopy failure alone consumed 154,368 training steps, counted separately from successful reruns.
+- A missing-field resume summary was transparently reconstructed from verified frozen metadata, retaining its original bytes and all run/source bytes. A separate docs-only formal source variation remains disclosed and is not relabeled as a clean strict audit.
+- Latest stream ledger/capacity audits pass for all 13 complete stream cohorts. See [full interpretation](WRITE_INVESTIGATION_REVIEW.md) and [current audit index](../outputs/write_current_reports/index.json).
+
 This log separates implementation or validation failures from real method-performance results. Every cohort's per-run files remain in `outputs/`; this summary is not a substitute for those records. There is no C2 cohort in this archive.
 
 ## Shared foundation and A/B

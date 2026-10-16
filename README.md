@@ -17,6 +17,12 @@
 
 先看当前核心报告：
 
+- **[最新：在线共享写入、容量替换与强对照的完整判断](docs/WRITE_INVESTIGATION_REVIEW.md)**：16 个完成 cohort、100 个完成运行；含未知边界、两份独立预训练底座、全部新数据用于训练的独立对照。当前写入规则尚未证明容量优势，父模块重组验证为负；所有选择和失败保留。
+- [最新算法与待验证修改](docs/WRITE_INVESTIGATION_METHOD.md) · [逐 seed 结果与完整成本](outputs/write_investigation_report/report.md) · [机器可读汇总](outputs/write_investigation_report/analysis.json)
+- [最新六面板图](outputs/write_investigation_figures/write_investigation_focus.png) · [当前流式账本审计索引](outputs/write_current_reports/index.json)
+
+以下为此前各阶段报告，保留当时结论及其限制：
+
 - [本轮按顺序完成的研究总结](outputs/shared_write_archive_audit/研究推进总结.md)
 - [当前真实共享写入结构与限制](docs/SHARED_WRITE_STRUCTURE_AND_LIMITS.md)
 - [S1a：共享参数持续在线学习](outputs/knowledge_shared_write_report/阶段S1a结果.md)

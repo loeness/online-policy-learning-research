@@ -1,0 +1,122 @@
+{
+  "started": "2026-10-16T16:02:58.124779+08:00",
+  "max_training_workers": 2,
+  "steps": [
+    {
+      "label": "unknown_report",
+      "command": [
+        "scripts/report_write_stream.py",
+        "--input",
+        "outputs/write_stream_unknown",
+        "--output",
+        "outputs/write_stream_unknown_report"
+      ],
+      "status": "complete",
+      "cohort": null,
+      "returncode": 0,
+      "elapsed_s": 4.247517300012987
+    },
+    {
+      "label": "parent_cumulative_validation",
+      "command": [
+        "scripts/run_write_recycle.py",
+        "--phase",
+        "known",
+        "--selection",
+        "outputs/write_decision_selection/selection.json",
+        "--conditions",
+        "trial_gate_relaxed",
+        "reward_shared",
+        "--seeds",
+        "1049",
+        "1051",
+        "--bout-steps",
+        "1024",
+        "--workers",
+        "2",
+        "--no-recycle",
+        "--output",
+        "outputs/write_parent_cumulative_validation"
+      ],
+      "status": "complete",
+      "cohort": "write_parent_cumulative_validation",
+      "returncode": 0,
+      "elapsed_s": 73.63061740002013
+    },
+    {
+      "label": "parent_recycle_validation",
+      "command": [
+        "scripts/run_write_recycle.py",
+        "--phase",
+        "known",
+        "--selection",
+        "outputs/write_decision_selection/selection.json",
+        "--conditions",
+        "trial_gate_relaxed",
+        "reward_shared",
+        "--seeds",
+        "1049",
+        "1051",
+        "--bout-steps",
+        "1024",
+        "--workers",
+        "2",
+        "--output",
+        "outputs/write_parent_recycle_validation"
+      ],
+      "status": "complete",
+      "cohort": "write_parent_recycle_validation",
+      "returncode": 0,
+      "elapsed_s": 75.5022314999951
+    },
+    {
+      "label": "parent_cumulative_validation_report",
+      "command": [
+        "scripts/report_write_stream.py",
+        "--input",
+        "outputs/write_parent_cumulative_validation",
+        "--output",
+        "outputs/write_parent_cumulative_validation_report"
+      ],
+      "status": "complete",
+      "cohort": null,
+      "returncode": 0,
+      "elapsed_s": 1.5856590000039432
+    },
+    {
+      "label": "parent_recycle_validation_report",
+      "command": [
+        "scripts/report_write_stream.py",
+        "--input",
+        "outputs/write_parent_recycle_validation",
+        "--output",
+        "outputs/write_parent_recycle_validation_report"
+      ],
+      "status": "complete",
+      "cohort": null,
+      "returncode": 0,
+      "elapsed_s": 1.615631000022404
+    },
+    {
+      "label": "known_budget_baseline",
+      "command": [
+        "scripts/run_write_budget_baseline.py",
+        "--phase",
+        "known",
+        "--selection",
+        "outputs/write_decision_selection/selection.json",
+        "--workers",
+        "2",
+        "--output",
+        "outputs/write_stream_known_budget_baseline"
+      ],
+      "status": "failed",
+      "cohort": "write_stream_known_budget_baseline",
+      "returncode": 1,
+      "elapsed_s": 113.41236250000657
+    }
+  ],
+  "status": "failed",
+  "error": "known_budget_baseline failed; see D:\\MovedFromC\\ChatGPT\\online\\outputs\\write_execution_logs\\known_budget_baseline.stderr.log",
+  "updated": "2026-10-16T16:11:03.181362+08:00"
+}

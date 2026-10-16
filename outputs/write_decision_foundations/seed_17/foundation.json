@@ -1,0 +1,106 @@
+{
+  "seed": 17,
+  "dataset_path": "D:\\MovedFromC\\ChatGPT\\online\\data\\pretrain_source.npz",
+  "dataset_sha256": "493c67dc07393a674deb6aa7ab5ba4feea3c1a48eacc16b37046a12606bc56f2",
+  "config_sha256": "0a8cb8e444dbe960ffabfdf29a1c28ea5014955e7a93c4a50c8e4a443a1b6fd8",
+  "dataset_transitions": 20000,
+  "train_transitions": 17955,
+  "validation_transitions": 2045,
+  "validation_split": "whole trajectory: episode ID mod 10",
+  "validation_cross_entropy": 0.34639859199523926,
+  "bc_updates": 1500,
+  "bc_batch_size": 512,
+  "bc_learning_rate": 0.002,
+  "minibatch_rng_seed": 7018,
+  "evaluation_steps_per_mode": 1024,
+  "evaluation_steps_total": 3072,
+  "evaluations": {
+    "source": {
+      "context": "normal",
+      "steps": 1024,
+      "step_budget": 1024,
+      "episodes": 170,
+      "completed_episodes": 169,
+      "mean_return": 2.327810650887574,
+      "success_rate": 1.0,
+      "partial_episode_return": 0.88,
+      "partial_episode_steps": 4
+    },
+    "unseen_cw_before_online": {
+      "context": "cw",
+      "steps": 1024,
+      "step_budget": 1024,
+      "episodes": 16,
+      "completed_episodes": 16,
+      "mean_return": -1.9668750000000004,
+      "success_rate": 0.0,
+      "partial_episode_return": null,
+      "partial_episode_steps": 0
+    },
+    "unseen_ccw_before_online": {
+      "context": "ccw",
+      "steps": 1024,
+      "step_budget": 1024,
+      "episodes": 16,
+      "completed_episodes": 16,
+      "mean_return": -2.045,
+      "success_rate": 0.0,
+      "partial_episode_return": null,
+      "partial_episode_steps": 0
+    }
+  },
+  "wall_s": 5.4461463000043295,
+  "cpu_s": 5.3125,
+  "rss_start_bytes": 255713280,
+  "rss_peak_bytes": 327639040,
+  "rss_end_bytes": 323510272,
+  "source_snapshot": {
+    "sources": {
+      "scripts\\build_write_foundations.py": {
+        "sha256": "c744a4fa5880dd676738811fc95c52a87e394fceb68d88822490b6fcda0101db",
+        "bytes": 20805
+      },
+      "scripts\\run_knowledge_loop.py": {
+        "sha256": "5ed6d081c0e3381d2e22d9bcf280600909ac1f281c9e82f9c31067419fc26eb7",
+        "bytes": 68917
+      },
+      "configs\\c1.json": {
+        "sha256": "7e24e002dfcc80809e28c4d6f97d42ec5a7ad1055752eb8a56742ae3275ebde0",
+        "bytes": 1035
+      },
+      "data\\pretrain_source.json": {
+        "sha256": "6b63c5a59e8509a52287fb22c74e1bcb85824c269e7909739f6c9e27c86d0f68",
+        "bytes": 321
+      },
+      "src\\online_rl\\experiment.py": {
+        "sha256": "1bf23a99f1ca62efe0bb0b8c5c67495b932b1c21a622e97ffc97e0c8269e0acc",
+        "bytes": 23600
+      },
+      "src\\online_rl\\policy.py": {
+        "sha256": "edf1d024abdfa00dfea262255a358e7ce5dfb92c1e003b2642714a0a56067c1d",
+        "bytes": 7288
+      },
+      "src\\online_rl\\envs.py": {
+        "sha256": "7d8952301e80834239330985739149b6f4066d3e1be9037282f3f3e58334d156",
+        "bytes": 9021
+      },
+      "src\\online_rl\\routing.py": {
+        "sha256": "cf68585e0a9fa0ca0dd2c52f3ce9c6ba742412d7382a2b071d47ee8cb62f9edf",
+        "bytes": 6217
+      }
+    },
+    "run_config": {
+      "path": "config.json",
+      "sha256": "0a8cb8e444dbe960ffabfdf29a1c28ea5014955e7a93c4a50c8e4a443a1b6fd8",
+      "bytes": 1600
+    },
+    "dataset": {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\data\\pretrain_source.npz",
+      "sha256": "493c67dc07393a674deb6aa7ab5ba4feea3c1a48eacc16b37046a12606bc56f2",
+      "bytes": 116878
+    }
+  },
+  "weights_sha256": "730e0033786f3aa00a05b21fadf5ec3259917a7c6fbc651dc5aea7dcbb655979",
+  "foundation_initialization": "fresh random initialization; no existing foundation weights loaded",
+  "configured_foundation_path_ignored": "D:\\MovedFromC\\ChatGPT\\online\\data\\foundation.pt"
+}

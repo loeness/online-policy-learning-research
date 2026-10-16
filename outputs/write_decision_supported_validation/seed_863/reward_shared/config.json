@@ -1,0 +1,68 @@
+{
+  "validation_seeds": [
+    859,
+    863
+  ],
+  "formal_seeds": [
+    1009,
+    1013,
+    1019
+  ],
+  "validation_conditions": [
+    "independent_fast",
+    "dynamics_shared",
+    "reward_shared",
+    "trial_gate",
+    "trial_gate_relaxed",
+    "projected_gate",
+    "local_promote",
+    "trial_rollback"
+  ],
+  "sequence": [
+    "A0+",
+    "A0-",
+    "A1+",
+    "A1-",
+    "A0+",
+    "A0-",
+    "A1+",
+    "A1-",
+    "A2+",
+    "A2-"
+  ],
+  "validation_bout_steps": 2048,
+  "formal_bout_steps": 4096,
+  "probe_steps": 256,
+  "evaluation_episodes": 8,
+  "local_learning_rate": 0.003,
+  "fast_local_learning_rate": 0.004,
+  "shared_learning_rate": 0.001,
+  "critic_learning_rate": 0.003,
+  "actor_budget_bytes": 1024,
+  "actor_codec": "float32",
+  "reward_support_aware": true,
+  "package_budget_bytes": 262144,
+  "anchors_per_slot": 24,
+  "gate_gain": 0.0005,
+  "gate_loss_tolerance": 0.005,
+  "gate_kl": 0.05,
+  "min_ess": 8,
+  "proposal_norm": 0.1,
+  "promotion_scale": 0.5,
+  "max_workers": 2,
+  "selection_rule": "Choose the best two proposed decision conditions by mean validation online reward per training step; preserve independent/dynamics/reward baselines regardless. Formal seeds are unused for selection.",
+  "revision_reason": "Repair scalar-generation metadata crash, and compare conditional reward only on identifiable common feature support. Earlier failed cohort remains separate.",
+  "bout_steps": 2048,
+  "phase": "validation",
+  "condition": "reward_shared",
+  "seed": 863,
+  "output_root": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\write_decision_supported_validation",
+  "slot_map": {
+    "A0+": 5,
+    "A0-": 2,
+    "A1+": 3,
+    "A1-": 1,
+    "A2+": 0,
+    "A2-": 4
+  }
+}

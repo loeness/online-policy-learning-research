@@ -1,5 +1,21 @@
 # Reproducibility
 
+## Latest ordered write investigation
+
+Use the current `.venv` and new, empty output directories. The original evidence and frozen snapshots remain under `outputs/write_*`. `configs/write_followup.json` and `configs/write_detour_budget_supplement.json` declare the matrix; `docs/WRITE_*PROTOCOL.md` and `WRITE_BUDGET_BASELINE.md` state stage-specific assumptions and costs. Maximum concurrent learners is two, with one torch thread per learner.
+
+The completed queue is recorded in `outputs/write_execution_logs/followups_status.json`; shifted-generator full-use controls are recorded in `outputs/write_detour_budget_logs/coordinator_status.json`. These queues skip completed work and preserve reports; use individual runner CLIs and new paths for a fresh reproduction. Do not overwrite historical directories to rerun.
+
+Regenerate derived aggregate/figures without new interactions:
+
+```powershell
+.venv\Scripts\python.exe scripts/summarize_write_investigation.py --output outputs/write_investigation_report_reproduction
+.venv\Scripts\python.exe scripts/plot_write_investigation_focus.py --analysis outputs/write_investigation_report_reproduction/analysis.json --output outputs/write_investigation_figures_reproduction
+.venv\Scripts\python.exe scripts/rebuild_write_stream_reports.py --output outputs/write_current_reports_reproduction
+```
+
+The metadata repair script is a one-time audited repair and intentionally refuses a second repair. Restored checkpoints contain learner state, not a saved live environment trajectory; this is not exact mid-episode trajectory resumption. See [current findings](WRITE_INVESTIGATION_REVIEW.md).
+
 The archive contains both the original experiment records and commands for fresh reruns. Fresh runs should write to a new output directory; several historical runners default to paths inside `outputs/` and would otherwise overwrite archive records. The original snapshot software check contained 82 tests; C1 supplement checks add to that suite. The current recorded total is in `outputs/c1_supplement/software_checks.txt`. Full A/B+ and C1 runs execute many hundreds of thousands to over a million simulated transitions and are not quick checks.
 
 ## Environment

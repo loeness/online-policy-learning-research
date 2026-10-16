@@ -1,0 +1,116 @@
+{
+  "status": "completed",
+  "dataset_path": "D:\\MovedFromC\\ChatGPT\\online\\data\\pretrain_source.npz",
+  "dataset_sha256": "493c67dc07393a674deb6aa7ab5ba4feea3c1a48eacc16b37046a12606bc56f2",
+  "dataset_transitions": 20000,
+  "seeds": [
+    17,
+    29
+  ],
+  "bc_updates_per_seed": 1500,
+  "bc_updates_total": 3000,
+  "evaluation_steps_per_mode": 1024,
+  "evaluation_steps_per_seed": 3072,
+  "evaluation_steps_total": 6144,
+  "wall_s_total": 10.091694200003985,
+  "cpu_s_total": 9.875,
+  "rss_peak_bytes_max": 327639040,
+  "per_seed": [
+    {
+      "seed": 17,
+      "path": "seed_17",
+      "weights_sha256": "730e0033786f3aa00a05b21fadf5ec3259917a7c6fbc651dc5aea7dcbb655979",
+      "config_sha256": "0a8cb8e444dbe960ffabfdf29a1c28ea5014955e7a93c4a50c8e4a443a1b6fd8",
+      "wall_s": 5.4461463000043295,
+      "cpu_s": 5.3125,
+      "rss_start_bytes": 255713280,
+      "rss_peak_bytes": 327639040,
+      "rss_end_bytes": 323510272,
+      "bc_updates": 1500,
+      "evaluation_steps": 3072,
+      "evaluations": {
+        "source": {
+          "context": "normal",
+          "steps": 1024,
+          "step_budget": 1024,
+          "episodes": 170,
+          "completed_episodes": 169,
+          "mean_return": 2.327810650887574,
+          "success_rate": 1.0,
+          "partial_episode_return": 0.88,
+          "partial_episode_steps": 4
+        },
+        "unseen_cw_before_online": {
+          "context": "cw",
+          "steps": 1024,
+          "step_budget": 1024,
+          "episodes": 16,
+          "completed_episodes": 16,
+          "mean_return": -1.9668750000000004,
+          "success_rate": 0.0,
+          "partial_episode_return": null,
+          "partial_episode_steps": 0
+        },
+        "unseen_ccw_before_online": {
+          "context": "ccw",
+          "steps": 1024,
+          "step_budget": 1024,
+          "episodes": 16,
+          "completed_episodes": 16,
+          "mean_return": -2.045,
+          "success_rate": 0.0,
+          "partial_episode_return": null,
+          "partial_episode_steps": 0
+        }
+      }
+    },
+    {
+      "seed": 29,
+      "path": "seed_29",
+      "weights_sha256": "f3d665f3541d8658a236031726f9f152b15ead6710469c62e5d0b6f1a0dd5074",
+      "config_sha256": "a1c69fb6a0fb405da3d227a85833acf65d9c6b11a58526de53aee32acd7115f1",
+      "wall_s": 4.645547899999656,
+      "cpu_s": 4.5625,
+      "rss_start_bytes": 323518464,
+      "rss_peak_bytes": 325808128,
+      "rss_end_bytes": 323166208,
+      "bc_updates": 1500,
+      "evaluation_steps": 3072,
+      "evaluations": {
+        "source": {
+          "context": "normal",
+          "steps": 1024,
+          "step_budget": 1024,
+          "episodes": 170,
+          "completed_episodes": 169,
+          "mean_return": 2.327810650887574,
+          "success_rate": 1.0,
+          "partial_episode_return": 0.88,
+          "partial_episode_steps": 4
+        },
+        "unseen_cw_before_online": {
+          "context": "cw",
+          "steps": 1024,
+          "step_budget": 1024,
+          "episodes": 16,
+          "completed_episodes": 16,
+          "mean_return": -2.044999999999999,
+          "success_rate": 0.0,
+          "partial_episode_return": null,
+          "partial_episode_steps": 0
+        },
+        "unseen_ccw_before_online": {
+          "context": "ccw",
+          "steps": 1024,
+          "step_budget": 1024,
+          "episodes": 16,
+          "completed_episodes": 16,
+          "mean_return": -2.029375,
+          "success_rate": 0.0,
+          "partial_episode_return": null,
+          "partial_episode_steps": 0
+        }
+      }
+    }
+  ]
+}

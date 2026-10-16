@@ -1014,7 +1014,7 @@ def _analysis(root: Path, output_dir: Path) -> dict[str, Any]:
         "Checkpoint、W0 与 actor 字节优先取物理文件长度；缺少可核对文件时会标记 capacity.json 回退来源，不把声明值伪装成实测。",
         "236 B actor 上限和 256 KiB 完整持久包上限是双重约束；同上限并非物理包字节恰好相等，尚未验证只约束总持久字节时的最优分配。",
         "完整数据利用基线只匹配 training + probe 交互总数，不匹配 known 每段停留时间、PPO 更新数或计算成本；跨 cohort 比较以全流奖励为准。",
-        "known 固定流中的 independent7_lru 与 independent7_lfu 轨迹结果相同；不能把二者当作额外独立验证。unknown 中二者可以不同。",
+        "known 固定流中的 independent7_lru 与 independent7_lfu 训练回报及训练正任务成功率相同，终点缓存诊断仍可不同；不能把二者当作额外独立验证。unknown 中二者可以不同。",
     ]
     return {
         "format": "write_investigation_report_v1",

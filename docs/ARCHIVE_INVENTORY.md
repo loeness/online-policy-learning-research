@@ -1,5 +1,9 @@
 # Research archive inventory
 
+## Latest write investigation (2026-10-16)
+
+The regenerated manifest includes all new `write_*` experiment artifacts, independent foundation checkpoints, candidate/control source snapshots, failed/interrupted ledgers, metadata-repair history, current audits, raw and focused figures, references, code and tests. There are 16 complete cohort roots / 100 complete runs plus separately costed failed or interrupted attempts. [Full interpretation](WRITE_INVESTIGATION_REVIEW.md) records negative results and provenance limits. Manifest byte totals describe the Git archive, not the deployed learner memory budget. Confidential local extraction remains excluded.
+
 Initial inventory date: 2026-10-14; expanded on 2026-10-15. The archive includes A/B, B+, compression, C1, P0, and the three-stage bounded knowledge-organization study. The new closed loop uses the controlled C1 environment; it is not a completed general-environment C2 benchmark. Historical size tables below describe their original snapshots; the manifest gives current counts and bytes.
 
 ## Coverage

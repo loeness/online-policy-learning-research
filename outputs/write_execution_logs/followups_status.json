@@ -1,0 +1,199 @@
+{
+  "started": "2026-10-16T16:14:00.401774+08:00",
+  "max_training_workers": 2,
+  "steps": [
+    {
+      "label": "unknown_report",
+      "status": "already_complete_report",
+      "output": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\write_stream_unknown_report"
+    },
+    {
+      "label": "parent_cumulative_validation",
+      "status": "already_complete",
+      "cohort": "write_parent_cumulative_validation"
+    },
+    {
+      "label": "parent_recycle_validation",
+      "status": "already_complete",
+      "cohort": "write_parent_recycle_validation"
+    },
+    {
+      "label": "parent_cumulative_validation_report",
+      "status": "already_complete_report",
+      "output": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\write_parent_cumulative_validation_report"
+    },
+    {
+      "label": "parent_recycle_validation_report",
+      "status": "already_complete_report",
+      "output": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\write_parent_recycle_validation_report"
+    },
+    {
+      "label": "known_budget_baseline",
+      "command": [
+        "scripts/run_write_budget_baseline.py",
+        "--phase",
+        "known",
+        "--selection",
+        "outputs/write_decision_selection/selection.json",
+        "--workers",
+        "2",
+        "--output",
+        "outputs/write_stream_known_budget_baseline"
+      ],
+      "status": "complete",
+      "cohort": "write_stream_known_budget_baseline",
+      "returncode": 0,
+      "elapsed_s": 120.13922409998486
+    },
+    {
+      "label": "known_budget_report",
+      "command": [
+        "scripts/report_write_stream.py",
+        "--input",
+        "outputs/write_stream_known_budget_baseline",
+        "--output",
+        "outputs/write_stream_known_budget_baseline_report"
+      ],
+      "status": "complete",
+      "cohort": null,
+      "returncode": 0,
+      "elapsed_s": 1.7364457000221591
+    },
+    {
+      "label": "unknown_budget_baseline",
+      "command": [
+        "scripts/run_write_budget_baseline.py",
+        "--phase",
+        "unknown",
+        "--selection",
+        "outputs/write_decision_selection/selection.json",
+        "--workers",
+        "2",
+        "--output",
+        "outputs/write_stream_unknown_budget_baseline"
+      ],
+      "status": "complete",
+      "cohort": "write_stream_unknown_budget_baseline",
+      "returncode": 0,
+      "elapsed_s": 139.40467659998103
+    },
+    {
+      "label": "unknown_budget_report",
+      "command": [
+        "scripts/report_write_stream.py",
+        "--input",
+        "outputs/write_stream_unknown_budget_baseline",
+        "--output",
+        "outputs/write_stream_unknown_budget_baseline_report"
+      ],
+      "status": "complete",
+      "cohort": null,
+      "returncode": 0,
+      "elapsed_s": 2.125094299990451
+    },
+    {
+      "label": "write_detour_w0_17",
+      "command": [
+        "scripts/run_write_stream.py",
+        "--phase",
+        "known",
+        "--selection",
+        "outputs/write_decision_selection/selection.json",
+        "--conditions",
+        "trial_gate_relaxed",
+        "reward_shared",
+        "independent7_lru",
+        "--seeds",
+        "1061",
+        "1063",
+        "--bout-steps",
+        "2048",
+        "--domain",
+        "detour",
+        "--foundation",
+        "outputs/write_decision_foundations/seed_17/foundation.pt",
+        "--workers",
+        "2",
+        "--output",
+        "outputs/write_detour_w0_17"
+      ],
+      "status": "complete",
+      "cohort": "write_detour_w0_17",
+      "returncode": 0,
+      "elapsed_s": 198.37433389999205
+    },
+    {
+      "label": "write_detour_w0_17_report",
+      "command": [
+        "scripts/report_write_stream.py",
+        "--input",
+        "outputs/write_detour_w0_17",
+        "--output",
+        "outputs/write_detour_w0_17_report"
+      ],
+      "status": "complete",
+      "cohort": null,
+      "returncode": 0,
+      "elapsed_s": 2.384836399985943
+    },
+    {
+      "label": "write_detour_w0_29",
+      "command": [
+        "scripts/run_write_stream.py",
+        "--phase",
+        "known",
+        "--selection",
+        "outputs/write_decision_selection/selection.json",
+        "--conditions",
+        "trial_gate_relaxed",
+        "reward_shared",
+        "independent7_lru",
+        "--seeds",
+        "1061",
+        "1063",
+        "--bout-steps",
+        "2048",
+        "--domain",
+        "detour",
+        "--foundation",
+        "outputs/write_decision_foundations/seed_29/foundation.pt",
+        "--workers",
+        "2",
+        "--output",
+        "outputs/write_detour_w0_29"
+      ],
+      "status": "complete",
+      "cohort": "write_detour_w0_29",
+      "returncode": 0,
+      "elapsed_s": 194.85454369999934
+    },
+    {
+      "label": "write_detour_w0_29_report",
+      "command": [
+        "scripts/report_write_stream.py",
+        "--input",
+        "outputs/write_detour_w0_29",
+        "--output",
+        "outputs/write_detour_w0_29_report"
+      ],
+      "status": "complete",
+      "cohort": null,
+      "returncode": 0,
+      "elapsed_s": 2.3342520000005607
+    },
+    {
+      "label": "investigation_report",
+      "command": [
+        "scripts/summarize_write_investigation.py",
+        "--output",
+        "outputs/write_investigation_report"
+      ],
+      "status": "complete",
+      "cohort": null,
+      "returncode": 0,
+      "elapsed_s": 2.10288760002004
+    }
+  ],
+  "status": "complete",
+  "updated": "2026-10-16T16:25:03.881907+08:00"
+}

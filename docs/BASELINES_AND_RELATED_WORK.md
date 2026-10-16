@@ -1,5 +1,11 @@
 # Baselines and related work
 
+## Latest write-investigation controls
+
+The new write-decision tests compare dynamics-only and reward-aware grouping, strict/relaxed benefit gates, episode-separated reference projection, local promotion, and retention of the same trial entirely in local parameters. Bounded caches add LRU/LFU/random replacement. An added G0 control uses all fresh rollouts for training and spends zero paid uniform-probe interactions; total training-plus-probe interactions match shared conditions, while updates, compute, and known per-bout dwell times do not. All-stream reward is used for that comparison.
+
+Reference projection is inspired by A-GEM and conflict-projection methods; it is not a faithful published reproduction. The newer setup adds reward conflicts, detour shaping and two independently initialized pretrained foundations, so the older single-foundation scope below describes historical cohorts. No literature leaderboard or SOTA comparison is claimed. [Latest results and limits](WRITE_INVESTIGATION_REVIEW.md).
+
 ## Scope and comparison rule
 
 This note maps the implemented A, B, and C1 controls to relevant published methods. It is not a leaderboard. This project uses a custom 9 × 9 navigation simulator with four actions, one fixed behavior-cloning foundation checkpoint, three deployment seeds per formal comparison, and project-specific online schedules. Literature scores from other task suites, training corpora, model sizes, budgets, or memory definitions cannot be ranked against these results.
