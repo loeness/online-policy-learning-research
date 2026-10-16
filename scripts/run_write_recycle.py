@@ -6,9 +6,9 @@ this file selects the separate recycling cohort.
 """
 from __future__ import annotations
 
+import argparse
 import io
 import json
-import argparse
 import sys
 from pathlib import Path
 from typing import Any, Mapping
@@ -160,8 +160,7 @@ def _wrapped_route_before_action(agent: Any, obs: np.ndarray) -> dict[str, Any]:
     manager = getattr(agent, "parent_budget_manager", None)
     if (
         is_bootstrap_route
-        or
-        manager is None
+        or manager is None
         or not bool(agent.run_config.get("parent_recycle", True))
         or slot < 0
         or slot >= int(agent.core.local_slots)
