@@ -618,6 +618,11 @@ def _process_rollout(agent, *, decisions_stream, capacity_rows, folder: Path, fo
         return
     if phase == "fit":
         update = loop._ppo_update(agent, rows)
+        # The reused PPO helper calls every masked row "stale", including
+        # legitimate unknown-route samples. Keep those two causes distinct.
+        unknown_fit = sum(row.slot < 0 for row in rows)
+        agent.counts["stale_actor_rows"] -= unknown_fit
+        agent.counts["unknown_actor_fit_rows"] = agent.counts.get("unknown_actor_fit_rows", 0) + unknown_fit
         agent.counts["fit_steps"] += len(rows)
         if agent.cycle_state is not None:
             agent.cycle_state["fit_rows"] += len(rows)
