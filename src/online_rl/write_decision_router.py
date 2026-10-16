@@ -16,6 +16,7 @@ from typing import Any, NamedTuple
 import numpy as np
 
 from .shared_write_grouping import empty_profile, observe_profile, supported_directions
+from .write_decision_evidence import RewardAwareGroups
 
 
 _STATE_VERSION = 1
@@ -119,6 +120,37 @@ def _fit_coefficients(xtx: np.ndarray, xty: np.ndarray) -> np.ndarray:
     return np.linalg.solve(xtx + _RIDGE * np.eye(_FEATURES), xty)
 
 
+def _feature_is_identifiable(xtx: np.ndarray, features: np.ndarray) -> bool:
+    """Whether a prediction lies in the feature subspace seen so far.
+
+    For ``X.T @ X``, the identifiable coefficient subspace is its range. A
+    prediction at ``features`` is independent of arbitrary null-space
+    coefficients exactly when this feature vector lies in that range.
+    """
+
+    gram = np.asarray(xtx, dtype=np.float64)
+    vector = np.asarray(features, dtype=np.float64)
+    if gram.shape != (_FEATURES, _FEATURES) or vector.shape != (_FEATURES,):
+        return False
+    if not np.isfinite(gram).all() or not np.isfinite(vector).all():
+        return False
+    symmetric = (gram + gram.T) * 0.5
+    eigenvalues, eigenvectors = np.linalg.eigh(symmetric)
+    largest = max(0.0, float(eigenvalues[-1]))
+    if largest <= 1e-12:
+        return False
+    tolerance = max(1e-12, largest * 1e-10)
+    supported = eigenvalues > tolerance
+    if not np.any(supported):
+        return False
+    basis = eigenvectors[:, supported]
+    projection = basis @ (basis.T @ vector)
+    relative_error = float(np.linalg.norm(vector - projection)) / max(
+        float(np.linalg.norm(vector)), 1e-12
+    )
+    return relative_error <= 1e-8
+
+
 def _cosine(first: np.ndarray, second: np.ndarray) -> float:
     denominator = float(np.linalg.norm(first) * np.linalg.norm(second))
     if denominator <= 1e-12:
@@ -166,6 +198,7 @@ class WriteDecisionRouter:
         window: int = 128,
         eviction: str = "lru",
         seed: int = 0,
+        reward_support_aware: bool = False,
     ) -> None:
         if isinstance(max_slots, (bool, np.bool_)):
             raise ValueError("max_slots must be 6 or 7")
@@ -187,7 +220,10 @@ class WriteDecisionRouter:
             raise ValueError("seed must be a nonnegative integer") from exc
         if seed_value < 0:
             raise ValueError("seed must be a nonnegative integer")
+        if not isinstance(reward_support_aware, (bool, np.bool_)):
+            raise ValueError("reward_support_aware must be a boolean")
         self.eviction = eviction
+        self.reward_support_aware = bool(reward_support_aware)
 
         self._counts = np.zeros((self.max_slots, 3, 4, 4), dtype=np.uint16)
         self._reward_xtx = np.zeros((self.max_slots, _FEATURES, _FEATURES), dtype=np.float64)
@@ -389,10 +425,12 @@ class WriteDecisionRouter:
 
         if int(self._reward_n[slot]) >= _MIN_STABLE_REWARDS:
             features = _reward_features(obs, next_obs, terminated)
-            coefficients = _fit_coefficients(self._reward_xtx[slot], self._reward_xty[slot])
-            residual = float(reward) - float(np.dot(features, coefficients))
-            if abs(residual) > _REWARD_RESIDUAL:
-                return "reward_residual"
+            xtx = self._reward_xtx[slot]
+            if not self.reward_support_aware or _feature_is_identifiable(xtx, features):
+                coefficients = _fit_coefficients(xtx, self._reward_xty[slot])
+                residual = float(reward) - float(np.dot(features, coefficients))
+                if abs(residual) > _REWARD_RESIDUAL:
+                    return "reward_residual"
         return None
 
     @staticmethod
@@ -488,6 +526,21 @@ class WriteDecisionRouter:
     def _reward_cosine(self, first: _WindowProfile, slot: int) -> float | None:
         if first.reward_n < _MIN_WINDOW_REWARDS or int(self._reward_n[slot]) < _MIN_WINDOW_REWARDS:
             return None
+        if self.reward_support_aware:
+            # This comparator is temporary: the router does not retain any
+            # extra numeric state. SharedWrite's tested implementation drops
+            # unsupported reward features and reports unidentifiable fits.
+            comparator = RewardAwareGroups(max_groups=1, reward_support_aware=True)
+            similarity = comparator._reward_similarity(
+                first.reward_xtx,
+                first.reward_xty,
+                self._reward_xtx[slot],
+                self._reward_xty[slot],
+            )
+            if not similarity.get("reward_comparable", 0):
+                return None
+            cosine = float(similarity["reward_cosine"])
+            return cosine if np.isfinite(cosine) else None
         incoming = _fit_coefficients(first.reward_xtx, first.reward_xty)
         existing = _fit_coefficients(self._reward_xtx[slot], self._reward_xty[slot])
         return _cosine(incoming, existing)
@@ -642,6 +695,7 @@ class WriteDecisionRouter:
                 "max_slots": self.max_slots,
                 "window": self.window,
                 "eviction": self.eviction,
+                "reward_support_aware": self.reward_support_aware,
             },
             **arrays,
             "history_size": self._history_size,

@@ -31,6 +31,15 @@ def _feed(router: WriteDecisionRouter, obs: np.ndarray, action: int, direction: 
     return router.observe(obs, action, reward, _next(obs, direction), False)
 
 
+def _teach_reward_model(router: WriteDecisionRouter, sign: float, cycles: int = 10) -> None:
+    """Provide supported moving and blocked examples for a 2-feature reward fit."""
+    for _ in range(cycles):
+        _feed(router, _obs(1), 0, 1, 0.2 * sign)
+        _feed(router, _obs(3), 0, 1, 0.2 * sign)
+        blocked = _obs(0)
+        router.observe(blocked, 1, 0.0, blocked, False)
+
+
 def _feed_real_episode(env, router: WriteDecisionRouter, seed: int) -> list[tuple[np.ndarray, int, float, np.ndarray, bool]]:
     obs, _ = env.reset(seed=seed)
     transitions = []
@@ -191,6 +200,114 @@ def test_real_navigation_stream_detects_reward_flip_and_reuses_original_profile(
     assert router.active_slot == 0
     assert router.active_slots == (0, 1)
     assert router._allocations == 2
+
+
+def test_support_aware_first_terminal_reward_is_learned_without_context_switch() -> None:
+    router = WriteDecisionRouter(window=64, reward_support_aware=True)
+    env = make_env(TaskSpec("A", 0, 1), domain="navigation")
+    seed = _seed_starting_left(env)
+    obs, _ = env.reset(seed=seed)
+
+    # Keep the real agent stream away from the goal while identifying both
+    # movement and intercept reward features.
+    before = obs.copy()
+    obs, reward, terminated, truncated, _ = env.step(0)  # x = 0 -> 1
+    assert not terminated and not truncated
+    router.observe(before, 0, reward, obs, terminated)
+    for _ in range(10):
+        for action in (0, 2):  # x = 1 <-> 2 under the visible C1 mapping
+            before = obs.copy()
+            obs, reward, terminated, truncated, _ = env.step(action)
+            assert not terminated and not truncated
+            router.observe(before, action, reward, obs, terminated)
+
+    assert router.active_slot == 0
+    assert router._reward_n[0] >= 16
+    assert router._reward_xtx[0, 2, 2] == 0.0
+    before_slots = router.active_slots
+
+    # Continue along the row to x = 7, align y, then let the real environment
+    # produce the first goal termination after the model has stabilized.
+    while int(round(float(obs[0]) * 8)) < 7:
+        before = obs.copy()
+        obs, reward, terminated, truncated, _ = env.step(0)
+        assert not terminated and not truncated
+        router.observe(before, 0, reward, obs, terminated)
+    goal_y = int(round(float(obs[3]) * 8))
+    while int(round(float(obs[1]) * 8)) != goal_y:
+        y = int(round(float(obs[1]) * 8))
+        action = 1 if y > goal_y else 2
+        before = obs.copy()
+        obs, reward, terminated, truncated, _ = env.step(action)
+        assert not terminated and not truncated
+        router.observe(before, action, reward, obs, terminated)
+    before = obs.copy()
+    obs, reward, terminated, truncated, _ = env.step(0)
+    assert terminated and not truncated
+    terminal = router.observe(before, 0, reward, obs, terminated)
+
+    assert terminal["reason"] == "active_profile"
+    assert terminal["active_slot"] == 0
+    assert terminal["allocated_slot"] is None
+    assert router.active_slots == before_slots == (0,)
+    assert router._reward_xtx[0, 2, 2] == 1.0
+
+
+def test_support_aware_router_detects_reversal_in_identifiable_reward_subspace() -> None:
+    router = WriteDecisionRouter(window=64, reward_support_aware=True)
+    _teach_reward_model(router, sign=1.0)
+    assert router.active_slot == 0
+
+    first_reversed = _feed(router, _obs(1), 0, 1, -0.2)
+    assert first_reversed["reason"] == "reward_residual"
+    assert first_reversed["active_slot"] == -1
+
+    allocation = None
+    # The conflict event starts the new numeric window; continue the same
+    # visible reward/movement stream until it has enough evidence to compare.
+    for _ in range(4):
+        for obs in (_obs(1), _obs(3)):
+            allocation = _feed(router, obs, 0, 1, -0.2)
+            if allocation["allocated_slot"] is not None:
+                break
+        if allocation is not None and allocation["allocated_slot"] is not None:
+            break
+        blocked = _obs(0)
+        allocation = router.observe(blocked, 1, 0.0, blocked, False)
+        if allocation["allocated_slot"] is not None:
+            break
+
+    assert allocation is not None
+    assert allocation["reason"] == "opposite_reward_profile"
+    assert allocation["allocated_slot"] == 1
+    assert router.active_slot == 1
+    assert router.active_slots == (0, 1)
+
+
+def test_support_aware_router_abstains_without_movement_support() -> None:
+    router = WriteDecisionRouter(window=32, reward_support_aware=True)
+    blocked = _obs(0)
+    for _ in range(24):
+        result = router.observe(blocked, 1, 0.0, blocked, False)
+
+    assert result["reason"] == "insufficient_support"
+    assert result["active_slot"] == -1
+    assert router.active_slots == ()
+
+
+def test_reward_support_aware_config_round_trips_and_old_state_defaults_false() -> None:
+    aware = WriteDecisionRouter(window=32, reward_support_aware=True)
+    restored = WriteDecisionRouter.from_state_dict(aware.state_dict())
+    assert restored.reward_support_aware is True
+    assert restored.nbytes == aware.nbytes
+
+    legacy_state = aware.state_dict()
+    del legacy_state["config"]["reward_support_aware"]
+    legacy_restored = WriteDecisionRouter.from_state_dict(legacy_state)
+    assert legacy_restored.reward_support_aware is False
+    assert legacy_restored.nbytes == aware.nbytes
+
+    assert WriteDecisionRouter().reward_support_aware is False
 
 
 @pytest.mark.parametrize(
