@@ -58,7 +58,7 @@ def _make_run(cohort_dir: Path, foundation: Path, dataset: Path, selection: Path
     for index in range(probe_steps):
         step_rows.append({
             "interaction_kind": "probe", "raw_step": train_steps + index + 1,
-            "taskobserver": "A0+", "phase": "uniform_probe", "reward": 0.0,
+            "taskobserver": "A0+", "phase": "uniform_probe", "reward": 2.0,
         })
     for index in range(eval_steps):
         step_rows.append({
@@ -178,6 +178,10 @@ def _make_run(cohort_dir: Path, foundation: Path, dataset: Path, selection: Path
             "unknown_actor_rows": 2 if phase == "unknown" else 0,
         },
         "training_reward": reward_per_step * train_steps, "reward_per_step": reward_per_step,
+        "per_task_observed_stream": {
+            "A0+": {"reward": reward_per_step * train_steps + 4.0,
+                    "steps": train_steps + probe_steps},
+        },
         # This mimics the observer summary before cross-task episodes are removed.
         "positive_goal_rate": 2 / 3,
         "evaluation_steps": eval_steps,
@@ -249,6 +253,11 @@ def test_stream_report_pairs_seeds_and_audits_ledgers_capacity_and_snapshots(tmp
     known_trial = next(row for row in analysis["per_seed"]
                        if row["phase"] == "known" and row["seed"] == 17 and row["condition"] == "trial_gate")
     assert known_trial["metrics"]["reward_per_train_step"] == 3.0
+    assert known_trial["metrics"]["training_and_probe_reward"] == 46.0
+    assert known_trial["metrics"]["reward_per_stream_interaction"] == 46.0 / 16
+    assert known_trial["costs"]["raw_training_and_probe_steps"] == 16
+    assert "observed_stream_steps_match_steps_ledger" not in known_trial["audit"]["failed_checks"]
+    assert "observed_stream_reward_matches_steps_ledger" not in known_trial["audit"]["failed_checks"]
     assert known_trial["training_outcomes"]["positive_goal_rate"] == 0.5
     assert known_trial["training_outcomes"]["cross_task_training_episodes_excluded"] == 1
     assert known_trial["training_outcomes"]["runner_rate_comparison"] == "not_compared_cross_task_episodes_excluded"
@@ -272,9 +281,16 @@ def test_stream_report_pairs_seeds_and_audits_ledgers_capacity_and_snapshots(tmp
     assert reward_diff["common_seeds"] == [17, 29]
     assert reward_diff["per_seed"][0]["difference"] == 2.0
     assert reward_diff["mean_difference"] == 2.0
+    stream_reward_diff = trial_comparison["reward_shared"]["reward_per_stream_interaction"]
+    assert stream_reward_diff["per_seed"][0]["difference"] == 1.75
     independent_diff = trial_comparison["independent7_lru"]["reward_per_train_step"]
     assert independent_diff["per_seed"][0]["difference"] == 1.0
+    independent_stream_diff = trial_comparison["independent7_lru"]["reward_per_stream_interaction"]
+    assert independent_stream_diff["per_seed"][0]["difference"] == 0.875
     assert analysis["unknown_minus_known_phase_pairs"]["n"] == 6
+    assert analysis["unknown_minus_known_phase_pairs"]["per_seed"][0][
+        "unknown_minus_known_reward_per_stream_interaction"
+    ] == 0.4375
     assert (report_dir / "analysis.json").is_file()
     assert {path.suffix for path in report_dir.glob("*.png")} == {".png"}
     assert {path.suffix for path in report_dir.glob("*.pdf")} == {".pdf"}
@@ -282,6 +298,8 @@ def test_stream_report_pairs_seeds_and_audits_ledgers_capacity_and_snapshots(tmp
     assert "统计单位是 seed" in report
     assert "跨 task episode 会排除" in report
     assert "低 unknown 或低未分组比例本身不代表算法优化" in report
+    assert "reward / training + probe interaction differences" in report
+    assert "policy dwell time" in report
 
 
 def test_stream_report_detects_a_physical_checkpoint_size_mismatch(tmp_path: Path) -> None:
@@ -296,3 +314,25 @@ def test_stream_report_detects_a_physical_checkpoint_size_mismatch(tmp_path: Pat
 
     assert "physical_checkpoint_sizes_match_capacity_ledger" in row["audit"]["failed_checks"]
     assert analysis["audit"]["passed"] is False
+
+
+def test_stream_reward_is_missing_when_any_training_or_probe_reward_is_missing(tmp_path: Path) -> None:
+    cohort_root = tmp_path / "cohort"
+    cohort_root.mkdir()
+    _make_cohort(cohort_root, "known")
+
+    steps_path = cohort_root / "known" / "seed_17" / "reward_shared" / "steps.csv"
+    with steps_path.open("r", newline="", encoding="utf-8") as stream:
+        rows = list(csv.DictReader(stream))
+    missing_probe = next(row for row in rows if row["interaction_kind"] == "probe")
+    missing_probe["reward"] = ""
+    _write_csv(steps_path, list(rows[0]), rows)
+
+    analysis = analyze_cohort(cohort_root / "known", tmp_path / "report")
+    row = next(item for item in analysis["per_seed"]
+               if item["seed"] == 17 and item["condition"] == "reward_shared")
+
+    assert row["metrics"]["reward_per_train_step"] == 1.0
+    assert row["metrics"]["reward_per_stream_interaction"] is None
+    assert row["costs"]["stream_reward_missing_rows"] == 1
+    assert "observed_stream_reward_matches_steps_ledger" in row["audit"]["failed_checks"]

@@ -1233,6 +1233,22 @@ def _summarize_group_coverage(group_coverage: Mapping[str, Mapping[str, Any]]) -
     }
 
 
+def _clone_endpoint_policy(core):
+    """Copy parameters without the last forward's transient autograd graph.
+
+    SB3 distributions cache the most recent Categorical. After a final fit
+    this can contain non-leaf tensors that deepcopy rejects. The distribution
+    is recomputed on every action and is not persistent learner knowledge.
+    """
+    action_dist = core.action_dist
+    previous = action_dist.distribution
+    try:
+        action_dist.distribution = None
+        return copy.deepcopy(core)
+    finally:
+        action_dist.distribution = previous
+
+
 def _clone_evaluate(agent, *, tasks: Sequence[str], episodes: int, steps_writer, eval_writer) -> dict[str, Any]:
     """Evaluate a cloned endpoint; no live policy, router, or optimizer is changed."""
     started = time.process_time()
@@ -1241,7 +1257,7 @@ def _clone_evaluate(agent, *, tasks: Sequence[str], episodes: int, steps_writer,
     for task_index, name in enumerate(tasks):
         # Every target starts from the same endpoint. Earlier diagnostic
         # targets must not evict knowledge used to score later targets.
-        core = copy.deepcopy(agent.core)
+        core = _clone_endpoint_policy(agent.core)
         core.eval()
         cache = BoundedTaskCache.from_state_dict(agent.cache.state_dict()) if agent.cache is not None else None
         router = WriteDecisionRouter.from_state_dict(agent.router.state_dict()) if agent.router is not None else None

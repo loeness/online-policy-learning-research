@@ -7,6 +7,7 @@ from types import SimpleNamespace
 
 import numpy as np
 import pytest
+import torch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -15,6 +16,10 @@ sys.path.insert(0, str(ROOT / "src"))
 from online_rl.write_decision_gate import AnchorBank  # noqa: E402
 from scripts import run_write_budget_baseline as baseline  # noqa: E402
 from scripts import run_write_stream as stream  # noqa: E402
+
+# Importing the executable installs hooks for spawned workers. Tests install
+# them per case so collection cannot change another module's stock stream.
+baseline.uninstall_hooks()
 
 
 @pytest.fixture(autouse=True)
@@ -82,6 +87,28 @@ def test_real_g0_agent_uses_nonzero_internal_window_and_real_anchor_bank():
     rows = agent.anchors.arrays(0, 0)
     assert rows["obs"].shape == (1, 13)
     assert rows["action"].tolist() == [1]
+
+
+def test_endpoint_clone_after_gradient_forward_preserves_live_distribution_and_policy():
+    config = baseline._wrapped_load_config()
+    config.update({"phase": "known", "condition": baseline.CONDITION, "seed": 117})
+    agent = baseline._wrapped_new_agent(
+        baseline.CONDITION, 117, config, stream.loop.load_base_config()
+    )
+    obs = torch.zeros((1, 13), dtype=torch.float32)
+    obs[0, -1] = 1
+    distribution = agent.core.get_distribution(obs).distribution
+    assert distribution.probs.grad_fn is not None
+    before = distribution.probs.detach().clone()
+    cloned = stream._clone_endpoint_policy(agent.core)
+    assert agent.core.action_dist.distribution is distribution
+    with torch.no_grad():
+        actual = cloned.get_distribution(obs).distribution.probs
+    torch.testing.assert_close(actual, before)
+    assert cloned is not agent.core
+    for original, copied in zip(agent.core.parameters(), cloned.parameters()):
+        torch.testing.assert_close(original, copied)
+        assert original.data_ptr() != copied.data_ptr()
 
 
 def test_generation_reset_keeps_probe_budget_zero_and_window_capacity_valid():

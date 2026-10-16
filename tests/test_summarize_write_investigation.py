@@ -288,3 +288,62 @@ def test_partial_top_level_records_are_reported_as_pending(tmp_path: Path) -> No
     pending = next(item for item in analysis["pending"] if item["name"] == "write_stream_partial")
     assert pending["observed_records"] == 1
     assert pending["expected_records"] == 4
+
+
+def test_stream_probe_reward_and_full_use_cross_cohort_pair(tmp_path: Path) -> None:
+    root, output = tmp_path / "outputs", tmp_path / "report"
+    shared = _record("trial_gate_relaxed", 0.3, 0.0)
+    shared["per_task_observed_stream"] = {
+        "A0+": {"reward": 3.0, "steps": 10},
+        "A0-": {"reward": -1.8, "steps": 2},
+    }
+    shared["group_saturation"] = {"unassigned_step_fraction": 0.75}
+    baseline = _record("independent7_lru", 0.2, 0.0)
+    baseline["costs"].update(training_steps=12, probe_steps=0)
+    for name, record in (("write_stream_known", shared),
+                         ("write_stream_known_budget_baseline", baseline)):
+        _dump(root / name / "summary.json", {
+            "conditions": [record["condition"]], "seeds": [7], "records": [record],
+        })
+    analysis = build_report(root, output)
+    row = analysis["cohorts"]["write_stream_known"]["records"][0]
+    assert abs(row["online_reward_per_stream_step"] - 0.1) < 1e-12
+    assert row["online_reward_per_step"] == 0.3
+    assert row["group_unassigned_training_fraction"] == 0.75
+    pair, = analysis["pairing"]["comparisons"]
+    assert pair["online_interactions_equal_each_seed"] is True
+    assert pair["primary_metric"] == "online_reward_per_stream_step"
+    # Probe losses reverse the ranking; training-only R cannot stand in for
+    # a comparison at equal actual interaction budget.
+    assert pair["delta_stats_by_seed"]["online_reward_per_step"]["mean"] > 0
+    assert abs(pair["delta_stats_by_seed"]["online_reward_per_stream_step"]["mean"] + 0.1) < 1e-12
+
+
+def test_missing_probe_rewards_are_not_invented_and_raw_reward_is_normalized(tmp_path: Path) -> None:
+    root = tmp_path / "outputs"
+    record = _record("trial_gate_relaxed", 0.3, 0.0)
+    record.pop("reward_per_step")
+    _dump(root / "write_stream_known" / "summary.json", {
+        "conditions": [record["condition"]], "seeds": [7], "records": [record],
+    })
+    analysis = build_report(root, tmp_path / "report")
+    row = analysis["cohorts"]["write_stream_known"]["records"][0]
+    assert row["online_reward_per_step"] == 0.3
+    assert row["online_reward_per_stream_step"] is None
+
+
+def test_parent_pairing_uses_same_stage_and_omits_unmatched_seeds(tmp_path: Path) -> None:
+    root = tmp_path / "outputs"
+    for variant in ("cumulative", "recycle"):
+        for stage, seed in (("validation", 7), ("formal", 8)):
+            record = _record("reward_shared", 0.3, 0.0)
+            record["seed"] = seed
+            _dump(root / f"write_parent_{variant}_{stage}" / "summary.json", {
+                "conditions": ["reward_shared"], "seeds": [seed], "records": [record],
+            })
+    analysis = build_report(root, tmp_path / "report")
+    pairs = analysis["pairing"]["recycle_cumulative"]["pairs"]
+    assert len(pairs) == 2
+    assert all(pair["n_pairs"] == 1 for pair in pairs)
+    assert all(pair["left"].split(":")[0].split("_")[-1] ==
+               pair["right"].split(":")[0].split("_")[-1] for pair in pairs)

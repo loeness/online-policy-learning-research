@@ -23,12 +23,14 @@ import matplotlib.pyplot as plt
 
 _METRICS = (
     "online_reward_per_step",
+    "online_reward_per_stream_step",
     "positive_goal_rate",
     "final_macro_signed_return",
     "final_positive_goal_rate",
     "gate_accepted",
     "gate_rejected",
     "group_unassigned_fraction",
+    "group_unassigned_training_fraction",
     "group_abstention_rate",
     "cpu_s",
     "wall_s",
@@ -313,7 +315,23 @@ def _record_metrics(
     counts = record.get("counts") if isinstance(record.get("counts"), dict) else {}
     online_reward = _number(record.get("reward_per_step"))
     if online_reward is None:
-        online_reward = _number(record.get("training_reward"))
+        total_reward = _number(record.get("training_reward"))
+        train_steps = costs["training_steps"]
+        online_reward = total_reward / train_steps if total_reward is not None and train_steps else None
+    stream_reward, stream_source = None, "unavailable_probe_rewards"
+    observed = record.get("per_task_observed_stream")
+    if isinstance(observed, dict) and observed:
+        stream_source = "unavailable_observed_stream_count_mismatch_or_missing_rewards"
+        rows = list(observed.values())
+        rewards = [_number(row.get("reward")) for row in rows if isinstance(row, dict)]
+        steps = [_number(row.get("steps")) for row in rows if isinstance(row, dict)]
+        expected = (costs["training_steps"] or 0) + (costs["probe_steps"] or 0)
+        if (len(rewards) == len(rows) and all(value is not None for value in rewards + steps)
+                and sum(steps) > 0 and math.isclose(sum(steps), expected, abs_tol=1e-6)):
+            stream_reward = sum(rewards) / sum(steps)
+            stream_source = "per_task_observed_stream_training_plus_probe"
+    elif costs["probe_steps"] == 0:
+        stream_reward, stream_source = online_reward, "training_only_no_probes"
     online_positive = _number(record.get("plus_goal_rate"))
     if online_positive is None:
         online_positive = _number(record.get("positive_goal_rate"))
@@ -345,6 +363,8 @@ def _record_metrics(
         "condition": str(record.get("condition", "unknown")),
         "seed": _integer(record.get("seed")),
         "online_reward_per_step": online_reward,
+        "online_reward_per_stream_step": stream_reward,
+        "online_stream_reward_source": stream_source,
         "positive_goal_rate": online_positive,
         "final_stage": final_stage,
         "final_macro_signed_return": final_signed,
@@ -352,6 +372,10 @@ def _record_metrics(
         "gate_accepted": _number(counts.get("accepted_count")),
         "gate_rejected": _number(counts.get("rejected_count")),
         "group_unassigned_fraction": group_fraction,
+        "group_unassigned_training_fraction": (
+            _number(group_saturation.get("unassigned_step_fraction"))
+            if isinstance(group_saturation, dict) else None
+        ),
         "group_abstention_rate": abstention_rate,
         "training_steps": costs["training_steps"],
         "probe_steps": costs["probe_steps"],
@@ -663,6 +687,7 @@ def _paired_rows(
     )
     metrics = (
         "online_reward_per_step",
+        "online_reward_per_stream_step",
         "positive_goal_rate",
         "final_macro_signed_return",
         "final_positive_goal_rate",
@@ -764,11 +789,45 @@ def _build_pairs(root: Path, cohorts: dict[str, dict[str, Any]]) -> dict[str, An
                         )
                     )
 
-    recycle_cohorts = [name for name in cohorts if "recycle" in name.lower()]
-    cumulative_cohorts = [name for name in cohorts if "cumulative" in name.lower()]
+    # These are independent cohorts with identical total online interaction
+    # budgets. Known-boundary dwell times and PPO update counts still differ.
+    for baseline_name, shared_names in (
+        ("write_stream_known_budget_baseline", ("write_stream_known",)),
+        ("write_stream_unknown_budget_baseline", ("write_stream_unknown",)),
+        ("write_parent_unknown_budget_baseline", ("write_parent_cumulative_unknown", "write_parent_recycle_unknown")),
+    ):
+        baseline_cohort = cohorts.get(baseline_name)
+        if not baseline_cohort:
+            continue
+        for shared_name in shared_names:
+            shared_cohort = cohorts.get(shared_name)
+            if not shared_cohort:
+                continue
+            for condition in shared_cohort.get("conditions", []):
+                if condition not in {"reward_shared", "trial_gate_relaxed", "projected_gate"}:
+                    continue
+                pair = _paired_rows(
+                    f"{shared_name}:{condition}", f"{baseline_name}:independent7_lru",
+                    _record_map(shared_cohort, condition), _record_map(baseline_cohort, "independent7_lru"),
+                    comparison_family="stream_total_interaction_budget_full_use_baseline", post_selection=True,
+                )
+                if pair["n_pairs"]:
+                    matched = pair["matched_seeds"]
+                    left = _record_map(shared_cohort, condition)
+                    right = _record_map(baseline_cohort, "independent7_lru")
+                    pair["online_interactions_equal_each_seed"] = all(
+                        left[s]["training_steps"] + left[s]["probe_steps"] ==
+                        right[s]["training_steps"] + right[s]["probe_steps"] for s in matched
+                    )
+                    pair["primary_metric"] = "online_reward_per_stream_step"
+                    pair["budget_limitations"] = "Total training + probe interactions matched; known per-bout dwell times, computation and PPO updates are not matched."
+                    comparisons.append(pair)
+
+    recycle_cohorts = [name for name in cohorts if name.startswith("write_parent_recycle_")]
     recycle_cumulative_pairs = []
     for recycle_name in recycle_cohorts:
-        for cumulative_name in cumulative_cohorts:
+        cumulative_name = recycle_name.replace("write_parent_recycle_", "write_parent_cumulative_", 1)
+        if cumulative_name in cohorts:
             recycle, cumulative = cohorts[recycle_name], cohorts[cumulative_name]
             common_conditions = sorted(
                 set(recycle.get("conditions", [])).intersection(cumulative.get("conditions", []))
@@ -782,8 +841,9 @@ def _build_pairs(root: Path, cohorts: dict[str, dict[str, Any]]) -> dict[str, An
                     comparison_family="recycle_fixed_vs_cumulative_same_seed_condition",
                     post_selection=False,
                 )
-                recycle_cumulative_pairs.append(pair)
-                comparisons.append(pair)
+                if pair["n_pairs"]:
+                    recycle_cumulative_pairs.append(pair)
+                    comparisons.append(pair)
     recycle_cumulative = {
         "status": "paired_records_available" if recycle_cumulative_pairs else "not_available",
         "pairs": recycle_cumulative_pairs,
@@ -988,26 +1048,28 @@ def _write_markdown(analysis: dict[str, Any], root: Path, output_dir: Path) -> s
         "",
         "## Cohort 与 condition 结果",
         "",
-        "在线 reward 和正奖励任务 goal rate 均先按 seed 汇总。final endpoint signed return 对各 task 等权取 macro mean；positive goal rate 只平均正奖励任务的成功率。方括号为 seed 间 min–max，不是置信区间。",
+        "在线 reward 和正奖励任务 goal rate 均先按 seed 汇总。Train R 仅训练流；Stream R 包含训练与探测奖励，分母为 training + probe，不含评估。缺失探测奖励时全流指标留空。完整交互预算基线以 Stream R 比较；known 的每段停留时间及计算/PPO 更新数仍不匹配。final endpoint signed return 对各 task 等权取 macro mean；positive goal rate 只平均正奖励任务的成功率。方括号为 seed 间 min–max，不是置信区间。",
         "",
-        "| Cohort | Condition | Seeds | Online R / step mean [min, max] | Positive goal rate | Final macro signed R | Final positive goal rate | Gate accept / reject | Group unassigned | CPU sum (s) | Wall sum (s) | Peak checkpoint + W0 (B) | Actor payload peak (B) |",
-        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| Cohort | Condition | Seeds | Train R / step [min, max] | Stream R / interaction [min, max] | Positive goal rate | Final macro signed R | Final positive goal rate | Gate accept / reject | Endpoint unassigned slots | Training unassigned fraction | CPU sum (s) | Wall sum (s) | Peak checkpoint + W0 (B) | Actor payload peak (B) |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for name, cohort in sorted(cohorts.items()):
         for condition, summary in cohort["by_condition"].items():
             metrics = summary["metrics"]
             lines.append(
-                "| {cohort} | {condition} | {n} | {online} | {goal} | {final} | {final_goal} | {accept} / {reject} | {unassigned} | {cpu} | {wall} | {package} | {actor} |".format(
+                "| {cohort} | {condition} | {n} | {online} | {stream} | {goal} | {final} | {final_goal} | {accept} / {reject} | {unassigned} | {unassigned_training} | {cpu} | {wall} | {package} | {actor} |".format(
                     cohort=name,
                     condition=condition,
                     n=summary["n_seeds"],
                     online=_fmt_range(metrics["online_reward_per_step"]),
+                    stream=_fmt_range(metrics["online_reward_per_stream_step"]),
                     goal=_fmt_range(metrics["positive_goal_rate"]),
                     final=_fmt_range(metrics["final_macro_signed_return"]),
                     final_goal=_fmt_range(metrics["final_positive_goal_rate"]),
                     accept=_fmt_range(metrics["gate_accepted"], 2),
                     reject=_fmt_range(metrics["gate_rejected"], 2),
                     unassigned=_fmt_range(metrics["group_unassigned_fraction"]),
+                    unassigned_training=_fmt_range(metrics["group_unassigned_training_fraction"]),
                     cpu=_fmt_range(metrics["cpu_s"], 2),
                     wall=_fmt_range(metrics["wall_s"], 2),
                     package=_fmt_range(metrics["physical_checkpoint_plus_w0_peak_bytes"], 0),
@@ -1046,15 +1108,15 @@ def _write_markdown(analysis: dict[str, Any], root: Path, output_dir: Path) -> s
             "",
             "所有差值按相同 seed 配对并展示 left − right；episode / transition 不作独立样本。formal 选中条件与 baselines/control 的比较发生在 selection 之后，明确标为 post-selection，不能用于 method selection。最多 3 个 seed 时只作描述性对照。",
             "",
-            "| Family | Left | Right | Matched seeds | Δ online R / step mean [min, max] | Δ positive goal rate | Δ final signed R | Δ final positive goal rate | Post-selection |",
-            "|---|---|---|---|---:|---:|---:|---:|---|",
+            "| Family | Left | Right | Matched seeds | Δ Train R / step [min, max] | Δ Stream R / interaction [min, max] | Δ positive goal rate | Δ final signed R | Δ final positive goal rate | Post-selection |",
+            "|---|---|---|---|---:|---:|---:|---:|---:|---|",
         ]
     )
     comparisons = analysis["pairing"]["comparisons"]
     for pair in comparisons:
         stats = pair["delta_stats_by_seed"]
         lines.append(
-            f"| {pair['comparison_family']} | {pair['left']} | {pair['right']} | {', '.join(map(str, pair['matched_seeds'])) or '—'} | {_fmt_range(stats['online_reward_per_step'])} | {_fmt_range(stats['positive_goal_rate'])} | {_fmt_range(stats['final_macro_signed_return'])} | {_fmt_range(stats['final_positive_goal_rate'])} | {'是' if pair['post_selection'] else '否'} |"
+            f"| {pair['comparison_family']} | {pair['left']} | {pair['right']} | {', '.join(map(str, pair['matched_seeds'])) or '—'} | {_fmt_range(stats['online_reward_per_step'])} | {_fmt_range(stats['online_reward_per_stream_step'])} | {_fmt_range(stats['positive_goal_rate'])} | {_fmt_range(stats['final_macro_signed_return'])} | {_fmt_range(stats['final_positive_goal_rate'])} | {'是' if pair['post_selection'] else '否'} |"
         )
     if not comparisons:
         lines.append("| 暂无 seed 匹配的 paired records | — | — | — | — | — | — | — | — |")
@@ -1118,7 +1180,8 @@ def _write_plot(analysis: dict[str, Any], output_dir: Path) -> None:
     goal_highs: list[float] = []
     for cohort_name, cohort in sorted(analysis["cohorts"].items()):
         for condition, summary in sorted(cohort["by_condition"].items()):
-            reward = summary["metrics"]["online_reward_per_step"]
+            # A common metric across all bars; absent probe rewards stay absent.
+            reward = summary["metrics"]["online_reward_per_stream_step"]
             goal = summary["metrics"]["positive_goal_rate"]
             if reward["mean"] is None and goal["mean"] is None:
                 continue
@@ -1127,7 +1190,7 @@ def _write_plot(analysis: dict[str, Any], output_dir: Path) -> None:
                 (reward, reward_means, reward_lows, reward_highs),
                 (goal, goal_means, goal_lows, goal_highs),
             ):
-                mean = float(stats["mean"] or 0.0)
+                mean = float(stats["mean"]) if stats["mean"] is not None else float("nan")
                 low = float(stats["min"] if stats["min"] is not None else mean)
                 high = float(stats["max"] if stats["max"] is not None else mean)
                 means.append(mean)
@@ -1147,7 +1210,7 @@ def _write_plot(analysis: dict[str, Any], output_dir: Path) -> None:
     else:
         axes[0].text(0.5, 0.5, "No completed cohort records", ha="center", va="center", transform=axes[0].transAxes)
         axes[1].text(0.5, 0.5, "No completed cohort records", ha="center", va="center", transform=axes[1].transAxes)
-    axes[0].set_ylabel("Online reward / step")
+    axes[0].set_ylabel("Reward / (training + probe interaction)")
     axes[1].set_ylabel("Positive goal rate")
     axes[1].set_xlabel("Cohort / condition")
     axes[0].set_title("Seed-level cohort means; whiskers show seed min-max")

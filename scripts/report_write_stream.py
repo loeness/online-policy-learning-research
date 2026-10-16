@@ -536,6 +536,23 @@ def _audit_costs(run_dir: Path, record: Mapping[str, Any], config: Mapping[str, 
 
     reward_sum = sum(_as_float(row.get("reward")) or 0.0 for row in step_rows if row.get("interaction_kind") == "training")
     reward_per_step = reward_sum / training_steps if training_steps else None
+    stream_reward_rows = [
+        row for row in step_rows if row.get("interaction_kind") in ("training", "probe")
+    ]
+    stream_reward_values = [_as_float(row.get("reward")) for row in stream_reward_rows]
+    stream_reward_complete = len(stream_reward_rows) == raw_steps and all(
+        value is not None for value in stream_reward_values
+    )
+    stream_reward_sum = (
+        sum(float(value) for value in stream_reward_values if value is not None)
+        if stream_reward_complete
+        else None
+    )
+    reward_per_stream_interaction = (
+        stream_reward_sum / raw_steps
+        if stream_reward_sum is not None and raw_steps
+        else None
+    )
     summary_reward = _as_float(record.get("training_reward"))
     summary_per_step = _as_float(record.get("reward_per_step"))
     _new_check(checks, "training_reward_matches_steps_ledger",
@@ -545,6 +562,27 @@ def _audit_costs(run_dir: Path, record: Mapping[str, Any], config: Mapping[str, 
                summary_per_step is not None and reward_per_step is not None
                and math.isclose(reward_per_step, summary_per_step, rel_tol=1e-7, abs_tol=1e-6),
                reward_per_step, summary_per_step)
+
+    observed_stream = record.get("per_task_observed_stream")
+    if isinstance(observed_stream, Mapping):
+        observed_rows = [row for row in observed_stream.values() if isinstance(row, Mapping)]
+        observed_steps = [_as_int(row.get("steps")) for row in observed_rows]
+        observed_rewards = [_as_float(row.get("reward")) for row in observed_rows]
+        stream_summary_valid = (
+            len(observed_rows) == len(observed_stream)
+            and all(value is not None for value in observed_steps)
+            and all(value is not None for value in observed_rewards)
+        )
+        summary_stream_steps = sum(value or 0 for value in observed_steps)
+        summary_stream_reward = sum(value or 0.0 for value in observed_rewards)
+        _new_check(checks, "observed_stream_steps_match_steps_ledger",
+                   stream_summary_valid and summary_stream_steps == raw_steps,
+                   summary_stream_steps if stream_summary_valid else None, raw_steps)
+        _new_check(checks, "observed_stream_reward_matches_steps_ledger",
+                   stream_summary_valid and stream_reward_sum is not None and math.isclose(
+                       summary_stream_reward, stream_reward_sum, rel_tol=1e-7, abs_tol=1e-6
+                   ),
+                   summary_stream_reward if stream_summary_valid else None, stream_reward_sum)
 
     episode_length_sum = sum(_as_int(row.get("length")) or 0 for row in episode_rows)
     episode_lengths_ok = episode_length_sum == raw_steps
@@ -585,6 +623,9 @@ def _audit_costs(run_dir: Path, record: Mapping[str, Any], config: Mapping[str, 
             "total_interactions": raw_steps + eval_step_rows,
             "training_reward": reward_sum,
             "reward_per_train_step": reward_per_step,
+            "training_and_probe_reward": stream_reward_sum,
+            "reward_per_stream_interaction": reward_per_stream_interaction,
+            "stream_reward_missing_rows": sum(value is None for value in stream_reward_values),
             "cpu_s": _as_float(costs.get("cpu_s")),
             "wall_s": _as_float(costs.get("wall_s")),
             "decision_cpu_s": _as_float(costs.get("decision_cpu_s")),
@@ -636,6 +677,8 @@ def _audit_run(cohort_dir: Path, phase: str, record: Mapping[str, Any],
         "metrics": {
             "reward_per_train_step": cost["reward_per_train_step"],
             "training_reward": cost["training_reward"],
+            "reward_per_stream_interaction": cost["reward_per_stream_interaction"],
+            "training_and_probe_reward": cost["training_and_probe_reward"],
             "positive_training_goal_rate": training_episodes["positive_goal_rate"],
             "positive_training_goal_episodes": training_episodes["positive_goal_episodes"],
             "positive_training_episodes": training_episodes["positive_completed_episodes"],
@@ -661,6 +704,7 @@ def _summarize_conditions(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     conditions = sorted({str(row["condition"]) for row in rows})
     metrics = (
         "reward_per_train_step",
+        "reward_per_stream_interaction",
         "positive_training_goal_rate",
         "final_clone_mean_signed_return",
         "final_clone_positive_goal_rate",
@@ -716,7 +760,12 @@ def _paired_metric(rows: Sequence[Mapping[str, Any]], candidate: str, baseline: 
 def _paired_differences(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     conditions = sorted({str(row["condition"]) for row in rows})
     comparisons: dict[str, Any] = {}
-    metrics = ("reward_per_train_step", "positive_training_goal_rate", "final_clone_mean_signed_return")
+    metrics = (
+        "reward_per_train_step",
+        "reward_per_stream_interaction",
+        "positive_training_goal_rate",
+        "final_clone_mean_signed_return",
+    )
     for condition in conditions:
         comparisons[condition] = {}
         for baseline in BASELINES:
@@ -740,6 +789,9 @@ def _phase_pairing(per_seed: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             "condition": condition,
             "unknown_minus_known_reward_per_train_step": _difference(
                 unknown["metrics"].get("reward_per_train_step"), known["metrics"].get("reward_per_train_step")),
+            "unknown_minus_known_reward_per_stream_interaction": _difference(
+                unknown["metrics"].get("reward_per_stream_interaction"),
+                known["metrics"].get("reward_per_stream_interaction")),
             "unknown_minus_known_final_clone_signed_return": _difference(
                 unknown["metrics"].get("final_clone_mean_signed_return"), known["metrics"].get("final_clone_mean_signed_return")),
         })
@@ -754,11 +806,12 @@ def _render_figures(output: Path, per_seed: Sequence[Mapping[str, Any]]) -> list
     phases = [phase for phase in PHASES if any(row["phase"] == phase for row in per_seed)]
     conditions = sorted({str(row["condition"]) for row in per_seed})
     metrics = (
+        ("reward_per_stream_interaction", "Reward per training + probe interaction"),
         ("reward_per_train_step", "Reward per training step"),
         ("final_clone_mean_signed_return", "Final clone mean signed return"),
     )
     colors = {"known": "#1b9e77", "unknown": "#7570b3"}
-    figure, axes = plt.subplots(2, 1, figsize=(max(12, len(conditions) * 1.2), 9), constrained_layout=True)
+    figure, axes = plt.subplots(3, 1, figsize=(max(12, len(conditions) * 1.2), 12), constrained_layout=True)
     x = np.arange(len(conditions), dtype=float)
     phase_offsets = np.linspace(-0.16, 0.16, max(1, len(phases)))
     for ax, (metric, title) in zip(axes, metrics):
@@ -795,8 +848,9 @@ def _render_figures(output: Path, per_seed: Sequence[Mapping[str, Any]]) -> list
         ax.grid(axis="y", alpha=0.25)
         if phases:
             ax.legend(title="Stream phase")
-    axes[0].set_ylabel("Reward / training step")
-    axes[1].set_ylabel("Signed return")
+    axes[0].set_ylabel("Reward / stream interaction")
+    axes[1].set_ylabel("Reward / training step")
+    axes[2].set_ylabel("Signed return")
     figure.suptitle("Write stream outcomes by phase and seed (mean ± population SD)")
     png = output / "write_stream_metrics.png"
     pdf = output / "write_stream_metrics.pdf"
@@ -818,18 +872,21 @@ def _markdown_report(analysis: Mapping[str, Any]) -> str:
         "",
         "统计单位是 seed。episode 和 transition 只在 seed 内聚合，不作为独立样本。少于 4 个 seed 时只报告描述性结果；不做显著性结论。known 与 unknown phase 分开列出。",
         "",
+        "在线 reward / stream interaction 由 steps.csv 中 training 与 probe 行的 reward 总和除以两类交互总数计算；final clone evaluation 不计入分子或分母。reward / train step 仍保留作 training-only 指标。比较 full-use budget baseline 与 shared 条件时优先看前者：总交互数匹配，但 baseline 把交互都用于训练，shared 条件把一部分用于 uniform probes，因此 policy dwell time 和训练交互组成不同。",
+        "",
         "正向训练成功率只使用完整、起始和结束 taskobserver 相同、且 task 名以 `+` 结尾的 training episode。跨 task episode 会排除，并单独计数。评估回报按 final clone 的 signed return 汇总。",
         "",
         "步骤成本由唯一的 `steps.csv` 核对，其中已经包含 training、probe 和 evaluation；不读取独立 probe ledger。训练与评估 episode 长度和也分别与交互账本核对。",
         "",
         "## 每 seed 结果",
         "",
-        "| phase | seed | condition | reward / train step | 正向训练成功率 | 被排除跨 task episodes | final clone signed return | final 正向成功率 | unknown route 比例 | group 满载后未分组比例 | gate 接受 / 拒绝 | CPU s | wall s |",
-        "|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| phase | seed | condition | reward / training + probe interaction | reward / train step | 正向训练成功率 | 被排除跨 task episodes | final clone signed return | final 正向成功率 | unknown route 比例 | group 满载后未分组比例 | gate 接受 / 拒绝 | CPU s | wall s |",
+        "|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in sorted(analysis["per_seed"], key=lambda item: (item["phase"], int(item["seed"]), item["condition"])):
         lines.append(
             f"| {row['phase']} | {row['seed']} | {row['condition']} | "
+            f"{_fmt(row['metrics']['reward_per_stream_interaction'])} | "
             f"{_fmt(row['metrics']['reward_per_train_step'])} | "
             f"{_fmt(row['metrics']['positive_training_goal_rate'])} | "
             f"{row['training_outcomes']['cross_task_training_episodes_excluded']} | "
@@ -840,7 +897,23 @@ def _markdown_report(analysis: Mapping[str, Any]) -> str:
             f"{row['gates']['gate_accept_count']} / {row['gates']['gate_reject_count']} | "
             f"{_fmt(row['costs']['cpu_s'], 2)} | {_fmt(row['costs']['wall_s'], 2)} |"
         )
-    lines.extend(["", "## Paired reward / train step differences", ""])
+    lines.extend(["", "## Paired reward / training + probe interaction differences", ""])
+    for phase, phase_data in sorted(analysis["phase_analyses"].items()):
+        lines.extend([f"### {phase}", "", "| condition | baseline | common seeds | 每 seed difference | mean difference |", "|---|---|---|---|---:|"])
+        paired = phase_data["paired_differences"]["comparisons"]
+        for condition in sorted(paired):
+            for baseline in BASELINES:
+                detail = paired[condition].get(baseline)
+                if not detail:
+                    continue
+                delta = detail["reward_per_stream_interaction"]
+                values = ", ".join(f"{item['seed']}: {_fmt(item['difference'])}" for item in delta["per_seed"])
+                lines.append(
+                    f"| {condition} | {baseline} | {', '.join(map(str, delta['common_seeds'])) or 'none'} | "
+                    f"{values or 'n/a'} | {_fmt(delta['mean_difference'])} |"
+                )
+        lines.append("")
+    lines.extend(["## Paired reward / train step differences", ""])
     for phase, phase_data in sorted(analysis["phase_analyses"].items()):
         lines.extend([f"### {phase}", "", "| condition | baseline | common seeds | 每 seed difference | mean difference |", "|---|---|---|---|---:|"])
         paired = phase_data["paired_differences"]["comparisons"]
@@ -1019,6 +1092,7 @@ def analyze_cohort(input_path: str | Path, output_path: str | Path) -> dict[str,
             "Seeds are the statistical units; episodes and transitions are aggregated within seed.",
             "With fewer than four seeds, report descriptive paired differences only; no significance claims are made.",
             "Training positive goal rate excludes incomplete and cross-task episodes and uses same-task positive-preference episodes only.",
+            "All-stream reward per interaction includes training and uniform probe rewards but excludes evaluation; equal total interaction budgets can still have different policy dwell times because a full-use baseline spends those interactions on training while shared conditions spend some on probes.",
             "A lower unknown-route rate is not, by itself, evidence of an optimization or better decisions.",
             "Unknown-route and eviction records have no independent route truth label and are not false-route error counts.",
             "Group coverage is descriptive and cannot establish that grouping is beneficial or that abstentions are solved.",
