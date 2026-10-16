@@ -34,7 +34,8 @@ import torch
 from online_rl.c1_supplement_experiment import _foundation, seed_everything
 from online_rl.policy import LeafAdam
 from online_rl.write_decision_envs import make_env, task_from_name, task_specs
-from online_rl.write_decision_evidence import EvidenceWindow, RewardAwareGroups
+from online_rl.write_decision_evidence import RewardAwareGroups
+from online_rl.write_fast_evidence import IncrementalEvidenceWindow as EvidenceWindow
 from online_rl.write_decision_gate import AnchorBank
 from online_rl.write_decision_policy import FlexibleSharedPolicy, decode_actor, encode_actor
 from online_rl.write_decision_router import WriteDecisionRouter
@@ -61,6 +62,7 @@ SOURCE_FILES = (
     Path("scripts/run_shared_write.py"),
     Path("src/online_rl/write_decision_envs.py"),
     Path("src/online_rl/write_decision_evidence.py"),
+    Path("src/online_rl/write_fast_evidence.py"),
     Path("src/online_rl/write_decision_router.py"),
     Path("src/online_rl/write_decision_policy.py"),
     Path("src/online_rl/write_decision_gate.py"),
