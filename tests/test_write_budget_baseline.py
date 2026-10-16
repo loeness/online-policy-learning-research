@@ -186,10 +186,13 @@ def test_cohort_freezes_flags_and_runs_only_g0_without_training(monkeypatch, tmp
         }
 
     monkeypatch.setitem(baseline._ORIGINALS, "run_one", fake_run_one)
+    foundation = tmp_path / "independent_foundation.pt"
+    foundation.write_bytes(b"stub: fake worker does not load this")
     output = tmp_path / "cohort"
     result = baseline.run_cohort(
         "known", output, selection_path=selection_path, workers=1,
         seeds=[1031], bout_steps=3,
+        domain="detour", foundation=foundation,
     )
 
     frozen = json.loads((output / "frozen_config.json").read_text(encoding="utf-8"))
@@ -203,6 +206,10 @@ def test_cohort_freezes_flags_and_runs_only_g0_without_training(monkeypatch, tmp
     assert frozen["budget_baseline"] is True
     assert frozen["probe_steps"] == 0
     assert frozen["all_rows_fit"] is True
+    assert frozen["domain"] == "detour"
+    assert frozen["foundation"] == str(foundation.resolve())
+    assert run_config["domain"] == "detour"
+    assert run_config["foundation"] == str(foundation.resolve())
     assert run_config["budget_baseline"] is True
     assert result["conditions"] == [baseline.CONDITION]
     assert run_summary["budget_comparison"]["expected_training_interactions"] == 72

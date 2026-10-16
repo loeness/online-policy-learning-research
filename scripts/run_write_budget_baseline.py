@@ -197,6 +197,8 @@ def run_cohort(
     workers: int = 1,
     seeds: Sequence[int] | None = None,
     bout_steps: int | None = None,
+    domain: str | None = None,
+    foundation: str | Path | None = None,
 ) -> dict[str, Any]:
     install_hooks()
     phase = stream._validate_phase(phase)
@@ -210,6 +212,8 @@ def run_cohort(
         seeds=seeds,
         bout_steps=steps,
         local_slots=7,
+        domain=domain,
+        foundation=foundation,
     )
 
 
@@ -221,6 +225,8 @@ def main(argv: Sequence[str] | None = None) -> None:
     parser.add_argument("--workers", type=int, choices=(1, 2), default=1)
     parser.add_argument("--seeds", nargs="+", type=int)
     parser.add_argument("--bout-steps", type=int, help="override the phase's default budget for pilots")
+    parser.add_argument("--domain", choices=("navigation", "detour"))
+    parser.add_argument("--foundation", type=Path)
     args = parser.parse_args(argv)
     result = run_cohort(
         args.phase,
@@ -229,6 +235,8 @@ def main(argv: Sequence[str] | None = None) -> None:
         workers=args.workers,
         seeds=args.seeds,
         bout_steps=args.bout_steps,
+        domain=args.domain,
+        foundation=args.foundation,
     )
     print(json.dumps({
         "phase": result["phase"],

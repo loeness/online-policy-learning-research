@@ -1,0 +1,22 @@
+{
+  "status": "declared_before_supplement_runs",
+  "timing": "Added after the W0-17 detour cohort showed a small descriptive gain over the original holdout-using independent baseline; W0-29 cohort was still running. No proposal, threshold or learning rate is retuned.",
+  "purpose": "Test whether the shifted-generator gain survives a full-use independent control at the same total training-plus-probe interaction budget.",
+  "phase": "known",
+  "domain": "detour",
+  "foundation_seeds": [17, 29],
+  "deployment_seeds": [1061, 1063],
+  "condition": "independent7_lru",
+  "bout_training_steps": 2144,
+  "bouts": 24,
+  "online_interactions_per_run": 51456,
+  "probe_steps": 0,
+  "all_rows_fit": true,
+  "actor_cap_bytes": 236,
+  "full_persistent_cap_bytes": 262144,
+  "learning_rate": 0.004,
+  "primary_metric": "all-stream reward per training-plus-probe interaction",
+  "limitations": "Matched total online interactions, not known per-bout dwell time, PPO updates or compute. Two deployment seeds per W0 are descriptive and not pooled as four independent foundation seeds.",
+  "max_training_workers": 2,
+  "all_outcomes_retained": true
+}
