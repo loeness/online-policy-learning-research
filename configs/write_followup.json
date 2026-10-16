@@ -1,15 +1,36 @@
 {
   "known_capacity": {
-    "seeds": [1031, 1033, 1039],
-    "conditions": ["trial_gate_relaxed", "projected_gate", "reward_shared", "independent6", "independent7_lru", "independent7_random", "independent7_lfu"],
+    "seeds": [
+      1031,
+      1033,
+      1039
+    ],
+    "conditions": [
+      "trial_gate_relaxed",
+      "projected_gate",
+      "reward_shared",
+      "independent6",
+      "independent7_lru",
+      "independent7_random",
+      "independent7_lfu"
+    ],
     "bout_steps": 2048,
     "sequence_length": 24,
     "actor_cap_bytes": 236,
     "full_persistent_cap_bytes": 262144
   },
   "unknown_capacity": {
-    "seeds": [1031, 1033, 1039],
-    "conditions": ["trial_gate_relaxed", "reward_shared", "independent7_lru", "independent7_lfu"],
+    "seeds": [
+      1031,
+      1033,
+      1039
+    ],
+    "conditions": [
+      "trial_gate_relaxed",
+      "reward_shared",
+      "independent7_lru",
+      "independent7_lfu"
+    ],
     "bout_steps": 2048,
     "sequence_length": 24,
     "actor_cap_bytes": 236,
@@ -19,29 +40,95 @@
   "shifted_foundations": {
     "phase": "known",
     "domain": "detour",
-    "foundation_seeds": [17, 29],
-    "seeds": [1061, 1063],
-    "conditions": ["trial_gate_relaxed", "reward_shared", "independent7_lru"],
+    "foundation_seeds": [
+      17,
+      29
+    ],
+    "seeds": [
+      1061,
+      1063
+    ],
+    "conditions": [
+      "trial_gate_relaxed",
+      "reward_shared",
+      "independent7_lru"
+    ],
     "bout_steps": 2048,
     "interpretation": "Separate domain-generator and independently initialized W0 stress test; not a standard SOTA benchmark."
   },
   "parent_recycle_validation": {
     "phase": "known",
-    "seeds": [1049, 1051],
-    "conditions": ["trial_gate_relaxed", "reward_shared"],
-    "variants": ["fixed_parent_groups", "bounded_parent_recycle"],
+    "seeds": [
+      1049,
+      1051
+    ],
+    "conditions": [
+      "trial_gate_relaxed",
+      "reward_shared"
+    ],
+    "variants": [
+      "fixed_parent_groups",
+      "bounded_parent_recycle"
+    ],
     "bout_steps": 1024,
-    "rule": "Compare both paired variants on validation online signed reward; all outcomes retained. The independent capacity cohorts are not used for threshold selection."
+    "rule": "Compare both paired variants on validation online signed reward; all outcomes retained. The independent capacity cohorts are not used for threshold selection.",
+    "evidence": "Both variants use the same fixed-size cumulative resident statistics; only parent recycling differs."
   },
   "parent_recycle_formal": {
     "phase": "known",
-    "seeds": [1093, 1097, 1103],
-    "conditions": ["trial_gate_relaxed", "reward_shared"],
-    "variants": ["fixed_parent_groups", "bounded_parent_recycle"],
+    "seeds": [
+      1093,
+      1097,
+      1103
+    ],
+    "conditions": [
+      "trial_gate_relaxed",
+      "reward_shared"
+    ],
+    "variants": [
+      "fixed_parent_groups",
+      "bounded_parent_recycle"
+    ],
     "bout_steps": 2048,
     "rule": "Run only if parent-recycle validation improves at least one method in mean online reward; preserve its fixed-parent control and report all three paired formal seeds."
   },
   "max_training_workers": 2,
   "torch_threads_per_worker": 1,
-  "negative_or_null_results_retained": true
+  "negative_or_null_results_retained": true,
+  "budget_baseline": {
+    "conditions": [
+      "independent7_lru"
+    ],
+    "seeds": [
+      1031,
+      1033,
+      1039
+    ],
+    "known_bout_training_steps": 2144,
+    "known_total_training_steps": 51456,
+    "unknown_bout_training_steps": 2048,
+    "unknown_total_training_steps": 49152,
+    "probe_steps": 0,
+    "all_fresh_rollouts_fit": true,
+    "actor_cap_bytes": 236,
+    "full_persistent_cap_bytes": 262144,
+    "timing": "Added after first controlled formal results; not used to choose or tune a proposal rule.",
+    "fairness": "Same total real training-stream interactions as the shared cache, not identical per-bout dwell times or identical PPO update counts; report compute separately."
+  },
+  "parent_recycle_unknown_followup": {
+    "seeds": [
+      1123,
+      1129,
+      1151
+    ],
+    "variants": [
+      "fixed_parent_groups",
+      "bounded_parent_recycle"
+    ],
+    "phase": "unknown",
+    "bout_steps": 2048,
+    "condition_rule": "If known-parent formal has a positive mean paired gain for at least one condition, carry the condition with the largest validation mean recycle gain into fresh unknown seeds; do not change thresholds.",
+    "additional_control": "independent7 budget baseline on the same three fresh seeds",
+    "all_outcomes_retained": true
+  }
 }
