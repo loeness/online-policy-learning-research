@@ -286,8 +286,9 @@ def unknown_behavior_probs(base_probabilities: object, uniform_mix: float = 0.5)
         raise ValueError("base probabilities must sum to one")
     if not 0.0 <= float(uniform_mix) <= 1.0:
         raise ValueError("uniform_mix must be in [0, 1]")
+    base = base / base.sum()
     mixed = (1.0 - float(uniform_mix)) * base + float(uniform_mix) * 0.25
-    return mixed.astype(np.float32)
+    return mixed / mixed.sum()
 
 
 def _new_agent(
@@ -558,14 +559,17 @@ def _append_ledger(writer, *, kind: str, global_step: int, bout: int, task_name:
 def _policy_probs(core: FlexibleSharedPolicy, observation: np.ndarray) -> tuple[np.ndarray, float]:
     tensor = torch.as_tensor(np.asarray(observation, dtype=np.float32), dtype=torch.float32).reshape(1, -1)
     with torch.no_grad():
-        probabilities = core.get_distribution(tensor).distribution.probs.reshape(-1).cpu().numpy().astype(np.float32)
+        probabilities = core.get_distribution(tensor).distribution.probs.reshape(-1).cpu().numpy().astype(np.float64)
         value = float(core.predict_values(tensor).reshape(-1)[0].cpu().item())
+    probabilities /= probabilities.sum()
     return probabilities, value
 
 
 def _sample(probs: np.ndarray, rng: np.random.Generator) -> tuple[int, float]:
-    action = int(rng.choice(4, p=np.asarray(probs, dtype=np.float64)))
-    return action, math.log(max(float(probs[action]), 1e-12))
+    actual = np.asarray(probs, dtype=np.float64)
+    actual = actual / actual.sum()
+    action = int(rng.choice(4, p=actual))
+    return action, math.log(max(float(actual[action]), 1e-12))
 
 
 def _route_before_action(agent, obs: np.ndarray) -> dict[str, Any]:
@@ -1225,15 +1229,17 @@ def _summarize_group_coverage(group_coverage: Mapping[str, Mapping[str, Any]]) -
 def _clone_evaluate(agent, *, tasks: Sequence[str], episodes: int, steps_writer, eval_writer) -> dict[str, Any]:
     """Evaluate a cloned endpoint; no live policy, router, or optimizer is changed."""
     started = time.process_time()
-    core = copy.deepcopy(agent.core)
-    core.eval()
-    cache = BoundedTaskCache.from_state_dict(agent.cache.state_dict()) if agent.cache is not None else None
-    router = WriteDecisionRouter.from_state_dict(agent.router.state_dict()) if agent.router is not None else None
-    if router is not None:
-        router.clear_recent()
     results: dict[str, Any] = {}
     eval_steps = 0
     for task_index, name in enumerate(tasks):
+        # Every target starts from the same endpoint. Earlier diagnostic
+        # targets must not evict knowledge used to score later targets.
+        core = copy.deepcopy(agent.core)
+        core.eval()
+        cache = BoundedTaskCache.from_state_dict(agent.cache.state_dict()) if agent.cache is not None else None
+        router = WriteDecisionRouter.from_state_dict(agent.router.state_dict()) if agent.router is not None else None
+        if router is not None:
+            router.clear_recent()
         spec = task_from_name(name)
         env = make_env(spec, str(agent.run_config["domain"]))
         if cache is not None:
