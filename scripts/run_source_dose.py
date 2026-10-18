@@ -369,6 +369,8 @@ def _run_candidate_branches(
                     folder=branch_folder, phase="future", action=chosen_action,
                     future_regime=str(future_regime),
                 )
+                simulation_cpu_s = float(time.process_time() - branch_start_cpu)
+                simulation_wall_s = float(time.perf_counter() - branch_start_wall)
                 final_actor, final_codec_error, final_effective_error = base._encode_live_actor(restored)
                 final_learner = base._capture_learner(restored, foundation_sha)
                 final_simulator = base._capture_simulator(restored_env, restored_runtime)
@@ -378,10 +380,12 @@ def _run_candidate_branches(
                 elapsed = {
                     "cpu_s": float(time.process_time() - restore_cpu),
                     "wall_s": float(time.perf_counter() - restore_wall),
-                    "simulation_cpu_s": float(time.process_time() - branch_start_cpu),
-                    "simulation_wall_s": float(time.perf_counter() - branch_start_wall),
-                    "restore_cpu_s": float(time.process_time() - restore_cpu),
-                    "restore_wall_s": float(time.perf_counter() - restore_wall),
+                    "simulation_cpu_s": simulation_cpu_s,
+                    "simulation_wall_s": simulation_wall_s,
+                    # The legacy restore label covers all pre-simulation setup,
+                    # including the action, codec and audit snapshot writes.
+                    "restore_cpu_s": float(branch_start_cpu - restore_cpu),
+                    "restore_wall_s": float(branch_start_wall - restore_wall),
                 }
                 summary = base._summarize_bouts(branch_bouts, restored, elapsed, start_counts=branch_start_counts)
                 summary.update({
