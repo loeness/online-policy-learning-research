@@ -80,8 +80,8 @@ class FlexibleSharedPolicy(SharedWritePolicy):
     @staticmethod
     def _validate_flexible_group_count(shared_groups: int) -> int:
         value = SharedWritePolicy._validate_group_count(shared_groups)
-        if value not in (0, 2):
-            raise ValueError("shared_groups must be zero or two")
+        if value not in (0, 1, 2):
+            raise ValueError("shared_groups must be zero, one or two")
         return value
 
     def _resize_local_slots(self, count: int) -> None:

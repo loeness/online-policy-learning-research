@@ -1,0 +1,69 @@
+{
+  "format": "storage_decision_v1",
+  "analysis_role": "predeclared_controlled_mechanism",
+  "seeds": [
+    20089
+  ],
+  "pair_kinds": [
+    "dynamics"
+  ],
+  "history_regimes": [
+    "old_major"
+  ],
+  "future_regimes": [
+    "old_major",
+    "new_major"
+  ],
+  "actions": [
+    "keep",
+    "replace",
+    "mean",
+    "none"
+  ],
+  "bootstrap_steps": 512,
+  "bout_steps": 256,
+  "rollout_steps": 256,
+  "local_slots": 2,
+  "shared_groups": 1,
+  "local_learning_rate": 0.003,
+  "shared_learning_rate": 0.0,
+  "critic_learning_rate": 0.003,
+  "actor_budget_bytes": 89,
+  "package_budget_bytes": 262144,
+  "evidence_rows_per_group": 256,
+  "recent_bouts": 8,
+  "max_workers": 4,
+  "torch_threads": 1,
+  "pilot": {
+    "seeds": [
+      20089
+    ],
+    "pair_kinds": [
+      "dynamics"
+    ],
+    "history_regimes": [
+      "old_major"
+    ],
+    "bootstrap_steps": 512,
+    "bout_steps": 256
+  },
+  "gate": {
+    "min_rows": 12,
+    "min_blocks": 3,
+    "min_ess_ratio": 0.2,
+    "max_mean_kl": 0.5,
+    "clip_ratio": 5.0,
+    "stderr_multiplier": 1.0
+  },
+  "report": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20261018,
+    "practical_reward_per_step": 0.002,
+    "direction_consistency_minimum": 6,
+    "primary_continuation": "history_regime equals future_regime",
+    "stress_continuation": "history_regime differs from future_regime"
+  },
+  "scope": "One retention decision; known task IDs, boundaries and old/new group supplied to all arms; fixed actor layout, common complete-package cap, continued local PPO and natural LRU eviction. Not unknown-context discovery, repeated adaptive allocation, joint-state optimal storage or a new algorithm claim.",
+  "pilot_seed": 20089,
+  "domain": "navigation"
+}

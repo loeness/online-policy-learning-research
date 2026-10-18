@@ -1,5 +1,31 @@
 # Implemented algorithms
 
+## Source content dose and persistence × future PPO (2026-10-18)
+
+`scripts/run_source_dose.py` instruments the unchanged storage schedule after PPO, int8 encoding and actor-Adam clearing. It observes the two old source residuals at their own 1,024-step points, while the actual prefix still learns each old source for 2,048 steps. Both low- and high-dose past-only selectors freeze before future expansion. Future branches differ only in installed old-candidate content; replace/none outcomes are reused only after exact complete post-action learner/simulator hash equality. Observer candidates are absent from learner checkpoints. This is a controlled content intervention, not a shorter-history deployment or an equal-quality guarantee.
+
+`scripts/run_learning_ablation.py` restores the same prefixes and adds fresh replace/none continuations with actor/critic gradient and optimizer steps disabled. The original source-dose PPO outcomes are referenced rather than rerun or charged twice. LRU allocation and persistent-prior inheritance continue, so this is not a static-policy control. Trained rollouts and fit steps cannot increase; collected rollouts are counted separately. Each branch verifies W0, critic and optimizer invariance and exact post-action matching to its PPO reference.
+
+The model remains two 27-coefficient local slots and one 9-coefficient parent, with an 89 B int8 actor and a 262,144 B complete package cap. Neither runner adds automatic grouping, a tree, repeated allocation decisions, or a new retention selector. [Frozen source protocol](SOURCE_DOSE_PROTOCOL.md), [learning interaction protocol](LEARNING_INTERACTION_PROTOCOL.md), and [interpretation](SOURCE_FOLLOWUP_REVIEW.md) define the estimands and boundaries.
+
+`scripts/benchmark_score_features.py` is a checkpoint-only common-subexpression diagnostic. It shares actor features within one candidate/baseline scoring call, adds no persistent cache, and does not implement event-triggered or local structural maintenance. Its cost result is reported separately from policy-learning effects.
+
+## Latest controlled mechanism: one storage decision with continued learning
+
+[STORAGE_DECISION_PROTOCOL.md](STORAGE_DECISION_PROTOCOL.md) freezes the current one-decision implementation in `src/online_rl/storage_decision.py` and `scripts/run_storage_decision.py`. Two local slots contain 27 coefficients each; one parent contains 9. The common int8 actor container is 89 B. An old parent and one temporary new candidate are learned from online PPO. From the same learner/simulator snapshot, keep, replace, mean and none install different content in the single parent position. Resident effective matrices are compensated before encoding; measured encoding drift is retained. Displaced content is absent from the deployed learner backup.
+
+New local allocations inherit the frozen parent only when the known group matches its binding. Local LRU eviction and PPO/critic learning continue for 12,288 future steps. Actor Adam is cleared after each quantized rollout; critic Adam is retained. All new rollout rows enter training. Complete state restoration includes optimizers, RNGs, LRU/evidence state and the physical simulator. This experiment supplies context IDs, boundaries and old/new membership to every arm; it does not implement latent grouping or a dynamic tree.
+
+Past-only frequency, recency and existing historical gain/lower rules are fixed before any future branch runs. Their realized values use the chosen complete learning branch, not a frozen-policy proxy. Full learner packages are capped at 262,144 B; fixed actor shape is not a claim of globally optimal byte allocation. [The results](STORAGE_DECISION_REVIEW.md) support schedule-dependent action effects but do not validate a superior automatic selector. The later source-dose intervention isolates candidate content as described above; repeated adaptive allocation remains unimplemented.
+
+## Current diagnostic: score prediction
+
+[SCORE_CALIBRATION_PROTOCOL.md](SCORE_CALIBRATION_PROTOCOL.md) defines a diagnostic observer around the unchanged retention learner. It freezes all initial-prefix test scores and matrices, captures real pre-update recurrence states, and pays for paired cold-policy evaluations after learning. The observer has no feedback path to the learner. This adds no new policy-selection rule; [the result](SCORE_CALIBRATION_REVIEW.md) tests the existing score's predictive value.
+
+## Latest Stage 2 stream implementation
+
+[RETENTION_STREAM_STAGE2_METHOD.md](RETENTION_STREAM_STAGE2_METHOD.md) describes the current bounded local/parent model, online PPO, fixed prototype archive, pending average candidate, later-rollout retention test, compensated installation and selective prior reuse. The [result](RETENTION_STREAM_STAGE2_REVIEW.md) does not validate the new gate: direct shared PPO and simple mean remain necessary stronger controls. Local context indices and boundaries are provided for this mechanism study; true family labels are not used for grouping.
+
 This document describes the code and fixed protocols in the archived A/B, B+, compression, and C1 cohorts. It does not describe a future C2 design. The environment is a small mechanism study; results do not establish a general continual-learning method, safety guarantee, or state-of-the-art claim.
 
 ## Environment and shared foundation

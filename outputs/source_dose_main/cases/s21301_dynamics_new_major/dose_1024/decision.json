@@ -1,0 +1,325 @@
+{
+  "format": "storage_source_dose_case_v1",
+  "case_id": "s21301_dynamics_new_major",
+  "seed": 21301,
+  "pair_kind": "dynamics",
+  "history_regime": "new_major",
+  "prefix_state_hash": "3c04214efa90318fa8ab79062ad10840071cab7cf4530241cc08bb0d5c52e142",
+  "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+  "mapping": {
+    "pair_kind": "dynamics",
+    "families": {
+      "old": "A",
+      "new": "B"
+    },
+    "preferences": {
+      "old": 1,
+      "new": 1
+    },
+    "groups": {
+      "old": 0,
+      "new": 1
+    }
+  },
+  "old_candidate_2048": [
+    [
+      -0.04386011138558388,
+      -0.007797353435307741,
+      0.06189149245619774
+    ],
+    [
+      -0.025341399013996124,
+      0.013645368628203869,
+      0.04044876992702484
+    ],
+    [
+      -0.05165746808052063,
+      -0.059942156076431274,
+      0.008772023022174835
+    ]
+  ],
+  "old_candidate_1024": [
+    [
+      -0.009392043575644493,
+      -0.002516341395676136,
+      0.020296839997172356
+    ],
+    [
+      -0.02994491532444954,
+      -0.018349910154938698,
+      0.018432090058922768
+    ],
+    [
+      -0.021117735654115677,
+      -0.01733652874827385,
+      0.004721250385046005
+    ]
+  ],
+  "new_candidate": [
+    [
+      0.014462362974882126,
+      -0.005650416947901249,
+      -0.03327026590704918
+    ],
+    [
+      0.027509860694408417,
+      0.05197266861796379,
+      -0.023316754028201103
+    ],
+    [
+      0.054610725492239,
+      -0.056193459779024124,
+      -0.08999427407979965
+    ]
+  ],
+  "source_capture_steps": 1024,
+  "source_capture_records": {
+    "0": {
+      "variant": 0,
+      "task": "A0+",
+      "group": 0,
+      "bout": 0,
+      "bout_step": 1024,
+      "global_environment_steps": 1024,
+      "slot": 0,
+      "generation": 1,
+      "fitted_steps": 1024,
+      "rollouts_trained": 4,
+      "minibatch_updates": 64,
+      "last_rollout_updates": 16,
+      "rollout_index": 3,
+      "rollout_rows": 256,
+      "physical_group": -1,
+      "effective_matrix_27": [
+        -0.022516686469316483,
+        0.01857626624405384,
+        0.06079505383968353,
+        -0.006755005568265915,
+        0.005629171617329121,
+        0.010132508352398872,
+        -0.009006674401462078,
+        -0.016324596479535103,
+        0.003940420225262642,
+        -0.01351001113653183,
+        0.007880840450525284,
+        0.04897379130125046,
+        -0.04278170317411423,
+        -0.051225461065769196,
+        0.038841284811496735,
+        -0.032649192959070206,
+        -0.026457106694579124,
+        0.031523361802101135,
+        -0.03602669760584831,
+        -0.028708774596452713,
+        0.008443756960332394,
+        -0.023079603910446167,
+        0.009006674401462078,
+        0.023079603910446167,
+        -0.07149048149585724,
+        -0.06980172544717789,
+        0.039967115968465805
+      ]
+    },
+    "1": {
+      "variant": 1,
+      "task": "A1+",
+      "group": 0,
+      "bout": 1,
+      "bout_step": 1024,
+      "global_environment_steps": 3072,
+      "slot": 1,
+      "generation": 1,
+      "fitted_steps": 1024,
+      "rollouts_trained": 12,
+      "minibatch_updates": 192,
+      "last_rollout_updates": 16,
+      "rollout_index": 3,
+      "rollout_rows": 256,
+      "physical_group": -1,
+      "effective_matrix_27": [
+        0.02640645019710064,
+        -0.0035684392787516117,
+        -0.012846381403505802,
+        -0.03140226751565933,
+        0.02640645019710064,
+        0.042107582092285156,
+        0.0007136878557503223,
+        -0.040680207312107086,
+        -0.09063835442066193,
+        0.0164148211479187,
+        0.0164148211479187,
+        -0.009991629980504513,
+        -0.052099213004112244,
+        -0.04139389470219612,
+        0.03711176663637161,
+        0.009277941659092903,
+        0.008564254269003868,
+        -0.007850566878914833,
+        -0.027120139449834824,
+        -0.025692762807011604,
+        0.02640645019710064,
+        -0.02355169877409935,
+        -0.05852240324020386,
+        -0.040680207312107086,
+        -0.02355169877409935,
+        0.040680207312107086,
+        0.05138552561402321
+      ]
+    }
+  },
+  "selectors_frozen_before_future_expansion": true,
+  "selectors": {
+    "keep": "keep",
+    "replace": "replace",
+    "mean": "mean",
+    "none": "none",
+    "frequency": "replace",
+    "recency": "replace",
+    "surrogate_gain": "replace",
+    "surrogate_lower": "replace"
+  },
+  "selector_diagnostics": {
+    "recent_group_ids": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1
+    ],
+    "group_frequency": {
+      "0": 0.25,
+      "1": 0.75
+    },
+    "past_only_selectors": {
+      "keep": "keep",
+      "replace": "replace",
+      "mean": "mean",
+      "none": "none",
+      "frequency": "replace",
+      "recency": "replace",
+      "surrogate_gain": "replace",
+      "surrogate_lower": "replace"
+    },
+    "surrogate": {
+      "old_zero_vs_old_parent": {
+        "status": "supported",
+        "supported": true,
+        "gain": 0.0004255219902481159,
+        "lower": -0.00133136345328438,
+        "blocks": 5,
+        "ess": {
+          "candidate": 190.7157848068739,
+          "baseline": 194.32695719289083
+        },
+        "ess_ratio": {
+          "candidate": 0.7449835344018512,
+          "baseline": 0.7590896765347298
+        },
+        "kl": {
+          "candidate": 0.0975437033636256,
+          "baseline": 0.10882573614793761
+        },
+        "coverage": {
+          "candidate": true,
+          "baseline": true
+        },
+        "stderr": 0.0017568854435324958,
+        "rows": 256,
+        "reason": "supported"
+      },
+      "new_parent_vs_zero": {
+        "status": "supported",
+        "supported": true,
+        "gain": 0.009050043765767778,
+        "lower": 0.004428641200386159,
+        "blocks": 5,
+        "ess": {
+          "candidate": 248.97944159557096,
+          "baseline": 231.76498597218085
+        },
+        "ess_ratio": {
+          "candidate": 0.9725759437326991,
+          "baseline": 0.9053319764538315
+        },
+        "kl": {
+          "candidate": 0.01730104133438167,
+          "baseline": 0.047752574617671725
+        },
+        "coverage": {
+          "candidate": true,
+          "baseline": true
+        },
+        "stderr": 0.004621402565381619,
+        "rows": 256,
+        "reason": "supported"
+      },
+      "frequency_weighted_gain": 0.0068939133218878625,
+      "frequency_weighted_lower": 0.0029886400369685236
+    },
+    "support_rows": {
+      "old": 256,
+      "new": 256
+    },
+    "decision_source_groups": [
+      0,
+      1
+    ]
+  },
+  "selector_input_candidate_set": "old_candidate_1024",
+  "selector_freeze_timing": "both dose rules computed before any future expansion from common prefix evidence",
+  "candidate_workspace_in_learner": false,
+  "learner_parent_count": 1,
+  "branches": [
+    {
+      "action": "keep",
+      "future_regime": "old_major",
+      "summary": "branches/keep__old_major/summary.json"
+    },
+    {
+      "action": "replace",
+      "future_regime": "old_major",
+      "summary": "branches/replace__old_major/summary.json",
+      "reuse_of": "../../../branches/replace__old_major/summary.json",
+      "independent_observation": false
+    },
+    {
+      "action": "mean",
+      "future_regime": "old_major",
+      "summary": "branches/mean__old_major/summary.json"
+    },
+    {
+      "action": "none",
+      "future_regime": "old_major",
+      "summary": "branches/none__old_major/summary.json",
+      "reuse_of": "../../../branches/none__old_major/summary.json",
+      "independent_observation": false
+    },
+    {
+      "action": "keep",
+      "future_regime": "new_major",
+      "summary": "branches/keep__new_major/summary.json"
+    },
+    {
+      "action": "replace",
+      "future_regime": "new_major",
+      "summary": "branches/replace__new_major/summary.json",
+      "reuse_of": "../../../branches/replace__new_major/summary.json",
+      "independent_observation": false
+    },
+    {
+      "action": "mean",
+      "future_regime": "new_major",
+      "summary": "branches/mean__new_major/summary.json"
+    },
+    {
+      "action": "none",
+      "future_regime": "new_major",
+      "summary": "branches/none__new_major/summary.json",
+      "reuse_of": "../../../branches/none__new_major/summary.json",
+      "independent_observation": false
+    }
+  ]
+}

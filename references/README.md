@@ -1,6 +1,6 @@
 # Citation notes
 
-The bibliography contains 40 public references used by the baseline and related-work map in [the project note](../docs/BASELINES_AND_RELATED_WORK.md). Entries use the publisher or conference record when one is available, and the arXiv record for preprints or work without a formal proceedings entry. The original 25 records were checked on 2026-10-14; three C1 supplement entries (EWC, Progress & Compress, LoRA-XS) were checked on 2026-10-15. URLs point to the record used to verify the entry; arXiv eprint fields identify the cited preprint version.
+The bibliography contains 49 public references used by the baseline and related-work map in [the project note](../docs/BASELINES_AND_RELATED_WORK.md), the online-learning reading notes, and the software/workflow notes. Entries use the publisher or conference record when one is available, and the arXiv record for preprints or work without a formal proceedings entry. The original 25 records were checked on 2026-10-14; three C1 supplement entries (EWC, Progress & Compress, LoRA-XS) were checked on 2026-10-15. Three public arXiv correspondences for the twelve user-provided PDFs were checked on 2026-10-18. URLs point to the record used to verify the entry; version-specific metadata decisions are listed below.
 
 ## Metadata decisions
 
@@ -9,11 +9,16 @@ The bibliography contains 40 public references used by the baseline and related-
 - **Bossens2024LifetimePolicyReuse** gives the journal issue year, 2024; the article first appeared online in 2023.
 - **Cannon2024HOP** is an arXiv preprint. Its arXiv comments say that it was accepted as a poster at the NeurIPS IMOL workshop; it is not labeled as a NeurIPS main-track paper.
 - **Silver2025EraExperience** is a 2025 preprint of a chapter announced for *Designing an Intelligence* (MIT Press). It is a research agenda/position piece, not an experimental result or theorem.
-- **Kassis2026ScientificAgentSkills** cites arXiv version 2 (revised 2026-09-02). Its authors report no task-level evaluation; the project cites it only as procedural software/workflow context.
+- **Kassis2026ScientificAgentSkills** uses the unversioned arXiv identifier/DOI; metadata checked on 2026-10-16 identifies current version 2 (revised 2026-09-02). The project cites it only as procedural software/workflow context.
+- **Hunter2007Matplotlib** credits the plotting library separately, following [Matplotlib's official citation guidance](https://matplotlib.org/stable/project/citing.html), checked 2026-10-16. It is distinct from the procedural workflow citation.
 
 The user's notes mention an unpublished supervisor argument. It is not included in this public bibliography, and this document does not reproduce, attribute, or assess private proof material.
 
 ## Citation use
+
+### Twelve attached online-learning manuscripts (2026-10-18)
+
+[Synthesis](../docs/literature/20261018_SYNTHESIS.md) and [source inventory](../docs/literature/20261018_sources.json) cover all twelve attachment titles, page counts, current local locations and hashes. The public records verified in this session are **Li2026ImplicitTargetShift** (arXiv:2605.07886, current v2, 2026-10-02), **Voitovych2026SmoothedOnline** (arXiv:2610.10499, v1, 2026-10-07), and **Lu2026OPTSTTPO** (arXiv:2609.40035, v1, 2026-09-30). Analysis uses the attachments, including their appendices; public versions can differ in pagination and content. The other nine exact public correspondences were not verified in this session. They remain identified by their attachment titles rather than invented arXiv IDs or author lists. This is not evidence that no public versions exist. Anonymous review headers do not establish conference acceptance.
 
 The linked papers provide context for algorithms and evaluation design. Their results were obtained on their own tasks and protocols. They are not performance baselines for the custom navigation runs unless the same method is implemented and evaluated under the project's frozen environment, data, interaction budget, state accounting, and seeds.
 

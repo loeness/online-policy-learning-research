@@ -1,5 +1,73 @@
 # Reproducibility
 
+## Literature-driven source-dose and learning interaction follow-up
+
+Use new empty directories. The frozen settings are [source-dose config](../configs/source_dose.json), [source protocol](SOURCE_DOSE_PROTOCOL.md) and [future-learning protocol](LEARNING_INTERACTION_PROTOCOL.md). The no-gradient runner reads the complete source run; it neither reruns nor double-charges its prefix/PPO comparators.
+
+```powershell
+& .\.venv\Scripts\python.exe scripts/run_source_dose.py --config configs/source_dose.json --pilot --output outputs/my_source_pilot
+& .\.venv\Scripts\python.exe scripts/run_learning_ablation.py --source outputs/my_source_pilot --output outputs/my_learning_pilot
+& .\.venv\Scripts\python.exe scripts/audit_source_followup.py --source outputs/my_source_pilot --ablation outputs/my_learning_pilot --output outputs/my_pilot_audit.json
+& .\.venv\Scripts\python.exe scripts/run_source_dose.py --config configs/source_dose.json --output outputs/my_source_main
+& .\.venv\Scripts\python.exe scripts/run_learning_ablation.py --source outputs/my_source_main --output outputs/my_learning_main
+& .\.venv\Scripts\python.exe scripts/report_source_followup.py --source outputs/my_source_main --ablation outputs/my_learning_main --output outputs/my_source_report
+& .\.venv\Scripts\python.exe scripts/audit_source_followup.py --source outputs/my_source_main --ablation outputs/my_learning_main --output outputs/my_main_audit.json
+```
+
+Four case workers with one Torch thread each are configured. Pilot and main have different source/bout lengths; pilot tests implementation only. Historical `source_dose_pilot` fails at final aggregation after real interactions; `source_dose_pilot_v2` is the corrected rerun. `learning_interaction_pilot` fails during input snapshot before environment creation; `_v2` is the corrected rerun. Preserve these directories and their source snapshots; never relabel failed attempts as successful data. [The review](SOURCE_FOLLOWUP_REVIEW.md) records exact incremental costs and scientific outcomes.
+
+The checkpoint-only score feature benchmark is separate:
+
+```powershell
+& .\.venv\Scripts\python.exe scripts/benchmark_score_features.py --data-root outputs/storage_decision_main --output-root outputs/my_score_features --repeats 25 --timing-context "no concurrent RL workload"
+```
+
+Use a fresh output path and no concurrent RL load for new timing. The preserved clean result is `outputs/score_feature_benchmark`; `outputs/score_feature_benchmark_concurrent_pilot` is explicitly marked as concurrent. Neither report/benchmark/audit makes environment calls. The benchmark changes only a paired score computation, not structural maintenance or learner parameters.
+
+Targeted software checks are `test_source_dose.py`, `test_storage_decision.py`, `test_learning_ablation.py`, `test_score_features.py`, and `test_report_source_followup.py` under `tests/`. Actual executed results are recorded with this round's audit; contracts use fixtures, not fresh RL runs. Main source snapshots preserve the executed producer versions even if later documentation/reporting changes.
+
+## Single storage decision with future online PPO
+
+Existing main and pilot runs are complete. The [frozen protocol](STORAGE_DECISION_PROTOCOL.md), [config](../configs/storage_decision.json) and cohort source snapshots describe the actual run versions. New runs incur new costs; use empty output locations:
+
+```powershell
+& .\.venv\Scripts\python.exe scripts/run_storage_decision.py --config configs/storage_decision.json --pilot --output outputs/my_storage_pilot
+& .\.venv\Scripts\python.exe scripts/run_storage_decision.py --config configs/storage_decision.json --output outputs/my_storage_main
+& .\.venv\Scripts\python.exe scripts/report_storage_decision.py --input outputs/my_storage_main --output outputs/my_storage_report
+& .\.venv\Scripts\python.exe scripts/audit_storage_decision.py --cohort outputs/my_storage_main --output outputs/my_storage_audit.json
+& .\.venv\Scripts\python.exe scripts/diagnose_storage_decision.py --input outputs/my_storage_main --output outputs/my_storage_diagnostics.json
+```
+
+The default config fixes eight main deployment seeds and four workers with one Torch thread each. Main uses 3,538,944 interactions; the separate pilot adds 27,648. The one shared W0 is an existing checkpoint. Reports, tests and read-only audits make no environment calls. Main's top-level `costs.wall_s` is elapsed wall time and `costs.cpu_s` includes child case process plus orchestrator CPU; leaf wall-time sums measure different work. The preserved pilot's early `cpu_s` is orchestrator-only; its prefix/branch CPU fields record learner work.
+
+Targeted checks are `tests/test_storage_decision.py`, `tests/test_report_storage_decision.py`, `tests/test_write_decision_policy.py` and `tests/test_write_stream.py`. All 37 passed before the main run. One additional reporter schema regression was added afterward; the six reporter checks pass. See [software record](../outputs/storage_decision_software_validation.json) and [review](STORAGE_DECISION_REVIEW.md) for the correction history. The v2 report changes only a missing byte-field alias; the original v1 report and all run data remain unchanged.
+
+## Frozen score prediction diagnostic
+
+Existing results are complete; reruns add new costs. Use new empty output locations:
+
+```powershell
+& .\.venv\Scripts\python.exe scripts/run_score_calibration.py --mode pilot --output outputs/my_score_pilot
+& .\.venv\Scripts\python.exe scripts/run_score_calibration.py --mode main --output outputs/my_score_main
+& .\.venv\Scripts\python.exe scripts/report_score_calibration.py --input outputs/my_score_main --output outputs/my_score_report
+& .\.venv\Scripts\python.exe scripts/audit_score_calibration.py --cohort outputs/my_score_pilot --cohort outputs/my_score_main --output outputs/my_score_audit.json
+```
+
+Frozen settings are in `configs/score_calibration.json`; each cohort saves source copies and effective learner settings. [The protocol](SCORE_CALIBRATION_PROTOCOL.md) specifies candidate eligibility, natural-state anchors, paired randomness, costs and inference limits. The current completed diagnostic consumed 1110016 interactions, including both learner and observer. Reporting and artifact auditing do not step the environment. SciPy is not required: the frozen eight-replicate protocol uses the stated t7 critical constant.
+
+## Natural eviction and retention writes: Stage 2
+
+The current implementation and frozen main configuration are described in [RETENTION_STREAM_STAGE2_METHOD.md](RETENTION_STREAM_STAGE2_METHOD.md) and [RETENTION_STREAM_STAGE2_PROTOCOL.md](RETENTION_STREAM_STAGE2_PROTOCOL.md). Existing results need no rerun. Use new empty folders when reproducing:
+
+```powershell
+& .\.venv\Scripts\python.exe scripts/run_retention_stream.py --mode pilot --output outputs/my_new_retention_pilot
+& .\.venv\Scripts\python.exe scripts/run_retention_stream.py --mode exploratory --output outputs/my_new_retention_main
+& .\.venv\Scripts\python.exe scripts/report_retention_stream.py --input outputs/my_new_retention_main --output outputs/my_new_retention_report
+& .\.venv\Scripts\python.exe scripts/audit_retention_stream.py --cohort outputs/my_new_retention_pilot --cohort outputs/my_new_retention_main --output outputs/my_new_retention_audit.json
+```
+
+Current pilot mode reproduces the 1024-step-bout pilot v2, not the preserved 512-step pilot v1. Each existing cohort retains its exact source snapshot and frozen config. The original two pilots plus main cost 829440 interactions; new reruns add new costs. The audit verifies raw rows, rewards, action probabilities, update ledgers, snapshots and physical checkpoint/sidecar bytes. The main report v2 uses matched eviction differences in its recovery panels; v1 is preserved with descriptive per-arm panels. See [result and limits](RETENTION_STREAM_STAGE2_REVIEW.md).
+
 ## Latest ordered write investigation
 
 Use the current `.venv` and new, empty output directories. The original evidence and frozen snapshots remain under `outputs/write_*`. `configs/write_followup.json` and `configs/write_detour_budget_supplement.json` declare the matrix; `docs/WRITE_*PROTOCOL.md` and `WRITE_BUDGET_BASELINE.md` state stage-specific assumptions and costs. Maximum concurrent learners is two, with one torch thread per learner.

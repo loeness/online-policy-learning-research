@@ -1,5 +1,15 @@
 # Research archive inventory
 
+## Literature-driven follow-up update (2026-10-18)
+
+The current manifest adds the twelve-paper notes/source index, source-dose and learning-interaction protocols/configuration/code/tests, 32 common prefixes, 384 physical PPO futures and 128 fresh no-gradient futures, exact-state alias metadata, learner/simulator checkpoints, all raw logs, failed/successful pilots, source snapshots, derived reports/figures and independent audits. Superseded pilot/schema-debug reports stay labeled and preserved. The checkpoint-only clean/concurrent score-feature benchmarks are separate zero-interaction diagnostics. [The review](SOURCE_FOLLOWUP_REVIEW.md) gives the 6,776,832-interaction incremental ledger, narrow positive signals, negative practical findings and remaining method gap.
+
+Previous unsynced retention Stage 2, score-calibration and original storage-decision artifacts remain included. Archive size is reproducibility storage, not the deployed learner budget. Original source-document extracts and machine-local material remain excluded. Rebuild and verify the manifest after all final result/document edits; its exact current file/byte counts take precedence over historical tables below.
+
+## Storage decision update (2026-10-18)
+
+The local manifest covers the complete single-position storage experiment: 32 common prefixes, 256 continued-PPO branches, separate pilot, frozen configuration/protocol, original source snapshots, raw steps and update logs, learner and simulator states, v1/v2 reports, figures, independent audits and negative results. [The review](STORAGE_DECISION_REVIEW.md) separates supported schedule effects from unvalidated adaptive selector value. It also records candidate maturity and codec limits. Manifest inclusion describes local archival coverage, not confirmation that new files have been pushed to GitHub.
+
 ## Latest write investigation (2026-10-16)
 
 The regenerated manifest includes all new `write_*` experiment artifacts, independent foundation checkpoints, candidate/control source snapshots, failed/interrupted ledgers, metadata-repair history, current audits, raw and focused figures, references, code and tests. There are 16 complete cohort roots / 100 complete runs plus separately costed failed or interrupted attempts. [Full interpretation](WRITE_INVESTIGATION_REVIEW.md) records negative results and provenance limits. Manifest byte totals describe the Git archive, not the deployed learner memory budget. Confidential local extraction remains excluded.

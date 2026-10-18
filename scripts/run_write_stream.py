@@ -19,6 +19,7 @@ import shutil
 import sys
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from operator import index as as_index
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, Mapping, Sequence
@@ -175,14 +176,56 @@ def _validate_phase(phase: str) -> str:
     return phase
 
 
-def _validate_local_slot_conditions(conditions: Sequence[str], slots: int | None) -> None:
-    if slots == 7:
-        incompatible = [name for name in conditions if name not in INDEPENDENT_CONDITIONS]
-        if incompatible:
-            raise ValueError(
-                "seven local slots fit the 236-byte actor cap only for independent G0 conditions; "
-                f"incompatible conditions: {incompatible}"
-            )
+def _validate_local_slot_count(value: Any, *, name: str = "local_slots") -> int:
+    if isinstance(value, bool):
+        raise ValueError(f"{name} must be an integer from one through eight")
+    try:
+        count = as_index(value)
+    except TypeError as exc:
+        raise ValueError(f"{name} must be an integer from one through eight") from exc
+    if not 1 <= count <= 8:
+        raise ValueError(f"{name} must be an integer from one through eight")
+    return int(count)
+
+
+def _int8_actor_nbytes(local_slots: int, shared_groups: int) -> int:
+    """Return the exact WDK1 int8 payload size for a local/shared layout."""
+    return 12 + 32 * int(local_slots) + 13 * int(shared_groups)
+
+
+def _actor_budget_bytes(value: Any) -> int:
+    if isinstance(value, bool):
+        raise ValueError("actor_budget_bytes must be a non-negative integer")
+    try:
+        budget = as_index(value)
+    except TypeError as exc:
+        raise ValueError("actor_budget_bytes must be a non-negative integer") from exc
+    if budget < 0:
+        raise ValueError("actor_budget_bytes must be a non-negative integer")
+    return int(budget)
+
+
+def _validate_local_slot_conditions(
+    conditions: Sequence[str], slots: int | None, actor_budget_bytes: int | None = None,
+) -> None:
+    if slots is None:
+        return
+    count = _validate_local_slot_count(slots)
+    budget = _actor_budget_bytes(
+        _load_config()["actor_budget_bytes"] if actor_budget_bytes is None else actor_budget_bytes
+    )
+    incompatible = []
+    for name in conditions:
+        groups = 0 if name in INDEPENDENT_CONDITIONS else 2
+        required = _int8_actor_nbytes(count, groups)
+        if required > budget:
+            incompatible.append(f"{name} ({required} bytes)")
+    if incompatible:
+        independent_bytes = _int8_actor_nbytes(count, 0)
+        raise ValueError(
+            f"actor layouts exceed actor_budget_bytes={budget}: {incompatible}; "
+            f"independent G0 layout for {count} local slots uses {independent_bytes} bytes"
+        )
 
 
 def stream_task_order() -> tuple[str, ...]:
@@ -193,16 +236,15 @@ class BoundedTaskCache:
     """Bounded outer-harness task-to-slot cache with measurable eviction."""
 
     def __init__(self, capacity: int = 6, eviction: str = "lru", seed: int = 0) -> None:
-        if capacity not in (6, 7):
-            raise ValueError("cache capacity must be six or seven")
+        capacity = _validate_local_slot_count(capacity, name="cache capacity")
         if eviction not in ("lru", "lfu", "random"):
             raise ValueError("eviction must be lru, lfu, or random")
         self.capacity = int(capacity)
         self.eviction = eviction
         self.task_to_slot: dict[str, int] = {}
-        self.slot_to_task: list[str | None] = [None] * capacity
-        self.last_used = np.zeros(capacity, dtype=np.int64)
-        self.frequency = np.zeros(capacity, dtype=np.uint64)
+        self.slot_to_task: list[str | None] = [None] * self.capacity
+        self.last_used = np.zeros(self.capacity, dtype=np.int64)
+        self.frequency = np.zeros(self.capacity, dtype=np.uint64)
         self.clock = 0
         self.rng = np.random.default_rng(int(seed))
 
@@ -299,31 +341,36 @@ def _new_agent(
     config: Mapping[str, Any],
     base_config: Mapping[str, Any],
 ):
-    """Build a Step 1-compatible policy with six or seven local routes."""
+    """Build a Step 1-compatible policy with one through eight local routes."""
     torch.set_num_threads(1)
     condition = str(condition)
+    configured_slots = config.get("local_slots")
     if condition.startswith("independent7_"):
         eviction = condition.removeprefix("independent7_")
-        slots = int(config.get("local_slots") or 7)
+        default_slots = 7
         base_condition = "independent_fast"
     elif condition == "independent6":
         eviction = "lru"
-        slots = int(config.get("local_slots") or 6)
+        default_slots = 6
         base_condition = "independent_fast"
     else:
         eviction = "lru"
-        slots = int(config.get("local_slots") or 6)
+        default_slots = 6
         base_condition = condition
-    if slots not in (6, 7):
-        raise ValueError("local_slots override must be six or seven")
+    slots = _validate_local_slot_count(default_slots if configured_slots is None else configured_slots)
     if condition in INDEPENDENT_CONDITIONS:
         groups = 0
         local_lr = float(config["fast_local_learning_rate"])
     else:
-        groups = 2
+        groups = FlexibleSharedPolicy._validate_flexible_group_count(config.get("shared_groups", 2))
         local_lr = float(config["local_learning_rate"])
-    if slots == 7 and groups == 2:
-        raise ValueError("seven local slots with two shared groups exceed the 236-byte actor cap")
+    budget = _actor_budget_bytes(config["actor_budget_bytes"])
+    required_actor_bytes = _int8_actor_nbytes(slots, groups)
+    if required_actor_bytes > budget:
+        raise ValueError(
+            f"actor layout requires {required_actor_bytes} bytes for {slots} local slots and "
+            f"{groups} shared groups, exceeding actor_budget_bytes={budget}"
+        )
 
     seed_everything(int(seed))
     reference = _foundation(base_config, int(seed))
@@ -646,11 +693,7 @@ def _process_rollout(agent, *, decisions_stream, capacity_rows, folder: Path, fo
 
 def _save_stream_checkpoint(agent, path: Path, foundation_sha: str, capacity_rows: list[dict[str, Any]]) -> dict[str, int]:
     local, shared, groups = _actor_arrays(agent.core)
-    actor_budget = (
-        int(agent.run_config["independent7_actor_budget_bytes"])
-        if agent.slots == 7 and agent.core.shared_groups == 0
-        else int(agent.run_config["actor_budget_bytes"])
-    )
+    actor_budget = _actor_budget_bytes(agent.run_config["actor_budget_bytes"])
     actor = encode_actor(local, shared, groups, codec="int8", budget_bytes=actor_budget)
     payload = {
         "format": "write_stream_agent_v1", "phase": agent.run_config["phase"],
@@ -1494,9 +1537,9 @@ def run_cohort(phase: str, output: str | Path, *, selection_path: str | Path,
     if selected_domain not in ("navigation", "detour"):
         raise ValueError("domain must be navigation or detour")
     slots = local_slots if local_slots is not None else config.get("local_slots")
-    if slots is not None and int(slots) not in (6, 7):
-        raise ValueError("local_slots override must be six or seven")
-    _validate_local_slot_conditions(run_conditions, None if slots is None else int(slots))
+    if slots is not None:
+        slots = _validate_local_slot_count(slots)
+    _validate_local_slot_conditions(run_conditions, slots, config["actor_budget_bytes"])
     eval_count = int(config["evaluation_targets"] if evaluation_targets is None else evaluation_targets)
     if eval_count not in (6, 12):
         raise ValueError("evaluation_targets must be six or twelve")
@@ -1556,7 +1599,7 @@ def main() -> None:
     parser.add_argument("--seeds", nargs="+", type=int)
     parser.add_argument("--bout-steps", type=int)
     parser.add_argument("--domain", choices=("navigation", "detour"))
-    parser.add_argument("--local-slots", type=int, choices=(6, 7))
+    parser.add_argument("--local-slots", type=int, choices=tuple(range(1, 9)))
     parser.add_argument("--evaluation-targets", type=int, choices=(6, 12))
     parser.add_argument("--foundation", type=Path, help="override the W0 foundation checkpoint")
     args = parser.parse_args()

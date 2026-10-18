@@ -1,5 +1,39 @@
 # Experiment index
 
+## Source dose and persistence × future PPO (2026-10-18)
+
+[New hypotheses and verdict](SOURCE_FOLLOWUP_REVIEW.md) · [source protocol](SOURCE_DOSE_PROTOCOL.md) · [learning interaction protocol](LEARNING_INTERACTION_PROTOCOL.md) · [combined seed-level report](../outputs/source_followup_main_report/report.md) · [interaction figure](../outputs/source_followup_main_report/learning_interaction_T.png) · [mechanism curves](../outputs/source_followup_main_report/learning_mechanism_curves.png) · [independent final audit](../outputs/source_followup_audit/main_final.json).
+
+Eight new mapping-stratified seeds yield 32 common prefixes. The old-candidate content-only intervention has 512 logical / 384 physical PPO futures; 128 exact post-action hash aliases add zero new interactions. The source main costs 5,111,808 steps. Another 128 fresh no-gradient replace/none futures cost 1,572,864, with no new prefix cost and no reuse of PPO outcomes. Actor/critic optimizer updates are zero only in the latter branches; LRU allocation and persistent-prior inheritance continue.
+
+Source-dose B is +0.001481/+0.000937 reward per step across the two relations; the practical +0.002 criterion is uncertain/not supported, respectively. Primary persistence × future-PPO T is +0.000019 [−0.000957,+0.001020] and −0.000528 [−0.001110,+0.000148], with no clear practical interaction. Existing lower has a small positive signal in one old2048/dynamics/primary cell; this is not a new algorithm or cross-condition success. All means, seed pairs and failures remain available.
+
+Main total is 6,684,672 actual interactions; including the failed source pilot, successful pilots and zero-step ablation startup failure, this round adds 6,776,832. The checkpoint-only feature benchmark adds zero interactions and finds no meaningful time saving. It is not the proposed Sparse Forest structural-maintenance experiment. All new results remain known-context, fixed-layout, single-write C1 mechanism tests.
+
+## Attached online-learning manuscripts: design review only (2026-10-18)
+
+[Synthesis and next discriminating comparisons](literature/20261018_SYNTHESIS.md) · [twelve-source inventory](literature/20261018_sources.json). Four group notes cover all 430 attachment pages, including appendices. The reading itself adds zero environment interactions. The later source-content and future-learning interventions are indexed above; affected-state structural maintenance and a new delayed cost-aware selector remain unimplemented. This entry is separate from the original storage-decision cohort below.
+
+## One scarce parent position: complete online decision effects (2026-10-18)
+
+[Hypotheses and verdict](STORAGE_DECISION_REVIEW.md) · [frozen protocol](STORAGE_DECISION_PROTOCOL.md) · [seed-level report](../outputs/storage_decision_report_v2/report.md) · [figure](../outputs/storage_decision_report_v2/figure.png) · [independent audit](../outputs/storage_decision_audit/artifact_audit.json) · [read-only diagnostics](../outputs/storage_decision_diagnostics/analysis.json).
+
+Eight new deployment seeds, one W0, two relations and two histories yield 32 common prefixes. Four physical storage actions and two futures produce 256 continuations of 12,288 steps with local PPO, critic updates and natural LRU eviction. The predeclared schedule interaction direction passes in both relations (8/8 and 6/8 positive seeds), but preference reversals occur in only 7/16 and 5/16 nested cases. Frequency has not established superiority over both fixed keep and replace; gain/lower add no consistent value over frequency. The old/new sources have 2,048/1,024 fitting steps each, a limitation and next isolated hypothesis, not a proven explanation. Primary and reversal-stress outcomes stay separate.
+
+Main consumes 3,538,944 interactions; pilot 27,648; total 3,566,592. Main wall is 666.91 s with four workers and full process CPU 2,603.92 s. All actors are 89 B and actual complete packages are 231,683–233,923 B under 262,144 B. Main and pilot audits pass. Reporter v2 fixes a sidecar-field alias without changing the data or package totals; v1 remains archived. Known context IDs, boundaries and group membership are supplied uniformly. This is one controlled allocation decision, not repeated adaptive storage, unknown-context discovery or a SOTA result.
+
+## Frozen score prediction at natural recurrence (2026-10-16)
+
+[New hypothesis and verdict](SCORE_CALIBRATION_REVIEW.md) · [frozen protocol](SCORE_CALIBRATION_PROTOCOL.md) · [seed-level report](../outputs/score_calibration_report/report.md) · [artifact audit](../outputs/score_calibration_audit/artifact_audit.json).
+
+Three new seeds and two budgets produce 47 initial-prefix write tests; all are evaluated later, with no exclusions. The original mean-lower predictor has mean Spearman rho -0.043 (low) and -0.325 (wide), failing the frozen exploratory criterion. Of 35 conditionally MC-beneficial candidates, 27 are not approved; 12 outcomes are ambiguous and none are MC-harmful, limiting risk assessment. The target is cold, frozen-parent conditional 128-step gain, not whole-write or final-policy return. Pilot and main cost 1110016 interactions, including all paid observer forks. No algorithm was tuned from these outcomes.
+
+## Natural eviction and retention writes: Stage 2 (2026-10-16)
+
+[Interpretation](RETENTION_STREAM_STAGE2_REVIEW.md) · [implemented method](RETENTION_STREAM_STAGE2_METHOD.md) · [frozen protocol](RETENTION_STREAM_STAGE2_PROTOCOL.md) · [seed and matched-recovery report](../outputs/retention_stream_stage2_report_v2/report.md) · [artifact/cost audit](../outputs/retention_stream_stage2_audit/artifact_audit.json).
+
+Thirty complete exploratory runs cover five methods, two actor budgets and three new deployment seeds. Simple mean consolidation beats independent relearning in all six full-stream seed/budget pairs; direct shared PPO beats mean in all six. The additional reuse gate harms all six matched full-stream comparisons with ungated mean. The retention write gate has no stable advantage; it approves only seven of 127 actual write tests. The two pilots and main cohort consume 829440 new interactions, with no extra probe/evaluation interactions. Low-budget recovery comparisons match the same task/bout evicted in both methods; the wide budget has no local evictions. These remain controlled C1 mechanism experiments, not C2 or a SOTA comparison.
+
 ## Latest write-decision investigation (2026-10-16)
 
 [Full interpretation](WRITE_INVESTIGATION_REVIEW.md) · [algorithm and limits](WRITE_INVESTIGATION_METHOD.md) · [seed-level report](../outputs/write_investigation_report/report.md) · [current stream audits](../outputs/write_current_reports/index.json).

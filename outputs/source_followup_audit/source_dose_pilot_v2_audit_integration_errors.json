@@ -1,0 +1,56 @@
+{
+  "format": "source_followup_audit_v1",
+  "passed": false,
+  "source_dose": {
+    "cases": [
+      {
+        "case_id": "s21289_dynamics_old_major",
+        "errors": 1,
+        "logical_branch_count": 8,
+        "missing_or_unknown_cost": false,
+        "observed_actual_environment_steps": 39936,
+        "observed_actual_environment_steps_partial": 39936,
+        "observed_base_branch_rows": 24576,
+        "observed_logical_environment_steps": 52224,
+        "observed_prefix_rows": 3072,
+        "observed_source_1024_logical_rows": 24576,
+        "observed_source_1024_physical_rows": 12288,
+        "passed": false,
+        "physical_dose_branch_count": 4
+      }
+    ],
+    "cost": {
+      "actual_environment_steps_partial_raw_rows": 39936,
+      "base_branch_environment_steps": 24576,
+      "environment_steps_total": 39936,
+      "expected_minimum_environment_steps": 39936,
+      "logical_environment_steps_total": 52224,
+      "prefix_environment_steps": 3072,
+      "source_1024_branch_environment_steps": 12288,
+      "source_1024_logical_environment_steps": 24576
+    },
+    "errors": [
+      {
+        "code": "base_case_audit_error",
+        "details": {
+          "error": "AttributeError(\"'Audit' object has no attribute 'cohort'\")"
+        },
+        "message": "original 2048-source branches could not be audited",
+        "where": "s21289_dynamics_old_major"
+      },
+      {
+        "code": "selector_candidate_provenance",
+        "message": "frozen selectors do not record use of the original 2048-step candidate",
+        "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\source_dose_pilot_v2\\cases\\s21289_dynamics_old_major\\dose_1024"
+      }
+    ],
+    "expected_case_count": 1,
+    "format": "source_followup_audit_v1",
+    "logical_branch_count": 16,
+    "passed": false,
+    "phase": "pilot",
+    "physical_branch_count": 12,
+    "source": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\source_dose_pilot_v2",
+    "warnings": []
+  }
+}

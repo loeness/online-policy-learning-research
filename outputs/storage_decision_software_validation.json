@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-18",
+  "kind": "software_checks_not_research_results",
+  "targeted_tests": {
+    "passed": 37,
+    "files": [
+      "tests/test_storage_decision.py",
+      "tests/test_report_storage_decision.py",
+      "tests/test_write_decision_policy.py",
+      "tests/test_write_stream.py"
+    ],
+    "environment_steps": 0
+  },
+  "synthetic_capacity_preflight": {
+    "foundation_bytes": 55477,
+    "checkpoint_bytes": 175157,
+    "actor_bytes": 89,
+    "full_persistent_bytes": 230723,
+    "cap_bytes": 262144,
+    "evidence_rows_per_group": 256,
+    "critic_adam_entries": 6,
+    "environment_steps": 0
+  },
+  "post_pilot_computation_change": {
+    "description": "Skip the unused next-state actor distribution while computing the identical critic bootstrap value. No learning rule or threshold changed.",
+    "value_comparisons": 64,
+    "max_absolute_value_difference": 0.0,
+    "environment_steps": 0,
+    "pilot_sources_preserved": true
+  },
+  "accounting_change": "Main cohort cpu_s includes child case process CPU plus orchestrator CPU. The preserved pilot uses the earlier orchestrator-only cpu_s field; its prefix_cpu_s and branch_cpu_s contain the recorded learner work.",
+  "scientific_scope": "Passing these checks does not validate the storage-selection hypotheses.",
+  "post_run_report_correction": {
+    "description": "Reporter v1 omitted the runner capacity.actor_bytes alias for sidecar display; package totals and all scientific results were already correct. Original report retained; v2 generated separately.",
+    "reporter_tests_passed": 6,
+    "new_schema_regression_count": 1,
+    "environment_steps": 0,
+    "analysis_diff_paths": [
+      "/costs/observed_leaf_summaries/physical_bytes_ranges/sidecar_bytes/max",
+      "/costs/observed_leaf_summaries/physical_bytes_ranges/sidecar_bytes/min",
+      "/costs/observed_leaf_summaries/physical_bytes_ranges/sidecar_bytes/n"
+    ],
+    "figure_png_unchanged": true,
+    "v1": "outputs/storage_decision_report",
+    "v2": "outputs/storage_decision_report_v2"
+  }
+}

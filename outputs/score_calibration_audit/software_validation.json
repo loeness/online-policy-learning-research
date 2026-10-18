@@ -1,0 +1,33 @@
+{
+  "format": "score_calibration_software_validation_v1",
+  "targeted_checks": {
+    "passed": 39,
+    "failed": 0,
+    "pytest_seconds": 8.08,
+    "files": [
+      "tests/test_score_calibration.py",
+      "tests/test_run_score_calibration.py",
+      "tests/test_report_score_calibration.py",
+      "tests/test_retention_stream.py"
+    ]
+  },
+  "after_software_citation_correction": {
+    "reporter_tests_passed": 13,
+    "failed": 0
+  },
+  "extra_check": "Complete persistent-state hash repeatability and metadata mutation detection passed.",
+  "real_environment_steps_in_software_tests": 0,
+  "versions": {
+    "python": "3.12.13",
+    "numpy": "2.5.4",
+    "torch": "2.8.0+cpu",
+    "stable_baselines3": "2.8.0",
+    "matplotlib": "3.11.2"
+  },
+  "scheduler": {
+    "workers": 2,
+    "torch_threads_per_learner": 1,
+    "cuda_available": false
+  },
+  "scope": "Software checks and observer audits are not experimental seeds."
+}

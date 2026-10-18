@@ -1,0 +1,111 @@
+{
+  "config": {
+    "format": "score_calibration_config_v1",
+    "analysis_role": "diagnostic",
+    "seeds": [
+      19703,
+      19717,
+      19727
+    ],
+    "pilot_seed": 19701,
+    "budgets": [
+      "low",
+      "wide"
+    ],
+    "source_config": "configs/retention_stream_stage2.json",
+    "main_bout_steps": 2048,
+    "pilot_bout_steps": 1024,
+    "capture_initial_bouts": 6,
+    "anchor_offsets": [
+      0,
+      64,
+      128,
+      192
+    ],
+    "horizon": 128,
+    "replicates": 8,
+    "evaluation_seed": 1970001,
+    "discount": 0.98,
+    "discounted_horizon": 64,
+    "mc_interval_level": 0.95,
+    "benefit_margin": 0.0,
+    "min_correlation_events": 5,
+    "exploratory_rank_threshold": 0.3,
+    "max_workers": 2,
+    "torch_threads": 1,
+    "primary_predictor": "original_mean_lower",
+    "primary_outcome": "unique historical context equal-weight conditional 128-step frozen-policy reward/raw-step gain",
+    "secondary_predictors": [
+      "original_mean_gain",
+      "codec_mean_lower",
+      "fresh_lower",
+      "negative_mean_stderr",
+      "time_step"
+    ],
+    "feedback_to_learner": false,
+    "retain_all_prefix_write_tests": true,
+    "tune_from_pilot_or_main": false,
+    "mode": "main",
+    "bout_steps": 2048
+  },
+  "learner_config": {
+    "format": "retention_stream_config_v1",
+    "analysis_role": "exploratory",
+    "seeds": [
+      19703,
+      19717,
+      19727
+    ],
+    "pilot_seed": 18997,
+    "methods": [
+      "retention_gate"
+    ],
+    "budgets": {
+      "low": {
+        "shared_slots": 3,
+        "independent_slots": 4,
+        "actor_budget_bytes": 140
+      },
+      "wide": {
+        "shared_slots": 6,
+        "independent_slots": 7,
+        "actor_budget_bytes": 236
+      }
+    },
+    "bout_steps": 2048,
+    "pilot_bout_steps": 1024,
+    "domain": "navigation",
+    "rollout_steps": 256,
+    "profile_window": 256,
+    "archive_prototypes": 8,
+    "archive_rows_per_prototype": 24,
+    "proposal_min_fit_steps": 256,
+    "proposal_ttl_steps": 1024,
+    "proposal_interval_rollouts": 2,
+    "local_learning_rate": 0.003,
+    "fast_local_learning_rate": 0.004,
+    "shared_learning_rate": 0.001,
+    "critic_learning_rate": 0.003,
+    "package_budget_bytes": 327680,
+    "gate": {
+      "min_rows": 12,
+      "min_blocks": 3,
+      "min_ess_ratio": 0.2,
+      "max_mean_kl": 0.5,
+      "clip_ratio": 5.0,
+      "stderr_multiplier": 1.0,
+      "min_supported_profiles": 2,
+      "min_mean_gain": 0.0,
+      "max_profile_loss": 0.05
+    },
+    "prior_gate_min_lower": 0.0,
+    "prior_max_fit_steps": 1024,
+    "max_workers": 2,
+    "torch_threads": 1,
+    "schedule": "seeded family/variant permutations; paired first two variants of each family, then third variants; six-context recurrence permutation",
+    "scope": "Known local context index and boundary control; no family labels used by learner; bounded profile-derived groups; parameter-budget mechanism study, not joint-state optimal allocation or unknown-boundary confirmation.",
+    "mode": "score_calibration_main"
+  },
+  "seed": 19717,
+  "budget": "wide"
+}

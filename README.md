@@ -2,7 +2,7 @@
 
 ## GitHub 研究档案入口
 
-本仓库保存原 A、B、B+、压缩对照和 C1 快照；截至 **2026-10-16**，补充了强对照、P0、有界知识组织、V2诊断，以及真实共享参数写入和12情境/6槽的容量压力实验。原快照保留在 `v0.1.0-ab-c1`，新增工作在 `codex/c1-strong-baselines` 分支。包含原始数据、模型、逐步日志、图表、成功与失败记录、验证过程、算法实现和引用。新实验仍在 C1 受控环境中，不代表已完成一般环境的 C2/C3 基准。
+本仓库保存原 A、B、B+、压缩对照和 C1 快照；截至 **2026-10-18**，补充了强对照、P0、有界知识组织、V2诊断、共享参数写入、容量压力、完整在线保存决策，以及文献启发后的候选剂量与未来学习交互对照。原快照保留在 `v0.1.0-ab-c1`，新增工作位于 `codex/c1-strong-baselines` 分支；云端覆盖以该分支提交为准。包含原始数据、模型、逐步日志、图表、成功与失败记录、验证过程、算法实现和引用。新实验仍在 C1 受控环境中，不代表已完成一般环境的 C2/C3 基准。
 
 | 阅读目的 | 入口 |
 |---|---|
@@ -17,7 +17,18 @@
 
 先看当前核心报告：
 
-- **[最新：整合、删除局部知识与冻结复用](docs/CONSOLIDATION_RETENTION_STAGE1_REVIEW.md)**：3 个来源种子、4 方法、384 个主评估回合；简单平均对精确情境复现的回报增益为 +0.480，对相关变体为 +0.557（一个种子退步）。加权提取未胜简单平均，错误家族或冲突目标的强制复用有害；尚无自动路由、容量优势或独立确认结论。
+- **[最新：文献启发后的定向验证与下一项算法](docs/SOURCE_FOLLOWUP_REVIEW.md)**：8个新seed、32个共同前缀、512逻辑/384物理PPO分支，再增加128个无梯度分支。旧候选剂量有小幅内容效应，但未通过预设实际量级判据；保存×未来PPO的主条件交互为+0.000019/−0.000528 reward/step，未发现明确正协同。现有lower在一个条件有局部小幅信号，尚非新组织算法验证。评分特征复用未带来有意义的省时。含失败与pilot新增6776832次实际仿真交互，完整正负结果保留。
+- [合并逐seed报告](outputs/source_followup_main_report/report.md) · [交互图](outputs/source_followup_main_report/learning_interaction_T.png) · [恢复曲线](outputs/source_followup_main_report/learning_mechanism_curves.png) · [最终独立审计](outputs/source_followup_audit/main_final.json) · [source冻结规程](docs/SOURCE_DOSE_PROTOCOL.md) · [未来学习冻结规程](docs/LEARNING_INTERACTION_PROTOCOL.md)
+
+- **[12篇在线学习论文的全文阅读与方法建议](docs/literature/20261018_SYNTHESIS.md)**：430 页正文与附录的分组阅读，逐项区分参数更新、模型路由、短期信用状态与持久知识。重点分析 FOLD 的巩固语义、Sparse Forest 的局部维护、METIS 的带成本选择和各自迁移条件。这里只形成待检验方案，没有新增 RL 实验或 SOTA 比较；[来源、页数与版本索引](docs/literature/20261018_sources.json)保留可核实的三份公开 arXiv 对应。
+
+- **[上一轮：一个共享位置应该保存什么](docs/STORAGE_DECISION_REVIEW.md)**：8 个新部署 seed、32 个共同前缀、256 个完整在线 PPO 分支。未来复现比例改变 keep/replace 的作用，两种关系通过预设方向判据；频率规则尚未同时胜过两个固定端点，收益代理未增加稳定价值。该轮发现新旧候选拟合预算不对称；后续独立干预见最新报告。含 pilot 新增 3,566,592 次交互，全部原始数据和负结果保留。
+- [完整逐 seed 报告](outputs/storage_decision_report_v2/report.md) · [图表](outputs/storage_decision_report_v2/figure.png) · [冻结规程](docs/STORAGE_DECISION_PROTOCOL.md) · [独立审计](outputs/storage_decision_audit/artifact_audit.json)
+- **[上一轮：收益分数是否预测后续收益](docs/SCORE_CALIBRATION_REVIEW.md)**：三个新种子、两档容量、47个候选，逐项配对验证冻结分数与自然回访状态下的实际收益。主要分数未通过预设判据；本轮定位收益信号、误差惩罚和组间尺度问题，未修改算法。含pilot新增1110016次交互。
+- [本轮逐seed统计](outputs/score_calibration_report/report.md) · [预测—结果图](outputs/score_calibration_report/figure.png) · [冻结协议](docs/SCORE_CALIBRATION_PROTOCOL.md) · [完整审计](outputs/score_calibration_audit/artifact_audit.json)
+- **[上一轮：自然淘汰、共享写入与恢复](docs/RETENTION_STREAM_STAGE2_REVIEW.md)**：30 组、3 个新部署种子、2 档容量、5 种方法。简单平均优于独立重学，直接共享 PPO 最强；新增使用门控和写入门控尚无稳定增益。该轮含两次 pilot 共新增 829440 次真实在线交互，完整负结果和容量账本保留。
+- [本轮实际算法](docs/RETENTION_STREAM_STAGE2_METHOD.md) · [冻结规程](docs/RETENTION_STREAM_STAGE2_PROTOCOL.md) · [逐种子报告](outputs/retention_stream_stage2_report_v2/report.md) · [工件与成本审计](outputs/retention_stream_stage2_audit/artifact_audit.json)
+- **[上一阶段：整合、删除局部知识与冻结复用](docs/CONSOLIDATION_RETENTION_STAGE1_REVIEW.md)**：3 个来源种子、4 方法、384 个主评估回合；简单平均对精确情境复现的回报增益为 +0.480，对相关变体为 +0.557（一个种子退步）。加权提取未胜简单平均，错误家族或冲突目标的强制复用有害；尚无自动路由、容量优势或独立确认结论。
 - [第一阶段完整报告与成本更正](outputs/consolidation_retention_stage1_report_v3/report.md) · [图表](outputs/consolidation_retention_stage1_report_v3/figure.png) · [原始主结果](outputs/consolidation_retention_stage1/summary.json) · [物理文件与配对核算](outputs/consolidation_retention_stage1/postrun_audit.json) · [冻结规程](docs/CONSOLIDATION_RETENTION_STAGE1_PROTOCOL.md)
 - **[上一轮：在线共享写入、容量替换与强对照的完整判断](docs/WRITE_INVESTIGATION_REVIEW.md)**：16 个完成 cohort、100 个完成运行；含未知边界、两份独立预训练底座、全部新数据用于训练的独立对照。当前写入规则尚未证明容量优势，父模块重组验证为负；所有选择和失败保留。
 - [最新算法与待验证修改](docs/WRITE_INVESTIGATION_METHOD.md) · [逐 seed 结果与完整成本](outputs/write_investigation_report/report.md) · [机器可读汇总](outputs/write_investigation_report/analysis.json)
@@ -168,6 +179,8 @@ $env:PYTHONPATH = 'src'
 `autoresearch.py` 是已声明配置的自动试验/保留闭环，由本会话 agent 负责代码实现和修正；没有运行 Karpathy 原版 GPT/nanochat 训练器，也没有无限自治代码搜索。验证优化目标固定为 final CW success + 0.1×mean online episode return；只用于选配置。当前配置为残差方法所选，没有分别调到最优的全参数 PPO，因此不能将方法排名解释成最优算法比较。
 
 ## 统计与资源
+
+本节保留原 A/B 的统计与 256 KiB 口径。最新自然淘汰 Stage 2 使用 320 KiB 保存包上限，具体构成和完整成本见 [本轮结论](docs/RETENTION_STREAM_STAGE2_REVIEW.md)。
 
 每阶段、方法三个独立随机种子；小样本只作探索性机制验证。每个 A 运行 16,384 在线步，每个 B 运行 32,768 在线步。额外评估步和时间单独记录。B 的 mixed-context 回合只从分情境窗口统计中排除，所有奖励仍计入整体累计。
 

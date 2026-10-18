@@ -1,0 +1,307 @@
+{
+  "format": "storage_learning_interaction_decision_v1",
+  "case_id": "s21301_dynamics_old_major",
+  "seed": 21301,
+  "pair_kind": "dynamics",
+  "history_regime": "old_major",
+  "prefix_state_hash": "6aabc44204ba1b40b5738bab5f48f8815660757dcfb5893c2c769a8a69a0a7bb",
+  "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+  "mapping": {
+    "pair_kind": "dynamics",
+    "families": {
+      "old": "A",
+      "new": "B"
+    },
+    "preferences": {
+      "old": 1,
+      "new": 1
+    },
+    "groups": {
+      "old": 0,
+      "new": 1
+    }
+  },
+  "old_candidate_2048": [
+    [
+      -0.04386011138558388,
+      -0.007797353435307741,
+      0.06189149245619774
+    ],
+    [
+      -0.025341399013996124,
+      0.013645368628203869,
+      0.04044876992702484
+    ],
+    [
+      -0.05165746808052063,
+      -0.059942156076431274,
+      0.008772023022174835
+    ]
+  ],
+  "old_candidate_1024": [
+    [
+      -0.009392043575644493,
+      -0.002516341395676136,
+      0.020296839997172356
+    ],
+    [
+      -0.02994491532444954,
+      -0.018349910154938698,
+      0.018432090058922768
+    ],
+    [
+      -0.021117735654115677,
+      -0.01733652874827385,
+      0.004721250385046005
+    ]
+  ],
+  "new_candidate": [
+    [
+      0.019194552674889565,
+      -0.01768958568572998,
+      -0.027511240914463997
+    ],
+    [
+      0.012282881885766983,
+      0.023508815094828606,
+      -0.005335232242941856
+    ],
+    [
+      0.041919779032468796,
+      0.014681641943752766,
+      -0.04255194962024689
+    ]
+  ],
+  "source_capture_steps": 1024,
+  "source_capture_records": {
+    "0": {
+      "variant": 0,
+      "task": "A0+",
+      "group": 0,
+      "bout": 0,
+      "bout_step": 1024,
+      "global_environment_steps": 1024,
+      "slot": 0,
+      "generation": 1,
+      "fitted_steps": 1024,
+      "rollouts_trained": 4,
+      "minibatch_updates": 64,
+      "last_rollout_updates": 16,
+      "rollout_index": 3,
+      "rollout_rows": 256,
+      "physical_group": -1,
+      "effective_matrix_27": [
+        -0.022516686469316483,
+        0.01857626624405384,
+        0.06079505383968353,
+        -0.006755005568265915,
+        0.005629171617329121,
+        0.010132508352398872,
+        -0.009006674401462078,
+        -0.016324596479535103,
+        0.003940420225262642,
+        -0.01351001113653183,
+        0.007880840450525284,
+        0.04897379130125046,
+        -0.04278170317411423,
+        -0.051225461065769196,
+        0.038841284811496735,
+        -0.032649192959070206,
+        -0.026457106694579124,
+        0.031523361802101135,
+        -0.03602669760584831,
+        -0.028708774596452713,
+        0.008443756960332394,
+        -0.023079603910446167,
+        0.009006674401462078,
+        0.023079603910446167,
+        -0.07149048149585724,
+        -0.06980172544717789,
+        0.039967115968465805
+      ]
+    },
+    "1": {
+      "variant": 1,
+      "task": "A1+",
+      "group": 0,
+      "bout": 1,
+      "bout_step": 1024,
+      "global_environment_steps": 3072,
+      "slot": 1,
+      "generation": 1,
+      "fitted_steps": 1024,
+      "rollouts_trained": 12,
+      "minibatch_updates": 192,
+      "last_rollout_updates": 16,
+      "rollout_index": 3,
+      "rollout_rows": 256,
+      "physical_group": -1,
+      "effective_matrix_27": [
+        0.02640645019710064,
+        -0.0035684392787516117,
+        -0.012846381403505802,
+        -0.03140226751565933,
+        0.02640645019710064,
+        0.042107582092285156,
+        0.0007136878557503223,
+        -0.040680207312107086,
+        -0.09063835442066193,
+        0.0164148211479187,
+        0.0164148211479187,
+        -0.009991629980504513,
+        -0.052099213004112244,
+        -0.04139389470219612,
+        0.03711176663637161,
+        0.009277941659092903,
+        0.008564254269003868,
+        -0.007850566878914833,
+        -0.027120139449834824,
+        -0.025692762807011604,
+        0.02640645019710064,
+        -0.02355169877409935,
+        -0.05852240324020386,
+        -0.040680207312107086,
+        -0.02355169877409935,
+        0.040680207312107086,
+        0.05138552561402321
+      ]
+    }
+  },
+  "selectors_frozen_before_future_expansion": true,
+  "selectors": {
+    "keep": "keep",
+    "replace": "replace",
+    "mean": "mean",
+    "none": "none",
+    "frequency": "keep",
+    "recency": "replace",
+    "surrogate_gain": "replace",
+    "surrogate_lower": "keep"
+  },
+  "selector_diagnostics": {
+    "recent_group_ids": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "group_frequency": {
+      "0": 0.75,
+      "1": 0.25
+    },
+    "past_only_selectors": {
+      "keep": "keep",
+      "replace": "replace",
+      "mean": "mean",
+      "none": "none",
+      "frequency": "keep",
+      "recency": "replace",
+      "surrogate_gain": "replace",
+      "surrogate_lower": "keep"
+    },
+    "surrogate": {
+      "old_zero_vs_old_parent": {
+        "status": "supported",
+        "supported": true,
+        "gain": 0.004952161898980064,
+        "lower": -0.0007840173926027486,
+        "blocks": 8,
+        "ess": {
+          "candidate": 241.31815572323762,
+          "baseline": 230.8454999958968
+        },
+        "ess_ratio": {
+          "candidate": 0.942649045793897,
+          "baseline": 0.9017402343589719
+        },
+        "kl": {
+          "candidate": 0.018384909846433116,
+          "baseline": 0.04547559818143665
+        },
+        "coverage": {
+          "candidate": true,
+          "baseline": true
+        },
+        "stderr": 0.005736179291582813,
+        "rows": 256,
+        "reason": "supported"
+      },
+      "new_parent_vs_zero": {
+        "status": "supported",
+        "supported": true,
+        "gain": -0.004022439724405343,
+        "lower": -0.011820204514510293,
+        "blocks": 5,
+        "ess": {
+          "candidate": 238.68876014489598,
+          "baseline": 217.72661323665088
+        },
+        "ess_ratio": {
+          "candidate": 0.9323779693159999,
+          "baseline": 0.8504945829556675
+        },
+        "kl": {
+          "candidate": 0.029868461404846083,
+          "baseline": 0.06256915543489627
+        },
+        "coverage": {
+          "candidate": true,
+          "baseline": true
+        },
+        "stderr": 0.00779776479010495,
+        "rows": 256,
+        "reason": "supported"
+      },
+      "frequency_weighted_gain": 0.002708511493133712,
+      "frequency_weighted_lower": -0.0035430641730796347
+    },
+    "support_rows": {
+      "old": 256,
+      "new": 256
+    },
+    "decision_source_groups": [
+      0,
+      1
+    ]
+  },
+  "selector_input_candidate_set": "old_candidate_1024",
+  "selector_freeze_timing": "both dose rules computed before any future expansion from common prefix evidence",
+  "candidate_workspace_in_learner": false,
+  "learner_parent_count": 1,
+  "branches": [
+    {
+      "action": "replace",
+      "future_regime": "old_major",
+      "summary": "branches/replace__old_major/summary.json",
+      "independent_observation": true,
+      "learning_mode": "no_gradient"
+    },
+    {
+      "action": "none",
+      "future_regime": "old_major",
+      "summary": "branches/none__old_major/summary.json",
+      "independent_observation": true,
+      "learning_mode": "no_gradient"
+    },
+    {
+      "action": "replace",
+      "future_regime": "new_major",
+      "summary": "branches/replace__new_major/summary.json",
+      "independent_observation": true,
+      "learning_mode": "no_gradient"
+    },
+    {
+      "action": "none",
+      "future_regime": "new_major",
+      "summary": "branches/none__new_major/summary.json",
+      "independent_observation": true,
+      "learning_mode": "no_gradient"
+    }
+  ],
+  "learning_mode": "no_gradient",
+  "selector_information_source": "source-dose prefix only; no future branch feedback"
+}

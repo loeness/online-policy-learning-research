@@ -1,5 +1,44 @@
 # Success and failure log
 
+## Source content and persistence × future learning (2026-10-18)
+
+- Completed 32 common prefixes, 512 logical/384 physical PPO branches and 128 fresh no-gradient branches without main-run failures. Formal runs add 6,684,672 actual interactions; all pilots/failures bring the round to 6,776,832. Exact aliases and referenced PPO comparators are not double-counted or treated as independent seeds.
+- Old-candidate dose effects are positive but small: B=+0.001481/+0.000937 reward per step. The predeclared practical criterion is uncertain for dynamics and not supported at +0.002 for reward conflict. This content intervention is not a shorter-history deployment, nor evidence of equal candidate quality.
+- Primary persistence × future-PPO interactions are +0.000019 and −0.000528 with intervals spanning zero. No practical positive synergy is established. No-gradient retains LRU/prior inheritance; the treatment is PPO continuation versus no gradient, not a frozen actor or actor-only causal effect.
+- Frequency does not stably beat both fixed endpoints. Existing lower beats keep/replace/mean descriptively in one dynamics/high-dose/primary condition, but its advantage over keep is only +0.000739 with 3/8 strictly positive seeds and five ties, without cross-condition confirmation. Preserve this local signal alongside all other cells; no new selector was introduced.
+- Source pilot v1 consumes 39,936 steps then fails in final aggregation on an unqualified `_write_json`. Its old-candidate selector metadata also predates the corrected dose-specific freeze. The rerun uses a new directory after CLI, aggregation and freeze fixes, with 39,936 more steps. It is not legitimate to merge pilot v1 into main inference.
+- Learning pilot v1 fails during input snapshot on a nonexistent module helper, before any environment creation. The 0-step startup failure and unknown CPU are retained. A full snapshot-path unit check accompanies the fix; pilot v2 adds 12,288 steps and passes state/byte/zero-update audits.
+- Independent pilot-audit schema/adapter failures are preserved separately from learner failures; the corrected source/combined pilot audits pass. Source main audit also passes; final combined audit is linked from the review. Software checks pass in two root-run groups: 23 runner/core/feature tests and 5 report tests, adding zero interactions.
+- Checkpoint-only shared feature scores are numerically identical. CPU is slightly slower, wall slightly faster, both tiny relative to run cost; no meaningful acceleration is established. The earlier concurrent timing is preserved and marked. There is no structural-maintenance implementation or core-contribution claim from this benchmark.
+
+## Single scarce-position storage decision (2026-10-18)
+
+- Completed all 32 common prefixes and 256 continued-PPO branches, with no runner failures. Pilot uses 27,648 interactions and main 3,538,944; no additional environment calls occur in reporting, diagnostics or audits.
+- Both relations pass the predeclared positive future-schedule interaction direction. This is not adaptive-selection success: dynamics replacement remains slightly worse on average even under new-major futures; frequency has not established superiority over both fixed endpoints.
+- Historical gain/lower do not add consistent value over frequency. All group support checks are supported, so lack-of-support fallback does not explain the result. Reversal stress changes rankings and is reported separately.
+- Read-only diagnostics identify old/new source fitting budgets of 2,048/1,024 steps per source. This is a candidate-maturity limitation and a plausible contributor, not a proven causal explanation. No post-hoc sample removal or gate tuning follows.
+- Preflight fixes preserve appended prefix logs, deepcopy optimizer restoration, distinct post-action/final states, delta counters and honest missing failure costs. A pilot-to-main optimization skips an unused actor forward for critic bootstrap; 64 compared values match exactly. Separate source snapshots remain.
+- Initial pilot auditor failures came from string-array comparison and rebuilding cache bindings from the wrong action state; failed reports remain. Corrected pilot and independent main audits pass with zero errors. Original experimental data are unchanged.
+- Reporter v1 displayed null for the actor sidecar alias although packages already included it. A schema regression and reporter v2 restore 89–89 B display without double counting; v1 is retained. The initial 37 targeted tests pass; after this reporting correction, all 6 reporter tests pass, including one added regression.
+- All 256 actual packages fit the common 262,144 B cap. Their actor shapes are identical; no compression savings or global budget optimality are claimed. See [full result and next discriminating hypothesis](STORAGE_DECISION_REVIEW.md).
+
+## Frozen score prediction at natural recurrence (2026-10-16)
+
+- The new test freezes all 47 initial-prefix predictions before any natural recurrence. Candidate-only and old-parent-only int8 policies are evaluated on identical real recurrence states with paid paired forks; no candidate is excluded and no outcome feeds the learner.
+- The primary predictor fails the predeclared rank criterion in both budgets. Only one of three seeds has positive primary rho in each budget. Raw mean gain is positive in four of six cells, while the negative uncertainty penalty is negatively associated with realized gain in all six; this motivates a new hypothesis, not a validated replacement method.
+- There are 35 conditionally MC-beneficial, 12 ambiguous and zero MC-harmful candidates. The rule leaves 27 MC-beneficial candidates unapproved; these are opportunity losses, not proof it predicted negative benefit. With no harmful labels, harm rejection cannot be evaluated.
+- All seven learner runs (pilot plus six main) and full parent-matrix/provenance/fork/cost audits pass. Total cost is 1110016 interactions. Thirty-nine targeted software tests pass. Preparation fixes cover a missing optional SciPy import, synthetic hook signatures, numeric group labels, shared reset-prefix auditing and figure layout; no learning settings or trial counts change based on outcomes.
+- Source data, all predictions, paired trials and the earlier pilot figure remain archived. Software citation corrections are recorded separately. See [new verdict](SCORE_CALIBRATION_REVIEW.md).
+
+## Natural eviction and retention writes: Stage 2 (2026-10-16)
+
+- All 30 main runs complete with bounded local LRU eviction, bounded cross-slot evidence, test-then-train ordering and serialized learner state. Ninety targeted software checks and the full raw-log/physical-byte/source-snapshot audit pass.
+- Simple mean consolidation beats the independent learner in all six full-stream seed/budget pairs. Direct shared PPO is stronger in all six. These are useful sharing controls, not validation of a new storage-selection contribution.
+- The additional prior-use gate reduces mean's full-stream reward in every paired seed/budget. The new retention write gate accepts seven of 127 write tests and does not improve consistently over mean with the same reuse gate. Negative results are preserved.
+- Pilot v1 consumes 30720 interactions but never reaches a write test before expiry. A longer, separate pilot v2 consumes 61440 and exercises writes/rejections. Main consumes 737280; no runs are omitted from the 829440-interaction cost ledger.
+- Before the main cohort, fixes cover an absent initial optimizer counter, unequal-episode cluster SE, abstaining fresh evidence and measured injection drift. The uniform package ceiling increases from 256 to 320 KiB for wide-layout serialization headroom; learning rates and gate thresholds do not change based on pilot rankings.
+- Prototype counts are not independent context counts; historical scores are not held-out generalization tests. Unknown boundaries, conflicting-reward stress, parent replacement and total-byte-optimal replay baselines are not completed in this round. See [interpretation](RETENTION_STREAM_STAGE2_REVIEW.md).
+
 ## Latest ordered write investigation (2026-10-16)
 
 - Controlled trial sharing beats retention of the same trial update only in the current local module on all three seeds, but its mean is below simple reward-aware sharing.

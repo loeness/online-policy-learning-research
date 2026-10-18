@@ -1,0 +1,366 @@
+{
+  "format": "storage_decision_case_v1",
+  "case_id": "s20117_dynamics_old_major",
+  "seed": 20117,
+  "pair_kind": "dynamics",
+  "history_regime": "old_major",
+  "mapping": {
+    "pair_kind": "dynamics",
+    "families": {
+      "old": "B",
+      "new": "A"
+    },
+    "preferences": {
+      "old": 1,
+      "new": 1
+    },
+    "groups": {
+      "old": 0,
+      "new": 1
+    }
+  },
+  "bootstrap_schedule": [
+    {
+      "phase": "bootstrap",
+      "bout": 0,
+      "group": 0,
+      "variant": 0,
+      "task": "B0+",
+      "steps": 2048
+    },
+    {
+      "phase": "bootstrap",
+      "bout": 1,
+      "group": 0,
+      "variant": 1,
+      "task": "B1+",
+      "steps": 2048
+    }
+  ],
+  "history_schedule": [
+    {
+      "phase": "history",
+      "bout": 2,
+      "group": 0,
+      "variant": 0,
+      "task": "B0+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 3,
+      "group": 0,
+      "variant": 1,
+      "task": "B1+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 4,
+      "group": 0,
+      "variant": 2,
+      "task": "B2+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 5,
+      "group": 0,
+      "variant": 0,
+      "task": "B0+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 6,
+      "group": 0,
+      "variant": 1,
+      "task": "B1+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 7,
+      "group": 0,
+      "variant": 2,
+      "task": "B2+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 8,
+      "group": 1,
+      "variant": 0,
+      "task": "A0+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 9,
+      "group": 1,
+      "variant": 1,
+      "task": "A1+",
+      "steps": 1024
+    }
+  ],
+  "prefix_state_hash": "2553cafcabfa44e57f37eec76cddb45bad85e7d33a373a237938dcc7e2214bcb",
+  "restored_state_hashes": {
+    "keep__old_major": "2553cafcabfa44e57f37eec76cddb45bad85e7d33a373a237938dcc7e2214bcb",
+    "replace__old_major": "2553cafcabfa44e57f37eec76cddb45bad85e7d33a373a237938dcc7e2214bcb",
+    "mean__old_major": "2553cafcabfa44e57f37eec76cddb45bad85e7d33a373a237938dcc7e2214bcb",
+    "none__old_major": "2553cafcabfa44e57f37eec76cddb45bad85e7d33a373a237938dcc7e2214bcb",
+    "keep__new_major": "2553cafcabfa44e57f37eec76cddb45bad85e7d33a373a237938dcc7e2214bcb",
+    "replace__new_major": "2553cafcabfa44e57f37eec76cddb45bad85e7d33a373a237938dcc7e2214bcb",
+    "mean__new_major": "2553cafcabfa44e57f37eec76cddb45bad85e7d33a373a237938dcc7e2214bcb",
+    "none__new_major": "2553cafcabfa44e57f37eec76cddb45bad85e7d33a373a237938dcc7e2214bcb"
+  },
+  "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+  "old_parent": [
+    [
+      0.026599178090691566,
+      0.008511736989021301,
+      -0.06064612418413162
+    ],
+    [
+      0.029791079461574554,
+      0.012767605483531952,
+      -0.018087441101670265
+    ],
+    [
+      0.07022182643413544,
+      -0.054262325167655945,
+      -0.1351238191127777
+    ]
+  ],
+  "new_candidate": [
+    [
+      -0.021208064630627632,
+      -0.0014396366896107793,
+      0.027512352913618088
+    ],
+    [
+      0.007228625938296318,
+      0.034085385501384735,
+      0.00914191734045744
+    ],
+    [
+      0.01633763685822487,
+      -0.011770060285925865,
+      -0.03395199775695801
+    ]
+  ],
+  "temporary_candidate_workspace_bytes": 36,
+  "prequantized_invariance_error": 7.450580596923828e-09,
+  "formation_codec_coefficient_error": 0.0007969662547111511,
+  "formation_codec_effective_errors": [
+    0.001025032252073288,
+    0.0008770916610956192
+  ],
+  "prefix_codec_coefficient_error": 0.0,
+  "prefix_codec_effective_errors": [
+    0.0,
+    0.0
+  ],
+  "resident_slots_at_decision": [
+    {
+      "slot": 0,
+      "task": "A0+",
+      "logical_group": 1,
+      "physical_group": -1,
+      "generation": 4
+    },
+    {
+      "slot": 1,
+      "task": "A1+",
+      "logical_group": 1,
+      "physical_group": -1,
+      "generation": 4
+    }
+  ],
+  "selectors": {
+    "keep": "keep",
+    "replace": "replace",
+    "mean": "mean",
+    "none": "none",
+    "frequency": "keep",
+    "recency": "replace",
+    "surrogate_gain": "replace",
+    "surrogate_lower": "keep"
+  },
+  "selector_diagnostics": {
+    "recent_group_ids": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "group_frequency": {
+      "0": 0.75,
+      "1": 0.25
+    },
+    "past_only_selectors": {
+      "keep": "keep",
+      "replace": "replace",
+      "mean": "mean",
+      "none": "none",
+      "frequency": "keep",
+      "recency": "replace",
+      "surrogate_gain": "replace",
+      "surrogate_lower": "keep"
+    },
+    "surrogate": {
+      "old_zero_vs_old_parent": {
+        "status": "supported",
+        "supported": true,
+        "gain": 0.00033007262523332154,
+        "lower": -0.00093396091238344,
+        "blocks": 6,
+        "ess": {
+          "candidate": 225.5858023571955,
+          "baseline": 245.43438397682033
+        },
+        "ess_ratio": {
+          "candidate": 0.8811945404577949,
+          "baseline": 0.9587280624094544
+        },
+        "kl": {
+          "candidate": 0.047849422831605475,
+          "baseline": 0.018123503515439926
+        },
+        "coverage": {
+          "candidate": true,
+          "baseline": true
+        },
+        "stderr": 0.0012640335376167616,
+        "rows": 256,
+        "reason": "supported"
+      },
+      "new_parent_vs_zero": {
+        "status": "supported",
+        "supported": true,
+        "gain": 0.0032978814501682997,
+        "lower": 0.0011525988438205784,
+        "blocks": 5,
+        "ess": {
+          "candidate": 249.37632121670626,
+          "baseline": 242.4160099715516
+        },
+        "ess_ratio": {
+          "candidate": 0.9741262547527588,
+          "baseline": 0.9469375389513734
+        },
+        "kl": {
+          "candidate": 0.014195670203480323,
+          "baseline": 0.027740950520250322
+        },
+        "coverage": {
+          "candidate": true,
+          "baseline": true
+        },
+        "stderr": 0.0021452826063477213,
+        "rows": 256,
+        "reason": "supported"
+      },
+      "frequency_weighted_gain": 0.0010720248314670662,
+      "frequency_weighted_lower": -0.00041232097333243547
+    },
+    "support_rows": {
+      "old": 256,
+      "new": 256
+    },
+    "decision_source_groups": [
+      0,
+      1
+    ]
+  },
+  "selector_contract": {
+    "format": "storage_decision_past_selector_contract_v1",
+    "inputs": {
+      "recent_group_ids": "selector_diagnostics.recent_group_ids",
+      "group_evidence": "prefix/checkpoint.pt:evidence",
+      "old_parent": "old_parent",
+      "new_candidate": "new_candidate",
+      "surrogate_score_parameters": "config.gate"
+    },
+    "evidence_capacity_rows_per_group": 256,
+    "evidence_support_rows": {
+      "old": 256,
+      "new": 256
+    },
+    "outputs": "selector_diagnostics.past_only_selectors",
+    "rules": {
+      "frequency": "replace iff recent group 1 count exceeds group 0 count; ties keep",
+      "recency": "replace iff the latest recent group 1 bout is after the latest group 0 bout",
+      "surrogate_gain": "replace iff both groups have supported finite gain scores and the recent-frequency weighted score is positive; otherwise keep",
+      "surrogate_lower": "replace iff both groups have supported finite lower scores and the recent-frequency weighted score is positive; otherwise keep",
+      "fixed_actions": [
+        "keep",
+        "replace",
+        "mean",
+        "none"
+      ]
+    }
+  },
+  "evidence_rows_per_group": {
+    "old": 256,
+    "new": 256
+  },
+  "prefix_package": {
+    "foundation_bytes": 55477,
+    "checkpoint_bytes": 177141,
+    "actor_bytes": 89,
+    "full_persistent_bytes": 232707,
+    "package_budget_bytes": 262144
+  },
+  "wall_cpu": {
+    "cpu_s": 8.59375,
+    "wall_s": 8.670922799996333
+  },
+  "source_w0_unchanged_at_decision": true,
+  "branches": [
+    {
+      "action": "keep",
+      "future_regime": "old_major",
+      "summary": "branches/keep__old_major/summary.json"
+    },
+    {
+      "action": "replace",
+      "future_regime": "old_major",
+      "summary": "branches/replace__old_major/summary.json"
+    },
+    {
+      "action": "mean",
+      "future_regime": "old_major",
+      "summary": "branches/mean__old_major/summary.json"
+    },
+    {
+      "action": "none",
+      "future_regime": "old_major",
+      "summary": "branches/none__old_major/summary.json"
+    },
+    {
+      "action": "keep",
+      "future_regime": "new_major",
+      "summary": "branches/keep__new_major/summary.json"
+    },
+    {
+      "action": "replace",
+      "future_regime": "new_major",
+      "summary": "branches/replace__new_major/summary.json"
+    },
+    {
+      "action": "mean",
+      "future_regime": "new_major",
+      "summary": "branches/mean__new_major/summary.json"
+    },
+    {
+      "action": "none",
+      "future_regime": "new_major",
+      "summary": "branches/none__new_major/summary.json"
+    }
+  ]
+}

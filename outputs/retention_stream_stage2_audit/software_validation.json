@@ -1,0 +1,35 @@
+{
+  "format": "retention_software_validation_v1",
+  "targeted_suite": {
+    "passed": 90,
+    "failed": 0,
+    "reported_pytest_seconds": 9.06,
+    "files": [
+      "tests/test_retention_capacity.py",
+      "tests/test_retention_evidence.py",
+      "tests/test_retention_consolidation.py",
+      "tests/test_retention_stream.py",
+      "tests/test_report_retention_stream.py",
+      "tests/test_write_stream.py",
+      "tests/test_write_decision_policy.py",
+      "tests/test_write_budget_baseline.py"
+    ]
+  },
+  "after_report_plot_revision": {
+    "reporter_tests_passed": 12,
+    "failed": 0
+  },
+  "syntax_compile": "passed for runner, reporter, artifact auditor, evidence and consolidation modules",
+  "versions": {
+    "python": "3.12.13",
+    "numpy": "2.5.4",
+    "torch": "2.8.0+cpu",
+    "stable_baselines3": "2.8.0"
+  },
+  "experiment_scheduler": {
+    "workers": 2,
+    "torch_threads_per_learner": 1,
+    "torch_cuda_available": false
+  },
+  "scope": "Software checks are not experimental seeds or environment interactions."
+}

@@ -1,0 +1,107 @@
+{
+  "format": "retention_stream_run_v1",
+  "status": "completed",
+  "analysis_role": "exploratory",
+  "method": "mean",
+  "budget": "low",
+  "seed": 18997,
+  "raw_steps": 12288,
+  "fit_steps": 12288,
+  "total_reward": -196.64000000001317,
+  "reward_per_raw_step": -0.01600260416666774,
+  "slot_evictions": 7,
+  "rollouts_trained": 48,
+  "minibatch_updates": 768,
+  "write_proposals": 11,
+  "write_accepts": 5,
+  "prior_bindings": 7,
+  "prior_rejects": 0,
+  "capacity_max": {
+    "actor_bytes": 134,
+    "checkpoint_bytes": 154136,
+    "foundation_bytes": 55477,
+    "actor_sidecar_bytes": 134,
+    "full_physical_bytes": 209747,
+    "package_budget_bytes": 327680,
+    "evidence_bytes": 21640,
+    "window_bytes": 30048,
+    "optimizer_tensor_bytes": 40480
+  },
+  "recurrences": [
+    {
+      "task": "B0+",
+      "bout": 6,
+      "previously_evicted": false,
+      "first256_reward_per_step": -0.03488281250000001,
+      "recovery512_reward_per_step": -0.019257812500000013,
+      "recovery1024_reward_per_step": -0.006806640625000012,
+      "first_goal_step": 802,
+      "first_gradient_step": 256,
+      "observed_steps": 1024
+    },
+    {
+      "task": "B1+",
+      "bout": 7,
+      "previously_evicted": true,
+      "first256_reward_per_step": -0.024140625000000016,
+      "recovery512_reward_per_step": -0.01828125000000002,
+      "recovery1024_reward_per_step": -0.012666015625000016,
+      "first_goal_step": null,
+      "first_gradient_step": 256,
+      "observed_steps": 1024
+    },
+    {
+      "task": "A1+",
+      "bout": 8,
+      "previously_evicted": false,
+      "first256_reward_per_step": -0.008515625000000016,
+      "recovery512_reward_per_step": -0.014375000000000016,
+      "recovery1024_reward_per_step": -0.0038769531250000154,
+      "first_goal_step": 639,
+      "first_gradient_step": 256,
+      "observed_steps": 1024
+    },
+    {
+      "task": "A0+",
+      "bout": 9,
+      "previously_evicted": true,
+      "first256_reward_per_step": -0.0007031250000000093,
+      "recovery512_reward_per_step": -0.011933593750000011,
+      "recovery1024_reward_per_step": -0.010468750000000011,
+      "first_goal_step": 195,
+      "first_gradient_step": 256,
+      "observed_steps": 1024
+    },
+    {
+      "task": "B2+",
+      "bout": 10,
+      "previously_evicted": true,
+      "first256_reward_per_step": -0.003632812500000018,
+      "recovery512_reward_per_step": -0.007539062500000015,
+      "recovery1024_reward_per_step": -0.009248046875000015,
+      "first_goal_step": 520,
+      "first_gradient_step": 256,
+      "observed_steps": 1024
+    },
+    {
+      "task": "A2+",
+      "bout": 11,
+      "previously_evicted": true,
+      "first256_reward_per_step": -0.0446484375,
+      "recovery512_reward_per_step": -0.033417968750000006,
+      "recovery1024_reward_per_step": -0.02414062500000001,
+      "first_goal_step": 366,
+      "first_gradient_step": 256,
+      "observed_steps": 1024
+    }
+  ],
+  "cpu_s": 14.40625,
+  "wall_s": 14.805719500000123,
+  "audit": {
+    "passed": true,
+    "source_unchanged": true,
+    "persistent_roundtrip": true,
+    "all_raw_rows_submitted_to_ppo": true
+  },
+  "limits": "Known local indices/boundaries; parameter caps plus package ceiling, not total-state optimal allocation. Proxy gates lack safety guarantees."
+}

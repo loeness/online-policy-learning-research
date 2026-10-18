@@ -1,0 +1,408 @@
+{
+  "format": "score_calibration_analysis_v1",
+  "status": "completed",
+  "analysis_role": "diagnostic",
+  "estimand": "conditional 128-step frozen-policy gain on later natural recurrence",
+  "statistical_unit": "seed within budget; candidates and recurrence replicates are not independent seeds",
+  "protocol": {
+    "score_freeze": "all write_tests within the first 6 bouts and step <= 12288, before any recurrence",
+    "primary_target_weighting": "equal weight over unique source contexts in the scored archive",
+    "secondary_target_weighting": "prototype-reservoir weights",
+    "recurrence_design": "four actual recurrence state anchors at offsets 0, 64, 128, and 192; 8 paired runs x 128 raw steps per policy arm",
+    "common_randomness": "common per-step action uniforms and reset-ordinal seeds",
+    "intervals": "pointwise 95% Student t intervals with 7 degrees of freedom over paired replicate aggregates",
+    "interval_scope": "conditional on the observed contexts and recurrence anchors; pointwise intervals are not simultaneous across candidates",
+    "sign_threshold_epsilon": 0.0,
+    "sign_rule": "beneficial if CI low > 0; harmful if CI high < 0; otherwise ambiguous",
+    "scope_limit": "conditional frozen-policy gain only; not adaptation, final return, complete write benefit, or long-term online effect",
+    "inference_limit": "no p-values, no confidence interval across seeds, and no pooling seed-by-budget cells as independent seeds"
+  },
+  "cohort": {
+    "config": {
+      "format": "score_calibration_config_v1",
+      "analysis_role": "diagnostic",
+      "seeds": [
+        19701
+      ],
+      "pilot_seed": 19701,
+      "budgets": [
+        "low"
+      ],
+      "source_config": "configs/retention_stream_stage2.json",
+      "main_bout_steps": 2048,
+      "pilot_bout_steps": 1024,
+      "capture_initial_bouts": 6,
+      "anchor_offsets": [
+        0,
+        64,
+        128,
+        192
+      ],
+      "horizon": 128,
+      "replicates": 8,
+      "evaluation_seed": 1970001,
+      "discount": 0.98,
+      "discounted_horizon": 64,
+      "mc_interval_level": 0.95,
+      "benefit_margin": 0.0,
+      "min_correlation_events": 5,
+      "exploratory_rank_threshold": 0.3,
+      "max_workers": 2,
+      "torch_threads": 1,
+      "primary_predictor": "original_mean_lower",
+      "primary_outcome": "unique historical context equal-weight conditional 128-step frozen-policy reward/raw-step gain",
+      "secondary_predictors": [
+        "original_mean_gain",
+        "codec_mean_lower",
+        "fresh_lower",
+        "negative_mean_stderr",
+        "time_step"
+      ],
+      "feedback_to_learner": false,
+      "retain_all_prefix_write_tests": true,
+      "tune_from_pilot_or_main": false,
+      "mode": "pilot",
+      "bout_steps": 1024
+    },
+    "audit": {
+      "passed": true,
+      "failures": []
+    },
+    "cost": {
+      "learner_steps": 12288,
+      "observer_steps": 57344,
+      "new_total_interactions": 69632
+    },
+    "mode": "pilot",
+    "seeds": [
+      19701
+    ],
+    "budgets": [
+      "low"
+    ],
+    "cpu_s": 45.046875,
+    "wall_s": 51.88894130001427,
+    "branch_count": 1,
+    "captured_test_count": 3,
+    "candidate_count": 3,
+    "excluded_candidate_count": 0
+  },
+  "cells": [
+    {
+      "seed": 19701,
+      "budget": "low",
+      "candidate_count": 3,
+      "excluded_candidate_count": 0,
+      "captured_tests": 3,
+      "predictor_missing_counts": {
+        "original_mean_lower": 0,
+        "original_mean_gain": 0,
+        "codec_mean_lower": 0,
+        "fresh_lower": 0,
+        "negative_mean_stderr": 0,
+        "time_step": 0
+      },
+      "predictor_rho_vs_mean_gain": {
+        "original_mean_lower": {
+          "n": 3,
+          "rho": null,
+          "status": "not_estimable_too_few_events",
+          "predictor": "original_mean_lower",
+          "target": "mean_gain",
+          "missing_predictor_count": 0
+        },
+        "original_mean_gain": {
+          "n": 3,
+          "rho": null,
+          "status": "not_estimable_too_few_events",
+          "predictor": "original_mean_gain",
+          "target": "mean_gain",
+          "missing_predictor_count": 0
+        },
+        "codec_mean_lower": {
+          "n": 3,
+          "rho": null,
+          "status": "not_estimable_too_few_events",
+          "predictor": "codec_mean_lower",
+          "target": "mean_gain",
+          "missing_predictor_count": 0
+        },
+        "fresh_lower": {
+          "n": 3,
+          "rho": null,
+          "status": "not_estimable_too_few_events",
+          "predictor": "fresh_lower",
+          "target": "mean_gain",
+          "missing_predictor_count": 0
+        },
+        "negative_mean_stderr": {
+          "n": 3,
+          "rho": null,
+          "status": "not_estimable_too_few_events",
+          "predictor": "negative_mean_stderr",
+          "target": "mean_gain",
+          "missing_predictor_count": 0
+        },
+        "time_step": {
+          "n": 3,
+          "rho": null,
+          "status": "not_estimable_too_few_events",
+          "predictor": "time_step",
+          "target": "mean_gain",
+          "missing_predictor_count": 0
+        }
+      },
+      "primary_partial_rho_controlling_group": {
+        "n": 3,
+        "rho": null,
+        "status": "not_estimable_too_few_events",
+        "missing_predictor_count": 0
+      },
+      "primary_rho_vs_prototype_weighted_mean_gain": {
+        "n": 3,
+        "rho": null,
+        "status": "not_estimable_too_few_events",
+        "predictor": "original_mean_lower",
+        "target": "prototype_weighted_mean_gain",
+        "missing_predictor_count": 0
+      },
+      "primary_score_approval_gate": {
+        "classification": "original_mean_lower_gt_zero_approval_gate",
+        "n_total": 3,
+        "n_resolved_outcomes": 2,
+        "n_classified": 2,
+        "n_resolved": 2,
+        "n_ambiguous_outcomes": 1,
+        "n_missing_score_among_resolved": 0,
+        "positive_prediction_count": 1,
+        "beneficial_count": 2,
+        "harmful_count": 0,
+        "approved_but_mc_harmful_count": 0,
+        "approved_but_mc_harmful_ids": [],
+        "not_approved_but_mc_beneficial_count": 1,
+        "not_approved_but_mc_beneficial_ids": [
+          "19701-low-1792"
+        ],
+        "precision": 1.0,
+        "precision_status": "estimable",
+        "recall": 0.5,
+        "recall_status": "estimable"
+      },
+      "accepted_gate": {
+        "classification": "accepted_gate",
+        "n_total": 3,
+        "n_resolved_outcomes": 2,
+        "n_classified": 2,
+        "n_resolved": 2,
+        "n_ambiguous_outcomes": 1,
+        "n_missing_score_among_resolved": 0,
+        "positive_prediction_count": 1,
+        "beneficial_count": 2,
+        "harmful_count": 0,
+        "accepted_but_mc_harmful_count": 0,
+        "accepted_but_mc_harmful_ids": [],
+        "not_accepted_but_mc_beneficial_count": 1,
+        "not_accepted_but_mc_beneficial_ids": [
+          "19701-low-1792"
+        ],
+        "precision": 1.0,
+        "precision_status": "estimable",
+        "recall": 0.5,
+        "recall_status": "estimable"
+      },
+      "primary_auc_resolved_sign": null,
+      "candidate_outcomes": [
+        {
+          "id": "19701-low-1792",
+          "step": 1792,
+          "group": "0",
+          "predictors": {
+            "original_mean_lower": -0.0032165526089976853,
+            "original_mean_gain": 0.01571392620457525,
+            "codec_mean_lower": -0.0032228916173529312,
+            "fresh_lower": 0.0010522094841314187,
+            "negative_mean_stderr": -0.018930478813572935,
+            "time_step": 1792.0
+          },
+          "contexts": [
+            "B0+",
+            "B2+"
+          ],
+          "prototype_weights": {
+            "B0+": 0.6666666666666666,
+            "B2+": 0.3333333333333333
+          },
+          "original_mean_lower": -0.0032165526089976853,
+          "mean_gain": 0.005218505859374993,
+          "stderr": 0.0010097188356368177,
+          "ci_low": 0.0028309002139366908,
+          "ci_high": 0.007606111504813296,
+          "sign": "beneficial",
+          "replicate_gains": [
+            0.009521484374999997,
+            0.0039062499999999887,
+            0.000732421875,
+            0.005126953125000005,
+            0.00415039062500001,
+            0.008789062499999993,
+            0.003662109374999993,
+            0.005859374999999956
+          ],
+          "prototype_weighted_replicate_gains": [
+            0.008300781249999993,
+            0.00488281249999999,
+            0.0004882812500000015,
+            0.00618489583333334,
+            0.005208333333333346,
+            0.008951822916666656,
+            0.0027669270833333274,
+            0.006510416666666605
+          ],
+          "prototype_weighted_mean_gain": 0.005411783854166657,
+          "prototype_weighted_sign": "beneficial",
+          "accepted": false
+        },
+        {
+          "id": "19701-low-3840",
+          "step": 3840,
+          "group": "1",
+          "predictors": {
+            "original_mean_lower": -0.0013502214569298514,
+            "original_mean_gain": 0.017347063082171512,
+            "codec_mean_lower": -0.0013569362813640948,
+            "fresh_lower": -0.0009230073760741497,
+            "negative_mean_stderr": -0.018697284539101366,
+            "time_step": 3840.0
+          },
+          "contexts": [
+            "A0+",
+            "A2+"
+          ],
+          "prototype_weights": {
+            "A2+": 0.6666666666666666,
+            "A0+": 0.3333333333333333
+          },
+          "original_mean_lower": -0.0013502214569298514,
+          "mean_gain": 0.0011596679687500013,
+          "stderr": 0.001387795044055426,
+          "ci_low": -0.0021219458478410726,
+          "ci_high": 0.004441281785341075,
+          "sign": "ambiguous",
+          "replicate_gains": [
+            0.0002441406250000063,
+            0.005371093749999996,
+            0.006347656249999989,
+            0.003662109374999998,
+            0.0021972656249999957,
+            -0.003662109374999995,
+            -0.0041503906249999835,
+            -0.0007324218749999957
+          ],
+          "prototype_weighted_replicate_gains": [
+            0.0003255208333333404,
+            0.006347656249999996,
+            0.006184895833333318,
+            0.0024414062499999987,
+            0.0014648437499999978,
+            -0.002604166666666659,
+            -0.005533854166666653,
+            -0.0021158854166666635
+          ],
+          "prototype_weighted_mean_gain": 0.0008138020833333343,
+          "prototype_weighted_sign": "ambiguous",
+          "accepted": false
+        },
+        {
+          "id": "19701-low-5888",
+          "step": 5888,
+          "group": "1",
+          "predictors": {
+            "original_mean_lower": 0.0009277441425668675,
+            "original_mean_gain": 0.019752399881862566,
+            "codec_mean_lower": 0.0009266380848286845,
+            "fresh_lower": 0.0031450720232043985,
+            "negative_mean_stderr": -0.0188246557392957,
+            "time_step": 5888.0
+          },
+          "contexts": [
+            "A0+",
+            "A1+",
+            "A2+"
+          ],
+          "prototype_weights": {
+            "A2+": 0.5,
+            "A0+": 0.25,
+            "A1+": 0.25
+          },
+          "original_mean_lower": 0.0009277441425668675,
+          "mean_gain": 0.002441406250000005,
+          "stderr": 0.000796172510614951,
+          "ci_low": 0.0005587574234203372,
+          "ci_high": 0.004324055076579673,
+          "sign": "beneficial",
+          "replicate_gains": [
+            0.003092447916666684,
+            0.004069010416666664,
+            0.005859374999999993,
+            0.001139322916666674,
+            0.003906250000000009,
+            0.001953124999999999,
+            -0.0013020833333333287,
+            0.0008138020833333478
+          ],
+          "prototype_weighted_replicate_gains": [
+            0.0024414062500000147,
+            0.004760742187499998,
+            0.005615234374999992,
+            0.0012207031250000104,
+            0.003051757812500007,
+            0.001953125000000001,
+            -0.0017089843749999983,
+            -0.00036621093749998916
+          ],
+          "prototype_weighted_mean_gain": 0.0021209716796875043,
+          "prototype_weighted_sign": "beneficial",
+          "accepted": true
+        }
+      ],
+      "excluded_candidate_records": []
+    }
+  ],
+  "aggregate_by_budget": {
+    "low": {
+      "seed_level_primary_rho": {
+        "estimable_count": 0,
+        "expected_count": 1,
+        "mean": null,
+        "range": null
+      },
+      "seed_level_partial_rho_controlling_group": {
+        "estimable_count": 0,
+        "expected_count": 1,
+        "mean": null,
+        "range": null
+      },
+      "seed_level_prototype_weighted_rho": {
+        "estimable_count": 0,
+        "expected_count": 1,
+        "mean": null,
+        "range": null
+      },
+      "positive_seed_primary_rho_count": 0,
+      "favorable_heuristic_checks": {
+        "applicable": false,
+        "all_three_cells_estimable": null,
+        "mean_rho_at_least_0_3": null,
+        "at_least_two_of_three_seed_rhos_positive": null,
+        "mean_partial_rho_positive": null
+      },
+      "favorable_heuristic_met": null
+    }
+  },
+  "favorable_heuristic": {
+    "criterion": "exploratory heuristic: both budgets must have all 3 seed cells estimable, mean primary rho >= 0.3, at least 2 of 3 positive seed rhos, and mean partial rho controlling group > 0",
+    "applicable": false,
+    "met_for_all_budgets": null,
+    "is_significance_test": false
+  }
+}

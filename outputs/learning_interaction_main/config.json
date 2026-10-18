@@ -1,0 +1,95 @@
+{
+  "format": "storage_learning_interaction_config_v1",
+  "source_path": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\source_dose_main",
+  "source_config": {
+    "format": "storage_decision_v1",
+    "analysis_role": "predeclared_common_prefix_old_source_dose",
+    "seeds": [
+      21301,
+      21302,
+      21303,
+      21305,
+      21306,
+      21307,
+      21309,
+      21310
+    ],
+    "pair_kinds": [
+      "dynamics",
+      "reward_conflict"
+    ],
+    "history_regimes": [
+      "old_major",
+      "new_major"
+    ],
+    "future_regimes": [
+      "old_major",
+      "new_major"
+    ],
+    "actions": [
+      "keep",
+      "replace",
+      "mean",
+      "none"
+    ],
+    "bootstrap_steps": 2048,
+    "bout_steps": 1024,
+    "rollout_steps": 256,
+    "local_slots": 2,
+    "shared_groups": 1,
+    "local_learning_rate": 0.003,
+    "shared_learning_rate": 0.0,
+    "critic_learning_rate": 0.003,
+    "actor_budget_bytes": 89,
+    "package_budget_bytes": 262144,
+    "evidence_rows_per_group": 256,
+    "recent_bouts": 8,
+    "max_workers": 4,
+    "torch_threads": 1,
+    "pilot": {
+      "seeds": [
+        21289
+      ],
+      "pair_kinds": [
+        "dynamics"
+      ],
+      "history_regimes": [
+        "old_major"
+      ],
+      "bootstrap_steps": 512,
+      "bout_steps": 256,
+      "source_capture_steps": 256
+    },
+    "gate": {
+      "min_rows": 12,
+      "min_blocks": 3,
+      "min_ess_ratio": 0.2,
+      "max_mean_kl": 0.5,
+      "clip_ratio": 5.0,
+      "stderr_multiplier": 1.0
+    },
+    "report": {
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 20261018,
+      "practical_reward_per_step": 0.002,
+      "direction_consistency_minimum": 6,
+      "primary_continuation": "history_regime equals future_regime",
+      "stress_continuation": "history_regime differs from future_regime",
+      "source_dose_effect_reward_per_step": 0.002,
+      "source_dose_positive_seeds": 6
+    },
+    "scope": "One common prefix per case. Observer captures old source after 1024 environment steps, full source after 2048, new sources after 1024. Only old retained candidate content changes. No unknown-context claim or new deployable selector.",
+    "experiment_format": "source_dose_v1",
+    "source_capture_steps": 1024,
+    "pilot_source_capture_steps": 256,
+    "seed_selection": "first two seeds in each (old family A/B, reward-conflict old sign +/-) stratum scanning 21301..21400; mapping only, no rollout outcomes inspected",
+    "pilot_seed": 20089,
+    "domain": "navigation"
+  },
+  "actions": [
+    "replace",
+    "none"
+  ],
+  "learning_mode": "no_gradient",
+  "new_prefix_environment_steps": 0
+}
