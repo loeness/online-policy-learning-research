@@ -1,5 +1,29 @@
 # Reproducibility
 
+## Prediction decomposition and retention action/horizon diagnosis (2026-10-19)
+
+The [frozen protocol](RETENTION_MECHANISM_PROTOCOL.md) and [configuration](../configs/retention_mechanism.json) define a six-seed exploratory diagnostic. The existing-log decomposition makes zero new environment calls. The RL diagnostic restores the same complete prefix before four operations, applies declared future RNG streams, and continues local PPO with a fixed parent. Its three horizons are nested observations from one continuation, not separately paid runs or independent samples.
+
+Use fresh output directories. The retention RL runner and its mechanism reporter refuse to overwrite existing nonempty outputs:
+
+```powershell
+$env:PYTHONPATH='src'
+& .\.venv\Scripts\python.exe scripts/diagnose_retention_prediction.py --calibration-root outputs/retention_value_calibration_main --comparison-root outputs/retention_value_comparison_main --output-root outputs/my_prediction_diagnostics
+& .\.venv\Scripts\python.exe scripts/run_retention_mechanism.py --config configs/retention_mechanism.json --pilot --output outputs/my_mechanism_pilot
+& .\.venv\Scripts\python.exe scripts/audit_retention_mechanism.py --cohort outputs/my_mechanism_pilot --output outputs/my_mechanism_pilot_audit.json
+& .\.venv\Scripts\python.exe scripts/report_retention_mechanism.py --input outputs/my_mechanism_pilot --output outputs/my_mechanism_pilot_report
+& .\.venv\Scripts\python.exe scripts/run_retention_mechanism.py --config configs/retention_mechanism.json --output outputs/my_mechanism_main
+& .\.venv\Scripts\python.exe scripts/audit_retention_mechanism.py --cohort outputs/my_mechanism_main --output outputs/my_mechanism_main_audit.json
+& .\.venv\Scripts\python.exe scripts/report_retention_mechanism.py --input outputs/my_mechanism_main --output outputs/my_mechanism_main_report
+& .\.venv\Scripts\python.exe -m pytest -q tests/test_diagnose_retention_prediction.py tests/test_retention_mechanism.py tests/test_report_retention_mechanism.py tests/test_audit_retention_mechanism.py
+```
+
+The diagnostic script's report records the exact existing-log invocation. Calibration inputs are not regenerated. The main configuration defines 24 prefixes and 384 continuations, totaling 4,890,624 interactions; its pilot defines 56,320. Two CPU case workers and one Torch thread each are configured, with no dependency or backend change. The [environment record](../outputs/retention_mechanism_environment.json) captures package versions and pre-launch available memory. CPU figures are measured harness costs, not an isolated hardware speed benchmark; inline campaign CPU must not add the same case CPU twice.
+
+Source exposure is matched at the time source matrices are saved: 1024 fitted rows per source matrix. Task lifetime interactions and later source-task updates are separately recorded. Source matrices and simulator snapshots are observer artifacts, not a deployable memory bank. Actor sidecars are 89 bytes; W0 and all serialized learner state also count toward the 262144-byte package ceiling. Keep skips an extra install/codec; other operations use resident compensation and measured int8 drift.
+
+The original `retention_mechanism_pilot` failed after 7168 prefix steps due to an artifact path formatting error. Its files and interaction cost remain preserved; `retention_mechanism_pilot_v2` is a fresh successful rerun. The preliminary independent audit had schema and pre-/post-codec comparison errors; its original result and corrected audit are separately preserved. These software corrections do not change rewards, simulation data, candidate settings or operation rankings.
+
 ## Independent lower confirmation and selected-feedback retention (2026-10-19)
 
 The confirmation freezes the existing rule on unused mapping-balanced seeds. The later streams use independent seeds and never train from its observer branches. Settings and scientific limits are in [confirmation protocol](SURROGATE_LOWER_CONFIRMATION_PROTOCOL.md) and [selected-feedback protocol](RETENTION_VALUE_STREAM_PROTOCOL.md). Use fresh output paths:

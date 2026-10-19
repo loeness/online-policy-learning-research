@@ -1,0 +1,117 @@
+{
+  "format": "storage_decision_v1",
+  "mechanism_format": "retention_mechanism_v1",
+  "analysis_role": "exploratory_candidate_and_horizon_diagnostic",
+  "seeds": [
+    25101,
+    25102,
+    25103,
+    25104,
+    25107,
+    25108
+  ],
+  "pair_kinds": [
+    "dynamics",
+    "reward_conflict"
+  ],
+  "history_regimes": [
+    "old_major",
+    "new_major"
+  ],
+  "future_regimes": [
+    "old_major",
+    "new_major"
+  ],
+  "actions": [
+    "keep",
+    "replace",
+    "mean",
+    "none"
+  ],
+  "replicates": [
+    0,
+    1
+  ],
+  "bootstrap_steps": 1024,
+  "bout_steps": 512,
+  "candidate_source_steps": 1024,
+  "history_tail_source_bouts": 2,
+  "future_blocks": 8,
+  "horizons": [
+    1536,
+    6144,
+    12288
+  ],
+  "rollout_steps": 256,
+  "local_slots": 2,
+  "shared_groups": 1,
+  "local_learning_rate": 0.003,
+  "shared_learning_rate": 0.0,
+  "critic_learning_rate": 0.003,
+  "actor_budget_bytes": 89,
+  "package_budget_bytes": 262144,
+  "evidence_rows_per_group": 256,
+  "recent_bouts": 8,
+  "max_workers": 2,
+  "torch_threads": 1,
+  "future_seed_offset": 40000000,
+  "future_seed_multiplier": 1000,
+  "execution_order_seed": 2026101901,
+  "gate": {
+    "min_rows": 12,
+    "min_blocks": 3,
+    "min_ess_ratio": 0.2,
+    "max_mean_kl": 0.5,
+    "clip_ratio": 5.0,
+    "stderr_multiplier": 1.0
+  },
+  "report": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 2026101902,
+    "practical_reward_per_step": 0.002,
+    "primary_horizon": 12288,
+    "fixed_comparator": "replace",
+    "selection_evaluation_replica_swap": true,
+    "interpretation": "Six independent deployment seeds; bootstrap intervals are descriptive. Replicas, histories, futures and nested horizons are not additional independent seeds."
+  },
+  "pilot": {
+    "seeds": [
+      25089
+    ],
+    "pair_kinds": [
+      "dynamics"
+    ],
+    "history_regimes": [
+      "old_major"
+    ],
+    "future_regimes": [
+      "old_major"
+    ],
+    "future_blocks": 4,
+    "horizons": [
+      1536,
+      6144
+    ],
+    "max_workers": 1
+  },
+  "scope": "Observer-only action/horizon diagnostic with known task IDs, groups and boundaries. Same-prefix restored learner and simulator, explicit future stochastic reseeding, continued local PPO, frozen parent after one generic retention operation. No unchosen outcome is supplied to a deployed selector; no learned-policy improvement or global oracle bound is claimed.",
+  "seed_selection": "First mapping-only unused seeds in 25101..25300 satisfying A/even=2,A/odd=1,B/even=1,B/odd=2; three old-family A, three B, three even and three odd; no rewards examined.",
+  "expected_main": {
+    "cases": 24,
+    "branches": 384,
+    "prefix_steps_per_case": 7168,
+    "steps_per_branch": 12288,
+    "prefix_steps": 172032,
+    "branch_steps": 4718592,
+    "total_steps": 4890624
+  },
+  "expected_pilot": {
+    "cases": 1,
+    "branches": 8,
+    "prefix_steps_per_case": 7168,
+    "steps_per_branch": 6144,
+    "prefix_steps": 7168,
+    "branch_steps": 49152,
+    "total_steps": 56320
+  }
+}

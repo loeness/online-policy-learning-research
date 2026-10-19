@@ -1,0 +1,226 @@
+{
+  "format": "retention_mechanism_audit_v1",
+  "path": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot",
+  "phase": "pilot",
+  "passed": false,
+  "readiness": "blocked",
+  "scope": "saved-file integrity audit; no environment calls",
+  "counts": {
+    "expected_cases": 1,
+    "observed_cases": 1,
+    "expected_branches": 8,
+    "observed_branches_case_scoped": 0,
+    "prefix_environment_steps": 7168,
+    "branch_environment_steps": 0,
+    "environment_steps_total": 7168,
+    "expected_environment_steps_total": 56320,
+    "prefix_rollouts": 28,
+    "branch_rollouts": 0,
+    "rollouts_total": 28,
+    "minibatch_updates_total": 448,
+    "reward_total_all_phases": -120.29000000000005
+  },
+  "cases": [
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "passed": false,
+      "partial": true,
+      "environment_steps": 7168,
+      "rollouts": 28,
+      "minibatch_updates": 448,
+      "errors": 1
+    }
+  ],
+  "branches": [],
+  "observations": {},
+  "errors": [
+    {
+      "code": "branch_universe",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot\\summary.json",
+      "message": "branch summaries differ from the frozen case/future/replica/action grid",
+      "details": {
+        "missing": [
+          [
+            "s25089_dynamics_old_major",
+            "old_major__r0__keep"
+          ],
+          [
+            "s25089_dynamics_old_major",
+            "old_major__r0__mean"
+          ],
+          [
+            "s25089_dynamics_old_major",
+            "old_major__r0__none"
+          ],
+          [
+            "s25089_dynamics_old_major",
+            "old_major__r0__replace"
+          ],
+          [
+            "s25089_dynamics_old_major",
+            "old_major__r1__keep"
+          ],
+          [
+            "s25089_dynamics_old_major",
+            "old_major__r1__mean"
+          ],
+          [
+            "s25089_dynamics_old_major",
+            "old_major__r1__none"
+          ],
+          [
+            "s25089_dynamics_old_major",
+            "old_major__r1__replace"
+          ]
+        ],
+        "extra": []
+      }
+    },
+    {
+      "code": "runner_errors",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot\\summary.json",
+      "message": "runner summary records failed or incomplete work",
+      "details": {
+        "errors": [
+          {
+            "case_id": "s25089_dynamics_old_major",
+            "error_type": "case_failure",
+            "error": "Traceback (most recent call last):\n  File \"D:\\MovedFromC\\ChatGPT\\online\\scripts\\run_retention_mechanism.py\", line 826, in _case_worker\n    ).as_posix()\n      ^^^^^^^^\nAttributeError: 'str' object has no attribute 'as_posix'\n",
+            "persisted_interactions": {
+              "prefix_environment_steps": 7168,
+              "prefix_reward_sum": -120.29000000000738,
+              "prefix_rollouts": 28,
+              "prefix_minibatch_updates": 448,
+              "branch_environment_steps": 0,
+              "branch_rollouts": 0,
+              "branch_minibatch_updates": 0,
+              "environment_steps_total": 7168,
+              "branches": []
+            },
+            "count_source": "steps.csv and rollouts.csv rows"
+          },
+          {
+            "error_type": "branch_count_mismatch",
+            "expected": 8,
+            "actual": 0
+          },
+          {
+            "error_type": "interaction_count_mismatch",
+            "expected": 56320,
+            "actual": 7168
+          }
+        ]
+      }
+    },
+    {
+      "code": "runner_error",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot\\summary.json",
+      "message": "runner failure is retained in the audit",
+      "details": {
+        "error_record": {
+          "case_id": "s25089_dynamics_old_major",
+          "error_type": "case_failure",
+          "error": "Traceback (most recent call last):\n  File \"D:\\MovedFromC\\ChatGPT\\online\\scripts\\run_retention_mechanism.py\", line 826, in _case_worker\n    ).as_posix()\n      ^^^^^^^^\nAttributeError: 'str' object has no attribute 'as_posix'\n",
+          "persisted_interactions": {
+            "prefix_environment_steps": 7168,
+            "prefix_reward_sum": -120.29000000000738,
+            "prefix_rollouts": 28,
+            "prefix_minibatch_updates": 448,
+            "branch_environment_steps": 0,
+            "branch_rollouts": 0,
+            "branch_minibatch_updates": 0,
+            "environment_steps_total": 7168,
+            "branches": []
+          },
+          "count_source": "steps.csv and rollouts.csv rows"
+        }
+      }
+    },
+    {
+      "code": "runner_error",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot\\summary.json",
+      "message": "runner failure is retained in the audit",
+      "details": {
+        "error_record": {
+          "error_type": "branch_count_mismatch",
+          "expected": 8,
+          "actual": 0
+        }
+      }
+    },
+    {
+      "code": "runner_error",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot\\summary.json",
+      "message": "runner failure is retained in the audit",
+      "details": {
+        "error_record": {
+          "error_type": "interaction_count_mismatch",
+          "expected": 56320,
+          "actual": 7168
+        }
+      }
+    },
+    {
+      "code": "incomplete_case_preserved",
+      "where": "s25089_dynamics_old_major",
+      "message": "case failed before completing its frozen branch grid; persisted work is counted separately",
+      "details": {
+        "errors": [
+          {
+            "case_id": "s25089_dynamics_old_major",
+            "error_type": "case_failure",
+            "error": "Traceback (most recent call last):\n  File \"D:\\MovedFromC\\ChatGPT\\online\\scripts\\run_retention_mechanism.py\", line 826, in _case_worker\n    ).as_posix()\n      ^^^^^^^^\nAttributeError: 'str' object has no attribute 'as_posix'\n",
+            "persisted_interactions": {
+              "prefix_environment_steps": 7168,
+              "prefix_reward_sum": -120.29000000000738,
+              "prefix_rollouts": 28,
+              "prefix_minibatch_updates": 448,
+              "branch_environment_steps": 0,
+              "branch_rollouts": 0,
+              "branch_minibatch_updates": 0,
+              "environment_steps_total": 7168,
+              "branches": []
+            },
+            "count_source": "steps.csv and rollouts.csv rows"
+          }
+        ],
+        "persisted": {
+          "environment_steps": 7168,
+          "reward_total": -120.29000000000005,
+          "rollouts": 28,
+          "minibatch_updates": 448,
+          "episodes": 121,
+          "branches": []
+        }
+      }
+    },
+    {
+      "code": "cohort_branch_steps",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot\\summary.json",
+      "message": "independently counted branch rows differ from the frozen budget",
+      "details": {
+        "actual": 0,
+        "expected": 49152
+      }
+    },
+    {
+      "code": "cohort_total_steps",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot\\summary.json",
+      "message": "independently counted raw rows differ from the frozen campaign budget",
+      "details": {
+        "actual": 7168,
+        "expected": 56320
+      }
+    },
+    {
+      "code": "campaign_rollout_count",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot\\summary.json",
+      "message": "PPO rollout count differs from each actual interaction being trained once",
+      "details": {
+        "actual": 28,
+        "expected": 220
+      }
+    }
+  ],
+  "warnings": []
+}

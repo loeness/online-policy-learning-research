@@ -1,0 +1,678 @@
+{
+  "format": "retention_mechanism_branch_v1",
+  "branch_id": "old_major__r1__keep",
+  "case_id": "s25089_dynamics_old_major",
+  "seed": 25089,
+  "pair_kind": "dynamics",
+  "history_regime": "old_major",
+  "future_regime": "old_major",
+  "replicate": 1,
+  "action": "keep",
+  "future_seed": 65089001,
+  "future_schedule": [
+    {
+      "phase": "future",
+      "bout": 10,
+      "future_block": 0,
+      "within_block": 0,
+      "group": 1,
+      "variant": 0,
+      "task": "A0+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 11,
+      "future_block": 0,
+      "within_block": 1,
+      "group": 0,
+      "variant": 0,
+      "task": "B0+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 12,
+      "future_block": 0,
+      "within_block": 2,
+      "group": 0,
+      "variant": 1,
+      "task": "B1+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 13,
+      "future_block": 1,
+      "within_block": 0,
+      "group": 1,
+      "variant": 1,
+      "task": "A1+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 14,
+      "future_block": 1,
+      "within_block": 1,
+      "group": 0,
+      "variant": 1,
+      "task": "B1+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 15,
+      "future_block": 1,
+      "within_block": 2,
+      "group": 0,
+      "variant": 2,
+      "task": "B2+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 16,
+      "future_block": 2,
+      "within_block": 0,
+      "group": 1,
+      "variant": 2,
+      "task": "A2+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 17,
+      "future_block": 2,
+      "within_block": 1,
+      "group": 0,
+      "variant": 2,
+      "task": "B2+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 18,
+      "future_block": 2,
+      "within_block": 2,
+      "group": 0,
+      "variant": 0,
+      "task": "B0+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 19,
+      "future_block": 3,
+      "within_block": 0,
+      "group": 1,
+      "variant": 0,
+      "task": "A0+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 20,
+      "future_block": 3,
+      "within_block": 1,
+      "group": 0,
+      "variant": 0,
+      "task": "B0+",
+      "steps": 512
+    },
+    {
+      "phase": "future",
+      "bout": 21,
+      "future_block": 3,
+      "within_block": 2,
+      "group": 0,
+      "variant": 1,
+      "task": "B1+",
+      "steps": 512
+    }
+  ],
+  "prefix_state_hash": "b54a3a6ec6980371bde37adbd325650de007db6de0b4f891f7eced68a1c4788f",
+  "restored_state_hash": "b54a3a6ec6980371bde37adbd325650de007db6de0b4f891f7eced68a1c4788f",
+  "prefix_restore_verified": true,
+  "post_rng_transform_state_hash": "b622d8d62e2604094dfd6397c99d58dabe3f62be4926e3862b96a50688b0acd8",
+  "rng_transform": {
+    "reseed": {
+      "future_seed": 65089001,
+      "action_rng_seed": 65091584,
+      "action_rng_stream": 2583,
+      "behavior_rng_seed": 65091879,
+      "behavior_rng_stream": 2878,
+      "numpy_global_seed": 65089001,
+      "python_global_seed": 65089001,
+      "torch_global_seed": 65089001,
+      "episode_reset_seed_source": "agent.seed via run_storage_decision._reset_seed(seed, ordinal)",
+      "environment_rng_action": "preserved until a normal episode reset"
+    },
+    "before": {
+      "agent_seed": 25089,
+      "action_rng_sha256": "247ef1cd10da2350ad54b735ada14333e756838a2dec0674171b1d67f3b45104",
+      "behavior_rng_sha256": "9a6a0aa457e358a28f2ef10abb15c2cbb0d20fbd3896903b326663945f54808a",
+      "numpy_global_rng_sha256": "4e4af9f2ce3d6a26482ab979bfd665fed7a146d8cdbd5b7cc1cd786d190522e1",
+      "python_global_rng_sha256": "4e9a2f8060046a6a25e4b4dcf9085f673dc410dbb8dce3ecbc73a126a6cea017",
+      "torch_global_rng_sha256": "68628f245b1905f2a7fd2e4c89c845b5e0267a0df8af0cdc026c7174c09dcc94",
+      "environment_rng_sha256": "5bed9437164ff11a825b05829e439ac6245757aadbb6ee038493aad830f6f1c7",
+      "episode_reset_seed": 25090034977,
+      "episode_ordinal": 121,
+      "episode_length": 17
+    },
+    "after": {
+      "agent_seed": 65089001,
+      "action_rng_sha256": "65e2b80063b0aca92918537e834af6e5e431c2b73d1bac9d6fc9a86a7193b033",
+      "behavior_rng_sha256": "f07ab292544257fd9f1a9fdfc8bcefdbf874fd8add4896efd1b626edb9035dbf",
+      "numpy_global_rng_sha256": "51dd08e2dfa56deb69a68e075ea38d7516b6f4ede9d79e14a62a987623ca8048",
+      "python_global_rng_sha256": "7e4a815f019d5f63008781852bcef5b48e96be0a2ce4ecf6b80ec507d0edfaa2",
+      "torch_global_rng_sha256": "f148e783e54353a37bf76cefae03b3cbde62c64f187d4cfbb36a3f4098e13ddf",
+      "environment_rng_sha256": "5bed9437164ff11a825b05829e439ac6245757aadbb6ee038493aad830f6f1c7",
+      "episode_reset_seed": 25090034977,
+      "episode_ordinal": 121,
+      "episode_length": 17
+    },
+    "environment_rng_preserved": true,
+    "current_episode_preserved": true
+  },
+  "action_install": {
+    "incumbent_binding": 0,
+    "candidate_group": 1,
+    "parent_group": 0,
+    "details": {
+      "action": "keep",
+      "parent_group": 0,
+      "incumbent_binding": 0,
+      "candidate_group": 1,
+      "bound_slots": [],
+      "max_effective_preservation_error": 0.0,
+      "per_slot_preservation_error": [
+        0.0,
+        0.0
+      ]
+    },
+    "candidate_sha256": "0702fdf1397b1b2f2c32d296851539310a96cdf0889e6ace7ff8ea8df6b9eb43",
+    "fork_observation": [
+      0.0,
+      0.75,
+      1.0,
+      0.875
+    ],
+    "pre_action_resident_probabilities": [
+      [
+        0.012654358733239078,
+        0.6096576554457078,
+        0.3643212379494517,
+        0.013366747871601452
+      ],
+      [
+        0.012813878174048597,
+        0.1655300399352049,
+        0.8085979774113857,
+        0.013058104479360741
+      ]
+    ],
+    "prequantized_resident_probabilities": [
+      [
+        0.012654358733239078,
+        0.6096576554457078,
+        0.3643212379494517,
+        0.013366747871601452
+      ],
+      [
+        0.012813878174048597,
+        0.1655300399352049,
+        0.8085979774113857,
+        0.013058104479360741
+      ]
+    ],
+    "postquantized_resident_probabilities": [
+      [
+        0.012654358733239078,
+        0.6096576554457078,
+        0.3643212379494517,
+        0.013366747871601452
+      ],
+      [
+        0.012813878174048597,
+        0.1655300399352049,
+        0.8085979774113857,
+        0.013058104479360741
+      ]
+    ],
+    "prequantized_effective_errors": [
+      0.0,
+      0.0
+    ],
+    "prequantized_behavior_drift": {
+      "max_probability_absolute_drift": 0.0,
+      "per_resident_max_probability_absolute_drift": [
+        0.0,
+        0.0
+      ],
+      "kl_reference_to_candidate": [
+        0.0,
+        0.0
+      ],
+      "max_kl_reference_to_candidate": 0.0
+    },
+    "postquantized_behavior_drift": {
+      "max_probability_absolute_drift": 0.0,
+      "per_resident_max_probability_absolute_drift": [
+        0.0,
+        0.0
+      ],
+      "kl_reference_to_candidate": [
+        0.0,
+        0.0
+      ],
+      "max_kl_reference_to_candidate": 0.0
+    },
+    "codec_max_coefficient_error": 0.0,
+    "codec_effective_errors": [
+      0.0,
+      0.0
+    ],
+    "actor_payload_bytes": 89,
+    "keep_avoided_extra_install_and_codec": true
+  },
+  "post_action_state_hash": "b622d8d62e2604094dfd6397c99d58dabe3f62be4926e3862b96a50688b0acd8",
+  "post_action_artifacts": {
+    "checkpoint": {
+      "path": "cases/s25089_dynamics_old_major/branches/old_major__r1__keep/post_action/checkpoint.pt",
+      "sha256": "b606af6786a8d027e6ea38c8b8aa54bf5a731d248b943a045d5739d626573d40",
+      "bytes": 176821
+    },
+    "actor": {
+      "path": "cases/s25089_dynamics_old_major/branches/old_major__r1__keep/post_action/actor.bin",
+      "sha256": "eec4fa4cddab0fe59b9086bc20caa2692c7c97ce29072e82c46e538bbae4b686",
+      "bytes": 89
+    },
+    "simulator": {
+      "path": "cases/s25089_dynamics_old_major/branches/old_major__r1__keep/post_action/simulator.json",
+      "sha256": "1895757d40e52abcecb2c387d6db854cac8f4ca1588548bc3895c64de920fc29",
+      "bytes": 1062
+    }
+  },
+  "final_state_hash": "1ad3283511f4d95f2bdfae6873fbee1334187838597a12a8c6820ac68a8550b7",
+  "final_artifacts": {
+    "checkpoint": {
+      "path": "cases/s25089_dynamics_old_major/branches/old_major__r1__keep/checkpoint.pt",
+      "sha256": "a0738e89140d967bc79fe07597138a7dd6f49b63a761bcb2d24e0bfece6f588f",
+      "bytes": 177141
+    },
+    "actor": {
+      "path": "cases/s25089_dynamics_old_major/branches/old_major__r1__keep/actor.bin",
+      "sha256": "7c22e34c5d83d896e0a833e696cfcd0d691c694e1c42ebd662dd90b0d151f304",
+      "bytes": 89
+    },
+    "simulator": {
+      "path": "cases/s25089_dynamics_old_major/branches/old_major__r1__keep/simulator.json",
+      "sha256": "58782a4adae0e5f1d251c73f0a41e028884ba6490f907a7bd100dd8dfba040fa",
+      "bytes": 1064
+    }
+  },
+  "final_codec": {
+    "max_coefficient_error": 0.0,
+    "effective_errors": [
+      0.0,
+      0.0
+    ],
+    "behavior_drift": {
+      "max_probability_absolute_drift": 0.0,
+      "per_resident_max_probability_absolute_drift": [
+        0.0,
+        0.0
+      ],
+      "kl_reference_to_candidate": [
+        0.0,
+        0.0
+      ],
+      "max_kl_reference_to_candidate": 0.0
+    }
+  },
+  "shared_parent_invariant": {
+    "max_coefficient_drift": 0.0,
+    "exactly_fixed": true
+  },
+  "per_bout": [
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 10,
+      "task": "A0+",
+      "group": 1,
+      "slot": 0,
+      "generation": 4,
+      "allocated": false,
+      "physical_group_at_start": -1,
+      "parent_group_at_start": 0,
+      "prior_inherited": false,
+      "evicted_task": null,
+      "steps": 512,
+      "return_first_256": -4.680000000000002,
+      "return_first_512": 2.3899999999999966,
+      "return_full": 2.3899999999999966
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 11,
+      "task": "B0+",
+      "group": 0,
+      "slot": 1,
+      "generation": 5,
+      "allocated": true,
+      "physical_group_at_start": 0,
+      "parent_group_at_start": 0,
+      "prior_inherited": true,
+      "evicted_task": "A1+",
+      "steps": 512,
+      "return_first_256": -6.1800000000000015,
+      "return_first_512": -11.610000000000003,
+      "return_full": -11.610000000000003
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 12,
+      "task": "B1+",
+      "group": 0,
+      "slot": 0,
+      "generation": 5,
+      "allocated": true,
+      "physical_group_at_start": 0,
+      "parent_group_at_start": 0,
+      "prior_inherited": true,
+      "evicted_task": "A0+",
+      "steps": 512,
+      "return_first_256": -2.930000000000002,
+      "return_first_512": -2.1100000000000043,
+      "return_full": -2.1100000000000043
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 13,
+      "task": "A1+",
+      "group": 1,
+      "slot": 1,
+      "generation": 6,
+      "allocated": true,
+      "physical_group_at_start": -1,
+      "parent_group_at_start": 0,
+      "prior_inherited": false,
+      "evicted_task": "B0+",
+      "steps": 512,
+      "return_first_256": -3.1800000000000024,
+      "return_first_512": -4.360000000000005,
+      "return_full": -4.360000000000005
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 14,
+      "task": "B1+",
+      "group": 0,
+      "slot": 0,
+      "generation": 5,
+      "allocated": false,
+      "physical_group_at_start": 0,
+      "parent_group_at_start": 0,
+      "prior_inherited": false,
+      "evicted_task": null,
+      "steps": 512,
+      "return_first_256": -4.180000000000002,
+      "return_first_512": -8.360000000000005,
+      "return_full": -8.360000000000005
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 15,
+      "task": "B2+",
+      "group": 0,
+      "slot": 1,
+      "generation": 7,
+      "allocated": true,
+      "physical_group_at_start": 0,
+      "parent_group_at_start": 0,
+      "prior_inherited": true,
+      "evicted_task": "A1+",
+      "steps": 512,
+      "return_first_256": -7.1800000000000015,
+      "return_first_512": -10.860000000000003,
+      "return_full": -10.860000000000003
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 16,
+      "task": "A2+",
+      "group": 1,
+      "slot": 0,
+      "generation": 6,
+      "allocated": true,
+      "physical_group_at_start": -1,
+      "parent_group_at_start": 0,
+      "prior_inherited": false,
+      "evicted_task": "B1+",
+      "steps": 512,
+      "return_first_256": -9.430000000000001,
+      "return_first_512": -16.110000000000003,
+      "return_full": -16.110000000000003
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 17,
+      "task": "B2+",
+      "group": 0,
+      "slot": 1,
+      "generation": 7,
+      "allocated": false,
+      "physical_group_at_start": 0,
+      "parent_group_at_start": 0,
+      "prior_inherited": false,
+      "evicted_task": null,
+      "steps": 512,
+      "return_first_256": -5.180000000000001,
+      "return_first_512": -9.360000000000001,
+      "return_full": -9.360000000000001
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 18,
+      "task": "B0+",
+      "group": 0,
+      "slot": 0,
+      "generation": 7,
+      "allocated": true,
+      "physical_group_at_start": 0,
+      "parent_group_at_start": 0,
+      "prior_inherited": true,
+      "evicted_task": "A2+",
+      "steps": 512,
+      "return_first_256": -3.6800000000000006,
+      "return_first_512": -4.360000000000001,
+      "return_full": -4.360000000000001
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 19,
+      "task": "A0+",
+      "group": 1,
+      "slot": 1,
+      "generation": 8,
+      "allocated": true,
+      "physical_group_at_start": -1,
+      "parent_group_at_start": 0,
+      "prior_inherited": false,
+      "evicted_task": "B2+",
+      "steps": 512,
+      "return_first_256": -0.6800000000000007,
+      "return_first_512": -2.110000000000002,
+      "return_full": -2.110000000000002
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 20,
+      "task": "B0+",
+      "group": 0,
+      "slot": 0,
+      "generation": 7,
+      "allocated": false,
+      "physical_group_at_start": 0,
+      "parent_group_at_start": 0,
+      "prior_inherited": false,
+      "evicted_task": null,
+      "steps": 512,
+      "return_first_256": -3.6800000000000015,
+      "return_first_512": -6.860000000000001,
+      "return_full": -6.860000000000001
+    },
+    {
+      "phase": "future",
+      "action": "keep",
+      "future_regime": "old_major",
+      "bout": 21,
+      "task": "B1+",
+      "group": 0,
+      "slot": 1,
+      "generation": 9,
+      "allocated": true,
+      "physical_group_at_start": 0,
+      "parent_group_at_start": 0,
+      "prior_inherited": true,
+      "evicted_task": "A0+",
+      "steps": 512,
+      "return_first_256": -2.6800000000000024,
+      "return_first_512": -10.110000000000005,
+      "return_full": -10.110000000000005
+    }
+  ],
+  "horizons": [
+    {
+      "steps": 1536,
+      "reward_sum": -11.33000000000001,
+      "reward_per_step": -0.007376302083333341,
+      "simulation_cpu_s": 0.84375,
+      "action_install_cpu_s": 0.015625,
+      "utility_rate": -0.007935791015625008,
+      "raw_environment_steps": 1536,
+      "rollouts_trained": 6,
+      "minibatch_updates": 96,
+      "simulation_wall_s": 0.8509950999996363,
+      "cpu_sample_stage": "post_rollout_before_episode_reset_handling"
+    },
+    {
+      "steps": 6144,
+      "reward_sum": -83.82000000000002,
+      "reward_per_step": -0.013642578125000004,
+      "simulation_cpu_s": 3.3125,
+      "action_install_cpu_s": 0.015625,
+      "utility_rate": -0.014184265136718754,
+      "raw_environment_steps": 6144,
+      "rollouts_trained": 24,
+      "minibatch_updates": 384,
+      "simulation_wall_s": 3.380465299998832,
+      "cpu_sample_stage": "post_rollout_before_episode_reset_handling"
+    }
+  ],
+  "raw_environment_steps": 6144,
+  "ppo_call_counts": {
+    "rollouts_attempted": 24,
+    "rollouts_completed": 24,
+    "rollouts_failed": 0,
+    "minibatch_updates": 384,
+    "partial_minibatch_updates": 0
+  },
+  "counts_delta": {
+    "raw_steps": 6144,
+    "environment_steps": 6144,
+    "fit_steps": 6144,
+    "rollouts_trained": 24,
+    "minibatch_updates": 384,
+    "completed_episodes": 105,
+    "slot_allocations": 8,
+    "slot_evictions": 8,
+    "runtime_counts": {
+      "environment_steps": 6144,
+      "completed_episodes": 105,
+      "slot_allocations": 8,
+      "slot_evictions": 8,
+      "rollouts_trained": 24,
+      "minibatch_updates": 384
+    },
+    "optimizer_step_count": 384,
+    "partial_rollout_rows": 0
+  },
+  "raw_ledgers": {
+    "steps_csv": {
+      "path": "cases/s25089_dynamics_old_major/branches/old_major__r1__keep/steps.csv",
+      "exists": true,
+      "sha256": "37674ad98aa44ac6ed1365d244b21a347179027ada2cc493d2fc7cff679f5ed0",
+      "rows": 6144,
+      "reward_sum": -83.82000000000393
+    },
+    "episodes_csv": {
+      "path": "cases/s25089_dynamics_old_major/branches/old_major__r1__keep/episodes.csv",
+      "exists": true,
+      "sha256": "9b7e53041bfc4fde99586c4265ffdee3c460d3d62a675c3cb5fcae9f22173bb8",
+      "rows": 105
+    },
+    "rollouts_csv": {
+      "path": "cases/s25089_dynamics_old_major/branches/old_major__r1__keep/rollouts.csv",
+      "exists": true,
+      "sha256": "cbaec6a0168ebe20274b593e9f6dc7923a3ed3bc0d98708bdc45120ec49bb653",
+      "rows": 24,
+      "rollout_count": 24,
+      "trained_rows": 6144,
+      "minibatch_updates": 384
+    }
+  },
+  "capacity": {
+    "foundation_bytes": 55477,
+    "checkpoint_bytes": 177141,
+    "actor_bytes": 89,
+    "full_persistent_bytes": 232707,
+    "package_budget_bytes": 262144
+  },
+  "capacity_after_action": {
+    "foundation_bytes": 55477,
+    "checkpoint_bytes": 176821,
+    "actor_bytes": 89,
+    "full_persistent_bytes": 232387,
+    "package_budget_bytes": 262144
+  },
+  "costs": {
+    "setup_cpu_s": 0.015625,
+    "install_cpu_s": 0.015625,
+    "simulation_cpu_s": 3.3125,
+    "serialization_cpu_s": 0.03125,
+    "branch_cpu_s": 3.390625,
+    "unaccounted_cpu_s": 0.015625,
+    "setup_wall_s": 0.01463530000000901,
+    "install_wall_s": 0.004556800000500516,
+    "simulation_wall_s": 3.380807300000015,
+    "serialization_wall_s": 0.03484260000004724,
+    "branch_wall_s": 3.4387174999992567,
+    "unaccounted_wall_s": 0.0038754999986849725
+  },
+  "prefix_bouts_included_in_reward": false,
+  "errors": []
+}

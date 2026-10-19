@@ -1,0 +1,2585 @@
+{
+  "format": "retention_content_diagnostic_v2",
+  "scope": "Read-only coefficient magnitude inventory. No rewards, raw step ledgers, or in-progress main-run outputs were used.",
+  "supersedes": {
+    "path": "outputs/retention_content_diagnostics/summary.json",
+    "reason": "The v1 candidate calculation averaged only across two task matrices, yielding 27 coefficients, while the pilot candidate is the producer's 9-coefficient mean across two slots and three bands. V1 candidate comparisons across those dimensions are invalid and must not be used. V1 parent norms remain valid."
+  },
+  "code_snapshot": {
+    "path": "outputs/retention_content_diagnostics_v2/code_snapshot/diagnose_retention_content.py",
+    "sha256": "2855f3aaf003c8bbf98930149a12dee0984d2e0869ac8398d333f4e7f3db4e48"
+  },
+  "definitions": {
+    "parent_norm": "Frobenius norm of the stored nine-coefficient shared matrix, regardless of binding state.",
+    "current_candidate_norm": "Frobenius norm of the next decision's nine-coefficient common_mean_effective candidate. Its source pair is the final two outcome bout metadata rows before the checkpoint; the pair is matched to current resident task generations and reconstructed by averaging across the two slots and three bands, then casting to float32 as the producer does. Bout reward fields are not read into the diagnostic record or used.",
+    "last_candidate_matrix": "The most recent transient candidate matrix is not persisted in calibration/comparison checkpoints. Its provenance is tested against current resident generations; exact reconstruction is reported only if both sources still match.",
+    "early_late": "Earliest and latest persisted decision checkpoints available per stream, rather than chosen decision thresholds."
+  },
+  "inputs": [
+    {
+      "path": "outputs/retention_mechanism_pilot_v2/cases/s25089_dynamics_old_major/prefix/observer_prefix.json",
+      "sha256": "aa258c77970fbcd55f008dfaac182d515f3dda4efd86ecf1f19b45725ec55519"
+    },
+    {
+      "path": "outputs/retention_mechanism_pilot_v2/cases/s25089_dynamics_old_major/prefix/summary.json",
+      "sha256": "a214fe094a84a13e369e4fe1d11cea42ad5fb555beebded92a7a4399e5a03c99"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/bouts.jsonl",
+      "sha256": "1b1b4948d439bd89009d7a6abd8aafd38fe3ca7074470294163b8d2db51089ab"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "a63e6fad493ec528107216915b9f70d7b5fe3027af429dc1a695ff546ffb1c47"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "6fc363293faab8e5c22ade5ca9556d66b227d6b0c7f2adc863ebc6634d787ce7"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "35d8d008a8248e3d1178f074c23cc6c95d30605f4dacbc34be3756e6bf09a44b"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "47a43a102a8581b9e15e9bdbd4021a8fd8184b8178b1fa1642c87f1ab43213f1"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "c5b85496c10990971684f4a0692eb8d8662faa9deb5c469e9a8bc22afc3d0e34"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "04d250b43748b0403574cabc14ec3d2d987a64b013a21f6caf0e445daafedd5a"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "3daf9afe28aea9ac1ff438c89e82a63feba89e83fea48383f662bea957fa999b"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "b8b23482826947e8a5368aae4651ed83c2af414944f4aaeef45bd485c648e3e2"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23101/random/summary.json",
+      "sha256": "27b1bd77e4bdf696b01d0921cbe8c377cf93ba9f1e6b4e85cf747604f6db2c52"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/bouts.jsonl",
+      "sha256": "baa9c96b41cab4ce4d02e370f660821bfc6934bbb488d0898b1df28e86abe9c9"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "c4d85a2a33c0e74739ae2aa31d77396ac1a74215cadda77bd6b013ca14356c67"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "eaaed54c35a501168c5790a107ce3834945b85eb713666950592e9abc61022ed"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "9c386b9cc56bf9f84a9e91977c5a5fb411f7e5d181e46e37204b3270dd9aff4f"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "ad665f0c51beb0f8f96f855215bd9b67220ddcde50ba234387bfbff90953a2bc"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "a60ff5ef03f0e05c6ad9a2f1b6f5b2ca088a050c2d415e8e298d8147169e8b81"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "4661fc21917d543bcdbe547ff4a778a660a2bf981756e155f444f172a597d2a1"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "878c08cd76b364f0ac8e10c90acaf0470f47e7b37857796b34060cdde536233a"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "0dbfab96734a7e19d07a9b25fc218a222c1b0b6bb9f1512ebea079e598b6037b"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23102/random/summary.json",
+      "sha256": "858d7c35b065f8f0d1373955cebdfd02ea37dac8aa363a473ea7af0fe41d304f"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/bouts.jsonl",
+      "sha256": "3d857a4550d3fcf01af3129a71c22fea8166a6a35f1b73aa26938b013e06e209"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "8ed405cba5b299d9ade8d82c2a45ea238da4b4203f7b56324081a1d8b5085188"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "4580d734b2a1b6674718b42a690d1fa0a43924bf9f14aaf936b2161f49acc450"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "9af7f566ab884ff3d7600e83fd894f9f4367a2fcb647a578d039fd0706aff657"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "7fafc5e7fedde7ac26af441c05154b75535288a2fc9d86c0b2e2bb6bfd07c4a2"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "08a793d61c4f176fd0f5f6eb67911647b5ecb6d59e5c93340547784adf0dbbc4"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "37a3d4dedce5f5e20421a3e31845e48b7dbc11c8380456956de84de3d66cdaf6"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "10c720b5ff3edca1d9bb6802ed27f856171dfeffa10b55b4525e2c7cfa8ccab9"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "9e686885b85ca5c2ed1b75ba1ce2e139e982a69d1cbc03e4b41e9bd550156769"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23103/random/summary.json",
+      "sha256": "edb6096eaa3842d597d57ed2221c171ab068e73c18d224aa1028cb0be33b8fff"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/bouts.jsonl",
+      "sha256": "7329338af8cce6d28394597d06712f330563cf5088a02d1d99738d83d2a915b3"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "2c2e2483b5c294599145fc6b75158736796e4fbf432b1f84c09ebc0499e015c4"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "8e440aa23e67913dcb49745bda7c1e6d6734648428240ec42e4a865789261efb"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "67d7772207ea4951e9e2515a8b9e897be867099f53a67c66f2d0961c09cd481a"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "8000d06a6ca3e43ad7da3c7dedc1e976826518527c8ef672489a0eb1c1eea0df"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "56df3e40e4ec81fddc4dce10f90db8264fe84ccb65f304482f16255f65bdb6a6"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "2752fd5f589f19c7d242921cd3311db1e798311414f2a20f32306d159d56fa91"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "7404fd8e08523056ee0d05287bad9e9fd48d0156388a25f937174e09c49b4c7d"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "c5511f94d21bd4a8ee27f91be6828434278b8b0c045fd77366041d38016b745c"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23104/random/summary.json",
+      "sha256": "66721c6345c7aa7fe7d3e90b7c230bc8d7e4e4d5b250a54d64b43df753e84dd6"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/bouts.jsonl",
+      "sha256": "7147998c7fd6f86e0931f744b0c456405004d940e7ee0deeb8fe02876ec1c3ae"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "46d45f64be5e59570f378780c3136200c5ed7d2cd73239ae7edf55d40684a5c4"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "1f475e47e3183b2f9cad96416eca37cce075392cee8ddf587d12197ff87c9c6a"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "97e4b01a7c05dca025f5aafe1f2057eb771119ea99e12f6427c484019cf432a7"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "1d5b08c381e3d50b1b3f070522af84eb5f0fd9c3e0ac390d177798c92bb0e27f"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "e506316d8c1308fe5344d93b90dd6ab1ae57216581b6c23cb1264d7a617e4778"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "325679a2e07bcb5e5fb06517ad6f7006df0f338e66ba3409957ce694e74e1dad"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "57b4403c06415ce4530025b9c6b0ea7dac89b2fbcf6ffdd2dd6204748c904da6"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "a5aab2d321fcb036216469b6ed5a252598e3282ae108b09a3958572133e587fb"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23105/random/summary.json",
+      "sha256": "5ab42ac1709315d2fef74e8101c004334b65e73d258f44ec3cf52f5d059ac456"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/bouts.jsonl",
+      "sha256": "df78f5018e6c28ae2251a08113bb1d9c4c636140911803b1dae8033464fe6fcf"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "aa784d424f23c249f4f8034993f785894799e1bf7cc3eab9969a6ec5f6af22ff"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "9a582831c5cd5578e8881a796b1561d90f3c5095a7ab851fd7adb814a62e2d06"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "d89ac9a1266e387e21965dd83432705d91b0f18b7e341a221ec1e4ac3bb84f93"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "6316f924e26c515660de08a1dd8bfe1dcc94d7b7e3a8ed88e239d11d2df88b07"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "7104986a1af4d710430ddea6bb4bd7393c2c6e6d18a4abe19fe085a9f731dfb3"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "4c7ce0fa684277271dabd8e632dbb11044cbdd159ee72c328d4f8fcd91714a85"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "3458068d63044c316d8ff43fc80567658de641200a0981762b50f1d0bd610294"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "df3043106e1cc42e44784ef9faf9672203cc99b0ceba6367b2099fbae064b104"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/dynamics/seed_23107/random/summary.json",
+      "sha256": "6a26dc306b74221f44e0aca38b27c2a7071e94bd91311593beb0e1c13753a8b3"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/bouts.jsonl",
+      "sha256": "df9887c9e685a161d61e6353eb59594e20e0ea261d7aaabfe660c2d8ccea2dd9"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "ecde5fd7c7ee27bef5d0be0c09835eee5b60a7a362689f2d62eec0ad84c4e880"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "0d0aefd586f1fbac12bfee9e57b9382c845b469699afd97586c6421e9e07452b"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "c8a18b123e2816eacb7f6fd32a3fd35b069db6d722f26b52a02497adaad76d5f"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "edc16f1b960459d007f73ef587aa8047cd6aafe23b85ad826b452db2e1aa1617"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "e01f894961aaf2d7d6ae087ac4c71a59fc1a6e97a427aa958f6032fefdd9f401"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "77c8514bffd2cacbb2830d57dec7056a75c8991ce06301878633dbbf9e173429"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "1f646df83b72d9d49adb35acce74ed5e8244b19b9a6ee632bfe8d797e3836976"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "7cdfbe696fe655f5694a7455f732f622f291e6c9ccc11c5db01d3cc30e29038b"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23101/random/summary.json",
+      "sha256": "1958bf30339fd32c013283a63370b2f9f2df8173238f2565e6fca4b52271bc9b"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/bouts.jsonl",
+      "sha256": "c125c7f3a9c9fb0f20e5f4b962f6051adeceafd029248b345f1aad14e906df58"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "f410611a0b9841a538b2dc33dcf84e0425e4e6338ebe7fa4545074fbd9308c77"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "f99bd789e91f5d2883c553a0a0f6cac48a2a02decc43bbd759e3e8d8c01f45b8"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "d47307f0696a638dd9e63e25b8e30a7d241105d04582b71fdba057313839e071"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "e5cc1e24330bfad5926f864c5fdc92fab2d6a20ee2d32ed070c4faff3c2449d3"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "1b75631ecc7643404aa36cfcae7ff1b66574baa7aedd8c5a4fb97f599f501d93"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "8d0d90e32d073002983aa60993e2daaa2fabd883f1d1d0483f020cd4649df8eb"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "e03ab688e75c4d4cd61ce83171d1ff7357ab131922586a34e1e45a3f4fd9a414"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "ac08cbb981799efbfcf4e8ebde61a55dd2536cf0f198e390a287bab0ed90f307"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23102/random/summary.json",
+      "sha256": "07fbeedb4de096ec1b959e030df4c8f462d15f8714476b8c1b51025402062678"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/bouts.jsonl",
+      "sha256": "34d23b880b1cdf7d9eb85adddb20cf8a089d25aa3393f924194ad881e9ab5ea0"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "780a7c3d69514a33085155ae3be26ae3b631e30957b4facf4e93d23c74465161"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "9e0955d0736239affe534df9a5765f7c53e430540d8c4b9db6991f01f1ae2804"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "407269cc5daa7207469b2b9abe60c161c46004b86ec68507a93ce3a534fc1b8e"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "701b08ce9dd6c497fd1e971b6e1edf4caec570c4d00cdca1ffcfc36b97d2b983"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "17aa1cfa1a5a61c427fe1eca9e4d8fc4e46e1e3a369634447f28bf8bb82ac140"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "dbcb0161bf997f33c425a65328357aee849bdc0605c86a648757ab5a414b3246"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "b2810970d541d7b06c70d21b22cd9c6605a37ee5ee843ae1026f052d1ffde978"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "8eb53ee322723c05aefecff0cb6e8dffddeb387fdbc298b4ea397d77bb7aea4d"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23103/random/summary.json",
+      "sha256": "26a441f261cc1bca5c0736d582f3129a154fe79b0adcdb677f57213f1e6f0898"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/bouts.jsonl",
+      "sha256": "4ef1bcfcb9c1f8a5170f817dc266f03e7893f3123f4a3500656e7584d1b529a6"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "c291f0439023dbcb34276686c747809280484ab42f71eec7d2bf3a6be1938e50"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "a0e7bf196872dc4ff99fcb21d2219d1e9c015910f901100378d0199216af5141"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "edd0e1b2d41e3003ba8adfc88e8ce86ae223b9dbc887cc3011183b3b4c74d424"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "4e99ded06ecf7a032dff0599b6911936749562c3186ca5340ae3bc7eb61d78a8"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "18800b77fa26df4d8f65452787aec81292e4ecd9afe81b587462272033791c80"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "8a307d90865c7e949e135eb57703a7b234d6ef3ea366545b24e696b1351fc5d1"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "d6c121617053e4b7b1b3aa0e9f86d9791add46565998b77a31e1a58c34fbb2e3"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "b79729b4e03620cbaf4f00f82a641465cbd75f1c8805a0866748cb2e47ad3732"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23104/random/summary.json",
+      "sha256": "edd36c3b1a5cead2aac013ae167104fefd97a5eaf126d377ed3ae55b3353a51a"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/bouts.jsonl",
+      "sha256": "2ed8145da5df06393821af6809b3cabe150c79cc39c85a6de19bceb4dadd19e8"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "904a14b4281bf95ebc6a185850da94af3c57ec0df2ff0abb9ed829a022647623"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "fae4ce0137cbb6eff89779bcf40793388dcd573c8b4886549771f1714296e4f8"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "03a47772386a10cfee3e98b7c1badc891c95522011b2fe935e36053729cb428a"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "764665534a66f4d233861424e5803d6ba5651e120e0673ca4211c72db87b2835"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "2d7db5bcdd41f8c2d2cf185c733c52a0dafeddc9dbed6ee9b9f0c3fd7292a04b"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "7ba9ec1d1016a267031ebaac9dbaa25ec87bf925c75d897585db0c1acea03856"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "c520cef0eb27951cb964b151e65ff87b982d3ae128c5fb52df7c4d33d0896bb8"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "4e5a5e57d31f291cf622c5343fa68a923967a1b9657430acd7d7e94ca131abc3"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23105/random/summary.json",
+      "sha256": "1d3c6502fa42f37c2e1fd75e9572b2ffd7ebec60676d749ef813b761b72af1de"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/bouts.jsonl",
+      "sha256": "daa2ff72f45820dbd6cfa0b6d95e19924dfaa86b588f12ba0596b108cab4a5ee"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "8770605541d9dcc19040f0660cad070582873c3a5092ee8cb5bc71adcd6b84e7"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "70b6cde6e9f7735c478d6a9bb5f0b56943a98b332df5c525cb6d022b43a8450c"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "3bcd09eaed759e5b61ed5fab50fe69c1a4876d12c8a9139cc26d7ea9e91cc8ae"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "b1b925ab7820414c765fbb959a93abf0f1cf06b29a8371537f5220343176a146"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "d7dd2fa797172829aea5d7212284a1b9882552c73023fd8fbf0735834b702833"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "83173fc9bc5f4eaebc214206a1c02b2ec08493c6098ef429dff807c5a9725a16"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/checkpoints/decision_056/checkpoint.pt",
+      "sha256": "b791313f15ec9cbd20150231fc949aa9c509491bac38c74b21378cfff5df57e9"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/checkpoints/decision_064/checkpoint.pt",
+      "sha256": "780b4c6d3121ee31e5e758e66cf7e28c57ed64cce834250efd284d8970ef58ee"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/streams/reward_conflict/seed_23107/random/summary.json",
+      "sha256": "9d0e5a7389699ff5ac38bbf6dddcf65c6d6091bd404876e3a4675f4df44adfd1"
+    },
+    {
+      "path": "outputs/retention_value_calibration_main/summary.json",
+      "sha256": "ab411f3d01e0fff568c8e42a087b590a2d571bfea79f3a70953994c6bc8fd9c9"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/keep/bouts.jsonl",
+      "sha256": "15137000374ad389eeb5b013c7c1390c86bbffa56ffcf5aeaf0ff6406836eb65"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/keep/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "df26db80d05cb2499d42fae385e82594bff79f085094147c0815cc3fd4b9ef0f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/keep/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "5f8128b1b8c7c4903468d3073a6c44226da49b14f5b6331d030418026dabbe19"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/keep/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "ee8d1eb00e27a2b85d67fc448f249e375c395849428d97ef3cc0edc89e6d4c96"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/keep/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "b6ab8c108999f0c8ea5bd45b3d3fb16d00008d377bdb41350e03ef570d4234a8"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/keep/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "290249b8c42910b76eb3f552686f94c55d1c15cbd26834bc297e341d3c24d07c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/keep/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "3220b5e40b97f64fbe79a239dfe987c1659fd79c72bb6cbc67ce06a1c0624cde"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/keep/summary.json",
+      "sha256": "3c3dc03a64e6a28e67f70cd82c526bd0c84e10c9c839c5881d48ea08208ef98b"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/mean/bouts.jsonl",
+      "sha256": "210afd49a13f32f3a431bcd60c67746bd06f246a6639661554d6d40d7895da8c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/mean/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "980193eca34aa81d64a82ed00504f82b14fcbd61a33a7fef993b6dbffd047e43"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/mean/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "eef8b251fbd5a8eeaa449db4dd12bf88b20b6830924dfc333ef25d79b9467241"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/mean/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "69f7de5ac5e6fdc44eb9c20d4f1388cb76c04efb3afbaff90de71b220aa67151"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/mean/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "701cb21e7b617bf4ba432a7383dd35b5e02323f2f4665479234bb0919e8f199d"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/mean/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "ec0c04d80618cefa1a3bc12b7da3374361179f579ffea29a2ea16d0939933eea"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/mean/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "8ee2586703a10d66754fd3382ed8bd62e781aaa76bb2d5b4b94dba06aaba68b6"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/mean/summary.json",
+      "sha256": "a674859531ccbc4efea297df0e5dd8043d2f1b34273d25ab94821460f91cdd6e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/replace/bouts.jsonl",
+      "sha256": "69998e04e82f7b347cbb55dfe4f8826b44a23ea4e790be493bb488fbb9126437"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/replace/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "5a1eda67bfca9c901350b11e3fee3c6cd515f5ec8167b6a7ae2b93ddb44aebd1"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/replace/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "1ac2089a65de26781f5e689af2be8072215fab09e7dce6a208261ee2b0b1dfe5"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/replace/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "0183fb4ad09dfc342f6d71f127736fb6a87f04bfc496cf4f3454393f0dde670e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/replace/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "4297da39fe6c43ee290747e13e83222092afc4539737b3597ac0ad7229904ab5"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/replace/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "bd337005c311ada9d3908df583ae38c5434328054c19c7aeb3b04010a6cbbf37"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/replace/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "398a1838ebd89fb5ef6e67b58210831f711b7936f6185dbf9e0f303ba9421425"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/replace/summary.json",
+      "sha256": "88e79874460943f0a29270e9149a80473cf8876c803f629710d2bf66c26d7d24"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/shared_ppo/bouts.jsonl",
+      "sha256": "39f4e8e1c1568c2ba2cbb080f31b893078bdd382f1c30d8c83655f94b6ccc9b7"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/shared_ppo/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "769e348ad82aa92f79ef596e18fcf28d7a02a53015afb5a43baac97064ffd3d6"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/shared_ppo/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "3b2175db2abd900742322c2b541e3c3a54e66e750ee9145087484096ac43e972"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/shared_ppo/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "f3a4176a15c923855bcaa1f36a8fb5610581cc1544e30fb7bfb1909be3c678db"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/shared_ppo/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "cc399541f4b67382db5d2f5fe697f7b22b26c741d3e82b215193098c59c7a464"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/shared_ppo/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "cf96c95ec640030d5c83ad589f8c76a0197e84d376c2ac331876beff492f3fed"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/shared_ppo/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "27937e88a09d4bf19c12414bb56dc9e3b19096ae3d20b7db789e414f04bd9df7"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24101/shared_ppo/summary.json",
+      "sha256": "89b98b0cdbd2f8463d0b2c6ce758b2be780312d9a0f935c53803d8395b684555"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/keep/bouts.jsonl",
+      "sha256": "8df9790d2efda27a09ff465e12c561997bf2d489d4a87908e0f9c4995423b220"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/keep/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "f7ceaa27988458461c3cef649b96ffcedea64ff6f3212d86745066d69740bf52"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/keep/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "a1445a56a403b0fa52b426b6b7a01abab4327b10bc4d0e963675be1da895d695"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/keep/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "7720fe2a772d5160c666dd9622c58d6be18f0821a3e199747744122b950a4f74"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/keep/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "fab78761624eb0045da73a5b158e8499a531484150b41f20704e7d6bb29c026c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/keep/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "3c36f4ccbd8ef006314fb5598bb13fb77921a5d939cd373fa1ba6acd6581e571"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/keep/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "d5cbfe8d9b818feac49d6c51451c24b86f689004d1f0237bffa5ae93c5b557e2"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/keep/summary.json",
+      "sha256": "2e6fd396f2d811e4ff13e5ed40639a45b8f97021afd7880078e5a472533ffea7"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/mean/bouts.jsonl",
+      "sha256": "b80526f67e458c6e836ae0d20fccea1c5b004da2c16bc773c271fb450e3168df"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/mean/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "77d672f38045c670ac268cfc2648418751eacefaa8656a02e19c45fa3dc10bca"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/mean/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "ba7f6b216241dc044a05dcb7b530fbd5319a24f410f7a93755fae7b7b4565a08"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/mean/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "4339d617df238f069736c349128ff7cde1ff103ec6f193fdd5b69da5160450b5"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/mean/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "905064ddaa89aea1fb1f5ad53ae51cf5f1a9599db6c5708ea5a49959500434a0"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/mean/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "c69519e25b445ccbf595c01f126529363676136d28431767a1fb91398732bd68"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/mean/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "1a6c373909a02c363aeeb35ece7afb7ffa2b62242dfb417ee59cf7dbb83dfe71"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/mean/summary.json",
+      "sha256": "128eb9cfb56431a75816458930dbf5023691d156f89a7b2882d29ef98e07a443"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/replace/bouts.jsonl",
+      "sha256": "35c4cea75c4c26294a6fef2c7a33b3a886cc465bc4da63e4e3f00facaca9cbec"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/replace/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "a471a1df8296c516d64dcedadb04b82ba7e4093066d3d870f871275c7a72f00e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/replace/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "d12fa16fe0ca9e15557c8dfa177408385d40880257de562c6eb0eafddd830fac"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/replace/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "63d52db7a771ee40c542da71e7600de8ef4002ea723ad8cbce7d3c654d12c83f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/replace/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "c8cb20fbca7eb9240698993d90d30db59f86f56fb0e4dd67fa2ce314952f457c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/replace/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "74ac88e3ed576819f85ecd229baa8638b8ef3666250e5713bd48b6872f7a0707"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/replace/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "1ef257087fd9cb2806678d9ac84111e3ae2abb2f9551c5a1c09550c7750bec74"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/replace/summary.json",
+      "sha256": "247c703675d324e591f850fcb03d668c6204dbb7c2d3447d3862fafe51177464"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/shared_ppo/bouts.jsonl",
+      "sha256": "e8e372e88f28d83dacde1e7519c12c428cd285cd93b6f974650863d73593da40"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/shared_ppo/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "308909ae60aa7d2045ff4321c5e620f791ceecba2454e5ca46078d1d0d253833"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/shared_ppo/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "64a15304d0835d48066f3653b702414254b561654be0ea02df36a0e0b3c1aeef"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/shared_ppo/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "a441d6adac1925c69cf370895c73434f1c12ad1d80be4a3f6522a5c2f41c4ae8"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/shared_ppo/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "a2bb313805ba855c3cda4ad42bac64e67814d82874ac70c45f02272834f7568d"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/shared_ppo/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "4f4969c786bb05e91328b315f280bbaafabb9a74c8e1cbfa37fae727a3d1d879"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/shared_ppo/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "a22d70b0648e9fe189e0434d49aec270542cd9c7c5097ba560186fa5d0041dcc"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24107/shared_ppo/summary.json",
+      "sha256": "6e2b383ab538a330a15d565506649ba2eda918e0986cf857d973cc6e61da5418"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/keep/bouts.jsonl",
+      "sha256": "8782770fc2a0b80d4f009a7815ecfb3a7b3e65eb13d180b7f4b17e9cc61b5cad"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/keep/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "5fb211daec22c1507656e7b556d559a1f5ac06f1289061b0e539a2822c98c5e5"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/keep/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "507d00374d929e80a4ad4f599ceb165420d382b45a27e4a05bf638f49d40566a"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/keep/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "db7cd83bbfff2c4dbd2270e719e80bf8febfe56a6ff0c7d969b78316f335034a"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/keep/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "25affdb381e8403ccf1760c194a4be08dbae596dc0d4fbcae45220346d8bc0bc"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/keep/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "3d72d74aaf9e8c68c5e3c9ba98d7aa0d7e112405f6d11b1547d25dc3192dc85a"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/keep/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "a298c06ba68fd57998ff94561e8236f75b6616417d1a3f1ffcd9ac1faf762f93"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/keep/summary.json",
+      "sha256": "f0214076108927544f9e4cd5433d65eeeff3d78a162b60ea31476c4dc507e734"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/mean/bouts.jsonl",
+      "sha256": "9efb56730c43684a2170b2a5e4f4b882e90b0b2307e6ca3bbe3531dcc2b07c62"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/mean/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "86e4590c0d2db7d8f25485863796c8e2145c70415f7f3bf367deda4aabe7cf42"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/mean/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "39a555d1e706d9c876c15fd28c438cb668bddee3f63e7041d5cd7d9d21f64608"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/mean/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "52b87ee5afe15cf35c28075386e68d82b51f0c980d618300f26e035c50d357ad"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/mean/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "4f5417cff465e183a5ce0572cc5ee57f72064d3dbcd1446b9f816784bc83e751"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/mean/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "d226ef692dc3a8b82521369e2b0be3133fe3fd19075e48a1b0910055b5d5e07e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/mean/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "47d165b49c384659173f0322022cb546aa0a54f4674f10d3126814bda8e1d638"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/mean/summary.json",
+      "sha256": "02da91e529ee8114c8d857275d3eab7dcaaedfa4b2ee27a79c4bdcd8cae7929f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/replace/bouts.jsonl",
+      "sha256": "866fa3b053fb04f7cc1278f6314bf00570de37595db4c4a3b14908cd2df29145"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/replace/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "9ed503a9050141b8773d2114fa238395e5587480b2ebd9366a571c5cdb6b2ae3"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/replace/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "5bb1ebb8f789db598ec60cbfc1fb4a39b422dcb5860ee02a11a96833f75ec4b7"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/replace/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "b429c13e4f48988929cbc46eb577ffe1f34b4d18fcd8f90bc456a10ae82db438"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/replace/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "40a5adf78250063145d199a6603317d62c999eef8f7df6ab239f309815367644"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/replace/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "2b853c292e6321175e5d2e39d78d97c8e988b4df4e532bf7cd2b29c3e0e7cdef"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/replace/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "cd5cb88cfc781e788126a9670fd8089bd766c46c5cd147409d20fa65596e68ab"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/replace/summary.json",
+      "sha256": "43a2ade94884a722ab49289ae97cf2aca4565934c76b807215a813bc4d196909"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/shared_ppo/bouts.jsonl",
+      "sha256": "005f772056c1ab524dcce177c5633158226d75b1109f8645c5ecbc88a9a7d773"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/shared_ppo/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "2b1d1f8cff3f2f995aadeae02cafdb1b623ae4b618605d09e2cd9ef7d42b34c7"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/shared_ppo/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "08234e7d7b5b6168f1e24b818d64575164034ce9e7065631e39d41fdf383326b"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/shared_ppo/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "b3100a01233132cf5e7c55234a7839c24f5993dcc0fba2f328391977c407b26c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/shared_ppo/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "51460dc2a2bc028697733846886ca2cdd725a402081cf9ce22a15734ffbac76c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/shared_ppo/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "52718539c0705f8f4dc21dec5a233626f1c29a06dacc6c770867fbac237b8cb7"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/shared_ppo/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "5f2a35c6360be9787d7019b99f64050b21cbd7a75b98a73ec3213de240f90109"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24113/shared_ppo/summary.json",
+      "sha256": "51b927f1e68c2a2fb228802ed8274f3249c1c5b5b9ea18bd048dc383a72309c5"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/keep/bouts.jsonl",
+      "sha256": "0aa9d3ffc789a48f748e5158606196d509c73e2374e6dc31495634a7a9a1fa77"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/keep/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "05e3255b63aba4005bc5f7757aba302261ad9e065ea7dde5423e34e69b20e997"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/keep/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "7570e59f623b7b8d5fdce9bb76ef686401960ce20e37ef7af4dc9c0989bd5d57"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/keep/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "1adae82f93b4b96f7ff379b666f079897f8a65153c12a7478f3c2e9833ff2491"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/keep/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "98e600afdae8305974c5e01322ec282b2773421b3fdc03edd1579a6c5db425f5"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/keep/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "2af0265c3f9e96c0c50890317e1464a3f975d8dfa8835392429b51854897454d"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/keep/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "375acfdce65d9785ced66d43dfe7e85915a35495c99a784bad37045ba70ceaea"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/keep/summary.json",
+      "sha256": "fef42be076f6e906f7dd0a29fe7529ea85614c40930db370fdae01578c532e52"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/mean/bouts.jsonl",
+      "sha256": "eab0774812475daef207c76df498cd790f8b6111315e0e0cecd88cb0f3d0c71b"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/mean/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "1fd2b7f378951a175f8dd3eaaa0f86ea09b922d3b43e7ab2c95aad1c90e2d8dd"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/mean/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "bd1990a844e30edd91b71d8fdc118e96e19afacc8dbf7b9b52bbde7060d453f9"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/mean/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "044952e68fb0e50f118007185e2839385bc378742ee49916bf25d579e972bc8e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/mean/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "1c4c0e5aa3128a220da89c9900daf6f074d38894246694e2fa13a00626655049"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/mean/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "b9a03ac6e8dce8cd269f8434e658e3578609454e482420263ac1d8185fe2d8a0"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/mean/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "16d7b77db0621b84a9ca1ef63c88f53fbb38c40adcbdc6282cce10fb7c9faef6"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/mean/summary.json",
+      "sha256": "2af36f1dcbd32903413117d23a4c9b2c3139645bb590939262d1b846b95acfc2"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/replace/bouts.jsonl",
+      "sha256": "ba82db9dea4fc5a7c35a192506af434c115aa6d92d9054a1a0382fa015feea95"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/replace/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "cefe93e658dd31e689558c395dfb4745a3e2e563336325e1fc8f6f62dd8f9d87"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/replace/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "2486b39408e98d96351b6fe43148ed4c0db0f0545ece3fd5d856df4de2e6b916"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/replace/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "e70b09358066be3e61762f07043ba8603f0d8e3d8badd35049410edef989ebca"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/replace/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "0cbfa73b374525a9884cb323d9a1dd09229c63998b3b9e492ccde42c33c18297"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/replace/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "dac8e129733e5eb8a4fa8acb155f7dbbe1ee4c2f869f1f47855537edb38b9ae8"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/replace/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "18bcf5cf6d94b5281158aa6540160f9bfc0be049931be6124ad56472b87b10de"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/replace/summary.json",
+      "sha256": "facb0c0271d16f5a8e82ec8916827c4ad0613baf33223831d40837516876edd0"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/shared_ppo/bouts.jsonl",
+      "sha256": "fa419a6f30ff2345d6e96318d8b8b22e990591a3fe36005882c21a1c57822714"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/shared_ppo/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "98976880731b367fd46aa0d32ba926edb39e5eb58a539612ce2df899e24ac05c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/shared_ppo/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "bf2bfeedad6ac26c085ecd6a45e5cb3aa2c0dba1f5b18544c1b324ab03db0a92"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/shared_ppo/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "465085b79f494315d93d0a3180817febddf61e8a0237e7ba64b4367a247c444d"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/shared_ppo/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "b65fb8f263093b74824e13c30300ff3d5b9b3e4ff81c0487a30efc9efdfe9adc"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/shared_ppo/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "827b8402ac154fc3662231800a716290b6e3205c68faf42e5e5f7cedb17f67eb"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/shared_ppo/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "183865beb629bac945dc8e76a830f645b6443f423ad43b001e8f7eb454455824"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/dynamics/seed_24117/shared_ppo/summary.json",
+      "sha256": "02abc0c2d93dd0bfba77b11bb01ccdb44217aa62822143bf8a93cd167b64ed75"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/keep/bouts.jsonl",
+      "sha256": "b64c22dab85a7ed91d49c7ca442fc47c698b05f23011a7fe703101ae51d5211d"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/keep/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "8e51c6430974d83fc4dbdf2aa9e0198818039969b082659e7192d154495a9124"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/keep/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "74e9334ed1967c5655d716217874ba39fd1425577ade0902173eb34a8e1a7779"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/keep/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "0e6205823931f419f2360a13fe732c71d48bd557f74778d6f60986844c01be6f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/keep/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "95dede8c24f2399f02d957be3b6bea2c32c6d92a5b659b7b338a375e85fa3c3e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/keep/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "2518855269a2a1ec7225f56dabbd3a3ea7067f47197a14a563a0b11cce0a6775"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/keep/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "ec2d9d25a0d8b4410dae8b2cbeb4056e0e1fb8657dc9d8a7d46ebff26cc8f5a5"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/keep/summary.json",
+      "sha256": "7ba636a7c6865bb030d432f3ba4a8d36dee23e2c323b8aac3e67855606dcde63"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/mean/bouts.jsonl",
+      "sha256": "3acc01c2551fab7e6c82585bc545c7e574d2b955903bcecc15b3252e70d61fdc"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/mean/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "d20fea842e1b1a40265c0e1f9c57921a6aa82530807bb89f563d460e75a3f865"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/mean/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "6fd7dd3f0983af548d400618436d108b251ff5d251d24b784f67e6c3a557a4bd"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/mean/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "24966eb020f19fb6f2c0215b444698cc6f4d19720e5d5b824fbe6917de3fe8aa"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/mean/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "89165ba7966201f93963fe0dd0ff24d748b7f9901f142ec5ecb459c466af3e1c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/mean/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "fbb536269148d80f7f743b8753dae8b43c0d84002ddccbad292e26d61316b824"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/mean/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "0c5d5bb03518deaa1ba74766d78f7d324dd910c685299b1ad53240b3295ba913"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/mean/summary.json",
+      "sha256": "45e55b446efb62deee00e391ed349298ca6c2148dcf83d195a5313502a10c5d0"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/replace/bouts.jsonl",
+      "sha256": "93085aa2daa4a5ff53cf587a6b403b57bfd0a87f0d4c72589e5ef64cfb606ebd"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/replace/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "c22733f9feec48342d4ac21838edd154a7cc2b95e7bcdf1d2bebea06a07d33b6"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/replace/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "489dab0b4544bec0c67cba58b21c0fe6b90c1c1869d379ae27e54b3d4eaca10f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/replace/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "3c79b142ebe54ef69d3e54aa90f03379c98b718fa238b2aacfde85f29cc2175e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/replace/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "919197bf5d1ee5e6b95397f380c96970aa9ef11eea6a0036f088622e97e44d44"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/replace/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "c43e62fa1f5cdf04b3fa044c3cc787cc206abcb9d47c5777ee64b8cb73bf510c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/replace/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "71355738352bf9323656b5f615bf0e636ac6bfb253ff93cf42cc32f4742d2eee"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/replace/summary.json",
+      "sha256": "22a6cbae81a3f82f82cce053120ff73cf67c519b7c83ada4b557de6151846a8e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/shared_ppo/bouts.jsonl",
+      "sha256": "74320462ca3086e680a004ad356701973a278948839b84d7c4b9dbae20a35d33"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/shared_ppo/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "1a28d87da480ff43302c4892c7dd74fbcdd58d3adfb59d37a4761cc58c077981"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/shared_ppo/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "01c605b4c62e79e89ba4838cf2907d805641b799469145931d3daa7fc2656673"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/shared_ppo/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "af52c3fd76ce605a55a269bd6fd5294c18a634db101cdb17919381f3fb6f8c90"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/shared_ppo/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "cf36d490596c1e0282ca85495f62d8f03aaa540555043279516801e6c774c5d9"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/shared_ppo/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "4ab035a7629eccc0bde1f69eda8704cb669d9ad4da4ecd7c0bbebf2c61be5f73"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/shared_ppo/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "291691ab76372d63544f5099c5f7cf84b02cb5d026840a32dab1c0bd7860835c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24101/shared_ppo/summary.json",
+      "sha256": "d4f5580d32c113f6a76bbb6c63b474cc4df1f1a6711d4f481928462fe4da968b"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/keep/bouts.jsonl",
+      "sha256": "2c5b3fbdbc4124d687fdf51f6aa68fd7a744d175759bfbd5e94692c225374edb"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/keep/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "cc20c1827e61606de8d3c22c494ce8d1f5f399190e7fbed63745d544d9f71270"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/keep/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "dc0aa1d21f7b76217b5681c91c4d5288abcd0cc7667d45ab82939ac3fbd1e1ed"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/keep/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "e16a4511176785aad4f1615d17e0197009b11ca900a53f6ed4be9cffa4c887cb"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/keep/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "d4d0242e64f4faa67913a0e5405621db8419188b09966547017e176cfbe0320d"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/keep/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "c68502ffd797213e0793d33e702ff9b864bf055ee84ed4876aaee912183a5c5b"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/keep/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "84fe46763ee81146f000dc5345460003003de5c31ff6f773a0c7260c60ad24ba"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/keep/summary.json",
+      "sha256": "c3780112551ae482509fa6065a36db5d611c107eb1e820747e8e5fbf5d3f941f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/mean/bouts.jsonl",
+      "sha256": "555c52b3f83a31b333b2d75b793c8ec3a98c54a8d00e25f5e9bf9c741c9d9790"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/mean/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "6db69d1ee843dc5aa384f216e973217f4729b3fe549fe1f402489d268d84984f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/mean/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "21df6bd69e8317732586c4d213fa08dace5aa57c5475fb77f7d5a49918757356"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/mean/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "18bb50721849ce7321a1469c8d0da3601cd608fd0536c83709e1e46d15e0fc06"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/mean/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "4a8a952ba511109b65ab631ada89c56a9926f9e01f7ea11d94aef49b77380221"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/mean/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "23d3812f0f6a9e231d5ca1073cba4cffdc2c9c5a99af4ae6faf7208012930cef"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/mean/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "2a9eef06e40822fdfb5631ce45eadfb8ed6a836bd55d9b8a3927622da9565c65"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/mean/summary.json",
+      "sha256": "0783cf72dad26c56ceac669f48607144408353cf4e8b68526ff8ac72b5eb8916"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/replace/bouts.jsonl",
+      "sha256": "d2157c516f268cfb5239e94b931bc106e19e593379715c6a7724e58ece82f728"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/replace/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "a4edda1fd4b564e8c3157d3f141cbeca61ec627c27dd2a76b9dd2f9be6764693"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/replace/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "3173a6bc40cf8654a0cad6153337078649afa37d2da0d2144574b85ad16a5c93"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/replace/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "bacac9a5ad1213efa12fbf3d802b6e1f9bf296396df586d32cfdff7928635e64"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/replace/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "a9b8270c661fc6d8bf1887d1a8b4b7ff147c19fe8da65d7e07c55c61d0f1c46a"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/replace/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "1ba069ed4955e3f8c7d37cb12af5f917e45192b7eda3d138cf85f91451737082"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/replace/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "e8f30e509089ffb9c245c8c837a8a10aa169ca3b14c55c1fe67dd611f585ded8"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/replace/summary.json",
+      "sha256": "9ecc5a9e5db5232affbcc318e78faa97696f54e33b542a4afe08ffa9d2f3cba0"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/shared_ppo/bouts.jsonl",
+      "sha256": "33d30ffe27846d0ae45bf096e78d4ec0af39fed4209f8cf552cfc2f1bf4992dc"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/shared_ppo/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "72efb3ce185187fa89bd65c7855a98c308d691d29bb953b7a7d69a2cb72063ee"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/shared_ppo/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "57b735e250cacf595dad002ab7f62d67b2ad011b9503b5188f72bd607a00042e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/shared_ppo/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "83ee52ec8075001f76c199562c44b3b5db151e2c6f14ab1506911e89137e13c0"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/shared_ppo/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "7cf5872088686b996b20709a1e49f25c17f4b78ad5e5d44089b57a93809494af"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/shared_ppo/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "efb7baf79d7758e22c764144397fd7ababd907eb531d91bf9d76162eed0ea582"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/shared_ppo/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "99b275f175d46661d55768b75472dca68c9b9625f8aa24398785e8854d146345"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24107/shared_ppo/summary.json",
+      "sha256": "a1fb8d84fbc01da805c156c43ced24a0b6e57441c9cd903b748fd5cef262c51a"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/keep/bouts.jsonl",
+      "sha256": "d76e7d1bcf87e17a2c0a2805f3cce9e6b3aa4e1a3a6376512da58c7b3eff6fea"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/keep/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "0e7cf13b90f1c627a88214ba28577a7276dbb2607463e19c2b98cf64ea6c9e94"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/keep/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "b5cf64156c498deff4db423035cb6fe9a77f08b179758ce57e53404b2b80c30f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/keep/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "c06975f0d10da683d9bb6a5797edaabc3b583578e2a16a5e166b3d0fc2c38377"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/keep/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "18763303af57bdbda85177b8570ca205edd1f874d8077387b83b90d8afb7c59c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/keep/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "fdc7b5cb52586da5d93351801ee9f80c682ac1cd506efd24fae689925ae34137"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/keep/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "da1ad132b44a90a0720a35807c8829136c24691e4aa566925703084ce77c09be"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/keep/summary.json",
+      "sha256": "45c7ff324d6a8a0321e23a36557c056c4776ac1adab12ff964e0117b3f9f5e57"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/mean/bouts.jsonl",
+      "sha256": "531e23aa8d3d5626d3b450e4a667c47eafa2cd0366add809c94774d74b450f15"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/mean/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "3c750d3d809cffa33e3708233ae2878d09eb48db73ec1c099234fd9135132531"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/mean/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "ab593ac31dc4e573a21302dabb76424de192ee91823178c974ed9307c359d60c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/mean/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "b4ef850eba9e8034669dc42888add2db4e81c262938799acf569c20e0fd9884c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/mean/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "edbd60fd26f7299a7ce0b354a76164b6c1848eddbedd84da3b6716c06c46a951"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/mean/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "f0309adc9069edb23673f169a8f3655f7f8f6e1bb59caecb392ef3810ab539db"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/mean/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "768c8b0f6a629364dc51e44e46dffc060e5b53393e86dfba3bc1914aa690f823"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/mean/summary.json",
+      "sha256": "573171ed6e1218e1f3e65394fcbd7d53642bfece987c0b54f61ac0a8e6be58c9"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/replace/bouts.jsonl",
+      "sha256": "98e4c2b2f80e9f03486fca5f3ab7fc4e56ec0b1ce6c73ddcbb049118e7672ee0"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/replace/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "ba26b6e6ee9419ec288ec0c44e339a842c8f2ace7731ad0837a405707ebf78f2"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/replace/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "58370f9662dbd27aaeb284ada05d0fd40cd566ab4a7bb2e57593e05e60e87a3c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/replace/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "f50555c47f480453bf442545a44dc8abffc0a176b879a00cc3bc85c30bcb0d7e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/replace/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "bc536d01a81df8cbcc787c42e2e88355ba2b46e038d6bb6d279d2219a6e1e4b5"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/replace/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "b0750e53f14a77258cb79da86e685bfd7ab08be50ab2680f22672d4b156a2350"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/replace/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "876735f337b5d9a2ca2295e728d899ec0614a2149f3a6982ae67ba3ce94bd429"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/replace/summary.json",
+      "sha256": "92cd74c7f89c7caf899d819ca1bec49c6e867d88889f02ad400de28f6c139cca"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/shared_ppo/bouts.jsonl",
+      "sha256": "6357f9d2edc04090126dfbc931b5a99b9c64b6bc4eb56eaa5972de4926fa0954"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/shared_ppo/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "dcc8b73e561d0553987305e4ec102a3a60ecfb16931cb8bbfaa92ab44fc17d12"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/shared_ppo/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "caf2d46a31ad2c3e1ee69b4780a91cc2036f8622b954973171bfee963ec03193"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/shared_ppo/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "78e52034ee6cbf4c7adf2652591aff91904dac373eb04ec8ce52e40845c55e3d"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/shared_ppo/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "5da876c442ee60cb3c7f35414ad2a998880036f9ba61fbcff0cf49ae1a38e86f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/shared_ppo/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "b917c339a7dde89c1e0afa028685c6853bf2b275340e519f553c684afbad4fb1"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/shared_ppo/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "aa3c9bc74f9abd508594cf6e5513f07ed7405927166538ec0e4ff8beab5e0e2d"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24113/shared_ppo/summary.json",
+      "sha256": "e12e432502b7493ed5ebfa48e9013a331a91ac3a3beaee97d11ec95a2474ea88"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/keep/bouts.jsonl",
+      "sha256": "aa5b8d059ce710aa685f9d6d892be41841d54fa7c6b47e6c71a40933a699761e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/keep/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "08a297112e2865b412e0e14a1e25d981d06ba3040b1e94b29f2ac1515aff4754"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/keep/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "d22ab7b8cc1402542c1b7fc75f9bb97f4c007fd13a4b96be2f7c3781b5e817ed"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/keep/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "0a1e22867ee868d0968c73323a617a45419d603ecddb82a72ae77975b2659ecd"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/keep/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "c4bea90be8b528918e828e4fb2a5564e54b8411867fbeada2b396aa12777414f"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/keep/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "f8b0a1e3382f2e88a92b3d593b4d4331d51da12b432537c5b5b0df5c8e0fb1bb"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/keep/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "a20e7a3f36a0b9316de79764a6f650745735953a452ab9edb5103fe6203cad0c"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/keep/summary.json",
+      "sha256": "47bd60069d24305c20a3e14e4e898b77adab4f6ce3b620da1435485c172392eb"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/mean/bouts.jsonl",
+      "sha256": "6a5a2958fe873ad070ca0a820baf09579da23ef7d17f825bd89fda3536c8e96e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/mean/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "d87487cc4299ddc4ce237eebc8b920b3fdecc2538f7817fe2f7a17634a3299bf"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/mean/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "43d313f487b80e09d1e1c741676ce12031b9d5edc0dfccb9d66b00a911c1532e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/mean/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "d2930efcee032a8c7f24d125bb8612abee16e425ee9e59758cbc622496dfc7a6"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/mean/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "d6e743928abe8c22639f51f21e1b0dc8b41027e528b5dccb16164a9676870612"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/mean/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "61ef7a0023d05160ca12afdfcf02a7af82bad7117a35c3dca757433f71530b74"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/mean/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "72e115249dd241d9399174bc24d8f456ac528fc36d4ab1471e31f6881bffc5ae"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/mean/summary.json",
+      "sha256": "f698936477f6ac63d5ae311b7fa31c6ed1ea22fe94afdd2ddd5b9892b37dc50e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/replace/bouts.jsonl",
+      "sha256": "e25a0268e7b2302a6c73a209c7cb4f42f7f9349198ff1a73d09f80832e2ac037"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/replace/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "ee66ba3edb9ce8eee28e032ee3fdb955922d8bf5aa21723573351a2562b9120e"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/replace/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "96cf993ed4e0a2bdddcd943487e4402598d8feed9f402665f0a2479c762ab5d4"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/replace/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "d0ec122eeaad283da5964a2ad70109d0dee7b82e8b17f8bffa889eab6b32f449"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/replace/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "e635bcdf5f150a768c76f0d8f0dde95a0b311cf5fcc5469cc98c1a226226c6db"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/replace/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "d7ca7a429654575b93f97a1d80a5089a5fe9a08304c9313146979f7d98c46912"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/replace/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "f89d7d42361d3a5f57b8cdecb0e480b5c23414488ae3ede5fb96d97d3c32e467"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/replace/summary.json",
+      "sha256": "d1394abc1578b609bf670fc253bded8e426735eff7d52465d6142341ca3c737d"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/shared_ppo/bouts.jsonl",
+      "sha256": "b0eff992265e7e58cebc50870561ed2750956e3a4ede6b7146898bf54cd6dc77"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/shared_ppo/checkpoints/decision_008/checkpoint.pt",
+      "sha256": "c25181795a3465814b5374895d8dade64924afc720dbe62afebb2577c4633252"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/shared_ppo/checkpoints/decision_016/checkpoint.pt",
+      "sha256": "825fd37beee1532f06d4237e5e5baac5245e525c628a32bf9d1a7ee08002a5ea"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/shared_ppo/checkpoints/decision_024/checkpoint.pt",
+      "sha256": "de7b7ccc0258d36375e216a419e28a3cffb7c8af022d7b55f888b0be8e65c994"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/shared_ppo/checkpoints/decision_032/checkpoint.pt",
+      "sha256": "2d4d330fa8e044d1aa4844d30deb03595738f8370e8e2dbc4000acf5042968f8"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/shared_ppo/checkpoints/decision_040/checkpoint.pt",
+      "sha256": "419f536a6e2c204f48dcd3bb0d02506c3bec33f07e73ecf811be96061f8d398a"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/shared_ppo/checkpoints/decision_048/checkpoint.pt",
+      "sha256": "c3d48ba390507364dc3fed41026f350d60313a59132558d1fddaf9dfded7871b"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/streams/reward_conflict/seed_24117/shared_ppo/summary.json",
+      "sha256": "8cb8c9bb0419fd8ddf5554eef12c968f5155a9f8408b244bb1aed2924738f245"
+    },
+    {
+      "path": "outputs/retention_value_comparison_main/summary.json",
+      "sha256": "a1a999621a88719e41b5873c4231a793d4f78907b335e351b6c6ef8f7cc1d25b"
+    }
+  ],
+  "input_run_inventory": {
+    "calibration": {
+      "requested_stream_count": 12,
+      "completed_stream_count": 12,
+      "selected_method": "random",
+      "selected_stream_count": 12,
+      "checkpoint_count": 96
+    },
+    "comparison": {
+      "requested_stream_count": 80,
+      "completed_stream_count": 80,
+      "selected_methods": [
+        "keep",
+        "replace",
+        "mean",
+        "shared_ppo"
+      ],
+      "selected_stream_count": 32,
+      "checkpoint_count": 192
+    },
+    "pilot_v2_prefix_reference": {
+      "experiment": "retention_mechanism_pilot_v2",
+      "case_id": "s25089_dynamics_old_major",
+      "prefix_steps": 7168,
+      "parent_binding": 0,
+      "shared_parent_frobenius_norm_9": 0.08147973905646709,
+      "candidate_group": 1,
+      "candidate_current_source_records": [
+        {
+          "task": "A0+",
+          "slot": 0,
+          "generation": 4,
+          "fitted_steps": 1024
+        },
+        {
+          "task": "A1+",
+          "slot": 1,
+          "generation": 4,
+          "fitted_steps": 1024
+        }
+      ],
+      "current_candidate_mean_effective_frobenius_norm_9": 0.06945329138144067,
+      "candidate_matrix_sha256": "0702fdf1397b1b2f2c32d296851539310a96cdf0889e6ace7ff8ea8df6b9eb43",
+      "candidate_recomputed_sha256": "0702fdf1397b1b2f2c32d296851539310a96cdf0889e6ace7ff8ea8df6b9eb43",
+      "observer_prefix_path": "outputs/retention_mechanism_pilot_v2/cases/s25089_dynamics_old_major/prefix/observer_prefix.json",
+      "observer_prefix_sha256": "aa258c77970fbcd55f008dfaac182d515f3dda4efd86ecf1f19b45725ec55519",
+      "prefix_summary_sha256": "a214fe094a84a13e369e4fe1d11cea42ad5fb555beebded92a7a4399e5a03c99"
+    }
+  },
+  "stream_checkpoint_inventory": [
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__dynamics__seed_23101__random",
+      "method": "random",
+      "pair_kind": "dynamics",
+      "seed": 23101,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__dynamics__seed_23102__random",
+      "method": "random",
+      "pair_kind": "dynamics",
+      "seed": 23102,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__dynamics__seed_23103__random",
+      "method": "random",
+      "pair_kind": "dynamics",
+      "seed": 23103,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__dynamics__seed_23104__random",
+      "method": "random",
+      "pair_kind": "dynamics",
+      "seed": 23104,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__dynamics__seed_23105__random",
+      "method": "random",
+      "pair_kind": "dynamics",
+      "seed": 23105,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__dynamics__seed_23107__random",
+      "method": "random",
+      "pair_kind": "dynamics",
+      "seed": 23107,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__reward_conflict__seed_23101__random",
+      "method": "random",
+      "pair_kind": "reward_conflict",
+      "seed": 23101,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__reward_conflict__seed_23102__random",
+      "method": "random",
+      "pair_kind": "reward_conflict",
+      "seed": 23102,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__reward_conflict__seed_23103__random",
+      "method": "random",
+      "pair_kind": "reward_conflict",
+      "seed": 23103,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__reward_conflict__seed_23104__random",
+      "method": "random",
+      "pair_kind": "reward_conflict",
+      "seed": 23104,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__reward_conflict__seed_23105__random",
+      "method": "random",
+      "pair_kind": "reward_conflict",
+      "seed": 23105,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "stream_id": "calibration__reward_conflict__seed_23107__random",
+      "method": "random",
+      "pair_kind": "reward_conflict",
+      "seed": 23107,
+      "completed_decisions": 64,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "checkpoint_count": 8
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24101__keep",
+      "method": "keep",
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24101__replace",
+      "method": "replace",
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24101__mean",
+      "method": "mean",
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24101__shared_ppo",
+      "method": "shared_ppo",
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24107__keep",
+      "method": "keep",
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24107__replace",
+      "method": "replace",
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24107__mean",
+      "method": "mean",
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24107__shared_ppo",
+      "method": "shared_ppo",
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24113__keep",
+      "method": "keep",
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24113__replace",
+      "method": "replace",
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24113__mean",
+      "method": "mean",
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24113__shared_ppo",
+      "method": "shared_ppo",
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24117__keep",
+      "method": "keep",
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24117__replace",
+      "method": "replace",
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24117__mean",
+      "method": "mean",
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__dynamics__seed_24117__shared_ppo",
+      "method": "shared_ppo",
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24101__keep",
+      "method": "keep",
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24101__replace",
+      "method": "replace",
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24101__mean",
+      "method": "mean",
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24101__shared_ppo",
+      "method": "shared_ppo",
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24107__keep",
+      "method": "keep",
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24107__replace",
+      "method": "replace",
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24107__mean",
+      "method": "mean",
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24107__shared_ppo",
+      "method": "shared_ppo",
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24113__keep",
+      "method": "keep",
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24113__replace",
+      "method": "replace",
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24113__mean",
+      "method": "mean",
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24113__shared_ppo",
+      "method": "shared_ppo",
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24117__keep",
+      "method": "keep",
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24117__replace",
+      "method": "replace",
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24117__mean",
+      "method": "mean",
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "stream_id": "comparison__reward_conflict__seed_24117__shared_ppo",
+      "method": "shared_ppo",
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "completed_decisions": 48,
+      "available_checkpoint_decisions": [
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "checkpoint_count": 6
+    }
+  ],
+  "cohort_summaries": [
+    {
+      "experiment": "retention_value_calibration_main",
+      "method": "random",
+      "snapshot_set": "earliest_saved_checkpoint",
+      "stream_count": 12,
+      "checkpoint_decisions": [
+        8
+      ],
+      "parent_binding_counts": {
+        "-1": 6,
+        "-2": 3,
+        "0": 1,
+        "1": 2
+      },
+      "parent_norm_reconstructable_count": 12,
+      "parent_norm_9_mean": 0.04028783836130392,
+      "parent_norm_9_median": 0.017288912155201053,
+      "candidate_norm_reconstructable_count": 12,
+      "current_candidate_norm_9_mean": 0.09463264081462434,
+      "current_candidate_norm_9_median": 0.08494804306325561,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    },
+    {
+      "experiment": "retention_value_calibration_main",
+      "method": "random",
+      "snapshot_set": "latest_saved_checkpoint",
+      "stream_count": 12,
+      "checkpoint_decisions": [
+        64
+      ],
+      "parent_binding_counts": {
+        "-1": 5,
+        "-2": 1,
+        "0": 3,
+        "1": 3
+      },
+      "parent_norm_reconstructable_count": 12,
+      "parent_norm_9_mean": 0.0588349330494525,
+      "parent_norm_9_median": 0.05309056063429363,
+      "candidate_norm_reconstructable_count": 12,
+      "current_candidate_norm_9_mean": 0.11915244305699328,
+      "current_candidate_norm_9_median": 0.1165760106936064,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "method": "keep",
+      "snapshot_set": "earliest_saved_checkpoint",
+      "stream_count": 8,
+      "checkpoint_decisions": [
+        8
+      ],
+      "parent_binding_counts": {
+        "0": 8
+      },
+      "parent_norm_reconstructable_count": 8,
+      "parent_norm_9_mean": 0.07708717175405949,
+      "parent_norm_9_median": 0.07627025116112984,
+      "candidate_norm_reconstructable_count": 8,
+      "current_candidate_norm_9_mean": 0.08829543763420715,
+      "current_candidate_norm_9_median": 0.08607669199748763,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "method": "keep",
+      "snapshot_set": "latest_saved_checkpoint",
+      "stream_count": 8,
+      "checkpoint_decisions": [
+        48
+      ],
+      "parent_binding_counts": {
+        "0": 8
+      },
+      "parent_norm_reconstructable_count": 8,
+      "parent_norm_9_mean": 0.07708717175405949,
+      "parent_norm_9_median": 0.07627025116112984,
+      "candidate_norm_reconstructable_count": 8,
+      "current_candidate_norm_9_mean": 0.12233706864098853,
+      "current_candidate_norm_9_median": 0.12948799502762215,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "method": "mean",
+      "snapshot_set": "earliest_saved_checkpoint",
+      "stream_count": 8,
+      "checkpoint_decisions": [
+        8
+      ],
+      "parent_binding_counts": {
+        "-2": 8
+      },
+      "parent_norm_reconstructable_count": 8,
+      "parent_norm_9_mean": 0.15651010385930397,
+      "parent_norm_9_median": 0.1575615690010489,
+      "candidate_norm_reconstructable_count": 8,
+      "current_candidate_norm_9_mean": 0.21026901077175117,
+      "current_candidate_norm_9_median": 0.2110138436160116,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "method": "mean",
+      "snapshot_set": "latest_saved_checkpoint",
+      "stream_count": 8,
+      "checkpoint_decisions": [
+        48
+      ],
+      "parent_binding_counts": {
+        "-2": 8
+      },
+      "parent_norm_reconstructable_count": 8,
+      "parent_norm_9_mean": 0.3841576525839939,
+      "parent_norm_9_median": 0.3819705789519039,
+      "candidate_norm_reconstructable_count": 8,
+      "current_candidate_norm_9_mean": 0.40280488308779455,
+      "current_candidate_norm_9_median": 0.380063496138049,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "method": "replace",
+      "snapshot_set": "earliest_saved_checkpoint",
+      "stream_count": 8,
+      "checkpoint_decisions": [
+        8
+      ],
+      "parent_binding_counts": {
+        "1": 8
+      },
+      "parent_norm_reconstructable_count": 8,
+      "parent_norm_9_mean": 0.2918776173664452,
+      "parent_norm_9_median": 0.290740312119702,
+      "candidate_norm_reconstructable_count": 8,
+      "current_candidate_norm_9_mean": 0.3263744253384301,
+      "current_candidate_norm_9_median": 0.32808546738390926,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "method": "replace",
+      "snapshot_set": "latest_saved_checkpoint",
+      "stream_count": 8,
+      "checkpoint_decisions": [
+        48
+      ],
+      "parent_binding_counts": {
+        "0": 8
+      },
+      "parent_norm_reconstructable_count": 8,
+      "parent_norm_9_mean": 0.24570452597411785,
+      "parent_norm_9_median": 0.22415253228918877,
+      "candidate_norm_reconstructable_count": 8,
+      "current_candidate_norm_9_mean": 0.2708485635990252,
+      "current_candidate_norm_9_median": 0.26704328889311757,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "method": "shared_ppo",
+      "snapshot_set": "earliest_saved_checkpoint",
+      "stream_count": 8,
+      "checkpoint_decisions": [
+        8
+      ],
+      "parent_binding_counts": {
+        "-2": 8
+      },
+      "parent_norm_reconstructable_count": 8,
+      "parent_norm_9_mean": 0.7080471316084909,
+      "parent_norm_9_median": 0.7845396132208831,
+      "candidate_norm_reconstructable_count": 8,
+      "current_candidate_norm_9_mean": 0.7549682761673902,
+      "current_candidate_norm_9_median": 0.8509627270053617,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    },
+    {
+      "experiment": "retention_value_comparison_main",
+      "method": "shared_ppo",
+      "snapshot_set": "latest_saved_checkpoint",
+      "stream_count": 8,
+      "checkpoint_decisions": [
+        48
+      ],
+      "parent_binding_counts": {
+        "-2": 8
+      },
+      "parent_norm_reconstructable_count": 8,
+      "parent_norm_9_mean": 1.2082064355443043,
+      "parent_norm_9_median": 1.1587237267226853,
+      "candidate_norm_reconstructable_count": 8,
+      "current_candidate_norm_9_mean": 1.2081900487101531,
+      "current_candidate_norm_9_median": 1.1541202695739556,
+      "last_candidate_provenance_sources_current_count": 0,
+      "pilot_v2_prefix_reference_parent_norm_9": 0.08147973905646709,
+      "pilot_v2_prefix_reference_candidate_norm_9": 0.06945329138144067
+    }
+  ],
+  "checkpoint_rows": 288,
+  "pilot_reference_rows": 1,
+  "csv_path": "outputs/retention_content_diagnostics_v2/checkpoint_magnitudes.csv",
+  "csv_sha256": "ad0f957fbceaeb645824142bee1620a336a0c9abf0f3adce68dab2c0e8ecb1e9"
+}

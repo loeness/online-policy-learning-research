@@ -1,0 +1,467 @@
+{
+  "format": "retention_mechanism_audit_v1",
+  "path": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2",
+  "phase": "pilot",
+  "passed": false,
+  "readiness": "preliminary findings superseded",
+  "scope": "saved-file integrity audit; no environment calls",
+  "counts": {
+    "expected_cases": 1,
+    "observed_cases": 1,
+    "expected_branches": 8,
+    "observed_branches_case_scoped": 8,
+    "prefix_environment_steps": 7168,
+    "branch_environment_steps": 49152,
+    "environment_steps_total": 56320,
+    "expected_environment_steps_total": 56320,
+    "prefix_rollouts": 28,
+    "branch_rollouts": 192,
+    "rollouts_total": 220,
+    "minibatch_updates_total": 3520,
+    "reward_total_all_phases": -840.3500000000406
+  },
+  "cases": [
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "passed": true,
+      "partial": false,
+      "prefix_environment_steps": 7168,
+      "branch_environment_steps": 49152,
+      "branch_count_audited": 8,
+      "errors": 0
+    }
+  ],
+  "branches": [
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "branch_id": "old_major__r1__mean",
+      "environment_steps": 6144,
+      "reward_total": -87.32000000000477,
+      "rollouts": 24,
+      "minibatch_updates": 384,
+      "errors": 0,
+      "episodes": {
+        "completed_episodes": 107,
+        "episode_rows": 107,
+        "final_episode_ordinal": 228,
+        "final_episode_length": 27
+      }
+    },
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "branch_id": "old_major__r1__keep",
+      "environment_steps": 6144,
+      "reward_total": -83.82000000000393,
+      "rollouts": 24,
+      "minibatch_updates": 384,
+      "errors": 0,
+      "episodes": {
+        "completed_episodes": 105,
+        "episode_rows": 105,
+        "final_episode_ordinal": 226,
+        "final_episode_length": 23
+      }
+    },
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "branch_id": "old_major__r0__mean",
+      "environment_steps": 6144,
+      "reward_total": -84.82000000000585,
+      "rollouts": 24,
+      "minibatch_updates": 384,
+      "errors": 0,
+      "episodes": {
+        "completed_episodes": 104,
+        "episode_rows": 104,
+        "final_episode_ordinal": 225,
+        "final_episode_length": 22
+      }
+    },
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "branch_id": "old_major__r0__none",
+      "environment_steps": 6144,
+      "reward_total": -79.32000000000586,
+      "rollouts": 24,
+      "minibatch_updates": 384,
+      "errors": 0,
+      "episodes": {
+        "completed_episodes": 106,
+        "episode_rows": 106,
+        "final_episode_ordinal": 227,
+        "final_episode_length": 7
+      }
+    },
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "branch_id": "old_major__r1__none",
+      "environment_steps": 6144,
+      "reward_total": -87.3200000000041,
+      "rollouts": 24,
+      "minibatch_updates": 384,
+      "errors": 0,
+      "episodes": {
+        "completed_episodes": 107,
+        "episode_rows": 107,
+        "final_episode_ordinal": 228,
+        "final_episode_length": 27
+      }
+    },
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "branch_id": "old_major__r0__keep",
+      "environment_steps": 6144,
+      "reward_total": -107.8200000000058,
+      "rollouts": 24,
+      "minibatch_updates": 384,
+      "errors": 0,
+      "episodes": {
+        "completed_episodes": 100,
+        "episode_rows": 100,
+        "final_episode_ordinal": 221,
+        "final_episode_length": 35
+      }
+    },
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "branch_id": "old_major__r1__replace",
+      "environment_steps": 6144,
+      "reward_total": -81.82000000000434,
+      "rollouts": 24,
+      "minibatch_updates": 384,
+      "errors": 0,
+      "episodes": {
+        "completed_episodes": 107,
+        "episode_rows": 107,
+        "final_episode_ordinal": 228,
+        "final_episode_length": 27
+      }
+    },
+    {
+      "case_id": "s25089_dynamics_old_major",
+      "branch_id": "old_major__r0__replace",
+      "environment_steps": 6144,
+      "reward_total": -107.82000000000586,
+      "rollouts": 24,
+      "minibatch_updates": 384,
+      "errors": 0,
+      "episodes": {
+        "completed_episodes": 103,
+        "episode_rows": 103,
+        "final_episode_ordinal": 224,
+        "final_episode_length": 10
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\prefix\\steps.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "5470fdf989087af33ddefbab76ff3e005d4f426e28f43f5da0890fb4e6d563f6",
+        "actual_sha256": "5470fdf989087af33ddefbab76ff3e005d4f426e28f43f5da0890fb4e6d563f6",
+        "recorded_bytes": null,
+        "actual_bytes": 1714640
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\prefix\\episodes.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "72b823741d46db9d0156b7da2381b9d880c0525dd506f50e58927a9ca738529b",
+        "actual_sha256": "72b823741d46db9d0156b7da2381b9d880c0525dd506f50e58927a9ca738529b",
+        "recorded_bytes": null,
+        "actual_bytes": 9587
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\prefix\\rollouts.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "c5b787c4ab3a3819f91df36107a5de41c5258111dc30513a7dc6867b443e56f3",
+        "actual_sha256": "c5b787c4ab3a3819f91df36107a5de41c5258111dc30513a7dc6867b443e56f3",
+        "recorded_bytes": null,
+        "actual_bytes": 4810
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__keep\\steps.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "2f3ff50d5b1f2a380e826ab059b4be30ab5a16cc60dc1fe5d2b4aab29a2a4156",
+        "actual_sha256": "2f3ff50d5b1f2a380e826ab059b4be30ab5a16cc60dc1fe5d2b4aab29a2a4156",
+        "recorded_bytes": null,
+        "actual_bytes": 1539776
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__keep\\episodes.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "cf2e08a1da390026aea2fe9cb9d1f0450e04c1c6f7789a3bc3602466599f2a88",
+        "actual_sha256": "cf2e08a1da390026aea2fe9cb9d1f0450e04c1c6f7789a3bc3602466599f2a88",
+        "recorded_bytes": null,
+        "actual_bytes": 9316
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__keep\\rollouts.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "34dd223e19ceca1bb78a4c1b1cdc569dd21b2ff6c367cb79d7ed028b6f7dd29f",
+        "actual_sha256": "34dd223e19ceca1bb78a4c1b1cdc569dd21b2ff6c367cb79d7ed028b6f7dd29f",
+        "recorded_bytes": null,
+        "actual_bytes": 4322
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__mean\\steps.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "d7bd76cbd4109c3f4aed8874f08f6fa0cdc2617ac1533489ade9f6f919670fc4",
+        "actual_sha256": "d7bd76cbd4109c3f4aed8874f08f6fa0cdc2617ac1533489ade9f6f919670fc4",
+        "recorded_bytes": null,
+        "actual_bytes": 1540954
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__mean\\episodes.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "54b7e4dd762bdc2a091f482e9f07e9a72658308f808da7742db1059f9bae6518",
+        "actual_sha256": "54b7e4dd762bdc2a091f482e9f07e9a72658308f808da7742db1059f9bae6518",
+        "recorded_bytes": null,
+        "actual_bytes": 9572
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__mean\\rollouts.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "5eb6dc54f4b86ac415848b72f18cea75e2816a496e89c7fd335b99c70f0cb3a2",
+        "actual_sha256": "5eb6dc54f4b86ac415848b72f18cea75e2816a496e89c7fd335b99c70f0cb3a2",
+        "recorded_bytes": null,
+        "actual_bytes": 4325
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__none\\steps.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "66e074af17ace0a7bc16b464ca00f30ca1eae9729688cf57ada8b71e256c20bb",
+        "actual_sha256": "66e074af17ace0a7bc16b464ca00f30ca1eae9729688cf57ada8b71e256c20bb",
+        "recorded_bytes": null,
+        "actual_bytes": 1540403
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__none\\episodes.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "9516b9fd7ca9297a1f7d9e84c3987988edb5b03598f9074b58bcef040011d378",
+        "actual_sha256": "9516b9fd7ca9297a1f7d9e84c3987988edb5b03598f9074b58bcef040011d378",
+        "recorded_bytes": null,
+        "actual_bytes": 9797
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__none\\rollouts.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "f0bad85ddcfdd358374c9bfbe5327b888f6830a1ec1b75b1485cd2b3f25d4e33",
+        "actual_sha256": "f0bad85ddcfdd358374c9bfbe5327b888f6830a1ec1b75b1485cd2b3f25d4e33",
+        "recorded_bytes": null,
+        "actual_bytes": 4333
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__replace\\steps.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "a5b081ec4d886fdc65e60321267f5ccd911b58cba8b87abb787c1dc4e47adc19",
+        "actual_sha256": "a5b081ec4d886fdc65e60321267f5ccd911b58cba8b87abb787c1dc4e47adc19",
+        "recorded_bytes": null,
+        "actual_bytes": 1557052
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__replace\\episodes.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "423c398e4f867be63238893241a96a5b607f2a626363fe97480abe9e2bf97784",
+        "actual_sha256": "423c398e4f867be63238893241a96a5b607f2a626363fe97480abe9e2bf97784",
+        "recorded_bytes": null,
+        "actual_bytes": 9869
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r0__replace\\rollouts.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "243e2d4cee86b9000ee48bc101b6679a3652395874d6138e8f5601f69a5e6d46",
+        "actual_sha256": "243e2d4cee86b9000ee48bc101b6679a3652395874d6138e8f5601f69a5e6d46",
+        "recorded_bytes": null,
+        "actual_bytes": 4393
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__keep\\steps.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "37674ad98aa44ac6ed1365d244b21a347179027ada2cc493d2fc7cff679f5ed0",
+        "actual_sha256": "37674ad98aa44ac6ed1365d244b21a347179027ada2cc493d2fc7cff679f5ed0",
+        "recorded_bytes": null,
+        "actual_bytes": 1540812
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__keep\\episodes.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "9b7e53041bfc4fde99586c4265ffdee3c460d3d62a675c3cb5fcae9f22173bb8",
+        "actual_sha256": "9b7e53041bfc4fde99586c4265ffdee3c460d3d62a675c3cb5fcae9f22173bb8",
+        "recorded_bytes": null,
+        "actual_bytes": 9705
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__keep\\rollouts.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "cbaec6a0168ebe20274b593e9f6dc7923a3ed3bc0d98708bdc45120ec49bb653",
+        "actual_sha256": "cbaec6a0168ebe20274b593e9f6dc7923a3ed3bc0d98708bdc45120ec49bb653",
+        "recorded_bytes": null,
+        "actual_bytes": 4329
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__mean\\steps.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "be66350aaf98cf4f7990f3ec2d516f6a2180c39e82f51869bf30698ac8440571",
+        "actual_sha256": "be66350aaf98cf4f7990f3ec2d516f6a2180c39e82f51869bf30698ac8440571",
+        "recorded_bytes": null,
+        "actual_bytes": 1539998
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__mean\\episodes.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "d40458e8e1435b4f85d0fc8e7b77c0dc416096b961b0814b4a9d4dbb8fcfd8de",
+        "actual_sha256": "d40458e8e1435b4f85d0fc8e7b77c0dc416096b961b0814b4a9d4dbb8fcfd8de",
+        "recorded_bytes": null,
+        "actual_bytes": 9898
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__mean\\rollouts.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "b9ba4e0950d38b1ff9bece62f3391cdf957c05835e4c7bd2b19ff94125ece4b4",
+        "actual_sha256": "b9ba4e0950d38b1ff9bece62f3391cdf957c05835e4c7bd2b19ff94125ece4b4",
+        "recorded_bytes": null,
+        "actual_bytes": 4339
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__none\\steps.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "fdfdedd839c1f7c7030858ecc2caf274bda66418d0c372274f16c7274fbe6ac5",
+        "actual_sha256": "fdfdedd839c1f7c7030858ecc2caf274bda66418d0c372274f16c7274fbe6ac5",
+        "recorded_bytes": null,
+        "actual_bytes": 1539106
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__none\\episodes.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "842f7a4a2c41e5d0daf3759b1d76b0e9ad68912b6badd57de33243480ff9c03b",
+        "actual_sha256": "842f7a4a2c41e5d0daf3759b1d76b0e9ad68912b6badd57de33243480ff9c03b",
+        "recorded_bytes": null,
+        "actual_bytes": 9888
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__none\\rollouts.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "0c8d9aa382042e45f9902e2daf10182e5c0756b3009dbdadae4479eefb0c6d7d",
+        "actual_sha256": "0c8d9aa382042e45f9902e2daf10182e5c0756b3009dbdadae4479eefb0c6d7d",
+        "recorded_bytes": null,
+        "actual_bytes": 4327
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__replace\\steps.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "882286fb21a0d332b824002d288d7705a3ab2e57f65a491bfc84c9579e94c38a",
+        "actual_sha256": "882286fb21a0d332b824002d288d7705a3ab2e57f65a491bfc84c9579e94c38a",
+        "recorded_bytes": null,
+        "actual_bytes": 1557675
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__replace\\episodes.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "e784f1626517285a470c8634b26714d5934807605f7dbcae61f01334976c1877",
+        "actual_sha256": "e784f1626517285a470c8634b26714d5934807605f7dbcae61f01334976c1877",
+        "recorded_bytes": null,
+        "actual_bytes": 10197
+      }
+    },
+    {
+      "code": "raw_ledger_hash",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\branches\\old_major__r1__replace\\rollouts.csv",
+      "message": "preliminary auditor required a byte-size field absent from the runner raw-ledger schema; SHA-256 matched",
+      "details": {
+        "recorded_sha256": "d233d7c518341120cfee5b3d7b04cefee7a51ea104f65f608ffd327e1565fb1f",
+        "actual_sha256": "d233d7c518341120cfee5b3d7b04cefee7a51ea104f65f608ffd327e1565fb1f",
+        "recorded_bytes": null,
+        "actual_bytes": 4391
+      }
+    },
+    {
+      "code": "incumbent_parent_frozen",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_mechanism_pilot_v2\\cases\\s25089_dynamics_old_major\\prefix",
+      "message": "preliminary check compared the unquantized bootstrap source mean directly with the saved int8 parent; the corrected check replays the protocol codec round trip",
+      "details": {
+        "maximum_absolute_precodec_to_decoded_difference": 0.0001434164,
+        "decoded_parent_reproduces_saved_shared_coefficients": true
+      }
+    }
+  ],
+  "warnings": [],
+  "audit_iteration": "preliminary_contract_audit",
+  "superseded_by": "pilot_v2_final.json"
+}

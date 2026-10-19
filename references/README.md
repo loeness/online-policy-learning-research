@@ -37,3 +37,13 @@ a faithful reproduction of published SOTA.
 ## Online knowledge-structure design review
 
 Twelve additional primary references were checked on 2026-10-15 for `docs/ONLINE_KNOWLEDGE_STRUCTURE_DESIGN.md`: skill/state trees, compositional lifelong RL, task-agnostic adaptation, structure learning, rate-distortion, shared-gradient proposals and baseline-aware improvement. They are design context and proposed comparisons, not newly executed baselines. The cited primary texts show substantial overlap with individual mechanisms; this review does not certify field-wide novelty. No C2/C3 experiment was run.
+
+## Shared contrasts and selected feedback (2026-10-19)
+
+Three primary sources were added for the [shared-baseline and action-contrast note](../docs/literature/20261019_ACTION_CONTRAST_NOTES.md). The opening bibliography count predates these additions; the bibliography now contains 52 entries.
+
+- **Nie and Wager (2017),** [*Quasi-Oracle Estimation of Heterogeneous Treatment Effects*](https://arxiv.org/abs/1712.04912): source for the R-learner residualization template. Its independent-sample theorem is not an online guarantee for these repeated-write streams.
+- **Dudík, Langford, and Li (2011),** [*Doubly Robust Policy Evaluation and Learning*](https://icml.cc/2011/papers/554_icmlpaper.pdf), also [arXiv:1103.4601](https://arxiv.org/abs/1103.4601): source for chosen-action-only contextual-bandit feedback and doubly robust policy-value estimation. It does not supply whole-trajectory evaluation for the project setting.
+- **Kallus and Zhou (2022),** [*Stateful Offline Contextual Policy Evaluation and Learning*](https://proceedings.mlr.press/v151/kallus22a.html): source for a stateful contextual-bandit reduction under specific exogenous-arrival and response-structure assumptions. The repeated-write setting has action-dependent future learner state, so that reduction is not presumed.
+
+These papers provide design context only. No experiment or new environment interaction was run for this note.
