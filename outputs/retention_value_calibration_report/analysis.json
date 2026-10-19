@@ -1,0 +1,3651 @@
+{
+  "format": "retention_value_stream_report_v1",
+  "status": "report_generated",
+  "bootstrap": {
+    "resamples": 10000,
+    "seed": 20261019,
+    "method": "paired seed bootstrap; calibration averages relations within seed, comparison estimates each relation separately",
+    "interval_interpretation": "descriptive exploratory intervals; the four-seed comparison is not a high-power confirmation"
+  },
+  "calibration": {
+    "status": "complete_exploratory_cohort",
+    "cohort_complete": true,
+    "tail_complete": true,
+    "expected_stream_count": 12,
+    "observed_stream_count": 12,
+    "primary": {
+      "contrast": "prequential MSE(linear) minus MSE(intercept)",
+      "tail_decisions": 32,
+      "decisions_per_stream": 64,
+      "score_target": "feedback.utility_target for the selected action only",
+      "direction": "negative favors linear prediction on selected labels",
+      "estimate": {
+        "n": 6,
+        "mean": -3.061987509853104e-06,
+        "ci95": [
+          -4.365320786714076e-06,
+          -1.469563917806319e-06
+        ],
+        "positive": 1,
+        "negative": 5,
+        "tie": 0,
+        "denominator": 6,
+        "interval_interpretation": "descriptive seed bootstrap; exploratory cohort"
+      },
+      "observed_seed_count": 6,
+      "expected_seed_count": 6
+    },
+    "by_relation": {
+      "dynamics": {
+        "estimate": {
+          "n": 6,
+          "mean": 1.3745707054686695e-06,
+          "ci95": [
+            -7.884484994523798e-07,
+            3.908512210431476e-06
+          ],
+          "positive": 3,
+          "negative": 3,
+          "tie": 0,
+          "denominator": 6,
+          "interval_interpretation": "descriptive seed bootstrap; exploratory cohort"
+        },
+        "observed_seed_count": 6,
+        "expected_seed_count": 6
+      },
+      "reward_conflict": {
+        "estimate": {
+          "n": 6,
+          "mean": -7.498545725174878e-06,
+          "ci95": [
+            -1.0809192342286532e-05,
+            -4.072678378478528e-06
+          ],
+          "positive": 0,
+          "negative": 6,
+          "tie": 0,
+          "denominator": 6,
+          "interval_interpretation": "descriptive seed bootstrap; exploratory cohort"
+        },
+        "observed_seed_count": 6,
+        "expected_seed_count": 6
+      }
+    },
+    "per_seed": [
+      {
+        "stage": "calibration",
+        "seed": 23101,
+        "pair_kind": "dynamics",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 4.193384683338776e-05,
+        "intercept_mse": 4.2368229331415876e-05,
+        "linear_minus_intercept_mse": -4.343824980281133e-07,
+        "action_support_counts": {
+          "keep": 9,
+          "replace": 20,
+          "mean": 18,
+          "none": 17
+        },
+        "tail_action_support_counts": {
+          "keep": 4,
+          "replace": 12,
+          "mean": 11,
+          "none": 5
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23101,
+        "pair_kind": "reward_conflict",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 6.254606154747207e-05,
+        "intercept_mse": 7.243408428931478e-05,
+        "linear_minus_intercept_mse": -9.888022741842708e-06,
+        "action_support_counts": {
+          "keep": 13,
+          "replace": 12,
+          "mean": 19,
+          "none": 20
+        },
+        "tail_action_support_counts": {
+          "keep": 7,
+          "replace": 7,
+          "mean": 9,
+          "none": 9
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23101,
+        "pair_kind": "all_relations",
+        "row_level": "seed_mean_relations",
+        "status": "complete",
+        "linear_mse": 5.2239954190429915e-05,
+        "intercept_mse": 5.7401156810365326e-05,
+        "linear_minus_intercept_mse": -5.161202619935411e-06,
+        "action_support_counts": null,
+        "tail_action_support_counts": null,
+        "actual_step_rows": 202752
+      },
+      {
+        "stage": "calibration",
+        "seed": 23102,
+        "pair_kind": "dynamics",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 3.5576262685725724e-05,
+        "intercept_mse": 3.7707823549186023e-05,
+        "linear_minus_intercept_mse": -2.1315608634603e-06,
+        "action_support_counts": {
+          "keep": 15,
+          "replace": 16,
+          "mean": 22,
+          "none": 11
+        },
+        "tail_action_support_counts": {
+          "keep": 5,
+          "replace": 10,
+          "mean": 10,
+          "none": 7
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23102,
+        "pair_kind": "reward_conflict",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 8.734636168394484e-05,
+        "intercept_mse": 8.967393565452678e-05,
+        "linear_minus_intercept_mse": -2.3275739705819394e-06,
+        "action_support_counts": {
+          "keep": 11,
+          "replace": 15,
+          "mean": 21,
+          "none": 17
+        },
+        "tail_action_support_counts": {
+          "keep": 4,
+          "replace": 9,
+          "mean": 11,
+          "none": 8
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23102,
+        "pair_kind": "all_relations",
+        "row_level": "seed_mean_relations",
+        "status": "complete",
+        "linear_mse": 6.146131218483529e-05,
+        "intercept_mse": 6.36908796018564e-05,
+        "linear_minus_intercept_mse": -2.2295674170211196e-06,
+        "action_support_counts": null,
+        "tail_action_support_counts": null,
+        "actual_step_rows": 202752
+      },
+      {
+        "stage": "calibration",
+        "seed": 23103,
+        "pair_kind": "dynamics",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 5.6084324363531484e-05,
+        "intercept_mse": 5.3397645674620544e-05,
+        "linear_minus_intercept_mse": 2.6866786889109397e-06,
+        "action_support_counts": {
+          "keep": 18,
+          "replace": 10,
+          "mean": 26,
+          "none": 10
+        },
+        "tail_action_support_counts": {
+          "keep": 8,
+          "replace": 5,
+          "mean": 13,
+          "none": 6
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23103,
+        "pair_kind": "reward_conflict",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 3.880774037250878e-05,
+        "intercept_mse": 4.048427935401366e-05,
+        "linear_minus_intercept_mse": -1.6765389815048763e-06,
+        "action_support_counts": {
+          "keep": 15,
+          "replace": 17,
+          "mean": 17,
+          "none": 15
+        },
+        "tail_action_support_counts": {
+          "keep": 6,
+          "replace": 10,
+          "mean": 6,
+          "none": 10
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23103,
+        "pair_kind": "all_relations",
+        "row_level": "seed_mean_relations",
+        "status": "complete",
+        "linear_mse": 4.7446032368020136e-05,
+        "intercept_mse": 4.6940962514317104e-05,
+        "linear_minus_intercept_mse": 5.050698537030317e-07,
+        "action_support_counts": null,
+        "tail_action_support_counts": null,
+        "actual_step_rows": 202752
+      },
+      {
+        "stage": "calibration",
+        "seed": 23104,
+        "pair_kind": "dynamics",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 4.5798779283716405e-05,
+        "intercept_mse": 4.352984144252809e-05,
+        "linear_minus_intercept_mse": 2.268937841188314e-06,
+        "action_support_counts": {
+          "keep": 19,
+          "replace": 8,
+          "mean": 19,
+          "none": 18
+        },
+        "tail_action_support_counts": {
+          "keep": 10,
+          "replace": 4,
+          "mean": 6,
+          "none": 12
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23104,
+        "pair_kind": "reward_conflict",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 5.786596621464163e-05,
+        "intercept_mse": 6.890149326492696e-05,
+        "linear_minus_intercept_mse": -1.103552705028533e-05,
+        "action_support_counts": {
+          "keep": 21,
+          "replace": 10,
+          "mean": 17,
+          "none": 16
+        },
+        "tail_action_support_counts": {
+          "keep": 10,
+          "replace": 8,
+          "mean": 6,
+          "none": 8
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23104,
+        "pair_kind": "all_relations",
+        "row_level": "seed_mean_relations",
+        "status": "complete",
+        "linear_mse": 5.183237274917902e-05,
+        "intercept_mse": 5.6215667353727526e-05,
+        "linear_minus_intercept_mse": -4.383294604548508e-06,
+        "action_support_counts": null,
+        "tail_action_support_counts": null,
+        "actual_step_rows": 202752
+      },
+      {
+        "stage": "calibration",
+        "seed": 23105,
+        "pair_kind": "dynamics",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 4.995130199589579e-05,
+        "intercept_mse": 5.086347103288979e-05,
+        "linear_minus_intercept_mse": -9.121690369939977e-07,
+        "action_support_counts": {
+          "keep": 18,
+          "replace": 15,
+          "mean": 15,
+          "none": 16
+        },
+        "tail_action_support_counts": {
+          "keep": 10,
+          "replace": 8,
+          "mean": 8,
+          "none": 6
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23105,
+        "pair_kind": "reward_conflict",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 4.759157513537926e-05,
+        "intercept_mse": 5.478243174931115e-05,
+        "linear_minus_intercept_mse": -7.190856613931891e-06,
+        "action_support_counts": {
+          "keep": 12,
+          "replace": 16,
+          "mean": 17,
+          "none": 19
+        },
+        "tail_action_support_counts": {
+          "keep": 8,
+          "replace": 7,
+          "mean": 7,
+          "none": 10
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23105,
+        "pair_kind": "all_relations",
+        "row_level": "seed_mean_relations",
+        "status": "complete",
+        "linear_mse": 4.8771438565637526e-05,
+        "intercept_mse": 5.282295139110047e-05,
+        "linear_minus_intercept_mse": -4.0515128254629445e-06,
+        "action_support_counts": null,
+        "tail_action_support_counts": null,
+        "actual_step_rows": 202752
+      },
+      {
+        "stage": "calibration",
+        "seed": 23107,
+        "pair_kind": "dynamics",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 4.296079913085136e-05,
+        "intercept_mse": 3.6190879029656184e-05,
+        "linear_minus_intercept_mse": 6.769920101195174e-06,
+        "action_support_counts": {
+          "keep": 16,
+          "replace": 16,
+          "mean": 16,
+          "none": 16
+        },
+        "tail_action_support_counts": {
+          "keep": 8,
+          "replace": 7,
+          "mean": 8,
+          "none": 9
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23107,
+        "pair_kind": "reward_conflict",
+        "row_level": "seed_relation",
+        "status": "complete",
+        "linear_mse": 4.536659513091023e-05,
+        "intercept_mse": 5.823935012381275e-05,
+        "linear_minus_intercept_mse": -1.2872754992902521e-05,
+        "action_support_counts": {
+          "keep": 15,
+          "replace": 16,
+          "mean": 19,
+          "none": 14
+        },
+        "tail_action_support_counts": {
+          "keep": 7,
+          "replace": 8,
+          "mean": 10,
+          "none": 7
+        },
+        "actual_step_rows": 101376
+      },
+      {
+        "stage": "calibration",
+        "seed": 23107,
+        "pair_kind": "all_relations",
+        "row_level": "seed_mean_relations",
+        "status": "complete",
+        "linear_mse": 4.416369713088079e-05,
+        "intercept_mse": 4.721511457673447e-05,
+        "linear_minus_intercept_mse": -3.0514174458536735e-06,
+        "action_support_counts": null,
+        "tail_action_support_counts": null,
+        "actual_step_rows": 202752
+      }
+    ],
+    "selected_action_support": {
+      "overall": {
+        "keep": 182,
+        "replace": 171,
+        "mean": 226,
+        "none": 189
+      },
+      "tail": {
+        "keep": 87,
+        "replace": 95,
+        "mean": 105,
+        "none": 97
+      }
+    },
+    "tail_prediction_bias": {
+      "linear": {
+        "observed_stream_mean": 0.0012090946246913928,
+        "stream_count": 12
+      },
+      "intercept": {
+        "observed_stream_mean": 0.0013903659421655864,
+        "stream_count": 12
+      }
+    },
+    "exploratory_scope": "seed bootstrap with relations averaged within seed; this measures selected-label prediction only and does not identify unchosen-action outcomes",
+    "stage": "calibration",
+    "pilot": false,
+    "protocol": {
+      "summary_sha256": "178f1d780248228e0ad0ae39e83e92c0dd08ec322b1e1e400276fb9992cee5bb",
+      "frozen_start_sha256": "178f1d780248228e0ad0ae39e83e92c0dd08ec322b1e1e400276fb9992cee5bb",
+      "hashes_match": true
+    },
+    "expected_seeds": [
+      23101,
+      23102,
+      23103,
+      23104,
+      23105,
+      23107
+    ],
+    "expected_pair_kinds": [
+      "dynamics",
+      "reward_conflict"
+    ],
+    "expected_methods": [
+      "random"
+    ],
+    "decisions_per_stream": 64,
+    "incomplete_reasons": [],
+    "costs": {
+      "environment_steps": {
+        "sum": 1216512,
+        "observed_subtotal": 1216512,
+        "missing_stream_count": 0
+      },
+      "warmup_steps": {
+        "sum": 36864,
+        "observed_subtotal": 36864,
+        "missing_stream_count": 0
+      },
+      "outcome_steps": {
+        "sum": 1179648,
+        "observed_subtotal": 1179648,
+        "missing_stream_count": 0
+      },
+      "ppo_rollouts": {
+        "sum": 4752,
+        "observed_subtotal": 4752,
+        "missing_stream_count": 0
+      },
+      "minibatch_updates": {
+        "sum": 76032,
+        "observed_subtotal": 76032,
+        "missing_stream_count": 0
+      },
+      "storage_action_count": {
+        "sum": 768,
+        "observed_subtotal": 768,
+        "missing_stream_count": 0
+      },
+      "parent_write_count": {
+        "sum": 586,
+        "observed_subtotal": 586,
+        "missing_stream_count": 0
+      },
+      "eviction_count": {
+        "sum": 1568,
+        "observed_subtotal": 1568,
+        "missing_stream_count": 0
+      },
+      "slot_allocation_count": {
+        "sum": 1592,
+        "observed_subtotal": 1592,
+        "missing_stream_count": 0
+      },
+      "value_model_updates": {
+        "sum": 768,
+        "observed_subtotal": 768,
+        "missing_stream_count": 0
+      },
+      "package_serialization_cpu_s": {
+        "sum": 6.6875,
+        "observed_subtotal": 6.6875,
+        "missing_stream_count": 0
+      },
+      "aggregate_stream_cpu_s": {
+        "sum": 1371.265625,
+        "observed_subtotal": 1371.265625,
+        "missing_stream_count": 0
+      },
+      "aggregate_stream_wall_s": {
+        "sum": 1395.055069700029,
+        "observed_subtotal": 1395.055069700029,
+        "missing_stream_count": 0
+      },
+      "utility_cpu_s": {
+        "sum": 1310.328125,
+        "observed_subtotal": 1310.328125,
+        "missing_stream_count": 0
+      },
+      "model_update_cpu_s": {
+        "sum": 0.109375,
+        "observed_subtotal": 0.109375,
+        "missing_stream_count": 0
+      },
+      "actual_step_rows": 1216512,
+      "actual_step_rows_complete": true,
+      "raw_rows_match_reported_environment_steps": true,
+      "peak_package_bytes_max": 240386,
+      "package_budget_bytes": 262144,
+      "package_cap_passed": true,
+      "model_state_bytes_max": 1732,
+      "actor_container_bytes": [
+        89
+      ],
+      "actual_actor_bytes_max": 89,
+      "campaign_wall_s": 472.9160300999938,
+      "campaign_total_cpu_s": 1376.03125,
+      "campaign_child_cpu_s": 1371.265625,
+      "campaign_orchestrator_cpu_s": 4.765625,
+      "workers_actual": 3,
+      "runner_totals_reported": {
+        "environment_steps": 1216512,
+        "warmup_steps": 36864,
+        "outcome_steps": 1179648,
+        "ppo_rollouts": 4752,
+        "minibatch_updates": 76032,
+        "storage_action_count": 768,
+        "parent_write_count": 586,
+        "eviction_count": 1568,
+        "slot_allocation_count": 1592,
+        "value_model_updates": 768,
+        "utility_cpu_s": 1310.328125,
+        "model_update_cpu_s": 0.109375,
+        "package_serialization_cpu_s": 6.6875,
+        "aggregate_stream_wall_s": 1395.055069700029,
+        "total_reward_sum": -7554.119999986046,
+        "outcome_return_sum": -7289.219999986671,
+        "peak_package_bytes": 240386,
+        "aggregate_stream_cpu_s": 1371.265625
+      },
+      "campaign_cost_source": "cohort_costs"
+    },
+    "streams": [
+      {
+        "stream_id": "calibration__dynamics__seed_23101__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23101,
+        "pair_kind": "dynamics",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23101\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23101\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23101\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23101\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23101\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": -1469.0299999977376,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.014490905145179703,
+          "postwarmup_reward_sum": -1442.3699999977962,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.014672546386696331,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -26.660000000000146,
+            "outcome": -1442.3699999977962
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": -1469.0299999999963,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.014490905145201984,
+          "postwarmup_reward_sum": -1442.3699999999963,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.014672546386718712,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -26.660000000000025,
+            "outcome": -1442.3699999999963
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 9,
+          "replace": 20,
+          "mean": 18,
+          "none": 17,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 9,
+          "replace": 20,
+          "mean": 18,
+          "none": 17
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 4.193384683338776e-05,
+            "intercept": 4.2368229331415876e-05
+          },
+          "tail_prediction_bias": {
+            "linear": 0.0014150581060254457,
+            "intercept": 0.00204763621578826
+          },
+          "action_support_counts": {
+            "keep": 9,
+            "replace": 20,
+            "mean": 18,
+            "none": 17
+          },
+          "tail_action_support_counts": {
+            "keep": 4,
+            "replace": 12,
+            "mean": 11,
+            "none": 5
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 127.171875,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.015625,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0012936592102050781,
+          "sum_blockwise_cpu_deductions_per_step": 0.082794189453125,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 55,
+          "eviction_count": 131,
+          "slot_allocation_count": 133,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.609375,
+          "total_cpu_s": 133.484375,
+          "wall_s": 135.90452890000597,
+          "utility_cpu_s": 127.171875,
+          "model_update_cpu_s": 0.015625
+        },
+        "peak_package_bytes": 240002,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__dynamics__seed_23101__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23101,
+          "pair_kind": "dynamics",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/dynamics/seed_23101/random/summary.json",
+          "preactions_path": "streams/dynamics/seed_23101/random/preactions.jsonl",
+          "feedback_path": "streams/dynamics/seed_23101/random/feedback.jsonl",
+          "bouts_path": "streams/dynamics/seed_23101/random/bouts.jsonl",
+          "package_events_path": "streams/dynamics/seed_23101/random/package_events.jsonl",
+          "rawsteps_path": "streams/dynamics/seed_23101/random/rawsteps.csv",
+          "rollouts_path": "streams/dynamics/seed_23101/random/rollouts.csv",
+          "outcome_return_sum": -1442.3699999977962,
+          "warmup_return_sum": -26.660000000000146,
+          "total_reward_sum": -1469.0299999977376,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 127,
+            "recurred_after_eviction_rate": 0.6614583333333334,
+            "natural_eviction_count": 129,
+            "recurrent_first256_reward_per_step_mean": -0.016920214074803142,
+            "recurrent_first512_return_mean": -8.432834645669288,
+            "recurrent_full_return_mean": -8.432834645669288
+          },
+          "storage_action_counts": {
+            "keep": 9,
+            "replace": 20,
+            "mean": 18,
+            "none": 17
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 55,
+            "eviction_count": 131,
+            "slot_allocation_count": 133,
+            "value_model_updates": 64,
+            "utility_cpu_s": 127.171875,
+            "model_update_cpu_s": 0.015625,
+            "package_serialization_cpu_s": 0.609375,
+            "total_cpu_s": 133.484375,
+            "wall_s": 135.90452890000597
+          },
+          "peak_package_bytes": 240002,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "A0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "A1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "a804935f3d19ad86a74304f541d298fbb1e6da16af3b545e4e2a51cd3d55da60",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 1.862645149230957e-09,
+              "per_slot_preservation_error": [
+                1.862645149230957e-09,
+                9.313225746154785e-10
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 180916,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236482,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__dynamics__seed_23102__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23102,
+        "pair_kind": "dynamics",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23102\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23102\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23102\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23102\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23102\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": -1641.2799999976805,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.016190025252502373,
+          "postwarmup_reward_sum": -1587.3699999978028,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.016147562662738067,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -53.91000000000212,
+            "outcome": -1587.3699999978028
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": -1641.2799999999947,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.016190025252525202,
+          "postwarmup_reward_sum": -1587.3699999999947,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.01614756266276036,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -53.91000000000002,
+            "outcome": -1587.3699999999947
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 15,
+          "replace": 16,
+          "mean": 22,
+          "none": 11,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 15,
+          "replace": 16,
+          "mean": 22,
+          "none": 11
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 3.5576262685725724e-05,
+            "intercept": 3.7707823549186023e-05
+          },
+          "tail_prediction_bias": {
+            "linear": 0.0019776662074261838,
+            "intercept": 0.002684669266044914
+          },
+          "action_support_counts": {
+            "keep": 15,
+            "replace": 16,
+            "mean": 22,
+            "none": 11
+          },
+          "tail_action_support_counts": {
+            "keep": 5,
+            "replace": 10,
+            "mean": 10,
+            "none": 7
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 126.796875,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.0,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0012898445129394531,
+          "sum_blockwise_cpu_deductions_per_step": 0.082550048828125,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 49,
+          "eviction_count": 130,
+          "slot_allocation_count": 132,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.71875,
+          "total_cpu_s": 133.0625,
+          "wall_s": 135.97275770000124,
+          "utility_cpu_s": 126.796875,
+          "model_update_cpu_s": 0.0
+        },
+        "peak_package_bytes": 240386,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__dynamics__seed_23102__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23102,
+          "pair_kind": "dynamics",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/dynamics/seed_23102/random/summary.json",
+          "preactions_path": "streams/dynamics/seed_23102/random/preactions.jsonl",
+          "feedback_path": "streams/dynamics/seed_23102/random/feedback.jsonl",
+          "bouts_path": "streams/dynamics/seed_23102/random/bouts.jsonl",
+          "package_events_path": "streams/dynamics/seed_23102/random/package_events.jsonl",
+          "rawsteps_path": "streams/dynamics/seed_23102/random/rawsteps.csv",
+          "rollouts_path": "streams/dynamics/seed_23102/random/rollouts.csv",
+          "outcome_return_sum": -1587.3699999978028,
+          "warmup_return_sum": -53.91000000000212,
+          "total_reward_sum": -1641.2799999976805,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 126,
+            "recurred_after_eviction_rate": 0.65625,
+            "natural_eviction_count": 128,
+            "recurrent_first256_reward_per_step_mean": -0.01862227182539682,
+            "recurrent_first512_return_mean": -9.014761904761903,
+            "recurrent_full_return_mean": -9.014761904761903
+          },
+          "storage_action_counts": {
+            "keep": 15,
+            "replace": 16,
+            "mean": 22,
+            "none": 11
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 49,
+            "eviction_count": 130,
+            "slot_allocation_count": 132,
+            "value_model_updates": 64,
+            "utility_cpu_s": 126.796875,
+            "model_update_cpu_s": 0.0,
+            "package_serialization_cpu_s": 0.71875,
+            "total_cpu_s": 133.0625,
+            "wall_s": 135.97275770000124
+          },
+          "peak_package_bytes": 240386,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "A0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "A1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "18b5f26878a5ffa2ced2a70d1a6093e9b2edf0a41d722a4b8cc68b80354dcd07",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 3.725290298461914e-09,
+              "per_slot_preservation_error": [
+                3.725290298461914e-09,
+                3.725290298461914e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 181300,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236866,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__dynamics__seed_23103__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23103,
+        "pair_kind": "dynamics",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23103\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23103\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23103\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23103\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23103\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": -1464.0299999977844,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.014441583806796327,
+          "postwarmup_reward_sum": -1415.8699999978796,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.014402974446593013,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -48.16000000000188,
+            "outcome": -1415.8699999978796
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": -1464.0299999999968,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.01444158380681815,
+          "postwarmup_reward_sum": -1415.8699999999967,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.01440297444661455,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -48.160000000000025,
+            "outcome": -1415.8699999999967
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 18,
+          "replace": 10,
+          "mean": 26,
+          "none": 10,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 18,
+          "replace": 10,
+          "mean": 26,
+          "none": 10
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 5.6084324363531484e-05,
+            "intercept": 5.3397645674620544e-05
+          },
+          "tail_prediction_bias": {
+            "linear": 0.002803376496524829,
+            "intercept": 0.003147480752880534
+          },
+          "action_support_counts": {
+            "keep": 18,
+            "replace": 10,
+            "mean": 26,
+            "none": 10
+          },
+          "tail_action_support_counts": {
+            "keep": 8,
+            "replace": 5,
+            "mean": 13,
+            "none": 6
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 126.953125,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.015625,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0012914339701334636,
+          "sum_blockwise_cpu_deductions_per_step": 0.08265177408854167,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 46,
+          "eviction_count": 131,
+          "slot_allocation_count": 133,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.640625,
+          "total_cpu_s": 133.1875,
+          "wall_s": 136.08778440000606,
+          "utility_cpu_s": 126.953125,
+          "model_update_cpu_s": 0.015625
+        },
+        "peak_package_bytes": 240386,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__dynamics__seed_23103__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23103,
+          "pair_kind": "dynamics",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/dynamics/seed_23103/random/summary.json",
+          "preactions_path": "streams/dynamics/seed_23103/random/preactions.jsonl",
+          "feedback_path": "streams/dynamics/seed_23103/random/feedback.jsonl",
+          "bouts_path": "streams/dynamics/seed_23103/random/bouts.jsonl",
+          "package_events_path": "streams/dynamics/seed_23103/random/package_events.jsonl",
+          "rawsteps_path": "streams/dynamics/seed_23103/random/rawsteps.csv",
+          "rollouts_path": "streams/dynamics/seed_23103/random/rollouts.csv",
+          "outcome_return_sum": -1415.8699999978796,
+          "warmup_return_sum": -48.16000000000188,
+          "total_reward_sum": -1464.0299999977844,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 127,
+            "recurred_after_eviction_rate": 0.6614583333333334,
+            "natural_eviction_count": 129,
+            "recurrent_first256_reward_per_step_mean": -0.016066683070866138,
+            "recurrent_first512_return_mean": -8.417086614173227,
+            "recurrent_full_return_mean": -8.417086614173227
+          },
+          "storage_action_counts": {
+            "keep": 18,
+            "replace": 10,
+            "mean": 26,
+            "none": 10
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 46,
+            "eviction_count": 131,
+            "slot_allocation_count": 133,
+            "value_model_updates": 64,
+            "utility_cpu_s": 126.953125,
+            "model_update_cpu_s": 0.015625,
+            "package_serialization_cpu_s": 0.640625,
+            "total_cpu_s": 133.1875,
+            "wall_s": 136.08778440000606
+          },
+          "peak_package_bytes": 240386,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "B0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "B1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "6024ab8fdb2409dc576ce87edd40546bc41b78916de5405ad6f62fa9d8f78d7b",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 3.725290298461914e-09,
+              "per_slot_preservation_error": [
+                3.725290298461914e-09,
+                3.725290298461914e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 180916,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236482,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__dynamics__seed_23104__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23104,
+        "pair_kind": "dynamics",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23104\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23104\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23104\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23104\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23104\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": -1587.2799999977249,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.015657354797957355,
+          "postwarmup_reward_sum": -1526.6199999978642,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.01552958170570744,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -60.660000000002064,
+            "outcome": -1526.6199999978642
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": -1587.2799999999959,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.015657354797979757,
+          "postwarmup_reward_sum": -1526.6199999999958,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.015529581705729123,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -60.66000000000002,
+            "outcome": -1526.6199999999958
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 19,
+          "replace": 8,
+          "mean": 19,
+          "none": 18,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 19,
+          "replace": 8,
+          "mean": 19,
+          "none": 18
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 4.5798779283716405e-05,
+            "intercept": 4.352984144252809e-05
+          },
+          "tail_prediction_bias": {
+            "linear": 0.003631775178593838,
+            "intercept": 0.0036656166840209068
+          },
+          "action_support_counts": {
+            "keep": 19,
+            "replace": 8,
+            "mean": 19,
+            "none": 18
+          },
+          "tail_action_support_counts": {
+            "keep": 10,
+            "replace": 4,
+            "mean": 6,
+            "none": 12
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 126.015625,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.0,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0012818972269694011,
+          "sum_blockwise_cpu_deductions_per_step": 0.08204142252604167,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 45,
+          "eviction_count": 130,
+          "slot_allocation_count": 132,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.5625,
+          "total_cpu_s": 131.375,
+          "wall_s": 133.74252870000782,
+          "utility_cpu_s": 126.015625,
+          "model_update_cpu_s": 0.0
+        },
+        "peak_package_bytes": 240194,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__dynamics__seed_23104__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23104,
+          "pair_kind": "dynamics",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/dynamics/seed_23104/random/summary.json",
+          "preactions_path": "streams/dynamics/seed_23104/random/preactions.jsonl",
+          "feedback_path": "streams/dynamics/seed_23104/random/feedback.jsonl",
+          "bouts_path": "streams/dynamics/seed_23104/random/bouts.jsonl",
+          "package_events_path": "streams/dynamics/seed_23104/random/package_events.jsonl",
+          "rawsteps_path": "streams/dynamics/seed_23104/random/rawsteps.csv",
+          "rollouts_path": "streams/dynamics/seed_23104/random/rollouts.csv",
+          "outcome_return_sum": -1526.6199999978642,
+          "warmup_return_sum": -60.660000000002064,
+          "total_reward_sum": -1587.2799999977249,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 126,
+            "recurred_after_eviction_rate": 0.65625,
+            "natural_eviction_count": 128,
+            "recurrent_first256_reward_per_step_mean": -0.019141555059523804,
+            "recurrent_first512_return_mean": -9.407619047619045,
+            "recurrent_full_return_mean": -9.407619047619045
+          },
+          "storage_action_counts": {
+            "keep": 19,
+            "replace": 8,
+            "mean": 19,
+            "none": 18
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 45,
+            "eviction_count": 130,
+            "slot_allocation_count": 132,
+            "value_model_updates": 64,
+            "utility_cpu_s": 126.015625,
+            "model_update_cpu_s": 0.0,
+            "package_serialization_cpu_s": 0.5625,
+            "total_cpu_s": 131.375,
+            "wall_s": 133.74252870000782
+          },
+          "peak_package_bytes": 240194,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "B0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "B1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "2e6818495656af5d4fc762d3f7f450a189171e160c0783db5cba3cf46ffdaf12",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 7.450580596923828e-09,
+              "per_slot_preservation_error": [
+                7.450580596923828e-09,
+                7.450580596923828e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 181108,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236674,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__dynamics__seed_23105__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23105,
+        "pair_kind": "dynamics",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23105\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23105\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23105\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23105\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23105\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": -1609.0299999977085,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.01587190261992689,
+          "postwarmup_reward_sum": -1561.8699999977673,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.015888163248675206,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -47.16000000000225,
+            "outcome": -1561.8699999977673
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": -1609.0299999999947,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.015871902619949443,
+          "postwarmup_reward_sum": -1561.8699999999947,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.01588816324869786,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -47.160000000000025,
+            "outcome": -1561.8699999999947
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 18,
+          "replace": 15,
+          "mean": 15,
+          "none": 16,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 18,
+          "replace": 15,
+          "mean": 15,
+          "none": 16
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 4.995130199589579e-05,
+            "intercept": 5.086347103288979e-05
+          },
+          "tail_prediction_bias": {
+            "linear": 0.002660011247852781,
+            "intercept": 0.0032206649374725105
+          },
+          "action_support_counts": {
+            "keep": 18,
+            "replace": 15,
+            "mean": 15,
+            "none": 16
+          },
+          "tail_action_support_counts": {
+            "keep": 10,
+            "replace": 8,
+            "mean": 8,
+            "none": 6
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 126.421875,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.015625,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0012860298156738281,
+          "sum_blockwise_cpu_deductions_per_step": 0.082305908203125,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 46,
+          "eviction_count": 131,
+          "slot_allocation_count": 133,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.671875,
+          "total_cpu_s": 131.78125,
+          "wall_s": 133.8166104999982,
+          "utility_cpu_s": 126.421875,
+          "model_update_cpu_s": 0.015625
+        },
+        "peak_package_bytes": 240066,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__dynamics__seed_23105__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23105,
+          "pair_kind": "dynamics",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/dynamics/seed_23105/random/summary.json",
+          "preactions_path": "streams/dynamics/seed_23105/random/preactions.jsonl",
+          "feedback_path": "streams/dynamics/seed_23105/random/feedback.jsonl",
+          "bouts_path": "streams/dynamics/seed_23105/random/bouts.jsonl",
+          "package_events_path": "streams/dynamics/seed_23105/random/package_events.jsonl",
+          "rawsteps_path": "streams/dynamics/seed_23105/random/rawsteps.csv",
+          "rollouts_path": "streams/dynamics/seed_23105/random/rollouts.csv",
+          "outcome_return_sum": -1561.8699999977673,
+          "warmup_return_sum": -47.16000000000225,
+          "total_reward_sum": -1609.0299999977085,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 127,
+            "recurred_after_eviction_rate": 0.6614583333333334,
+            "natural_eviction_count": 129,
+            "recurrent_first256_reward_per_step_mean": -0.020103654035433065,
+            "recurrent_first512_return_mean": -9.50566929133858,
+            "recurrent_full_return_mean": -9.50566929133858
+          },
+          "storage_action_counts": {
+            "keep": 18,
+            "replace": 15,
+            "mean": 15,
+            "none": 16
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 46,
+            "eviction_count": 131,
+            "slot_allocation_count": 133,
+            "value_model_updates": 64,
+            "utility_cpu_s": 126.421875,
+            "model_update_cpu_s": 0.015625,
+            "package_serialization_cpu_s": 0.671875,
+            "total_cpu_s": 131.78125,
+            "wall_s": 133.8166104999982
+          },
+          "peak_package_bytes": 240066,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "B0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "B1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "7e593576586dabd66a9c1b734bdc761d856d02af9e7c34f7ab8147a4af2a6886",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 7.450580596923828e-09,
+              "per_slot_preservation_error": [
+                7.450580596923828e-09,
+                3.725290298461914e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 180980,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236546,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__dynamics__seed_23107__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23107,
+        "pair_kind": "dynamics",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23107\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23107\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23107\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23107\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\dynamics\\seed_23107\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": -1585.0299999976169,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.015635160195683562,
+          "postwarmup_reward_sum": -1525.8699999977014,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.015521952311174534,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -59.16000000000233,
+            "outcome": -1525.8699999977014
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": -1585.0299999999957,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": -0.01563516019570703,
+          "postwarmup_reward_sum": -1525.8699999999956,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": -0.015521952311197872,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -59.16000000000002,
+            "outcome": -1525.8699999999956
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 16,
+          "replace": 16,
+          "mean": 16,
+          "none": 16,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 16,
+          "replace": 16,
+          "mean": 16,
+          "none": 16
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 4.296079913085136e-05,
+            "intercept": 3.6190879029656184e-05
+          },
+          "tail_prediction_bias": {
+            "linear": 0.002113481690929381,
+            "intercept": 0.00236660167202651
+          },
+          "action_support_counts": {
+            "keep": 16,
+            "replace": 16,
+            "mean": 16,
+            "none": 16
+          },
+          "tail_action_support_counts": {
+            "keep": 8,
+            "replace": 7,
+            "mean": 8,
+            "none": 9
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 125.6875,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.015625,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0012785593668619792,
+          "sum_blockwise_cpu_deductions_per_step": 0.08182779947916667,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 48,
+          "eviction_count": 131,
+          "slot_allocation_count": 133,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.71875,
+          "total_cpu_s": 131.015625,
+          "wall_s": 133.94637190000503,
+          "utility_cpu_s": 125.6875,
+          "model_update_cpu_s": 0.015625
+        },
+        "peak_package_bytes": 240002,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__dynamics__seed_23107__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23107,
+          "pair_kind": "dynamics",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/dynamics/seed_23107/random/summary.json",
+          "preactions_path": "streams/dynamics/seed_23107/random/preactions.jsonl",
+          "feedback_path": "streams/dynamics/seed_23107/random/feedback.jsonl",
+          "bouts_path": "streams/dynamics/seed_23107/random/bouts.jsonl",
+          "package_events_path": "streams/dynamics/seed_23107/random/package_events.jsonl",
+          "rawsteps_path": "streams/dynamics/seed_23107/random/rawsteps.csv",
+          "rollouts_path": "streams/dynamics/seed_23107/random/rollouts.csv",
+          "outcome_return_sum": -1525.8699999977014,
+          "warmup_return_sum": -59.16000000000233,
+          "total_reward_sum": -1585.0299999976169,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 127,
+            "recurred_after_eviction_rate": 0.6614583333333334,
+            "natural_eviction_count": 129,
+            "recurrent_first256_reward_per_step_mean": -0.015436146653543313,
+            "recurrent_first512_return_mean": -8.775354330708659,
+            "recurrent_full_return_mean": -8.775354330708659
+          },
+          "storage_action_counts": {
+            "keep": 16,
+            "replace": 16,
+            "mean": 16,
+            "none": 16
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 48,
+            "eviction_count": 131,
+            "slot_allocation_count": 133,
+            "value_model_updates": 64,
+            "utility_cpu_s": 125.6875,
+            "model_update_cpu_s": 0.015625,
+            "package_serialization_cpu_s": 0.71875,
+            "total_cpu_s": 131.015625,
+            "wall_s": 133.94637190000503
+          },
+          "peak_package_bytes": 240002,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "A0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "A1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "33dc8fa1773b70916a1dca82c42b7dffad35a7e8bb4468340cdbd81452da3402",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 7.450580596923828e-09,
+              "per_slot_preservation_error": [
+                1.862645149230957e-09,
+                7.450580596923828e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 180788,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236354,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__reward_conflict__seed_23101__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23101,
+        "pair_kind": "reward_conflict",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23101\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23101\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23101\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23101\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23101\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": 268.2800000000748,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.00264638573232397,
+          "postwarmup_reward_sum": 254.2500000000558,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0025863647460943177,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": 14.029999999999772,
+            "outcome": 254.2500000000558
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": 268.2799999999999,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.0026463857323232314,
+          "postwarmup_reward_sum": 254.24999999999994,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0025863647460937496,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": 14.029999999999989,
+            "outcome": 254.24999999999994
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 13,
+          "replace": 12,
+          "mean": 19,
+          "none": 20,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 13,
+          "replace": 12,
+          "mean": 19,
+          "none": 20
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 6.254606154747207e-05,
+            "intercept": 7.243408428931478e-05
+          },
+          "tail_prediction_bias": {
+            "linear": 0.000992603079531001,
+            "intercept": 0.0009692206574830507
+          },
+          "action_support_counts": {
+            "keep": 13,
+            "replace": 12,
+            "mean": 19,
+            "none": 20
+          },
+          "tail_action_support_counts": {
+            "keep": 7,
+            "replace": 7,
+            "mean": 9,
+            "none": 9
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 102.28125,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.015625,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0010404586791992188,
+          "sum_blockwise_cpu_deductions_per_step": 0.06658935546875,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 51,
+          "eviction_count": 131,
+          "slot_allocation_count": 133,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.421875,
+          "total_cpu_s": 107.40625,
+          "wall_s": 109.0578208000079,
+          "utility_cpu_s": 102.28125,
+          "model_update_cpu_s": 0.015625
+        },
+        "peak_package_bytes": 239618,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__reward_conflict__seed_23101__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23101,
+          "pair_kind": "reward_conflict",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/reward_conflict/seed_23101/random/summary.json",
+          "preactions_path": "streams/reward_conflict/seed_23101/random/preactions.jsonl",
+          "feedback_path": "streams/reward_conflict/seed_23101/random/feedback.jsonl",
+          "bouts_path": "streams/reward_conflict/seed_23101/random/bouts.jsonl",
+          "package_events_path": "streams/reward_conflict/seed_23101/random/package_events.jsonl",
+          "rawsteps_path": "streams/reward_conflict/seed_23101/random/rawsteps.csv",
+          "rollouts_path": "streams/reward_conflict/seed_23101/random/rollouts.csv",
+          "outcome_return_sum": 254.2500000000558,
+          "warmup_return_sum": 14.029999999999772,
+          "total_reward_sum": 268.2800000000748,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 127,
+            "recurred_after_eviction_rate": 0.6614583333333334,
+            "natural_eviction_count": 129,
+            "recurrent_first256_reward_per_step_mean": 0.00019438976377952763,
+            "recurrent_first512_return_mean": 0.41645669291338583,
+            "recurrent_full_return_mean": 0.41645669291338583
+          },
+          "storage_action_counts": {
+            "keep": 13,
+            "replace": 12,
+            "mean": 19,
+            "none": 20
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 51,
+            "eviction_count": 131,
+            "slot_allocation_count": 133,
+            "value_model_updates": 64,
+            "utility_cpu_s": 102.28125,
+            "model_update_cpu_s": 0.015625,
+            "package_serialization_cpu_s": 0.421875,
+            "total_cpu_s": 107.40625,
+            "wall_s": 109.0578208000079
+          },
+          "peak_package_bytes": 239618,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "A0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "A1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "a804935f3d19ad86a74304f541d298fbb1e6da16af3b545e4e2a51cd3d55da60",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 1.862645149230957e-09,
+              "per_slot_preservation_error": [
+                1.862645149230957e-09,
+                9.313225746154785e-10
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 180852,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236418,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__reward_conflict__seed_23102__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23102,
+        "pair_kind": "reward_conflict",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23102\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23102\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23102\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23102\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23102\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": 319.4700000000183,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.0031513375946971497,
+          "postwarmup_reward_sum": 289.2500000000206,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0029424031575522925,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": 30.21999999999997,
+            "outcome": 289.2500000000206
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": 319.46999999999997,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.0031513375946969693,
+          "postwarmup_reward_sum": 289.24999999999994,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0029424031575520826,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": 30.22000000000001,
+            "outcome": 289.24999999999994
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 11,
+          "replace": 15,
+          "mean": 21,
+          "none": 17,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 11,
+          "replace": 15,
+          "mean": 21,
+          "none": 17
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 8.734636168394484e-05,
+            "intercept": 8.967393565452678e-05
+          },
+          "tail_prediction_bias": {
+            "linear": 0.0012545023497225647,
+            "intercept": 0.00133812592764071
+          },
+          "action_support_counts": {
+            "keep": 11,
+            "replace": 15,
+            "mean": 21,
+            "none": 17
+          },
+          "tail_action_support_counts": {
+            "keep": 4,
+            "replace": 9,
+            "mean": 11,
+            "none": 8
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 102.15625,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.015625,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0010391871134440105,
+          "sum_blockwise_cpu_deductions_per_step": 0.06650797526041667,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 53,
+          "eviction_count": 130,
+          "slot_allocation_count": 132,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.453125,
+          "total_cpu_s": 107.421875,
+          "wall_s": 109.11882999999216,
+          "utility_cpu_s": 102.15625,
+          "model_update_cpu_s": 0.015625
+        },
+        "peak_package_bytes": 239554,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__reward_conflict__seed_23102__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23102,
+          "pair_kind": "reward_conflict",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/reward_conflict/seed_23102/random/summary.json",
+          "preactions_path": "streams/reward_conflict/seed_23102/random/preactions.jsonl",
+          "feedback_path": "streams/reward_conflict/seed_23102/random/feedback.jsonl",
+          "bouts_path": "streams/reward_conflict/seed_23102/random/bouts.jsonl",
+          "package_events_path": "streams/reward_conflict/seed_23102/random/package_events.jsonl",
+          "rawsteps_path": "streams/reward_conflict/seed_23102/random/rawsteps.csv",
+          "rollouts_path": "streams/reward_conflict/seed_23102/random/rollouts.csv",
+          "outcome_return_sum": 289.2500000000206,
+          "warmup_return_sum": 30.21999999999997,
+          "total_reward_sum": 319.4700000000183,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 126,
+            "recurred_after_eviction_rate": 0.65625,
+            "natural_eviction_count": 128,
+            "recurrent_first256_reward_per_step_mean": -0.000496031746031746,
+            "recurrent_first512_return_mean": 0.3908730158730158,
+            "recurrent_full_return_mean": 0.3908730158730158
+          },
+          "storage_action_counts": {
+            "keep": 11,
+            "replace": 15,
+            "mean": 21,
+            "none": 17
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 53,
+            "eviction_count": 130,
+            "slot_allocation_count": 132,
+            "value_model_updates": 64,
+            "utility_cpu_s": 102.15625,
+            "model_update_cpu_s": 0.015625,
+            "package_serialization_cpu_s": 0.453125,
+            "total_cpu_s": 107.421875,
+            "wall_s": 109.11882999999216
+          },
+          "peak_package_bytes": 239554,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "A0-",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "A1-",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "70fbe5ccc60b95e4072f2bb090ce337573eae55031e905b3adf21ed50f2892fe",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 3.725290298461914e-09,
+              "per_slot_preservation_error": [
+                3.725290298461914e-09,
+                1.862645149230957e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 181300,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236866,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__reward_conflict__seed_23103__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23103,
+        "pair_kind": "reward_conflict",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23103\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23103\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23103\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23103\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23103\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": 351.030000000071,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.003462653882576458,
+          "postwarmup_reward_sum": 350.7500000000725,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0035680135091153207,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": 0.27999999999978153,
+            "outcome": 350.7500000000725
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": 351.0299999999999,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.003462653882575757,
+          "postwarmup_reward_sum": 350.74999999999994,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0035680135091145826,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": 0.2799999999999869,
+            "outcome": 350.74999999999994
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 15,
+          "replace": 17,
+          "mean": 17,
+          "none": 15,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 15,
+          "replace": 17,
+          "mean": 17,
+          "none": 15
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 3.880774037250878e-05,
+            "intercept": 4.048427935401366e-05
+          },
+          "tail_prediction_bias": {
+            "linear": -0.00015044594306515253,
+            "intercept": -0.0005063921235273783
+          },
+          "action_support_counts": {
+            "keep": 15,
+            "replace": 17,
+            "mean": 17,
+            "none": 15
+          },
+          "tail_action_support_counts": {
+            "keep": 6,
+            "replace": 10,
+            "mean": 6,
+            "none": 10
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 102.28125,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.0,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0010404586791992188,
+          "sum_blockwise_cpu_deductions_per_step": 0.06658935546875,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 49,
+          "eviction_count": 131,
+          "slot_allocation_count": 133,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.640625,
+          "total_cpu_s": 107.609375,
+          "wall_s": 109.24014080000052,
+          "utility_cpu_s": 102.28125,
+          "model_update_cpu_s": 0.0
+        },
+        "peak_package_bytes": 240002,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__reward_conflict__seed_23103__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23103,
+          "pair_kind": "reward_conflict",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/reward_conflict/seed_23103/random/summary.json",
+          "preactions_path": "streams/reward_conflict/seed_23103/random/preactions.jsonl",
+          "feedback_path": "streams/reward_conflict/seed_23103/random/feedback.jsonl",
+          "bouts_path": "streams/reward_conflict/seed_23103/random/bouts.jsonl",
+          "package_events_path": "streams/reward_conflict/seed_23103/random/package_events.jsonl",
+          "rawsteps_path": "streams/reward_conflict/seed_23103/random/rawsteps.csv",
+          "rollouts_path": "streams/reward_conflict/seed_23103/random/rollouts.csv",
+          "outcome_return_sum": 350.7500000000725,
+          "warmup_return_sum": 0.27999999999978153,
+          "total_reward_sum": 351.030000000071,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 127,
+            "recurred_after_eviction_rate": 0.6614583333333334,
+            "natural_eviction_count": 129,
+            "recurrent_first256_reward_per_step_mean": 0.0011632627952755908,
+            "recurrent_first512_return_mean": 0.5680314960629923,
+            "recurrent_full_return_mean": 0.5680314960629923
+          },
+          "storage_action_counts": {
+            "keep": 15,
+            "replace": 17,
+            "mean": 17,
+            "none": 15
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 49,
+            "eviction_count": 131,
+            "slot_allocation_count": 133,
+            "value_model_updates": 64,
+            "utility_cpu_s": 102.28125,
+            "model_update_cpu_s": 0.0,
+            "package_serialization_cpu_s": 0.640625,
+            "total_cpu_s": 107.609375,
+            "wall_s": 109.24014080000052
+          },
+          "peak_package_bytes": 240002,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "B0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "B1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "6024ab8fdb2409dc576ce87edd40546bc41b78916de5405ad6f62fa9d8f78d7b",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 3.725290298461914e-09,
+              "per_slot_preservation_error": [
+                3.725290298461914e-09,
+                3.725290298461914e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 180852,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236418,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__reward_conflict__seed_23104__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23104,
+        "pair_kind": "reward_conflict",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23104\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23104\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23104\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23104\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23104\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": 221.52999999999878,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.0021852312184343315,
+          "postwarmup_reward_sum": 258.000000000001,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0026245117187500104,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -36.469999999999736,
+            "outcome": 258.000000000001
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": 221.53000000000006,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.002185231218434344,
+          "postwarmup_reward_sum": 258.00000000000006,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0026245117187500004,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -36.47,
+            "outcome": 258.00000000000006
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 21,
+          "replace": 10,
+          "mean": 17,
+          "none": 16,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 21,
+          "replace": 10,
+          "mean": 17,
+          "none": 16
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 5.786596621464163e-05,
+            "intercept": 6.890149326492696e-05
+          },
+          "tail_prediction_bias": {
+            "linear": -0.0009095616774377338,
+            "intercept": -0.0016080127001832083
+          },
+          "action_support_counts": {
+            "keep": 21,
+            "replace": 10,
+            "mean": 17,
+            "none": 16
+          },
+          "tail_action_support_counts": {
+            "keep": 10,
+            "replace": 8,
+            "mean": 6,
+            "none": 8
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 81.609375,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.0,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0008301734924316406,
+          "sum_blockwise_cpu_deductions_per_step": 0.053131103515625,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 43,
+          "eviction_count": 130,
+          "slot_allocation_count": 132,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.421875,
+          "total_cpu_s": 85.125,
+          "wall_s": 86.05901280000398,
+          "utility_cpu_s": 81.609375,
+          "model_update_cpu_s": 0.0
+        },
+        "peak_package_bytes": 239682,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__reward_conflict__seed_23104__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23104,
+          "pair_kind": "reward_conflict",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/reward_conflict/seed_23104/random/summary.json",
+          "preactions_path": "streams/reward_conflict/seed_23104/random/preactions.jsonl",
+          "feedback_path": "streams/reward_conflict/seed_23104/random/feedback.jsonl",
+          "bouts_path": "streams/reward_conflict/seed_23104/random/bouts.jsonl",
+          "package_events_path": "streams/reward_conflict/seed_23104/random/package_events.jsonl",
+          "rawsteps_path": "streams/reward_conflict/seed_23104/random/rawsteps.csv",
+          "rollouts_path": "streams/reward_conflict/seed_23104/random/rollouts.csv",
+          "outcome_return_sum": 258.000000000001,
+          "warmup_return_sum": -36.469999999999736,
+          "total_reward_sum": 221.52999999999878,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 126,
+            "recurred_after_eviction_rate": 0.65625,
+            "natural_eviction_count": 128,
+            "recurrent_first256_reward_per_step_mean": -0.0003255208333333331,
+            "recurrent_first512_return_mean": 0.5515873015873015,
+            "recurrent_full_return_mean": 0.5515873015873015
+          },
+          "storage_action_counts": {
+            "keep": 21,
+            "replace": 10,
+            "mean": 17,
+            "none": 16
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 43,
+            "eviction_count": 130,
+            "slot_allocation_count": 132,
+            "value_model_updates": 64,
+            "utility_cpu_s": 81.609375,
+            "model_update_cpu_s": 0.0,
+            "package_serialization_cpu_s": 0.421875,
+            "total_cpu_s": 85.125,
+            "wall_s": 86.05901280000398
+          },
+          "peak_package_bytes": 239682,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "B0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "B1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "2e6818495656af5d4fc762d3f7f450a189171e160c0783db5cba3cf46ffdaf12",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 7.450580596923828e-09,
+              "per_slot_preservation_error": [
+                7.450580596923828e-09,
+                7.450580596923828e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 180532,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236098,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__reward_conflict__seed_23105__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23105,
+        "pair_kind": "reward_conflict",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23105\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23105\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23105\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23105\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23105\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": 378.4699999999643,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.00373332938762591,
+          "postwarmup_reward_sum": 338.99999999992866,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0034484863281242745,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": 39.47000000000021,
+            "outcome": 338.99999999992866
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": 378.47,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.0037333293876262628,
+          "postwarmup_reward_sum": 339.00000000000006,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.0034484863281250004,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": 39.47,
+            "outcome": 339.00000000000006
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 12,
+          "replace": 16,
+          "mean": 17,
+          "none": 19,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 12,
+          "replace": 16,
+          "mean": 17,
+          "none": 19
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 4.759157513537926e-05,
+            "intercept": 5.478243174931115e-05
+          },
+          "tail_prediction_bias": {
+            "linear": -0.0008447025059287626,
+            "intercept": -0.0002522159435337893
+          },
+          "action_support_counts": {
+            "keep": 12,
+            "replace": 16,
+            "mean": 17,
+            "none": 19
+          },
+          "tail_action_support_counts": {
+            "keep": 8,
+            "replace": 7,
+            "mean": 7,
+            "none": 10
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 81.421875,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.0,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0008282661437988281,
+          "sum_blockwise_cpu_deductions_per_step": 0.053009033203125,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 52,
+          "eviction_count": 131,
+          "slot_allocation_count": 133,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.390625,
+          "total_cpu_s": 84.875,
+          "wall_s": 85.81539770000381,
+          "utility_cpu_s": 81.421875,
+          "model_update_cpu_s": 0.0
+        },
+        "peak_package_bytes": 239554,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__reward_conflict__seed_23105__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23105,
+          "pair_kind": "reward_conflict",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/reward_conflict/seed_23105/random/summary.json",
+          "preactions_path": "streams/reward_conflict/seed_23105/random/preactions.jsonl",
+          "feedback_path": "streams/reward_conflict/seed_23105/random/feedback.jsonl",
+          "bouts_path": "streams/reward_conflict/seed_23105/random/bouts.jsonl",
+          "package_events_path": "streams/reward_conflict/seed_23105/random/package_events.jsonl",
+          "rawsteps_path": "streams/reward_conflict/seed_23105/random/rawsteps.csv",
+          "rollouts_path": "streams/reward_conflict/seed_23105/random/rollouts.csv",
+          "outcome_return_sum": 338.99999999992866,
+          "warmup_return_sum": 39.47000000000021,
+          "total_reward_sum": 378.4699999999643,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 127,
+            "recurred_after_eviction_rate": 0.6614583333333334,
+            "natural_eviction_count": 129,
+            "recurrent_first256_reward_per_step_mean": 0.00012856791338582672,
+            "recurrent_first512_return_mean": 0.7981102362204724,
+            "recurrent_full_return_mean": 0.7981102362204724
+          },
+          "storage_action_counts": {
+            "keep": 12,
+            "replace": 16,
+            "mean": 17,
+            "none": 19
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 52,
+            "eviction_count": 131,
+            "slot_allocation_count": 133,
+            "value_model_updates": 64,
+            "utility_cpu_s": 81.421875,
+            "model_update_cpu_s": 0.0,
+            "package_serialization_cpu_s": 0.390625,
+            "total_cpu_s": 84.875,
+            "wall_s": 85.81539770000381
+          },
+          "peak_package_bytes": 239554,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "B0-",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "B1-",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "70e81764f627330ccdca0f86bfa8ddbd88684a9048a060d57ccab29aafe41938",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 3.725290298461914e-09,
+              "per_slot_preservation_error": [
+                3.725290298461914e-09,
+                3.725290298461914e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 181172,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236738,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      },
+      {
+        "stream_id": "calibration__reward_conflict__seed_23107__random",
+        "stage": "calibration",
+        "method": "random",
+        "seed": 23107,
+        "pair_kind": "reward_conflict",
+        "status": "completed",
+        "requested_decisions": 64,
+        "completed_decisions": 64,
+        "failure": null,
+        "log_paths": {
+          "summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23107\\random\\summary.json",
+          "preactions": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23107\\random\\preactions.jsonl",
+          "feedback": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23107\\random\\feedback.jsonl",
+          "rawsteps": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23107\\random\\rawsteps.csv",
+          "rollouts": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_main\\streams\\reward_conflict\\seed_23107\\random\\rollouts.csv"
+        },
+        "raw_step_metrics": {
+          "actual_step_rows": 101376,
+          "whole_stream_reward_sum": 262.7800000000793,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.0025921322601017926,
+          "postwarmup_reward_sum": 279.5000000000621,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.002843221028646465,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -16.72,
+            "outcome": 279.5000000000621
+          },
+          "phases_valid": true
+        },
+        "return_metrics": {
+          "whole_stream_reward_sum": 262.77999999999986,
+          "whole_stream_steps": 101376,
+          "whole_stream_return_per_step": 0.002592132260101009,
+          "postwarmup_reward_sum": 279.4999999999999,
+          "postwarmup_steps": 98304,
+          "postwarmup_return_per_step": 0.002843221028645832,
+          "phase_steps": {
+            "warmup": 3072,
+            "outcome": 98304
+          },
+          "phase_reward_sums": {
+            "warmup": -16.720000000000006,
+            "outcome": 279.4999999999999
+          },
+          "metrics_source": "bouts.jsonl"
+        },
+        "return_metrics_source": "bouts.jsonl",
+        "action_support_counts": {
+          "keep": 15,
+          "replace": 16,
+          "mean": 19,
+          "none": 14,
+          "no_retention_operation": 0
+        },
+        "logged_storage_action_counts": {
+          "keep": 15,
+          "replace": 16,
+          "mean": 19,
+          "none": 14
+        },
+        "logged_cost_action_count": 64,
+        "prequential": {
+          "matched_decisions": 64,
+          "tail_expected_decisions": 32,
+          "tail_observed_decisions": 32,
+          "tail_complete": true,
+          "tail_mse": {
+            "linear": 4.536659513091023e-05,
+            "intercept": 5.823935012381275e-05
+          },
+          "tail_prediction_bias": {
+            "linear": -0.0004346287338776627,
+            "intercept": -0.0003890040401259842
+          },
+          "action_support_counts": {
+            "keep": 15,
+            "replace": 16,
+            "mean": 19,
+            "none": 14
+          },
+          "tail_action_support_counts": {
+            "keep": 7,
+            "replace": 8,
+            "mean": 10,
+            "none": 7
+          }
+        },
+        "utility_cost": {
+          "lambda_cpu": 1.0,
+          "utility_cpu_s_observed": 81.53125,
+          "utility_cpu_s_count": 64,
+          "model_update_cpu_s_observed": 0.015625,
+          "model_update_cpu_s_count": 64,
+          "mean_cpu_deduction_per_step": 0.0008293787638346354,
+          "sum_blockwise_cpu_deductions_per_step": 0.053080240885416664,
+          "utility_target_mismatch_count": 0
+        },
+        "recurrence": null,
+        "costs": {
+          "environment_steps": 101376,
+          "warmup_steps": 3072,
+          "outcome_steps": 98304,
+          "ppo_rollouts": 396,
+          "minibatch_updates": 6336,
+          "storage_action_count": 64,
+          "parent_write_count": 49,
+          "eviction_count": 131,
+          "slot_allocation_count": 133,
+          "value_model_updates": 64,
+          "package_serialization_cpu_s": 0.4375,
+          "total_cpu_s": 84.921875,
+          "wall_s": 86.29328549999627,
+          "utility_cpu_s": 81.53125,
+          "model_update_cpu_s": 0.015625
+        },
+        "peak_package_bytes": 239490,
+        "package_budget_bytes": 262144,
+        "actor_container_bytes": 89,
+        "actual_actor_bytes": 89,
+        "model_state_bytes": 1732,
+        "stream_summary": {
+          "stream_id": "calibration__reward_conflict__seed_23107__random",
+          "stage": "calibration",
+          "pilot": false,
+          "method": "random",
+          "seed": 23107,
+          "pair_kind": "reward_conflict",
+          "status": "completed",
+          "requested_decisions": 64,
+          "completed_decisions": 64,
+          "summary_path": "streams/reward_conflict/seed_23107/random/summary.json",
+          "preactions_path": "streams/reward_conflict/seed_23107/random/preactions.jsonl",
+          "feedback_path": "streams/reward_conflict/seed_23107/random/feedback.jsonl",
+          "bouts_path": "streams/reward_conflict/seed_23107/random/bouts.jsonl",
+          "package_events_path": "streams/reward_conflict/seed_23107/random/package_events.jsonl",
+          "rawsteps_path": "streams/reward_conflict/seed_23107/random/rawsteps.csv",
+          "rollouts_path": "streams/reward_conflict/seed_23107/random/rollouts.csv",
+          "outcome_return_sum": 279.5000000000621,
+          "warmup_return_sum": -16.72,
+          "total_reward_sum": 262.7800000000793,
+          "recurrence": {
+            "outcome_bouts": 192,
+            "recurred_after_eviction_count": 127,
+            "recurred_after_eviction_rate": 0.6614583333333334,
+            "natural_eviction_count": 129,
+            "recurrent_first256_reward_per_step_mean": -0.0001670152559055127,
+            "recurrent_first512_return_mean": 0.6762992125984252,
+            "recurrent_full_return_mean": 0.6762992125984252
+          },
+          "storage_action_counts": {
+            "keep": 15,
+            "replace": 16,
+            "mean": 19,
+            "none": 14
+          },
+          "costs": {
+            "environment_steps": 101376,
+            "warmup_steps": 3072,
+            "outcome_steps": 98304,
+            "ppo_rollouts": 396,
+            "minibatch_updates": 6336,
+            "storage_action_count": 64,
+            "parent_write_count": 49,
+            "eviction_count": 131,
+            "slot_allocation_count": 133,
+            "value_model_updates": 64,
+            "utility_cpu_s": 81.53125,
+            "model_update_cpu_s": 0.015625,
+            "package_serialization_cpu_s": 0.4375,
+            "total_cpu_s": 84.921875,
+            "wall_s": 86.29328549999627
+          },
+          "peak_package_bytes": 239490,
+          "actor_container_bytes": 89,
+          "actual_actor_bytes": 89,
+          "model_state_bytes": 1732,
+          "value_models_trained": true,
+          "failure": null,
+          "initial_parent": {
+            "binding": 0,
+            "source_fit_steps": 1024.0,
+            "candidate_provenance": {
+              "candidate_group": 0,
+              "sources": [
+                {
+                  "task": "A0+",
+                  "group": 0,
+                  "variant": 0,
+                  "slot": 0,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 0,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                },
+                {
+                  "task": "A1+",
+                  "group": 0,
+                  "variant": 1,
+                  "slot": 1,
+                  "generation": 1,
+                  "fitted_steps": 1024,
+                  "bout": 1,
+                  "fitted_steps_before_source_pair": 0,
+                  "fitted_steps_added_in_source_pair": 1024
+                }
+              ],
+              "source_fit_steps_mean": 1024.0,
+              "candidate_sha256": "33dc8fa1773b70916a1dca82c42b7dffad35a7e8bb4468340cdbd81452da3402",
+              "candidate_matrix_persisted": false
+            },
+            "install": {
+              "action": "replace",
+              "parent_group": 0,
+              "incumbent_binding": -1,
+              "candidate_group": 0,
+              "bound_slots": [
+                0,
+                1
+              ],
+              "max_effective_preservation_error": 7.450580596923828e-09,
+              "per_slot_preservation_error": [
+                1.862645149230957e-09,
+                7.450580596923828e-09
+              ]
+            }
+          },
+          "warmup_codec": {
+            "actor_bytes": 89,
+            "max_coefficient_error": 0.0,
+            "per_slot_effective_error": [
+              0.0,
+              0.0
+            ],
+            "max_effective_error": 0.0
+          },
+          "initial_package": {
+            "foundation_bytes": 55477,
+            "checkpoint_bytes": 180596,
+            "actor_bytes": 89,
+            "full_persistent_bytes": 236162,
+            "package_budget_bytes": 262144
+          },
+          "rawstep_partial_bouts": []
+        },
+        "complete": true,
+        "incomplete_reasons": []
+      }
+    ]
+  },
+  "comparison": null,
+  "files": {
+    "analysis_json": "analysis.json",
+    "markdown": "report.md",
+    "per_seed_csv": "per_seed.csv",
+    "prequential_csv": "prequential.csv"
+  }
+}

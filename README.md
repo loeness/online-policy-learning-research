@@ -2,7 +2,7 @@
 
 ## GitHub 研究档案入口
 
-本仓库保存原 A、B、B+、压缩对照和 C1 快照；截至 **2026-10-18**，补充了强对照、P0、有界知识组织、V2诊断、共享参数写入、容量压力、完整在线保存决策，以及文献启发后的候选剂量与未来学习交互对照。原快照保留在 `v0.1.0-ab-c1`，新增工作位于 `codex/c1-strong-baselines` 分支；云端覆盖以该分支提交为准。包含原始数据、模型、逐步日志、图表、成功与失败记录、验证过程、算法实现和引用。新实验仍在 C1 受控环境中，不代表已完成一般环境的 C2/C3 基准。
+本仓库保存原 A、B、B+、压缩对照和 C1 快照；截至 **2026-10-19**，补充了强对照、P0、有界知识组织、V2诊断、共享参数写入、容量压力、完整在线保存决策、候选剂量与未来学习交互对照，以及固定规则确认、所选反馈预测和重复写入验证。原快照保留在 `v0.1.0-ab-c1`，新增工作位于 `codex/c1-strong-baselines` 分支；云端覆盖以该分支提交为准。包含原始数据、模型、逐步日志、图表、成功与失败记录、验证过程、算法实现和引用。新实验仍在 C1 受控环境中，不代表已完成一般环境的 C2/C3 基准。
 
 | 阅读目的 | 入口 |
 |---|---|
@@ -17,7 +17,11 @@
 
 先看当前核心报告：
 
-- **[最新：文献启发后的定向验证与下一项算法](docs/SOURCE_FOLLOWUP_REVIEW.md)**：8个新seed、32个共同前缀、512逻辑/384物理PPO分支，再增加128个无梯度分支。旧候选剂量有小幅内容效应，但未通过预设实际量级判据；保存×未来PPO的主条件交互为+0.000019/−0.000528 reward/step，未发现明确正协同。现有lower在一个条件有局部小幅信号，尚非新组织算法验证。评分特征复用未带来有意义的省时。含失败与pilot新增6776832次实际仿真交互，完整正负结果保留。
+- **[最新：固定规则确认、预测与重复写入的顺序验证](docs/ORDERED_RETENTION_VALIDATION_REVIEW.md)**：lower 在 16 个新种子中相对 keep 的 +0.000050 reward/step 未获独立确认。12 条随机流中，历史特征使所选反馈预测 MSE 平均下降约 5.7%，增益集中在奖励冲突条件。随后 80 条流、十方法比较中，学习型写入相对常数预测器的两个条件区间均跨零，明显落后于直接共享 PPO；当前组织算法的策略增量未验证。含 pilot 共新增 9,443,328 次实际仿真交互，完整正负结果保留，未推进树/DAG。
+- [规则确认报告](outputs/lower_confirmation_report/report.md) · [预测校准报告](outputs/retention_value_calibration_report/report.md) · [十方法完整报告](outputs/retention_value_main_report/report.md) · [全流对照图](outputs/ordered_retention_figures/s3_comparison_whole_stream.png) · [逐块轨迹](outputs/ordered_retention_figures/s3_comparison_block_returns.png) · [方法和边界](docs/RETENTION_VALUE_STREAM_METHOD.md)
+- [规则确认审计](outputs/lower_confirmation_audit/main.json) · [预测流审计](outputs/retention_value_calibration_main_audit.json) · [重复写入审计](outputs/retention_value_comparison_main_audit.json) · [45 项软件检查](outputs/ordered_validation_software_checks.json)
+
+- **[上一轮：文献启发后的定向验证与下一项算法](docs/SOURCE_FOLLOWUP_REVIEW.md)**：8个新seed、32个共同前缀、512逻辑/384物理PPO分支，再增加128个无梯度分支。旧候选剂量有小幅内容效应，但未通过预设实际量级判据；保存×未来PPO的主条件交互为+0.000019/−0.000528 reward/step，未发现明确正协同。现有lower在一个条件有局部小幅信号，尚非新组织算法验证。评分特征复用未带来有意义的省时。含失败与pilot新增6776832次实际仿真交互，完整正负结果保留。
 - [合并逐seed报告](outputs/source_followup_main_report/report.md) · [交互图](outputs/source_followup_main_report/learning_interaction_T.png) · [恢复曲线](outputs/source_followup_main_report/learning_mechanism_curves.png) · [最终独立审计](outputs/source_followup_audit/main_final.json) · [source冻结规程](docs/SOURCE_DOSE_PROTOCOL.md) · [未来学习冻结规程](docs/LEARNING_INTERACTION_PROTOCOL.md)
 
 - **[12篇在线学习论文的全文阅读与方法建议](docs/literature/20261018_SYNTHESIS.md)**：430 页正文与附录的分组阅读，逐项区分参数更新、模型路由、短期信用状态与持久知识。重点分析 FOLD 的巩固语义、Sparse Forest 的局部维护、METIS 的带成本选择和各自迁移条件。这里只形成待检验方案，没有新增 RL 实验或 SOTA 比较；[来源、页数与版本索引](docs/literature/20261018_sources.json)保留可核实的三份公开 arXiv 对应。

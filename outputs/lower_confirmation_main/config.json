@@ -1,0 +1,90 @@
+{
+  "format": "storage_decision_v1",
+  "analysis_role": "independent_surrogate_lower_confirmation",
+  "seeds": [
+    22101,
+    22102,
+    22103,
+    22104,
+    22105,
+    22106,
+    22107,
+    22108,
+    22109,
+    22110,
+    22111,
+    22112,
+    22113,
+    22114,
+    22118,
+    22121
+  ],
+  "pair_kinds": [
+    "dynamics"
+  ],
+  "history_regimes": [
+    "old_major",
+    "new_major"
+  ],
+  "future_regimes": [
+    "old_major",
+    "new_major"
+  ],
+  "actions": [
+    "keep",
+    "replace",
+    "mean",
+    "none"
+  ],
+  "bootstrap_steps": 2048,
+  "bout_steps": 1024,
+  "rollout_steps": 256,
+  "local_slots": 2,
+  "shared_groups": 1,
+  "local_learning_rate": 0.003,
+  "shared_learning_rate": 0.0,
+  "critic_learning_rate": 0.003,
+  "actor_budget_bytes": 89,
+  "package_budget_bytes": 262144,
+  "evidence_rows_per_group": 256,
+  "recent_bouts": 8,
+  "max_workers": 3,
+  "torch_threads": 1,
+  "pilot": {
+    "seeds": [
+      22089
+    ],
+    "pair_kinds": [
+      "dynamics"
+    ],
+    "history_regimes": [
+      "old_major"
+    ],
+    "bootstrap_steps": 512,
+    "bout_steps": 256
+  },
+  "gate": {
+    "min_rows": 12,
+    "min_blocks": 3,
+    "min_ess_ratio": 0.2,
+    "max_mean_kl": 0.5,
+    "clip_ratio": 5.0,
+    "stderr_multiplier": 1.0
+  },
+  "report": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20261019,
+    "practical_reward_per_step": 0.002,
+    "primary": "surrogate_lower minus keep, history=future; seed-average histories, stratified A/B cluster bootstrap",
+    "secondary": [
+      "replace",
+      "mean",
+      "frequency"
+    ]
+  },
+  "scope": "One retention decision; known task IDs, boundaries and old/new group supplied to all arms; fixed actor layout, common complete-package cap, continued local PPO and natural LRU eviction. Not unknown-context discovery, repeated adaptive allocation, joint-state optimal storage or a new algorithm claim.",
+  "seed_selection": "first eight unused seeds per old-family A/B while scanning22101..22300; mapping only, no rewards",
+  "confirmation_format": "surrogate_lower_confirmation_v1",
+  "pilot_seed": 20089,
+  "domain": "navigation"
+}

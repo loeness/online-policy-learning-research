@@ -1,0 +1,61 @@
+{
+  "format": "retention_value_stream_audit_v1",
+  "cohort": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_pilot",
+  "stage": "calibration",
+  "pilot": true,
+  "stream_count": 1,
+  "completed_stream_count": 1,
+  "failed_stream_count": 0,
+  "valid": true,
+  "errors": [],
+  "warnings": [
+    {
+      "code": "calibration_protocol_preclarification",
+      "where": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\retention_value_calibration_pilot",
+      "message": "calibration pilot snapshots preserve the original protocol; the fidelity clarification was appended afterward, before main runs",
+      "details": {
+        "frozen_sha256": "ba3f961b96e9a0e042ee0494bf40fb737c256d05a0c9899d73158fd8a2d1083b",
+        "current_sha256": "178f1d780248228e0ad0ae39e83e92c0dd08ec322b1e1e400276fb9992cee5bb",
+        "change": "strict append after frozen protocol bytes"
+      }
+    }
+  ],
+  "protocol_provenance": {
+    "hashes": {
+      "ba3f961b96e9a0e042ee0494bf40fb737c256d05a0c9899d73158fd8a2d1083b": 1
+    },
+    "drift": true,
+    "documented_append": true
+  },
+  "package_accounting": {
+    "cap_bytes": 262144,
+    "measured_persistent_peak_bytes": 238466,
+    "estimated_live_peak_with_preaction_and_candidate_bytes": 240614,
+    "transient_estimate_note": "Estimate adds serialized pre-action row and one float32 3 x 3 candidate (36 bytes) to the preceding package boundary; in-flight package measurements already include serialized pending feedback. This is not a package-cap breach calculation.",
+    "arbitrary_step_exact_resume_supported": false,
+    "resume_note": "Decision-boundary checkpoints have no pending feedback and omit external simulator state; they do not establish exact arbitrary-step environment resumption."
+  },
+  "streams": [
+    {
+      "stream": "streams/dynamics/seed_23089/random",
+      "status": "completed",
+      "method": "random",
+      "pair_kind": "dynamics",
+      "seed": 23089,
+      "requested_decisions": 4,
+      "completed_decisions": 4,
+      "raw_steps": 9216,
+      "rollouts": 36,
+      "minibatch_updates": 576,
+      "selected_action_count": 4,
+      "model_updates": 4,
+      "peak_persistent_package_bytes": 238466,
+      "estimated_peak_with_preaction_and_candidate_bytes": 240614,
+      "utility_cpu_s": 8.125,
+      "model_update_cpu_s": 0.0,
+      "failure": null,
+      "prefix_behavior_sha256": "fb02ebd8f8d215ab70d73ea3cd9d3cef967dbd79e05cbeb79b6b0b87caf243ec",
+      "prefix_behavior_rows": 9216
+    }
+  ]
+}

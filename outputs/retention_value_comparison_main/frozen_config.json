@@ -1,0 +1,756 @@
+{
+  "format": "retention_value_stream_run_config_v1",
+  "stage": "comparison",
+  "pilot": false,
+  "config": {
+    "format": "retention_value_stream_v1",
+    "analysis_role": "selected_feedback_and_repeated_retention",
+    "pair_kinds": [
+      "dynamics",
+      "reward_conflict"
+    ],
+    "local_slots": 2,
+    "shared_groups": 1,
+    "rollout_steps": 256,
+    "local_learning_rate": 0.003,
+    "shared_learning_rate": 0.0,
+    "direct_shared_learning_rate": 0.003,
+    "critic_learning_rate": 0.003,
+    "actor_budget_bytes": 89,
+    "package_budget_bytes": 262144,
+    "evidence_rows_per_group": 256,
+    "recent_bouts": 8,
+    "bootstrap_steps": 1024,
+    "bout_steps": 512,
+    "minimum_source_fitted_steps": 512,
+    "outcome_bouts": 3,
+    "regime_blocks": 8,
+    "checkpoint_every": 8,
+    "max_workers": 6,
+    "torch_threads": 1,
+    "value_model": {
+      "n_features": 6,
+      "ridge": 1.0,
+      "discount": 0.97,
+      "lambda_cpu": 1.0,
+      "epsilon": 0.1,
+      "uniform_warmup_decisions": 16
+    },
+    "gate": {
+      "min_rows": 12,
+      "min_blocks": 3,
+      "min_ess_ratio": 0.2,
+      "max_mean_kl": 0.5,
+      "clip_ratio": 5.0,
+      "stderr_multiplier": 1.0
+    },
+    "calibration": {
+      "seeds": [
+        23101,
+        23102,
+        23103,
+        23104,
+        23105,
+        23107
+      ],
+      "decisions": 64,
+      "methods": [
+        "random"
+      ],
+      "pilot": {
+        "seeds": [
+          23089
+        ],
+        "pair_kinds": [
+          "dynamics"
+        ],
+        "decisions": 4
+      },
+      "primary_tail_decisions": 32
+    },
+    "comparison": {
+      "seeds": [
+        24101,
+        24107,
+        24113,
+        24117
+      ],
+      "decisions": 48,
+      "methods": [
+        "learned_linear",
+        "learned_intercept",
+        "random",
+        "keep",
+        "replace",
+        "mean",
+        "frequency",
+        "lower",
+        "shared_ppo",
+        "independent"
+      ],
+      "pilot": {
+        "seeds": [
+          24089
+        ],
+        "pair_kinds": [
+          "dynamics"
+        ],
+        "decisions": 4
+      }
+    },
+    "report": {
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 20261019,
+      "practical_reward_per_step": 0.002
+    },
+    "scope": "Known task IDs, logical groups and bout boundaries; two local slots and one parent container. Continuous trajectories with natural LRU eviction and selected-action-only feedback. Independent baseline reserves the same unbound parent container; it is not an optimal allocation of spare bytes. No unknown-context, tree/DAG or causal per-write-benefit claim."
+  },
+  "config_path": "D:\\MovedFromC\\ChatGPT\\online\\configs\\retention_value_stream.json",
+  "config_sha256": "44355d8101db57f2fbb4f0a321ebed0ebcd55f4d4ae2b601bd3b8e36a9f85efd",
+  "protocol_path": "D:\\MovedFromC\\ChatGPT\\online\\docs\\RETENTION_VALUE_STREAM_PROTOCOL.md",
+  "protocol_sha256": "178f1d780248228e0ad0ae39e83e92c0dd08ec322b1e1e400276fb9992cee5bb",
+  "requested_grid": [
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "learned_linear",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "learned_intercept",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "random",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "keep",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "replace",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "mean",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "frequency",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "lower",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "shared_ppo",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24101,
+      "method": "independent",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "learned_linear",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "learned_intercept",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "random",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "keep",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "replace",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "mean",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "frequency",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "lower",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "shared_ppo",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24107,
+      "method": "independent",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "learned_linear",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "learned_intercept",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "random",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "keep",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "replace",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "mean",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "frequency",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "lower",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "shared_ppo",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24113,
+      "method": "independent",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "learned_linear",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "learned_intercept",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "random",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "keep",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "replace",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "mean",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "frequency",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "lower",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "shared_ppo",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "dynamics",
+      "seed": 24117,
+      "method": "independent",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "learned_linear",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "learned_intercept",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "random",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "keep",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "replace",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "mean",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "frequency",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "lower",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "shared_ppo",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24101,
+      "method": "independent",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "learned_linear",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "learned_intercept",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "random",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "keep",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "replace",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "mean",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "frequency",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "lower",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "shared_ppo",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24107,
+      "method": "independent",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "learned_linear",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "learned_intercept",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "random",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "keep",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "replace",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "mean",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "frequency",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "lower",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "shared_ppo",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24113,
+      "method": "independent",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "learned_linear",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "learned_intercept",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "random",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "keep",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "replace",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "mean",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "frequency",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "lower",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "shared_ppo",
+      "decisions": 48
+    },
+    {
+      "stage": "comparison",
+      "pilot": false,
+      "pair_kind": "reward_conflict",
+      "seed": 24117,
+      "method": "independent",
+      "decisions": 48
+    }
+  ],
+  "sources_are_frozen_before_run": true,
+  "stage_one_outcomes_read": false
+}

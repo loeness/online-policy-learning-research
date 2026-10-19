@@ -1,0 +1,335 @@
+{
+  "format": "surrogate_lower_confirmation_report_v1",
+  "status": "incomplete_pilot",
+  "input_summary": "D:\\MovedFromC\\ChatGPT\\online\\outputs\\lower_confirmation_pilot\\summary.json",
+  "input_phase": "pilot",
+  "observed_histories": [
+    "old_major"
+  ],
+  "expected_histories": [
+    "old_major"
+  ],
+  "seed_count": 1,
+  "case_count": 1,
+  "family_seed_counts": {
+    "A": 1,
+    "B": 0
+  },
+  "incomplete_reasons": [],
+  "scoring": {
+    "source": "saved, already-paid four physical-action observer branches",
+    "observer_only": true,
+    "branch_outcomes_feed_back_to_learner": false,
+    "primary_selected_action": "case.confirmation_action / selectors.surrogate_lower",
+    "frequency_selected_action": "case.selectors.frequency",
+    "matched_future_only": true
+  },
+  "bootstrap": {
+    "resamples": 10000,
+    "seed": 20261019,
+    "method": "stratified percentile cluster bootstrap over seed; sample 8 old-family A and 8 old-family B with replacement",
+    "confidence_level": 0.95,
+    "computed": false
+  },
+  "tie_rule": "per-seed differences within 1e-12 reward/step of zero count as ties and remain in the full seed denominator",
+  "primary": {
+    "contrast": "surrogate_lower minus keep",
+    "statistical_unit": "seed",
+    "history_aggregation": "equal mean of old_major and new_major matched history=future conditions within seed",
+    "estimate": null,
+    "directional_status": "not_evaluated_incomplete_input",
+    "interpretation_rule": "direction confirmed only if mean > 0 and the stratified percentile 95% CI lower endpoint > 0"
+  },
+  "practical_threshold": {
+    "threshold": 0.002,
+    "status": "not_evaluated_incomplete_input",
+    "estimate": null,
+    "rule": "reported separately; support requires the 95% CI lower endpoint to exceed the original threshold"
+  },
+  "secondary": {
+    "replace": {
+      "estimate": null,
+      "interpretation": "descriptive_secondary_contrast",
+      "positive_negative_tie_denominator": null
+    },
+    "mean": {
+      "estimate": null,
+      "interpretation": "descriptive_secondary_contrast",
+      "positive_negative_tie_denominator": null
+    },
+    "frequency": {
+      "estimate": null,
+      "interpretation": "descriptive_secondary_contrast",
+      "positive_negative_tie_denominator": null
+    },
+    "none": {
+      "estimate": null,
+      "interpretation": "descriptive_secondary_contrast",
+      "positive_negative_tie_denominator": null
+    }
+  },
+  "by_history": {
+    "old_major": {
+      "lower_minus_keep": {
+        "n": 1,
+        "mean": 0.0,
+        "ci95": null,
+        "positive": 0,
+        "negative": 0,
+        "tie": 1,
+        "denominator": 1
+      },
+      "lower_minus_replace": {
+        "n": 1,
+        "mean": 0.0003255208333333322,
+        "ci95": null,
+        "positive": 1,
+        "negative": 0,
+        "tie": 0,
+        "denominator": 1
+      },
+      "lower_minus_mean": {
+        "n": 1,
+        "mean": 0.0005696614583333322,
+        "ci95": null,
+        "positive": 1,
+        "negative": 0,
+        "tie": 0,
+        "denominator": 1
+      },
+      "lower_minus_frequency": {
+        "n": 1,
+        "mean": 0.0,
+        "ci95": null,
+        "positive": 0,
+        "negative": 0,
+        "tie": 1,
+        "denominator": 1
+      },
+      "lower_minus_none": {
+        "n": 1,
+        "mean": 0.0008138020833333322,
+        "ci95": null,
+        "positive": 1,
+        "negative": 0,
+        "tie": 0,
+        "denominator": 1
+      }
+    },
+    "new_major": {
+      "lower_minus_keep": {
+        "n": 0,
+        "mean": null,
+        "ci95": null,
+        "positive": 0,
+        "negative": 0,
+        "tie": 0,
+        "denominator": 0
+      },
+      "lower_minus_replace": {
+        "n": 0,
+        "mean": null,
+        "ci95": null,
+        "positive": 0,
+        "negative": 0,
+        "tie": 0,
+        "denominator": 0
+      },
+      "lower_minus_mean": {
+        "n": 0,
+        "mean": null,
+        "ci95": null,
+        "positive": 0,
+        "negative": 0,
+        "tie": 0,
+        "denominator": 0
+      },
+      "lower_minus_frequency": {
+        "n": 0,
+        "mean": null,
+        "ci95": null,
+        "positive": 0,
+        "negative": 0,
+        "tie": 0,
+        "denominator": 0
+      },
+      "lower_minus_none": {
+        "n": 0,
+        "mean": null,
+        "ci95": null,
+        "positive": 0,
+        "negative": 0,
+        "tie": 0,
+        "denominator": 0
+      }
+    }
+  },
+  "by_old_family": {
+    "A": {
+      "seed_count": 0,
+      "metrics": {
+        "lower_minus_keep": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        },
+        "lower_minus_replace": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        },
+        "lower_minus_mean": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        },
+        "lower_minus_frequency": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        },
+        "lower_minus_none": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        }
+      }
+    },
+    "B": {
+      "seed_count": 0,
+      "metrics": {
+        "lower_minus_keep": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        },
+        "lower_minus_replace": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        },
+        "lower_minus_mean": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        },
+        "lower_minus_frequency": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        },
+        "lower_minus_none": {
+          "n": 0,
+          "mean": null,
+          "ci95": null,
+          "positive": 0,
+          "negative": 0,
+          "tie": 0,
+          "denominator": 0
+        }
+      }
+    }
+  },
+  "costs": {
+    "environment_steps_total": 15360.0,
+    "prefix_environment_steps": 3072.0,
+    "branch_environment_steps": 12288.0,
+    "cpu_s": 22.546875,
+    "child_cpu_s": 22.453125,
+    "orchestrator_cpu_s": 0.09375,
+    "wall_s": 25.551231300007203,
+    "prefix_cpu_s": 3.578125,
+    "branch_cpu_s": 18.109375,
+    "prefix_wall_s": 3.741324299990083,
+    "branch_wall_s": 18.704627899991465,
+    "actual_prefix_rows": 3072,
+    "actual_branch_rows": 12288,
+    "actual_rows": 15360,
+    "actual_rows_complete": true
+  },
+  "per_seed": [
+    {
+      "seed": 22089,
+      "old_family": "A",
+      "case_count": 1,
+      "matched_history_count": 1,
+      "expected_history_count": 1,
+      "history_metrics": {
+        "old_major": {
+          "surrogate_lower": -0.01657226562500001,
+          "keep": -0.01657226562500001,
+          "replace": -0.01689778645833334,
+          "mean": -0.01714192708333334,
+          "frequency": -0.01657226562500001,
+          "none": -0.01738606770833334,
+          "lower_minus_keep": 0.0,
+          "lower_minus_replace": 0.0003255208333333322,
+          "lower_minus_mean": 0.0005696614583333322,
+          "lower_minus_frequency": 0.0,
+          "lower_minus_none": 0.0008138020833333322
+        },
+        "new_major": {}
+      },
+      "metrics": {
+        "surrogate_lower": -0.01657226562500001,
+        "keep": -0.01657226562500001,
+        "replace": -0.01689778645833334,
+        "mean": -0.01714192708333334,
+        "frequency": -0.01657226562500001,
+        "none": -0.01738606770833334,
+        "lower_minus_keep": 0.0,
+        "lower_minus_replace": 0.0003255208333333322,
+        "lower_minus_mean": 0.0005696614583333322,
+        "lower_minus_frequency": 0.0,
+        "lower_minus_none": 0.0008138020833333322
+      },
+      "prefix_raw_rows": 3072,
+      "branch_raw_rows": 12288,
+      "actual_raw_rows": 15360,
+      "environment_steps_total": 15360.0,
+      "case_cpu_s": 22.453125,
+      "case_wall_s": 23.395922000010614,
+      "prefix_cpu_s": 3.578125,
+      "branch_cpu_s": 18.109375,
+      "prefix_wall_s": 3.741324299990083,
+      "branch_wall_s": 18.704627899991465
+    }
+  ],
+  "per_seed_csv": "per_seed.csv"
+}

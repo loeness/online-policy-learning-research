@@ -1,0 +1,125 @@
+{
+  "stream_id": "comparison__reward_conflict__seed_24101__learned_linear",
+  "stage": "comparison",
+  "pilot": false,
+  "method": "learned_linear",
+  "seed": 24101,
+  "pair_kind": "reward_conflict",
+  "status": "completed",
+  "requested_decisions": 48,
+  "completed_decisions": 48,
+  "summary_path": "streams/reward_conflict/seed_24101/learned_linear/summary.json",
+  "preactions_path": "streams/reward_conflict/seed_24101/learned_linear/preactions.jsonl",
+  "feedback_path": "streams/reward_conflict/seed_24101/learned_linear/feedback.jsonl",
+  "bouts_path": "streams/reward_conflict/seed_24101/learned_linear/bouts.jsonl",
+  "package_events_path": "streams/reward_conflict/seed_24101/learned_linear/package_events.jsonl",
+  "rawsteps_path": "streams/reward_conflict/seed_24101/learned_linear/rawsteps.csv",
+  "rollouts_path": "streams/reward_conflict/seed_24101/learned_linear/rollouts.csv",
+  "outcome_return_sum": 177.75000000000074,
+  "warmup_return_sum": -2.7799999999998897,
+  "total_reward_sum": 174.97000000000037,
+  "recurrence": {
+    "outcome_bouts": 144,
+    "recurred_after_eviction_count": 95,
+    "recurred_after_eviction_rate": 0.6597222222222222,
+    "natural_eviction_count": 97,
+    "recurrent_first256_reward_per_step_mean": 0.0006138980263157895,
+    "recurrent_first512_return_mean": 0.8248421052631579,
+    "recurrent_full_return_mean": 0.8248421052631579
+  },
+  "storage_action_counts": {
+    "keep": 24,
+    "replace": 9,
+    "mean": 6,
+    "none": 9
+  },
+  "costs": {
+    "environment_steps": 76800,
+    "warmup_steps": 3072,
+    "outcome_steps": 73728,
+    "ppo_rollouts": 300,
+    "minibatch_updates": 4800,
+    "storage_action_count": 48,
+    "parent_write_count": 24,
+    "eviction_count": 99,
+    "slot_allocation_count": 101,
+    "value_model_updates": 48,
+    "utility_cpu_s": 70.734375,
+    "model_update_cpu_s": 0.0,
+    "package_serialization_cpu_s": 0.34375,
+    "total_cpu_s": 74.40625,
+    "wall_s": 74.96860310000193
+  },
+  "peak_package_bytes": 239746,
+  "actor_container_bytes": 89,
+  "actual_actor_bytes": 89,
+  "model_state_bytes": 1732,
+  "value_models_trained": true,
+  "failure": null,
+  "initial_parent": {
+    "binding": 0,
+    "source_fit_steps": 1024.0,
+    "candidate_provenance": {
+      "candidate_group": 0,
+      "sources": [
+        {
+          "task": "B0-",
+          "group": 0,
+          "variant": 0,
+          "slot": 0,
+          "generation": 1,
+          "fitted_steps": 1024,
+          "bout": 0,
+          "fitted_steps_before_source_pair": 0,
+          "fitted_steps_added_in_source_pair": 1024
+        },
+        {
+          "task": "B1-",
+          "group": 0,
+          "variant": 1,
+          "slot": 1,
+          "generation": 1,
+          "fitted_steps": 1024,
+          "bout": 1,
+          "fitted_steps_before_source_pair": 0,
+          "fitted_steps_added_in_source_pair": 1024
+        }
+      ],
+      "source_fit_steps_mean": 1024.0,
+      "candidate_sha256": "259dd5f7614eabd88b3875c0d3d7897e832b4e3beadd4f1279aafbfa4c433e9b",
+      "candidate_matrix_persisted": false
+    },
+    "install": {
+      "action": "replace",
+      "parent_group": 0,
+      "incumbent_binding": -1,
+      "candidate_group": 0,
+      "bound_slots": [
+        0,
+        1
+      ],
+      "max_effective_preservation_error": 3.725290298461914e-09,
+      "per_slot_preservation_error": [
+        1.862645149230957e-09,
+        3.725290298461914e-09
+      ]
+    }
+  },
+  "warmup_codec": {
+    "actor_bytes": 89,
+    "max_coefficient_error": 0.0,
+    "per_slot_effective_error": [
+      0.0,
+      0.0
+    ],
+    "max_effective_error": 0.0
+  },
+  "initial_package": {
+    "foundation_bytes": 55477,
+    "checkpoint_bytes": 180980,
+    "actor_bytes": 89,
+    "full_persistent_bytes": 236546,
+    "package_budget_bytes": 262144
+  },
+  "rawstep_partial_bouts": []
+}

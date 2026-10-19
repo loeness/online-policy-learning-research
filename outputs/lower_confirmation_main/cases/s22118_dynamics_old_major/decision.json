@@ -1,0 +1,342 @@
+{
+  "format": "storage_decision_case_v1",
+  "case_id": "s22118_dynamics_old_major",
+  "seed": 22118,
+  "pair_kind": "dynamics",
+  "history_regime": "old_major",
+  "mapping": {
+    "pair_kind": "dynamics",
+    "families": {
+      "old": "A",
+      "new": "B"
+    },
+    "preferences": {
+      "old": 1,
+      "new": 1
+    },
+    "groups": {
+      "old": 0,
+      "new": 1
+    }
+  },
+  "bootstrap_schedule": [
+    {
+      "phase": "bootstrap",
+      "bout": 0,
+      "group": 0,
+      "variant": 0,
+      "task": "A0+",
+      "steps": 2048
+    },
+    {
+      "phase": "bootstrap",
+      "bout": 1,
+      "group": 0,
+      "variant": 1,
+      "task": "A1+",
+      "steps": 2048
+    }
+  ],
+  "history_schedule": [
+    {
+      "phase": "history",
+      "bout": 2,
+      "group": 0,
+      "variant": 0,
+      "task": "A0+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 3,
+      "group": 0,
+      "variant": 1,
+      "task": "A1+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 4,
+      "group": 0,
+      "variant": 2,
+      "task": "A2+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 5,
+      "group": 0,
+      "variant": 0,
+      "task": "A0+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 6,
+      "group": 0,
+      "variant": 1,
+      "task": "A1+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 7,
+      "group": 0,
+      "variant": 2,
+      "task": "A2+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 8,
+      "group": 1,
+      "variant": 0,
+      "task": "B0+",
+      "steps": 1024
+    },
+    {
+      "phase": "history",
+      "bout": 9,
+      "group": 1,
+      "variant": 1,
+      "task": "B1+",
+      "steps": 1024
+    }
+  ],
+  "prefix_state_hash": "7fe5c7e5aab341e0a92b3f0d0988250a8528c29144f50699bc78846d06026218",
+  "restored_state_hashes": {
+    "keep__old_major": "7fe5c7e5aab341e0a92b3f0d0988250a8528c29144f50699bc78846d06026218",
+    "replace__old_major": "7fe5c7e5aab341e0a92b3f0d0988250a8528c29144f50699bc78846d06026218",
+    "mean__old_major": "7fe5c7e5aab341e0a92b3f0d0988250a8528c29144f50699bc78846d06026218",
+    "none__old_major": "7fe5c7e5aab341e0a92b3f0d0988250a8528c29144f50699bc78846d06026218"
+  },
+  "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+  "old_parent": [
+    [
+      -0.050711680203676224,
+      0.044591303914785385,
+      0.11104109138250351
+    ],
+    [
+      0.03584791347384453,
+      0.05595771595835686,
+      -0.016612447798252106
+    ],
+    [
+      0.00874339323490858,
+      -0.02010980434715748,
+      -0.014863768592476845
+    ]
+  ],
+  "new_candidate": [
+    [
+      0.016764791682362556,
+      -0.012332851998507977,
+      -0.03238812834024429
+    ],
+    [
+      0.009261740371584892,
+      0.027980150654911995,
+      0.004521653987467289
+    ],
+    [
+      0.023219402879476547,
+      -0.025522036477923393,
+      -0.032567571848630905
+    ]
+  ],
+  "temporary_candidate_workspace_bytes": 36,
+  "prequantized_invariance_error": 3.725290298461914e-09,
+  "formation_codec_coefficient_error": 0.0006489716470241547,
+  "formation_codec_effective_errors": [
+    0.0006041787564754486,
+    0.0009615998715162277
+  ],
+  "prefix_codec_coefficient_error": 0.0,
+  "prefix_codec_effective_errors": [
+    0.0,
+    0.0
+  ],
+  "resident_slots_at_decision": [
+    {
+      "slot": 0,
+      "task": "B0+",
+      "logical_group": 1,
+      "physical_group": -1,
+      "generation": 4
+    },
+    {
+      "slot": 1,
+      "task": "B1+",
+      "logical_group": 1,
+      "physical_group": -1,
+      "generation": 4
+    }
+  ],
+  "selectors": {
+    "keep": "keep",
+    "replace": "replace",
+    "mean": "mean",
+    "none": "none",
+    "frequency": "keep",
+    "recency": "replace",
+    "surrogate_gain": "keep",
+    "surrogate_lower": "keep"
+  },
+  "selector_diagnostics": {
+    "recent_group_ids": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "group_frequency": {
+      "0": 0.75,
+      "1": 0.25
+    },
+    "past_only_selectors": {
+      "keep": "keep",
+      "replace": "replace",
+      "mean": "mean",
+      "none": "none",
+      "frequency": "keep",
+      "recency": "replace",
+      "surrogate_gain": "keep",
+      "surrogate_lower": "keep"
+    },
+    "surrogate": {
+      "old_zero_vs_old_parent": {
+        "status": "supported",
+        "supported": true,
+        "gain": -0.014330579196944136,
+        "lower": -0.01934838544072892,
+        "blocks": 6,
+        "ess": {
+          "candidate": 227.98910516124516,
+          "baseline": 243.84186836132778
+        },
+        "ess_ratio": {
+          "candidate": 0.8905824420361139,
+          "baseline": 0.9525072982864367
+        },
+        "kl": {
+          "candidate": 0.036613068717874175,
+          "baseline": 0.012988569612045711
+        },
+        "coverage": {
+          "candidate": true,
+          "baseline": true
+        },
+        "stderr": 0.005017806243784785,
+        "rows": 256,
+        "reason": "supported"
+      },
+      "new_parent_vs_zero": {
+        "status": "supported",
+        "supported": true,
+        "gain": 0.00327899738758793,
+        "lower": 0.0005964562712071002,
+        "blocks": 5,
+        "ess": {
+          "candidate": 253.43230565639666,
+          "baseline": 241.8079974731416
+        },
+        "ess_ratio": {
+          "candidate": 0.9899699439702995,
+          "baseline": 0.9445624901294594
+        },
+        "kl": {
+          "candidate": 0.004090458788112945,
+          "baseline": 0.026705400241230238
+        },
+        "coverage": {
+          "candidate": true,
+          "baseline": true
+        },
+        "stderr": 0.00268254111638083,
+        "rows": 256,
+        "reason": "supported"
+      },
+      "frequency_weighted_gain": -0.009928185050811118,
+      "frequency_weighted_lower": -0.014362175012744916
+    },
+    "support_rows": {
+      "old": 256,
+      "new": 256
+    },
+    "decision_source_groups": [
+      0,
+      1
+    ]
+  },
+  "selector_contract": {
+    "format": "storage_decision_past_selector_contract_v1",
+    "inputs": {
+      "recent_group_ids": "selector_diagnostics.recent_group_ids",
+      "group_evidence": "prefix/checkpoint.pt:evidence",
+      "old_parent": "old_parent",
+      "new_candidate": "new_candidate",
+      "surrogate_score_parameters": "config.gate"
+    },
+    "evidence_capacity_rows_per_group": 256,
+    "evidence_support_rows": {
+      "old": 256,
+      "new": 256
+    },
+    "outputs": "selector_diagnostics.past_only_selectors",
+    "rules": {
+      "frequency": "replace iff recent group 1 count exceeds group 0 count; ties keep",
+      "recency": "replace iff the latest recent group 1 bout is after the latest group 0 bout",
+      "surrogate_gain": "replace iff both groups have supported finite gain scores and the recent-frequency weighted score is positive; otherwise keep",
+      "surrogate_lower": "replace iff both groups have supported finite lower scores and the recent-frequency weighted score is positive; otherwise keep",
+      "fixed_actions": [
+        "keep",
+        "replace",
+        "mean",
+        "none"
+      ]
+    }
+  },
+  "evidence_rows_per_group": {
+    "old": 256,
+    "new": 256
+  },
+  "prefix_package": {
+    "foundation_bytes": 55477,
+    "checkpoint_bytes": 177717,
+    "actor_bytes": 89,
+    "full_persistent_bytes": 233283,
+    "package_budget_bytes": 262144
+  },
+  "wall_cpu": {
+    "cpu_s": 15.53125,
+    "wall_s": 15.702500900006271
+  },
+  "source_w0_unchanged_at_decision": true,
+  "branches": [
+    {
+      "action": "keep",
+      "future_regime": "old_major",
+      "summary": "branches/keep__old_major/summary.json"
+    },
+    {
+      "action": "replace",
+      "future_regime": "old_major",
+      "summary": "branches/replace__old_major/summary.json"
+    },
+    {
+      "action": "mean",
+      "future_regime": "old_major",
+      "summary": "branches/mean__old_major/summary.json"
+    },
+    {
+      "action": "none",
+      "future_regime": "old_major",
+      "summary": "branches/none__old_major/summary.json"
+    }
+  ]
+}

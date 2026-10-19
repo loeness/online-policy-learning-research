@@ -1,5 +1,29 @@
 # Reproducibility
 
+## Independent lower confirmation and selected-feedback retention (2026-10-19)
+
+The confirmation freezes the existing rule on unused mapping-balanced seeds. The later streams use independent seeds and never train from its observer branches. Settings and scientific limits are in [confirmation protocol](SURROGATE_LOWER_CONFIRMATION_PROTOCOL.md) and [selected-feedback protocol](RETENTION_VALUE_STREAM_PROTOCOL.md). Use fresh output paths:
+
+```powershell
+& .\.venv\Scripts\python.exe scripts/run_lower_confirmation.py --pilot --output outputs/my_lower_pilot
+& .\.venv\Scripts\python.exe scripts/audit_lower_confirmation.py --cohort outputs/my_lower_pilot --output outputs/my_lower_pilot_audit.json
+& .\.venv\Scripts\python.exe scripts/run_lower_confirmation.py --output outputs/my_lower_main
+& .\.venv\Scripts\python.exe scripts/report_lower_confirmation.py --input outputs/my_lower_main --output outputs/my_lower_report
+& .\.venv\Scripts\python.exe scripts/audit_lower_confirmation.py --cohort outputs/my_lower_main --output outputs/my_lower_main_audit.json
+& .\.venv\Scripts\python.exe scripts/run_retention_value_stream.py --stage calibration --pilot --output outputs/my_value_calibration_pilot
+& .\.venv\Scripts\python.exe scripts/run_retention_value_stream.py --stage calibration --output outputs/my_value_calibration
+& .\.venv\Scripts\python.exe scripts/run_retention_value_stream.py --stage comparison --pilot --output outputs/my_value_comparison_pilot
+& .\.venv\Scripts\python.exe scripts/run_retention_value_stream.py --stage comparison --output outputs/my_value_comparison
+& .\.venv\Scripts\python.exe scripts/audit_retention_value_stream.py --cohort outputs/my_value_calibration --output outputs/my_value_calibration_audit.json
+& .\.venv\Scripts\python.exe scripts/audit_retention_value_stream.py --cohort outputs/my_value_comparison --output outputs/my_value_comparison_audit.json
+& .\.venv\Scripts\python.exe scripts/report_retention_value_stream.py --calibration outputs/my_value_calibration --comparison outputs/my_value_comparison --output outputs/my_value_report
+& .\.venv\Scripts\python.exe scripts/plot_ordered_retention.py --lower outputs/my_lower_report --calibration outputs/my_value_calibration --comparison outputs/my_value_comparison --output outputs/my_ordered_figures
+```
+
+The confirmation uses three workers; subsequent streams permit six workers with one Torch thread per worker after observing actual process memory. Recheck available memory before increasing concurrency. CPU is the installed execution backend. Calibration is uniformly randomized selected feedback; comparison is a new whole-stream policy test. Raw logs and failed attempts are evidence, not additional agent-accessible memory. Predictor sufficient statistics, bounded history and selector RNG are serialized and charged to the complete learner cap. The identical 89-byte independent baseline container reserves an unused parent; this is not a globally optimized allocation of spare bytes.
+
+Targeted no-environment checks: `test_lower_confirmation.py`, `test_report_lower_confirmation.py`, `test_audit_lower_confirmation.py`, `test_retention_value.py`, `test_retention_stream_value.py`, `test_retention_value_stream.py`, `test_report_retention_value_stream.py`, and `test_audit_retention_value_stream.py` under `tests/` (45 checks in the recorded root run). Plot exports are inspected visually; the plotting utility imports no RL/environment code. Source snapshots preserve historical pilot producer versions. See the [ordered review](ORDERED_RETENTION_VALIDATION_REVIEW.md) for documentation-only pilot hash drift, actor-Adam clearing, actual worker counts and campaign-versus-aggregate timing definitions.
+
 ## Literature-driven source-dose and learning interaction follow-up
 
 Use new empty directories. The frozen settings are [source-dose config](../configs/source_dose.json), [source protocol](SOURCE_DOSE_PROTOCOL.md) and [future-learning protocol](LEARNING_INTERACTION_PROTOCOL.md). The no-gradient runner reads the complete source run; it neither reruns nor double-charges its prefix/PPO comparators.

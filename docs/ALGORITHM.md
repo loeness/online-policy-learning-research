@@ -1,5 +1,13 @@
 # Implemented algorithms
 
+## Selected-feedback value learning and repeated retention (2026-10-19)
+
+[Actual method](RETENTION_VALUE_STREAM_METHOD.md), [frozen protocol](RETENTION_VALUE_STREAM_PROTOCOL.md), and [ordered evidence review](ORDERED_RETENTION_VALIDATION_REVIEW.md) describe `run_retention_value_stream.py`. It retains the pretrained foundation, two local corrections and a single shared parent. Four repeated operations preserve the current binding, replace from the current source pair, average into a wildcard parent, or remove the parent. Resident policies are compensated before genuine writes; keep is a no-op. Rejected candidate matrices do not form a persistent archive.
+
+Two bounded action-specific ridge models (six past features versus an intercept) receive only the selected operation's complete 1536-step continuation target. Model statistics, fixed task history, RNG and one in-flight feedback record count toward the 262144 B package cap. Candidate source maturity and generations are checked before each decision. The external schedule and observer traces are not inputs to the selector. Comparators include simple retention rules, generalized lower, shared PPO and same-container independent locals; task IDs and boundaries are supplied to every method.
+
+The common actor is quantized after each 256-row PPO rollout; actor Adam moments clear while actor parameters, critic state and global counters continue. The direct shared baseline uses this same harness. This is repeated storage-decision learning, not unknown-context discovery, a dynamic tree/DAG, or a proof of calibrated write safety. The older one-write lower rule is evaluated independently by `run_lower_confirmation.py`; it is distinct from the generalized repeated-operation rule, and its increment was not independently confirmed.
+
 ## Source content dose and persistence × future PPO (2026-10-18)
 
 `scripts/run_source_dose.py` instruments the unchanged storage schedule after PPO, int8 encoding and actor-Adam clearing. It observes the two old source residuals at their own 1,024-step points, while the actual prefix still learns each old source for 2,048 steps. Both low- and high-dose past-only selectors freeze before future expansion. Future branches differ only in installed old-candidate content; replace/none outcomes are reused only after exact complete post-action learner/simulator hash equality. Observer candidates are absent from learner checkpoints. This is a controlled content intervention, not a shorter-history deployment or an equal-quality guarantee.
@@ -16,7 +24,7 @@ The model remains two 27-coefficient local slots and one 9-coefficient parent, w
 
 New local allocations inherit the frozen parent only when the known group matches its binding. Local LRU eviction and PPO/critic learning continue for 12,288 future steps. Actor Adam is cleared after each quantized rollout; critic Adam is retained. All new rollout rows enter training. Complete state restoration includes optimizers, RNGs, LRU/evidence state and the physical simulator. This experiment supplies context IDs, boundaries and old/new membership to every arm; it does not implement latent grouping or a dynamic tree.
 
-Past-only frequency, recency and existing historical gain/lower rules are fixed before any future branch runs. Their realized values use the chosen complete learning branch, not a frozen-policy proxy. Full learner packages are capped at 262,144 B; fixed actor shape is not a claim of globally optimal byte allocation. [The results](STORAGE_DECISION_REVIEW.md) support schedule-dependent action effects but do not validate a superior automatic selector. The later source-dose intervention isolates candidate content as described above; repeated adaptive allocation remains unimplemented.
+Past-only frequency, recency and existing historical gain/lower rules are fixed before any future branch runs. Their realized values use the chosen complete learning branch, not a frozen-policy proxy. Full learner packages are capped at 262,144 B; fixed actor shape is not a claim of globally optimal byte allocation. [The results](STORAGE_DECISION_REVIEW.md) support schedule-dependent action effects but do not validate a superior automatic selector. The later source-dose intervention isolates candidate content as described above. This historical one-write cohort does not implement repeated adaptive allocation; the 2026-10-19 section describes the subsequent implementation and its limits.
 
 ## Current diagnostic: score prediction
 

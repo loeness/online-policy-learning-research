@@ -1,5 +1,11 @@
 # Research archive inventory
 
+## Ordered retention validation update (2026-10-19)
+
+The local research record now includes the Stage 1 lower-confirmation protocol, configuration, pilot and main reports, per-seed data, raw branch accounting and independent audits; the Stage 2 selected-feedback protocol, method, configuration, runner, reporters, audit tools, model, tests, frozen source snapshots, pilot outputs and audits, completed calibration main streams/report/audit; and the completed Stage 3 comparison main streams, frozen configuration, final report and analysis. All exported figures are under `outputs/ordered_retention_figures/`. Stage 3 has 80/80 completed streams and zero runtime failures; the separate ordered protocol audit at `outputs/retention_value_comparison_main_audit.json` passes with zero errors and zero warnings. The three main stages and pilots total 9,443,328 actual environment steps. Pilot protocol-snapshot differences, the shared actor-Adam reset caveat, same-layout independent baseline, and scope limits are documented in [the ordered review](ORDERED_RETENTION_VALIDATION_REVIEW.md) and [success/failure log](SUCCESS_AND_FAILURE_LOG.md).
+
+The refreshed `archive/manifest.json` covers this update. Its exact file and byte counts take precedence over historical inventory tables. Run `scripts/verify_archive.py` to verify every recorded file. Original experiment outputs are preserved.
+
 ## Literature-driven follow-up update (2026-10-18)
 
 The current manifest adds the twelve-paper notes/source index, source-dose and learning-interaction protocols/configuration/code/tests, 32 common prefixes, 384 physical PPO futures and 128 fresh no-gradient futures, exact-state alias metadata, learner/simulator checkpoints, all raw logs, failed/successful pilots, source snapshots, derived reports/figures and independent audits. Superseded pilot/schema-debug reports stay labeled and preserved. The checkpoint-only clean/concurrent score-feature benchmarks are separate zero-interaction diagnostics. [The review](SOURCE_FOLLOWUP_REVIEW.md) gives the 6,776,832-interaction incremental ledger, narrow positive signals, negative practical findings and remaining method gap.
