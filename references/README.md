@@ -1,6 +1,6 @@
 # Citation notes
 
-The bibliography contains 49 public references used by the baseline and related-work map in [the project note](../docs/BASELINES_AND_RELATED_WORK.md), the online-learning reading notes, and the software/workflow notes. Entries use the publisher or conference record when one is available, and the arXiv record for preprints or work without a formal proceedings entry. The original 25 records were checked on 2026-10-14; three C1 supplement entries (EWC, Progress & Compress, LoRA-XS) were checked on 2026-10-15. Three public arXiv correspondences for the twelve user-provided PDFs were checked on 2026-10-18. URLs point to the record used to verify the entry; version-specific metadata decisions are listed below.
+The bibliography contains 53 public references used by the baseline and related-work map in [the project note](../docs/BASELINES_AND_RELATED_WORK.md), the online-learning reading notes, and the software/workflow notes. Entries use the publisher or conference record when one is available, and the arXiv record for preprints or work without a formal proceedings entry. The original 25 records were checked on 2026-10-14; three C1 supplement entries (EWC, Progress & Compress, LoRA-XS) were checked on 2026-10-15. Three public arXiv correspondences for the twelve user-provided PDFs were checked on 2026-10-18. Three action-contrast references were added on 2026-10-19. Distral was added and the existing Policy Distillation record rechecked on 2026-10-20. URLs point to the record used to verify the entry; version-specific metadata decisions are listed below.
 
 ## Metadata decisions
 
@@ -40,10 +40,28 @@ Twelve additional primary references were checked on 2026-10-15 for `docs/ONLINE
 
 ## Shared contrasts and selected feedback (2026-10-19)
 
-Three primary sources were added for the [shared-baseline and action-contrast note](../docs/literature/20261019_ACTION_CONTRAST_NOTES.md). The opening bibliography count predates these additions; the bibliography now contains 52 entries.
+Three primary sources were added for the [shared-baseline and action-contrast note](../docs/literature/20261019_ACTION_CONTRAST_NOTES.md), bringing the bibliography from 49 to 52 entries at that stage.
 
 - **Nie and Wager (2017),** [*Quasi-Oracle Estimation of Heterogeneous Treatment Effects*](https://arxiv.org/abs/1712.04912): source for the R-learner residualization template. Its independent-sample theorem is not an online guarantee for these repeated-write streams.
 - **Dudík, Langford, and Li (2011),** [*Doubly Robust Policy Evaluation and Learning*](https://icml.cc/2011/papers/554_icmlpaper.pdf), also [arXiv:1103.4601](https://arxiv.org/abs/1103.4601): source for chosen-action-only contextual-bandit feedback and doubly robust policy-value estimation. It does not supply whole-trajectory evaluation for the project setting.
 - **Kallus and Zhou (2022),** [*Stateful Offline Contextual Policy Evaluation and Learning*](https://proceedings.mlr.press/v151/kallus22a.html): source for a stateful contextual-bandit reduction under specific exogenous-arrival and response-structure assumptions. The repeated-write setting has action-dependent future learner state, so that reduction is not presumed.
 
 These papers provide design context only. No experiment or new environment interaction was run for this note.
+
+## Bounded behavior candidate (2026-10-20)
+
+The bibliography now has 53 unique entries. **Rusu2015PolicyDistillation**
+([arXiv:1511.06295](https://arxiv.org/abs/1511.06295)) and **Teh2017Distral**
+([arXiv:1707.04175](https://arxiv.org/abs/1707.04175)) were checked against
+their public primary records on 2026-10-20. The existing
+**Schwarz2018ProgressCompress** record was rechecked at
+[arXiv:1805.06370](https://arxiv.org/abs/1805.06370).
+
+The [candidate protocol](../docs/RETENTION_CANDIDATE_PROTOCOL.md) borrows
+behavior-distribution fitting and acquisition/consolidation separation.
+The candidate is a nine-coefficient correction fitted on a bounded sample of
+past observations, with current online policies as teachers. It is not a
+faithful implementation of those complete methods or evidence that
+distillation itself is novel. Reward after installation, source provenance,
+encoding, fitting cost and the complete persistent package are evaluated
+separately from imitation error.

@@ -1,0 +1,14 @@
+Command: uv run python scripts/report_retention_candidate.py --input outputs/retention_candidate_pilot --output outputs/retention_candidate_pilot_report
+Outcome: failed before the reporter created its output directory.
+Exit code: 1
+Error: KeyError: 'expected_cases'
+Traceback:
+  File "D:\MovedFromC\ChatGPT\online\scripts\report_retention_candidate.py", line 1798, in <module>
+    raise SystemExit(main())
+  File "D:\MovedFromC\ChatGPT\online\scripts\report_retention_candidate.py", line 1788, in main
+    analysis = analyze(args.input, args.output)
+  File "D:\MovedFromC\ChatGPT\online\scripts\report_retention_candidate.py", line 1713, in analyze
+    audit_records = _audit_record_history(run_root, design["phase"], expected, _file_hash(manifest_path))
+  File "D:\MovedFromC\ChatGPT\online\scripts\report_retention_candidate.py", line 1457, in _audit_record_history
+    if int(_number(coverage.get(field), f"{path.name}.coverage.{field}", integer=True)) != int(expected[field]):
+KeyError: 'expected_cases'

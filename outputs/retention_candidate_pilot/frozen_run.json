@@ -1,0 +1,303 @@
+{
+  "phase": "pilot",
+  "config": {
+    "format": "storage_decision_v1",
+    "candidate_format": "retention_candidate_v1",
+    "analysis_role": "exploratory_candidate_content_and_state_coverage",
+    "seeds": [
+      25189
+    ],
+    "pair_kinds": [
+      "dynamics"
+    ],
+    "states": [
+      "early",
+      "late"
+    ],
+    "history_regime_by_seed": "old_major_if_even_else_new_major",
+    "history_regimes": [
+      "old_major",
+      "new_major"
+    ],
+    "future_regimes": [
+      "old_major"
+    ],
+    "actions": [
+      "keep",
+      "replace",
+      "mean",
+      "none"
+    ],
+    "arms": [
+      "keep",
+      "replace_mean",
+      "replace_behavioral",
+      "merge_mean",
+      "merge_behavioral"
+    ],
+    "replicates": [
+      0
+    ],
+    "bootstrap_steps": 1024,
+    "bout_steps": 512,
+    "early_source_steps": 1024,
+    "late_source_steps": 4096,
+    "late_warmup_cycles": 4,
+    "warmup_pair_steps": 1024,
+    "warmup_write_rule": "replace_old_group_only_after_pair",
+    "evidence_rows_per_source": 128,
+    "behavioral_fit": {
+      "train_fraction": 0.75,
+      "min_rows_per_owner": 16,
+      "ridge": 0.0001,
+      "maxiter": 64,
+      "maxfun": 256,
+      "source_weighting": "equal_mean_per_owner",
+      "objective": "forward_KL_teacher_to_student_plus_ridge_to_mean",
+      "candidate_selection": "best_training_objective_including_initial_mean",
+      "holdout_role": "diagnostic_only_not_used_for_candidate_selection"
+    },
+    "future_blocks": 4,
+    "horizons": [
+      1536,
+      6144
+    ],
+    "rollout_steps": 256,
+    "local_slots": 2,
+    "shared_groups": 1,
+    "local_learning_rate": 0.003,
+    "shared_learning_rate": 0.0,
+    "critic_learning_rate": 0.003,
+    "actor_budget_bytes": 89,
+    "package_budget_bytes": 262144,
+    "evidence_rows_per_group": 256,
+    "recent_bouts": 8,
+    "max_workers": 1,
+    "torch_threads": 1,
+    "future_seed_offset": 50000000,
+    "future_seed_multiplier": 1000,
+    "execution_order_seed": 2026102001,
+    "report": {
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 2026102002,
+      "primary_horizon": 6144,
+      "practical_reward_per_step": 0.002,
+      "primary_contrasts": [
+        "replace_behavioral-minus-replace_mean",
+        "replace_behavioral-minus-keep"
+      ],
+      "interpretation": "Six independent deployment seeds; all other factors are within seed. Descriptive paired seed bootstrap stratified by old family. No confirmatory claim after exploratory condition selection."
+    },
+    "gate": {
+      "min_rows": 12,
+      "min_blocks": 3,
+      "min_ess_ratio": 0.2,
+      "max_mean_kl": 0.5,
+      "clip_ratio": 5.0,
+      "stderr_multiplier": 1.0
+    },
+    "pilot": {
+      "seeds": [
+        25189
+      ],
+      "pair_kinds": [
+        "dynamics"
+      ],
+      "states": [
+        "early",
+        "late"
+      ],
+      "future_regimes": [
+        "old_major"
+      ],
+      "replicates": [
+        0
+      ],
+      "max_workers": 1
+    },
+    "expected_main": {
+      "cases": 24,
+      "branches": 480,
+      "early_prefix_steps": 7168,
+      "late_prefix_steps": 29696,
+      "prefix_steps": 442368,
+      "steps_per_branch": 6144,
+      "branch_steps": 2949120,
+      "total_steps": 3391488
+    },
+    "expected_pilot": {
+      "cases": 2,
+      "branches": 10,
+      "early_prefix_steps": 7168,
+      "late_prefix_steps": 29696,
+      "prefix_steps": 36864,
+      "steps_per_branch": 6144,
+      "branch_steps": 61440,
+      "total_steps": 98304
+    },
+    "scope": "Controlled known-identity single-write diagnostic; no deployed selector, repeated learned organizer, unknown-context discovery, tree/DAG comparison or C2. Early versus late is a joint state-coverage manipulation, not an isolated causal effect of age or source fit.",
+    "pilot_seed": 20089,
+    "domain": "navigation",
+    "phase": "pilot"
+  },
+  "config_sha256": "9dda7ab3bea70d0a70a75711b7d17a1987c55fb3e5b10f62b075f99cce2a91bd",
+  "protocol_sha256": "8a18f4a364dbb179dea32202280da21007d63bd000caa015169fc9d252b5a3f5",
+  "source_manifest": {
+    "sources": {
+      "scripts/run_storage_decision.py": {
+        "sha256": "6e52370cf4916ff23a6f4a2b54a84fd9c7aa4df7e52fe4c38956fb2945d84e22",
+        "bytes": 59135
+      },
+      "scripts/run_knowledge_loop.py": {
+        "sha256": "5ed6d081c0e3381d2e22d9bcf280600909ac1f281c9e82f9c31067419fc26eb7",
+        "bytes": 68917
+      },
+      "scripts/run_write_stream.py": {
+        "sha256": "fc2691c5664fbb0a6cb04d59eceac92867826c0b7732640334033d5c85e5214b",
+        "bytes": 88423
+      },
+      "src/online_rl/storage_decision.py": {
+        "sha256": "efa5ac610967d1921857cf2568ab4d4088122f802896d05011aecaa5c27b42b4",
+        "bytes": 18532
+      },
+      "src/online_rl/score_calibration.py": {
+        "sha256": "41a20dcbe56bbf42a9ae005c747a038e6e03616ffe1a3c211f96027b3cf00b5e",
+        "bytes": 23444
+      },
+      "src/online_rl/retention_consolidation.py": {
+        "sha256": "a9b3cc6630ce400ec5543157386d83830b8627fd8c10c55ecf7bc62f2c8ec6e8",
+        "bytes": 19016
+      },
+      "src/online_rl/consolidation_probe.py": {
+        "sha256": "849f636de549c413f3d463a1b24434d6e16a3e14be6129639328d49b4554b9a8",
+        "bytes": 11179
+      },
+      "src/online_rl/write_decision_envs.py": {
+        "sha256": "5c73459e01cef1be8c9249a96a2867130de45ca29f9b898512c8c5effebef248",
+        "bytes": 7703
+      },
+      "src/online_rl/write_decision_policy.py": {
+        "sha256": "84c9e9653cf8e6135154e4a4e1f851aa35fc8ceebd6eb0336af2ace31239654f",
+        "bytes": 15074
+      },
+      "src/online_rl/shared_write_policy.py": {
+        "sha256": "8b241f7760b785e990c72335b73fb489bb43b8f67e75ac92e80418fabc47d3ee",
+        "bytes": 9850
+      },
+      "src/online_rl/shared_write_storage.py": {
+        "sha256": "4555e1f4ea2eb103bdb108195b82f0e16db517d7c708c5bca42c426566d8d591",
+        "bytes": 8580
+      },
+      "src/online_rl/write_decision_evidence.py": {
+        "sha256": "eb1e35bc69792a9c8163ec6d49f7f89f31ebc3925121b284b4de8f86cecbbe4c",
+        "bytes": 34517
+      },
+      "src/online_rl/write_fast_evidence.py": {
+        "sha256": "876761b89f5723cd6ab1c517eb08780db7f572943844035b65294b8565c8577f",
+        "bytes": 5073
+      },
+      "src/online_rl/c1_supplement_experiment.py": {
+        "sha256": "d0c9db31d02b39350e83e620e11755e0ffd8639a7fc4c8e967a064e85477c22f",
+        "bytes": 52761
+      },
+      "src/online_rl/c1_tensor_controls.py": {
+        "sha256": "727f1b4fa80c76b7d516ec6a4d95255ec58566b0c487340f6c9855ddc1accfae",
+        "bytes": 16851
+      },
+      "src/online_rl/c1_policy.py": {
+        "sha256": "371fc881e960c63c01e0ae71c27b7fa22462e1b4985f8efd8c6862388ab2fb14",
+        "bytes": 25602
+      },
+      "src/online_rl/c1_envs.py": {
+        "sha256": "d02e46b65b7edfef1d0219116a2429e7dca139c8f6ffb14e4f9d8418cf642a55",
+        "bytes": 8441
+      },
+      "src/online_rl/experiment.py": {
+        "sha256": "1bf23a99f1ca62efe0bb0b8c5c67495b932b1c21a622e97ffc97e0c8269e0acc",
+        "bytes": 23600
+      },
+      "src/online_rl/policy.py": {
+        "sha256": "edf1d024abdfa00dfea262255a358e7ce5dfb92c1e003b2642714a0a56067c1d",
+        "bytes": 7288
+      },
+      "configs/storage_decision.json": {
+        "sha256": "4a9b364a621aef823815498fdb3688bdfb770344dc9ca521204854334f0d12bb",
+        "bytes": 1666
+      },
+      "docs/STORAGE_DECISION_PROTOCOL.md": {
+        "sha256": "fc8c76921800c31d7b3ca422cda9231618d1283adf2a0346d3eb3b04e763cbb0",
+        "bytes": 9973
+      },
+      "scripts/run_retention_mechanism.py": {
+        "sha256": "343ac09037f8909e3d8066009d0a9985230ad348c1d1553f812fc40e8148e929",
+        "bytes": 73399
+      },
+      "src/online_rl/envs.py": {
+        "sha256": "7d8952301e80834239330985739149b6f4066d3e1be9037282f3f3e58334d156",
+        "bytes": 9021
+      },
+      "src/online_rl/retention_stream_value.py": {
+        "sha256": "ae63a24cfdaa54bb1e3306610a8d64927bd1e0404aadc090c0aa8e518db50cb1",
+        "bytes": 27989
+      },
+      "configs/retention_mechanism.json": {
+        "sha256": "d253546e07f21a37be3a28497febbf1442f988c72b3ec1619abbce2dab94f011",
+        "bytes": 2818
+      },
+      "docs/RETENTION_MECHANISM_PROTOCOL.md": {
+        "sha256": "88677db58fe3131f1f7946015a314a95e5f72a7ebe8556ee034bbab082bd2b9c",
+        "bytes": 12425
+      },
+      "scripts/run_retention_candidate.py": {
+        "sha256": "fe6e3a711cebb85ff811c3641cbc2d8da71762c14c599d569a04c10b4302b33e",
+        "bytes": 105754
+      },
+      "src/online_rl/retention_behavioral_candidate.py": {
+        "sha256": "5c57f2913e33e8fd7553550c0c98eeff2a000c4ce67193d5d7535e842daf1d71",
+        "bytes": 25494
+      },
+      "configs/retention_candidate.json": {
+        "sha256": "9dda7ab3bea70d0a70a75711b7d17a1987c55fb3e5b10f62b075f99cce2a91bd",
+        "bytes": 3337
+      },
+      "docs/RETENTION_CANDIDATE_PROTOCOL.md": {
+        "sha256": "8a18f4a364dbb179dea32202280da21007d63bd000caa015169fc9d252b5a3f5",
+        "bytes": 8588
+      }
+    },
+    "foundation": {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\data\\foundation.pt",
+      "sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+      "bytes": 55477
+    },
+    "dataset": {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\data\\pretrain_source.npz",
+      "sha256": "493c67dc07393a674deb6aa7ab5ba4feea3c1a48eacc16b37046a12606bc56f2",
+      "bytes": 116878
+    },
+    "excluded_local_instructions": [
+      "Agent.md",
+      "AGENTS.md"
+    ]
+  },
+  "expected_interactions": {
+    "cases": 2,
+    "branches": 10,
+    "early_prefix_steps": 7168,
+    "late_prefix_steps": 29696,
+    "prefix_steps": 36864,
+    "steps_per_branch": 6144,
+    "branch_steps": 61440,
+    "total_steps": 98304
+  },
+  "configured_expected_interactions": {
+    "cases": 2,
+    "branches": 10,
+    "early_prefix_steps": 7168,
+    "late_prefix_steps": 29696,
+    "prefix_steps": 36864,
+    "steps_per_branch": 6144,
+    "branch_steps": 61440,
+    "total_steps": 98304
+  }
+}

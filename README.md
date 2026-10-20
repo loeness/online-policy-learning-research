@@ -2,7 +2,7 @@
 
 ## GitHub 研究档案入口
 
-本仓库保存原 A、B、B+、压缩对照和 C1 快照；截至 **2026-10-19**，补充了强对照、P0、有界知识组织、V2诊断、共享参数写入、容量压力、完整在线保存决策、候选剂量与未来学习交互对照、固定规则确认、所选反馈预测、重复写入验证，以及匹配来源的操作/观察窗口诊断。原快照保留在 `v0.1.0-ab-c1`，新增工作位于 `codex/c1-strong-baselines` 分支；云端覆盖以该分支提交为准。包含原始数据、模型、逐步日志、图表、成功与失败记录、验证过程、算法实现和引用。新实验仍在 C1 受控环境中，不代表已完成一般环境的 C2/C3 基准。
+本仓库保存原 A、B、B+、压缩对照和 C1 快照；截至 **2026-10-20**，补充了强对照、P0、有界知识组织、V2诊断、共享参数写入、容量压力、完整在线保存决策、候选剂量与未来学习交互对照、固定规则确认、所选反馈预测、重复写入验证、匹配来源的操作/观察窗口诊断，以及有限观测上的行为候选构造与 early/late 状态对照。原快照保留在 `v0.1.0-ab-c1`，新增工作位于 `codex/c1-strong-baselines` 分支；云端覆盖以该分支提交为准。包含原始数据、模型、逐步日志、图表、成功与失败记录、验证过程、算法实现和引用。新实验仍在 C1 受控环境中，不代表已完成一般环境的 C2/C3 基准。
 
 | 阅读目的 | 入口 |
 |---|---|
@@ -17,7 +17,10 @@
 
 先看当前核心报告：
 
-- **[最新：保存操作、观察窗口与预测来源诊断](docs/RETENTION_MECHANISM_REVIEW.md)**：旧日志分解发现预测改善的 96.25% 来自奖励率，0.08% 来自 CPU 率。6 个新种子、24 个匹配来源前缀、384 条 PPO 续程在 1536/6144/12288 步统计；主要窗口中跨续程选择−keep 为动力学 −0.000268、奖励冲突 +0.000415，两个描述性种子区间均跨零。仅延长反馈窗口未带来稳定选择收益；后续优先检查候选构造和成熟状态。正式数据、独立审计、24 项软件检查及完整正负结果保留，含失败/pilot 共新增 **4,954,112** 次实际仿真交互。
+- **[最新：候选构造、编码与较晚在线状态](docs/RETENTION_CANDIDATE_REVIEW.md)**：6 个新部署种子、24 个前缀、480 条续程。dynamics / late 条件中，行为拟合替换相对参数平均为 **+0.003394 [0.000634, 0.006151]**，相对 keep 为 **+0.003254 [0.000541, 0.006429]** reward/step；其余三个条件尚未同时支持两个主优势。收益依赖未来复现比例，当前参数平均合并在奖励冲突条件有害，首 256 步恢复优势未建立。该结果支持条件性的候选内容改进，尚未验证自动组织规则。完整持久包 232870–235246 B；正式重跑 3391488 次交互，含 pilot 与中断尝试全轮至少 **3844940** 次，精确中断成本未知。
+- [逐种子完整报表](outputs/retention_candidate_completed_report/report.md) · [图表](outputs/retention_candidate_completed_report/figure.png) · [独立审计](outputs/retention_candidate_audit/main_completed.json) · [编码诊断](outputs/retention_candidate_encoding_diagnostics/diagnostics.json) · [冻结规程](docs/RETENTION_CANDIDATE_PROTOCOL.md) · [29 项软件检查](outputs/retention_candidate_software_checks.xml)
+
+- **[上一轮：保存操作、观察窗口与预测来源诊断](docs/RETENTION_MECHANISM_REVIEW.md)**：旧日志分解发现预测改善的 96.25% 来自奖励率，0.08% 来自 CPU 率。6 个新种子、24 个匹配来源前缀、384 条 PPO 续程在 1536/6144/12288 步统计；主要窗口中跨续程选择−keep 为动力学 −0.000268、奖励冲突 +0.000415，两个描述性种子区间均跨零。仅延长反馈窗口未带来稳定选择收益；后续优先检查候选构造和成熟状态。正式数据、独立审计、24 项软件检查及完整正负结果保留，含失败/pilot 共新增 **4,954,112** 次实际仿真交互。
 - [完整新报表](outputs/retention_mechanism_main_report/report.md) · [图表](outputs/retention_mechanism_main_report/figure.png) · [独立审计](outputs/retention_mechanism_audit/main.json) · [旧日志分解](outputs/retention_prediction_diagnostics/report.md) · [状态幅度检查](outputs/retention_content_diagnostics_v2/summary.json) · [冻结规程](docs/RETENTION_MECHANISM_PROTOCOL.md)
 
 - **[上一轮：固定规则确认、预测与重复写入的顺序验证](docs/ORDERED_RETENTION_VALIDATION_REVIEW.md)**：lower 在 16 个新种子中相对 keep 的 +0.000050 reward/step 未获独立确认。12 条随机流中，历史特征使所选反馈预测 MSE 平均下降约 5.7%，增益集中在奖励冲突条件。随后 80 条流、十方法比较中，学习型写入相对常数预测器的两个条件区间均跨零，明显落后于直接共享 PPO；当前组织算法的策略增量未验证。含 pilot 共新增 9,443,328 次实际仿真交互，完整正负结果保留，未推进树/DAG。

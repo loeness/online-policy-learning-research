@@ -1,0 +1,41 @@
+{
+  "format": "retention_candidate_encoding_startup_receipt_v1",
+  "receipt_kind": "retrospective_reconstruction",
+  "attempt": 1,
+  "command_as_invoked": "python scripts/diagnose_retention_candidate_encoding.py --input outputs/retention_candidate_completed_report/analysis.json --output outputs/retention_candidate_encoding_diagnostics",
+  "working_directory": "D:\\MovedFromC\\ChatGPT\\online",
+  "interpreter": {
+    "command_name_as_invoked": "python",
+    "exact_executable_recorded_at_launch": false,
+    "best_effort_path_resolution_from_immediate_following_where_python": "C:\\Users\\EthanLi\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "resolution_note": "The launch used bare python; where.exe python was run immediately after the failure and listed this executable first. The original launch did not log its resolved executable path."
+  },
+  "result": "failed_during_numpy_import_before_analyze_or_output_write",
+  "exception": "ModuleNotFoundError: No module named 'numpy'",
+  "traceback_returned_by_original_command": [
+    "Traceback (most recent call last):",
+    "  File \"D:\\MovedFromC\\ChatGPT\\online\\scripts\\diagnose_retention_candidate_encoding.py\", line 10, in <module>",
+    "    import numpy as np",
+    "ModuleNotFoundError: No module named 'numpy'"
+  ],
+  "capture_provenance": {
+    "standalone_stderr_log_created_at_attempt": false,
+    "original_exec_response_contains_traceback": true,
+    "this_json_is": "retrospective receipt transcribed from the original exec response, not the original stderr file"
+  },
+  "output": {
+    "diagnostics_json_written_by_attempt": false,
+    "diagnostic_output_directory_created_by_attempt": false
+  },
+  "environment_interactions": {
+    "environment_steps": 0,
+    "note": "Import failed before report loading or diagnostic analysis; no environment was instantiated or stepped."
+  },
+  "timing": {
+    "process_cpu_seconds": null,
+    "process_wall_seconds": null,
+    "tool_observed_wall_seconds": 0.4,
+    "tool_wall_note": "Approximate exec-command response wall time; not an independently measured process runtime."
+  },
+  "follow_up": "The same diagnostic later succeeded with the repository virtual environment interpreter (.venv\\Scripts\\python.exe)."
+}

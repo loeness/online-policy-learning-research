@@ -1,5 +1,55 @@
 # Reproducibility
 
+## Bounded behavioral candidates and online state coverage (2026-10-20)
+
+The [frozen protocol](RETENTION_CANDIDATE_PROTOCOL.md) and
+[configuration](../configs/retention_candidate.json) compare two candidate
+constructors and two one-time storage operations, with keep as a shared
+control. The candidate has nine coefficients; the observed source buffer is
+128 rows per current source and is charged to the complete 262144-byte
+deployment package. The behavioral fitter is bounded Torch L-BFGS, not an
+additional online RL run. Its temporally later holdout is diagnostic only.
+
+Use a fresh reproduction parent so each phase's independent audit records
+refer to that reproduction's cohort. Commands below preserve all existing
+outputs:
+
+```powershell
+& .\.venv\Scripts\python.exe scripts/run_retention_candidate.py --config configs/retention_candidate.json --pilot --output outputs/my_candidate_reproduction/pilot
+& .\.venv\Scripts\python.exe scripts/audit_retention_candidate.py --root outputs/my_candidate_reproduction/pilot --report outputs/my_candidate_reproduction/retention_candidate_audit/pilot.json
+& .\.venv\Scripts\python.exe scripts/report_retention_candidate.py --input outputs/my_candidate_reproduction/pilot --output outputs/my_candidate_reproduction/pilot_report
+& .\.venv\Scripts\python.exe scripts/run_retention_candidate.py --config configs/retention_candidate.json --output outputs/my_candidate_reproduction/main
+& .\.venv\Scripts\python.exe scripts/audit_retention_candidate.py --root outputs/my_candidate_reproduction/main --report outputs/my_candidate_reproduction/retention_candidate_audit/main.json
+& .\.venv\Scripts\python.exe scripts/report_retention_candidate.py --input outputs/my_candidate_reproduction/main --output outputs/my_candidate_reproduction/main_report
+& .\.venv\Scripts\python.exe scripts/diagnose_retention_candidate_encoding.py --input outputs/my_candidate_reproduction/main_report/analysis.json --output outputs/my_candidate_reproduction/encoding_diagnostics
+& .\.venv\Scripts\python.exe -m pytest -q tests/test_retention_behavioral_candidate.py tests/test_retention_candidate.py tests/test_audit_retention_candidate.py tests/test_report_retention_candidate.py
+```
+
+The original `outputs/retention_candidate_main` was stopped at the user's
+request. It has no complete root summary and is not the final analysis
+cohort. Its [pause receipt](../outputs/retention_candidate_pause_receipt.json)
+and [interrupted inventory](../outputs/retention_candidate_interrupted_inventory.json)
+are retained. The inventory counts 355148 complete persisted step rows;
+unflushed process buffers mean the exact actual interaction count and
+campaign CPU/wall time are unknown. Those rows are a lower bound, not a
+completed-run cost estimate or additional independent observations.
+
+After the user resumed, all 29 original helper/configuration/protocol hashes
+still matched. A fresh full run uses `outputs/retention_candidate_completed`
+with the same producer and scientific configuration. It does not copy
+partial branch results into its analysis. Report the pilot, interrupted
+attempt and fresh run separately; the interruption did not select settings
+or seeds based on rewards. Source/state/cost audit validity is separate from
+whether a candidate improves future reward.
+
+The offline encoding diagnostic takes the completed reporter's `analysis.json`
+file, not a cohort directory. It checks the complete audited 24-prefix / 480-branch
+grid and reads the summary/checkpoint/evidence locations recorded by that report.
+Run it with the repository environment (bare system Python may lack NumPy).
+It creates no new environment steps and does not refit candidates. Source-feature
+condition numbers and coefficient norms depend on the frozen coordinates; saved
+codec drift is a local diagnostic, not a causal estimate of the reward effect.
+
 ## Prediction decomposition and retention action/horizon diagnosis (2026-10-19)
 
 The [frozen protocol](RETENTION_MECHANISM_PROTOCOL.md) and [configuration](../configs/retention_mechanism.json) define a six-seed exploratory diagnostic. The existing-log decomposition makes zero new environment calls. The RL diagnostic restores the same complete prefix before four operations, applies declared future RNG streams, and continues local PPO with a fixed parent. Its three horizons are nested observations from one continuation, not separately paid runs or independent samples.
