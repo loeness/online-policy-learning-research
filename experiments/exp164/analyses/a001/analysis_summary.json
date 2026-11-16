@@ -1,0 +1,3331 @@
+{
+  "format": "e164_a001_pure_json_analysis_v1",
+  "experiment_id": "E164",
+  "generated_date": "2026-10-23",
+  "status": "COMPLETE_VALID_EXPLORATORY_ONLY",
+  "validity_claim": "TECHNICAL_VALIDITY_CONFIRMED_NO_REWARD_OR_ADVANCEMENT_CLAIM",
+  "audit": {
+    "status": "COMPLETE_VALID",
+    "owner": "root coordinator",
+    "note": "Original frozen verifier and all initial/intermediate INVALID/INCOMPLETE audits are preserved; corrections change only metadata/runtime schema mapping, accepted by coordinator. Raw outputs/science/thresholds unchanged.",
+    "path": "../a003/audit.json",
+    "verifier_sha256": "329a152996555de6dbc0ae8e96a532b9815948ca3ca01e30d3e3d4584542516a",
+    "posthoc_mapping_corrections_disclosed": true
+  },
+  "contract": {
+    "path": "experiments/exp164/preparation/validation/report_contract.json",
+    "version": 1,
+    "report_format": "e164_exploratory_report_v1",
+    "comparisons_only": [
+      "UG-V",
+      "UR-UG"
+    ],
+    "paired_delta": "right arm minus left arm; include signed and absolute difference per prefix",
+    "metric_definitions": {
+      "old_kl": "Read from each score metrics pre_codec_fresh/encoded_fresh old_train/old_holdout.",
+      "G_new": "For each view/split: same-arm W0_fresh.new_split minus view.new_split; encoded holdout must equal legacy G_new.",
+      "classification": "old_kl lower is improvement; G_new higher is improvement; exact delta == 0 is unchanged."
+    }
+  },
+  "source_run": {
+    "scientific_report_status": "EXPLORATORY_ONLY",
+    "worker_status": "COMPLETE",
+    "remote_state_status": "COMPLETE",
+    "source_freeze_id": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+    "source_freeze_state": "FROZEN",
+    "cohort_lock_sha256": "6e512de82961b0eda644099ee84583017a0bdde6ff33cc306371dd9eab3d7b73",
+    "logical_prefix_count": 16,
+    "recovered_seeds": [
+      26204,
+      26206,
+      26209,
+      26212,
+      26213
+    ],
+    "reused_prefix_count": 11,
+    "reused_prefixes_exact_same_candidate_actor_checkpoint": 11,
+    "reused_prefixes_zero_delta_all_metrics": 11,
+    "anchors_confirmed": 5,
+    "completed_fits": 5,
+    "fit_attempts": 5,
+    "new_scoring_packages": 10,
+    "completed_scores": 10,
+    "environment_interactions": 0,
+    "gpu_devices": 0
+  },
+  "cost_and_limits": {
+    "observed_cpu_seconds_before_footer": 7.929754999999999,
+    "observed_wall_seconds_before_footer": 9.350686746649444,
+    "footer_bounded_campaign_cpu_seconds_upper": 12.929755,
+    "footer_bounded_campaign_wall_seconds_upper": 19.350686746649444,
+    "footer_reserve_cpu_seconds": 5.0,
+    "footer_reserve_wall_seconds": 10.0,
+    "campaign_cpu_limit_seconds": 60.0,
+    "campaign_wall_limit_seconds": 120.0,
+    "new_artifact_cache_temp_limit_bytes": 67108864,
+    "new_environment_interactions_limit": 0,
+    "gpu_limit": 0,
+    "external_operational_cpu": "UNKNOWN; outside parent shell, SSH, transfer and admission operations are excluded from campaign accounting."
+  },
+  "input_files": [
+    {
+      "path": "experiments/exp164/preparation/validation/report_contract.json",
+      "bytes": 5241,
+      "sha256": "04551277fc02a38674104fef83c8208312918efe7bf3b07b84a5d84de1e8ac2a"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/scientific_report.json",
+      "bytes": 289200,
+      "sha256": "b07840fd6103f0c3d0b32ee498421618da1e71cfb2167a5c38f9a4d56a169215"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/logical_scores.json",
+      "bytes": 469568,
+      "sha256": "c05f58a667569a699d892acb7c9f560c67650c6ba8b7fe6c60e3fab06e4082a3"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/aliases.json",
+      "bytes": 122441,
+      "sha256": "6d61cfa78b1b7f0e3d78b5989738e8733bae76955e6d37c2c00bf3ead2866826"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/state_worker.json",
+      "bytes": 3442,
+      "sha256": "62c851944e1915430e5f62f5b5a4ba5652ac039cff358812fd0e1d63ddead229"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/state.json",
+      "bytes": 4521,
+      "sha256": "2c0e9a21ba810422d416b77b695ab01378ca6e4b348932d14c94d9a28ec8d12e"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/cohort.json",
+      "bytes": 217792,
+      "sha256": "8666b2f3eb4029da2cbd713a3c8a62fb6e2838d6757695a2c7bb786f40a8f918"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/cases/s26204/lock.json",
+      "bytes": 5150,
+      "sha256": "c547bb5f3a381bc25e5b26405c9d3226205be6539bfcafa7f7388f093f475525"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/cases/s26206/lock.json",
+      "bytes": 5150,
+      "sha256": "d52034b272c818de295eeaf90cb7fe355f41212b39f549e3d56020c558fb8239"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/cases/s26209/lock.json",
+      "bytes": 5146,
+      "sha256": "b4b9b101164f9f41e289da813454a5acb2097408881b1960eb665d9bb343ddfb"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/cases/s26212/lock.json",
+      "bytes": 5150,
+      "sha256": "6501254c60461e0f82fb37cf76892205c872e812a7750563b7abc79c0fcdc716"
+    },
+    {
+      "path": "experiments/exp164/runs/run001/remote/cases/s26213/lock.json",
+      "bytes": 5150,
+      "sha256": "a3d528b3292bcd758cacb74fd1ca5514969e311181a82d65ac07297f05bc4051"
+    }
+  ],
+  "independent_recalculation": {
+    "computed_from": "experiments/exp164/runs/run001/remote/logical_scores.json",
+    "compared_against": "experiments/exp164/runs/run001/remote/scientific_report.json",
+    "report_cross_check": {
+      "paired_metric_points_checked": 256,
+      "exact_row_mismatches": 0,
+      "aggregate_count_mismatches": 0,
+      "result": "PASS_FOR_LOCAL_METRIC_RECALCULATION_ONLY"
+    },
+    "aggregates": [
+      {
+        "comparison": "UG-V",
+        "from_arm": "V",
+        "to_arm": "UG",
+        "metric": "old_kl",
+        "view": "pre_codec_fresh",
+        "split": "train",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": 0.0,
+        "mean_absolute_delta": 0.0,
+        "counts": {
+          "improved": 0,
+          "degraded": 0,
+          "unchanged": 16
+        }
+      },
+      {
+        "comparison": "UG-V",
+        "from_arm": "V",
+        "to_arm": "UG",
+        "metric": "old_kl",
+        "view": "pre_codec_fresh",
+        "split": "holdout",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": 0.0,
+        "mean_absolute_delta": 0.0,
+        "counts": {
+          "improved": 0,
+          "degraded": 0,
+          "unchanged": 16
+        }
+      },
+      {
+        "comparison": "UG-V",
+        "from_arm": "V",
+        "to_arm": "UG",
+        "metric": "old_kl",
+        "view": "encoded_fresh",
+        "split": "train",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": 0.0,
+        "mean_absolute_delta": 0.0,
+        "counts": {
+          "improved": 0,
+          "degraded": 0,
+          "unchanged": 16
+        }
+      },
+      {
+        "comparison": "UG-V",
+        "from_arm": "V",
+        "to_arm": "UG",
+        "metric": "old_kl",
+        "view": "encoded_fresh",
+        "split": "holdout",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": 0.0,
+        "mean_absolute_delta": 0.0,
+        "counts": {
+          "improved": 0,
+          "degraded": 0,
+          "unchanged": 16
+        }
+      },
+      {
+        "comparison": "UG-V",
+        "from_arm": "V",
+        "to_arm": "UG",
+        "metric": "G_new",
+        "view": "pre_codec_fresh",
+        "split": "train",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": 0.0,
+        "mean_absolute_delta": 0.0,
+        "counts": {
+          "improved": 0,
+          "degraded": 0,
+          "unchanged": 16
+        }
+      },
+      {
+        "comparison": "UG-V",
+        "from_arm": "V",
+        "to_arm": "UG",
+        "metric": "G_new",
+        "view": "pre_codec_fresh",
+        "split": "holdout",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": 0.0,
+        "mean_absolute_delta": 0.0,
+        "counts": {
+          "improved": 0,
+          "degraded": 0,
+          "unchanged": 16
+        }
+      },
+      {
+        "comparison": "UG-V",
+        "from_arm": "V",
+        "to_arm": "UG",
+        "metric": "G_new",
+        "view": "encoded_fresh",
+        "split": "train",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": 0.0,
+        "mean_absolute_delta": 0.0,
+        "counts": {
+          "improved": 0,
+          "degraded": 0,
+          "unchanged": 16
+        }
+      },
+      {
+        "comparison": "UG-V",
+        "from_arm": "V",
+        "to_arm": "UG",
+        "metric": "G_new",
+        "view": "encoded_fresh",
+        "split": "holdout",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": 0.0,
+        "mean_absolute_delta": 0.0,
+        "counts": {
+          "improved": 0,
+          "degraded": 0,
+          "unchanged": 16
+        }
+      },
+      {
+        "comparison": "UR-UG",
+        "from_arm": "UG",
+        "to_arm": "UR",
+        "metric": "old_kl",
+        "view": "pre_codec_fresh",
+        "split": "train",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": -0.1805961478919671,
+        "mean_absolute_delta": 0.1805961478919671,
+        "counts": {
+          "improved": 5,
+          "degraded": 0,
+          "unchanged": 11
+        }
+      },
+      {
+        "comparison": "UR-UG",
+        "from_arm": "UG",
+        "to_arm": "UR",
+        "metric": "old_kl",
+        "view": "pre_codec_fresh",
+        "split": "holdout",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": -0.21984179700641185,
+        "mean_absolute_delta": 0.21984179700641185,
+        "counts": {
+          "improved": 5,
+          "degraded": 0,
+          "unchanged": 11
+        }
+      },
+      {
+        "comparison": "UR-UG",
+        "from_arm": "UG",
+        "to_arm": "UR",
+        "metric": "old_kl",
+        "view": "encoded_fresh",
+        "split": "train",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": -0.18266858165194827,
+        "mean_absolute_delta": 0.18266858165194827,
+        "counts": {
+          "improved": 5,
+          "degraded": 0,
+          "unchanged": 11
+        }
+      },
+      {
+        "comparison": "UR-UG",
+        "from_arm": "UG",
+        "to_arm": "UR",
+        "metric": "old_kl",
+        "view": "encoded_fresh",
+        "split": "holdout",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": -0.22188129434769693,
+        "mean_absolute_delta": 0.22188129434769693,
+        "counts": {
+          "improved": 5,
+          "degraded": 0,
+          "unchanged": 11
+        }
+      },
+      {
+        "comparison": "UR-UG",
+        "from_arm": "UG",
+        "to_arm": "UR",
+        "metric": "G_new",
+        "view": "pre_codec_fresh",
+        "split": "train",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": -0.011567447967116994,
+        "mean_absolute_delta": 0.011567447967116994,
+        "counts": {
+          "improved": 0,
+          "degraded": 5,
+          "unchanged": 11
+        }
+      },
+      {
+        "comparison": "UR-UG",
+        "from_arm": "UG",
+        "to_arm": "UR",
+        "metric": "G_new",
+        "view": "pre_codec_fresh",
+        "split": "holdout",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": -0.012279031886329953,
+        "mean_absolute_delta": 0.03301332245264149,
+        "counts": {
+          "improved": 2,
+          "degraded": 3,
+          "unchanged": 11
+        }
+      },
+      {
+        "comparison": "UR-UG",
+        "from_arm": "UG",
+        "to_arm": "UR",
+        "metric": "G_new",
+        "view": "encoded_fresh",
+        "split": "train",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": -0.014298905226769344,
+        "mean_absolute_delta": 0.014298905226769344,
+        "counts": {
+          "improved": 0,
+          "degraded": 5,
+          "unchanged": 11
+        }
+      },
+      {
+        "comparison": "UR-UG",
+        "from_arm": "UG",
+        "to_arm": "UR",
+        "metric": "G_new",
+        "view": "encoded_fresh",
+        "split": "holdout",
+        "logical_prefix_count": 16,
+        "mean_signed_delta": -0.016072061517235156,
+        "mean_absolute_delta": 0.03621827811879545,
+        "counts": {
+          "improved": 2,
+          "degraded": 3,
+          "unchanged": 11
+        }
+      }
+    ],
+    "encoded_holdout_focus": {
+      "UG-V": {
+        "old_kl": {
+          "comparison": "UG-V",
+          "from_arm": "V",
+          "to_arm": "UG",
+          "metric": "old_kl",
+          "view": "encoded_fresh",
+          "split": "holdout",
+          "logical_prefix_count": 16,
+          "mean_signed_delta": 0.0,
+          "mean_absolute_delta": 0.0,
+          "counts": {
+            "improved": 0,
+            "degraded": 0,
+            "unchanged": 16
+          }
+        },
+        "G_new": {
+          "comparison": "UG-V",
+          "from_arm": "V",
+          "to_arm": "UG",
+          "metric": "G_new",
+          "view": "encoded_fresh",
+          "split": "holdout",
+          "logical_prefix_count": 16,
+          "mean_signed_delta": 0.0,
+          "mean_absolute_delta": 0.0,
+          "counts": {
+            "improved": 0,
+            "degraded": 0,
+            "unchanged": 16
+          }
+        }
+      },
+      "UR-UG": {
+        "old_kl": {
+          "comparison": "UR-UG",
+          "from_arm": "UG",
+          "to_arm": "UR",
+          "metric": "old_kl",
+          "view": "encoded_fresh",
+          "split": "holdout",
+          "logical_prefix_count": 16,
+          "mean_signed_delta": -0.22188129434769693,
+          "mean_absolute_delta": 0.22188129434769693,
+          "counts": {
+            "improved": 5,
+            "degraded": 0,
+            "unchanged": 11
+          }
+        },
+        "G_new": {
+          "comparison": "UR-UG",
+          "from_arm": "UG",
+          "to_arm": "UR",
+          "metric": "G_new",
+          "view": "encoded_fresh",
+          "split": "holdout",
+          "logical_prefix_count": 16,
+          "mean_signed_delta": -0.016072061517235156,
+          "mean_absolute_delta": 0.03621827811879545,
+          "counts": {
+            "improved": 2,
+            "degraded": 3,
+            "unchanged": 11
+          }
+        }
+      }
+    },
+    "per_prefix": [
+      {
+        "seed": 26203,
+        "disposition": "REUSED_E163",
+        "prepared_id": "4858815e47be512a7c804d84ac7515add57745d6c3059401f6963972dfc508e1",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26203,
+                  "from_value": 0.0006414697646870746,
+                  "to_value": 0.0006414697646870746,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26203,
+                  "from_value": 0.0016593440559072839,
+                  "to_value": 0.0016593440559072839,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26203,
+                  "from_value": 0.0004479984219144474,
+                  "to_value": 0.0004479984219144474,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26203,
+                  "from_value": 0.0017130518914203986,
+                  "to_value": 0.0017130518914203986,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26203,
+                  "from_value": 0.05861857946398094,
+                  "to_value": 0.05861857946398094,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26203,
+                  "from_value": 0.07563952816790061,
+                  "to_value": 0.07563952816790061,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26203,
+                  "from_value": 0.05518528932776684,
+                  "to_value": 0.05518528932776684,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26203,
+                  "from_value": 0.06649633591398971,
+                  "to_value": 0.06649633591398971,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26203,
+                  "from_value": 0.0006414697646870746,
+                  "to_value": 0.0006414697646870746,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26203,
+                  "from_value": 0.0016593440559072839,
+                  "to_value": 0.0016593440559072839,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26203,
+                  "from_value": 0.0004479984219144474,
+                  "to_value": 0.0004479984219144474,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26203,
+                  "from_value": 0.0017130518914203986,
+                  "to_value": 0.0017130518914203986,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26203,
+                  "from_value": 0.05861857946398094,
+                  "to_value": 0.05861857946398094,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26203,
+                  "from_value": 0.07563952816790061,
+                  "to_value": 0.07563952816790061,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26203,
+                  "from_value": 0.05518528932776684,
+                  "to_value": 0.05518528932776684,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26203,
+                  "from_value": 0.06649633591398971,
+                  "to_value": 0.06649633591398971,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26216,
+        "disposition": "REUSED_E163",
+        "prepared_id": "33f5b727a8c5e12c7e5a969a35614ff1e5451ee841e4c034e7ebc6af6e302d66",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26216,
+                  "from_value": 0.015653397770826288,
+                  "to_value": 0.015653397770826288,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26216,
+                  "from_value": 0.0038615151427648757,
+                  "to_value": 0.0038615151427648757,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26216,
+                  "from_value": 0.023990303114350627,
+                  "to_value": 0.023990303114350627,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26216,
+                  "from_value": 0.0009320442041410894,
+                  "to_value": 0.0009320442041410894,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26216,
+                  "from_value": 0.08536203459242009,
+                  "to_value": 0.08536203459242009,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26216,
+                  "from_value": -0.09519410765339142,
+                  "to_value": -0.09519410765339142,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26216,
+                  "from_value": 0.08414791719196094,
+                  "to_value": 0.08414791719196094,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26216,
+                  "from_value": -0.059416643123171076,
+                  "to_value": -0.059416643123171076,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26216,
+                  "from_value": 0.015653397770826288,
+                  "to_value": 0.015653397770826288,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26216,
+                  "from_value": 0.0038615151427648757,
+                  "to_value": 0.0038615151427648757,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26216,
+                  "from_value": 0.023990303114350627,
+                  "to_value": 0.023990303114350627,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26216,
+                  "from_value": 0.0009320442041410894,
+                  "to_value": 0.0009320442041410894,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26216,
+                  "from_value": 0.08536203459242009,
+                  "to_value": 0.08536203459242009,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26216,
+                  "from_value": -0.09519410765339142,
+                  "to_value": -0.09519410765339142,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26216,
+                  "from_value": 0.08414791719196094,
+                  "to_value": 0.08414791719196094,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26216,
+                  "from_value": -0.059416643123171076,
+                  "to_value": -0.059416643123171076,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26213,
+        "disposition": "RECOVERED",
+        "prepared_id": "a78ba4ba26c65cace435431c3e133eb93a921660fbb70936c6d066290fa0a7c2",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26213,
+                  "from_value": 0.7132062871401915,
+                  "to_value": 0.7132062871401915,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26213,
+                  "from_value": 0.8025371310782607,
+                  "to_value": 0.8025371310782607,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26213,
+                  "from_value": 0.7141434958014714,
+                  "to_value": 0.7141434958014714,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26213,
+                  "from_value": 0.8035834008309978,
+                  "to_value": 0.8035834008309978,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26213,
+                  "from_value": 0.022820999350180005,
+                  "to_value": 0.022820999350180005,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26213,
+                  "from_value": -0.055770509044796135,
+                  "to_value": -0.055770509044796135,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26213,
+                  "from_value": 0.02257310991147532,
+                  "to_value": 0.02257310991147532,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26213,
+                  "from_value": -0.056369047735419286,
+                  "to_value": -0.056369047735419286,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26213,
+                  "from_value": 0.7132062871401915,
+                  "to_value": 0.060452113609269394,
+                  "delta_to_minus_from": -0.6527541735309221,
+                  "absolute_delta": 0.6527541735309221,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26213,
+                  "from_value": 0.8025371310782607,
+                  "to_value": 0.008989881487317835,
+                  "delta_to_minus_from": -0.7935472495909429,
+                  "absolute_delta": 0.7935472495909429,
+                  "classification": "improved"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26213,
+                  "from_value": 0.7141434958014714,
+                  "to_value": 0.06362749746421613,
+                  "delta_to_minus_from": -0.6505159983372553,
+                  "absolute_delta": 0.6505159983372553,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26213,
+                  "from_value": 0.8035834008309978,
+                  "to_value": 0.009656217833906317,
+                  "delta_to_minus_from": -0.7939271829970914,
+                  "absolute_delta": 0.7939271829970914,
+                  "classification": "improved"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26213,
+                  "from_value": 0.022820999350180005,
+                  "to_value": -0.029480287189386056,
+                  "delta_to_minus_from": -0.05230128653956606,
+                  "absolute_delta": 0.05230128653956606,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26213,
+                  "from_value": -0.055770509044796135,
+                  "to_value": 0.0758198632759276,
+                  "delta_to_minus_from": 0.13159037232072374,
+                  "absolute_delta": 0.13159037232072374,
+                  "classification": "improved"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26213,
+                  "from_value": 0.02257310991147532,
+                  "to_value": -0.027359517850734483,
+                  "delta_to_minus_from": -0.0499326277622098,
+                  "absolute_delta": 0.0499326277622098,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26213,
+                  "from_value": -0.056369047735419286,
+                  "to_value": 0.07234977930826626,
+                  "delta_to_minus_from": 0.12871882704368554,
+                  "absolute_delta": 0.12871882704368554,
+                  "classification": "improved"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26201,
+        "disposition": "REUSED_E163",
+        "prepared_id": "98a285a11721ff7e2354fd76d142991912284b92794190d3af644144e725ca14",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26201,
+                  "from_value": 0.04037146698705033,
+                  "to_value": 0.04037146698705033,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26201,
+                  "from_value": 0.059499341860435206,
+                  "to_value": 0.059499341860435206,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26201,
+                  "from_value": 0.05591578061324686,
+                  "to_value": 0.05591578061324686,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26201,
+                  "from_value": 0.09025734405567114,
+                  "to_value": 0.09025734405567114,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26201,
+                  "from_value": 0.03797019008974398,
+                  "to_value": 0.03797019008974398,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26201,
+                  "from_value": 0.2030031275049386,
+                  "to_value": 0.2030031275049386,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26201,
+                  "from_value": 0.048389434836516754,
+                  "to_value": 0.048389434836516754,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26201,
+                  "from_value": 0.2147187273266023,
+                  "to_value": 0.2147187273266023,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26201,
+                  "from_value": 0.04037146698705033,
+                  "to_value": 0.04037146698705033,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26201,
+                  "from_value": 0.059499341860435206,
+                  "to_value": 0.059499341860435206,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26201,
+                  "from_value": 0.05591578061324686,
+                  "to_value": 0.05591578061324686,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26201,
+                  "from_value": 0.09025734405567114,
+                  "to_value": 0.09025734405567114,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26201,
+                  "from_value": 0.03797019008974398,
+                  "to_value": 0.03797019008974398,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26201,
+                  "from_value": 0.2030031275049386,
+                  "to_value": 0.2030031275049386,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26201,
+                  "from_value": 0.048389434836516754,
+                  "to_value": 0.048389434836516754,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26201,
+                  "from_value": 0.2147187273266023,
+                  "to_value": 0.2147187273266023,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26208,
+        "disposition": "REUSED_E163",
+        "prepared_id": "2bd39b34a66802835b6a99955cd7da196aecd79987a49058f44936742f5894cb",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26208,
+                  "from_value": 0.0003833749686689388,
+                  "to_value": 0.0003833749686689388,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26208,
+                  "from_value": 0.00023397310549886675,
+                  "to_value": 0.00023397310549886675,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26208,
+                  "from_value": 0.00039270875859991164,
+                  "to_value": 0.00039270875859991164,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26208,
+                  "from_value": 0.00021427113080445378,
+                  "to_value": 0.00021427113080445378,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26208,
+                  "from_value": 0.015700459607910278,
+                  "to_value": 0.015700459607910278,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26208,
+                  "from_value": -0.27595601977894363,
+                  "to_value": -0.27595601977894363,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26208,
+                  "from_value": 0.015570694309029909,
+                  "to_value": 0.015570694309029909,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26208,
+                  "from_value": -0.27509483816791847,
+                  "to_value": -0.27509483816791847,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26208,
+                  "from_value": 0.0003833749686689388,
+                  "to_value": 0.0003833749686689388,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26208,
+                  "from_value": 0.00023397310549886675,
+                  "to_value": 0.00023397310549886675,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26208,
+                  "from_value": 0.00039270875859991164,
+                  "to_value": 0.00039270875859991164,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26208,
+                  "from_value": 0.00021427113080445378,
+                  "to_value": 0.00021427113080445378,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26208,
+                  "from_value": 0.015700459607910278,
+                  "to_value": 0.015700459607910278,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26208,
+                  "from_value": -0.27595601977894363,
+                  "to_value": -0.27595601977894363,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26208,
+                  "from_value": 0.015570694309029909,
+                  "to_value": 0.015570694309029909,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26208,
+                  "from_value": -0.27509483816791847,
+                  "to_value": -0.27509483816791847,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26206,
+        "disposition": "RECOVERED",
+        "prepared_id": "13f733d376413919e8f356f688bee74e4ab3ba12270d59ea3f637d533649bae4",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26206,
+                  "from_value": 0.27480471331139644,
+                  "to_value": 0.27480471331139644,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26206,
+                  "from_value": 0.26040985918097503,
+                  "to_value": 0.26040985918097503,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26206,
+                  "from_value": 0.2751856679851378,
+                  "to_value": 0.2751856679851378,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26206,
+                  "from_value": 0.2600306869315404,
+                  "to_value": 0.2600306869315404,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26206,
+                  "from_value": 0.17626553524488936,
+                  "to_value": 0.17626553524488936,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26206,
+                  "from_value": -0.1330339675972061,
+                  "to_value": -0.1330339675972061,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26206,
+                  "from_value": 0.1762713691829774,
+                  "to_value": 0.1762713691829774,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26206,
+                  "from_value": -0.1324865101526943,
+                  "to_value": -0.1324865101526943,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26206,
+                  "from_value": 0.27480471331139644,
+                  "to_value": 0.05689502708006322,
+                  "delta_to_minus_from": -0.21790968623133322,
+                  "absolute_delta": 0.21790968623133322,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26206,
+                  "from_value": 0.26040985918097503,
+                  "to_value": 0.08116813700969275,
+                  "delta_to_minus_from": -0.1792417221712823,
+                  "absolute_delta": 0.1792417221712823,
+                  "classification": "improved"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26206,
+                  "from_value": 0.2751856679851378,
+                  "to_value": 0.060954919126589104,
+                  "delta_to_minus_from": -0.21423074885854873,
+                  "absolute_delta": 0.21423074885854873,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26206,
+                  "from_value": 0.2600306869315404,
+                  "to_value": 0.07686898547470791,
+                  "delta_to_minus_from": -0.1831617014568325,
+                  "absolute_delta": 0.1831617014568325,
+                  "classification": "improved"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26206,
+                  "from_value": 0.17626553524488936,
+                  "to_value": 0.16802291507481953,
+                  "delta_to_minus_from": -0.008242620170069825,
+                  "absolute_delta": 0.008242620170069825,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26206,
+                  "from_value": -0.1330339675972061,
+                  "to_value": -0.1485349638718514,
+                  "delta_to_minus_from": -0.015500996274645296,
+                  "absolute_delta": 0.015500996274645296,
+                  "classification": "degraded"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26206,
+                  "from_value": 0.1762713691829774,
+                  "to_value": 0.16434899868998326,
+                  "delta_to_minus_from": -0.011922370492994133,
+                  "absolute_delta": 0.011922370492994133,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26206,
+                  "from_value": -0.1324865101526943,
+                  "to_value": -0.17352004323635606,
+                  "delta_to_minus_from": -0.041033533083661755,
+                  "absolute_delta": 0.041033533083661755,
+                  "classification": "degraded"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26205,
+        "disposition": "REUSED_E163",
+        "prepared_id": "464f57ac368393a6e45095ca270a14ad171a462ac68d5d6999372edb00021e92",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26205,
+                  "from_value": 0.12613556274247048,
+                  "to_value": 0.12613556274247048,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26205,
+                  "from_value": 0.1462494284012194,
+                  "to_value": 0.1462494284012194,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26205,
+                  "from_value": 0.11275928079308567,
+                  "to_value": 0.11275928079308567,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26205,
+                  "from_value": 0.14178073400288227,
+                  "to_value": 0.14178073400288227,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26205,
+                  "from_value": 0.15845475955017543,
+                  "to_value": 0.15845475955017543,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26205,
+                  "from_value": 0.42412908167059027,
+                  "to_value": 0.42412908167059027,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26205,
+                  "from_value": 0.14243986679664428,
+                  "to_value": 0.14243986679664428,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26205,
+                  "from_value": 0.4098364632952349,
+                  "to_value": 0.4098364632952349,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26205,
+                  "from_value": 0.12613556274247048,
+                  "to_value": 0.12613556274247048,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26205,
+                  "from_value": 0.1462494284012194,
+                  "to_value": 0.1462494284012194,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26205,
+                  "from_value": 0.11275928079308567,
+                  "to_value": 0.11275928079308567,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26205,
+                  "from_value": 0.14178073400288227,
+                  "to_value": 0.14178073400288227,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26205,
+                  "from_value": 0.15845475955017543,
+                  "to_value": 0.15845475955017543,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26205,
+                  "from_value": 0.42412908167059027,
+                  "to_value": 0.42412908167059027,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26205,
+                  "from_value": 0.14243986679664428,
+                  "to_value": 0.14243986679664428,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26205,
+                  "from_value": 0.4098364632952349,
+                  "to_value": 0.4098364632952349,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26215,
+        "disposition": "REUSED_E163",
+        "prepared_id": "066eb7411ea1309a04f1dae3b087f1b46768bd6a10d628fe9e385bcdcf7d558c",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26215,
+                  "from_value": 0.028049242632948623,
+                  "to_value": 0.028049242632948623,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26215,
+                  "from_value": 0.03787964300278003,
+                  "to_value": 0.03787964300278003,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26215,
+                  "from_value": 0.035657540744580184,
+                  "to_value": 0.035657540744580184,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26215,
+                  "from_value": 0.04007155353986221,
+                  "to_value": 0.04007155353986221,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26215,
+                  "from_value": 0.10050619411421097,
+                  "to_value": 0.10050619411421097,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26215,
+                  "from_value": 0.1236377859563665,
+                  "to_value": 0.1236377859563665,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26215,
+                  "from_value": 0.10487570369318988,
+                  "to_value": 0.10487570369318988,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26215,
+                  "from_value": 0.12472698411633808,
+                  "to_value": 0.12472698411633808,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26215,
+                  "from_value": 0.028049242632948623,
+                  "to_value": 0.028049242632948623,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26215,
+                  "from_value": 0.03787964300278003,
+                  "to_value": 0.03787964300278003,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26215,
+                  "from_value": 0.035657540744580184,
+                  "to_value": 0.035657540744580184,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26215,
+                  "from_value": 0.04007155353986221,
+                  "to_value": 0.04007155353986221,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26215,
+                  "from_value": 0.10050619411421097,
+                  "to_value": 0.10050619411421097,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26215,
+                  "from_value": 0.1236377859563665,
+                  "to_value": 0.1236377859563665,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26215,
+                  "from_value": 0.10487570369318988,
+                  "to_value": 0.10487570369318988,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26215,
+                  "from_value": 0.12472698411633808,
+                  "to_value": 0.12472698411633808,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26209,
+        "disposition": "RECOVERED",
+        "prepared_id": "3f3c2c11f7af89458d0718f776b7ab7b7bf259e392dca3085c82a8a09e73c301",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26209,
+                  "from_value": 0.49432361650588375,
+                  "to_value": 0.49432361650588375,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26209,
+                  "from_value": 1.6232450825442184,
+                  "to_value": 1.6232450825442184,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26209,
+                  "from_value": 0.4958633979595384,
+                  "to_value": 0.4958633979595384,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26209,
+                  "from_value": 1.6267304965763336,
+                  "to_value": 1.6267304965763336,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26209,
+                  "from_value": 0.11694077577292827,
+                  "to_value": 0.11694077577292827,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26209,
+                  "from_value": 0.19922003111755177,
+                  "to_value": 0.19922003111755177,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26209,
+                  "from_value": 0.11673152308392334,
+                  "to_value": 0.11673152308392334,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26209,
+                  "from_value": 0.1992001363548951,
+                  "to_value": 0.1992001363548951,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26209,
+                  "from_value": 0.49432361650588375,
+                  "to_value": 0.0652400470899014,
+                  "delta_to_minus_from": -0.42908356941598236,
+                  "absolute_delta": 0.42908356941598236,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26209,
+                  "from_value": 1.6232450825442184,
+                  "to_value": 0.02926480517938259,
+                  "delta_to_minus_from": -1.5939802773648357,
+                  "absolute_delta": 1.5939802773648357,
+                  "classification": "improved"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26209,
+                  "from_value": 0.4958633979595384,
+                  "to_value": 0.057305416411005644,
+                  "delta_to_minus_from": -0.43855798154853276,
+                  "absolute_delta": 0.43855798154853276,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26209,
+                  "from_value": 1.6267304965763336,
+                  "to_value": 0.02213935573875115,
+                  "delta_to_minus_from": -1.6045911408375824,
+                  "absolute_delta": 1.6045911408375824,
+                  "classification": "improved"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26209,
+                  "from_value": 0.11694077577292827,
+                  "to_value": 0.09449335155839517,
+                  "delta_to_minus_from": -0.022447424214533107,
+                  "absolute_delta": 0.022447424214533107,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26209,
+                  "from_value": 0.19922003111755177,
+                  "to_value": -0.05469468293434021,
+                  "delta_to_minus_from": -0.253914714051892,
+                  "absolute_delta": 0.253914714051892,
+                  "classification": "degraded"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26209,
+                  "from_value": 0.11673152308392334,
+                  "to_value": 0.08442121493185076,
+                  "delta_to_minus_from": -0.03231030815207259,
+                  "absolute_delta": 0.03231030815207259,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26209,
+                  "from_value": 0.1992001363548951,
+                  "to_value": -0.06793233546208977,
+                  "delta_to_minus_from": -0.26713247181698485,
+                  "absolute_delta": 0.26713247181698485,
+                  "classification": "degraded"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26210,
+        "disposition": "REUSED_E163",
+        "prepared_id": "c085a96a593d34fb2317b5541c164488404dde62fc830476dc9e09bb54340696",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26210,
+                  "from_value": 0.02778803697818084,
+                  "to_value": 0.02778803697818084,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26210,
+                  "from_value": 0.04611774811969327,
+                  "to_value": 0.04611774811969327,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26210,
+                  "from_value": 0.0347235334819791,
+                  "to_value": 0.0347235334819791,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26210,
+                  "from_value": 0.06461987247241124,
+                  "to_value": 0.06461987247241124,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26210,
+                  "from_value": 0.03596185356251691,
+                  "to_value": 0.03596185356251691,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26210,
+                  "from_value": 0.009712495600816634,
+                  "to_value": 0.009712495600816634,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26210,
+                  "from_value": 0.04156217914065713,
+                  "to_value": 0.04156217914065713,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26210,
+                  "from_value": 0.021369530895085573,
+                  "to_value": 0.021369530895085573,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26210,
+                  "from_value": 0.02778803697818084,
+                  "to_value": 0.02778803697818084,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26210,
+                  "from_value": 0.04611774811969327,
+                  "to_value": 0.04611774811969327,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26210,
+                  "from_value": 0.0347235334819791,
+                  "to_value": 0.0347235334819791,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26210,
+                  "from_value": 0.06461987247241124,
+                  "to_value": 0.06461987247241124,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26210,
+                  "from_value": 0.03596185356251691,
+                  "to_value": 0.03596185356251691,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26210,
+                  "from_value": 0.009712495600816634,
+                  "to_value": 0.009712495600816634,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26210,
+                  "from_value": 0.04156217914065713,
+                  "to_value": 0.04156217914065713,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26210,
+                  "from_value": 0.021369530895085573,
+                  "to_value": 0.021369530895085573,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26212,
+        "disposition": "RECOVERED",
+        "prepared_id": "18c5ee7a2e830915f98427e1c5bde2ae393258a433dd1b6d4a72cf77d4fc45d8",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26212,
+                  "from_value": 0.33050681825642664,
+                  "to_value": 0.33050681825642664,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26212,
+                  "from_value": 0.9631770137306285,
+                  "to_value": 0.9631770137306285,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26212,
+                  "from_value": 0.33043193849336155,
+                  "to_value": 0.33043193849336155,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26212,
+                  "from_value": 0.9627771451891399,
+                  "to_value": 0.9627771451891399,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26212,
+                  "from_value": 0.2344364400648548,
+                  "to_value": 0.2344364400648548,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26212,
+                  "from_value": 0.1134166836625852,
+                  "to_value": 0.1134166836625852,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26212,
+                  "from_value": 0.23433960953409083,
+                  "to_value": 0.23433960953409083,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26212,
+                  "from_value": 0.11314474506415789,
+                  "to_value": 0.11314474506415789,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26212,
+                  "from_value": 0.33050681825642664,
+                  "to_value": 0.0719452609165444,
+                  "delta_to_minus_from": -0.25856155733988223,
+                  "absolute_delta": 0.25856155733988223,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26212,
+                  "from_value": 0.9631770137306285,
+                  "to_value": 0.1336503345199616,
+                  "delta_to_minus_from": -0.8295266792106668,
+                  "absolute_delta": 0.8295266792106668,
+                  "classification": "improved"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26212,
+                  "from_value": 0.33043193849336155,
+                  "to_value": 0.06098176406726633,
+                  "delta_to_minus_from": -0.2694501744260952,
+                  "absolute_delta": 0.2694501744260952,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26212,
+                  "from_value": 0.9627771451891399,
+                  "to_value": 0.10952412711048069,
+                  "delta_to_minus_from": -0.8532530180786593,
+                  "absolute_delta": 0.8532530180786593,
+                  "classification": "improved"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26212,
+                  "from_value": 0.2344364400648548,
+                  "to_value": 0.20339333697338952,
+                  "delta_to_minus_from": -0.031043103091465296,
+                  "absolute_delta": 0.031043103091465296,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26212,
+                  "from_value": 0.1134166836625852,
+                  "to_value": 0.1477006358723538,
+                  "delta_to_minus_from": 0.0342839522097686,
+                  "absolute_delta": 0.0342839522097686,
+                  "classification": "improved"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26212,
+                  "from_value": 0.23433960953409083,
+                  "to_value": 0.1897068463766566,
+                  "delta_to_minus_from": -0.044632763157434224,
+                  "absolute_delta": 0.044632763157434224,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26212,
+                  "from_value": 0.11314474506415789,
+                  "to_value": 0.14559565083295473,
+                  "delta_to_minus_from": 0.032450905768796834,
+                  "absolute_delta": 0.032450905768796834,
+                  "classification": "improved"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26202,
+        "disposition": "REUSED_E163",
+        "prepared_id": "c80b7d913334c6b7860c18dc08a63ecef2f1bae1eb4c3a30ac6e38fa74d872c3",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26202,
+                  "from_value": 6.031987991750145e-05,
+                  "to_value": 6.031987991750145e-05,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26202,
+                  "from_value": 4.249280592423136e-05,
+                  "to_value": 4.249280592423136e-05,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26202,
+                  "from_value": 0.009202056015297007,
+                  "to_value": 0.009202056015297007,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26202,
+                  "from_value": 0.008878321875064953,
+                  "to_value": 0.008878321875064953,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26202,
+                  "from_value": 0.040401429277667655,
+                  "to_value": 0.040401429277667655,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26202,
+                  "from_value": 0.06029529765992733,
+                  "to_value": 0.06029529765992733,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26202,
+                  "from_value": 0.029420636169128378,
+                  "to_value": 0.029420636169128378,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26202,
+                  "from_value": 0.07557239075097058,
+                  "to_value": 0.07557239075097058,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26202,
+                  "from_value": 6.031987991750145e-05,
+                  "to_value": 6.031987991750145e-05,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26202,
+                  "from_value": 4.249280592423136e-05,
+                  "to_value": 4.249280592423136e-05,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26202,
+                  "from_value": 0.009202056015297007,
+                  "to_value": 0.009202056015297007,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26202,
+                  "from_value": 0.008878321875064953,
+                  "to_value": 0.008878321875064953,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26202,
+                  "from_value": 0.040401429277667655,
+                  "to_value": 0.040401429277667655,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26202,
+                  "from_value": 0.06029529765992733,
+                  "to_value": 0.06029529765992733,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26202,
+                  "from_value": 0.029420636169128378,
+                  "to_value": 0.029420636169128378,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26202,
+                  "from_value": 0.07557239075097058,
+                  "to_value": 0.07557239075097058,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26207,
+        "disposition": "REUSED_E163",
+        "prepared_id": "b211a78326910c0f81cc0da3ba50e2609114516935f68253dce488ae3b2d6ade",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26207,
+                  "from_value": 0.03745449140645145,
+                  "to_value": 0.03745449140645145,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26207,
+                  "from_value": 0.0073005288594949905,
+                  "to_value": 0.0073005288594949905,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26207,
+                  "from_value": 0.0330025937555553,
+                  "to_value": 0.0330025937555553,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26207,
+                  "from_value": 0.008529644814651476,
+                  "to_value": 0.008529644814651476,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26207,
+                  "from_value": 0.09692779613090802,
+                  "to_value": 0.09692779613090802,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26207,
+                  "from_value": 0.11809806440558894,
+                  "to_value": 0.11809806440558894,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26207,
+                  "from_value": 0.09041233652916561,
+                  "to_value": 0.09041233652916561,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26207,
+                  "from_value": 0.11533835844164886,
+                  "to_value": 0.11533835844164886,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26207,
+                  "from_value": 0.03745449140645145,
+                  "to_value": 0.03745449140645145,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26207,
+                  "from_value": 0.0073005288594949905,
+                  "to_value": 0.0073005288594949905,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26207,
+                  "from_value": 0.0330025937555553,
+                  "to_value": 0.0330025937555553,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26207,
+                  "from_value": 0.008529644814651476,
+                  "to_value": 0.008529644814651476,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26207,
+                  "from_value": 0.09692779613090802,
+                  "to_value": 0.09692779613090802,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26207,
+                  "from_value": 0.11809806440558894,
+                  "to_value": 0.11809806440558894,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26207,
+                  "from_value": 0.09041233652916561,
+                  "to_value": 0.09041233652916561,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26207,
+                  "from_value": 0.11533835844164886,
+                  "to_value": 0.11533835844164886,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26204,
+        "disposition": "RECOVERED",
+        "prepared_id": "7fe751633d581358f3c8be7a242b991e6a84bd2dbff29587d9bde126a3d22ed7",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26204,
+                  "from_value": 1.382856398363881,
+                  "to_value": 1.382856398363881,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26204,
+                  "from_value": 0.16899838808892503,
+                  "to_value": 0.16899838808892503,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26204,
+                  "from_value": 1.3864582604687286,
+                  "to_value": 1.3864582604687286,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26204,
+                  "from_value": 0.1693060596615017,
+                  "to_value": 0.1693060596615017,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26204,
+                  "from_value": 0.17967969079540633,
+                  "to_value": 0.17967969079540633,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26204,
+                  "from_value": 0.3728809954291608,
+                  "to_value": 0.3728809954291608,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26204,
+                  "from_value": 0.17934098077274127,
+                  "to_value": 0.17934098077274127,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26204,
+                  "from_value": 0.373012161655221,
+                  "to_value": 0.373012161655221,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26204,
+                  "from_value": 1.382856398363881,
+                  "to_value": 0.05162701861052732,
+                  "delta_to_minus_from": -1.3312293797533536,
+                  "absolute_delta": 1.3312293797533536,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26204,
+                  "from_value": 0.16899838808892503,
+                  "to_value": 0.04782556432406308,
+                  "delta_to_minus_from": -0.12117282376486195,
+                  "absolute_delta": 0.12117282376486195,
+                  "classification": "improved"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26204,
+                  "from_value": 1.3864582604687286,
+                  "to_value": 0.036515857207988535,
+                  "delta_to_minus_from": -1.34994240326074,
+                  "absolute_delta": 1.34994240326074,
+                  "classification": "improved"
+                },
+                "holdout": {
+                  "seed": 26204,
+                  "from_value": 0.1693060596615017,
+                  "to_value": 0.05413839346851592,
+                  "delta_to_minus_from": -0.11516766619298577,
+                  "absolute_delta": 0.11516766619298577,
+                  "classification": "improved"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26204,
+                  "from_value": 0.17967969079540633,
+                  "to_value": 0.10863495733716871,
+                  "delta_to_minus_from": -0.07104473345823761,
+                  "absolute_delta": 0.07104473345823761,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26204,
+                  "from_value": 0.3728809954291608,
+                  "to_value": 0.2799578710439265,
+                  "delta_to_minus_from": -0.09292312438523431,
+                  "absolute_delta": 0.09292312438523431,
+                  "classification": "degraded"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26204,
+                  "from_value": 0.17934098077274127,
+                  "to_value": 0.08935656670914252,
+                  "delta_to_minus_from": -0.08998441406359875,
+                  "absolute_delta": 0.08998441406359875,
+                  "classification": "degraded"
+                },
+                "holdout": {
+                  "seed": 26204,
+                  "from_value": 0.373012161655221,
+                  "to_value": 0.26285544946762274,
+                  "delta_to_minus_from": -0.11015671218759826,
+                  "absolute_delta": 0.11015671218759826,
+                  "classification": "degraded"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26211,
+        "disposition": "REUSED_E163",
+        "prepared_id": "58682f758a2807e8841bfe9241ca32ef438198cfc2b65db9a04d03925906dce8",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26211,
+                  "from_value": 0.06629047234367443,
+                  "to_value": 0.06629047234367443,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26211,
+                  "from_value": 0.11817607219217056,
+                  "to_value": 0.11817607219217056,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26211,
+                  "from_value": 0.061669889089485265,
+                  "to_value": 0.061669889089485265,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26211,
+                  "from_value": 0.10722410187558361,
+                  "to_value": 0.10722410187558361,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26211,
+                  "from_value": 0.09549299068341195,
+                  "to_value": 0.09549299068341195,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26211,
+                  "from_value": 0.10454273080762584,
+                  "to_value": 0.10454273080762584,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26211,
+                  "from_value": 0.09011854236890336,
+                  "to_value": 0.09011854236890336,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26211,
+                  "from_value": 0.09624069146978359,
+                  "to_value": 0.09624069146978359,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26211,
+                  "from_value": 0.06629047234367443,
+                  "to_value": 0.06629047234367443,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26211,
+                  "from_value": 0.11817607219217056,
+                  "to_value": 0.11817607219217056,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26211,
+                  "from_value": 0.061669889089485265,
+                  "to_value": 0.061669889089485265,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26211,
+                  "from_value": 0.10722410187558361,
+                  "to_value": 0.10722410187558361,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26211,
+                  "from_value": 0.09549299068341195,
+                  "to_value": 0.09549299068341195,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26211,
+                  "from_value": 0.10454273080762584,
+                  "to_value": 0.10454273080762584,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26211,
+                  "from_value": 0.09011854236890336,
+                  "to_value": 0.09011854236890336,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26211,
+                  "from_value": 0.09624069146978359,
+                  "to_value": 0.09624069146978359,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "seed": 26218,
+        "disposition": "REUSED_E163",
+        "prepared_id": "c9a047c5dca121ed78c7a2c609df6bb1389ff6a6f60235185787175c24427818",
+        "comparisons": {
+          "UG-V": {
+            "from_arm": "V",
+            "to_arm": "UG",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26218,
+                  "from_value": 0.015529431467146429,
+                  "to_value": 0.015529431467146429,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26218,
+                  "from_value": 0.028313302117083272,
+                  "to_value": 0.028313302117083272,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26218,
+                  "from_value": 0.01745534634272827,
+                  "to_value": 0.01745534634272827,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26218,
+                  "from_value": 0.027793853992821266,
+                  "to_value": 0.027793853992821266,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26218,
+                  "from_value": 0.04898996578462819,
+                  "to_value": 0.04898996578462819,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26218,
+                  "from_value": 0.11244080307054982,
+                  "to_value": 0.11244080307054982,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26218,
+                  "from_value": 0.048525824818021285,
+                  "to_value": 0.048525824818021285,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26218,
+                  "from_value": 0.11860388957735632,
+                  "to_value": 0.11860388957735632,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          },
+          "UR-UG": {
+            "from_arm": "UG",
+            "to_arm": "UR",
+            "old_kl": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26218,
+                  "from_value": 0.015529431467146429,
+                  "to_value": 0.015529431467146429,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26218,
+                  "from_value": 0.028313302117083272,
+                  "to_value": 0.028313302117083272,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26218,
+                  "from_value": 0.01745534634272827,
+                  "to_value": 0.01745534634272827,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26218,
+                  "from_value": 0.027793853992821266,
+                  "to_value": 0.027793853992821266,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            },
+            "G_new": {
+              "pre_codec_fresh": {
+                "train": {
+                  "seed": 26218,
+                  "from_value": 0.04898996578462819,
+                  "to_value": 0.04898996578462819,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26218,
+                  "from_value": 0.11244080307054982,
+                  "to_value": 0.11244080307054982,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              },
+              "encoded_fresh": {
+                "train": {
+                  "seed": 26218,
+                  "from_value": 0.048525824818021285,
+                  "to_value": 0.048525824818021285,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                },
+                "holdout": {
+                  "seed": 26218,
+                  "from_value": 0.11860388957735632,
+                  "to_value": 0.11860388957735632,
+                  "delta_to_minus_from": 0.0,
+                  "absolute_delta": 0.0,
+                  "classification": "unchanged"
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "alias_counts_by_arm": {
+    "V": {
+      "NEW_SCORE": 5,
+      "REUSED_E163": 11
+    },
+    "UG": {
+      "REUSED_E163": 11,
+      "ALIAS": 5
+    },
+    "UR": {
+      "NEW_SCORE": 5,
+      "REUSED_E163": 11
+    }
+  },
+  "recovery_diagnostics": [
+    {
+      "seed": 26204,
+      "float64_F64_candidate_sha256": "c7ffb2089a977f5056efd0102ad03c10833fadf6f6683d7e93920c3688b5b8f3",
+      "float64_U64_candidate_sha256": "3badb87648d9871e2a34726833e4bfe8d7ddeac733268e18c76634f02d0b5b67",
+      "float64_F64_vs_U64_differ": true,
+      "V_selector": "F64",
+      "V_fallback_applied": false,
+      "UG_selector": "U64",
+      "UG_post_cast_gate_enabled": true,
+      "UG_post_cast_gate_pass": false,
+      "UG_fallback_applied": true,
+      "UG_gate_tolerance": 1e-12,
+      "UG_baseline_new_train_kl": 0.12983214268389912,
+      "UG_raw_cast_new_train_kl": 0.20087687614213673,
+      "UG_raw_cast_minus_baseline_new_train_kl": 0.07104473345823761,
+      "UG_named_fallback_reason_field_present": false,
+      "UG_origin": "ALIAS",
+      "UG_canonical_label": "V",
+      "UG_candidate_raw_sha256": "943d11d1772580dac8ad0061dcc1530dd6806b4ef53618ecca78997e13efb2af",
+      "UG_candidate_sha256": "e5fd1672cab5f612525db03f40154d1d07ddd977cb2ab25a04f6b7eb8b279141",
+      "UG_byte_aliases_V": true,
+      "V_origin": "NEW_SCORE",
+      "V_candidate_sha256": "e5fd1672cab5f612525db03f40154d1d07ddd977cb2ab25a04f6b7eb8b279141",
+      "V_package_path": "scores/s26204/V/package.json",
+      "UR_selector": "U64",
+      "UR_post_cast_gate_enabled": false,
+      "UR_fallback_applied": false,
+      "UR_origin": "NEW_SCORE",
+      "UR_candidate_raw_sha256": "7e87d31904541cc87a990720f879feac600734e9413ae10c8fe05bce56b6846d",
+      "UR_candidate_sha256": "e2faac1e1e1f7ca2456bf4fcd4bcb4947e483ba2d4b7d1ddc13e000dfbbee6ce",
+      "UR_package_path": "scores/s26204/UR/package.json",
+      "UR_candidate_differs_from_V": true
+    },
+    {
+      "seed": 26206,
+      "float64_F64_candidate_sha256": "a14d4abab488d5917afae5c265e59250c7dec86ede22dd3d4d86b9803854061e",
+      "float64_U64_candidate_sha256": "5f1b7ed98bc727244c9c8706610198ae5e2c60f690b19ec86e0c3aeb3d47e5c9",
+      "float64_F64_vs_U64_differ": true,
+      "V_selector": "F64",
+      "V_fallback_applied": false,
+      "UG_selector": "U64",
+      "UG_post_cast_gate_enabled": true,
+      "UG_post_cast_gate_pass": false,
+      "UG_fallback_applied": true,
+      "UG_gate_tolerance": 1e-12,
+      "UG_baseline_new_train_kl": 0.09025461904890791,
+      "UG_raw_cast_new_train_kl": 0.09849723921897774,
+      "UG_raw_cast_minus_baseline_new_train_kl": 0.008242620170069825,
+      "UG_named_fallback_reason_field_present": false,
+      "UG_origin": "ALIAS",
+      "UG_canonical_label": "V",
+      "UG_candidate_raw_sha256": "5faf3b71b561261682c74282937156d3f8ddeeba3bd4f2796846a3fb08d85ee3",
+      "UG_candidate_sha256": "79c978e1f6bc3597dd5b24eaed1ac66f45a5bd24095858a171ef504d27472620",
+      "UG_byte_aliases_V": true,
+      "V_origin": "NEW_SCORE",
+      "V_candidate_sha256": "79c978e1f6bc3597dd5b24eaed1ac66f45a5bd24095858a171ef504d27472620",
+      "V_package_path": "scores/s26206/V/package.json",
+      "UR_selector": "U64",
+      "UR_post_cast_gate_enabled": false,
+      "UR_fallback_applied": false,
+      "UR_origin": "NEW_SCORE",
+      "UR_candidate_raw_sha256": "9ce6884f1dbc5cd9366491bef207778b890870b50577b3c017ceefa5ea6a15ce",
+      "UR_candidate_sha256": "ccf89f881d4fdc6525abad75691235dfe6b211521ddc50745b8a3c5817280d1f",
+      "UR_package_path": "scores/s26206/UR/package.json",
+      "UR_candidate_differs_from_V": true
+    },
+    {
+      "seed": 26209,
+      "float64_F64_candidate_sha256": "19e87d58878e282d4ae673739b2285f983f44e753126edee59b626ade9ea3252",
+      "float64_U64_candidate_sha256": "de4557ecff2c8753e3cb97bfe85b6932293441be6cab72c80ee84092e95e837c",
+      "float64_F64_vs_U64_differ": true,
+      "V_selector": "F64",
+      "V_fallback_applied": false,
+      "UG_selector": "U64",
+      "UG_post_cast_gate_enabled": true,
+      "UG_post_cast_gate_pass": false,
+      "UG_fallback_applied": true,
+      "UG_gate_tolerance": 1e-12,
+      "UG_baseline_new_train_kl": 0.1292125033776266,
+      "UG_raw_cast_new_train_kl": 0.15165992759215968,
+      "UG_raw_cast_minus_baseline_new_train_kl": 0.02244742421453308,
+      "UG_named_fallback_reason_field_present": false,
+      "UG_origin": "ALIAS",
+      "UG_canonical_label": "V",
+      "UG_candidate_raw_sha256": "5ff5fb885da7a7331795e0ec5aba9d57332674a965656bd84f8d708ada2e8934",
+      "UG_candidate_sha256": "0e89a59be89b7f5132842b93e214bbc0bc901d610da67ed284e685e174b5dd0b",
+      "UG_byte_aliases_V": true,
+      "V_origin": "NEW_SCORE",
+      "V_candidate_sha256": "0e89a59be89b7f5132842b93e214bbc0bc901d610da67ed284e685e174b5dd0b",
+      "V_package_path": "scores/s26209/V/package.json",
+      "UR_selector": "U64",
+      "UR_post_cast_gate_enabled": false,
+      "UR_fallback_applied": false,
+      "UR_origin": "NEW_SCORE",
+      "UR_candidate_raw_sha256": "91e1ad651dd240acf1938ba507604d7aa05859416ea26ac9acfa198d7597fd3d",
+      "UR_candidate_sha256": "4ad87971664d25a1d467961ade2ab494b98305133f44d7691a2c84dfc5d7c141",
+      "UR_package_path": "scores/s26209/UR/package.json",
+      "UR_candidate_differs_from_V": true
+    },
+    {
+      "seed": 26212,
+      "float64_F64_candidate_sha256": "03e130711e288042e891c2c3d3d8218a79d7f1471516133832d12620a066d131",
+      "float64_U64_candidate_sha256": "c18b27cadbe3db98e03964293d78f02621571ec7ded04947bb508d0e05cea4b4",
+      "float64_F64_vs_U64_differ": true,
+      "V_selector": "F64",
+      "V_fallback_applied": false,
+      "UG_selector": "U64",
+      "UG_post_cast_gate_enabled": true,
+      "UG_post_cast_gate_pass": false,
+      "UG_fallback_applied": true,
+      "UG_gate_tolerance": 1e-12,
+      "UG_baseline_new_train_kl": 0.09257678558521835,
+      "UG_raw_cast_new_train_kl": 0.12361988867668366,
+      "UG_raw_cast_minus_baseline_new_train_kl": 0.03104310309146531,
+      "UG_named_fallback_reason_field_present": false,
+      "UG_origin": "ALIAS",
+      "UG_canonical_label": "V",
+      "UG_candidate_raw_sha256": "aad41a10b4b7b109165fd1349f998e4d29b725e95e4d25fad04a912eace7efb4",
+      "UG_candidate_sha256": "6b0dbf2b285c694f65bf122719c1e442b496a71036e47d6b64275f4dbbc892ca",
+      "UG_byte_aliases_V": true,
+      "V_origin": "NEW_SCORE",
+      "V_candidate_sha256": "6b0dbf2b285c694f65bf122719c1e442b496a71036e47d6b64275f4dbbc892ca",
+      "V_package_path": "scores/s26212/V/package.json",
+      "UR_selector": "U64",
+      "UR_post_cast_gate_enabled": false,
+      "UR_fallback_applied": false,
+      "UR_origin": "NEW_SCORE",
+      "UR_candidate_raw_sha256": "673c5a9808e101aff68313c54742e4b6767b4b366dc3995668954a5030d238d1",
+      "UR_candidate_sha256": "fd92c909108796da4bc6dc73a5a7b7b25d28a4bd73ce8a26e1edaaa5fe24cbd0",
+      "UR_package_path": "scores/s26212/UR/package.json",
+      "UR_candidate_differs_from_V": true
+    },
+    {
+      "seed": 26213,
+      "float64_F64_candidate_sha256": "acd9dc478a3994a276b8565e7ccabfa116c7c87c52d2fd6ce9e7cd3c8d6aa325",
+      "float64_U64_candidate_sha256": "76c267e975d26cb702ae78e6be93f941f770f2e9d72b48a43a5c08effe24d367",
+      "float64_F64_vs_U64_differ": true,
+      "V_selector": "F64",
+      "V_fallback_applied": false,
+      "UG_selector": "U64",
+      "UG_post_cast_gate_enabled": true,
+      "UG_post_cast_gate_pass": false,
+      "UG_fallback_applied": true,
+      "UG_gate_tolerance": 1e-12,
+      "UG_baseline_new_train_kl": 0.16415847984106485,
+      "UG_raw_cast_new_train_kl": 0.21645976638063086,
+      "UG_raw_cast_minus_baseline_new_train_kl": 0.052301286539566005,
+      "UG_named_fallback_reason_field_present": false,
+      "UG_origin": "ALIAS",
+      "UG_canonical_label": "V",
+      "UG_candidate_raw_sha256": "4052dc8f069cd3387b305cf08b0b01dc7ceddc8f00a44fdae16c452bfb47e85a",
+      "UG_candidate_sha256": "1b24a3977d21af59b3cc5b69f0dd48fd8a59bd60c0c2c89ec7880149778507d9",
+      "UG_byte_aliases_V": true,
+      "V_origin": "NEW_SCORE",
+      "V_candidate_sha256": "1b24a3977d21af59b3cc5b69f0dd48fd8a59bd60c0c2c89ec7880149778507d9",
+      "V_package_path": "scores/s26213/V/package.json",
+      "UR_selector": "U64",
+      "UR_post_cast_gate_enabled": false,
+      "UR_fallback_applied": false,
+      "UR_origin": "NEW_SCORE",
+      "UR_candidate_raw_sha256": "382b74140ce3625c09024c46edac243d90a066f1dfbc77b1fa6dc8191bb41ebd",
+      "UR_candidate_sha256": "1746caed9dbb96e18909a640f400f64d65527bcbee63f223e6f8f8abfdbe485a",
+      "UR_package_path": "scores/s26213/UR/package.json",
+      "UR_candidate_differs_from_V": true
+    }
+  ],
+  "interpretation": [
+    "UG-V is exactly unchanged in every reported metric/view/split across all 16 logical prefixes. In each of the five recoveries, the U64 selected float64 candidate differs from F64, but UG fails the post-cast new-train-KL gate and falls back to a byte alias of V.",
+    "UR-UG differs only on the five recovered prefixes; the eleven fixed E163 reuses are exact aliases and contribute zero by construction. UR lowers old KL on all five, while encoded holdout G_new improves on two and degrades on three; full-16 means are diluted by the eleven unchanged rows.",
+    "This is a bounded diagnostic of selector, float32 post-cast gate and fallback on five fixed recoveries. It is not reward evidence, a deployment or upgrade rule, a 12-of-16 progression decision, or evidence about general function-class compatibility."
+  ],
+  "next_decision": "Return these observed comparisons to the coordinator for the already-owned audit and next-step decision; this analysis authorizes no additional fitting, scoring, seed, search or phase."
+}

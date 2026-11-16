@@ -1,0 +1,37 @@
+{
+  "format": "e164_verification_result_v1",
+  "status": "INVALID",
+  "final_source_manifest_accepted": true,
+  "runtime_evidence_status": "PENDING_RUNTIME_EVIDENCE",
+  "external_launcher_status": "PENDING_RUNTIME_EVIDENCE",
+  "metering_scope": {
+    "measured_origin": "fresh supervisor process birth ticks",
+    "measured_includes": "Python startup; in-campaign prechecks; worker preparation/fits/scoring/logging; stop/reap and reserved footer",
+    "measured_cpu": "RUSAGE_SELF plus direct-child wait4 including waited descendants, with live owned counters during execution",
+    "safety_stops": {
+      "cpu_seconds": 55.0,
+      "wall_seconds": 110.0
+    },
+    "footer_reserve": {
+      "cpu_seconds": 5.0,
+      "wall_seconds": 10.0,
+      "byte_reserve": 65536
+    },
+    "outside_scope": [
+      "parent launch shell",
+      "SSH transport",
+      "source/input transfer",
+      "capacity/admission operations"
+    ],
+    "outside_elapsed": "reported separately when independently measured; this verifier has no elapsed field and does not infer one",
+    "outside_cpu_seconds": "UNKNOWN, never reported as zero"
+  },
+  "checks": {},
+  "errors": [
+    "final_source_spec reference_map keys differ from frozen bindings"
+  ],
+  "allowed_root": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp164\\runs\\run001\\remote",
+  "audit_elapsed_seconds": 0.0026670999941416085,
+  "verifier_sha256": "0e174f3b57d2dbf894bc8e7f4dc36b55aeb336f730998439b64ccca2a014ac2f",
+  "run_spec_sha256": "40a1ac53ec03b2ac0eb0cea6004f962fccdc3d342490d2b67eef1b698f2dd303"
+}

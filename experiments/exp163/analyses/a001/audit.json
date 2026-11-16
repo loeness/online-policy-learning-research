@@ -1,0 +1,126 @@
+{
+  "audit_status": "ACCOUNTING_INVALID",
+  "check_count": 22,
+  "cost": {
+    "aggregate_project_apparent_bytes": 2905922916,
+    "campaign_cpu_seconds": null,
+    "campaign_wall_seconds": null,
+    "e_root_apparent_bytes": 633788,
+    "environment_interactions": 0,
+    "footer_reserve": {
+      "byte_reserve": 65536,
+      "cpu_seconds": 5.0,
+      "wall_seconds": 10.0
+    },
+    "gpu_devices": 0,
+    "known_cpu_components": {
+      "live_owned_process_cpu_seconds": 0.0,
+      "recorded_wait4_children_cpu_seconds": 0.12206999999999998,
+      "supervisor_rusage_self_cpu_seconds": 0.146166
+    },
+    "known_precheck_wait4_cpu_seconds": 0.12206999999999998,
+    "known_precheck_wait4_records": [
+      {
+        "exit_code": 0,
+        "pid": 1850713,
+        "purpose": "cpu_descendant_accounting_precheck",
+        "start_ticks": 657596484,
+        "wait4_cpu_seconds_including_waited_descendants": 0.12206999999999998
+      }
+    ],
+    "meter_event_count": 6,
+    "missing_evidence": [
+      "state_worker.json"
+    ],
+    "nominal_bounded_cpu_seconds_upper": 5.268236,
+    "nominal_bounded_wall_seconds_upper": 77.52755812183022,
+    "observed_run_status": "ACCOUNTING_INVALID",
+    "parse_errors": [],
+    "raw_meter_finalizing": {
+      "bounded_cpu_seconds_upper": 5.268236,
+      "bounded_wall_seconds_upper": 77.52755812183022,
+      "campaign_wall_seconds": 67.52755812183022,
+      "wait4_audit_error": "SupervisorError: final wait4 sum differs from RUSAGE_CHILDREN"
+    },
+    "recorded_subtotal_cpu_seconds": 0.268236,
+    "reported_campaign_wall_seconds_before_footer": 67.52755812183022,
+    "scope": "recorded supervisor and wait4 evidence only; valid full campaign cost is UNKNOWN unless accounting and clock origin are valid",
+    "validity": "INVALID_CAMPAIGN_COST_UNKNOWN",
+    "wait4_audit_error": "SupervisorError: final wait4 sum differs from RUSAGE_CHILDREN",
+    "wait4_children_audit": null,
+    "wait4_record_count": 1,
+    "wait4_sum_cpu_seconds": 0.12206999999999998,
+    "wall_origin": {
+      "first_event_gap_exceeds_launcher_call": true,
+      "first_event_minus_kernel_start_seconds": 67.34534343518317,
+      "first_event_monotonic": 6575964.825343436,
+      "observed_launcher_call_seconds": 0.745819,
+      "reported_wall_exceeds_launcher_call": true,
+      "run_spec_sha256": "6e7604856c28ce33218f732eb893c1cc56827cab7eb4e51abee21b994f4491e8",
+      "supervisor_pid": 1850481,
+      "supervisor_start_ticks": 657589748,
+      "ticks_per_second": 100
+    },
+    "worker_body": null,
+    "worker_wait4": null
+  },
+  "cost_failure_count": 1,
+  "execution_integrity_assessment": {
+    "cost_conclusion": "campaign CPU and wall cost are UNKNOWN under this invalid accounting and wall-clock origin; retain the recorded subtotal and nominal bounds as evidence only",
+    "inferences": [
+      "the first meter event is about 67.345 seconds after the reported kernel start tick, while the coordinator-observed launcher call lasted 0.745819 seconds; the reported 67.527558 second wall value therefore includes a pre-event interval and is not accepted as campaign wall cost",
+      "the coordinator reports that Python and du children ran in the launching shell before exec; because launch_command.sh execs in place and the supervisor compares cumulative child usage with its own tracked wait4 rows, inherited child accounting is a plausible explanation for the mismatch, but the mirror does not establish the exact prior child identities or CPU amounts"
+    ],
+    "verified_artifact_facts": [
+      "state.json reports ACCOUNTING_INVALID with RUSAGE_CHILDREN and recorded wait4 accounting mismatch",
+      "only one recorded direct child exists: cpu_descendant_accounting_precheck, exit code 0, wait4 CPU 0.122070 seconds",
+      "no scientific worker wait4 record is present; this non-COMPLETE run is not scored",
+      "the recorded supervisor subtotal is 0.268236 CPU seconds, composed of 0.146166 supervisor RUSAGE_SELF seconds and 0.122070 recorded wait4 seconds",
+      "the state reports nominal bounds of 5.268236 CPU seconds and 77.527558 seconds wall time, which include the 5 second and 10 second footer reserves"
+    ],
+    "verified_source_facts": [
+      "launch_command.sh sources enter.sh, sets the project environment, changes to the frozen source directory, then execs the supervisor Python command",
+      "supervisor.py derives campaign_started_mono from /proc process start ticks before writing the first campaign_started event",
+      "the CPU descendant precheck compares RUSAGE_CHILDREN with the sum of explicitly recorded wait4 children before recording precheck success",
+      "the final children audit repeats a RUSAGE_CHILDREN versus recorded wait4 sum comparison"
+    ]
+  },
+  "failure_count": 1,
+  "failures": [
+    {
+      "actual": {
+        "error": {
+          "exception_type": "SupervisorError",
+          "message": "RUSAGE_CHILDREN and recorded wait4 accounting differ",
+          "traceback": "Traceback (most recent call last):\n  File \"/data/robot/p001/e163/o001/supervisor.py\", line 1011, in run\n    self._launch_cpu_tree_precheck()\n  File \"/data/robot/p001/e163/o001/supervisor.py\", line 645, in _launch_cpu_tree_precheck\n    raise SupervisorError(\"RUSAGE_CHILDREN and recorded wait4 accounting differ\")\nSupervisorError: RUSAGE_CHILDREN and recorded wait4 accounting differ\n"
+        },
+        "status": "ACCOUNTING_INVALID",
+        "wait4_audit_error": "SupervisorError: final wait4 sum differs from RUSAGE_CHILDREN"
+      },
+      "check": "cost.supervisor_accounting_invalid",
+      "expected": "valid wait4 and RUSAGE_CHILDREN reconciliation"
+    }
+  ],
+  "mirror_integrity": {
+    "source": "coordinator-reported provenance manifest; this script does not repeat the SSH comparison",
+    "status": "REMOTE_BYTE_IDENTITIES_VERIFIED",
+    "verified_bytes": {
+      "meter.jsonl": 2863,
+      "state.json": 2883,
+      "total": 6220,
+      "wait4.jsonl": 474
+    }
+  },
+  "observed_supervisor_status": "ACCOUNTING_INVALID",
+  "read_scope": {
+    "checkpoint_deserialized": false,
+    "fit_or_environment_execution_started": false,
+    "frozen_spec_sha256": "6e7604856c28ce33218f732eb893c1cc56827cab7eb4e51abee21b994f4491e8",
+    "model_or_numeric_libraries_imported": false,
+    "original_prefix_files_opened": false,
+    "run_root": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp163\\runs\\run001\\remote\\run001"
+  },
+  "schema": "E163_OFFLINE_AUDIT_V1",
+  "scientific": null,
+  "scientific_validation": "SKIPPED_NONCOMPLETE_RUN"
+}

@@ -8,3 +8,6 @@
 *.zip binary
 *.png binary
 *.pdf binary
+
+# Preserve the full E161 raw archive while respecting GitHub's blob limit.
+experiments/exp161/runs/run001/raw.zip filter=lfs diff=lfs merge=lfs -text

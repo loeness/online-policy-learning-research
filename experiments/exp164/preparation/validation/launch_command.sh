@@ -1,0 +1,29 @@
+set -eu
+. /data/robot/p001/enter.sh
+export OMP_NUM_THREADS='1'
+export MKL_NUM_THREADS='1'
+export OPENBLAS_NUM_THREADS='1'
+export NUMEXPR_NUM_THREADS='1'
+export PYTHONDONTWRITEBYTECODE='1'
+export CUDA_VISIBLE_DEVICES=''
+export TMPDIR='/data/robot/p001/e164/tmp'
+export TMP='/data/robot/p001/e164/tmp'
+export TEMP='/data/robot/p001/e164/tmp'
+export XDG_CACHE_HOME='/data/robot/p001/e164/cache'
+export XDG_CONFIG_HOME='/data/robot/p001/e164/config'
+export XDG_DATA_HOME='/data/robot/p001/e164/state'
+export XDG_STATE_HOME='/data/robot/p001/e164/state'
+export MPLCONFIGDIR='/data/robot/p001/e164/cache/mpl'
+export TORCH_HOME='/data/robot/p001/e164/cache/torch'
+export TORCH_EXTENSIONS_DIR='/data/robot/p001/e164/cache/ext'
+cd '/data/robot/p001/e164/s001'
+E164_LAUNCH_PARENT_PID=$$ '/data/robot/p001/env/bin/python' '-I' '-B' '/data/robot/p001/e164/o001/supervisor.py' '--spec' '/data/robot/p001/e164/o001/run_spec.json' '--authorization' '/data/robot/p001/e164/o001/authorization.json' &
+childpid=$!
+printf 'launch_parent_pid=%s\nlaunch_child_pid=%s\n' "$$" "$childpid"
+if wait "$childpid"; then
+    rc=0
+else
+    rc=$?
+fi
+printf 'supervisor_exit_code=%s\n' "$rc"
+exit "$rc"

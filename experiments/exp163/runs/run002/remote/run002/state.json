@@ -1,0 +1,94 @@
+{
+  "aggregate_project_apparent_bytes": 2913273058,
+  "bounded_campaign_cpu_seconds_upper": 13.625535,
+  "bounded_campaign_wall_seconds_upper": 20.011705487035215,
+  "campaign_start_source": "new supervisor process start ticks from /proc/self/stat; includes Python interpreter startup; launch shell and SSH parent are recorded separately and excluded from the campaign clock",
+  "campaign_wall_seconds_before_final_footer": 10.011705487035215,
+  "child_wait4_records": [
+    {
+      "exit_code": 0,
+      "pid": 1868374,
+      "purpose": "cpu_descendant_accounting_precheck",
+      "start_ticks": 657940040,
+      "wait4_cpu_seconds_including_waited_descendants": 0.12218799999999999
+    },
+    {
+      "exit_code": -15,
+      "pid": 1868376,
+      "purpose": "owned_process_group_stop_precheck",
+      "start_ticks": 657940058,
+      "wait4_cpu_seconds_including_waited_descendants": 0.000592
+    },
+    {
+      "exit_code": 0,
+      "pid": 1868377,
+      "purpose": "scientific_worker",
+      "start_ticks": 657940064,
+      "wait4_cpu_seconds_including_waited_descendants": 7.791221
+    }
+  ],
+  "completed_direct_children": 3,
+  "cpu_snapshot_before_final_footer": {
+    "live_owned_process_cpu_seconds_from_proc_stat": 0,
+    "live_owned_processes": [],
+    "reaped_wait4_cpu_seconds": 7.914001,
+    "supervisor_rusage_self_cpu_seconds": 0.711534,
+    "total_cpu_seconds": 8.625535
+  },
+  "cpu_total_scope": "supervisor RUSAGE_SELF + completed direct-child wait4 totals + live owned /proc counters; child wait4 descendants checked by in-campaign precheck",
+  "e_root_apparent_bytes": 7983930,
+  "environment_interactions": 0,
+  "error": null,
+  "evidence_note": "The final tiny footer is covered by the explicit reserve; command-lifetime cost excludes no claimed launcher because no external launcher counters are available.",
+  "experiment_id": "E163",
+  "final_footer_tail_measurement": "not observed after supervisor exit; explicitly bounded by the reported CPU and wall reserves",
+  "finalization_reserve": {
+    "byte_reserve": 65536,
+    "cpu_seconds": 5.0,
+    "wall_seconds": 10.0
+  },
+  "gpu_devices": 0,
+  "limits": {
+    "aggregate_remote_project_bytes": 100000000000,
+    "campaign_wall_seconds": 180,
+    "candidate_fits": 32,
+    "cpu_seconds": 120,
+    "environment_interactions": 0,
+    "gpu_devices": 0,
+    "new_artifact_cache_temp_bytes": 268435456,
+    "numeric_threads_per_worker": 1,
+    "workers": 1
+  },
+  "project_bytes_before_non_e163_baseline": 2905289128,
+  "real_fit_count": 32,
+  "return_code": 0,
+  "safety_stops": {
+    "cpu_seconds": 115.0,
+    "wall_seconds": 170.0
+  },
+  "status": "COMPLETE",
+  "wait4_audit_error": null,
+  "wait4_children_audit": {
+    "difference_seconds": {
+      "system": 1.000000000139778e-06,
+      "user": 9.999999992515995e-07
+    },
+    "final_rusage_children_cpu_seconds": {
+      "system": 1.030267,
+      "user": 6.883736
+    },
+    "initial_rusage_children_cpu_seconds": {
+      "system": 0.0,
+      "user": 0.0
+    },
+    "rusage_children_delta_cpu_seconds": {
+      "system": 1.030267,
+      "user": 6.883736
+    },
+    "wait4_sum_cpu_seconds": {
+      "system": 1.030266,
+      "user": 6.883735000000001
+    }
+  },
+  "worker_return_code": 0
+}

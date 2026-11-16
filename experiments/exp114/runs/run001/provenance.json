@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "hypothesis_id": "H020",
+  "experiment_id": "E114",
+  "run_id": "run001",
+  "operational_status": "FAILED",
+  "producer_path": "outputs/source_dose_pilot",
+  "execution_git_commit": null,
+  "execution_command": null,
+  "archive_context_git_commit": "81de4afd2d703d17c3953facb78fd04b19cb64a9",
+  "source_records": [
+    "outputs/source_dose_pilot/source_snapshot",
+    "outputs/source_dose_pilot/config.json",
+    "outputs/source_dose_pilot/summary.json"
+  ],
+  "reference_paths": [
+    "docs/SOURCE_DOSE_PROTOCOL.md",
+    "docs/SOURCE_FOLLOWUP_REVIEW.md",
+    "configs/source_dose.json",
+    "outputs/source_followup_audit"
+  ],
+  "costs_reference": "Native summary/cost ledgers and linked review; aggregate E costs must not be assigned to every attempt.",
+  "provenance_gaps": [
+    "Original execution Git SHA and exact invocation were not independently established by this import; source hashes remain linked."
+  ],
+  "notes": [
+    "No raw artifact copied or rerun.",
+    "A stored archive commit is not the producer execution commit."
+  ],
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

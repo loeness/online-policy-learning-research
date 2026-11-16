@@ -1,0 +1,108 @@
+{
+  "format": "e164_ready_for_resource_decision_v1",
+  "state": "READY_FOR_RESOURCE_DECISION",
+  "scientific_source_identity_sha256": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+  "scientific_manifest_sha256": "76073211ec4ff37af2677e0d3cae33c87e46a703a25c306ccb0257c03a2ef379",
+  "orchestration_identity_sha256": "8b2cf8c5a45c009a4955cac9303eb2a2d810f73944c4a0bdc285b9f3021dd3e0",
+  "run_spec_sha256": "c7d0921475a7d872bb44e189b8e468afcb20eb4d7fd29ec08ea1e5834a7ec602",
+  "transfer_manifest_sha256": "a6e7d9442b643a65887f0057332d1ffa2e37293bf33fe3ea7cdc666d66cd3fa6",
+  "local_inventory_sha256": "cf482edee8235c8bef9588bad440b178d44b33d396fa65e9c089fedff07a8927",
+  "verifier_sha256": "0e174f3b57d2dbf894bc8e7f4dc36b55aeb336f730998439b64ccca2a014ac2f",
+  "reference_map_sha256": "0b23a59f4a163583acdc552a3f78447c6121ef571d2a97cc040ab9a364be4f5d",
+  "entry_argv": [
+    "sh",
+    "/data/robot/p001/e164/o001/launch_command.sh"
+  ],
+  "supervisor_argv": [
+    "/data/robot/p001/env/bin/python",
+    "-I",
+    "-B",
+    "/data/robot/p001/e164/o001/supervisor.py",
+    "--spec",
+    "/data/robot/p001/e164/o001/run_spec.json",
+    "--authorization",
+    "/data/robot/p001/e164/o001/authorization.json"
+  ],
+  "worker_argv": [
+    "/data/robot/p001/env/bin/python",
+    "-B",
+    "/data/robot/p001/e164/o001/runner.py",
+    "--spec",
+    "/data/robot/p001/e164/o001/run_spec.json",
+    "--authorization",
+    "/data/robot/p001/e164/o001/authorization.json"
+  ],
+  "cwd": "/data/robot/p001/e164/s001",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "MKL_NUM_THREADS": "1",
+    "MPLCONFIGDIR": "/data/robot/p001/e164/cache/mpl",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TEMP": "/data/robot/p001/e164/tmp",
+    "TMP": "/data/robot/p001/e164/tmp",
+    "TMPDIR": "/data/robot/p001/e164/tmp",
+    "TORCH_EXTENSIONS_DIR": "/data/robot/p001/e164/cache/ext",
+    "TORCH_HOME": "/data/robot/p001/e164/cache/torch",
+    "XDG_CACHE_HOME": "/data/robot/p001/e164/cache",
+    "XDG_CONFIG_HOME": "/data/robot/p001/e164/config",
+    "XDG_DATA_HOME": "/data/robot/p001/e164/state",
+    "XDG_STATE_HOME": "/data/robot/p001/e164/state"
+  },
+  "planned_limits": {
+    "aggregate_remote_project_bytes": 100000000000,
+    "campaign_wall_seconds": 120,
+    "candidate_fit_calls": 5,
+    "cpu_seconds": 60,
+    "environment_interactions": 0,
+    "gpu_devices": 0,
+    "logical_paired_prefixes": 16,
+    "new_artifact_cache_temp_bytes": 67108864,
+    "new_complete_scoring_packages": 15,
+    "numeric_threads_per_worker": 1,
+    "workers": 1
+  },
+  "campaign_cost_scope": {
+    "coordinator_scope_acceptance": "2026-10-23 explicit thread directive; numerical resource authorization remains pending",
+    "cpu": "lifetime supervisor RUSAGE_SELF plus direct-child wait4 including waited descendants; live owned counters during execution",
+    "finalization_reserve": {
+      "byte_reserve": 65536,
+      "cpu_seconds": 5,
+      "wall_seconds": 10
+    },
+    "included": "Python startup; in-campaign prechecks; worker preparation/fits/scoring/logging; stop/reap and reserved footer",
+    "origin": "fresh supervisor process birth ticks",
+    "outside_cost_reporting": "separate operational elapsed; unmeasured CPU UNKNOWN, never zero or included in measured campaign subtotal",
+    "outside_origin": [
+      "parent launch shell",
+      "SSH transport",
+      "source/input transfer",
+      "capacity/admission operations"
+    ],
+    "safety_stops": {
+      "cpu_seconds": 55,
+      "wall_seconds": 110
+    }
+  },
+  "transfer_files": 40,
+  "transfer_bytes": 1177074,
+  "references": 308,
+  "static_checks": 155,
+  "artificial_json_check_groups": 5,
+  "planned_peak_additional_bytes": 32710053,
+  "resource_authorized": false,
+  "execution_authorized": false,
+  "remote_operations_performed": false,
+  "scientific_calls": 0,
+  "runtime_evidence_status": "PENDING_RUNTIME_EVIDENCE",
+  "remaining_blockers": [
+    "new numerical reservation and formal coordinator directive",
+    "fresh authorized remote capacity/path/identity admission and spec rehash",
+    "actual bounded runtime and independent audit"
+  ],
+  "no_automatic_retry": true,
+  "E163_budget_reuse": false,
+  "static_storage_allowance_check": "PASS"
+}

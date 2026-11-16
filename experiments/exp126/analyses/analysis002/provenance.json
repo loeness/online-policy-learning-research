@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "record_role": "LEGACY_DERIVED_ARTIFACT_VERSION",
+  "experiment_id": "E126",
+  "hypothesis_id": "H025",
+  "analysis_id": "analysis002",
+  "artifact_version_root": "outputs/retention_content_diagnostics",
+  "version_order_note": "Assigned navigation ordinal, not an asserted chronology or actual historical invocation count.",
+  "associated_run_records": [
+    "experiments/exp126/runs/run001/provenance.json",
+    "experiments/exp126/runs/run002/provenance.json"
+  ],
+  "associated_runs_semantics": "These are related E source/cohort wrappers, not a claim that every failed and completed attempt was pooled into this report.",
+  "upstream_source_mapping": {
+    "source_runs": [
+      "E122/run001",
+      "E124/run001",
+      "E127/run002"
+    ],
+    "source_run_receipts": [
+      "experiments/exp122/runs/run001/provenance.json",
+      "experiments/exp124/runs/run001/provenance.json",
+      "experiments/exp127/runs/run002/provenance.json"
+    ],
+    "certainty": "SCRIPT_CONSTANTS_AND_REVIEW",
+    "mapping_evidence_note": "Basis: scripts/diagnose_retention_content.py lines 24-27; docs/RETENTION_MECHANISM_REVIEW.md lines 35-49. Run provenance source_records lists output summary only."
+  },
+  "exact_execution_input_membership": null,
+  "exact_membership_status": "Consult linked native hashes/audits for file/case membership; this import does not invent an unrecorded historical input list.",
+  "native_provenance_or_audit_paths": [],
+  "referenced_analysis_code_paths": [
+    "scripts/diagnose_retention_content.py"
+  ],
+  "analysis_execution_commit": null,
+  "analysis_execution_command": null,
+  "code_provenance_note": "Referenced current archive files are not asserted to be the executed historical versions. Use native snapshots/hashes when available; otherwise execution code/command remain MISSING.",
+  "artifacts": [
+    {
+      "path": "outputs/retention_content_diagnostics/checkpoint_magnitudes.csv",
+      "bytes": 251448,
+      "sha256_at_review": "0ad13003657695b3ce89c11a7517fd5b3df41c63ae306d80742529eaf188d878"
+    },
+    {
+      "path": "outputs/retention_content_diagnostics/summary.json",
+      "bytes": 116587,
+      "sha256_at_review": "efd971e33094fd943a83bf6d608efb2cf7be993a4496d836c7cbcc4016d0befe"
+    },
+    {
+      "path": "outputs/retention_content_diagnostics/SUPERSEDED.md",
+      "bytes": 805,
+      "sha256_at_review": "d447ef325f267b01aac02836d40bc400c51cb51fa66c73bc0fc5476555d85c2f"
+    }
+  ],
+  "figure_paths": [],
+  "figure_lineage_note": "Source data/plotting identity follow linked native analyses/code where explicitly bound. Adjacent files alone do not establish exact figure lineage; unresolved source/command bindings remain MISSING.",
+  "new_environment_interactions_in_this_review": 0,
+  "historical_analysis_cpu_wall": null,
+  "limitations": [
+    "No report or metric was recomputed. Existing failed, corrected and superseded outputs stay in place.",
+    "Physical attempts, shared reports, source aliases and common prefixes are not independent extra samples. Their costs must not be summed blindly.",
+    "File hashes identify preserved artifacts at review time; they do not create execution provenance."
+  ],
+  "artifact_relation": "COLOCATED_WITH_THIS_E_OUTPUT",
+  "producer_root_overlap_experiment_ids": [
+    "E126"
+  ],
+  "shared_evidence_note": "The same preserved report/figure can be linked from several E records. Such a link neither transfers producer ownership nor creates a distinct analysis execution or independent sample."
+}

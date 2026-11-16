@@ -1,0 +1,62 @@
+{
+  "active_job": null,
+  "cpu_seconds": 999.5186980000001,
+  "cpu_seconds_observed": 999.2379870000001,
+  "finished_utc": "2026-10-20T17:33:38Z",
+  "limits": {
+    "cpu_seconds": 3600.0,
+    "environment_interactions": 2500000,
+    "wall_seconds": 2700.0
+  },
+  "phases": [
+    {
+      "command": [
+        "/data/robot/p001/env/bin/python",
+        "scripts/run_retention_candidate.py",
+        "--config",
+        "/data/robot/p001/s001/configs/e161.json",
+        "--output",
+        "/data/robot/p001/e161/run001/producer"
+      ],
+      "cpu_seconds": 934.825954,
+      "cwd": "/data/robot/p001/s001",
+      "name": "producer",
+      "pid": 1214096,
+      "process_group": 1214096,
+      "returncode": 0,
+      "state": "COMPLETED",
+      "wall_seconds": 476.5824545035139
+    },
+    {
+      "command": [
+        "/data/robot/p001/env/bin/python",
+        "scripts/audit_retention_candidate.py",
+        "--root",
+        "/data/robot/p001/e161/run001/producer",
+        "--report",
+        "/data/robot/p001/e161/run001/retention_candidate_audit/main.json"
+      ],
+      "cpu_seconds": 63.030259,
+      "cwd": "/data/robot/p001/s001",
+      "name": "audit",
+      "pid": 1217883,
+      "process_group": 1217883,
+      "returncode": 2,
+      "state": "FAILED",
+      "wall_seconds": 67.0667548654601
+    }
+  ],
+  "pid": 1214095,
+  "project_job_handles": [
+    {
+      "cpu_seconds": 62.75,
+      "create_time": 1792517550.74,
+      "pid": 1217883
+    }
+  ],
+  "run": "/data/robot/p001/e161/run001",
+  "source": "/data/robot/p001/s001",
+  "started_utc": "2026-10-20T17:24:32Z",
+  "state": "AUDIT_FAILED",
+  "wall_seconds": 546.6011506672949
+}

@@ -8,7 +8,6 @@ import hashlib
 import json
 import os
 import random
-import shutil
 import sys
 import time
 import traceback
@@ -44,7 +43,28 @@ from scripts import run_write_stream as ws
 CONFIG_PATH = ROOT / "configs" / "retention_mechanism.json"
 PROTOCOL_PATH = ROOT / "docs" / "RETENTION_MECHANISM_PROTOCOL.md"
 SUMMARY_FORMAT = "retention_mechanism_summary_v1"
-SOURCE_FILES = tuple(storage.SOURCE_FILES) + (
+SOURCE_FILES = (
+    Path("scripts/run_storage_decision.py"),
+    Path("scripts/run_knowledge_loop.py"),
+    Path("scripts/run_write_stream.py"),
+    Path("src/online_rl/storage_decision.py"),
+    Path("src/online_rl/score_calibration.py"),
+    Path("src/online_rl/retention_consolidation.py"),
+    Path("src/online_rl/consolidation_probe.py"),
+    Path("src/online_rl/write_decision_envs.py"),
+    Path("src/online_rl/write_decision_policy.py"),
+    Path("src/online_rl/shared_write_policy.py"),
+    Path("src/online_rl/shared_write_storage.py"),
+    Path("src/online_rl/write_decision_evidence.py"),
+    Path("src/online_rl/write_fast_evidence.py"),
+    Path("src/online_rl/c1_supplement_experiment.py"),
+    Path("src/online_rl/c1_tensor_controls.py"),
+    Path("src/online_rl/c1_policy.py"),
+    Path("src/online_rl/c1_envs.py"),
+    Path("src/online_rl/experiment.py"),
+    Path("src/online_rl/policy.py"),
+    Path("configs/storage_decision.json"),
+    Path("docs/STORAGE_DECISION_PROTOCOL.md"),
     Path("scripts/run_retention_mechanism.py"),
     Path("src/online_rl/envs.py"),
     Path("src/online_rl/retention_stream_value.py"),
@@ -73,6 +93,18 @@ def _sha(path: Path) -> str:
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def _copy_bytes_verified(source: Path, target: Path) -> tuple[str, int]:
+    source_digest = _sha(source)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with source.open("rb") as source_stream, target.open("wb") as target_stream:
+        for block in iter(lambda: source_stream.read(1024 * 1024), b""):
+            target_stream.write(block)
+    copied_digest = _sha(target)
+    if _sha(source) != source_digest or copied_digest != source_digest:
+        raise RuntimeError(f"file changed while byte-copying: {source}")
+    return copied_digest, int(target.stat().st_size)
 
 
 def validate_config(config: Mapping[str, Any]) -> dict[str, Any]:
@@ -111,10 +143,6 @@ def validate_config(config: Mapping[str, Any]) -> dict[str, Any]:
     if result.get("pair_kinds") != ["dynamics", "reward_conflict"]:
         if not result.get("pair_kinds") or not set(result["pair_kinds"]) <= {"dynamics", "reward_conflict"}:
             raise ValueError("pair_kinds must be a nonempty subset of dynamics and reward_conflict")
-    if not result.get("history_regimes") or not set(result["history_regimes"]) <= {"old_major", "new_major"}:
-        raise ValueError("history_regimes must be a nonempty subset of old_major and new_major")
-    if not result.get("future_regimes") or not set(result["future_regimes"]) <= {"old_major", "new_major"}:
-        raise ValueError("future_regimes must be a nonempty subset of old_major and new_major")
     if not result.get("seeds"):
         raise ValueError("seeds must be nonempty")
     result["seeds"] = [int(value) for value in result["seeds"]]
@@ -209,15 +237,19 @@ def build_prefix_schedule(mapping: Mapping[str, Any], config: Mapping[str, Any],
 def build_future_schedule(
     mapping: Mapping[str, Any], future_regime: str, *, blocks: int, bout_steps: int, start_bout: int,
 ) -> list[dict[str, Any]]:
-    """Build the declared minority, dominant, dominant three-bout blocks."""
-    if future_regime not in ("old_major", "new_major"):
-        raise ValueError("future_regime must be old_major or new_major")
+    """Build fixed minority/dominant blocks, alternating dominant group for balanced."""
+    if future_regime not in ("old_major", "new_major", "balanced"):
+        raise ValueError("future_regime must be old_major, new_major, or balanced")
     if int(blocks) < 1 or int(bout_steps) < 1:
         raise ValueError("blocks and bout_steps must be positive")
-    dominant = 0 if future_regime == "old_major" else 1
-    minority = 1 - dominant
     result: list[dict[str, Any]] = []
     for block in range(int(blocks)):
+        dominant = (
+            0 if future_regime == "old_major" else
+            1 if future_regime == "new_major" else
+            block % 2
+        )
+        minority = 1 - dominant
         variant = block % 3
         entries = ((minority, variant), (dominant, variant), (dominant, (variant + 1) % 3))
         for position, (group, current_variant) in enumerate(entries):
@@ -558,7 +590,7 @@ def _snapshot_sources(folder: Path, config_path: Path) -> dict[str, Any]:
     if config_resolved.is_relative_to(ROOT.resolve()):
         config_rel = Path(os.path.relpath(config_resolved, ROOT.resolve()))
         if config_rel not in paths:
-            paths.append(config_rel)
+            raise ValueError(f"configuration is outside the source snapshot allowlist: {config_rel}")
     for relative in paths:
         if any(part.casefold() in {"agent.md", "agents.md", "tmp"} for part in relative.parts):
             raise ValueError("private or temporary material is excluded from source snapshots")
@@ -566,12 +598,8 @@ def _snapshot_sources(folder: Path, config_path: Path) -> dict[str, Any]:
         if not source.is_file():
             raise FileNotFoundError(f"required source snapshot file is missing: {relative}")
         target = snapshot / relative
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
-        source_digest, copied_digest = _sha(source), _sha(target)
-        if source_digest != copied_digest:
-            raise RuntimeError(f"source changed while snapshotting: {relative}")
-        manifest_files[relative.as_posix()] = {"sha256": copied_digest, "bytes": int(target.stat().st_size)}
+        copied_digest, copied_bytes = _copy_bytes_verified(source, target)
+        manifest_files[relative.as_posix()] = {"sha256": copied_digest, "bytes": copied_bytes}
     base = loop.load_base_config()
     foundation = Path(base["foundation"])
     dataset = Path(base["dataset"])

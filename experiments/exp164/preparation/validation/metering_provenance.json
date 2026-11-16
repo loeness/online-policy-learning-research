@@ -1,0 +1,83 @@
+{
+  "experiment_id": "E164",
+  "source_artifacts": [
+    {
+      "role": "base_supervisor",
+      "source_path": "experiments/exp163/preparation/validation/repair002/supervisor.py",
+      "source_sha256": "04c7182a19f92741df43fc95e1c8b84c091cd8396be291475e0a770d32c463c3",
+      "target_path": "experiments/exp164/preparation/validation/supervisor.py",
+      "target_sha256": "77d9e636860a3ea7c21c7553d7b207cca9521b572b86d4a4324bec84ccd159eb",
+      "diff_summary": {
+        "old_lines": 1170,
+        "new_lines": 1333,
+        "changed_opcodes": 37,
+        "removed_lines": 55,
+        "added_lines": 218,
+        "targeted_adaptations": [
+          "Changed E163/e163 identifiers and e163/o002/run002 paths to E164/e164/o001/run001.",
+          "Set resource limits to the E164 planned limits and CPU/wall safety stops to 55/110 seconds, preserving 5/10 seconds for finalization.",
+          "Added pre-sampling gates for preparation_state=FROZEN, spec and authorization resource_authorized=true, execution_authorized=true, and the output-contract freeze flag.",
+          "Added directed validation of state_worker.json, scientific_report.json, cohort.json, and counterfactual_permit.json, including E164 counts, required score-record keys, permit/cohort binding, and report source identity/comparisons; no E163 12-of-16 gate is inferred.",
+          "Complete worker state requires score_calls to equal new_scoring_packages. Final state records fit_attempts, score_calls, completed score-package count, and logical-prefix count; no started worker reports zero, while a started worker without readable state reports UNKNOWN/null counts.",
+          "Kept project_bytes_before validation and E164 project accounting; a draft null baseline is rejected before resource sampling.",
+          "Bound the implemented worker output contract and expose the final owned-child handle list for independent reaping checks; numerical authorization remains false.",
+          "Final state embeds the accepted campaign cost scope and explicitly discloses outside-origin operational CPU as UNKNOWN."
+        ]
+      }
+    },
+    {
+      "role": "base_launcher",
+      "source_path": "experiments/exp163/preparation/validation/repair002/launch_command.sh",
+      "source_sha256": "03662e9c5608238aa64a9f54dc8d4f7d557d37aaf4bc6427528ca0227d6a0cde",
+      "target_path": "experiments/exp164/preparation/validation/launch_command.sh",
+      "target_sha256": "62b7e58578cea6a858e7cc16c93bb5e0ce0646f713609227fddd05b8beeaccc2",
+      "diff_summary": {
+        "old_lines": 29,
+        "new_lines": 29,
+        "changed_opcodes": 1,
+        "removed_lines": 12,
+        "added_lines": 12,
+        "targeted_adaptations": [
+          "Changed experiment identifiers and e163/o002/run002 paths to E164/e164/o001/run001.",
+          "Retained the child supervisor process and explicit parent-shell wait."
+        ]
+      }
+    }
+  ],
+  "expected_limits": {
+    "cpu_seconds": 60,
+    "campaign_wall_seconds": 120,
+    "new_artifact_cache_temp_bytes": 67108864,
+    "workers": 1,
+    "numeric_threads_per_worker": 1,
+    "gpu_devices": 0,
+    "environment_interactions": 0,
+    "candidate_fit_calls": 5,
+    "new_complete_scoring_packages": 15,
+    "logical_paired_prefixes": 16,
+    "aggregate_remote_project_bytes": 100000000000
+  },
+  "draft_state": {
+    "preparation_state": "FROZEN",
+    "resource_authorized": false,
+    "execution_authorized": false,
+    "output_contract_frozen": true,
+    "runnable": false
+  },
+  "original_sources_unchanged_at_recording": true,
+  "validation": {
+    "ast_parse": "PASS",
+    "compile_source_string_without_execution": "PASS",
+    "limits_match_budget_json": "PASS",
+    "draft_identity_and_path_string_checks": "PASS_STATIC_BOUND_ONLY",
+    "lf_only": "PASS",
+    "supervisor_or_launcher_executed": false,
+    "remote_access_or_transfer_performed": false
+  },
+  "campaign_cost_scope": {
+    "origin": "supervisor process birth ticks; includes Python startup, in-campaign prechecks, worker, scoring, logs, stop and reap",
+    "cpu": "supervisor lifetime RUSAGE_SELF plus direct child wait4 including waited descendants, with owned live counters during execution",
+    "unmeasured_tail": "5 CPU / 10 wall second conservative finalization reserve; 65536 byte footer reserve",
+    "outside_campaign": "external SSH transport, source transfer, admission and parent launch-shell operations; operational elapsed costs disclosed separately, not reported as zero CPU"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "format": "e161_power_plan_v1",
+  "experiment": "E161",
+  "purpose": "pre-run sample-planning calculation from the existing six-seed E130 report",
+  "status": "PLANNING_ONLY_NOT_NEW_EXPERIMENT_EVIDENCE",
+  "created_date": "2026-10-21",
+  "input_report": {
+    "path_repo_relative": "outputs/retention_candidate_completed_report/analysis.json",
+    "sha256": "6692d405a21f0e38f734c6896aa18179beda9b8b7545a32d75edab6c2336a6f7",
+    "bytes": 23548903,
+    "format": "retention_candidate_report_v1",
+    "analysis_role": "exploratory_candidate_content_and_state_coverage",
+    "phase": "main",
+    "primary_horizon": 6144,
+    "source_summary_sha256_embedded_in_report": "3dc76c489c4a18480d402351c2ec46ec18fe0e3f7fa26e226931f3fe750287d3",
+    "source_config_canonical_sha256_embedded_in_report": "77783f52c9d7b1b1fb5e7d7a91f49609710bdbbe5a57f70753a60bed26d453b7"
+  },
+  "historical_sample": {
+    "independent_unit": "deployment seed; future regimes and paired replicas are not independent units",
+    "seeds": [
+      25201,
+      25202,
+      25203,
+      25204,
+      25205,
+      25206
+    ],
+    "old_family_by_seed": {
+      "25201": "B",
+      "25202": "A",
+      "25203": "A",
+      "25204": "A",
+      "25205": "B",
+      "25206": "B"
+    },
+    "historical_counts": {
+      "A": 3,
+      "B": 3
+    },
+    "futures_used": [
+      "old_major",
+      "new_major"
+    ],
+    "future_aggregation": "within each seed, average the paired difference over the two original replicas within each future regime as saved in the report; then take the equal mean of old_major and new_major",
+    "horizon_steps": 6144,
+    "replica_aggregation_note": "future_scoped_effects per-seed values are already paired averages over the two replicas; the planning calculation averages those two regime values equally"
+  },
+  "planning_method": {
+    "planned_seed_count_per_family": 8,
+    "family_weighting": "equal estimate (mean_A + mean_B) / 2",
+    "standard_error_formula": "sqrt(s_A^2 / 8 + s_B^2 / 8) / 2",
+    "welch_satterthwaite_df_formula": "(v_A + v_B)^2 / (v_A^2 / 7 + v_B^2 / 7), where v_f = s_f^2 / 8",
+    "critical_value": "one-sided 95% Student t quantile at the planned Welch-Satterthwaite degrees of freedom",
+    "mde_formula": "(t_0.95,df + z_0.80) * planned_SE",
+    "alpha_one_sided": 0.05,
+    "target_single_comparison_power": 0.8,
+    "quantile_implementation": "mpmath 1.3.0, Student-t inverse CDF by regularized incomplete-beta CDF and bisection; z quantile from Python statistics.NormalDist"
+  },
+  "contrasts": [
+    {
+      "contrast": "replace_behavioral-minus-replace_mean",
+      "historical_per_seed_input": [
+        {
+          "seed": 25201,
+          "old_family": "B",
+          "old_major_paired_difference_reward_per_step": 0.0010375976562502472,
+          "new_major_paired_difference_reward_per_step": -0.005391438802083408,
+          "equal_two_future_average_reward_per_step": -0.0021769205729165802
+        },
+        {
+          "seed": 25202,
+          "old_family": "A",
+          "old_major_paired_difference_reward_per_step": -0.0013631184895834727,
+          "new_major_paired_difference_reward_per_step": 0.0046386718749995386,
+          "equal_two_future_average_reward_per_step": 0.001637776692708033
+        },
+        {
+          "seed": 25203,
+          "old_family": "A",
+          "old_major_paired_difference_reward_per_step": 0.00376383463541704,
+          "new_major_paired_difference_reward_per_step": 0.022725423177082753,
+          "equal_two_future_average_reward_per_step": 0.013244628906249896
+        },
+        {
+          "seed": 25204,
+          "old_family": "A",
+          "old_major_paired_difference_reward_per_step": 0.0074055989583334605,
+          "new_major_paired_difference_reward_per_step": 0.006713867187500049,
+          "equal_two_future_average_reward_per_step": 0.0070597330729167546
+        },
+        {
+          "seed": 25205,
+          "old_family": "B",
+          "old_major_paired_difference_reward_per_step": 0.0014241536458334458,
+          "new_major_paired_difference_reward_per_step": 0.0008138020833335048,
+          "equal_two_future_average_reward_per_step": 0.0011189778645834753
+        },
+        {
+          "seed": 25206,
+          "old_family": "B",
+          "old_major_paired_difference_reward_per_step": -0.0012410481770832905,
+          "new_major_paired_difference_reward_per_step": 0.0002034505208329952,
+          "equal_two_future_average_reward_per_step": -0.0005187988281251477
+        }
+      ],
+      "historical_family_summary": {
+        "A": {
+          "historical_seed_count": 3,
+          "historical_mean": 0.007314046223958228,
+          "historical_sample_sd": 0.005807603719335961
+        },
+        "B": {
+          "historical_seed_count": 3,
+          "historical_mean": -0.0005255805121527509,
+          "historical_sample_sd": 0.001647959684278567
+        }
+      },
+      "planned_family_sample_sizes": {
+        "A": 8,
+        "B": 8
+      },
+      "planned_variance_components_before_equal_family_weight": {
+        "A": 4.216032620105612e-06,
+        "B": 3.3947139012593926e-07
+      },
+      "planned_standard_error": 0.001067181335368028,
+      "welch_satterthwaite_degrees_freedom": 8.120006811402424,
+      "one_sided_95pct_t_critical_value": 1.8559914732750482,
+      "normal_80pct_power_quantile": 0.8416212335729144,
+      "rough_single_comparison_80pct_mde_reward_per_step": 0.0028788419307997693
+    },
+    {
+      "contrast": "replace_behavioral-minus-keep",
+      "historical_per_seed_input": [
+        {
+          "seed": 25201,
+          "old_family": "B",
+          "old_major_paired_difference_reward_per_step": -0.0051066080729167546,
+          "new_major_paired_difference_reward_per_step": -0.0014444986979166565,
+          "equal_two_future_average_reward_per_step": -0.0032755533854167056
+        },
+        {
+          "seed": 25202,
+          "old_family": "A",
+          "old_major_paired_difference_reward_per_step": -0.006042480468750552,
+          "new_major_paired_difference_reward_per_step": 0.014465332031250215,
+          "equal_two_future_average_reward_per_step": 0.004211425781249832
+        },
+        {
+          "seed": 25203,
+          "old_family": "A",
+          "old_major_paired_difference_reward_per_step": 0.0014241536458336258,
+          "new_major_paired_difference_reward_per_step": 0.03171793619791675,
+          "equal_two_future_average_reward_per_step": 0.016571044921875187
+        },
+        {
+          "seed": 25204,
+          "old_family": "A",
+          "old_major_paired_difference_reward_per_step": 0.0009155273437501854,
+          "new_major_paired_difference_reward_per_step": 0.01708984375000063,
+          "equal_two_future_average_reward_per_step": 0.009002685546875408
+        },
+        {
+          "seed": 25205,
+          "old_family": "B",
+          "old_major_paired_difference_reward_per_step": -0.012695312500000562,
+          "new_major_paired_difference_reward_per_step": 0.0035196940104164983,
+          "equal_two_future_average_reward_per_step": -0.004587809244792032
+        },
+        {
+          "seed": 25206,
+          "old_family": "B",
+          "old_major_paired_difference_reward_per_step": -0.0070393880208337095,
+          "new_major_paired_difference_reward_per_step": 0.0022379557291664466,
+          "equal_two_future_average_reward_per_step": -0.0024007161458336314
+        }
+      ],
+      "historical_family_summary": {
+        "A": {
+          "historical_seed_count": 3,
+          "historical_mean": 0.009928385416666808,
+          "historical_sample_sd": 0.006231591812051478
+        },
+        "B": {
+          "historical_seed_count": 3,
+          "historical_mean": -0.003421359592014123,
+          "historical_sample_sd": 0.0011008127194439624
+        }
+      },
+      "planned_family_sample_sizes": {
+        "A": 8,
+        "B": 8
+      },
+      "planned_variance_components_before_equal_family_weight": {
+        "A": 4.854092064003378e-06,
+        "B": 1.5147358041120147e-07
+      },
+      "planned_standard_error": 0.0011186560736453563,
+      "welch_satterthwaite_degrees_freedom": 7.436449719987176,
+      "one_sided_95pct_t_critical_value": 1.8779825049307997,
+      "normal_80pct_power_quantile": 0.8416212335729144,
+      "rough_single_comparison_80pct_mde_reward_per_step": 0.003042301239985797
+    }
+  ],
+  "limitations": [
+    "The six-seed E130 sample was selected in an earlier exploration and its variance estimates are unstable; these are planning inputs only, not confirmatory evidence or guaranteed power.",
+    "The MDE is a rough single-comparison approximation using historical family SDs and planned n=8 per family; it is not 80% power for the joint IUT claim.",
+    "The calculation does not account for the practical point-estimate threshold, the balanced secondary regime, or uncertainty in historical SD estimates.",
+    "No new environment interactions, simulations, training, or experiments were run for this planning artifact."
+  ]
+}

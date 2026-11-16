@@ -1,0 +1,117 @@
+{
+  "format": "h036_frozen_scientific_review_v1",
+  "review_type": "independent source-level review of the frozen H036/E163 scientific interface",
+  "status": "PASS",
+  "scope": {
+    "method": "Reviewed the frozen retention-protected fit and input/encoding/scoring modules against the coordinator contract, METHOD_V1, and HANDOFF_V1, with only the frozen behavioral, actor-codec, and storage helpers needed to verify semantics.",
+    "not_reviewed": [
+      "No real prefix was deserialized or fitted.",
+      "No SSH, remote metering precheck, campaign, or new environment interaction was performed.",
+      "No source, configuration, shared research index, or budget file was changed."
+    ],
+    "tests": "No tests were rerun, as requested. The 23 frozen synthetic checks are treated as previously recorded evidence, not as independent runtime validation."
+  },
+  "identity_check": {
+    "manifest_path": "research/appendix/H036/delivery_v1/manifest.json",
+    "manifest_sha256_expected": "b837222aff57ab45abee226e9aa8bc9d2cd3444807fa348dee0c0c1ece70dc54",
+    "manifest_sha256_observed": "b837222aff57ab45abee226e9aa8bc9d2cd3444807fa348dee0c0c1ece70dc54",
+    "source_identity_sha256_expected": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea",
+    "source_identity_sha256_rebuilt": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea",
+    "manifest_snapshot_files_checked": 21,
+    "manifest_snapshot_file_mismatches": [],
+    "reviewed_module_sha256": {
+      "src/online_rl/retention_protected_candidate.py": "0cabd3169650c3cd01ed719414f7dbe1f8bff156e5e84b834c71b56698c912d5",
+      "src/online_rl/retention_protected_inputs.py": "d48c9c9cac14585c0c8e5ce43cff899b362652343738715975481cd0c4835316"
+    }
+  },
+  "reviewed_contract_points": [
+    {
+      "topic": "Old keep teacher and current new-owner teachers",
+      "conclusion": "The old teacher is formed from the decoded current shared parent alone, corresponding to the old local=0 keep prior. New teachers use the current decoded resident effective matrices and observation bands, with the two owners kept distinct and equally represented.",
+      "evidence": [
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:234-285",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:464-507"
+      ]
+    },
+    {
+      "topic": "Fixed chronological data and split",
+      "conclusion": "The old input is the final 128 rows of the existing group-0 FIFO. New sidecar rows are validated as 128 per owner, route/slot/generation consistent, and strictly increasing in global-step order within each owner's source-row sequence. Grouping preserves within-owner order; training uses the first 96 and holdout the final 32 for each owner and for the old FIFO.",
+      "evidence": [
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:288-327",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:356-391",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:464-515",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_candidate.py:244-261"
+      ]
+    },
+    {
+      "topic": "Objective, initialization, acceptance, and fallback",
+      "conclusion": "Lambda 0 directly returns the existing new-only behavioral objective and gradient with one ridge term. Lambda 1 combines new and old objectives while subtracting the duplicated ridge, leaving one ridge total. Owner weights implement equal owner mass. C0 is the float32 mean of the six new-owner-by-band effective matrices. The complete objective initializes the incumbent; each closure records full objective, new/old training KL, ridge, candidate hash, and acceptance/rejection. Closure evaluation is capped at 256. The float32 fallback checks only the frozen new-training-KL gate and reports its state; holdout does not select the candidate.",
+      "evidence": [
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_candidate.py:333-385",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_candidate.py:519-654",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_candidate.py:656-678",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_candidate.py:733-787",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_behavioral_candidate.py:150-195"
+      ]
+    },
+    {
+      "topic": "Compensated wildcard install and actual encoded fresh-slot score",
+      "conclusion": "The install helper uses the frozen compensation function and verifies resident effective matrices before encoding. Scoring calls the original full actor encoder for the complete local/shared/group payload at 89 bytes, decodes those bytes, then evaluates fresh zero-local old/new slots. C/D can be scored with wildcard binding. The resident drift diagnostic is separately computed from the encoded resident actor.",
+      "evidence": [
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:749-780",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:851-911",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/write_decision_policy.py:229-282",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/write_decision_policy.py:313-351"
+      ]
+    },
+    {
+      "topic": "Learner package byte accounting",
+      "conclusion": "The complete checkpoint is cloned without adding teacher or optimizer-fit state, actor-state optimizer entries are cleared while critic state is checked for preservation, and the checkpoint is serialized once to BytesIO. Capacity is computed from the fixed foundation bytes, those returned serialized checkpoint bytes, the 89-byte actor, and raw evidence bytes, with a hard 262144-byte rejection gate. The metrics do not infer equal realized C/D sizes from the common cap.",
+      "evidence": [
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:817-848",
+        "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:913-976"
+      ]
+    }
+  ],
+  "gate_metric_paths": {
+    "score_definition": "Each score is the returned score_result from encode_and_score_stage0(prepared, fit_result, binding='wildcard'). C uses the single fit_result with lambda_value=0; D uses lambda_value=1. The returned metrics object is score_result['metrics'].",
+    "C_lambda_0": {
+      "K_old_C": "score_C['metrics']['K_old']",
+      "K_new_C": "score_C['metrics']['K_new']",
+      "K_new_W0_C": "score_C['metrics']['K_new_W0']",
+      "G_new_C": "score_C['metrics']['G_new']"
+    },
+    "D_lambda_1": {
+      "K_old_D": "score_D['metrics']['K_old']",
+      "K_new_D": "score_D['metrics']['K_new']",
+      "K_new_W0_D": "score_D['metrics']['K_new_W0']",
+      "G_new_D": "score_D['metrics']['G_new']"
+    },
+    "underlying_holdout_paths": {
+      "encoded_candidate_old": "score_result['metrics']['encoded_fresh']['old_holdout']",
+      "encoded_candidate_new_equal_owner_mean": "score_result['metrics']['encoded_fresh']['new_holdout']",
+      "W0_new_equal_owner_mean": "score_result['metrics']['W0_fresh']['new_holdout']",
+      "W0_old_diagnostic": "score_result['metrics']['W0_fresh']['old_holdout']"
+    },
+    "source_evidence": "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py:943-950"
+  },
+  "fit_diagnostic_paths": {
+    "C_lambda_0": {
+      "returned_is_C0": "fit_C['diagnostics']['returned_is_C0']",
+      "fallback_applied": "fit_C['diagnostics']['fallback_applied']",
+      "fallback_reason": "fit_C['diagnostics']['fallback_reason']",
+      "termination_reason": "fit_C['diagnostics']['termination_reason']",
+      "closure_count": "fit_C['diagnostics']['closure_count']"
+    },
+    "D_lambda_1": {
+      "returned_is_C0": "fit_D['diagnostics']['returned_is_C0']",
+      "fallback_applied": "fit_D['diagnostics']['fallback_applied']",
+      "fallback_reason": "fit_D['diagnostics']['fallback_reason']",
+      "termination_reason": "fit_D['diagnostics']['termination_reason']",
+      "closure_count": "fit_D['diagnostics']['closure_count']"
+    },
+    "source_evidence": "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_candidate.py:733-758"
+  },
+  "blockers": [],
+  "qualification": "This PASS accepts the frozen science interface for independent review purposes only. It does not establish that hash-bound input files pass on the execution host, record E163 execution readiness, authorize a remote precheck, or authorize real fits."
+}

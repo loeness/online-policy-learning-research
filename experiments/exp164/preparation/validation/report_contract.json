@@ -1,0 +1,132 @@
+{
+  "binding_note": "Runner normalizes the accepted legacy score.metrics into this experiment-owned contract; resource and execution admission remain separate.",
+  "contract_name": "E164 experiment-owned logical score report input proposal",
+  "contract_version": 1,
+  "input": {
+    "format": "e164_logical_scores_v1",
+    "prefix_count": 16,
+    "prefix_item": {
+      "C": "The original C score.metrics object directly, with no wrapper added",
+      "C_reference": "Non-empty accurate source identity metadata for the original C metrics",
+      "UG": "Same wrapper shape as V",
+      "UR": "Same wrapper shape as V",
+      "V": {
+        "metrics": "The original score.metrics object directly",
+        "origin": [
+          "REUSED_E163",
+          "NEW_SCORE",
+          "ALIAS"
+        ],
+        "reference": "Non-empty accurate provenance metadata; retain the source identity unchanged"
+      },
+      "seed": "integer; must equal its position in prefix_seed_order"
+    },
+    "prefix_seed_order": [
+      26201,
+      26202,
+      26203,
+      26204,
+      26205,
+      26206,
+      26207,
+      26208,
+      26209,
+      26210,
+      26211,
+      26212,
+      26213,
+      26215,
+      26216,
+      26218
+    ],
+    "score_metrics": {
+      "binding": "wildcard",
+      "format": "h036_score_metrics_v1",
+      "identity_checks": {
+        "G_new": "exactly equals K_new_W0 - K_new",
+        "K_new": "exactly equals encoded_fresh.new_holdout",
+        "K_new_W0": "exactly equals W0_fresh.new_holdout",
+        "K_old": "exactly equals encoded_fresh.old_holdout",
+        "W0_baseline": "For each prefix, C, V, UG, and UR W0_fresh old/new train/holdout values must all match exactly; each G_new uses the same-split W0_fresh new value as baseline",
+        "prepared_id": "C, V, UG, and UR each contain the same non-empty prepared_id"
+      },
+      "lambda_value": {
+        "C": 0,
+        "UG": 1,
+        "UR": 1,
+        "V": 1
+      },
+      "numeric_policy": "Finite JSON integers/floats only; reject booleans, NaN, and infinities",
+      "required_common_fields": {
+        "prepared_id": "non-empty string; C, V, UG, and UR identities must match per prefix"
+      },
+      "required_fresh_views": {
+        "W0_fresh": [
+          "old_train",
+          "new_train",
+          "old_holdout",
+          "new_holdout"
+        ],
+        "encoded_fresh": [
+          "old_train",
+          "new_train",
+          "old_holdout",
+          "new_holdout"
+        ],
+        "pre_codec_fresh": [
+          "old_train",
+          "new_train",
+          "old_holdout",
+          "new_holdout"
+        ]
+      },
+      "required_legacy_scalars": [
+        "K_old",
+        "K_new",
+        "K_new_W0",
+        "G_new"
+      ]
+    },
+    "source_freeze_id_required": true,
+    "source_freeze_state_required_for_report_build": "FROZEN"
+  },
+  "normalization_owner": "E164 experiment implementation",
+  "report": {
+    "classification": {
+      "G_new": "higher is improvement; lower is degradation",
+      "old_kl": "lower is improvement; higher is degradation",
+      "unchanged": "exact delta == 0 only; no tolerance"
+    },
+    "comparisons_only": [
+      "UG-V",
+      "UR-UG"
+    ],
+    "exploratory_only": true,
+    "format": "e164_exploratory_report_v1",
+    "no_advancement_decision": true,
+    "paired_delta": "right arm minus left arm; include signed and absolute difference per prefix",
+    "pairing_unit": "logical_prefix",
+    "prepared_identity": "Repeat the shared non-empty prepared_id on each paired row",
+    "prohibited": [
+      "best-arm or winner selection",
+      "new upgrade or advancement rule",
+      "reward conclusion",
+      "12-of-16 progression switch",
+      "treating multiple probes, labels, packages, or closures as independent samples"
+    ],
+    "reported_G_new": "For each of pre_codec_fresh and encoded_fresh, W0_fresh.new_split - that view's new_split, for train and holdout; encoded_fresh holdout must exactly match legacy G_new",
+    "reported_old_kl": "Only pre_codec_fresh and encoded_fresh, each for train and holdout",
+    "summary": "Finite counts of improved, degraded, and unchanged logical prefixes for every fixed metric/view/split"
+  },
+  "runner_binding_status_required_now": "BOUND_FROZEN_SOURCE",
+  "scientific_api_assumption": false,
+  "state": "BOUND_FROZEN_SOURCE",
+  "verification": {
+    "current_verifier_result": "Must remain INCOMPLETE; must not emit COMPLETE_VALID.",
+    "mirror_files": "verify_results requires an explicit caller-supplied allowlisted root; hash only explicitly listed source/mirror regular files, resolve both paths and reject any resolved path outside that root. Do not scan directories or take the root from receipt data.",
+    "report_recalculation": "Independent finite-metric and paired-delta recomputation may be provided without importing report.py.",
+    "scientific_trace_probe_alias_records": "PENDING_SOURCE_FREEZE; raw record schemas and bindings are not yet frozen.",
+    "source_and_input_binding": "PENDING_SOURCE_FREEZE; exact runner/manifest binding fields are not yet frozen.",
+    "worker_and_meter_records": "PENDING_SOURCE_FREEZE; require the finalized runner workerstate/meter schema before completeness can be verified."
+  }
+}

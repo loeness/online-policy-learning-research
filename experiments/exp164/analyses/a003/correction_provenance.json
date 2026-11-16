@@ -1,0 +1,15 @@
+{
+  "kind": "OFFLINE_AUDIT_FIELD_NAME_CORRECTION_PENDING_COORDINATOR_ACCEPTANCE",
+  "previous_verifier_sha256": "b1622e02e340350dcb9591ff56079b01bfb466be952feba0001852c58693891b",
+  "new_verifier_sha256": "329a152996555de6dbc0ae8e96a532b9815948ca3ca01e30d3e3d4584542516a",
+  "previous_incomplete_audit": "../a002/audit.json",
+  "change": {
+    "incorrect_expected_key": "rusage_children_post_auth_pre_fork",
+    "frozen_supervisor_and_raw_startup_proof_key": "rusage_children_post_authorization_pre_fork"
+  },
+  "evidence": "supervisor.py _capture_startup_proof emits full authorization name; raw meter.jsonl campaign_started.startup_proof contains user_seconds=0/system_seconds=0 under exactly this key",
+  "numeric_thresholds_or_required_evidence_changed": false,
+  "scientific_or_raw_or_remote_files_changed": false,
+  "runtime_accounting_numeric_code_unchanged": true,
+  "fit_or_score_calls": 0
+}

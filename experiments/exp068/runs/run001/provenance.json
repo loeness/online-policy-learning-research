@@ -1,0 +1,264 @@
+{
+  "experiment_id": "E068",
+  "hypothesis_id": "H013",
+  "run_id": "run001",
+  "phase": "pilot",
+  "unit_of_record": "One cohort-level producer invocation / diagnostic root. component_paths lists seed-condition output units; these are not asserted to be separately known CLI invocations.",
+  "operational_status": "COMPLETED",
+  "producer_path": "outputs/knowledge_shared_write_conflict_pilot",
+  "component_count": 3,
+  "component_paths": [
+    {
+      "seed": 853,
+      "condition": "frozen_conflict",
+      "component_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict",
+      "per_run_config_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/config.json",
+      "summary_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/summary.json",
+      "output_paths": [
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/steps.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/episodes.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/evaluations.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/probe_steps.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/summary.json"
+      ],
+      "code_provenance": {
+        "source_manifest_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/source_manifest.json",
+        "source_snapshot_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/source_snapshot",
+        "code_entry_path": "scripts/run_shared_write_conflict.py",
+        "provenance_note": "The per-run source manifest records hashes for historical source files; this does not establish a Git commit."
+      },
+      "extracted_summary_metadata": {
+        "seed": 853,
+        "condition": "frozen_conflict",
+        "training_steps": 4096,
+        "probe_steps": 1024,
+        "evaluation_steps": 3072,
+        "total_interactions": 8192,
+        "wall_s": 3.837429399995017,
+        "cpu_s": 3.75,
+        "sampled_peak_rss_bytes": 324706304,
+        "counts": {
+          "stale_actor_rows": 0,
+          "minibatch_updates": 192,
+          "rollouts_trained": 12,
+          "fit_steps": 3072,
+          "holdout_steps": 1024,
+          "environment_steps": 4096,
+          "probe_steps": 1024,
+          "evaluation_steps": 3072,
+          "training_steps": 4096,
+          "goal_reaches_plus": 1,
+          "episodes_plus": 32,
+          "goal_reaches_minus": 0,
+          "episodes_minus": 32
+        },
+        "sizes": {
+          "step": 4096,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93345,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148822
+        },
+        "scope": "Fixed C1 A0 transition dynamics, reward sign reversed in minus; known route boundaries, profile-only shared grouping."
+      }
+    },
+    {
+      "seed": 853,
+      "condition": "independent_conflict",
+      "component_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict",
+      "per_run_config_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/config.json",
+      "summary_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/summary.json",
+      "output_paths": [
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/steps.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/episodes.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/evaluations.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/probe_steps.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/summary.json"
+      ],
+      "code_provenance": {
+        "source_manifest_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/source_manifest.json",
+        "source_snapshot_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/source_snapshot",
+        "code_entry_path": "scripts/run_shared_write_conflict.py",
+        "provenance_note": "The per-run source manifest records hashes for historical source files; this does not establish a Git commit."
+      },
+      "extracted_summary_metadata": {
+        "seed": 853,
+        "condition": "independent_conflict",
+        "training_steps": 4096,
+        "probe_steps": 1024,
+        "evaluation_steps": 3039,
+        "total_interactions": 8159,
+        "wall_s": 4.73269760000403,
+        "cpu_s": 4.625,
+        "sampled_peak_rss_bytes": 324001792,
+        "counts": {
+          "stale_actor_rows": 0,
+          "minibatch_updates": 192,
+          "rollouts_trained": 12,
+          "fit_steps": 3072,
+          "holdout_steps": 1024,
+          "environment_steps": 4096,
+          "probe_steps": 1024,
+          "evaluation_steps": 3039,
+          "training_steps": 4096,
+          "goal_reaches_plus": 2,
+          "episodes_plus": 32,
+          "goal_reaches_minus": 0,
+          "episodes_minus": 32
+        },
+        "sizes": {
+          "step": 4096,
+          "checkpoint": "after_minus",
+          "actor_bytes": 666,
+          "checkpoint_bytes": 92221,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 147698
+        },
+        "scope": "Fixed C1 A0 transition dynamics, reward sign reversed in minus; known route boundaries, profile-only shared grouping."
+      }
+    },
+    {
+      "seed": 853,
+      "condition": "shared_conflict",
+      "component_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict",
+      "per_run_config_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/config.json",
+      "summary_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/summary.json",
+      "output_paths": [
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/steps.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/episodes.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/evaluations.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/probe_steps.csv",
+        "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/summary.json"
+      ],
+      "code_provenance": {
+        "source_manifest_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/source_manifest.json",
+        "source_snapshot_path": "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/source_snapshot",
+        "code_entry_path": "scripts/run_shared_write_conflict.py",
+        "provenance_note": "The per-run source manifest records hashes for historical source files; this does not establish a Git commit."
+      },
+      "extracted_summary_metadata": {
+        "seed": 853,
+        "condition": "shared_conflict",
+        "training_steps": 4096,
+        "probe_steps": 1024,
+        "evaluation_steps": 3072,
+        "total_interactions": 8192,
+        "wall_s": 4.833275400000275,
+        "cpu_s": 4.703125,
+        "sampled_peak_rss_bytes": 323760128,
+        "counts": {
+          "stale_actor_rows": 0,
+          "minibatch_updates": 192,
+          "rollouts_trained": 12,
+          "fit_steps": 3072,
+          "holdout_steps": 1024,
+          "environment_steps": 4096,
+          "probe_steps": 1024,
+          "evaluation_steps": 3072,
+          "training_steps": 4096,
+          "goal_reaches_plus": 1,
+          "episodes_plus": 32,
+          "goal_reaches_minus": 0,
+          "episodes_minus": 32
+        },
+        "sizes": {
+          "step": 4096,
+          "checkpoint": "after_minus",
+          "actor_bytes": 738,
+          "checkpoint_bytes": 93345,
+          "foundation_bytes": 55477,
+          "whole_package_bytes": 148822
+        },
+        "scope": "Fixed C1 A0 transition dynamics, reward sign reversed in minus; known route boundaries, profile-only shared grouping."
+      }
+    }
+  ],
+  "recorded_execution_command": null,
+  "command_provenance_status": "NOT_RECORDED",
+  "reproduction_reference": "docs/SHARED_WRITE_CONFLICT_PROTOCOL.md",
+  "original_execution_commit": null,
+  "original_execution_commit_reason": "No run-level Git SHA is recorded in the historical source manifest. Current 81de4afd2d703d17c3953facb78fd04b19cb64a9 is import/archive context only and is not attributed to past execution.",
+  "code_provenance": {
+    "source_manifest_paths": [
+      "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/source_manifest.json",
+      "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/source_manifest.json",
+      "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/source_manifest.json"
+    ],
+    "source_snapshot_paths": [
+      "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/source_snapshot",
+      "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/source_snapshot",
+      "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/source_snapshot"
+    ],
+    "code_entry_paths": [
+      "scripts/run_shared_write_conflict.py"
+    ],
+    "provenance_note": "Historical source manifests/snapshots are linked per component where available; no run-level Git SHA is recorded. Current archive commit is import context only, not execution provenance."
+  },
+  "input_artifact_paths": [
+    "configs/c1.json",
+    "data/foundation.pt",
+    "data/pretrain_source.npz"
+  ],
+  "per_run_config_paths": [
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/config.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/config.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/config.json"
+  ],
+  "frozen_config_path": "outputs/knowledge_shared_write_conflict_pilot/frozen_config.json",
+  "summary_path": "outputs/knowledge_shared_write_conflict_pilot/summary.json",
+  "output_paths": [
+    "outputs/knowledge_shared_write_conflict_pilot",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/episodes.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/evaluations.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/probe_steps.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/steps.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/summary.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/episodes.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/evaluations.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/probe_steps.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/steps.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/summary.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/episodes.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/evaluations.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/probe_steps.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/steps.csv",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/summary.json",
+    "outputs/knowledge_shared_write_conflict_pilot/summary.json"
+  ],
+  "related_paths": [
+    "configs/shared_write_conflict.json",
+    "docs/SHARED_WRITE_CONFLICT_PROTOCOL.md",
+    "docs/SHARED_WRITE_PROTOCOL.md",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/config.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/source_manifest.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/frozen_conflict/summary.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/config.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/source_manifest.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/independent_conflict/summary.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/config.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/source_manifest.json",
+    "outputs/knowledge_shared_write_conflict_pilot/seed_853/shared_conflict/summary.json",
+    "outputs/knowledge_shared_write_conflict_pilot/summary.json",
+    "outputs/knowledge_shared_write_conflict_pilot_report/report.json",
+    "outputs/knowledge_shared_write_conflict_pilot_report/report.md"
+  ],
+  "cohort_metadata": {
+    "total_interactions": 24543,
+    "total_training_steps": 12288,
+    "total_evaluation_steps": 9183,
+    "total_probe_steps": 3072,
+    "note": "Summed from the preserved per-component extracted_summary_metadata entries; fields absent from historical summaries are omitted."
+  },
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

@@ -1,0 +1,43 @@
+{
+  "experiment_id": "E017",
+  "run_id": "run001",
+  "producer_path": "outputs/c1_supplement/step2_grouping/equivalence/",
+  "configuration_and_protocol_paths": [
+    "docs/C1_GROUPED_EQUIVALENCE.md",
+    "outputs/c1_supplement/cohort_source_manifest.json",
+    "outputs/c1_supplement/step2_grouping/equivalence/ppo_parity.json"
+  ],
+  "input_data_paths": [
+    "data/foundation.pt",
+    "data/pretrain_source.npz",
+    "outputs/c1_supplement/step2_grouping/"
+  ],
+  "producer_artifact_paths": [
+    "outputs/c1_supplement/step2_grouping/equivalence/"
+  ],
+  "source_provenance_paths": [
+    "outputs/c1_supplement/cohort_source_manifest.json"
+  ],
+  "reported_date": "2026-10-15",
+  "operational_status": "COMPLETED",
+  "actual_cost": "4,096 paired PPO interactions; grouped-dictionary training is charged in E018",
+  "actual_execution_commit": null,
+  "execution_commit_explanation": "Supplement manifest records source hashes but not execution SHA. Archive context commit 81de4afd2d703d17c3953facb78fd04b19cb64a9 is import context only.",
+  "actual_execution_command": null,
+  "command_explanation": "Exact historical invocation not preserved.",
+  "retrospective_record": true,
+  "producer_entrypoints": [
+    "scripts/run_c1_supplement.py"
+  ],
+  "producer_path_semantics": "Historical artifact root, not code entrypoint. This retrospective cohort wrapper does not establish the exact number of original CLI invocations.",
+  "supporting_log_paths": [
+    "outputs/c1_neural_integration_checks.log",
+    "outputs/c1_step2_execution.log"
+  ],
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "hypothesis_id": "H005",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

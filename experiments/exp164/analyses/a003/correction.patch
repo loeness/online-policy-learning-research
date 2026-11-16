@@ -1,0 +1,11 @@
+--- a002/verify_results.py
++++ a003/verify_results.py
+@@ -1822,7 +1822,7 @@
+                   "meter campaign start source")
+     proof = _mapping(_required(started, "startup_proof", "campaign_started"), "startup proof")
+     _expect_equal(proof.get("captured_before_supervisor_fork"), True, "startup proof fork ordering")
+-    child_baseline = _mapping(_required(proof, "rusage_children_post_auth_pre_fork", "startup proof"),
++    child_baseline = _mapping(_required(proof, "rusage_children_post_authorization_pre_fork", "startup proof"),
+                               "startup child baseline")
+     if child_baseline.get("user_seconds") != 0.0 or child_baseline.get("system_seconds") != 0.0:
+         raise ValueError("startup RUSAGE_CHILDREN baseline must be exactly zero")

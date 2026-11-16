@@ -1,0 +1,123 @@
+{
+  "actual_new_score_count": 10,
+  "aggregate_project_apparent_bytes": 2924093563,
+  "bounded_campaign_cpu_seconds_upper": 12.929755,
+  "bounded_campaign_wall_seconds_upper": 19.350686746649444,
+  "campaign_cost_scope": {
+    "coordinator_scope_acceptance": "2026-10-23 explicit thread directive; numerical resource authorization remains pending",
+    "cpu": "lifetime supervisor RUSAGE_SELF plus direct-child wait4 including waited descendants; live owned counters during execution",
+    "finalization_reserve": {
+      "byte_reserve": 65536,
+      "cpu_seconds": 5,
+      "wall_seconds": 10
+    },
+    "included": "Python startup; in-campaign prechecks; worker preparation/fits/scoring/logging; stop/reap and reserved footer",
+    "origin": "fresh supervisor process birth ticks",
+    "outside_cost_reporting": "separate operational elapsed; unmeasured CPU UNKNOWN, never zero or included in measured campaign subtotal",
+    "outside_origin": [
+      "parent launch shell",
+      "SSH transport",
+      "source/input transfer",
+      "capacity/admission operations"
+    ],
+    "safety_stops": {
+      "cpu_seconds": 55,
+      "wall_seconds": 110
+    }
+  },
+  "campaign_start_source": "new supervisor process start ticks from /proc/self/stat; includes Python interpreter startup; launch shell and SSH parent are recorded separately and excluded from the campaign clock",
+  "campaign_wall_seconds_before_final_footer": 9.350686746649444,
+  "child_wait4_records": [
+    {
+      "exit_code": 0,
+      "pid": 2199419,
+      "purpose": "cpu_descendant_accounting_precheck",
+      "start_ticks": 664827294,
+      "wait4_cpu_seconds_including_waited_descendants": 0.12259899999999999
+    },
+    {
+      "exit_code": -15,
+      "pid": 2199421,
+      "purpose": "owned_process_group_stop_precheck",
+      "start_ticks": 664827312,
+      "wait4_cpu_seconds_including_waited_descendants": 0.0007549999999999999
+    },
+    {
+      "exit_code": 0,
+      "pid": 2199422,
+      "purpose": "scientific_worker",
+      "start_ticks": 664827318,
+      "wait4_cpu_seconds_including_waited_descendants": 6.972001
+    }
+  ],
+  "completed_direct_children": 3,
+  "completed_new_score_package_count": 10,
+  "cpu_snapshot_before_final_footer": {
+    "live_owned_process_cpu_seconds_from_proc_stat": 0,
+    "live_owned_processes": [],
+    "reaped_wait4_cpu_seconds": 7.095355,
+    "supervisor_rusage_self_cpu_seconds": 0.8343999999999999,
+    "total_cpu_seconds": 7.929754999999999
+  },
+  "cpu_total_scope": "supervisor RUSAGE_SELF + completed direct-child wait4 totals + live owned /proc counters; child wait4 descendants checked by in-campaign precheck",
+  "e_root_apparent_bytes": 7037427,
+  "environment_interactions": 0,
+  "error": null,
+  "evidence_note": "The final footer is conservatively reserved, not measured. Parent launch shell, SSH, transfer and admission are outside the campaign origin; disclose operational elapsed separately and unmeasured CPU as UNKNOWN.",
+  "experiment_id": "E164",
+  "final_footer_tail_measurement": "not observed after supervisor exit; explicitly bounded by the reported CPU and wall reserves",
+  "finalization_reserve": {
+    "byte_reserve": 65536,
+    "cpu_seconds": 5.0,
+    "wall_seconds": 10.0
+  },
+  "gpu_devices": 0,
+  "limits": {
+    "aggregate_remote_project_bytes": 100000000000,
+    "campaign_wall_seconds": 120,
+    "candidate_fit_calls": 5,
+    "cpu_seconds": 60,
+    "environment_interactions": 0,
+    "gpu_devices": 0,
+    "logical_paired_prefixes": 16,
+    "new_artifact_cache_temp_bytes": 67108864,
+    "new_complete_scoring_packages": 15,
+    "numeric_threads_per_worker": 1,
+    "workers": 1
+  },
+  "logical_prefix_count": 16,
+  "owned_child_handles_final": [],
+  "project_bytes_before_non_e164_baseline": 2917056136,
+  "real_fit_count": 5,
+  "return_code": 0,
+  "safety_stops": {
+    "cpu_seconds": 55.0,
+    "wall_seconds": 110.0
+  },
+  "status": "COMPLETE",
+  "wait4_audit_error": null,
+  "wait4_children_audit": {
+    "difference_seconds": {
+      "system": 9.999999999177334e-07,
+      "user": 1.000000000139778e-06
+    },
+    "final_rusage_children_cpu_seconds": {
+      "system": 1.178291,
+      "user": 5.917066
+    },
+    "initial_rusage_children_cpu_seconds": {
+      "system": 0.0,
+      "user": 0.0
+    },
+    "rusage_children_delta_cpu_seconds": {
+      "system": 1.178291,
+      "user": 5.917066
+    },
+    "wait4_sum_cpu_seconds": {
+      "system": 1.17829,
+      "user": 5.917065
+    }
+  },
+  "worker_count_status": "KNOWN_FROM_STATE_WORKER",
+  "worker_return_code": 0
+}

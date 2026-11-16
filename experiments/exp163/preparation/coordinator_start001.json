@@ -1,0 +1,51 @@
+{
+  "experiment_id": "E163",
+  "hypothesis_id": "H036",
+  "directive": "E163_RUN001_20261022_APPROVED",
+  "approved_date": "2026-10-22",
+  "approved_at_utc": "2026-10-22T06:04:26.4199245+00:00",
+  "status": "APPROVED_ONE_CAMPAIGN_WITH_SAME_CAMPAIGN_RUNTIME_PRECHECKS",
+  "user_authorization": "User requested waiting for frozen implementation, validation via SSH in the established robot project, then coordinator analysis",
+  "scientific_source_identity_sha256": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea",
+  "orchestration_identity_sha256": "0cb8bb54683809acd20b8303a7a73ff578759a62875d4627bbe9be778f242168",
+  "run_spec_sha256": "6e7604856c28ce33218f732eb893c1cc56827cab7eb4e51abee21b994f4491e8",
+  "authorization_payload": {
+    "coordinator_directive": "E163_RUN001_20261022_APPROVED",
+    "execution_authorized": true,
+    "experiment_id": "E163",
+    "limits": {
+      "aggregate_remote_project_bytes": 100000000000,
+      "campaign_wall_seconds": 180,
+      "candidate_fits": 32,
+      "cpu_seconds": 120,
+      "environment_interactions": 0,
+      "gpu_devices": 0,
+      "new_artifact_cache_temp_bytes": 268435456,
+      "numeric_threads_per_worker": 1,
+      "workers": 1
+    },
+    "run_spec_sha256": "6e7604856c28ce33218f732eb893c1cc56827cab7eb4e51abee21b994f4491e8"
+  },
+  "evidence_files_sha256": {
+    "READY.md": "ac1d14d69281585026a7c3280cf2f1319693c7181f7d732023597113c2ea6066",
+    "readiness001.json": "63f7e315984d4b680cc45027aae161c9deb6e98eb4c6de91c3aa42c3beba95b1",
+    "execution_freeze001.json": "c536884743a5c80ee1310dc3244e405e16d81065b4d3d6be7aa5ad8bd7f33cbd",
+    "frozen_review.json": "de3f667b1317417d955337706b75484f1fa437686299c9da0ebfe044fbaf9b4a",
+    "runner_review.json": "2f9cc46aebfd4d2663297d48f3f97965f75c10ba3945b5a6ec12212ffcf6b553",
+    "metering_design.md": "66030418ff02c29b19f4c9c6bf81fff517dc5136c883f2c7dd9857f9b498326c",
+    "run_spec.json": "6e7604856c28ce33218f732eb893c1cc56827cab7eb4e51abee21b994f4491e8"
+  },
+  "conditions": [
+    "refresh allocated destination and project aggregate capacity before launch",
+    "frozen source/spec/input identities must match",
+    "authorization file and run001 must be new",
+    "lifecycle and stop prechecks pass inside same campaign before real fits",
+    "only one32fit campaign; no automatic retry",
+    "no StageA/new seeds/environment interactions/GPU"
+  ],
+  "resource_accounting": "120CPU/180wall from supervisor process startup;115CPU/170wall stop thresholds include5CPU/10wall footer reserves within limits. Observed usage and conservative tail upper bounds reported separately. SSH/shell admission operations recorded separately.",
+  "remote_account": "robot",
+  "remote_root": "/data/robot/p001/e163",
+  "execution_owner_thread_id": "01a1592f-90c2-74b1-bf2a-f6442d0c7397",
+  "result": "NOT_RUN_AT_APPROVAL"
+}

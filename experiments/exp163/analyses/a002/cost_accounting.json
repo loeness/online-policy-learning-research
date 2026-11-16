@@ -1,0 +1,90 @@
+{
+  "experiment_id": "E163",
+  "campaign": "run002",
+  "finalized_date_asia_singapore": "2026-10-23",
+  "measurement_status": "VALID_OBSERVED_SUBTOTAL_AND_RESERVED_FOOTER_UPPER_BOUND",
+  "independent_audit": "audit.json",
+  "exact_complete_campaign_cpu_seconds": null,
+  "exact_complete_campaign_wall_seconds": null,
+  "exact_complete_cost_limitation": "Final footer after the last sample is not observed; explicit reserves bound it. SSH, parent shell, transfer and offline evidence audit are separate operational work.",
+  "observed_cpu_subtotal_seconds": 8.625535,
+  "observed_wall_before_footer_seconds": 10.011705487035215,
+  "cpu_upper_including_reserved_footer_seconds": 13.625535,
+  "wall_upper_including_reserved_footer_seconds": 20.011705487035215,
+  "footer_reserve": {
+    "byte_reserve": 65536,
+    "cpu_seconds": 5.0,
+    "wall_seconds": 10.0
+  },
+  "supervisor_self_cpu_seconds": 0.711534,
+  "completed_child_wait4_cpu_seconds": 7.914001,
+  "child_wait4_records": [
+    {
+      "exit_code": 0,
+      "pid": 1868374,
+      "purpose": "cpu_descendant_accounting_precheck",
+      "start_ticks": 657940040,
+      "wait4_cpu_seconds_including_waited_descendants": 0.12218799999999999
+    },
+    {
+      "exit_code": -15,
+      "pid": 1868376,
+      "purpose": "owned_process_group_stop_precheck",
+      "start_ticks": 657940058,
+      "wait4_cpu_seconds_including_waited_descendants": 0.000592
+    },
+    {
+      "exit_code": 0,
+      "pid": 1868377,
+      "purpose": "scientific_worker",
+      "start_ticks": 657940064,
+      "wait4_cpu_seconds_including_waited_descendants": 7.791221
+    }
+  ],
+  "wait4_children_audit": {
+    "difference_seconds": {
+      "system": 1.000000000139778e-06,
+      "user": 9.999999992515995e-07
+    },
+    "final_rusage_children_cpu_seconds": {
+      "system": 1.030267,
+      "user": 6.883736
+    },
+    "initial_rusage_children_cpu_seconds": {
+      "system": 0.0,
+      "user": 0.0
+    },
+    "rusage_children_delta_cpu_seconds": {
+      "system": 1.030267,
+      "user": 6.883736
+    },
+    "wait4_sum_cpu_seconds": {
+      "system": 1.030266,
+      "user": 6.883735000000001
+    }
+  },
+  "worker_body_subtotal": {
+    "completed_fits": 32,
+    "cost_scope": "worker-body subtotal only; complete lifecycle is supervisor wait4 accounting",
+    "environment_interactions": 0,
+    "fit_attempts": 32,
+    "fit_returns": 32,
+    "status": "COMPLETE",
+    "worker_body_cpu_seconds": 7.163977363,
+    "worker_body_wall_seconds": 8.718709142878652
+  },
+  "environment_interactions": 0,
+  "gpu_devices": 0,
+  "scientific_workers_started": 1,
+  "candidate_fit_calls": 32,
+  "prefixes_scored": 16,
+  "new_e163_total_apparent_bytes_after_return_archive": 11767008,
+  "project_apparent_bytes_after_return_archive": 2917056136,
+  "storage_measurement_utc": "2026-10-22T07:06:17.338866+00:00",
+  "retained_raw_evidence_bytes": 6875913,
+  "operational_cost": "NOT_METERED_AS_SCIENTIFIC_CAMPAIGN; admission, transfer/packing, byte-return and local offline audit recorded separately, no new fits/interactions",
+  "cumulative_E163_cpu_seconds": null,
+  "cumulative_E163_wall_seconds": null,
+  "cumulative_status": "UNKNOWN due to run001 ACCOUNTING_INVALID; run002 does not reconstruct run001 cost",
+  "settlement": "Single run002 reservation closed; no numerical remainder released and no additional start authorized."
+}

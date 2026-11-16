@@ -1,0 +1,72 @@
+{
+  "experiment_id": "E100",
+  "hypothesis_id": "H016",
+  "run_id": "run001",
+  "execution_status": "COMPLETED",
+  "producer_path": "outputs/consolidation_retention_stage1",
+  "historical_command": null,
+  "historical_command_evidence_paths": [],
+  "reproduction_recipe_not_historical": ".venv/Scripts/python.exe scripts/run_consolidation_retention.py --output <new empty directory> (documented recipe, not recovered historical argv).",
+  "historical_working_directory": "D:/MovedFromC/ChatGPT/online (visible in archived review/report paths; current checkout differs).",
+  "historical_execution_commit_sha": null,
+  "commit_provenance_gap": "MISSING: source manifest provides per-file hashes but no full Git commit SHA.",
+  "source_snapshot_manifest_paths": [
+    "outputs/consolidation_retention_stage1/source_snapshot/manifest.json"
+  ],
+  "input_data_paths": [
+    {
+      "path": "data/foundation.pt",
+      "sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222"
+    },
+    {
+      "path": "outputs/write_decision_causal_control/seed_1009/trial_rollback/checkpoints/checkpoint_step_00032768.pt",
+      "sha256": "e70439ddc0f40fb140ffced134cbfd4c62504e4b8b4a3f5bce29a60099b2569f"
+    },
+    {
+      "path": "outputs/write_decision_causal_control/seed_1013/trial_rollback/checkpoints/checkpoint_step_00032768.pt",
+      "sha256": "1f4287a6a0ded76959df5fa46b476e1e14e09b7a9ffa706fc98b6c68a41016b1"
+    },
+    {
+      "path": "outputs/write_decision_causal_control/seed_1019/trial_rollback/checkpoints/checkpoint_step_00032768.pt",
+      "sha256": "32abff3779a042e40a5b03db028f928ec397985019aa0c831fff597b6236f0f6"
+    }
+  ],
+  "raw_output_paths": [
+    "outputs/consolidation_retention_stage1"
+  ],
+  "report_paths": [
+    "outputs/consolidation_retention_stage1_report/report.md",
+    "outputs/consolidation_retention_stage1_report_v2/report.md",
+    "outputs/consolidation_retention_stage1_report_v3/report.md"
+  ],
+  "audit_paths": [
+    "outputs/consolidation_retention_stage1/postrun_audit.json",
+    "outputs/consolidation_retention_stage1/summary.json"
+  ],
+  "figure_paths": [
+    "outputs/consolidation_retention_stage1_report_v3/figure.png",
+    "outputs/consolidation_retention_stage1_report_v3/figure.pdf"
+  ],
+  "actual_cost": {
+    "new_total_interactions": 22746,
+    "training_steps": 0,
+    "evaluation_observer_steps": 22746,
+    "reused_historical_source_training_steps": 98304,
+    "reused_historical_source_interactions": 110207,
+    "cpu_seconds": 10.5,
+    "wall_seconds": 10.89
+  },
+  "code_hash_reference": "outputs/consolidation_retention_stage1/source_snapshot/manifest.json",
+  "data_provenance_gap": null,
+  "notes": "Historical source interactions are not counted as new cohort cost. Corrected physical-package accounting is documented in report_v3 and postrun_audit.json.",
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "producer_entrypoints": [
+    "scripts/run_consolidation_retention.py"
+  ],
+  "producer_path_semantics": "Historical artifact root; producer code entrypoints are recorded separately.",
+  "operational_status": "COMPLETED",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

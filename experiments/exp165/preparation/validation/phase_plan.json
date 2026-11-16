@@ -1,0 +1,68 @@
+{
+  "format": "e165_validation_phase_plan_v1",
+  "state": "STATIC_PREPARATION_PENDING_SCIENTIFIC_FREEZE",
+  "experiment_id": "E165",
+  "remote_project_root": "/data/robot/p001",
+  "remote_work_root": "/data/robot/p001/e165",
+  "source_cwd": "/data/robot/p001/e165/s001",
+  "orchestration_root": "/data/robot/p001/e165/o001",
+  "python": "/data/robot/p001/env/bin/python",
+  "phases": [
+    {
+      "stage": "CHECKS",
+      "limits": {"cpu_seconds": 20, "wall_seconds": 60},
+      "stop_thresholds": {"cpu_seconds": 15, "wall_seconds": 50},
+      "run_root": "/data/robot/p001/e165/c001",
+      "spec": "/data/robot/p001/e165/o001/stage_checks.json",
+      "authorization": "/data/robot/p001/e165/o001/authorization_checks.json",
+      "entry": "/data/robot/p001/e165/o001/launch_checks.sh",
+      "worker": "/data/robot/p001/e165/o001/checks_entry.py",
+      "prerequisite": "Coordinator admits exact static source and controls for one remote check batch."
+    },
+    {
+      "stage": "DIAGNOSTIC",
+      "limits": {"cpu_seconds": 80, "wall_seconds": 140},
+      "stop_thresholds": {"cpu_seconds": 75, "wall_seconds": 130},
+      "run_root": "/data/robot/p001/e165/run001",
+      "spec": "/data/robot/p001/e165/o001/stage_diagnostic.json",
+      "authorization": "/data/robot/p001/e165/o001/authorization_diagnostic.json",
+      "entry": "/data/robot/p001/e165/o001/launch_diagnostic.sh",
+      "worker": "/data/robot/p001/e165/o001/runner.py",
+      "prerequisite": "Remote CHECKS passes, algorithm confirms its frozen delivery, coordinator admits exact diagnostic spec."
+    },
+    {
+      "stage": "AUDIT",
+      "limits": {"cpu_seconds": 20, "wall_seconds": 40},
+      "stop_thresholds": {"cpu_seconds": 15, "wall_seconds": 30},
+      "run_root": "/data/robot/p001/e165/a001",
+      "spec": "/data/robot/p001/e165/o001/stage_audit.json",
+      "authorization": "/data/robot/p001/e165/o001/authorization_audit.json",
+      "entry": "/data/robot/p001/e165/o001/launch_audit.sh",
+      "worker": "/data/robot/p001/e165/o001/audit_entry.py",
+      "prerequisite": "Diagnostic worker is reaped and raw evidence is preserved; coordinator admits exact remote audit inputs."
+    }
+  ],
+  "included_footer_reserve_each_stage": {"cpu_seconds": 5, "wall_seconds": 10, "bytes": 65536},
+  "round_limits": {
+    "cpu_seconds": 120,
+    "cumulative_controlled_wall_seconds": 240,
+    "new_artifact_cache_temp_bytes": 134217728,
+    "aggregate_remote_project_bytes": 100000000000,
+    "workers": 1,
+    "numeric_threads_per_worker": 1,
+    "gpu_devices": 0,
+    "environment_interactions": 0,
+    "real_candidate_fit_calls": 0,
+    "candidate_recovery_calls": 0,
+    "real_full_training_oracle_evaluations": 336,
+    "new_complete_score_packages": 33,
+    "logical_paired_prefixes": 16
+  },
+  "resource_authorized": false,
+  "execution_authorized": false,
+  "automatic_retry": false,
+  "earlier_experiment_allowance_reused": false,
+  "wall_scope": "Sum of fresh supervisor lifetimes for admitted stages; approval waits and transport are separate elapsed operations, with unmeasured CPU UNKNOWN.",
+  "source_export": "Only exact allowlisted scientific/control artifacts; machine-local instruction files, credentials and Git data excluded.",
+  "real_data_computation": "Remote only; CHECKS uses frozen synthetic fixtures; AUDIT replays saved records without model oracle or scoring calls."
+}

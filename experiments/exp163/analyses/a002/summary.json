@@ -1,0 +1,119 @@
+{
+  "experiment_id": "E163",
+  "campaign": "run002",
+  "source": "byte-verified raw mirror",
+  "server_gate_status": "NO_ADVANCEMENT",
+  "pass_count": 8,
+  "gate_denominator": 16,
+  "required_pass_count": 12,
+  "passed_seed_ids": [
+    26201,
+    26202,
+    26203,
+    26205,
+    26207,
+    26209,
+    26211,
+    26215
+  ],
+  "failed_condition_seed_ids": {
+    "G_new_C_gt_1e-10": [
+      26206,
+      26208,
+      26218
+    ],
+    "G_new_D_ge_0.5_G_new_C": [
+      26206,
+      26208,
+      26210,
+      26213,
+      26216
+    ],
+    "K_old_C_gt_1e-10": [],
+    "K_old_D_le_0.75_K_old_C": [
+      26204,
+      26212
+    ]
+  },
+  "returned_C0_seed_ids": {
+    "C": [],
+    "D": [
+      26204,
+      26206,
+      26209,
+      26212,
+      26213
+    ]
+  },
+  "passed_with_D_C0_seed_ids": [
+    26209
+  ],
+  "fallback_applied_count": 0,
+  "termination_counts": {
+    "optimizer_completed": 32
+  },
+  "closure_total": 2290,
+  "ranges": {
+    "closure_count": {
+      "min": 61,
+      "max": 83,
+      "mean": 71.5625
+    },
+    "full_persistent_bytes": {
+      "min": 233500,
+      "max": 234681,
+      "mean": 234024.4375
+    },
+    "process_lifetime_peak_memory_bytes": {
+      "min": 365060096,
+      "max": 365060096,
+      "mean": 365060096
+    },
+    "teacher_array_bytes": {
+      "min": 12288,
+      "max": 12288,
+      "mean": 12288
+    },
+    "temporary_array_bytes_estimate": {
+      "min": 117072,
+      "max": 117072,
+      "mean": 117072
+    },
+    "optimizer_state_tensor_bytes": {
+      "min": 1752,
+      "max": 1760,
+      "mean": 1752.5
+    },
+    "compensation_max_abs_error": {
+      "min": 7.450580596923828e-09,
+      "max": 9.5367431640625e-07,
+      "mean": 3.01864929497242e-07
+    },
+    "resident_probability_max_abs_drift": {
+      "min": 0.0016635218275545816,
+      "max": 0.21843435146798268,
+      "mean": 0.0799628622092716
+    },
+    "encoding_change_old_holdout_KL": {
+      "min": -0.21127788891775023,
+      "max": 0.5752617254108887,
+      "mean": 0.024252855506591817
+    },
+    "encoding_change_new_holdout_KL": {
+      "min": -0.03577746453022035,
+      "max": 0.08838403390993821,
+      "mean": 0.0016708203125843514
+    }
+  },
+  "resident_KL_range": {
+    "min": 9.462209733526593e-07,
+    "max": 0.04870864141349191,
+    "mean": 0.0053190050028154275
+  },
+  "limitations": [
+    "Gate is a KL proxy screen, not a reward estimate.",
+    "Process peak is an interpreter lifetime high-water mark, not an isolated per-fit workspace peak.",
+    "Fit stage time subtotals do not replace complete supervisor lifecycle accounting.",
+    "C0 return does not imply float32 fallback or a learned protective update."
+  ]
+}

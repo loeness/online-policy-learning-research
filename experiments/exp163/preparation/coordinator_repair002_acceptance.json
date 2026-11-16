@@ -1,0 +1,51 @@
+{
+  "experiment_id": "E163",
+  "hypothesis_id": "H036",
+  "repair": "002",
+  "accepted_date": "2026-10-22",
+  "state": "LOCAL_REPAIR_ACCEPTED_PENDING_NEW_USER_RESOURCE_AUTHORIZATION",
+  "review_result": "PASS_STATIC_ONLY",
+  "execution_authorized": false,
+  "new_reservation_created": false,
+  "runtime_prechecks_performed": false,
+  "ssh_transfer_for_repair": false,
+  "real_fits": 0,
+  "environment_interactions": 0,
+  "prior_attempt": "run001 ACCOUNTING_INVALID / NOT_EVALUATED",
+  "prior_complete_cpu_seconds": null,
+  "prior_complete_wall_seconds": null,
+  "prior_reservation_state": "RETIRED_FAILED_SINGLE_ATTEMPT_NO_AUTOMATIC_REUSE",
+  "source_identity_sha256": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea",
+  "orchestration_identity_sha256": "b8df209ce3d89df2a4847b2b7e2da380e8d01b819e1f12f8ccde70782ad1353b",
+  "run_spec_sha256": "d5764b8091aba95b7223ee7cdcb18d752e123d17063bb0c936775753f6e8189d",
+  "archive_sha256": "11a23bab40e945b1d73252b2d75207c99882fc5b83eff2725127dae21044a3c9",
+  "archive_bytes": 37912,
+  "static_review_sha256": "9cb920119956b5e8b5231b18188d75a0c185a3af567b8008e0c6f7243ce974d0",
+  "review_evidence": [
+    "validation/repair002/static_review.json",
+    "validation/repair002/reviewed_readiness.json",
+    "validation/repair002/orchestration.diff",
+    "../analyses/a001/report.md",
+    "../analyses/a001/audit.json"
+  ],
+  "root_review": "Accepted minimum startup/accounting orchestration repair after independent owner static review and separate root delegated resource review; scientific method, frozen source/input identities and gate unchanged. Static acceptance does not establish Linux runtime behavior.",
+  "requested_single_retry_limits": {
+    "aggregate_remote_project_bytes": 100000000000,
+    "campaign_wall_seconds": 180,
+    "candidate_fits": 32,
+    "cpu_seconds": 120,
+    "environment_interactions": 0,
+    "gpu_devices": 0,
+    "new_artifact_cache_temp_bytes": 268435456,
+    "numeric_threads_per_worker": 1,
+    "workers": 1
+  },
+  "requested_limits_authorized": false,
+  "conditions_before_any_run": [
+    "Explicit user additional single-attempt compute authorization",
+    "New budget reservation and coordinator directive bound to frozen run spec",
+    "Exact allowlisted remote transfer plus refreshed project path/input/capacity checks",
+    "Linux lifecycle CPU and stop prechecks within the newly authorized single campaign"
+  ],
+  "next_decision": "Await user response to requested additional 120 CPU seconds / 180 wall seconds / zero new environment interactions. No reuse/reset of prior reservation; no StageA/new seeds/automatic retry."
+}

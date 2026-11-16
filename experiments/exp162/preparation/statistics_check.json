@@ -1,0 +1,101 @@
+{
+  "format": "e162_h033_statistics_synthetic_check_v1",
+  "scope": "synthetic_only_no_real_feature_or_crossfit_packets_read",
+  "experiment": "E162",
+  "hypothesis": "H033",
+  "statistics_source_sha256": "28eaa71a173c0c68d832f098ab1a6c8066c4d088d02a4742f5a820abfdc1e753",
+  "synthetic_packet_hashes": {
+    "features": "e6b9a3b16b7c1be64b22813db81a8cb80914712a90657b46df898e9ac36427f1",
+    "outcomes": "f979813296244bbf451ab4b070a7693778117e6b9afd20e23fa1e8eaf473329d",
+    "crossfit": "feca5b4dbb22954797cd56ad18c76d5bebf00bf7d6b5fb7a3bb8017f86675202"
+  },
+  "checks": [
+    {
+      "name": "192_outcomes_128_primary_and_complete_16_seed_schema",
+      "status": "PASS",
+      "expected": {
+        "outcomes": 192,
+        "primary": 128,
+        "balanced": 64,
+        "seeds": 16
+      },
+      "observed": {
+        "outcomes": 192,
+        "primary": 128,
+        "balanced": 64,
+        "seeds": 16
+      }
+    },
+    {
+      "name": "hand_calculated_primary_and_balanced_arm_means",
+      "status": "PASS",
+      "fixed_keep_mean_primary": 1.75,
+      "fixed_replace_mean_primary": 1.754,
+      "fixed_replace_gain_vs_keep": 0.004,
+      "all_16_seed_arm_means_checked": true
+    },
+    {
+      "name": "independent_crossfit_models_predictions_actions_values_and_aggregates",
+      "status": "PASS",
+      "numeric_fields_checked": 565,
+      "max_abs_difference": 2.220446049250313e-16
+    },
+    {
+      "name": "hand_calculated_paired_gains_fold_gate_and_selection_counts",
+      "status": "PASS",
+      "G_b": {
+        "fixed_keep": 0.02193749999999997,
+        "fixed_replace": 0.017937500000000037,
+        "intercept_only": 0.022687500000000017,
+        "frequency_rule": -6.2500000000007e-05
+      },
+      "G_min": -6.2500000000007e-05,
+      "positive_fold_count": 0,
+      "synthetic_status": "NO_ADVANCEMENT"
+    },
+    {
+      "name": "conditional_bootstrap_reproducibility",
+      "status": "PASS",
+      "draws": 10000,
+      "generator": "PCG64",
+      "seed": 162033,
+      "intervals_sha256": "b28b72d2633a0caf2948c5502318aa5c2117d9a1dc99103c75e666a34936d42f",
+      "intervals": {
+        "method": "conditional stratified percentile bootstrap of fixed OOF values",
+        "resampling_unit": "seed within the four family-by-history strata; n=4 sampled with replacement per stratum",
+        "draws": 10000,
+        "bit_generator": "PCG64",
+        "seed": 162033,
+        "quantile_method": "NumPy default linear",
+        "G_b_interval_2_5_97_5": {
+          "fixed_keep": [
+            0.01818593749999993,
+            0.02568750000000003
+          ],
+          "fixed_replace": [
+            0.014062500000000033,
+            0.021750000000000047
+          ],
+          "intercept_only": [
+            0.011437500000000003,
+            0.03512500000000003
+          ],
+          "frequency_rule": [
+            -0.00018750000000002098,
+            0.0
+          ]
+        },
+        "G_min_interval_2_5_97_5": [
+          -0.00018750000000002098,
+          0.0
+        ],
+        "interpretation": "Conditional resampling range for fixed held-out values only; no refitting, training uncertainty, formal 95% coverage, or p-value claim."
+      }
+    },
+    {
+      "name": "new_output_directory_and_refuse_overwrite",
+      "status": "PASS"
+    }
+  ],
+  "synthetic_only_note": "The frozen crossfit implementation was used only to create an expected output from generated synthetic packets. The independent statistics implementation recomputed it separately. No E161 feature packets, E161 crossfit output, extraction, fitting on real inputs, simulations, or remote commands were used."
+}

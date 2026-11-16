@@ -1,5 +1,11 @@
 # 预训练后在线学习：A / B / 压缩 / C1 实验
 
+已有研究现已按 **H 猜想 → E 实验 → run 执行 → analysis 报告** 回溯归类：
+[研究总索引](research/RESEARCH_LOG.md) · [实验入口](experiments/README.md) ·
+[历史产物归属](research/ARTIFACT_CATALOG.json) · [整合范围与来源缺口](research/MIGRATION_REPORT.md)。
+原始输出、失败记录和冻结协议保留原路径；下方按时间编排的历史说明继续保留。
+引用与借用关系见 [Citation 总索引](research/CITATIONS.md)，复核范围和历史缺口见 [结构复核报告](research/STRUCTURE_AUDIT.md)。
+
 ## GitHub 研究档案入口
 
 本仓库保存原 A、B、B+、压缩对照和 C1 快照；截至 **2026-10-20**，补充了强对照、P0、有界知识组织、V2诊断、共享参数写入、容量压力、完整在线保存决策、候选剂量与未来学习交互对照、固定规则确认、所选反馈预测、重复写入验证、匹配来源的操作/观察窗口诊断，以及有限观测上的行为候选构造与 early/late 状态对照。原快照保留在 `v0.1.0-ab-c1`，新增工作位于 `codex/c1-strong-baselines` 分支；云端覆盖以该分支提交为准。包含原始数据、模型、逐步日志、图表、成功与失败记录、验证过程、算法实现和引用。新实验仍在 C1 受控环境中，不代表已完成一般环境的 C2/C3 基准。

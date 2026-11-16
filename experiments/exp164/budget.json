@@ -1,0 +1,150 @@
+{
+  "experiment_id": "E164",
+  "hypothesis_id": "H036",
+  "registered_date": "2026-10-23",
+  "state": "COMPLETE_VALID_EXPLORATORY_ONLY",
+  "execution_authorized": false,
+  "resource_authorized": false,
+  "authority_scope": "The user directly requested resuming the algorithm and validation chats' collaboration to perform validation after the account-usage interruption. Within that requested E164 validation, the coordinator admits the already reviewed finite envelope of 60 CPU seconds, 120 campaign wall seconds and 64 MiB for one new attempt. The user did not separately state these numerical values; they are the coordinator's bounded allocation for the requested work. No E163 balance reuse. Remote preparation is admitted now; actual campaign launch still requires the final exact-spec coordinator directive.",
+  "planned_execution_location": "/data/robot/p001/e164",
+  "remote_project_root": "/data/robot/p001",
+  "remote_account": "robot",
+  "planned_limits": {
+    "environment_interactions": 0,
+    "cpu_seconds": 60,
+    "campaign_wall_seconds": 120,
+    "workers": 1,
+    "numeric_threads_per_worker": 1,
+    "gpu_devices": 0,
+    "new_artifact_cache_temp_bytes": 67108864,
+    "aggregate_remote_project_bytes": 100000000000,
+    "candidate_fit_calls": 5,
+    "new_complete_scoring_packages": 15,
+    "logical_paired_prefixes": 16
+  },
+  "planned_resource_estimate": {
+    "cpu_seconds_range": [
+      10,
+      25
+    ],
+    "wall_seconds_range": [
+      15,
+      45
+    ],
+    "not_a_measurement": true,
+    "source": "Algorithm NEXT_DESIGN_20261023 section7; independent static estimate and final budget admission pending"
+  },
+  "spent": {
+    "environment_interactions": 0,
+    "candidate_fit_calls": 5,
+    "new_scoring_packages": 10,
+    "scientific_workers_started": 1,
+    "cpu_seconds": null,
+    "campaign_wall_seconds": null,
+    "measurement_status": "VALID observed complete supervisor lifecycle subtotal plus explicit unmeasured footer upper bound; exact complete footer cost remains UNKNOWN",
+    "observed_cpu_seconds_before_footer": 7.929754999999999,
+    "observed_campaign_wall_seconds_before_footer": 9.350686746649444,
+    "bounded_cpu_seconds_upper": 12.929755,
+    "bounded_campaign_wall_seconds_upper": 19.350686746649444,
+    "new_artifact_cache_temp_bytes": 8956426,
+    "raw_output_files": 279,
+    "raw_output_bytes": 5213330,
+    "audit": "analyses/a003/audit.json"
+  },
+  "reservations": [
+    {
+      "reservation_id": "acceptance_diag_campaign001",
+      "status": "CLOSED_COMPLETED_VALID_NO_RETRY",
+      "registered_date": "2026-10-23",
+      "cpu_seconds": 60,
+      "campaign_wall_seconds": 120,
+      "new_artifact_cache_temp_bytes": 67108864,
+      "environment_interactions": 0,
+      "gpu_devices": 0,
+      "workers": 1,
+      "numeric_threads_per_worker": 1,
+      "candidate_fit_calls": 5,
+      "new_complete_scoring_packages": 15,
+      "logical_paired_prefixes": 16,
+      "attempts": 1,
+      "prior_experiment_allowance_reused": false,
+      "preparation_directive": "preparation/coordinator_prepare001.json",
+      "campaign_start_directive": "preparation/coordinator_start001.json",
+      "scientific_campaign_started": true,
+      "closed_at_utc": "2026-10-23T02:24:52.776067+00:00",
+      "observed_cpu_seconds_before_footer": 7.929754999999999,
+      "observed_wall_seconds_before_footer": 9.350686746649444,
+      "bounded_cpu_seconds_upper": 12.929755,
+      "bounded_wall_seconds_upper": 19.350686746649444,
+      "actual_fit_calls": 5,
+      "actual_score_calls": 10,
+      "environment_interactions_used": 0,
+      "unused_allowance": "RETIRED_NOT_REUSABLE",
+      "result_audit": "analyses/a003/audit.json"
+    }
+  ],
+  "active_job": null,
+  "active_reservation_id": null,
+  "recovery_seed_ids": [
+    26204,
+    26206,
+    26209,
+    26212,
+    26213
+  ],
+  "reuse_prefixes": 11,
+  "source_identity_sha256": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+  "run_spec_sha256": "40a1ac53ec03b2ac0eb0cea6004f962fccdc3d342490d2b67eef1b698f2dd303",
+  "execution_owner_thread_id": "01a1592f-90c2-74b1-bf2a-f6442d0c7397",
+  "retry_rule": "No automatic retry, tolerance relaxation, extension to16recovery fits, extra probes, lambda search or new seeds. Preserve partial evidence and return to coordinator.",
+  "followup_authorization": "NONE; no production rule, StageA, structural extension or reward validation",
+  "required_before_execution": [
+    "Algorithm implementation, required synthetic checks and frozen methods/source/input identities",
+    "Independent exact design and frozen implementation review",
+    "Resource authorization for a concrete single attempt; no inherited E163 allowance",
+    "Final protocol/limits, fresh source/spec/input identities and exact transfer/path allowlists",
+    "Coordinator final execution directive; runtime prechecks within new campaign"
+  ],
+  "next_decision": "Coordinator interpretation only; no new scientific work, retry, Stage A or structural change is authorized.",
+  "scientific_manifest_sha256": "76073211ec4ff37af2677e0d3cae33c87e46a703a25c306ccb0257c03a2ef379",
+  "scientific_freeze_accepted_date": "2026-10-23",
+  "scientific_freeze_acceptance": "preparation/coordinator_acceptance_v1.json",
+  "resource_admission_date": "2026-10-23",
+  "preparation_directive": "preparation/coordinator_prepare001.json",
+  "accepted_orchestration_identity_sha256": "8b2cf8c5a45c009a4955cac9303eb2a2d810f73944c4a0bdc285b9f3021dd3e0",
+  "unadmitted_spec_sha256": "c7d0921475a7d872bb44e189b8e468afcb20eb4d7fd29ec08ea1e5834a7ec602",
+  "campaign_cost_scope": "Fresh supervisor birth ticks through Python startup, same-campaign runtime prechecks, all worker preparation/fit/score/log work, stop/reap and reserved footer. Safety stops55CPU/110wall; reserve5CPU/10wall and65536B within caps. SSH, parent launch shell, transfer and capacity admission are external operations: report elapsed separately and unmeasured CPU as UNKNOWN.",
+  "last_job": {
+    "status": "CLOSED_COMPLETE_VALID",
+    "ssh_session_handle": 16261,
+    "entry_argv": [
+      "sh",
+      "/data/robot/p001/e164/o001/launch_command.sh"
+    ],
+    "launch_requested_utc": "2026-10-23T02:12:33.218467+00:00",
+    "reservation_id": "acceptance_diag_campaign001",
+    "owned_pid_handles": [
+      {
+        "pid": 2199417,
+        "role": "launch_parent_shell",
+        "exited": true
+      },
+      {
+        "pid": 2199418,
+        "role": "fresh_supervisor",
+        "exited": true
+      }
+    ],
+    "supervisor_exit_code": 0,
+    "entry_return_code": 0,
+    "owned_jobs_remaining": 0
+  },
+  "settlement": {
+    "closed_at_utc": "2026-10-23T02:24:52.776067+00:00",
+    "final_audit": "analyses/a003/audit.json",
+    "result_report": "analyses/a001/report.md",
+    "cost_disclosure": "analyses/a001/cost.json",
+    "no_automatic_followup": true,
+    "prior_experiment_cost_or_allowance_changed": false
+  }
+}

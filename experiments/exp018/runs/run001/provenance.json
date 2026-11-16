@@ -1,0 +1,44 @@
+{
+  "experiment_id": "E018",
+  "run_id": "run001",
+  "producer_path": "outputs/c1_supplement/",
+  "configuration_and_protocol_paths": [
+    "docs/C1_SUPPLEMENT_PROTOCOL.md",
+    "docs/C1_SUPPLEMENT_AMENDMENTS.md",
+    "outputs/c1_supplement/结果解读.md",
+    "outputs/c1_supplement/optimizer_step_audit.json",
+    "outputs/c1_supplement/cohort_source_manifest.json"
+  ],
+  "input_data_paths": [
+    "data/foundation.pt",
+    "data/pretrain_source.npz"
+  ],
+  "producer_artifact_paths": [
+    "outputs/c1_supplement/step3_tuning_and_continual/",
+    "outputs/c1_supplement/"
+  ],
+  "source_provenance_paths": [
+    "outputs/c1_supplement/cohort_source_manifest.json"
+  ],
+  "reported_date": "2026-10-15",
+  "operational_status": "COMPLETED",
+  "actual_cost": "formal train 2,476,032 + evaluation 678,912; validation train 761,856 + evaluation 208,896 interactions",
+  "actual_execution_commit": null,
+  "execution_commit_explanation": "Supplement manifest records source hashes but not execution SHA. Archive context commit 81de4afd2d703d17c3953facb78fd04b19cb64a9 is import context only.",
+  "actual_execution_command": null,
+  "command_explanation": "Exact historical invocation not preserved.",
+  "retrospective_record": true,
+  "producer_entrypoints": [
+    "scripts/run_c1_supplement.py"
+  ],
+  "producer_path_semantics": "Historical artifact root, not code entrypoint. This retrospective cohort wrapper does not establish the exact number of original CLI invocations.",
+  "supporting_log_paths": [
+    "outputs/c1_step3_execution.log"
+  ],
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "hypothesis_id": "H006",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

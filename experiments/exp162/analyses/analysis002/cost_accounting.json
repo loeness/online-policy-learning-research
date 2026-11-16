@@ -1,0 +1,67 @@
+{
+  "experiment_id": "E162",
+  "kind": "TECHNICAL_CPU_ACCOUNTING_CORRECTION_NO_SCIENTIFIC_RECOMPUTATION",
+  "original_full_cpu_seconds": null,
+  "original_full_cpu_status": "UNKNOWN: launched Windows venv redirector spawns a distinct real interpreter; original wrapper measured redirector and supervisor only. Real interpreter handles were not retained.",
+  "original_supervisor_plus_launcher_cpu_seconds": 1.296875,
+  "known_original_cpu_lower_bound_seconds": 7.265625,
+  "stage_records": [
+    {
+      "stage": "features",
+      "launcher_handle_cpu_seconds": 0.0,
+      "external_stage_wall_seconds": 8.295443300001352,
+      "recorded_internal_cpu_seconds": 4.453125,
+      "recorded_internal_wall_seconds": 7.815697800000635
+    },
+    {
+      "stage": "outcomes",
+      "launcher_handle_cpu_seconds": 0.0,
+      "external_stage_wall_seconds": 1.935105399999884,
+      "recorded_internal_cpu_seconds": 1.515625,
+      "recorded_internal_wall_seconds": 1.5347839999994903
+    },
+    {
+      "stage": "crossfit",
+      "launcher_handle_cpu_seconds": 0.03125,
+      "external_stage_wall_seconds": 0.24194250000073225,
+      "recorded_internal_cpu_seconds": 0.0,
+      "recorded_internal_wall_seconds": 0.0026735999999800697
+    },
+    {
+      "stage": "statistics",
+      "launcher_handle_cpu_seconds": 0.0,
+      "external_stage_wall_seconds": 0.2991373000004387,
+      "recorded_internal_cpu_seconds": null,
+      "recorded_internal_wall_seconds": null
+    }
+  ],
+  "original_scientific_pipeline_wall_seconds": 10.898279500001081,
+  "campaign_wall_seconds_through_cost_supplement": 388.019593,
+  "original_pipeline_conservative_cpu_upper_bound_seconds": 60,
+  "bound_method": "Sum measured supervisor/redirector CPU, known internal process CPU, and 32 logical CPUs times the externally timed portions outside each recorded internal wall interval (statistics entirely external); add .2s wall-equivalent timing margin. This is a conservative bound for the original pipeline, not an exact CPU measurement.",
+  "logical_cpus": 32,
+  "zero_model_accounting_repair": {
+    "kind": "ZERO_MODEL_SOFTWARE_ACCOUNTING_REPAIR",
+    "used_on_original_run": false,
+    "real_feature_or_crossfit_reruns": 0,
+    "launcher_pid": 36072,
+    "interpreter_pid": 31468,
+    "distinct_venv_redirector": true,
+    "launcher_cpu_seconds": 0.0,
+    "full_interpreter_cpu_seconds": 0.21875,
+    "complete_child_cpu_seconds": 0.21875,
+    "supervisor_check_cpu_seconds": 0.0,
+    "wall_seconds": 0.26895490000242717,
+    "passed": true,
+    "environment_interactions": 0,
+    "limitation": "Repair verified on synthetic single-interpreter software only; no recovered exact original-run CPU is asserted."
+  },
+  "additional_preparation_or_followup_queries": "Not fully process-metered; operational metadata/closure overhead is disclosed rather than represented as exact original CPU.",
+  "real_feature_or_crossfit_retries": 0,
+  "environment_interactions": 0,
+  "budget_settlement": "Consume entire300s CPU reservation administratively because full cumulative CPU is unknown; no balance is made available for further experiments. This is not a claim that300CPU seconds were actually used.",
+  "completed_utc": "2026-10-21T11:49:30.794157+00:00",
+  "original_state_sha256": "ed99330ffdcaac876f28a847e8a645b85066296d57f083c8746f442b02f0e11b",
+  "original_statistics_source_sha256": "28eaa71a173c0c68d832f098ab1a6c8066c4d088d02a4742f5a820abfdc1e753",
+  "scientific_metrics_sha256": "6f532b2f37fa29114de21ba7c48dae240534617304eaf625081f36e1fdb9ed1a"
+}

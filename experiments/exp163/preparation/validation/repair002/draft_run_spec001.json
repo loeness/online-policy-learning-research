@@ -1,0 +1,581 @@
+{
+  "admission_measured_utc": "2026-10-22T05:46:18.427839+00:00",
+  "admission_status": "LOCAL_DRAFT_ONLY; historic non-e163 baseline retained; fresh remote admission and new resource authorization required before any execution",
+  "baseline_definition": "non-e163 project bytes; supervisor adds all e_root bytes including archive and sources",
+  "e_root": "/data/robot/p001/e163",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "MKL_NUM_THREADS": "1",
+    "MPLCONFIGDIR": "/data/robot/p001/e163/cache/mpl",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TEMP": "/data/robot/p001/e163/tmp",
+    "TMP": "/data/robot/p001/e163/tmp",
+    "TMPDIR": "/data/robot/p001/e163/tmp",
+    "TORCH_EXTENSIONS_DIR": "/data/robot/p001/e163/cache/ext",
+    "TORCH_HOME": "/data/robot/p001/e163/cache/torch",
+    "XDG_CACHE_HOME": "/data/robot/p001/e163/cache",
+    "XDG_CONFIG_HOME": "/data/robot/p001/e163/config",
+    "XDG_DATA_HOME": "/data/robot/p001/e163/state",
+    "XDG_STATE_HOME": "/data/robot/p001/e163/state"
+  },
+  "experiment_id": "E163",
+  "format": "e163_execution_spec_v2_local_repair",
+  "foundation": {
+    "bytes": 55477,
+    "remote_path": "/data/robot/p001/s001/data/foundation.pt",
+    "sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222"
+  },
+  "fresh_process_contract": "launch_command.sh forks a new dedicated supervisor and explicitly waits; supervisor verifies known parent PID and zero initial waited-child usage. No inherited-counter subtraction.",
+  "gate_mapping": {
+    "C_lambda": 0,
+    "D_lambda": 1,
+    "G_new": "K_new_W0 minus arm K_new; equality to frozen metrics.G_new is checked by runner",
+    "additional_preserved_diagnostics": [
+      "returned_is_C0",
+      "fallback_reason",
+      "termination_reason",
+      "closure_records",
+      "computation_counts"
+    ],
+    "binding": "wildcard",
+    "fields": {
+      "K_new_C": "score_C.metrics.K_new == score_C.metrics.encoded_fresh.new_holdout",
+      "K_new_D": "score_D.metrics.K_new == score_D.metrics.encoded_fresh.new_holdout",
+      "K_new_W0": "score_C.metrics.K_new_W0 == score_D.metrics.K_new_W0 == metrics.W0_fresh.new_holdout",
+      "K_old_C": "score_C.metrics.K_old == score_C.metrics.encoded_fresh.old_holdout",
+      "K_old_D": "score_D.metrics.K_old == score_D.metrics.encoded_fresh.old_holdout",
+      "fallback_flags.C": "fit_C.diagnostics.fallback_applied",
+      "fallback_flags.D": "fit_D.diagnostics.fallback_applied"
+    },
+    "schema": "E163_GATE_MAPPING_V1",
+    "scientific_score_format": "h036_stage0_score_v1",
+    "scientific_semantics": "Complete original actor codec bytes decoded, fresh local zero, frozen teachers and prescribed holdout. Runner uses no alternate loss, teacher or codec.",
+    "source_identity_sha256": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea"
+  },
+  "git_parent": "81de4afd2d703d17c3953facb78fd04b19cb64a9",
+  "input_files": [
+    {
+      "bytes": 176565,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26201_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26201,
+      "sha256": "307bb651efa13cdaf2a303dd369ba2de328d39dcaf2ac10b46294afdd84cade3"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26201_dynamics_late/prefix/actor.bin",
+      "seed": 26201,
+      "sha256": "f46d5f1787b4a54f70d4cf12839385fb56f72edc3ecd53be00cc532b5fa5113b"
+    },
+    {
+      "bytes": 2116,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26201_dynamics_late/prefix/evidence.npz",
+      "seed": 26201,
+      "sha256": "975199b27bf137e49ad2cef7516972fb7de0e33e71af1e130fdec80c3febfd0b"
+    },
+    {
+      "bytes": 176245,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26202_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26202,
+      "sha256": "661cf57cf2fdabb7c2611a11a61c8aeaf977532b077aec078d9897cbf00e5618"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26202_dynamics_late/prefix/actor.bin",
+      "seed": 26202,
+      "sha256": "ef250d5f006c442fb0649757475f0198a1bf138fcb18122eedd918e212feae9e"
+    },
+    {
+      "bytes": 2010,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26202_dynamics_late/prefix/evidence.npz",
+      "seed": 26202,
+      "sha256": "f76ad26b8d5bff23c9179e40cfb4f3948e3727afa430d53102f1c3fd640ff8ed"
+    },
+    {
+      "bytes": 176821,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26203_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26203,
+      "sha256": "ce94a7d1d75ad2a64967851280412568b677a5aa2f7be7bb6a0602686e629e9e"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26203_dynamics_late/prefix/actor.bin",
+      "seed": 26203,
+      "sha256": "c7b501bdb4a24ab7fef65da07a53a7d89bb02a3f40c53961e8a69299496fefdd"
+    },
+    {
+      "bytes": 2084,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26203_dynamics_late/prefix/evidence.npz",
+      "seed": 26203,
+      "sha256": "6b43f22809953bb432cac6a292099eee481ed64e9415f4af7188eaa177bae5f0"
+    },
+    {
+      "bytes": 176821,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26204_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26204,
+      "sha256": "2d381aca922eb684e29b0dc2abb9f1ed7bd88cc8b27234faee454e19431dc069"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26204_dynamics_late/prefix/actor.bin",
+      "seed": 26204,
+      "sha256": "1cdfe49830ebaec5de3d73b3155d7dc18739c496d35a7e3b1eb5b326abc42c0d"
+    },
+    {
+      "bytes": 2116,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26204_dynamics_late/prefix/evidence.npz",
+      "seed": 26204,
+      "sha256": "dbd3c90be8b78c8f9aaff17f41a3d6ce6a464852c00da699038dc96f5d1085ec"
+    },
+    {
+      "bytes": 176629,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26205_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26205,
+      "sha256": "032338132b21232ad30483f657229347aabd12200dc126c72b32baef7bc3b8b3"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26205_dynamics_late/prefix/actor.bin",
+      "seed": 26205,
+      "sha256": "e120707aba445ed1f970aae5ecc52142d3d1544f957b3357bbdf5fefc84cd99c"
+    },
+    {
+      "bytes": 2046,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26205_dynamics_late/prefix/evidence.npz",
+      "seed": 26205,
+      "sha256": "f12a603ae59676c47308822d30039c136326e94c99365219e241522141924222"
+    },
+    {
+      "bytes": 176501,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26206_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26206,
+      "sha256": "7ee41486c7edce688803f7e0843461591a1ccbeff14caa0dffa6efd6599e6a78"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26206_dynamics_late/prefix/actor.bin",
+      "seed": 26206,
+      "sha256": "acd70284738b21bc9642f1a3de3354b9c4c888f98e780c13bee4bd2df1623921"
+    },
+    {
+      "bytes": 2087,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26206_dynamics_late/prefix/evidence.npz",
+      "seed": 26206,
+      "sha256": "9fe11b4bcda920929e1abef0dacc3b55d3e0d4b57af00d6237c121881ed866f7"
+    },
+    {
+      "bytes": 177269,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26207_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26207,
+      "sha256": "f532ee5dc03fc5a55864a92b5a87e7dcac97d15554570d27b5e866f022021809"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26207_dynamics_late/prefix/actor.bin",
+      "seed": 26207,
+      "sha256": "a04ac9e2a98176a5b7618071101123cc38c560b2c53b04ad4e247cd6725c4161"
+    },
+    {
+      "bytes": 1983,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26207_dynamics_late/prefix/evidence.npz",
+      "seed": 26207,
+      "sha256": "7b1453403456317d6a4508349cec450714a403b00eede7b09742572ab585b6de"
+    },
+    {
+      "bytes": 176565,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26208_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26208,
+      "sha256": "8ed8594a277594a0954c01153bbae7cad43c350ffd786de53469999ee4d84906"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26208_dynamics_late/prefix/actor.bin",
+      "seed": 26208,
+      "sha256": "b07cf2f90fdfee02c062d30de0d1d5ce625c24c694b4992497fdba7f6e1e4504"
+    },
+    {
+      "bytes": 2011,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26208_dynamics_late/prefix/evidence.npz",
+      "seed": 26208,
+      "sha256": "b3f4ef28867fe2e738052629bcc6b3b3f88ad842ed119f991c5c4bf394fa0b54"
+    },
+    {
+      "bytes": 176757,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26209_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26209,
+      "sha256": "e47c95facdf1bdeffab61641317523941a264f08aac6cf46b2a880f961c6d8c8"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26209_dynamics_late/prefix/actor.bin",
+      "seed": 26209,
+      "sha256": "d06ec199bfc59050af406800c208336560441e5895212bc9a4103f4bea08c2e5"
+    },
+    {
+      "bytes": 2062,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26209_dynamics_late/prefix/evidence.npz",
+      "seed": 26209,
+      "sha256": "60b5c382850f980fdafaf2b4202e83f1b3974b3225e153f8d60a1308a89ff094"
+    },
+    {
+      "bytes": 176309,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26210_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26210,
+      "sha256": "676ac6227e3b6f71ce5c9a516bdf797e6db8b654c165efedd689e344a3def84d"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26210_dynamics_late/prefix/actor.bin",
+      "seed": 26210,
+      "sha256": "c663a06f46843890f6379a15fecffcd3ca23b84837481b9eb6ae163e7731a468"
+    },
+    {
+      "bytes": 2006,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26210_dynamics_late/prefix/evidence.npz",
+      "seed": 26210,
+      "sha256": "10d74069606e9837a09a014ffa19d1a8a68769872078a09484fa3ff1f0852969"
+    },
+    {
+      "bytes": 177013,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26211_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26211,
+      "sha256": "d85f5a1d54862368fce4d3746f585cd8883d24c377fed3311a56051d89083052"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26211_dynamics_late/prefix/actor.bin",
+      "seed": 26211,
+      "sha256": "e898007adc8ecd18101506e67f4d68fad76d46a9f214700287183221035b67ec"
+    },
+    {
+      "bytes": 2025,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26211_dynamics_late/prefix/evidence.npz",
+      "seed": 26211,
+      "sha256": "750811846c3c6733ceb872b923c488c04c119e7c62abe7836064bdb769076c8c"
+    },
+    {
+      "bytes": 176757,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26212_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26212,
+      "sha256": "096bff5b66571500f589b3405c42dc8ebc07e2924ed0599b25e648632c7e87da"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26212_dynamics_late/prefix/actor.bin",
+      "seed": 26212,
+      "sha256": "cb9028267e908025fb6af02dfb9958e961adc4d0cd7cfd3f2c2b1e49b4af2e58"
+    },
+    {
+      "bytes": 2127,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26212_dynamics_late/prefix/evidence.npz",
+      "seed": 26212,
+      "sha256": "02d1504c7285bfd24d30d6aef8830ecb16ed52d9926c6b86dc90cafb5c72dc1a"
+    },
+    {
+      "bytes": 177397,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26213_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26213,
+      "sha256": "a6b14bbede1149f97d0ff0ae37f8b9bfb92bf184a37e2df4809bba22dfe40f26"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26213_dynamics_late/prefix/actor.bin",
+      "seed": 26213,
+      "sha256": "340477f5302ce9113df925f69123f3ef14c6bf3cfc41ecf3bca5cdd70bb51678"
+    },
+    {
+      "bytes": 2039,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26213_dynamics_late/prefix/evidence.npz",
+      "seed": 26213,
+      "sha256": "13aaf1b499002ea3dbef0feca23ec4d225845abf9cb9d3c8d362d90bab8339df"
+    },
+    {
+      "bytes": 176629,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26215_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26215,
+      "sha256": "be7d7092fdcf7c845c5ff9fbd026afd50b43863db67fcfaf0f867602763f3178"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26215_dynamics_late/prefix/actor.bin",
+      "seed": 26215,
+      "sha256": "0b09df7601ef4cdf8bd1027ab21b40b7291295d22ce9d506fae46056f30c2e50"
+    },
+    {
+      "bytes": 2012,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26215_dynamics_late/prefix/evidence.npz",
+      "seed": 26215,
+      "sha256": "cfb009009c1874b3a716981e03755c5329dcaadc93ab451b205b6e39b3e1e0c1"
+    },
+    {
+      "bytes": 176309,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26216_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26216,
+      "sha256": "6a1b6a8d3ce772cfc0bf8cc92b9869bed9f8a10ef8ab96347181fc901ad27fd7"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26216_dynamics_late/prefix/actor.bin",
+      "seed": 26216,
+      "sha256": "40dfeae84da8ae9e68d12b5969ab10ae17023bf67f30075e8e6cd8da824e80e2"
+    },
+    {
+      "bytes": 1991,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26216_dynamics_late/prefix/evidence.npz",
+      "seed": 26216,
+      "sha256": "5ec94667b75d6d668a31da5e7099ca95c129c5a61c019e05988a402e382d5eea"
+    },
+    {
+      "bytes": 177077,
+      "file": "checkpoint.pt",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26218_dynamics_late/prefix/checkpoint.pt",
+      "seed": 26218,
+      "sha256": "ebc4a9275a66c1419a67468791f2d99b609a252a03c93e8bc2e2c42c5b5658ae"
+    },
+    {
+      "bytes": 89,
+      "file": "actor.bin",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26218_dynamics_late/prefix/actor.bin",
+      "seed": 26218,
+      "sha256": "bffc638c65c40f457b54491ff877d079a41636826b40842a50a15c9a83ef5371"
+    },
+    {
+      "bytes": 2092,
+      "file": "evidence.npz",
+      "remote_path": "/data/robot/p001/e161/run001/producer/cases/s26218_dynamics_late/prefix/evidence.npz",
+      "seed": 26218,
+      "sha256": "bea2454d5cb8ed526afd136c066fa93d2c2ee6a3ae5d6dcc231bdf4f5ca0b57c"
+    }
+  ],
+  "lambda_values": [
+    0,
+    1
+  ],
+  "launcher_file": {
+    "bytes": 1200,
+    "path": "launch_command.sh",
+    "sha256": "24459e0e93912de5e9469c9becb06e8e9a8613e6d67f194289bec66ebb8ae2ec"
+  },
+  "limits": {
+    "aggregate_remote_project_bytes": 100000000000,
+    "campaign_wall_seconds": 180,
+    "candidate_fits": 32,
+    "cpu_seconds": 120,
+    "environment_interactions": 0,
+    "gpu_devices": 0,
+    "new_artifact_cache_temp_bytes": 268435456,
+    "numeric_threads_per_worker": 1,
+    "workers": 1
+  },
+  "orchestration_files": [
+    {
+      "bytes": 18291,
+      "path": "runner.py",
+      "sha256": "9aedf31853f9aa6f2630d6bab9e9dd72756a1372830f87d5c132b12be7f913af"
+    },
+    {
+      "bytes": 56150,
+      "path": "supervisor.py",
+      "sha256": "18b3af163a4be3f2c6d72f3adc410273c838b5622d356e98febe28943de9a7ff"
+    },
+    {
+      "bytes": 17955,
+      "path": "gate.py",
+      "sha256": "ddf6d123ad302c13413855d4395fe14716b40c1d719c94f693123a778a91e65d"
+    },
+    {
+      "bytes": 1248,
+      "path": "gate_mapping.json",
+      "sha256": "bafd11b469a2462c4bb52c2a4f2a16dc03f9438e8a2ca5466115fddb0bdfd29a"
+    }
+  ],
+  "orchestration_root": "/data/robot/p001/e163/o002",
+  "project_bytes_before": 2905289128,
+  "project_root": "/data/robot/p001",
+  "python": "/data/robot/p001/env/bin/python",
+  "repair_of_run_spec_sha256": "6e7604856c28ce33218f732eb893c1cc56827cab7eb4e51abee21b994f4491e8",
+  "run_root": "/data/robot/p001/e163/run002",
+  "scientific_manifest_sha256": "b837222aff57ab45abee226e9aa8bc9d2cd3444807fa348dee0c0c1ece70dc54",
+  "seeds": [
+    26201,
+    26202,
+    26203,
+    26204,
+    26205,
+    26206,
+    26207,
+    26208,
+    26209,
+    26210,
+    26211,
+    26212,
+    26213,
+    26215,
+    26216,
+    26218
+  ],
+  "source_cwd": "/data/robot/p001/e163/s001",
+  "source_files": [
+    {
+      "bytes": 851,
+      "path": "configs/h036_protected_v1.json",
+      "sha256": "28356c17c4d155b434c945fdd6ff73cdf1a3db233a19f5e9d65c9ba8700a137f"
+    },
+    {
+      "bytes": 982,
+      "path": "requirements-lock.txt",
+      "sha256": "89c4076b219734a0048c6c9a3d292be8aa42bb6325859e57e7b139ac4ca475ef"
+    },
+    {
+      "bytes": 437,
+      "path": "requirements.txt",
+      "sha256": "e81a8365718ac84600ccb49e27aae4c0150a125157fca7529d46250e205e20a2"
+    },
+    {
+      "bytes": 8272,
+      "path": "research/appendix/H036/HANDOFF_V1.md",
+      "sha256": "9fa9adabe9bf9ac9be666664e663c3c305f0db4c5be5982beeab8e6fb19e8ae3"
+    },
+    {
+      "bytes": 7680,
+      "path": "research/appendix/H036/METHOD_V1.md",
+      "sha256": "768135675cb063a6ad3cb75f2363c2d67550e48bbcd4c410f13df886a1d94e0c"
+    },
+    {
+      "bytes": 0,
+      "path": "src/online_rl/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 25602,
+      "path": "src/online_rl/c1_policy.py",
+      "sha256": "371fc881e960c63c01e0ae71c27b7fa22462e1b4985f8efd8c6862388ab2fb14"
+    },
+    {
+      "bytes": 16851,
+      "path": "src/online_rl/c1_tensor_controls.py",
+      "sha256": "727f1b4fa80c76b7d516ec6a4d95255ec58566b0c487340f6c9855ddc1accfae"
+    },
+    {
+      "bytes": 31893,
+      "path": "src/online_rl/compression.py",
+      "sha256": "bc62a863b5ddafeb8deb39b2c1a4b4b0aaf98313d60083249fc4bf9572944a7a"
+    },
+    {
+      "bytes": 22154,
+      "path": "src/online_rl/h033_diagnostic.py",
+      "sha256": "b4d2457df559b9cecf10fa385c8c3879038b8aa1aca04076f4f77a11017e5c67"
+    },
+    {
+      "bytes": 30301,
+      "path": "src/online_rl/h033_inputs.py",
+      "sha256": "4a2939c0616a0f522048553331f45679efb8c1315ad7f228aef85beee80e71cd"
+    },
+    {
+      "bytes": 7288,
+      "path": "src/online_rl/policy.py",
+      "sha256": "edf1d024abdfa00dfea262255a358e7ce5dfb92c1e003b2642714a0a56067c1d"
+    },
+    {
+      "bytes": 25494,
+      "path": "src/online_rl/retention_behavioral_candidate.py",
+      "sha256": "5c57f2913e33e8fd7553550c0c98eeff2a000c4ce67193d5d7535e842daf1d71"
+    },
+    {
+      "bytes": 35908,
+      "path": "src/online_rl/retention_protected_candidate.py",
+      "sha256": "0cabd3169650c3cd01ed719414f7dbe1f8bff156e5e84b834c71b56698c912d5"
+    },
+    {
+      "bytes": 50333,
+      "path": "src/online_rl/retention_protected_inputs.py",
+      "sha256": "d48c9c9cac14585c0c8e5ce43cff899b362652343738715975481cd0c4835316"
+    },
+    {
+      "bytes": 9850,
+      "path": "src/online_rl/shared_write_policy.py",
+      "sha256": "8b241f7760b785e990c72335b73fb489bb43b8f67e75ac92e80418fabc47d3ee"
+    },
+    {
+      "bytes": 19039,
+      "path": "src/online_rl/storage_decision.py",
+      "sha256": "d732b97e7375e75d467bf019e74e7135ef56e054165857c64d83b3a3a1dd7068"
+    },
+    {
+      "bytes": 15074,
+      "path": "src/online_rl/write_decision_policy.py",
+      "sha256": "84c9e9653cf8e6135154e4a4e1f851aa35fc8ceebd6eb0336af2ace31239654f"
+    },
+    {
+      "bytes": 15179,
+      "path": "tests/test_retention_protected_candidate.py",
+      "sha256": "334e74798dd74a84c2633a0d6868ba0385f714f5097e6e1b13978fec8b845e55"
+    },
+    {
+      "bytes": 17246,
+      "path": "tests/test_retention_protected_inputs.py",
+      "sha256": "5bc4ceaa05f4b701ac99799411a2579363997c56e31e8f537511e325200298fc"
+    },
+    {
+      "bytes": 9716,
+      "path": "tests/test_retention_protected_score.py",
+      "sha256": "c2d2172f9417419395debfee42668c898d5f98cf20d6043cfdc190b1e720e204"
+    }
+  ],
+  "source_identity_sha256": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea",
+  "worker_argv": [
+    "-B",
+    "/data/robot/p001/e163/o002/runner.py",
+    "--spec",
+    "/data/robot/p001/e163/o002/run_spec.json",
+    "--authorization",
+    "/data/robot/p001/e163/o002/authorization.json"
+  ]
+}

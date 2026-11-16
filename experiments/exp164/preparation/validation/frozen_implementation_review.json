@@ -1,0 +1,120 @@
+{
+  "format": "e164_frozen_implementation_review_v1",
+  "experiment_id": "E164",
+  "hypothesis_id": "H036",
+  "review_date": "2026-10-23",
+  "review_status": "PASS_WITH_REQUIREMENTS",
+  "source_identity_sha256": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+  "manifest_sha256": "76073211ec4ff37af2677e0d3cae33c87e46a703a25c306ccb0257c03a2ef379",
+  "manifest_file_sha256": "76073211ec4ff37af2677e0d3cae33c87e46a703a25c306ccb0257c03a2ef379",
+  "verification_file_sha256": "2c909375c113679cc4a5123d300f47eac9419c291ad9eeaaa5c28ab910c60a09",
+  "checks_log_sha256": "1a12acbe96c2145a21275af92fe80505a58f82bff6f1ca47567dae9fb358780c",
+  "snapshot": {
+    "file_count": 27,
+    "bytes": 762031,
+    "manifest_reports_all_hashes_verified": true,
+    "manifest_reports_working_source_matches_snapshot": true
+  },
+  "synthetic_checks": {
+    "reported_result": "9 passed",
+    "rerun_by_reviewer": false,
+    "old_23_or_1876_checks_rerun": false,
+    "actual_recovery_fits": 0,
+    "new_real_policy_scores": 0,
+    "environment_interactions": 0,
+    "remote_operations": 0,
+    "all_five_anchor_note": "The recorded full-cohort synthetic test uses one adapter-produced synthetic score and four matched synthetic fixture records. It demonstrates ordering and metric validation, not five actual scorer calls."
+  },
+  "conditions": [
+    {
+      "id": "reuse_identity_and_recovery_selection",
+      "status": "PASS_WITH_REQUIREMENTS",
+      "finding": "F64/U64 reuse is derived from exact helper candidate hashes and original fallback=false; the fixed 16-prefix manifest requires 11 reuse and the five specified recovery seeds. lock_cohort binds prepared_id, wildcard binding, exactly three input references, foundation, v1 source identity, C/D candidate and artifact references, metrics, actor/deployment, checkpoint/evidence references, run002 provenance, and each lock/probe. Helper hashes and candidate-file byte SHAs remain distinct. The APIs seal the supplied binding object but do not themselves resolve referenced paths to bytes or compare the supplied object to a separately pinned expected bindings-file SHA.",
+      "requirements": [
+        "At execution, load the bindings object from the exact frozen ACCEPTANCE_BINDINGS_V1.json included in the source snapshot and verify its pinned source-snapshot hash.",
+        "Before relying on reused identities, resolve allowlisted artifact references and validate actual bytes against the recorded SHA/size; the metadata-only API checks are not byte reads."
+      ],
+      "evidence": [
+        {
+          "path": "src/online_rl/retention_protected_candidate.py",
+          "lines": "457-463",
+          "sha256": "0cabd3169650c3cd01ed719414f7dbe1f8bff156e5e84b834c71b56698c912d5"
+        },
+        {
+          "path": "src/online_rl/retention_acceptance_replay.py",
+          "lines": "173-245, 515-599, 602-744, 1187-1292, 1420-1473",
+          "sha256": "2ab24ed4a9eb05d131785692954d3ff8c71c116427805013011cae0d4035358e"
+        },
+        {
+          "path": "research/appendix/H036/METHOD_ACCEPTANCE_V1.md",
+          "lines": "31-41",
+          "sha256": "da69e8c30c31b22776e3865d3ccef8cbcb6fbdfe1e4ae8c7d6df0c66adba3082"
+        }
+      ]
+    },
+    {
+      "id": "training_only_replay_and_gate_semantics",
+      "status": "PASS",
+      "finding": "The training view projects only the frozen 192 new and 96 old training rows. fit_selection_trace uses the original objective/gradient helper, lambda=1, L-BFGS settings, closure order, and returned objective/gradient; U updates only its own finite fullL incumbent and does not feed the optimizer. F/U selection uses the specified exact <= tie rule. The lock separately applies the float32 post-cast gate to V/UG and bypasses it for UR, with C0 fallback preserved. Replay comparison covers C0 identity/scalars, ordered closure scalars and hashes, F64/F32 identities, iterations, termination, and legal budgets. Historical per-closure gradients were not saved and are not claimed as compared. Nonfinite evaluation fails closed; exhaustion after 256 valid closures returns the observed incumbent with an explicit budget-exhausted termination.",
+      "evidence": [
+        {
+          "path": "src/online_rl/retention_acceptance_diagnostic.py",
+          "lines": "201-274, 329-482, 573-691, 781-853",
+          "sha256": "f981a3d5e69a551e8eb5bd5062f76558a36a39189b1a5c193df5783a6e637318"
+        },
+        {
+          "path": "src/online_rl/retention_protected_candidate.py",
+          "lines": "528-654",
+          "sha256": "0cabd3169650c3cd01ed719414f7dbe1f8bff156e5e84b834c71b56698c912d5"
+        },
+        {
+          "path": "src/online_rl/retention_acceptance_replay.py",
+          "lines": "384-468",
+          "sha256": "2ab24ed4a9eb05d131785692954d3ff8c71c116427805013011cae0d4035358e"
+        },
+        {
+          "path": "tests/test_retention_acceptance_diagnostic.py",
+          "lines": "291-375, 379-465",
+          "sha256": "d9a4167a85ab98a90b701e1a005f1687a87bf7d16cd605476651001110326f44"
+        }
+      ]
+    },
+    {
+      "id": "legacy_adapter_and_stage_barrier",
+      "status": "PASS_WITH_REQUIREMENTS",
+      "finding": "The adapter forms the exact h036_fit_v1 envelope with matching prepared_id, lambda=1, finite float32 (3,3) candidate, and diagnostics.candidate_sha256, then calls the original complete scorer and records diagnostic selection provenance separately. Locked-probe validation checks dtype, shape, finiteness, helper/raw hashes, and aliases. The cohort lock and permit validator restrict anchors to V on the five recovery seeds; confirm_anchors requires exactly those five records, compares old/new metrics and actor identity, and emits the counterfactual permit only after the all-five token validates. However, confirm_anchors accepts caller-supplied metric/deployment records and does not itself attest that each record came from an adapter call. Each adapter invocation calls the scorer without alias caching, but the API has no global call counter or 15-package cap.",
+      "requirements": [
+        "The execution runner must pass the five actual adapter-returned V score records to confirm_anchors, and record five calls before opening UG/UR scoring; fixture or reused D records are synthetic evidence only.",
+        "Count every actual complete scoring invocation, including candidate-byte aliases if rescored, and enforce the 15-package maximum in the runner/resource ledger."
+      ],
+      "evidence": [
+        {
+          "path": "src/online_rl/retention_acceptance_diagnostic.py",
+          "lines": "694-778, 884-967",
+          "sha256": "f981a3d5e69a551e8eb5bd5062f76558a36a39189b1a5c193df5783a6e637318"
+        },
+        {
+          "path": "src/online_rl/retention_acceptance_replay.py",
+          "lines": "747-779, 782-908, 911-970, 1050-1095, 1106-1159",
+          "sha256": "2ab24ed4a9eb05d131785692954d3ff8c71c116427805013011cae0d4035358e"
+        },
+        {
+          "path": "tests/test_retention_acceptance_diagnostic.py",
+          "lines": "414-431, 468-550",
+          "sha256": "d9a4167a85ab98a90b701e1a005f1687a87bf7d16cd605476651001110326f44"
+        },
+        {
+          "path": "research/appendix/H036/delivery_acceptance_v1/verification.json",
+          "lines": "5-10, 27, 59-65",
+          "sha256": "2c909375c113679cc4a5123d300f47eac9419c291ad9eeaaa5c28ab910c60a09"
+        },
+        {
+          "path": "research/appendix/H036/METHOD_ACCEPTANCE_V1.md",
+          "lines": "58-70",
+          "sha256": "da69e8c30c31b22776e3865d3ccef8cbcb6fbdfe1e4ae8c7d6df0c66adba3082"
+        }
+      ]
+    }
+  ],
+  "review_boundary": "Local frozen source and already-recorded synthetic results only. This review does not establish real-trajectory reproduction, real-score equivalence, remote readiness, or remote metering."
+}

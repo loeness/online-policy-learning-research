@@ -1,0 +1,30 @@
+{
+  "format": "e165_coordinator_checks_preparation_v1",
+  "directive": "E165_CHECKS_PREPARE001_20261028_APPROVED",
+  "experiment_id": "E165",
+  "hypothesis_id": "H036",
+  "owner": "消融实验（1）",
+  "authority": "User requested E165 validation and continuation, with handoff information relayed manually. Coordinator adopts the previously documented bounded budget and authorizes only this preparation scope.",
+  "scientific_source_identity_sha256": "4e96df16ca207ea961bafaed6b92dfbee07d7cdd55dc7cf986b5fb2b48189f0b",
+  "scientific_manifest_sha256": "64f9f5ef31d7e3157ddaa7c59fa21e4acb901002c4046566dfa43e6e314d4ec3",
+  "checks_transfer_manifest_sha256": "1076fadb7ac7503d5fc0dcc21be49c57ee17cce83fb86d989bab677507d58e2b",
+  "checks_frozen_candidate_sha256": "5f4741444ee0d2ee326c93c35d95680c91020fdc08e3d79b8adbe0e118f19d77",
+  "transfer_files": 42,
+  "transfer_bytes": 1202701,
+  "remote_account": "robot",
+  "project_root": "/data/robot/p001",
+  "new_work_root": "/data/robot/p001/e165",
+  "round_limits": {"cpu_seconds": 120, "cumulative_controlled_wall_seconds": 240, "new_artifact_cache_temp_bytes": 134217728, "aggregate_project_bytes": 100000000000, "gpu_devices": 0, "environment_interactions": 0, "workers": 1, "numeric_threads_per_worker": 1},
+  "checks_limits": {"cpu_seconds": 20, "wall_seconds": 60, "footer_cpu_seconds": 5, "footer_wall_seconds": 10, "tests": 9},
+  "resource_authorized": true,
+  "execution_authorized": false,
+  "permitted_now": [
+    "As robot, validate authorized project paths and reject symlink escapes; measure the allocated project's aggregate usage and destination free bytes/inodes, ensuring the entire 128 MiB E165 allowance fits the 100 GB project cap and available storage.",
+    "Transfer only the 42 exact files in the accepted checks_transfer_manifest, validate destination lengths and SHA-256, and preserve all pre-existing evidence.",
+    "Bind the measured project baseline and admission time into a new CHECKS spec and return its exact SHA, transfer receipt, capacity evidence and readiness for coordinator review."
+  ],
+  "metadata_scope": "The transferred anchor manifest includes authorized historical project file paths and hashes as provenance metadata. It does not authorize reading or transferring the referenced historical model payloads during CHECKS preparation.",
+  "prohibited_until_separate_directive": ["Launching any supervisor, runtime precheck, test, model operation, fit, score, audit or environment interaction", "Reading outside the authorized project and exact input paths", "Other accounts, sudo, system/shared-environment changes, credential extraction or transmission", "Automatic retries, other phases, additional candidates or new seeds"],
+  "credentials_and_instructions": "Never include credentials or machine-local Agent.md/AGENTS.md in transferred files, manifests or logs.",
+  "next": "User manually relays readiness to coordinator; coordinator verifies the actual admitted spec and issues a separate exact CHECKS execution directive if all conditions pass."
+}

@@ -1,0 +1,82 @@
+{
+  "audit_policy": {
+    "audit_reexecuted_by_this_patch": false,
+    "fit_or_score_calls_for_correction": 0,
+    "frozen_verifier_preserved": true,
+    "missing_or_conflicting_evidence_remains_fail_closed": true,
+    "raw_result_changed": false,
+    "scientific_or_execution_source_changed": false
+  },
+  "corrected_a002_verifier_sha256": "b1622e02e340350dcb9591ff56079b01bfb466be952feba0001852c58693891b",
+  "corrections": [
+    {
+      "change": "include the separately validated foundation descriptor in the independent reference set",
+      "effect": "reference inventory now contains the full 308 descriptors",
+      "reason": "the frozen source/spec/receipt contain 308 bindings; prior a002 audit enumerated 307",
+      "source_of_truth": "run_spec and worker reference receipt as previously accepted by coordinator"
+    },
+    {
+      "change": "map wait4 outcomes by fixed child purpose",
+      "effect": "still requires the exact fixed result for each of exactly three owned children",
+      "expected_outcomes": {
+        "cpu_descendant_accounting_precheck": {
+          "exit_code": 0,
+          "wait_status": 0
+        },
+        "owned_process_group_stop_precheck": {
+          "exit_code": -15,
+          "wait_status": 15
+        },
+        "scientific_worker": {
+          "exit_code": 0,
+          "wait_status": 0
+        }
+      },
+      "observed_raw_wait4": [
+        {
+          "exit_code": 0,
+          "purpose": "cpu_descendant_accounting_precheck",
+          "wait_status": 0
+        },
+        {
+          "exit_code": -15,
+          "purpose": "owned_process_group_stop_precheck",
+          "wait_status": 15
+        },
+        {
+          "exit_code": 0,
+          "purpose": "scientific_worker",
+          "wait_status": 0
+        }
+      ],
+      "reason": "supervisor deliberately sends SIGTERM to the owned stop-precheck and requires its exit code to equal -signal.SIGTERM; wait4 records raw wait status and derived exit code"
+    },
+    {
+      "change": "remove worker cohort hash comparison against supervisor state",
+      "effect": "retains the existing worker-to-cohort identity check without requiring a nonexistent supervisor field",
+      "reason": "frozen supervisor state.json does not emit cohort_lock_sha256; runner state_worker.json does, and worker record validation compares it with cohort.json"
+    },
+    {
+      "change": "cross-check launcher parent and supervisor PIDs against campaign_started outer meter fields",
+      "effect": "raw terminal, launcher descriptors, startup proof, outer meter PIDs, and state return codes remain cross-bound",
+      "reason": "the fixed meter schema emits parent_pid and supervisor_pid at campaign_started in addition to startup_proof"
+    }
+  ],
+  "frozen_verifier_sha256": "0e174f3b57d2dbf894bc8e7f4dc36b55aeb336f730998439b64ccca2a014ac2f",
+  "kind": "OFFLINE_AUDIT_MAPPING_CORRECTION_PENDING_COORDINATOR_REAUDIT",
+  "original_audit": "../a001/audit_initial.json",
+  "preserved_intermediate_audit": "audit_intermediate001.json",
+  "preserved_intermediate_audit_sha256": "0c20996f061ec9eedad0f7e7732ade9e4cc3c7bc74a195d7ca0322ccb1dc52cb",
+  "preserved_intermediate_status": "INVALID",
+  "previous_a002_verifier_sha256": "9bada3fea0768b670bdcdad7a41d9b139dbd58c5fb64ea36beb3953b05e7b011",
+  "runtime_evidence_observation": {
+    "environment_interactions": 0,
+    "final_live_owned_handles": [],
+    "gpu_devices": 0,
+    "observed_supervisor_cpu_seconds": 7.929754999999999,
+    "observed_supervisor_wall_seconds": 9.350686746649444,
+    "state_status": "COMPLETE",
+    "supervisor_return_code": 0,
+    "worker_return_code": 0
+  }
+}

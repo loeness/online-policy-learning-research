@@ -1,0 +1,62 @@
+{
+  "state": "COMPLETED",
+  "pid": 1218773,
+  "source": "/data/robot/p001/s002",
+  "run": "/data/robot/p001/e161/a002",
+  "started_utc": "2026-10-20T17:36:52Z",
+  "limits": {
+    "cpu_seconds": 2500.0,
+    "wall_seconds": 1947.0,
+    "environment_interactions": 2500000
+  },
+  "phases": [
+    {
+      "name": "audit",
+      "command": [
+        "/data/robot/p001/env/bin/python",
+        "scripts/audit_retention_candidate.py",
+        "--root",
+        "/data/robot/p001/e161/run001/producer",
+        "--report",
+        "/data/robot/p001/e161/run001/retention_candidate_audit/main002.json"
+      ],
+      "cwd": "/data/robot/p001/s002",
+      "pid": 1218816,
+      "process_group": 1218816,
+      "state": "COMPLETED",
+      "returncode": 0,
+      "wall_seconds": 68.06964113656431,
+      "cpu_seconds": 63.161172
+    },
+    {
+      "name": "analysis",
+      "command": [
+        "/data/robot/p001/env/bin/python",
+        "scripts/report_retention_candidate.py",
+        "--input",
+        "/data/robot/p001/e161/run001/producer",
+        "--output",
+        "/data/robot/p001/e161/run001/analysis001"
+      ],
+      "cwd": "/data/robot/p001/s002",
+      "pid": 1219049,
+      "process_group": 1219049,
+      "state": "COMPLETED",
+      "returncode": 0,
+      "wall_seconds": 18.01835258770734,
+      "cpu_seconds": 16.362445
+    }
+  ],
+  "active_job": null,
+  "cpu_seconds_observed": 81.26527,
+  "wall_seconds": 92.02883587125689,
+  "project_job_handles": [
+    {
+      "pid": 1219049,
+      "create_time": 1792517885.48,
+      "cpu_seconds": 15.61
+    }
+  ],
+  "cpu_seconds": 82.018105,
+  "finished_utc": "2026-10-20T17:38:24Z"
+}

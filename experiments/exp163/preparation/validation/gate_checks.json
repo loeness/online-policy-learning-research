@@ -1,0 +1,173 @@
+{
+  "check_count": 9,
+  "checks": [
+    {
+      "actual": {
+        "new_condition": true,
+        "old_condition": true,
+        "passed": true,
+        "status": "MECHANISM_SCREEN_PASSED_EXPLORATORY"
+      },
+      "expected": {
+        "new_condition": true,
+        "old_condition": true,
+        "passed": true,
+        "status": "MECHANISM_SCREEN_PASSED_EXPLORATORY"
+      },
+      "name": "inclusive_25_percent_old_reduction_and_50_percent_new_gain",
+      "result": "PASS"
+    },
+    {
+      "actual": {
+        "condition": false,
+        "failed": true,
+        "guard_failure_seeds": [
+          26201
+        ],
+        "pass_count": 15
+      },
+      "expected": {
+        "condition": false,
+        "failed": true,
+        "guard_failure_seeds": [
+          26201
+        ],
+        "pass_count": 15
+      },
+      "name": "old_denominator_guard_is_strict",
+      "result": "PASS"
+    },
+    {
+      "actual": {
+        "condition": false,
+        "failed": true,
+        "gain": 1e-10,
+        "guard_failure_seeds": [
+          26201
+        ],
+        "pass_count": 15
+      },
+      "expected": {
+        "condition": false,
+        "failed": true,
+        "gain": 1e-10,
+        "guard_failure_seeds": [
+          26201
+        ],
+        "pass_count": 15
+      },
+      "name": "new_gain_denominator_guard_is_strict",
+      "result": "PASS"
+    },
+    {
+      "actual": {
+        "at_11": [
+          "NO_ADVANCEMENT",
+          11
+        ],
+        "at_12": [
+          "MECHANISM_SCREEN_PASSED_EXPLORATORY",
+          12
+        ]
+      },
+      "expected": {
+        "at_11": [
+          "NO_ADVANCEMENT",
+          11
+        ],
+        "at_12": [
+          "MECHANISM_SCREEN_PASSED_EXPLORATORY",
+          12
+        ]
+      },
+      "name": "12_of_16_threshold_is_inclusive_at_12",
+      "result": "PASS"
+    },
+    {
+      "actual": {
+        "C_fallback_seeds": [
+          26201,
+          26218
+        ],
+        "D_fallback_seeds": [
+          26202,
+          26218
+        ],
+        "pass_count": 12,
+        "scored_count": 16
+      },
+      "expected": {
+        "C_fallback_seeds": [
+          26201,
+          26218
+        ],
+        "D_fallback_seeds": [
+          26202,
+          26218
+        ],
+        "pass_count": 12,
+        "scored_count": 16
+      },
+      "name": "fallback_rows_are_carried_and_scored_without_filtering",
+      "result": "PASS"
+    },
+    {
+      "actual": {
+        "pass_count": null,
+        "scored_count": 0,
+        "status": "INCOMPLETE"
+      },
+      "expected": {
+        "pass_count": null,
+        "scored_count": 0,
+        "status": "INCOMPLETE"
+      },
+      "name": "missing_seed_invalidates_whole_batch_as_incomplete",
+      "result": "PASS"
+    },
+    {
+      "actual": {
+        "scored_count": 0,
+        "status": "INCOMPLETE"
+      },
+      "expected": {
+        "scored_count": 0,
+        "status": "INCOMPLETE"
+      },
+      "name": "missing_scalar_invalidates_whole_batch_as_incomplete",
+      "result": "PASS"
+    },
+    {
+      "actual": {
+        "scored_count": 0,
+        "status": "INVALID"
+      },
+      "expected": {
+        "scored_count": 0,
+        "status": "INVALID"
+      },
+      "name": "duplicate_seed_invalidates_whole_batch",
+      "result": "PASS"
+    },
+    {
+      "actual": {
+        "scored_count": 0,
+        "status": "INVALID"
+      },
+      "expected": {
+        "scored_count": 0,
+        "status": "INVALID"
+      },
+      "name": "nonfinite_scalar_invalidates_whole_batch",
+      "result": "PASS"
+    }
+  ],
+  "environment_interactions": 0,
+  "execution_authorized": false,
+  "overall": "PASS",
+  "real_fits": 0,
+  "schema": "E163_INTERNAL_SCALAR_GATE_V1",
+  "schema_status": "PROVISIONAL_INTERNAL_VALIDATION_SCHEMA_PENDING_MAPPING_TO_FUTURE_FROZEN_SCIENTIFIC_API",
+  "scope": "software preparation only; synthetic scalar fixtures only",
+  "suite": "E163 scalar gate synthetic arithmetic checks"
+}

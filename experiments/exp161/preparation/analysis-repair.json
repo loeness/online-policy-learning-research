@@ -1,0 +1,31 @@
+{
+  "format": "e161_analysis_repair_v1",
+  "kind": "technical_portability_correction_not_new_experiment",
+  "producer_unchanged": true,
+  "new_environment_interactions": 0,
+  "original_bundle_sha256": "90f474cf993044649a409c395a706ccb9ad293121bf8810a5cf26bb1497f589e",
+  "original_audit_counts": {
+    "artifact_missing": 2368,
+    "source_copy_missing": 32,
+    "observer_prefix_path": 16
+  },
+  "reason": "Windows-only separator conversion in auditor; all recorded audit failures are path resolution errors. Retain initial audit; reread identical producer bytes. No learner/candidate/statistical rule changes.",
+  "changes": [
+    {
+      "path": "scripts/audit_retention_candidate.py",
+      "before_sha256": "c5fee5c60e3460ef754c57aa327ffe78a26d7aea2153f356179957c253cb85cd",
+      "after_sha256": "50d5025d116ad71647f54dc98928e0aa5758ea8fabba202691fb501060b42ceb"
+    },
+    {
+      "path": "scripts/launch_e161.py",
+      "before_sha256": "916e7ceacaa9fc12e203de4b9c62d80ed4fd5873d9da6a80911370d7e245ce0f",
+      "after_sha256": "7c87c349c2c977be7f4265726f51acf9d82b5649d25946b047499b129582c616"
+    },
+    {
+      "path": "tests/test_e161_analysis.py",
+      "before_sha256": "e16fc12a735b226818df1da0ec22db9b6045caeb26c0e66ecc4304ac3076778a",
+      "after_sha256": "ae560faed64f899524a07eed682b85a6c9b5048ae955c354a30495ec2a886433"
+    }
+  ],
+  "checks": "21 passed, 1 Windows symlink test skipped; Linux-specific helper checks planned before audit."
+}

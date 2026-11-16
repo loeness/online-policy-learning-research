@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "hypothesis_id": "H014",
+  "experiment_id": "E081",
+  "run_id": "run001",
+  "operational_status": "FAILED",
+  "producer_path": "outputs/write_decision_validation",
+  "producer_entrypoints": [
+    "scripts/run_write_decision.py"
+  ],
+  "unit_of_record": "Historical failed cohort wrapper; its 16 seed-condition cells are not asserted to be 16 separate CLI invocations.",
+  "component_count": 16,
+  "completed_component_count": 9,
+  "component_paths": [
+    "outputs/write_decision_validation/seed_859/dynamics_shared",
+    "outputs/write_decision_validation/seed_859/independent_fast",
+    "outputs/write_decision_validation/seed_859/local_promote",
+    "outputs/write_decision_validation/seed_859/projected_gate",
+    "outputs/write_decision_validation/seed_859/reward_shared",
+    "outputs/write_decision_validation/seed_859/trial_gate",
+    "outputs/write_decision_validation/seed_859/trial_gate_relaxed",
+    "outputs/write_decision_validation/seed_859/trial_rollback",
+    "outputs/write_decision_validation/seed_863/dynamics_shared",
+    "outputs/write_decision_validation/seed_863/independent_fast",
+    "outputs/write_decision_validation/seed_863/local_promote",
+    "outputs/write_decision_validation/seed_863/projected_gate",
+    "outputs/write_decision_validation/seed_863/reward_shared",
+    "outputs/write_decision_validation/seed_863/trial_gate",
+    "outputs/write_decision_validation/seed_863/trial_gate_relaxed",
+    "outputs/write_decision_validation/seed_863/trial_rollback"
+  ],
+  "configuration_and_protocol_paths": [
+    "configs/write_decision.json",
+    "outputs/write_decision_validation/frozen_config.json",
+    "docs/WRITE_DECISION_PROTOCOL.md"
+  ],
+  "failure_record_path": "outputs/write_decision_validation/FAILED_COHORT.json",
+  "source_snapshot_manifest_paths": [
+    "outputs/write_decision_validation/seed_863/trial_rollback/source_snapshot/manifest.json"
+  ],
+  "execution_git_commit": null,
+  "recorded_execution_commit_short": "583a25f7",
+  "execution_commit_evidence_path": "outputs/write_decision_validation/FAILED_COHORT.json",
+  "execution_command": null,
+  "provenance_gaps": [
+    "Failure marker contains only a short source commit; no independently established full execution SHA or exact CLI. CPU and wall-clock cohort totals are unknown."
+  ],
+  "actual_cost": {
+    "total_interactions": 392671,
+    "training": 267264,
+    "probe": 22016,
+    "evaluation": 103391
+  },
+  "do_not_pool_with_repaired_cohort": true,
+  "input_data_paths": [
+    "data/pretrain_source.npz",
+    "data/foundation.pt"
+  ],
+  "input_data_hash_reference": "Per-file input hashes recorded in the linked source snapshot manifest and E081 README.",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

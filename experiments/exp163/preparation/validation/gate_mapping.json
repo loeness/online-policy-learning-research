@@ -1,0 +1,20 @@
+{
+  "schema": "E163_GATE_MAPPING_V1",
+  "source_identity_sha256": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea",
+  "scientific_score_format": "h036_stage0_score_v1",
+  "binding": "wildcard",
+  "C_lambda": 0,
+  "D_lambda": 1,
+  "fields": {
+    "K_old_C": "score_C.metrics.K_old == score_C.metrics.encoded_fresh.old_holdout",
+    "K_old_D": "score_D.metrics.K_old == score_D.metrics.encoded_fresh.old_holdout",
+    "K_new_W0": "score_C.metrics.K_new_W0 == score_D.metrics.K_new_W0 == metrics.W0_fresh.new_holdout",
+    "K_new_C": "score_C.metrics.K_new == score_C.metrics.encoded_fresh.new_holdout",
+    "K_new_D": "score_D.metrics.K_new == score_D.metrics.encoded_fresh.new_holdout",
+    "fallback_flags.C": "fit_C.diagnostics.fallback_applied",
+    "fallback_flags.D": "fit_D.diagnostics.fallback_applied"
+  },
+  "G_new": "K_new_W0 minus arm K_new; equality to frozen metrics.G_new is checked by runner",
+  "additional_preserved_diagnostics": ["returned_is_C0", "fallback_reason", "termination_reason", "closure_records", "computation_counts"],
+  "scientific_semantics": "Complete original actor codec bytes decoded, fresh local zero, frozen teachers and prescribed holdout. Runner uses no alternate loss, teacher or codec."
+}

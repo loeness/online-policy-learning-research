@@ -1,0 +1,561 @@
+{
+  "git_commit": "81de4afd2d703d17c3953facb78fd04b19cb64a9",
+  "method_source_identity": "eed12dc721e9d3a56e6d079cd51ecd4bb29f87c884f362f044d97ada8ba0351c",
+  "admission_sha256": "20294e8b283a6b90499e75211f31dbb11d9603e641e73ccc77c9e54412fe3213",
+  "execution_freeze": "../../preparation/execution_freeze.json",
+  "execution": {
+    "state": "COMPLETED",
+    "experiment_id": "E162",
+    "supervisor_pid": 30232,
+    "started_utc": "2026-10-21T11:43:02.774564+00:00",
+    "phases": [
+      {
+        "name": "features",
+        "pid": 33184,
+        "command": [
+          "D:\\MovedFromC\\ChatGPT\\online\\.venv\\Scripts\\python.exe",
+          "-B",
+          "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\scripts\\h033_diagnostic.py",
+          "features",
+          "--producer",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer",
+          "--output",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\features.json"
+        ],
+        "cwd": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot",
+        "cpu_seconds": 0.0,
+        "wall_seconds": 8.295443300001352,
+        "returncode": 0
+      },
+      {
+        "name": "outcomes",
+        "pid": 35340,
+        "command": [
+          "D:\\MovedFromC\\ChatGPT\\online\\.venv\\Scripts\\python.exe",
+          "-B",
+          "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\scripts\\h033_diagnostic.py",
+          "outcomes",
+          "--analysis",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\analyses\\analysis001\\analysis.json",
+          "--output",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\outcomes.json"
+        ],
+        "cwd": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot",
+        "cpu_seconds": 0.0,
+        "wall_seconds": 1.935105399999884,
+        "returncode": 0
+      },
+      {
+        "name": "crossfit",
+        "pid": 33956,
+        "command": [
+          "D:\\MovedFromC\\ChatGPT\\online\\.venv\\Scripts\\python.exe",
+          "-B",
+          "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\scripts\\h033_diagnostic.py",
+          "crossfit",
+          "--features",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\features.json",
+          "--outcomes",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\outcomes.json",
+          "--output",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\crossfit.json"
+        ],
+        "cwd": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot",
+        "cpu_seconds": 0.03125,
+        "wall_seconds": 0.24194250000073225,
+        "returncode": 0
+      },
+      {
+        "name": "statistics",
+        "pid": 34016,
+        "command": [
+          "D:\\MovedFromC\\ChatGPT\\online\\.venv\\Scripts\\python.exe",
+          "-B",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\preparation\\statistics.py",
+          "--features",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\features.json",
+          "--outcomes",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\outcomes.json",
+          "--crossfit",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\crossfit.json",
+          "--output",
+          "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\analyses\\analysis001"
+        ],
+        "cwd": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot",
+        "cpu_seconds": 0.0,
+        "wall_seconds": 0.2991373000004387,
+        "returncode": 0
+      }
+    ],
+    "active_job": null,
+    "environment_interactions": 0,
+    "limits": {
+      "environment_interactions": 0,
+      "cpu_seconds": 300,
+      "campaign_wall_seconds": 600,
+      "workers": 1,
+      "torch_threads_per_worker": 1,
+      "gpu_devices": 0,
+      "new_artifact_cache_temp_bytes": 268435456,
+      "remote_access": false
+    },
+    "environment_overrides": {
+      "TEMP": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\tmp",
+      "TMP": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\tmp",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "TMPDIR": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\tmp",
+      "MPLCONFIGDIR": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\cache\\mpl",
+      "XDG_CACHE_HOME": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\cache\\xdg",
+      "TORCH_HOME": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\cache\\torch"
+    },
+    "home_unchanged": true,
+    "cpu_seconds": 1.296875,
+    "wall_seconds": 10.898279500001081,
+    "artifact_cache_temp_bytes": 481290,
+    "finished_utc": "2026-10-21T11:43:13.676917+00:00"
+  },
+  "inputs_and_sources": [
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\configs\\h033_diagnostic_v1.json",
+      "sha256": "d15c0ba858a96b48598e1734a973ec31404b904bd5057c65ee170192d01852db",
+      "bytes": 479,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\requirements-lock.txt",
+      "sha256": "89c4076b219734a0048c6c9a3d292be8aa42bb6325859e57e7b139ac4ca475ef",
+      "bytes": 982,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\requirements.txt",
+      "sha256": "e81a8365718ac84600ccb49e27aae4c0150a125157fca7529d46250e205e20a2",
+      "bytes": 437,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\research\\appendix\\H033\\METHOD_V1.md",
+      "sha256": "c4f3c691a39e3af1a39b85142419bff11ba6e52221cf34398a3366e683e54e88",
+      "bytes": 9284,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\scripts\\h033_diagnostic.py",
+      "sha256": "676fc23d540d3b0386ea197980e73827a71a0006d20c59213d3858684bbadd0b",
+      "bytes": 4123,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\c1_policy.py",
+      "sha256": "371fc881e960c63c01e0ae71c27b7fa22462e1b4985f8efd8c6862388ab2fb14",
+      "bytes": 25602,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\c1_tensor_controls.py",
+      "sha256": "727f1b4fa80c76b7d516ec6a4d95255ec58566b0c487340f6c9855ddc1accfae",
+      "bytes": 16851,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\compression.py",
+      "sha256": "bc62a863b5ddafeb8deb39b2c1a4b4b0aaf98313d60083249fc4bf9572944a7a",
+      "bytes": 31893,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\h033_diagnostic.py",
+      "sha256": "b4d2457df559b9cecf10fa385c8c3879038b8aa1aca04076f4f77a11017e5c67",
+      "bytes": 22154,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\h033_inputs.py",
+      "sha256": "4a2939c0616a0f522048553331f45679efb8c1315ad7f228aef85beee80e71cd",
+      "bytes": 30301,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\policy.py",
+      "sha256": "edf1d024abdfa00dfea262255a358e7ce5dfb92c1e003b2642714a0a56067c1d",
+      "bytes": 7288,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\retention_behavioral_candidate.py",
+      "sha256": "5c57f2913e33e8fd7553550c0c98eeff2a000c4ce67193d5d7535e842daf1d71",
+      "bytes": 25494,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\shared_write_policy.py",
+      "sha256": "8b241f7760b785e990c72335b73fb489bb43b8f67e75ac92e80418fabc47d3ee",
+      "bytes": 9850,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\storage_decision.py",
+      "sha256": "d732b97e7375e75d467bf019e74e7135ef56e054165857c64d83b3a3a1dd7068",
+      "bytes": 19039,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\src\\online_rl\\write_decision_policy.py",
+      "sha256": "84c9e9653cf8e6135154e4a4e1f851aa35fc8ceebd6eb0336af2ace31239654f",
+      "bytes": 15074,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\tests\\test_h033_cli.py",
+      "sha256": "d7ca42574082133a6be7fb2da69e443b15c3d0309946aac706f35ff3165dfced",
+      "bytes": 1502,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\tests\\test_h033_diagnostic.py",
+      "sha256": "d6be0e1738ebcd6dc8d338f4a10e93d8dacc39ab6441beb22f25bcefb77a00e2",
+      "bytes": 11329,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\tests\\test_h033_inputs.py",
+      "sha256": "020eec414c591838ac57fba970ec0789a43afe0330ad1fc561a15062bf6edad7",
+      "bytes": 15396,
+      "role": "frozen_source"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26201_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "307bb651efa13cdaf2a303dd369ba2de328d39dcaf2ac10b46294afdd84cade3",
+      "bytes": 176565,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26201_dynamics_late\\prefix\\actor.bin",
+      "sha256": "f46d5f1787b4a54f70d4cf12839385fb56f72edc3ecd53be00cc532b5fa5113b",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26201_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "975199b27bf137e49ad2cef7516972fb7de0e33e71af1e130fdec80c3febfd0b",
+      "bytes": 2116,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26202_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "661cf57cf2fdabb7c2611a11a61c8aeaf977532b077aec078d9897cbf00e5618",
+      "bytes": 176245,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26202_dynamics_late\\prefix\\actor.bin",
+      "sha256": "ef250d5f006c442fb0649757475f0198a1bf138fcb18122eedd918e212feae9e",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26202_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "f76ad26b8d5bff23c9179e40cfb4f3948e3727afa430d53102f1c3fd640ff8ed",
+      "bytes": 2010,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26203_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "ce94a7d1d75ad2a64967851280412568b677a5aa2f7be7bb6a0602686e629e9e",
+      "bytes": 176821,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26203_dynamics_late\\prefix\\actor.bin",
+      "sha256": "c7b501bdb4a24ab7fef65da07a53a7d89bb02a3f40c53961e8a69299496fefdd",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26203_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "6b43f22809953bb432cac6a292099eee481ed64e9415f4af7188eaa177bae5f0",
+      "bytes": 2084,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26204_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "2d381aca922eb684e29b0dc2abb9f1ed7bd88cc8b27234faee454e19431dc069",
+      "bytes": 176821,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26204_dynamics_late\\prefix\\actor.bin",
+      "sha256": "1cdfe49830ebaec5de3d73b3155d7dc18739c496d35a7e3b1eb5b326abc42c0d",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26204_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "dbd3c90be8b78c8f9aaff17f41a3d6ce6a464852c00da699038dc96f5d1085ec",
+      "bytes": 2116,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26205_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "032338132b21232ad30483f657229347aabd12200dc126c72b32baef7bc3b8b3",
+      "bytes": 176629,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26205_dynamics_late\\prefix\\actor.bin",
+      "sha256": "e120707aba445ed1f970aae5ecc52142d3d1544f957b3357bbdf5fefc84cd99c",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26205_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "f12a603ae59676c47308822d30039c136326e94c99365219e241522141924222",
+      "bytes": 2046,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26206_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "7ee41486c7edce688803f7e0843461591a1ccbeff14caa0dffa6efd6599e6a78",
+      "bytes": 176501,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26206_dynamics_late\\prefix\\actor.bin",
+      "sha256": "acd70284738b21bc9642f1a3de3354b9c4c888f98e780c13bee4bd2df1623921",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26206_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "9fe11b4bcda920929e1abef0dacc3b55d3e0d4b57af00d6237c121881ed866f7",
+      "bytes": 2087,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26207_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "f532ee5dc03fc5a55864a92b5a87e7dcac97d15554570d27b5e866f022021809",
+      "bytes": 177269,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26207_dynamics_late\\prefix\\actor.bin",
+      "sha256": "a04ac9e2a98176a5b7618071101123cc38c560b2c53b04ad4e247cd6725c4161",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26207_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "7b1453403456317d6a4508349cec450714a403b00eede7b09742572ab585b6de",
+      "bytes": 1983,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26208_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "8ed8594a277594a0954c01153bbae7cad43c350ffd786de53469999ee4d84906",
+      "bytes": 176565,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26208_dynamics_late\\prefix\\actor.bin",
+      "sha256": "b07cf2f90fdfee02c062d30de0d1d5ce625c24c694b4992497fdba7f6e1e4504",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26208_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "b3f4ef28867fe2e738052629bcc6b3b3f88ad842ed119f991c5c4bf394fa0b54",
+      "bytes": 2011,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26209_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "e47c95facdf1bdeffab61641317523941a264f08aac6cf46b2a880f961c6d8c8",
+      "bytes": 176757,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26209_dynamics_late\\prefix\\actor.bin",
+      "sha256": "d06ec199bfc59050af406800c208336560441e5895212bc9a4103f4bea08c2e5",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26209_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "60b5c382850f980fdafaf2b4202e83f1b3974b3225e153f8d60a1308a89ff094",
+      "bytes": 2062,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26210_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "676ac6227e3b6f71ce5c9a516bdf797e6db8b654c165efedd689e344a3def84d",
+      "bytes": 176309,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26210_dynamics_late\\prefix\\actor.bin",
+      "sha256": "c663a06f46843890f6379a15fecffcd3ca23b84837481b9eb6ae163e7731a468",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26210_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "10d74069606e9837a09a014ffa19d1a8a68769872078a09484fa3ff1f0852969",
+      "bytes": 2006,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26211_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "d85f5a1d54862368fce4d3746f585cd8883d24c377fed3311a56051d89083052",
+      "bytes": 177013,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26211_dynamics_late\\prefix\\actor.bin",
+      "sha256": "e898007adc8ecd18101506e67f4d68fad76d46a9f214700287183221035b67ec",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26211_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "750811846c3c6733ceb872b923c488c04c119e7c62abe7836064bdb769076c8c",
+      "bytes": 2025,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26212_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "096bff5b66571500f589b3405c42dc8ebc07e2924ed0599b25e648632c7e87da",
+      "bytes": 176757,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26212_dynamics_late\\prefix\\actor.bin",
+      "sha256": "cb9028267e908025fb6af02dfb9958e961adc4d0cd7cfd3f2c2b1e49b4af2e58",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26212_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "02d1504c7285bfd24d30d6aef8830ecb16ed52d9926c6b86dc90cafb5c72dc1a",
+      "bytes": 2127,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26213_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "a6b14bbede1149f97d0ff0ae37f8b9bfb92bf184a37e2df4809bba22dfe40f26",
+      "bytes": 177397,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26213_dynamics_late\\prefix\\actor.bin",
+      "sha256": "340477f5302ce9113df925f69123f3ef14c6bf3cfc41ecf3bca5cdd70bb51678",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26213_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "13aaf1b499002ea3dbef0feca23ec4d225845abf9cb9d3c8d362d90bab8339df",
+      "bytes": 2039,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26215_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "be7d7092fdcf7c845c5ff9fbd026afd50b43863db67fcfaf0f867602763f3178",
+      "bytes": 176629,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26215_dynamics_late\\prefix\\actor.bin",
+      "sha256": "0b09df7601ef4cdf8bd1027ab21b40b7291295d22ce9d506fae46056f30c2e50",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26215_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "cfb009009c1874b3a716981e03755c5329dcaadc93ab451b205b6e39b3e1e0c1",
+      "bytes": 2012,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26216_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "6a1b6a8d3ce772cfc0bf8cc92b9869bed9f8a10ef8ab96347181fc901ad27fd7",
+      "bytes": 176309,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26216_dynamics_late\\prefix\\actor.bin",
+      "sha256": "40dfeae84da8ae9e68d12b5969ab10ae17023bf67f30075e8e6cd8da824e80e2",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26216_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "5ec94667b75d6d668a31da5e7099ca95c129c5a61c019e05988a402e382d5eea",
+      "bytes": 1991,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26218_dynamics_late\\prefix\\checkpoint.pt",
+      "sha256": "ebc4a9275a66c1419a67468791f2d99b609a252a03c93e8bc2e2c42c5b5658ae",
+      "bytes": 177077,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26218_dynamics_late\\prefix\\actor.bin",
+      "sha256": "bffc638c65c40f457b54491ff877d079a41636826b40842a50a15c9a83ef5371",
+      "bytes": 89,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\cases\\s26218_dynamics_late\\prefix\\evidence.npz",
+      "sha256": "bea2454d5cb8ed526afd136c066fa93d2c2ee6a3ae5d6dcc231bdf4f5ca0b57c",
+      "bytes": 2092,
+      "role": "pre_action"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\analyses\\analysis001\\analysis.json",
+      "sha256": "813561c90e3219bc1463133c67aead68103849b465c7a72bbf7c20fc798bbaf8",
+      "bytes": 15866058,
+      "role": "outcome_labels"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\configs\\e161.json",
+      "sha256": "26ea556797ab6e2a42d4e356ba7fd32a2aa1aeb1b716ba3d6f6c0a0a5f1b4476",
+      "bytes": 3671,
+      "role": "historical_config"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\source_snapshot\\scripts\\run_retention_candidate.py",
+      "sha256": "9b1e6c0123022943010d9a1e42c237aea095a71bc82fbfa480e7dbd7a349670f",
+      "bytes": 108896,
+      "role": "historical_action_semantics"
+    },
+    {
+      "path": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer\\source_snapshot\\src\\online_rl\\storage_decision.py",
+      "sha256": "d732b97e7375e75d467bf019e74e7135ef56e054165857c64d83b3a3a1dd7068",
+      "bytes": 19039,
+      "role": "historical_action_semantics"
+    }
+  ],
+  "data_paths": [
+    "features.json",
+    "outcomes.json",
+    "crossfit.json"
+  ],
+  "analysis_paths": [
+    "../../analyses/analysis001/metrics.json",
+    "../../analyses/analysis001/report.md"
+  ],
+  "figure_paths": {
+    "state": "NOT_APPLICABLE",
+    "reason": "full seed and fold tables suffice"
+  }
+}

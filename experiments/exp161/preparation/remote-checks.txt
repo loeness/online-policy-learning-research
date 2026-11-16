@@ -1,0 +1,634 @@
+....E........EEE                                                         [100%]
+==================================== ERRORS ====================================
+______ ERROR at setup of test_provisional_seed_config_cannot_start_a_run _______
+
+cls = <class '_pytest.runner.CallInfo'>
+func = <function call_and_report.<locals>.<lambda> at 0x7a4b1133f600>
+when = 'setup'
+reraise = (<class '_pytest.outcomes.Exit'>, <class 'KeyboardInterrupt'>)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -> CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        instant = timing.Instant()
+        try:
+>           result: TResult | None = func()
+                                     ^^^^^^
+
+../env/lib/python3.12/site-packages/_pytest/runner.py:361: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../env/lib/python3.12/site-packages/_pytest/runner.py:250: in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/logging.py:858: in pytest_runtest_setup
+    yield
+../env/lib/python3.12/site-packages/_pytest/capture.py:895: in pytest_runtest_setup
+    return (yield)
+            ^^^^^
+../env/lib/python3.12/site-packages/_pytest/runner.py:170: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+../env/lib/python3.12/site-packages/_pytest/runner.py:536: in setup
+    col.setup()
+../env/lib/python3.12/site-packages/_pytest/python.py:1710: in setup
+    self._request._fillfixtures()
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:806: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:630: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:726: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:1232: in execute
+    result: FixtureValue = ihook.pytest_fixture_setup(
+../env/lib/python3.12/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:1328: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:998: in call_fixture_func
+    fixture_result = next(generator)
+                     ^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:300: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:287: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:136: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:117: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+        ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7a4b1172b6e0>, _basetemp=None, _retention_count=3, _retention_policy='all')
+
+    def getbasetemp(self) -> Path:
+        """Return the base temporary directory, creating it if needed.
+    
+        :returns:
+            The base temporary directory.
+        """
+        if self._basetemp is not None:
+            return self._basetemp
+    
+        if self._given_basetemp is not None:
+            basetemp = self._given_basetemp
+            if basetemp.exists():
+                rm_rf(basetemp)
+            basetemp.mkdir(mode=0o700)
+            basetemp = basetemp.resolve()
+        else:
+            from_env = os.environ.get("PYTEST_DEBUG_TEMPROOT")
+            temproot = Path(from_env or tempfile.gettempdir()).resolve()
+            user = get_user() or "unknown"
+            # use a sub-directory in the temproot to speed-up
+            # make_numbered_dir() call
+            rootdir = temproot.joinpath(f"pytest-of-{user}")
+            try:
+                rootdir.mkdir(mode=0o700, exist_ok=True)
+            except OSError:
+                # getuser() likely returned illegal characters for the platform, use unknown back off mechanism
+                rootdir = temproot.joinpath("pytest-of-unknown")
+                rootdir.mkdir(mode=0o700, exist_ok=True)
+            # Because we use exist_ok=True with a predictable name, make sure
+            # we are the owners, to prevent any funny business (on unix, where
+            # temproot is usually shared).
+            # Also, to keep things private, fixup any world-readable temp
+            # rootdir's permissions. Historically 0o755 was used, so we can't
+            # just error out on this, at least for a while.
+            # Don't follow symlinks, otherwise we're open to symlink-swapping
+            # TOCTOU vulnerability.
+            # This check makes us vulnerable to a DoS - a user can `mkdir
+            # /tmp/pytest-of-otheruser` and then `otheruser` will fail this
+            # check. For now we don't consider it a real problem. otheruser can
+            # change their TMPDIR or --basetemp, and maybe give the prankster a
+            # good scolding.
+            uid = get_user_id()
+            if uid is not None:
+                stat_follow_symlinks = (
+                    False if os.stat in os.supports_follow_symlinks else True
+                )
+                rootdir_stat = rootdir.stat(follow_symlinks=stat_follow_symlinks)
+                if stat.S_ISLNK(rootdir_stat.st_mode):
+                    raise OSError(
+                        f"The temporary directory {rootdir} is a symbolic link. "
+                        "Fix this and try again."
+                    )
+                if rootdir_stat.st_uid != uid:
+>                   raise OSError(
+                        f"The temporary directory {rootdir} is not owned by the current user. "
+                        "Fix this and try again."
+                    )
+E                   OSError: The temporary directory /data/robot/p001/tmp/pytest-of-robot is not owned by the current user. Fix this and try again.
+
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:198: OSError
+_ ERROR at setup of test_evidence_audit_checks_source_generation_and_band_coverage _
+
+cls = <class '_pytest.runner.CallInfo'>
+func = <function call_and_report.<locals>.<lambda> at 0x7a4af0a6c7c0>
+when = 'setup'
+reraise = (<class '_pytest.outcomes.Exit'>, <class 'KeyboardInterrupt'>)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -> CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        instant = timing.Instant()
+        try:
+>           result: TResult | None = func()
+                                     ^^^^^^
+
+../env/lib/python3.12/site-packages/_pytest/runner.py:361: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../env/lib/python3.12/site-packages/_pytest/runner.py:250: in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/logging.py:858: in pytest_runtest_setup
+    yield
+../env/lib/python3.12/site-packages/_pytest/capture.py:895: in pytest_runtest_setup
+    return (yield)
+            ^^^^^
+../env/lib/python3.12/site-packages/_pytest/runner.py:170: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+../env/lib/python3.12/site-packages/_pytest/runner.py:536: in setup
+    col.setup()
+../env/lib/python3.12/site-packages/_pytest/python.py:1710: in setup
+    self._request._fillfixtures()
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:806: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:630: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:726: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:1232: in execute
+    result: FixtureValue = ihook.pytest_fixture_setup(
+../env/lib/python3.12/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:1328: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:998: in call_fixture_func
+    fixture_result = next(generator)
+                     ^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:300: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:287: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:136: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:117: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+        ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7a4b1172b6e0>, _basetemp=None, _retention_count=3, _retention_policy='all')
+
+    def getbasetemp(self) -> Path:
+        """Return the base temporary directory, creating it if needed.
+    
+        :returns:
+            The base temporary directory.
+        """
+        if self._basetemp is not None:
+            return self._basetemp
+    
+        if self._given_basetemp is not None:
+            basetemp = self._given_basetemp
+            if basetemp.exists():
+                rm_rf(basetemp)
+            basetemp.mkdir(mode=0o700)
+            basetemp = basetemp.resolve()
+        else:
+            from_env = os.environ.get("PYTEST_DEBUG_TEMPROOT")
+            temproot = Path(from_env or tempfile.gettempdir()).resolve()
+            user = get_user() or "unknown"
+            # use a sub-directory in the temproot to speed-up
+            # make_numbered_dir() call
+            rootdir = temproot.joinpath(f"pytest-of-{user}")
+            try:
+                rootdir.mkdir(mode=0o700, exist_ok=True)
+            except OSError:
+                # getuser() likely returned illegal characters for the platform, use unknown back off mechanism
+                rootdir = temproot.joinpath("pytest-of-unknown")
+                rootdir.mkdir(mode=0o700, exist_ok=True)
+            # Because we use exist_ok=True with a predictable name, make sure
+            # we are the owners, to prevent any funny business (on unix, where
+            # temproot is usually shared).
+            # Also, to keep things private, fixup any world-readable temp
+            # rootdir's permissions. Historically 0o755 was used, so we can't
+            # just error out on this, at least for a while.
+            # Don't follow symlinks, otherwise we're open to symlink-swapping
+            # TOCTOU vulnerability.
+            # This check makes us vulnerable to a DoS - a user can `mkdir
+            # /tmp/pytest-of-otheruser` and then `otheruser` will fail this
+            # check. For now we don't consider it a real problem. otheruser can
+            # change their TMPDIR or --basetemp, and maybe give the prankster a
+            # good scolding.
+            uid = get_user_id()
+            if uid is not None:
+                stat_follow_symlinks = (
+                    False if os.stat in os.supports_follow_symlinks else True
+                )
+                rootdir_stat = rootdir.stat(follow_symlinks=stat_follow_symlinks)
+                if stat.S_ISLNK(rootdir_stat.st_mode):
+                    raise OSError(
+                        f"The temporary directory {rootdir} is a symbolic link. "
+                        "Fix this and try again."
+                    )
+                if rootdir_stat.st_uid != uid:
+>                   raise OSError(
+                        f"The temporary directory {rootdir} is not owned by the current user. "
+                        "Fix this and try again."
+                    )
+E                   OSError: The temporary directory /data/robot/p001/tmp/pytest-of-robot is not owned by the current user. Fix this and try again.
+
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:198: OSError
+_ ERROR at setup of test_source_manifest_rejects_machine_local_agent_instructions _
+
+cls = <class '_pytest.runner.CallInfo'>
+func = <function call_and_report.<locals>.<lambda> at 0x7a4af07bbe20>
+when = 'setup'
+reraise = (<class '_pytest.outcomes.Exit'>, <class 'KeyboardInterrupt'>)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -> CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        instant = timing.Instant()
+        try:
+>           result: TResult | None = func()
+                                     ^^^^^^
+
+../env/lib/python3.12/site-packages/_pytest/runner.py:361: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../env/lib/python3.12/site-packages/_pytest/runner.py:250: in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/logging.py:858: in pytest_runtest_setup
+    yield
+../env/lib/python3.12/site-packages/_pytest/capture.py:895: in pytest_runtest_setup
+    return (yield)
+            ^^^^^
+../env/lib/python3.12/site-packages/_pytest/runner.py:170: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+../env/lib/python3.12/site-packages/_pytest/runner.py:536: in setup
+    col.setup()
+../env/lib/python3.12/site-packages/_pytest/python.py:1710: in setup
+    self._request._fillfixtures()
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:806: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:630: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:726: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:1232: in execute
+    result: FixtureValue = ihook.pytest_fixture_setup(
+../env/lib/python3.12/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:1328: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:998: in call_fixture_func
+    fixture_result = next(generator)
+                     ^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:300: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:287: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:136: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:117: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+        ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7a4b1172b6e0>, _basetemp=None, _retention_count=3, _retention_policy='all')
+
+    def getbasetemp(self) -> Path:
+        """Return the base temporary directory, creating it if needed.
+    
+        :returns:
+            The base temporary directory.
+        """
+        if self._basetemp is not None:
+            return self._basetemp
+    
+        if self._given_basetemp is not None:
+            basetemp = self._given_basetemp
+            if basetemp.exists():
+                rm_rf(basetemp)
+            basetemp.mkdir(mode=0o700)
+            basetemp = basetemp.resolve()
+        else:
+            from_env = os.environ.get("PYTEST_DEBUG_TEMPROOT")
+            temproot = Path(from_env or tempfile.gettempdir()).resolve()
+            user = get_user() or "unknown"
+            # use a sub-directory in the temproot to speed-up
+            # make_numbered_dir() call
+            rootdir = temproot.joinpath(f"pytest-of-{user}")
+            try:
+                rootdir.mkdir(mode=0o700, exist_ok=True)
+            except OSError:
+                # getuser() likely returned illegal characters for the platform, use unknown back off mechanism
+                rootdir = temproot.joinpath("pytest-of-unknown")
+                rootdir.mkdir(mode=0o700, exist_ok=True)
+            # Because we use exist_ok=True with a predictable name, make sure
+            # we are the owners, to prevent any funny business (on unix, where
+            # temproot is usually shared).
+            # Also, to keep things private, fixup any world-readable temp
+            # rootdir's permissions. Historically 0o755 was used, so we can't
+            # just error out on this, at least for a while.
+            # Don't follow symlinks, otherwise we're open to symlink-swapping
+            # TOCTOU vulnerability.
+            # This check makes us vulnerable to a DoS - a user can `mkdir
+            # /tmp/pytest-of-otheruser` and then `otheruser` will fail this
+            # check. For now we don't consider it a real problem. otheruser can
+            # change their TMPDIR or --basetemp, and maybe give the prankster a
+            # good scolding.
+            uid = get_user_id()
+            if uid is not None:
+                stat_follow_symlinks = (
+                    False if os.stat in os.supports_follow_symlinks else True
+                )
+                rootdir_stat = rootdir.stat(follow_symlinks=stat_follow_symlinks)
+                if stat.S_ISLNK(rootdir_stat.st_mode):
+                    raise OSError(
+                        f"The temporary directory {rootdir} is a symbolic link. "
+                        "Fix this and try again."
+                    )
+                if rootdir_stat.st_uid != uid:
+>                   raise OSError(
+                        f"The temporary directory {rootdir} is not owned by the current user. "
+                        "Fix this and try again."
+                    )
+E                   OSError: The temporary directory /data/robot/p001/tmp/pytest-of-robot is not owned by the current user. Fix this and try again.
+
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:198: OSError
+_ ERROR at setup of test_audit_history_preserves_superseded_and_final_record_hashes _
+
+cls = <class '_pytest.runner.CallInfo'>
+func = <function call_and_report.<locals>.<lambda> at 0x7a4af07bba60>
+when = 'setup'
+reraise = (<class '_pytest.outcomes.Exit'>, <class 'KeyboardInterrupt'>)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -> CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        instant = timing.Instant()
+        try:
+>           result: TResult | None = func()
+                                     ^^^^^^
+
+../env/lib/python3.12/site-packages/_pytest/runner.py:361: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../env/lib/python3.12/site-packages/_pytest/runner.py:250: in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/logging.py:858: in pytest_runtest_setup
+    yield
+../env/lib/python3.12/site-packages/_pytest/capture.py:895: in pytest_runtest_setup
+    return (yield)
+            ^^^^^
+../env/lib/python3.12/site-packages/_pytest/runner.py:170: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+../env/lib/python3.12/site-packages/_pytest/runner.py:536: in setup
+    col.setup()
+../env/lib/python3.12/site-packages/_pytest/python.py:1710: in setup
+    self._request._fillfixtures()
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:806: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:630: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:726: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:1232: in execute
+    result: FixtureValue = ihook.pytest_fixture_setup(
+../env/lib/python3.12/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:1328: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/fixtures.py:998: in call_fixture_func
+    fixture_result = next(generator)
+                     ^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:300: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:287: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:136: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:117: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+        ^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7a4b1172b6e0>, _basetemp=None, _retention_count=3, _retention_policy='all')
+
+    def getbasetemp(self) -> Path:
+        """Return the base temporary directory, creating it if needed.
+    
+        :returns:
+            The base temporary directory.
+        """
+        if self._basetemp is not None:
+            return self._basetemp
+    
+        if self._given_basetemp is not None:
+            basetemp = self._given_basetemp
+            if basetemp.exists():
+                rm_rf(basetemp)
+            basetemp.mkdir(mode=0o700)
+            basetemp = basetemp.resolve()
+        else:
+            from_env = os.environ.get("PYTEST_DEBUG_TEMPROOT")
+            temproot = Path(from_env or tempfile.gettempdir()).resolve()
+            user = get_user() or "unknown"
+            # use a sub-directory in the temproot to speed-up
+            # make_numbered_dir() call
+            rootdir = temproot.joinpath(f"pytest-of-{user}")
+            try:
+                rootdir.mkdir(mode=0o700, exist_ok=True)
+            except OSError:
+                # getuser() likely returned illegal characters for the platform, use unknown back off mechanism
+                rootdir = temproot.joinpath("pytest-of-unknown")
+                rootdir.mkdir(mode=0o700, exist_ok=True)
+            # Because we use exist_ok=True with a predictable name, make sure
+            # we are the owners, to prevent any funny business (on unix, where
+            # temproot is usually shared).
+            # Also, to keep things private, fixup any world-readable temp
+            # rootdir's permissions. Historically 0o755 was used, so we can't
+            # just error out on this, at least for a while.
+            # Don't follow symlinks, otherwise we're open to symlink-swapping
+            # TOCTOU vulnerability.
+            # This check makes us vulnerable to a DoS - a user can `mkdir
+            # /tmp/pytest-of-otheruser` and then `otheruser` will fail this
+            # check. For now we don't consider it a real problem. otheruser can
+            # change their TMPDIR or --basetemp, and maybe give the prankster a
+            # good scolding.
+            uid = get_user_id()
+            if uid is not None:
+                stat_follow_symlinks = (
+                    False if os.stat in os.supports_follow_symlinks else True
+                )
+                rootdir_stat = rootdir.stat(follow_symlinks=stat_follow_symlinks)
+                if stat.S_ISLNK(rootdir_stat.st_mode):
+                    raise OSError(
+                        f"The temporary directory {rootdir} is a symbolic link. "
+                        "Fix this and try again."
+                    )
+                if rootdir_stat.st_uid != uid:
+>                   raise OSError(
+                        f"The temporary directory {rootdir} is not owned by the current user. "
+                        "Fix this and try again."
+                    )
+E                   OSError: The temporary directory /data/robot/p001/tmp/pytest-of-robot is not owned by the current user. Fix this and try again.
+
+../env/lib/python3.12/site-packages/_pytest/tmpdir.py:198: OSError
+=============================== warnings summary ===============================
+../env/lib/python3.12/site-packages/_pytest/cacheprovider.py:469
+  /data/robot/p001/env/lib/python3.12/site-packages/_pytest/cacheprovider.py:469: PytestCacheWarning: could not create cache path /data/robot/p001/s001/.pytest_cache/v/cache/nodeids: [Errno 1] Operation not permitted: '/data/robot/p001/s001/pytest-cache-files-q1m6uxzf'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+../env/lib/python3.12/site-packages/_pytest/cacheprovider.py:423
+  /data/robot/p001/env/lib/python3.12/site-packages/_pytest/cacheprovider.py:423: PytestCacheWarning: could not create cache path /data/robot/p001/s001/.pytest_cache/v/cache/lastfailed: [Errno 1] Operation not permitted: '/data/robot/p001/s001/pytest-cache-files-om9zvrto'
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/test_e161_plan.py::test_provisional_seed_config_cannot_start_a_run
+ERROR tests/test_report_retention_candidate.py::test_evidence_audit_checks_source_generation_and_band_coverage
+ERROR tests/test_report_retention_candidate.py::test_source_manifest_rejects_machine_local_agent_instructions
+ERROR tests/test_report_retention_candidate.py::test_audit_history_preserves_superseded_and_final_record_hashes
+12 passed, 2 warnings, 4 errors in 6.11s

@@ -1,5 +1,10 @@
 # Experiment index
 
+结构化研究入口：[H 猜想及下一决策](../research/RESEARCH_LOG.md) ·
+[E 实验与运行来源](../experiments/README.md) ·
+[原有产物归属清单](../research/ARTIFACT_CATALOG.json)。
+以下历史时间线和所有原始引用保持保留；回溯整理不代表新增实验或重新确认结果。
+
 ## Retention candidate construction and later online state (2026-10-20)
 
 [Review](RETENTION_CANDIDATE_REVIEW.md) · [frozen protocol](RETENTION_CANDIDATE_PROTOCOL.md) · [configuration](../configs/retention_candidate.json) · [reproducibility guide](REPRODUCIBILITY.md) · [completed main report](../outputs/retention_candidate_completed_report/report.md) · [analysis](../outputs/retention_candidate_completed_report/analysis.json) · [independent audit](../outputs/retention_candidate_audit/main_completed.json) · [interrupted inventory](../outputs/retention_candidate_interrupted_inventory.json) · [restart consistency](../outputs/retention_candidate_restart_consistency.json) · [encoding diagnostic](../outputs/retention_candidate_encoding_diagnostics/diagnostics.json) · [diagnostic startup receipt](../outputs/retention_candidate_encoding_diagnostics/startup_attempt_01.json) · [audit records](../outputs/retention_candidate_audit/) · [completed cohort](../outputs/retention_candidate_completed/).

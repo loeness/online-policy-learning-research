@@ -65,3 +65,34 @@ faithful implementation of those complete methods or evidence that
 distillation itself is novel. Reward after installation, source provenance,
 encoding, fitting cost and the complete persistent package are evaluated
 separately from imitation error.
+
+## 2026-10-20 classification review supplement
+
+The bibliography now contains **54** unique entries after adding
+`He2026CPC`, *Continual Policy Consolidation for Lifelong Robot Learning*.
+Its title, authors, year and v2 revision metadata were checked against the
+[primary arXiv record](https://arxiv.org/abs/2601.22475) on 2026-10-20.
+It was already cited as design context in H006/phase_c_plan.md and is not a
+newly implemented baseline. Counts of 53 above describe the earlier snapshot.
+
+The [citation index](../research/CITATIONS.md) and
+[derived H/E map](../research/citations.json) integrate these public records
+and the 12-item attachment inventory. Document mentions, method adaptations,
+proposed comparisons, software references and unverified attachment matches
+are distinguished. The archive's own citation remains in `CITATION.cff`;
+no new software release, paper DOI or experiment is asserted by this update.
+
+## 2026-10-22 targeted H036 source update
+
+The bibliography now has 55 unique keys after adding `Lei2025DMPEL`. Its title,
+authors, DOI, and arXiv v3 revision date (2026-05-28) were supplied from the
+primary arXiv record in the coordinating review. The entry retains the arXiv
+form and pins [version 3](https://arxiv.org/abs/2506.05985v3); formal TMLR
+venue metadata was not added here. H036 cites it only as conditional context
+for growing low-rank experts, routing, and coefficient replay. Those mechanisms
+are not adopted in this round.
+
+The existing `He2026CPC` key remains the sole CPC entry and now pins
+[arXiv version 2](https://arxiv.org/abs/2601.22475v2), revised 2026-09-06.
+This is a targeted citation-navigation update, not a renewed review of the full
+bibliography.

@@ -1,0 +1,152 @@
+{
+  "schema": "E163_RUNNER_REVIEW_V1",
+  "reviewed_file": "experiments/exp163/preparation/validation/runner.py",
+  "reviewed_file_sha256": "5f0b4961323b0920f03a744c3101951114c11f7b36d28c1e883bdcdaa845f310",
+  "review_inputs": [
+    "experiments/exp163/preparation/validation/frozen_review.json",
+    "experiments/exp163/preparation/validation/gate_mapping.json",
+    "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_inputs.py",
+    "research/appendix/H036/delivery_v1/source_snapshot/src/online_rl/retention_protected_candidate.py"
+  ],
+  "scope": {
+    "method": "Read-only source review of runner orchestration, scientific API mapping, input and output identity handling, authorization binding, and path checks.",
+    "not_performed": [
+      "No runner or scientific module execution/import.",
+      "No tests rerun; the recorded 23 synthetic checks were treated as existing evidence.",
+      "No SSH, metering precheck, real prefix deserialization, fitting, or environment interaction.",
+      "No code, configuration, source snapshot, or research index changes."
+    ]
+  },
+  "overall": "PASS",
+  "follow_up_review": {
+    "date": "2026-10-22",
+    "runner_sha256": "5f0b4961323b0920f03a744c3101951114c11f7b36d28c1e883bdcda845f310",
+    "frozen_manifest_sha_expected": "b837222aff57ab45abee226e9aa8bc9d2cd3444807fa348dee0c0c1ece70dc54",
+    "frozen_manifest_sha_constant_matches_review": true,
+    "authorization_path_matches_frozen_o001_path": true,
+    "authorization_json_read_root": "E_ROOT",
+    "failure_cost_metadata": "candidate dtype/byte order and fit-attempt/return counters are metadata-only; fit/scoring APIs and gate values are unchanged.",
+    "method": "Read-only verification of the requested runner fixes against frozen_review.json, gate_mapping.json, and the updated runner source.",
+    "not_performed": [
+      "No runner or scientific module execution/import.",
+      "No tests, SSH, metering, prefix deserialization, or fitting."
+    ]
+  },
+  "findings": [
+    {
+      "id": "R163-01",
+      "severity": "HIGH",
+      "follow_up_status": "RESOLVED",
+      "topic": "File reads are not constrained to the declared source roots or exact input manifest",
+      "lines": [
+        62,
+        65,
+        108,
+        111,
+        113,
+        114,
+        115,
+        116,
+        117
+      ],
+      "evidence": "Authorization JSON uses read_json(), whose safe() root is PROJECT. Source and orchestration rows are joined to their declared roots, then verify_file() again applies the broader PROJECT root. Absolute child paths discard the joined root. Input and foundation paths are also checked only against PROJECT. The expected (seed, file) set is checked after all manifest paths have already been opened and hashed, and no exact canonical E161 prefix path set is asserted.",
+      "impact": "A malformed or drifted spec can cause reads or hashes of other project paths before rejection. In particular, E161 inputs are permitted only through the exact manifest, while the runner currently accepts any path under the broader project root. The authorization file can also be read from outside E163.",
+      "minimal_fix": "Validate the full manifest structure and exact canonical input path set before opening any listed file, bound authorization and foundation paths to the approved E163 subtree, and require source/orchestration entries to be relative canonical paths verified under their respective roots. Bind the E161 references to the frozen manifest digest and exact 48 entries.",
+      "resolution_evidence": "The frozen manifest SHA is checked before source/input reads; source rows must match the manifest snapshot inventory; the 48 input references and foundation identity/path are compared against canonical frozen values before opening; source members are relative; and source/run/orchestration roots are fixed. validate_authorization now requires the exact /data/robot/p001/e163/o001/run_spec.json and /data/robot/p001/e163/o001/authorization.json paths, and read_json applies safe(path, E_ROOT)."
+    },
+    {
+      "id": "R163-02",
+      "severity": "HIGH",
+      "follow_up_status": "RESOLVED",
+      "topic": "The declared source identity is not independently established from a complete frozen manifest",
+      "lines": [
+        18,
+        73,
+        76,
+        108,
+        112,
+        128,
+        140
+      ],
+      "evidence": "The runner compares spec.source_identity_sha256 to a hard-coded string and verifies only the file rows supplied by spec.source_files and spec.orchestration_files. It does not require the frozen delivery manifest digest or exact expected file inventory, nor recompute the source identity from those rows. The import-origin check covers online_rl modules but not the imported gate module. The authorization SHA binds the spec bytes, but does not establish that its self-described file lists are complete or that gate.py was imported from the verified path.",
+      "impact": "An incomplete or misdirected file list can retain the expected source identity string while omitting a frozen source or orchestration file; the scientific code identity and gate implementation would then not be proven by the runner itself.",
+      "minimal_fix": "Require the frozen delivery manifest hash and exact expected file inventory, verify every listed byte identity, and assert that the loaded scientific and gate modules resolve to those verified files. Keep the authorization-to-spec hash check in addition to these checks.",
+      "resolution_evidence": "runner.py now checks the pinned manifest SHA before source/input reads, requires source_files to equal the manifest snapshot path/bytes/hash triples, constrains the orchestration inventory to four named files, and checks the imported gate path against the fixed orchestration root."
+    },
+    {
+      "id": "R163-03",
+      "severity": "MEDIUM",
+      "follow_up_status": "RESOLVED",
+      "topic": "The frozen G_new consistency check is absent",
+      "lines": [
+        222,
+        227,
+        228,
+        230
+      ],
+      "evidence": "The runner checks K_old, K_new, K_new_W0, wildcard binding, and zero fresh-local state against the frozen output paths. It never checks metrics.G_new against metrics.K_new_W0 minus metrics.K_new, although gate_mapping.json states that this equality is checked by the runner. gate.py later derives gains from the five scalar fields, so this omits the promised cross-check against the scientific API's own reported value.",
+      "impact": "A mismatch in the API's reported G_new would not invalidate the batch even though the frozen mapping requires that consistency check.",
+      "minimal_fix": "For both C and D, assert that metrics['G_new'] equals metrics['K_new_W0'] - metrics['K_new'] before constructing the gate row.",
+      "resolution_evidence": "runner.py now checks metrics['G_new'] == metrics['K_new_W0'] - metrics['K_new'] for both arms before creating the gate row."
+    },
+    {
+      "id": "R163-04",
+      "severity": "MEDIUM",
+      "follow_up_status": "RESOLVED",
+      "topic": "The runner collapses an INCOMPLETE gate result into INVALID",
+      "lines": [
+        232,
+        234,
+        250,
+        257
+      ],
+      "evidence": "If evaluate_batch() returns INCOMPLETE, scored_count is zero and the runner raises ValueError at the completeness check. The broad handler then labels every non-stop exception INVALID. This loses the gate's explicit whole-batch INVALID versus INCOMPLETE distinction, even though the scalar gate defines and records both statuses.",
+      "impact": "A missing gate row or scalar would be reported as invalid input rather than an incomplete batch, weakening the intended failure record semantics.",
+      "minimal_fix": "Preserve gate['status'] in the failure record and map an INCOMPLETE gate result to worker status INCOMPLETE; keep malformed data as INVALID.",
+      "resolution_evidence": "BatchStateError carries the gate INVALID/INCOMPLETE status, and the exception handler uses scientific_status when setting failure_worker.json status."
+    }
+  ],
+  "verified_points": [
+    {
+      "topic": "Fit plan",
+      "result": "PASS",
+      "evidence": "SEEDS matches the frozen 16-seed sequence, spec validation requires lambda_values [0, 1], and the nested loop runs C/lambda 0 and D/lambda 1 for every prepared seed, producing the required 32 fits."
+    },
+    {
+      "topic": "Pre-fit validation",
+      "result": "PASS",
+      "evidence": "The frozen source inventory, exact 48 input refs, foundation, and exact authorization/spec paths are validated before their files are opened; all 16 prefixes are prepared before the first fit."
+    },
+    {
+      "topic": "Fallback retention",
+      "result": "PASS",
+      "evidence": "Complete per-fit diagnostics are written, fallback flags are carried into gate rows, and gate.py keeps fallback rows in the denominator."
+    },
+    {
+      "topic": "Candidate and deployment artifacts",
+      "result": "PASS",
+      "evidence": "Candidate array bytes are written directly in C order. Actor and checkpoint deployment bytes are length/hash checked against scientific metrics and saved verbatim. Returned evidence bytes are checked against the exact input reference and its byte count/hash; persistent_references.json records that exact reference rather than copying the evidence payload."
+    },
+    {
+      "topic": "Scientific algorithm duplication",
+      "result": "PASS",
+      "evidence": "Fitting, preparation, compensation, actor encoding, and scoring are delegated to the frozen scientific APIs. The runner performs orchestration and scalar gate handoff only."
+    },
+    {
+      "topic": "Failure recording",
+      "result": "PASS_FOR_BATCH_ERRORS",
+      "evidence": "Runtime failures after run setup produce failure_worker.json and state_worker.json as INVALID or INCOMPLETE, and BatchStateError preserves the gate status. Authorization rejection occurs before run setup and does not create worker failure artifacts."
+    }
+  ],
+  "gate_evidence": {
+    "frozen_review_status": "PASS",
+    "frozen_source_identity_sha256": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea",
+    "gate_mapping": "Five gate scalars are sourced from the expected K_old/K_new/K_new_W0 API metrics; G_new consistency is now checked against the frozen subtraction in both arms.",
+    "synthetic_checks": "The recorded 23 synthetic checks were not rerun, per instruction."
+  },
+  "digest_transcription_correction": {
+    "original_reported_digest": "5f0b4961323b0920f03a744c3101951114c11f7b36d28c1e883bdcda845f310",
+    "verified_file_digest": "5f0b4961323b0920f03a744c3101951114c11f7b36d28c1e883bdcdaa845f310",
+    "note": "Root corrected a missing character in the worker report digest text. Runner bytes match the frozen bundle and remote verification; no source change or extra execution."
+  }
+}

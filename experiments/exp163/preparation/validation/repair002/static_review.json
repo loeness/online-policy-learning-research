@@ -1,0 +1,75 @@
+{
+  "experiment_id": "E163",
+  "repair": "002",
+  "review_type": "independent static review",
+  "reviewed_at": "2026-10-22",
+  "result": "PASS",
+  "blocking_issues": [],
+  "execution_performed": false,
+  "reviewed_files": [
+    "orchestration.diff",
+    "supervisor.py",
+    "runner.py",
+    "launch_command.sh",
+    "run_spec.json",
+    "freeze.json",
+    "repair_notes.md",
+    "authorization.template.json",
+    "repair002.zip",
+    "transfer_manifest.json",
+    "../supervisor.py",
+    "../runner.py",
+    "../launch_command.sh",
+    "../run_spec.json",
+    "../gate.py",
+    "../gate_mapping.json"
+  ],
+  "checks": {
+    "authorization_before_accounting_sample": {
+      "status": "PASS",
+      "evidence": "main validates the bound coordinator authorization before calling _capture_startup_proof; capture occurs before Campaign construction and any supervisor fork. The auth validation path is filesystem/JSON validation and contains no fork."
+    },
+    "fresh_child_and_parent_wait": {
+      "status": "PASS",
+      "evidence": "launch_command.sh starts the isolated Python supervisor as a background child, passes the shell PID in E163_LAUNCH_PARENT_PID, waits for that child, and returns its exit code. The shell does not exec-replace itself."
+    },
+    "process_identity_and_start_clock": {
+      "status": "PASS",
+      "evidence": "The supervisor checks E163_LAUNCH_PARENT_PID against os.getppid(), records supervisor and parent PIDs plus both /proc start ticks, and rejects missing/mismatched parent identity or a supervisor tick preceding its parent. Campaign wall time is derived from the fresh supervisor PID start ticks and /proc/uptime."
+    },
+    "resource_usage_boundary": {
+      "status": "PASS",
+      "evidence": "Post-authorization, pre-fork RUSAGE_SELF and RUSAGE_CHILDREN samples are recorded. Initial RUSAGE_CHILDREN user and system CPU must both be exactly zero. RUSAGE_SELF is cumulative from process start and is not zeroed or subtracted; the fresh kernel start clock and cumulative self CPU retain interpreter and preflight cost."
+    },
+    "final_child_accounting": {
+      "status": "PASS",
+      "evidence": "Finalization again requires the initial RUSAGE_CHILDREN boundary to be zero, then compares per-component final-minus-initial RUSAGE_CHILDREN CPU with summed wait4 user/system CPU within 0.03 seconds."
+    },
+    "cpu_and_stop_prechecks": {
+      "status": "PASS",
+      "evidence": "Source-text comparison against validation/supervisor.py found the CPU descendant-accounting precheck, owned process-group stop precheck, limit checks, worker monitoring, and owned-child stop/reap methods unchanged. Both prechecks remain in Campaign.run before worker launch."
+    },
+    "campaign_bounds": {
+      "status": "PASS",
+      "evidence": "The frozen limits remain 120 CPU seconds, 180 wall seconds, 256 MiB new artifacts/cache/temp, one single-thread CPU worker, zero GPU devices, zero environment interactions, and 32 candidate fits. Safety stops remain 115 CPU seconds and 170 wall seconds, with 5 CPU-second and 10 wall-second finalization reserves."
+    },
+    "scientific_protocol_and_inputs": {
+      "status": "PASS",
+      "evidence": "Compared with the prior frozen spec, source identity, all 21 source-file rows, all 48 E161 input references, foundation reference, seeds, lambda values, limits, and gate mapping are unchanged. E161 references remain under /data/robot/p001/e161/run001. The unchanged gate.py specifies 16 scored rows and a required pass count of 12."
+    },
+    "evidence_isolation": {
+      "status": "PASS",
+      "evidence": "The new run root is /data/robot/p001/e163/run002. The supervisor refuses to start if run002 exists. The repaired supervisor, runner, and launcher target run002/o002; prior E163 run001 evidence is not used as an output path."
+    },
+    "spec_and_hash_bundle": {
+      "status": "PASS",
+      "evidence": "The run spec has the four orchestration files expected by runner.py. Freeze identity covers five rows including launch_command.sh, and its recomputed SHA-256 matches b8df209ce3d89df2a4847b2b7e2da380e8d01b819e1f12f8ccde70782ad1353b. All spec/freeze rows match current file bytes and hashes. The seven ZIP members match transfer_manifest.json; run-spec SHA-256 is d5764b8091aba95b7223ee7cdcb18d752e123d17063bb0c936775753f6e8189d and archive SHA-256 is 11a23bab40e945b1d73252b2d75207c99882fc5b83eff2725127dae21044a3c9. The launcher is LF-only at 1171 bytes."
+    },
+    "authorization_and_no_automatic_run": {
+      "status": "PASS",
+      "evidence": "The authorization template and freeze both set execution_authorized=false; freeze records zero runtime prechecks, zero real fits, and transferred=false. No launcher, supervisor, runner, SSH command, model probe, or real-input operation was executed during this review."
+    }
+  },
+  "verification_method": "Local source-text inspection, PowerShell JSON field comparisons, file SHA-256/byte comparisons, and read-only ZIP member hash checks. No Python modules were imported and no reviewed program was executed.",
+  "limitations": "Static review confirms the rejection and accounting logic but does not establish runtime Linux RUSAGE_CHILDREN behavior; runtime validation remains outside this review scope."
+}

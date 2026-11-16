@@ -1,0 +1,106 @@
+{
+  "experiment_id": "E165",
+  "status": "PREPARATION_STATIC_ONLY",
+  "source_artifacts": [
+    {
+      "role": "base_supervisor",
+      "source_path": "experiments/exp164/preparation/validation/supervisor.py",
+      "source_sha256": "77d9e636860a3ea7c21c7553d7b207cca9521b572b86d4a4324bec84ccd159eb",
+      "target_path": "experiments/exp165/preparation/validation/supervisor.py",
+      "target_sha256": "d1f0ffd892f37cc9f0fc14e1ec39fcd5f10332757877ab7b6bb7c92e80cd9540",
+      "diff_summary": {
+        "source_lines": 1333,
+        "target_lines": 1596,
+        "targeted_adaptations": [
+          "Replaced the single E164 campaign with three fixed E165 stages and exact per-stage spec, authorization, worker, and output paths.",
+          "Added stage-specific hard limits and stop thresholds with 5 CPU / 10 wall seconds reserved in each stage; checks observed and upper costs without borrowing allocations.",
+          "Required the complete single-attempt authorization binding to exact spec bytes, stage, coordinator directive, resource/execution flags, and stage limits before runtime sampling.",
+          "Validated source/orchestration path descriptors and exact predecessor state descriptors, then carried observed and bounded costs into the cumulative round ledger.",
+          "Preserved fresh-PID, pre-fork zero RUSAGE_CHILDREN, descendant wait4, owned process-group stop (-15 / raw 15), dynamic project capacity, reap, and footer accounting.",
+          "Added structural stage worker completion checks for CHECKS, DIAGNOSTIC, and AUDIT without recomputing scientific metrics.",
+          "Froze the control output schema for CHECKS; exact per-stage authorization, resources, and spec remain mandatory."
+        ]
+      }
+    },
+    {
+      "role": "base_launcher",
+      "source_path": "experiments/exp164/preparation/validation/launch_command.sh",
+      "source_sha256": "62b7e58578cea6a858e7cc16c93bb5e0ce0646f713609227fddd05b8beeaccc2",
+      "target_artifacts": [
+        {
+          "target_path": "experiments/exp165/preparation/validation/launch_checks.sh",
+          "target_sha256": "ff8c975ea05046bd4fa181dd36cbf386c26b421bb291c4300eb8bdcbf810a1e5",
+          "diff_summary": "Fixed CHECKS stage, spec and authorization paths; retained fresh isolated supervisor child, project-local thread/cache/temp settings, launch parent identity, and explicit parent wait."
+        },
+        {
+          "target_path": "experiments/exp165/preparation/validation/launch_diagnostic.sh",
+          "target_sha256": "a19a0a259f35c6cab4954c9f76880350d7abd97810cd8e4cb37a947ef3edc994",
+          "diff_summary": "Fixed DIAGNOSTIC stage, spec and authorization paths; retained fresh isolated supervisor child, project-local thread/cache/temp settings, launch parent identity, and explicit parent wait."
+        },
+        {
+          "target_path": "experiments/exp165/preparation/validation/launch_audit.sh",
+          "target_sha256": "7f4cb4881502507cefc43d3f590927e25f92b9029711b3395d47b2044457f314",
+          "diff_summary": "Fixed AUDIT stage, spec and authorization paths; retained fresh isolated supervisor child, project-local thread/cache/temp settings, launch parent identity, and explicit parent wait."
+        }
+      ]
+    }
+  ],
+  "supporting_artifacts": [
+    {
+      "role": "metering_notes",
+      "path": "experiments/exp165/preparation/validation/metering_notes.md",
+      "sha256": "dff6a0b20678017b6ca1d96443c1909789d91837b5d440fb4d83ec3cff6ca6da"
+    }
+  ],
+  "stage_limits": {
+    "CHECKS": {
+      "cpu_seconds": 20,
+      "wall_seconds": 60
+    },
+    "DIAGNOSTIC": {
+      "cpu_seconds": 80,
+      "wall_seconds": 140
+    },
+    "AUDIT": {
+      "cpu_seconds": 20,
+      "wall_seconds": 40
+    }
+  },
+  "round_limits": {
+    "cpu_seconds": 120,
+    "cumulative_controlled_wall_seconds": 240,
+    "new_artifact_cache_temp_bytes": 134217728,
+    "aggregate_remote_project_bytes": 100000000000,
+    "workers": 1,
+    "numeric_threads_per_worker": 1,
+    "gpu_devices": 0,
+    "environment_interactions": 0,
+    "real_candidate_fit_calls": 0,
+    "candidate_recovery_calls": 0,
+    "real_full_training_oracle_evaluations": 336,
+    "new_complete_score_packages": 33,
+    "logical_paired_prefixes": 16
+  },
+  "draft_state": {
+    "output_contract_frozen": false,
+    "resource_authorized": false,
+    "execution_authorized": false,
+    "runnable": false
+  },
+  "validation": {
+    "ast_parse": "PASS",
+    "compile_source_string_without_execution": "PASS",
+    "budget_json_limit_match": "PASS",
+    "launcher_text_manifest_and_lf": "PASS",
+    "supervisor_or_launcher_executed": false,
+    "worker_or_research_module_imported": false,
+    "pytest_synthetic_audit_or_metering_probe_run": false,
+    "remote_access_or_transfer_performed": false
+  },
+  "campaign_cost_scope": {
+    "origin": "fresh supervisor process birth ticks; includes Python startup, same-stage prechecks, worker, stop, reap and finalization",
+    "cpu": "supervisor lifetime RUSAGE_SELF plus direct-child wait4 including waited descendants, with live owned counters during execution",
+    "unmeasured_tail": "5 CPU / 10 wall second conservative finalization reserve; 65536 byte footer reserve",
+    "outside_campaign": "external SSH transport, source transfer, admission and parent launch-shell operations; operational elapsed reported separately, unmeasured CPU UNKNOWN"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "format": "e164_coordinator_result_acceptance_v1",
+  "experiment_id": "E164",
+  "hypothesis_id": "H036",
+  "accepted_at_utc": "2026-10-23 02:28:00 UTC",
+  "status": "COMPLETE_VALID_EXPLORATORY_ONLY",
+  "hypothesis_status": "INCONCLUSIVE",
+  "scientific_source_identity_sha256": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+  "run_spec_sha256": "40a1ac53ec03b2ac0eb0cea6004f962fccdc3d342490d2b67eef1b698f2dd303",
+  "final_verifier_sha256": "329a152996555de6dbc0ae8e96a532b9815948ca3ca01e30d3e3d4584542516a",
+  "accepted_evidence_sha256": {
+    "FINAL_VALIDATION.json": "f82bc01c330a3e68ca2a995964db274de05b148d60787e9322a03e686fb49939",
+    "analyses/a003/audit.json": "a3adecae4be56d68f081a29e2d80b194d9ea213760b3a400ad7dc792cc0348c7",
+    "analyses/a001/report.md": "dd41e2ad01edbf7c262cdca485c5b699c34447a8dbd4074a26d7ee033de9da64",
+    "analyses/a001/analysis_summary.json": "4f1074422f2d4471ddface202852aa9fda20bbb6f9f177984bfc31662c435cb0",
+    "analyses/a001/cost.json": "3daf2bd09acf7ee83c1fb470b10221de546b08184880775caf14345d9581ffbf"
+  },
+  "audit": {
+    "status": "COMPLETE_VALID",
+    "errors": [],
+    "independent_groups_passed": 7,
+    "independently_recalculated_paired_metrics": 256,
+    "posthoc_schema_mapping_corrections": true,
+    "original_and_intermediate_audits_preserved": true,
+    "scientific_or_raw_changes": false,
+    "campaign_retry": false
+  },
+  "execution": {
+    "recovery_fits": 5,
+    "new_complete_score_packages": 10,
+    "logical_pairs": 16,
+    "reused_pairs": 11,
+    "actual_V_anchors_confirmed": 5,
+    "environment_interactions": 0,
+    "gpu_devices": 0,
+    "workers": 1,
+    "numeric_threads": 1,
+    "mirror_files": 279,
+    "mirror_bytes": 5213330
+  },
+  "observations": {
+    "UG_minus_V": "All16 exact zero in every pre/encoded train/holdout metric",
+    "UR_minus_UG_encoded_holdout_oldKL": {
+      "mean_signed_delta": -0.22188129434769693,
+      "improved": 5,
+      "degraded": 0,
+      "unchanged": 11
+    },
+    "UR_minus_UG_encoded_holdout_G_new": {
+      "mean_signed_delta": -0.016072061517235156,
+      "improved": 2,
+      "degraded": 3,
+      "unchanged": 11
+    },
+    "UG_recovery_gate": "All5failpostcastnewtrainKL and fallback to finalbytes aliasV",
+    "UR_recovery_new_train_gain": "All5decrease"
+  },
+  "cost": {
+    "observed_cpu_seconds_before_footer": 7.929755,
+    "observed_wall_seconds_before_footer": 9.350686746649444,
+    "conservative_cpu_seconds_upper": 12.929755,
+    "conservative_wall_seconds_upper": 19.350686746649444,
+    "exact_complete_footer_cost": "UNKNOWN",
+    "outside_campaign_cpu": "UNKNOWN",
+    "remote_E164_bytes_at_closeout": 8956426,
+    "aggregate_project_bytes_at_closeout": 2926012562
+  },
+  "decision": "End finite E164 diagnostic; no direct UG/UR production promotion, reward claim, StageA, seed/lambda search, structural expansion, retry or new E. H036 remainsINCONCLUSIVE;E163v1NO_ADVANCEMENT unchanged.",
+  "next_question_only": "Coordinate admissible old/new training tradeoffs with held-out joint utility and an explicit new-behavior cost bound; require a method contract before selecting/implementing any new rule.",
+  "resource_closeout": {
+    "reservation_id": "acceptance_diag_campaign001",
+    "status": "CLOSED_COMPLETED_VALID_NO_RETRY",
+    "unused_allowance": "RETIRED_NOT_REUSABLE",
+    "active_job": null,
+    "active_reservation_id": null,
+    "SSH_closed": true
+  },
+  "synthesis": "../../../research/appendix/H036/COORDINATOR_E164_SYNTHESIS_20261023.md",
+  "round_closeout": {
+    "validation_handoff_complete": true,
+    "coordinator_analysis_complete": true,
+    "algorithm_analysis_complete_and_accepted": true,
+    "algorithm_analysis": "../../../research/appendix/H036/ALGORITHM_E164_ANALYSIS_20261023.md",
+    "algorithm_analysis_sha256": "441e77b5e28de2f697a8910473ba59d0e9de384f2f6cade5aebcb3915574aec0",
+    "algorithm_chat_terminal_error_after_file_written": "Selected model is at capacity. Please try a different model.",
+    "terminal_error_handling": "Root verified the fully persisted algorithm analysis and accepted its contents; no model switch, science rerun or new validation was needed.",
+    "state": "ROUND_COMPLETE_STOPPED_AWAITING_NEW_USER_INSTRUCTION",
+    "automatic_next_round": false,
+    "algorithm_chat_restarted_and_completed": true,
+    "subsequent_user_requested_deep_review": {
+      "date": "2026-10-23",
+      "both_named_chats_contacted_and_replied": true,
+      "scope": "Read-only interpretation and descriptive arithmetic on existing evidence; no new experiment, method implementation or resource reservation",
+      "record": "../../../research/appendix/H036/COORDINATOR_E164_SYNTHESIS_20261023.md",
+      "H036_status_unchanged": "INCONCLUSIVE"
+    }
+  }
+}

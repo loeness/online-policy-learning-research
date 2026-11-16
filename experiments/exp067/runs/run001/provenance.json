@@ -1,0 +1,100 @@
+{
+  "experiment_id": "E067",
+  "hypothesis_id": "H013",
+  "run_id": "run001",
+  "phase": "offline_diagnostic",
+  "unit_of_record": "One cohort-level producer invocation / diagnostic root. component_paths lists seed-condition output units; these are not asserted to be separately known CLI invocations.",
+  "operational_status": "COMPLETED",
+  "producer_path": "outputs/knowledge_shared_write_support_diagnostic",
+  "component_count": 1,
+  "component_paths": [
+    {
+      "seed": null,
+      "condition": "offline_support_replay",
+      "component_path": "outputs/knowledge_shared_write_support_diagnostic",
+      "per_run_config_path": null,
+      "summary_path": "outputs/knowledge_shared_write_support_diagnostic/summary.json",
+      "output_paths": [
+        "outputs/knowledge_shared_write_support_diagnostic/summary.json",
+        "outputs/knowledge_shared_write_support_diagnostic/assignments.csv",
+        "outputs/knowledge_shared_write_support_diagnostic/pairwise_audit.csv",
+        "outputs/knowledge_shared_write_support_diagnostic/tied_prototype_checks.json",
+        "outputs/knowledge_shared_write_support_diagnostic/local_reference_audit.json",
+        "outputs/knowledge_shared_write_support_diagnostic/local_reference_audit.csv",
+        "outputs/knowledge_shared_write_support_diagnostic/support_coverage_error.png"
+      ],
+      "code_provenance": {
+        "source_manifest_path": null,
+        "source_snapshot_path": null,
+        "code_entry_path": "scripts/diagnose_shared_write_support.py",
+        "provenance_note": "The archived diagnostic output has no run-specific source snapshot or execution SHA; the current code entry is linked as a reference only."
+      },
+      "extracted_summary_metadata": {
+        "diagnostic": "S3 offline shared-write evidence support and ambiguity diagnostic",
+        "saved_probe_rows_read": 9216,
+        "action_censoring_rows_used": 4512,
+        "new_environment_interactions": 0,
+        "input_csv_sha256_by_seed": {
+          "seed_677": "1bef1ea88f10591cdf43869e4d3d60b1250cb9bebd022dc75955b84d6f77cb6e",
+          "seed_691": "52a9f2029be4dfdd514854ee2e130dc6a73bf98496fa495e7576bd4f9264ae38",
+          "seed_709": "8bb682bd704486cf0c8ba531fb9bb952b26a06e2432e24e1315c86ed1430ec03"
+        }
+      },
+      "source_path_note": "The saved summary contains obsolete absolute paths under D:\\MovedFromC:\\ChatGPT\\online; this provenance uses exact repository-relative input paths from the protocol and current output layout."
+    }
+  ],
+  "recorded_execution_command": null,
+  "command_provenance_status": "NOT_RECORDED",
+  "reproduction_reference": "docs/SHARED_WRITE_SUPPORT_DIAGNOSTIC.md",
+  "original_execution_commit": null,
+  "original_execution_commit_reason": "No run-specific source manifest or Git SHA is present in the archived diagnostic output. Current 81de4afd2d703d17c3953facb78fd04b19cb64a9 is import/archive context only and is not attributed to past execution.",
+  "code_provenance": {
+    "source_manifest_paths": [],
+    "source_snapshot_paths": [],
+    "code_entry_paths": [
+      "scripts/diagnose_shared_write_support.py"
+    ],
+    "provenance_note": "Historical source manifests/snapshots are linked per component where available; no run-level Git SHA is recorded. Current archive commit is import context only, not execution provenance."
+  },
+  "input_artifact_paths": [
+    "configs/shared_write_auto.json",
+    "outputs/knowledge_shared_write_auto_formal/seed_677/independent/probe_steps.csv",
+    "outputs/knowledge_shared_write_auto_formal/seed_691/independent/probe_steps.csv",
+    "outputs/knowledge_shared_write_auto_formal/seed_709/independent/probe_steps.csv"
+  ],
+  "per_run_config_paths": [],
+  "frozen_config_path": null,
+  "summary_path": "outputs/knowledge_shared_write_support_diagnostic/summary.json",
+  "output_paths": [
+    "outputs/knowledge_shared_write_support_diagnostic",
+    "outputs/knowledge_shared_write_support_diagnostic/assignments.csv",
+    "outputs/knowledge_shared_write_support_diagnostic/local_reference_audit.csv",
+    "outputs/knowledge_shared_write_support_diagnostic/local_reference_audit.json",
+    "outputs/knowledge_shared_write_support_diagnostic/pairwise_audit.csv",
+    "outputs/knowledge_shared_write_support_diagnostic/summary.json",
+    "outputs/knowledge_shared_write_support_diagnostic/support_coverage_error.png",
+    "outputs/knowledge_shared_write_support_diagnostic/tied_prototype_checks.json"
+  ],
+  "related_paths": [
+    "configs/shared_write_auto.json",
+    "docs/SHARED_WRITE_SUPPORT_DIAGNOSTIC.md",
+    "outputs/knowledge_shared_write_auto_formal/seed_677/independent/probe_steps.csv",
+    "outputs/knowledge_shared_write_auto_formal/seed_691/independent/probe_steps.csv",
+    "outputs/knowledge_shared_write_auto_formal/seed_709/independent/probe_steps.csv",
+    "outputs/knowledge_shared_write_support_diagnostic/assignments.csv",
+    "outputs/knowledge_shared_write_support_diagnostic/local_reference_audit.csv",
+    "outputs/knowledge_shared_write_support_diagnostic/local_reference_audit.json",
+    "outputs/knowledge_shared_write_support_diagnostic/pairwise_audit.csv",
+    "outputs/knowledge_shared_write_support_diagnostic/summary.json",
+    "outputs/knowledge_shared_write_support_diagnostic/support_coverage_error.png",
+    "outputs/knowledge_shared_write_support_diagnostic/tied_prototype_checks.json"
+  ],
+  "cohort_metadata": {
+    "note": "Summed from the preserved per-component extracted_summary_metadata entries; fields absent from historical summaries are omitted."
+  },
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

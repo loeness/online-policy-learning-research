@@ -1,0 +1,50 @@
+{
+  "comparisons": [
+    "UG-V",
+    "UR-UG"
+  ],
+  "execution_authorized": false,
+  "experiment_id": "E164",
+  "hard_stops": [
+    "PENDING_SOURCE_FREEZE",
+    "MISSING_RESOURCE_OR_EXECUTION_ADMISSION",
+    "IDENTITY_OR_PATH_MISMATCH",
+    "REPLAY_MISMATCH",
+    "LOCK_OR_SCORE_ANCHOR_MISMATCH",
+    "NONFINITE_OR_CAPACITY_FAILURE",
+    "METERING_OR_BUDGET_FAILURE"
+  ],
+  "labels": [
+    "V",
+    "UG",
+    "UR"
+  ],
+  "logical_prefixes": 16,
+  "maximum_fit_calls": 5,
+  "maximum_new_scoring_packages": 15,
+  "notes": "No scientific phase has been executed. New E164 budget reservations are not created by this plan.",
+  "ordered_phases": [
+    "verify_exact_source_dependencies_and_reference_identities",
+    "training_only_scalar_replay_all_16_and_verify_reuse_partition",
+    "restore_R_once_each_and_match_original_observed_trace_and_stop",
+    "lock_all_16_V_UG_UR_with_exact_bytes_aliases_and_manifest_sha",
+    "score_and_verify_all_5_V_anchors",
+    "score_remaining_locked_unique_probes_within_15_total_packages",
+    "save_verbatim_deployments_and_build_paired_exploratory_report",
+    "finalize_worker_state_then_supervisor_wait4_and_footer_bounds"
+  ],
+  "original_E163_decision": "UNCHANGED_NO_ADVANCEMENT_8_OF_16",
+  "recovery_seed_ids": [
+    26204,
+    26206,
+    26209,
+    26212,
+    26213
+  ],
+  "resource_authorized": false,
+  "retry_or_scope_expansion": "NONE",
+  "reuse_prefixes": 11,
+  "schema": "e164_local_orchestration_plan_v1",
+  "scientific_api_mapping": "source_binding.json",
+  "state": "BOUND_FROZEN_SOURCE_PENDING_RESOURCE_AUTHORIZATION"
+}

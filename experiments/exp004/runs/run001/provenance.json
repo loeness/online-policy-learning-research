@@ -1,0 +1,51 @@
+{
+  "experiment_id": "E004",
+  "run_id": "run001",
+  "producer_path": "outputs/current_analysis/",
+  "configuration_and_protocol_paths": [
+    "outputs/current_analysis/provenance.json",
+    "outputs/current_analysis/diagnostics.json"
+  ],
+  "input_data_paths": [
+    "outputs/validated/",
+    "outputs/ab_plus/no_gradient/",
+    "outputs/ab_plus/summary.json",
+    "outputs/compression_attempt/"
+  ],
+  "producer_artifact_paths": [
+    "outputs/current_analysis/"
+  ],
+  "source_provenance_paths": [
+    "outputs/current_analysis/provenance.json"
+  ],
+  "reported_date": "unknown",
+  "operational_status": "COMPLETED",
+  "actual_cost": "0 new environment interactions; wall/CPU time unknown",
+  "actual_execution_commit": null,
+  "execution_commit_explanation": "No execution SHA verified; archive context commit 81de4afd2d703d17c3953facb78fd04b19cb64a9 is import context only.",
+  "actual_execution_command": null,
+  "command_explanation": "Exact historical analysis command not preserved; README reproduction guidance is not evidence of execution.",
+  "retrospective_record": true,
+  "producer_entrypoints": [
+    "outputs/current_analysis/analyze_existing.py",
+    "outputs/current_analysis/plot_diagnostics.py"
+  ],
+  "producer_path_semantics": "Historical artifact root, not code entrypoint. This retrospective cohort wrapper does not establish the exact number of original CLI invocations.",
+  "supporting_log_paths": [],
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "hypothesis_id": "H001",
+  "record_role": "HISTORICAL_ANALYSIS_EXECUTION_WRAPPER",
+  "input_membership_manifest": "outputs/current_analysis/provenance.json",
+  "source_experiment_ids": [
+    "E003",
+    "E005",
+    "E009",
+    "E010"
+  ],
+  "new_environment_interactions": 0,
+  "new_optimizer_updates": 0,
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

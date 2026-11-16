@@ -1,0 +1,114 @@
+{
+  "state": "COMPLETED",
+  "experiment_id": "E162",
+  "supervisor_pid": 30232,
+  "started_utc": "2026-10-21T11:43:02.774564+00:00",
+  "phases": [
+    {
+      "name": "features",
+      "pid": 33184,
+      "command": [
+        "D:\\MovedFromC\\ChatGPT\\online\\.venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\scripts\\h033_diagnostic.py",
+        "features",
+        "--producer",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\runs\\run001\\producer",
+        "--output",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\features.json"
+      ],
+      "cwd": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot",
+      "cpu_seconds": 0.0,
+      "wall_seconds": 8.295443300001352,
+      "returncode": 0
+    },
+    {
+      "name": "outcomes",
+      "pid": 35340,
+      "command": [
+        "D:\\MovedFromC\\ChatGPT\\online\\.venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\scripts\\h033_diagnostic.py",
+        "outcomes",
+        "--analysis",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp161\\analyses\\analysis001\\analysis.json",
+        "--output",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\outcomes.json"
+      ],
+      "cwd": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot",
+      "cpu_seconds": 0.0,
+      "wall_seconds": 1.935105399999884,
+      "returncode": 0
+    },
+    {
+      "name": "crossfit",
+      "pid": 33956,
+      "command": [
+        "D:\\MovedFromC\\ChatGPT\\online\\.venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot\\scripts\\h033_diagnostic.py",
+        "crossfit",
+        "--features",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\features.json",
+        "--outcomes",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\outcomes.json",
+        "--output",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\crossfit.json"
+      ],
+      "cwd": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot",
+      "cpu_seconds": 0.03125,
+      "wall_seconds": 0.24194250000073225,
+      "returncode": 0
+    },
+    {
+      "name": "statistics",
+      "pid": 34016,
+      "command": [
+        "D:\\MovedFromC\\ChatGPT\\online\\.venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\preparation\\statistics.py",
+        "--features",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\features.json",
+        "--outcomes",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\outcomes.json",
+        "--crossfit",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\runs\\run001\\crossfit.json",
+        "--output",
+        "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\analyses\\analysis001"
+      ],
+      "cwd": "D:\\MovedFromC\\ChatGPT\\online\\research\\appendix\\H033\\delivery_v1\\source_snapshot",
+      "cpu_seconds": 0.0,
+      "wall_seconds": 0.2991373000004387,
+      "returncode": 0
+    }
+  ],
+  "active_job": null,
+  "environment_interactions": 0,
+  "limits": {
+    "environment_interactions": 0,
+    "cpu_seconds": 300,
+    "campaign_wall_seconds": 600,
+    "workers": 1,
+    "torch_threads_per_worker": 1,
+    "gpu_devices": 0,
+    "new_artifact_cache_temp_bytes": 268435456,
+    "remote_access": false
+  },
+  "environment_overrides": {
+    "TEMP": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\tmp",
+    "TMP": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\tmp",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "TMPDIR": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\tmp",
+    "MPLCONFIGDIR": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\cache\\mpl",
+    "XDG_CACHE_HOME": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\cache\\xdg",
+    "TORCH_HOME": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp162\\cache\\torch"
+  },
+  "home_unchanged": true,
+  "cpu_seconds": 1.296875,
+  "wall_seconds": 10.898279500001081,
+  "artifact_cache_temp_bytes": 481290,
+  "finished_utc": "2026-10-21T11:43:13.676917+00:00"
+}

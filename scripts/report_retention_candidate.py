@@ -7,7 +7,6 @@ import hashlib
 import json
 import math
 from pathlib import Path
-import shutil
 from typing import Any, Mapping, Sequence
 
 import numpy as np
@@ -19,6 +18,13 @@ ARMS = ("keep", "replace_mean", "replace_behavioral", "merge_mean", "merge_behav
 MAIN_SEEDS = (25201, 25202, 25203, 25204, 25205, 25206)
 PILOT_SEED = 25189
 OLD_FAMILIES = ("A", "B")
+E161_ARMS = ("keep", "replace_mean", "replace_behavioral")
+E161_FUTURES = ("old_major", "new_major", "balanced")
+E161_PRIMARY_FUTURES = ("old_major", "new_major")
+E161_PRIMARY_CONTRASTS = (
+    "replace_behavioral-minus-replace_mean",
+    "replace_behavioral-minus-keep",
+)
 OUTCOME_CONTRASTS = (
     ("replace_behavioral-minus-replace_mean", "replace_behavioral", "replace_mean"),
     ("replace_behavioral-minus-keep", "replace_behavioral", "keep"),
@@ -28,6 +34,15 @@ OUTCOME_CONTRASTS = (
     ("merge_mean-minus-keep", "merge_mean", "keep"),
 )
 INTERACTION_NAME = "candidate_by_operation_interaction"
+
+
+def _is_e161(config: Mapping[str, Any]) -> bool:
+    return "e161" in str(config.get("analysis_role", "")).casefold()
+
+
+def _available_contrasts(arms: Sequence[str]) -> tuple[tuple[str, str, str], ...]:
+    arm_set = set(arms)
+    return tuple(row for row in OUTCOME_CONTRASTS if row[1] in arm_set and row[2] in arm_set)
 
 
 def _number(value: Any, name: str, *, integer: bool = False, nullable: bool = False) -> float | int | None:
@@ -172,21 +187,50 @@ def _design(summary: Mapping[str, Any]) -> tuple[dict[str, Any], list[dict[str, 
         horizons = [int(value) for value in active["horizons"]]
     except (KeyError, TypeError, ValueError) as exc:
         raise ValueError(f"incomplete {phase} dimensions in summary.config") from exc
-    if arms != list(ARMS):
+    is_e161 = _is_e161(config)
+    if is_e161:
+        if phase != "main":
+            raise ValueError("E161 confirmatory analysis must use phase main")
+        if arms != list(E161_ARMS):
+            raise ValueError(f"E161 arms must equal the frozen order {E161_ARMS}")
+        if pairs != ["dynamics"] or states != ["late"]:
+            raise ValueError("E161 must use dynamics / late only")
+        if len(seeds) != 16:
+            raise ValueError("E161 requires sixteen configured independent seeds")
+        if set(futures) != set(E161_FUTURES) or len(futures) != len(E161_FUTURES):
+            raise ValueError("E161 futures must contain old_major, new_major, and balanced exactly once")
+        if replicates != [0, 1]:
+            raise ValueError("E161 requires paired replicas 0 and 1")
+        report_config = _mapping(config.get("report"), "config.report")
+        if report_config.get("primary_future_regimes") != list(E161_PRIMARY_FUTURES):
+            raise ValueError("E161 primary_future_regimes must be old_major then new_major")
+        if [str(value) for value in report_config.get("primary_contrasts", [])] != list(E161_PRIMARY_CONTRASTS):
+            raise ValueError("E161 primary_contrasts must contain the two frozen behavioral contrasts")
+        if horizons != [1536, 6144] or int(report_config.get("primary_horizon", -1)) != 6144:
+            raise ValueError("E161 must retain the 1536-step window and use 6144 as primary horizon")
+        if int(report_config.get("bootstrap_resamples", -1)) != 10000 or int(report_config.get("bootstrap_seed", -1)) != 2026102102:
+            raise ValueError("E161 bootstrap sensitivity settings differ from the frozen 10000 / 2026102102 plan")
+        threshold = _number(report_config.get("practical_reward_per_step"),
+                            "config.report.practical_reward_per_step")
+        if not math.isclose(float(threshold), 0.002, rel_tol=0.0, abs_tol=1e-15):
+            raise ValueError("E161 practical_reward_per_step must equal 0.002")
+    elif arms != list(ARMS):
         raise ValueError(f"arms must equal the frozen order {ARMS}")
     if not seeds or len(seeds) != len(set(seeds)):
         raise ValueError("active seeds must be nonempty and unique")
     if not pairs or not states or not futures or not replicates:
         raise ValueError("active design dimensions must be nonempty")
-    if states != ["early", "late"]:
+    if not is_e161 and states != ["early", "late"]:
         raise ValueError("states must be early then late")
     if horizons != sorted(set(horizons)) or not horizons or horizons[0] <= 0:
         raise ValueError("horizons must be increasing positive integers")
-    if phase == "main" and tuple(seeds) != MAIN_SEEDS:
+    if phase == "main" and not is_e161 and tuple(seeds) != MAIN_SEEDS:
         raise ValueError(f"main seeds must equal the frozen set {MAIN_SEEDS}")
+    if phase == "main" and is_e161 and config.get("history_regime_by_seed") != "old_major_if_even_else_new_major":
+        raise ValueError("E161 history regime must follow the frozen seed-parity assignment")
     if phase == "pilot" and (seeds != [PILOT_SEED] or pairs != ["dynamics"] or futures != ["old_major"] or replicates != [0]):
         raise ValueError("pilot dimensions differ from the frozen one-seed design")
-    if config.get("history_regime_by_seed") != "old_major_if_even_else_new_major":
+    if not is_e161 and config.get("history_regime_by_seed") != "old_major_if_even_else_new_major":
         raise ValueError("history regime must follow the frozen seed-parity rule")
     if config.get("warmup_write_rule") != "replace_old_group_only_after_pair":
         raise ValueError("late warmup must use the frozen old-group-only write rule")
@@ -242,9 +286,14 @@ def _design(summary: Mapping[str, Any]) -> tuple[dict[str, Any], list[dict[str, 
         cases_by_id[case_id] = case
     if set(case_index) != expected_cases:
         raise ValueError(f"case grid mismatch; missing {sorted(expected_cases - set(case_index))[:4]}")
-    if phase == "main" and ({family: list(families.values()).count(family) for family in OLD_FAMILIES} != {"A": 3, "B": 3}
-                            or sum(seed % 2 == 0 for seed in seeds) != 3 or sum(seed % 2 for seed in seeds) != 3):
-        raise ValueError("main seed strata must contain three seeds per old family and parity")
+    if phase == "main":
+        expected_stratum_size = 8 if is_e161 else 3
+        expected_counts = {family: expected_stratum_size for family in OLD_FAMILIES}
+        parity_count = expected_stratum_size
+        if ({family: list(families.values()).count(family) for family in OLD_FAMILIES} != expected_counts
+                or sum(seed % 2 == 0 for seed in seeds) != parity_count
+                or sum(seed % 2 for seed in seeds) != parity_count):
+            raise ValueError(f"main seed strata must contain {expected_stratum_size} seeds per old family and parity")
 
     branch_index: dict[tuple[int, str, str, str, int, str], dict[str, Any]] = {}
     branch_by_id: dict[tuple[str, str], tuple[int, str, str, str, int, str]] = {}
@@ -369,7 +418,9 @@ def _expected_counts(config: Mapping[str, Any], active: Mapping[str, Any]) -> di
     branch_count = case_count * len(active["future_regimes"]) * len(active["replicates"]) * len(active["arms"])
     early_steps = 2 * int(config["bootstrap_steps"]) + 6 * int(config["bout_steps"]) + 2 * int(config["early_source_steps"])
     late_steps = early_steps + 4 * 2 * 2 * int(config["warmup_pair_steps"]) + 2 * (int(config["late_source_steps"]) - int(config["early_source_steps"]))
-    prefix_steps = len(active["seeds"]) * len(active["pair_kinds"]) * (early_steps + late_steps)
+    prefix_steps = len(active["seeds"]) * len(active["pair_kinds"]) * sum(
+        late_steps if str(state) == "late" else early_steps for state in active["states"]
+    )
     branch_steps_per_branch = max(int(value) for value in active["horizons"])
     branch_steps = branch_count * branch_steps_per_branch
     return {"cases": case_count, "branches": branch_count, "early_prefix_steps": early_steps,
@@ -676,6 +727,7 @@ def _audit_run(
     families: Mapping[int, str | None],
 ) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]]]:
     active, config, phase = design["active"], design["config"], design["phase"]
+    is_e161 = _is_e161(config)
     horizons = [int(value) for value in active["horizons"]]
     max_horizon = max(horizons)
     case_by_key = {
@@ -752,7 +804,7 @@ def _audit_run(
                                 ("package_budget_bytes", case_capacity["package_budget_bytes"])):
             if int(_number(case_costs.get(field), f"case {case_id}.costs.{field}", integer=True)) != expected:
                 raise ValueError(f"case {case_id} package capacity differs between prefix and case cost records")
-        case_observations.append({
+        case_observation = {
             "case_id": case_id, "seed": case_key[0], "family": families.get(case_key[0]),
             "pair_kind": case_key[1], "state": case_key[2], "history_regime": str(case["history_regime"]),
             "prefix_steps": prefix_record["rows"], "prefix_reward_sum": prefix_record["reward_sum"],
@@ -765,7 +817,11 @@ def _audit_run(
             "band_counts_by_owner": band_counts, "prefix_capacity": case_capacity,
             "evidence_buffer": evidence_record,
             "warmup_pair_records": _json_safe(prefix.get("warmup_pair_records", [])),
-        })
+        }
+        if is_e161:
+            case_observation["prefix_rollouts_trained"] = rollout_record["rows"]
+            case_observation["prefix_minibatch_updates"] = rollout_record["minibatch_updates"]
+        case_observations.append(case_observation)
 
     for branch in branches:
         bid = str(branch["branch_id"])
@@ -837,6 +893,19 @@ def _audit_run(
                     if int(_number(costs.get(capacity_field), f"branch {bid}.costs.{capacity_field}", integer=True)) != capacity[capacity_field]:
                         raise ValueError(f"branch {bid} final package capacity differs from its cost record")
         action_install = _mapping(branch.get("action_install"), f"branch {bid}.action_install")
+        counts_delta = branch.get("counts_delta")
+        slot_evictions = runtime_slot_evictions = None
+        if is_e161:
+            counts_delta = _mapping(counts_delta, f"branch {bid}.counts_delta")
+            slot_evictions = int(_number(counts_delta.get("slot_evictions"),
+                                         f"branch {bid}.counts_delta.slot_evictions", integer=True))
+            runtime_counts = _mapping(counts_delta.get("runtime_counts"),
+                                      f"branch {bid}.counts_delta.runtime_counts")
+            runtime_slot_evictions = int(_number(runtime_counts.get("slot_evictions"),
+                                                 f"branch {bid}.counts_delta.runtime_counts.slot_evictions",
+                                                 integer=True))
+            if slot_evictions != runtime_slot_evictions:
+                raise ValueError(f"branch {bid} learner and runtime eviction counters differ")
         install = float(_number(costs.get("install_cpu_s"), f"branch {bid}.costs.install_cpu_s"))
         if install < 0:
             raise ValueError(f"branch {bid} install CPU must be nonnegative")
@@ -870,7 +939,7 @@ def _audit_run(
             expected_utility = float(raw["reward_per_step"]) - (install + simulation_cpu) / horizon
             if not math.isclose(utility_rate, expected_utility, rel_tol=1e-10, abs_tol=1e-10):
                 raise ValueError(f"branch {bid} utility rate at {horizon} differs from raw reward and measured CPU")
-            branch_observations.append({
+            observation = {
                 "branch_id": bid, "case_id": str(branch["case_id"]), "seed": key[0],
                 "family": families.get(key[0]), "pair_kind": key[1], "state": key[2],
                 "history_regime": str(branch["history_regime"]), "future_regime": key[3],
@@ -883,7 +952,18 @@ def _audit_run(
                 "action_install": dict(action_install),
                 "new_source_teacher_kl_before_codec": _json_safe(action_install.get("new_source_teacher_kl_before_codec")),
                 "new_source_teacher_kl_after_codec": _json_safe(action_install.get("new_source_teacher_kl_after_codec")),
-            })
+            }
+            if is_e161:
+                observation["rollouts_trained"] = int(_number(
+                    hrow.get("rollouts_trained"), f"branch {bid}.{horizon}.rollouts_trained", integer=True,
+                ))
+                observation["minibatch_updates"] = int(_number(
+                    hrow.get("minibatch_updates"), f"branch {bid}.{horizon}.minibatch_updates", integer=True,
+                ))
+                observation["slot_evictions"] = slot_evictions
+                observation["runtime_slot_evictions"] = runtime_slot_evictions
+                observation["counts_delta"] = _json_safe(counts_delta)
+            branch_observations.append(observation)
         per_bout = branch.get("per_bout")
         if not isinstance(per_bout, list) or not per_bout:
             raise ValueError(f"branch {bid} per_bout must be a nonempty array")
@@ -1096,6 +1176,115 @@ def _bootstrap_stat(
             "bootstrap_method": method, "bootstrap_resamples": int(resamples) if phase == "main" else 0}
 
 
+def _student_t_quantile(probability: float, degrees_freedom: float) -> float:
+    """Return a Student-t quantile using the already locked mpmath dependency."""
+    from mpmath import mp
+
+    if not 0.0 < probability < 1.0 or degrees_freedom <= 0.0:
+        raise ValueError("Student-t probability and degrees of freedom must be valid")
+    with mp.workdps(45):
+        target = mp.mpf(str(probability))
+        if math.isinf(degrees_freedom):
+            return float(mp.sqrt(2) * mp.erfinv(2 * target - 1))
+        df = mp.mpf(str(degrees_freedom))
+
+        def cdf(value: Any) -> Any:
+            if value == 0:
+                return mp.mpf("0.5")
+            tail = mp.betainc(df / 2, mp.mpf("0.5"), 0,
+                              df / (df + value * value), regularized=True) / 2
+            return 1 - tail if value > 0 else tail
+
+        if probability == 0.5:
+            return 0.0
+        sign = 1 if probability > 0.5 else -1
+        low, high = mp.mpf("0"), mp.mpf("1")
+        while cdf(high) < max(target, 1 - target):
+            high *= 2
+        for _ in range(180):
+            middle = (low + high) / 2
+            if cdf(middle) < max(target, 1 - target):
+                low = middle
+            else:
+                high = middle
+        return float(sign * (low + high) / 2)
+
+
+def _e161_stratified_stat(
+    per_seed: Mapping[int, float], families: Mapping[int, str | None],
+    *, resamples: int, bootstrap_seed: int,
+) -> dict[str, Any]:
+    """Equal-family Welch inference with a stratified bootstrap sensitivity interval."""
+    strata = {
+        family: [(int(seed), float(value)) for seed, value in sorted(per_seed.items())
+                 if families.get(int(seed)) == family]
+        for family in OLD_FAMILIES
+    }
+    if set(per_seed) != {int(seed) for rows in strata.values() for seed, _ in rows}:
+        raise ValueError("E161 effects require an A/B family label for every independent seed")
+    if any(len(strata[family]) != 8 for family in OLD_FAMILIES):
+        raise ValueError("E161 statistics require eight independent seeds in each A/B stratum")
+    values_a = np.asarray([value for _, value in strata["A"]], dtype=np.float64)
+    values_b = np.asarray([value for _, value in strata["B"]], dtype=np.float64)
+    mean_a, mean_b = float(np.mean(values_a)), float(np.mean(values_b))
+    var_a = float(np.var(values_a, ddof=1))
+    var_b = float(np.var(values_b, ddof=1))
+    estimate = (mean_a + mean_b) / 2.0
+    component_a, component_b = var_a / len(values_a), var_b / len(values_b)
+    standard_error = math.sqrt(component_a + component_b) / 2.0
+    denominator = component_a * component_a / (len(values_a) - 1) + component_b * component_b / (len(values_b) - 1)
+    degrees_freedom = math.inf if denominator == 0.0 else (component_a + component_b) ** 2 / denominator
+    if standard_error == 0.0:
+        lower = estimate
+        ci95 = [estimate, estimate]
+        t_statistic: float | None = 0.0 if estimate == 0.0 else None
+        t_statistic_degenerate = "zero" if estimate == 0.0 else (
+            "positive_infinity" if estimate > 0.0 else "negative_infinity"
+        )
+    else:
+        t_statistic = estimate / standard_error
+        t_statistic_degenerate = None
+        lower = estimate - _student_t_quantile(0.95, degrees_freedom) * standard_error
+        half_width = _student_t_quantile(0.975, degrees_freedom) * standard_error
+        ci95 = [estimate - half_width, estimate + half_width]
+
+    rng = np.random.default_rng(int(bootstrap_seed))
+    draws = np.empty(int(resamples), dtype=np.float64)
+    for family_index, values in enumerate((values_a, values_b)):
+        sampled_indices = rng.integers(0, len(values), size=(int(resamples), len(values)))
+        family_means = np.mean(values[sampled_indices], axis=1)
+        if family_index == 0:
+            draws[:] = family_means / 2.0
+        else:
+            draws += family_means / 2.0
+    bootstrap_ci95 = [float(value) for value in np.quantile(draws, [0.025, 0.975], method="linear")]
+    items = [{"seed": int(seed), "family": families[int(seed)], "value": float(value)}
+             for seed, value in sorted(per_seed.items())]
+    return {
+        "mean": estimate,
+        "ci95": ci95,
+        "ci95_method": "two-sided 95% A/B-stratified Welch-t interval",
+        "lower95_one_sided": lower,
+        "one_sided_lower_method": "one-sided 95% A/B-stratified Welch-t lower bound",
+        "standard_error": standard_error,
+        "welch_degrees_freedom": None if math.isinf(degrees_freedom) else degrees_freedom,
+        "welch_degrees_freedom_infinite": math.isinf(degrees_freedom),
+        "welch_t_statistic": t_statistic,
+        "welch_t_statistic_degenerate": t_statistic_degenerate,
+        "family_summary": {
+            family: {"seed_count": len(strata[family]), "mean": float(np.mean(values)),
+                     "sample_sd": float(np.std(values, ddof=1))}
+            for family, values in (("A", values_a), ("B", values_b))
+        },
+        "seed_count": len(items),
+        "per_seed": items,
+        "bootstrap_ci95_sensitivity": bootstrap_ci95,
+        "bootstrap_method": "A/B-stratified paired-seed bootstrap sensitivity only",
+        "bootstrap_resamples": int(resamples),
+        "bootstrap_seed": int(bootstrap_seed),
+    }
+
+
 def _contrast_seed_values(
     index: Mapping[tuple[Any, ...], float],
     *, seed: int, pair: str, state: str, horizon: int,
@@ -1113,6 +1302,28 @@ def _contrast_seed_values(
     return float(np.mean(differences))
 
 
+def _e161_contrast_seed_values(
+    index: Mapping[tuple[Any, ...], float],
+    *, seed: int, pair: str, state: str, horizon: int,
+    futures: Sequence[str], replicates: Sequence[int],
+    left: str, right: str,
+) -> float:
+    """Average replicas within each regime, then weight each regime equally."""
+    regime_means = []
+    for future in futures:
+        differences = []
+        for replicate in replicates:
+            akey = (seed, pair, state, future, replicate, left, horizon)
+            bkey = (seed, pair, state, future, replicate, right, horizon)
+            if akey not in index or bkey not in index:
+                raise ValueError(f"paired contrast is missing branch cell(s): {akey}, {bkey}")
+            differences.append(index[akey] - index[bkey])
+        regime_means.append(float(np.mean(differences)))
+    if not regime_means:
+        raise ValueError("E161 contrast requires at least one primary future regime")
+    return float(np.mean(regime_means))
+
+
 def _compute_effects(
     observations: Sequence[Mapping[str, Any]],
     recovery: Sequence[Mapping[str, Any]],
@@ -1124,12 +1335,31 @@ def _compute_effects(
     report_config = _mapping(config.get("report"), "config.report")
     resamples = int(_number(report_config.get("bootstrap_resamples"), "config.report.bootstrap_resamples", integer=True))
     bootstrap_seed = int(_number(report_config.get("bootstrap_seed"), "config.report.bootstrap_seed", integer=True))
+    is_e161 = _is_e161(config)
     horizons = [int(value) for value in active["horizons"]]
     primary_horizon = int(_number(report_config.get("primary_horizon"), "config.report.primary_horizon", integer=True))
     if primary_horizon not in horizons:
         raise ValueError("primary_horizon is not one of the saved horizons")
     seeds, pairs, states = active["seeds"], active["pair_kinds"], active["states"]
     futures, replicates = active["future_regimes"], active["replicates"]
+    arms_set = set(active.get("arms", ARMS))
+    contrasts = _available_contrasts(active["arms"]) if is_e161 else OUTCOME_CONTRASTS
+    primary_futures = ([str(value) for value in report_config["primary_future_regimes"]]
+                       if is_e161 else [str(value) for value in futures])
+
+    def contrast_seed(*, seed: int, pair: str, state: str, horizon: int,
+                      futures: Sequence[str], left: str, right: str) -> float:
+        implementation = _e161_contrast_seed_values if is_e161 else _contrast_seed_values
+        return implementation(reward_index, seed=seed, pair=pair, state=state, horizon=horizon,
+                               futures=futures, replicates=replicates, left=left, right=right)
+
+    def summarize(per_seed: Mapping[int, float]) -> dict[str, Any]:
+        if is_e161:
+            return _e161_stratified_stat(per_seed, families, resamples=resamples,
+                                         bootstrap_seed=bootstrap_seed)
+        return _bootstrap_stat(per_seed, families, phase=phase, resamples=resamples,
+                               bootstrap_seed=bootstrap_seed)
+
     reward_index = _branch_value_index(observations, "reward_per_step")
     effects: list[dict[str, Any]] = []
     future_effects: list[dict[str, Any]] = []
@@ -1137,70 +1367,61 @@ def _compute_effects(
     for horizon in horizons:
         for pair in pairs:
             for state in states:
-                for name, left, right in OUTCOME_CONTRASTS:
+                for name, left, right in contrasts:
                     per_seed = {
-                        int(seed): _contrast_seed_values(
-                            reward_index, seed=int(seed), pair=str(pair), state=str(state),
-                            horizon=horizon, futures=futures, replicates=replicates, left=left, right=right,
-                        )
+                        int(seed): contrast_seed(seed=int(seed), pair=str(pair), state=str(state),
+                                                 horizon=horizon, futures=primary_futures,
+                                                 left=left, right=right)
                         for seed in seeds
                     }
                     effects.append({"pair_kind": pair, "state": state, "horizon": horizon,
                                     "contrast": name, "left_arm": left, "right_arm": right,
-                                    "reward_per_step": _bootstrap_stat(per_seed, families, phase=phase,
-                                                                       resamples=resamples, bootstrap_seed=bootstrap_seed)})
+                                    "reward_per_step": summarize(per_seed)})
                     for future in futures:
                         scoped = {
-                            int(seed): _contrast_seed_values(
-                                reward_index, seed=int(seed), pair=str(pair), state=str(state),
-                                horizon=horizon, futures=[str(future)], replicates=replicates,
-                                left=left, right=right,
-                            )
+                            int(seed): contrast_seed(seed=int(seed), pair=str(pair), state=str(state),
+                                                     horizon=horizon, futures=[str(future)],
+                                                     left=left, right=right)
                             for seed in seeds
                         }
                         future_effects.append({"pair_kind": pair, "state": state, "future_regime": future,
                                                "horizon": horizon, "contrast": name,
                                                "left_arm": left, "right_arm": right,
-                                               "reward_per_step": _bootstrap_stat(scoped, families, phase=phase,
-                                                                                  resamples=resamples, bootstrap_seed=bootstrap_seed)})
+                                               "reward_per_step": summarize(scoped)})
                 # Candidate-by-operation interaction: (merge behavioral - merge mean) - (replace behavioral - replace mean).
-                per_seed_interaction = {}
-                per_future_interaction: dict[str, dict[int, float]] = {str(future): {} for future in futures}
-                for seed in seeds:
-                    replace_gap = _contrast_seed_values(
-                        reward_index, seed=int(seed), pair=str(pair), state=str(state), horizon=horizon,
-                        futures=futures, replicates=replicates, left="replace_behavioral", right="replace_mean",
-                    )
-                    merge_gap = _contrast_seed_values(
-                        reward_index, seed=int(seed), pair=str(pair), state=str(state), horizon=horizon,
-                        futures=futures, replicates=replicates, left="merge_behavioral", right="merge_mean",
-                    )
-                    per_seed_interaction[int(seed)] = merge_gap - replace_gap
+                if {"replace_behavioral", "replace_mean", "merge_behavioral", "merge_mean"} <= arms_set:
+                    per_seed_interaction = {}
+                    per_future_interaction: dict[str, dict[int, float]] = {str(future): {} for future in futures}
+                    for seed in seeds:
+                        replace_gap = contrast_seed(
+                            seed=int(seed), pair=str(pair), state=str(state), horizon=horizon,
+                            futures=primary_futures, left="replace_behavioral", right="replace_mean",
+                        )
+                        merge_gap = contrast_seed(
+                            seed=int(seed), pair=str(pair), state=str(state), horizon=horizon,
+                            futures=primary_futures, left="merge_behavioral", right="merge_mean",
+                        )
+                        per_seed_interaction[int(seed)] = merge_gap - replace_gap
+                        for future in futures:
+                            replace_future = contrast_seed(
+                                seed=int(seed), pair=str(pair), state=str(state), horizon=horizon,
+                                futures=[str(future)], left="replace_behavioral", right="replace_mean",
+                            )
+                            merge_future = contrast_seed(
+                                seed=int(seed), pair=str(pair), state=str(state), horizon=horizon,
+                                futures=[str(future)], left="merge_behavioral", right="merge_mean",
+                            )
+                            per_future_interaction[str(future)][int(seed)] = merge_future - replace_future
+                    interaction_effects.append({"pair_kind": pair, "state": state, "horizon": horizon,
+                                                "contrast": INTERACTION_NAME,
+                                                "reward_per_step": summarize(per_seed_interaction)})
                     for future in futures:
-                        replace_future = _contrast_seed_values(
-                            reward_index, seed=int(seed), pair=str(pair), state=str(state), horizon=horizon,
-                            futures=[str(future)], replicates=replicates,
-                            left="replace_behavioral", right="replace_mean",
-                        )
-                        merge_future = _contrast_seed_values(
-                            reward_index, seed=int(seed), pair=str(pair), state=str(state), horizon=horizon,
-                            futures=[str(future)], replicates=replicates,
-                            left="merge_behavioral", right="merge_mean",
-                        )
-                        per_future_interaction[str(future)][int(seed)] = merge_future - replace_future
-                interaction_effects.append({"pair_kind": pair, "state": state, "horizon": horizon,
-                                            "contrast": INTERACTION_NAME,
-                                            "reward_per_step": _bootstrap_stat(per_seed_interaction, families,
-                                                                               phase=phase, resamples=resamples,
-                                                                               bootstrap_seed=bootstrap_seed)})
-                for future in futures:
-                    future_effects.append({"pair_kind": pair, "state": state, "future_regime": future,
-                                           "horizon": horizon, "contrast": INTERACTION_NAME,
-                                           "reward_per_step": _bootstrap_stat(per_future_interaction[str(future)], families,
-                                                                              phase=phase, resamples=resamples,
-                                                                              bootstrap_seed=bootstrap_seed)})
+                        future_effects.append({"pair_kind": pair, "state": state, "future_regime": future,
+                                               "horizon": horizon, "contrast": INTERACTION_NAME,
+                                               "reward_per_step": summarize(per_future_interaction[str(future)])})
 
     recovery_effects: list[dict[str, Any]] = []
+    recovery_future_effects: list[dict[str, Any]] = []
     recovery_index: dict[tuple[Any, ...], float] = {}
     for row in recovery:
         key = (int(row["seed"]), str(row["pair_kind"]), str(row["state"]), str(row["future_regime"]),
@@ -1213,57 +1434,129 @@ def _compute_effects(
     for population in ("allocated_only", "all_bouts"):
         for pair in pairs:
             for state in states:
-                for name, left, right in OUTCOME_CONTRASTS:
+                for name, left, right in contrasts:
                     per_seed: dict[int, float] = {}
                     for seed in seeds:
-                        differences = []
-                        for future in futures:
+                        regime_means = []
+                        all_differences = []
+                        for future in primary_futures:
+                            differences = []
                             for replicate in replicates:
                                 akey = (int(seed), str(pair), str(state), str(future), int(replicate), left, population)
                                 bkey = (int(seed), str(pair), str(state), str(future), int(replicate), right, population)
                                 if akey not in recovery_index or bkey not in recovery_index:
                                     raise ValueError(f"recovery contrast is missing paired bout population: {akey}, {bkey}")
                                 differences.append(recovery_index[akey] - recovery_index[bkey])
-                        per_seed[int(seed)] = float(np.mean(differences))
+                                all_differences.append(recovery_index[akey] - recovery_index[bkey])
+                            regime_means.append(float(np.mean(differences)))
+                        per_seed[int(seed)] = float(np.mean(regime_means) if is_e161 else np.mean(all_differences))
                     recovery_effects.append({"population": population, "pair_kind": pair, "state": state,
                                              "contrast": name, "metric": "return_first_256_per_step",
-                                             "stat": _bootstrap_stat(per_seed, families, phase=phase,
-                                                                     resamples=resamples, bootstrap_seed=bootstrap_seed)})
-                per_seed_interaction = {}
-                for seed in seeds:
-                    replace_gap = []
-                    merge_gap = []
+                                             "stat": summarize(per_seed)})
                     for future in futures:
-                        for replicate in replicates:
-                            get = lambda arm: recovery_index[(int(seed), str(pair), str(state), str(future), int(replicate), arm, population)]
-                            replace_gap.append(get("replace_behavioral") - get("replace_mean"))
-                            merge_gap.append(get("merge_behavioral") - get("merge_mean"))
-                    per_seed_interaction[int(seed)] = float(np.mean(merge_gap) - np.mean(replace_gap))
-                recovery_effects.append({"population": population, "pair_kind": pair, "state": state,
-                                         "contrast": INTERACTION_NAME, "metric": "return_first_256_per_step",
-                                         "stat": _bootstrap_stat(per_seed_interaction, families, phase=phase,
-                                                                 resamples=resamples, bootstrap_seed=bootstrap_seed)})
+                        by_seed_future: dict[int, float] = {}
+                        for seed in seeds:
+                            differences = []
+                            for replicate in replicates:
+                                akey = (int(seed), str(pair), str(state), str(future), int(replicate), left, population)
+                                bkey = (int(seed), str(pair), str(state), str(future), int(replicate), right, population)
+                                if akey not in recovery_index or bkey not in recovery_index:
+                                    raise ValueError(f"recovery contrast is missing paired bout population: {akey}, {bkey}")
+                                differences.append(recovery_index[akey] - recovery_index[bkey])
+                            by_seed_future[int(seed)] = float(np.mean(differences))
+                        recovery_future_effects.append({"population": population, "pair_kind": pair, "state": state,
+                                                        "future_regime": future, "contrast": name,
+                                                        "metric": "return_first_256_per_step",
+                                                        "stat": summarize(by_seed_future)})
+                if {"replace_behavioral", "replace_mean", "merge_behavioral", "merge_mean"} <= arms_set:
+                    per_seed_interaction = {}
+                    for seed in seeds:
+                        replace_gap = []
+                        merge_gap = []
+                        for future in primary_futures:
+                            for replicate in replicates:
+                                get = lambda arm: recovery_index[(int(seed), str(pair), str(state), str(future), int(replicate), arm, population)]
+                                replace_gap.append(get("replace_behavioral") - get("replace_mean"))
+                                merge_gap.append(get("merge_behavioral") - get("merge_mean"))
+                        per_seed_interaction[int(seed)] = float(np.mean(merge_gap) - np.mean(replace_gap))
+                    recovery_effects.append({"population": population, "pair_kind": pair, "state": state,
+                                             "contrast": INTERACTION_NAME, "metric": "return_first_256_per_step",
+                                             "stat": summarize(per_seed_interaction)})
     future_interactions = []
     if "old_major" in futures and "new_major" in futures:
         for pair in pairs:
             for state in states:
-                for name, left, right in OUTCOME_CONTRASTS:
+                for name, left, right in contrasts:
                     by_seed = {}
                     for seed in seeds:
-                        old_value = _contrast_seed_values(reward_index, seed=int(seed), pair=str(pair), state=str(state),
-                                                          horizon=primary_horizon, futures=["old_major"], replicates=replicates,
-                                                          left=left, right=right)
-                        new_value = _contrast_seed_values(reward_index, seed=int(seed), pair=str(pair), state=str(state),
-                                                          horizon=primary_horizon, futures=["new_major"], replicates=replicates,
-                                                          left=left, right=right)
+                        old_value = contrast_seed(seed=int(seed), pair=str(pair), state=str(state),
+                                                  horizon=primary_horizon, futures=["old_major"],
+                                                  left=left, right=right)
+                        new_value = contrast_seed(seed=int(seed), pair=str(pair), state=str(state),
+                                                  horizon=primary_horizon, futures=["new_major"],
+                                                  left=left, right=right)
                         by_seed[int(seed)] = new_value - old_value
                     future_interactions.append({"pair_kind": pair, "state": state, "horizon": primary_horizon,
                                                 "contrast": f"new_major_minus_old_major:{name}",
-                                                "reward_per_step": _bootstrap_stat(by_seed, families, phase=phase,
-                                                                                   resamples=resamples, bootstrap_seed=bootstrap_seed)})
-    return {"primary_horizon": primary_horizon, "effects": effects,
+                                                "reward_per_step": summarize(by_seed)})
+    result = {"primary_horizon": primary_horizon, "effects": effects,
             "future_scoped_effects": future_effects, "candidate_by_operation_interaction": interaction_effects,
             "future_prevalence_interaction": future_interactions, "recovery_effects": recovery_effects}
+    if is_e161:
+        result["primary_future_regimes"] = primary_futures
+        result["recovery_future_effects"] = recovery_future_effects
+    return result
+
+
+def _e161_scientific_decision(effects: Mapping[str, Any], config: Mapping[str, Any]) -> dict[str, Any]:
+    report_config = _mapping(config.get("report"), "config.report")
+    threshold = float(_number(report_config.get("practical_reward_per_step"),
+                              "config.report.practical_reward_per_step"))
+    primary_horizon = int(effects["primary_horizon"])
+    wanted = set(E161_PRIMARY_CONTRASTS)
+    rows = [row for row in effects["effects"]
+            if row["horizon"] == primary_horizon and row["pair_kind"] == "dynamics"
+            and row["state"] == "late" and row["contrast"] in wanted]
+    found = {str(row["contrast"]): row for row in rows}
+    if set(found) != wanted or len(rows) != len(wanted):
+        raise ValueError("E161 primary horizon is missing one of its two frozen contrasts")
+    contrasts = {}
+    for name in E161_PRIMARY_CONTRASTS:
+        stat = found[name]["reward_per_step"]
+        mean = float(stat["mean"])
+        lower = float(stat["lower95_one_sided"])
+        contrasts[name] = {
+            "estimate": mean,
+            "one_sided_95_lower": lower,
+            "direction_pass": lower > 0.0,
+            "practical_threshold": threshold,
+            "point_estimate_at_or_above_threshold": mean >= threshold,
+            "welch_degrees_freedom": stat["welch_degrees_freedom"],
+            "two_sided_95_ci": stat["ci95"],
+        }
+    direction_pass = all(row["direction_pass"] for row in contrasts.values())
+    threshold_pass = all(row["point_estimate_at_or_above_threshold"] for row in contrasts.values())
+    if direction_pass and threshold_pass:
+        status = "ADVANCE_TO_FULL_STREAM_VALIDATION"
+    elif direction_pass:
+        status = "SMALL_CONDITION_SPECIFIC_GAIN"
+    elif all(row["estimate"] > 0.0 for row in contrasts.values()):
+        status = "INCONCLUSIVE"
+    else:
+        status = "NOT_REPEATED"
+    return {
+        "status": status,
+        "technical_audit_status": "PASS",
+        "primary_horizon": primary_horizon,
+        "primary_future_regimes": list(E161_PRIMARY_FUTURES),
+        "balanced_in_primary_estimand": False,
+        "independent_unit": "deployment seed; all sixteen configured seeds retained",
+        "contrast_rule": "both one-sided 95% Welch lower bounds must exceed zero",
+        "advancement_rule": "direction rule and both point estimates at or above 0.002 reward/step",
+        "intersection_union_direction_pass": direction_pass,
+        "advancement_threshold_pass": threshold_pass,
+        "contrasts": contrasts,
+    }
 
 
 def _diagnostics(
@@ -1324,7 +1617,8 @@ def _diagnostics(
     return {"candidate_fit_by_case": fit_rows, "branch_codec_kl_by_arm": codec_rows}
 
 
-def _costs(cases: Sequence[Mapping[str, Any]], branches: Sequence[Mapping[str, Any]], recount: Mapping[str, Any]) -> dict[str, Any]:
+def _costs(cases: Sequence[Mapping[str, Any]], branches: Sequence[Mapping[str, Any]], recount: Mapping[str, Any],
+           *, arms: Sequence[str] = ARMS, include_evictions: bool = False) -> dict[str, Any]:
     unique_cases = []
     for case in cases:
         prefix = _case_prefix(case, f"case {case['case_id']}")
@@ -1346,12 +1640,12 @@ def _costs(cases: Sequence[Mapping[str, Any]], branches: Sequence[Mapping[str, A
             "package_budget_bytes": int(_number(costs.get("package_budget_bytes"), f"case {case['case_id']}.package_budget_bytes", integer=True)),
         })
     branch_costs = []
-    by_arm: dict[str, list[float]] = {arm: [] for arm in ARMS}
+    by_arm: dict[str, list[float]] = {str(arm): [] for arm in arms}
     for branch in branches:
         cost = _mapping(branch.get("costs"), f"branch {branch['branch_id']}.costs")
         cpu = float(_number(cost.get("branch_cpu_s"), f"branch {branch['branch_id']}.branch_cpu_s"))
         by_arm[str(branch["arm"])].append(cpu)
-        branch_costs.append({
+        branch_record = {
             "branch_id": str(branch["branch_id"]), "seed": int(branch["seed"]),
             "pair_kind": str(branch["pair_kind"]), "state": str(branch["state"]),
             "future_regime": str(branch["future_regime"]), "replicate": int(branch["replicate"]),
@@ -1362,7 +1656,14 @@ def _costs(cases: Sequence[Mapping[str, Any]], branches: Sequence[Mapping[str, A
             "package_bytes_after_action": branch.get("capacity_after_action", {}).get("package_bytes"),
             "actor_container_bytes": branch.get("capacity", {}).get("actor_container_bytes"),
             "package_budget_bytes": branch.get("capacity", {}).get("package_budget_bytes"),
-        })
+        }
+        if include_evictions:
+            counts_delta = _mapping(branch.get("counts_delta"), f"branch {branch['branch_id']}.counts_delta")
+            branch_record["slot_evictions"] = int(_number(
+                counts_delta.get("slot_evictions"), f"branch {branch['branch_id']}.counts_delta.slot_evictions",
+                integer=True,
+            ))
+        branch_costs.append(branch_record)
     prefix_cpu = sum(row["prefix_cpu_s_including_fit"] for row in unique_cases)
     fit_cpu = sum(row["candidate_fit_cpu_s"] for row in unique_cases)
     branch_cpu = sum(row["branch_cpu_s"] for row in branch_costs)
@@ -1596,7 +1897,75 @@ def _interval(stat: Mapping[str, Any]) -> str:
     return f"[{_format(interval[0])}, {_format(interval[1])}]"
 
 
+def _markdown_e161(analysis: Mapping[str, Any]) -> str:
+    decision = analysis["scientific_decision"]
+    lines = [
+        "# E161 retention candidate confirmation report", "",
+        f"Role: **{analysis['analysis_role']}**. Scientific status: **{decision['status']}**.",
+        f"Technical audit: **{analysis['audit']['passed']}**. The technical integrity result is reported separately from the scientific decision.", "",
+        "This offline report reads the saved cohort, step and rollout ledgers, checkpoint metadata, and bounded evidence artifacts. It makes no environment calls.", "",
+        "## Design and main decision", "",
+        f"- Independent units: {len(analysis['seeds'])} deployment seeds, all retained; A/B family labels are balanced.",
+        f"- Cases: {analysis['case_count']}; branches: {analysis['branch_count']}; measured environment interactions: {analysis['costs_recount']['total_environment_steps']:,}.",
+        f"- Main futures: {', '.join(decision['primary_future_regimes'])}. Balanced is a secondary boundary and does not enter the main estimate.",
+        f"- Main estimand: average the two paired replicas within each future regime, then give old_major and new_major equal weight within seed.",
+        f"- IUT direction passes: **{decision['intersection_union_direction_pass']}**; practical point threshold passes for both contrasts: **{decision['advancement_threshold_pass']}**.",
+        f"- Advancement requires both one-sided 95% Welch lower bounds above zero and both point estimates at least {decision['contrasts'][E161_PRIMARY_CONTRASTS[0]]['practical_threshold']:.3f} reward/step.",
+        "- Welch inference uses equal A/B family means and the Welch-Satterthwaite degrees of freedom. The stratified seed bootstrap is a sensitivity analysis only.", "",
+        "| primary contrast | estimate | one-sided 95% lower | two-sided 95% Welch interval | direction | point threshold | bootstrap sensitivity interval |",
+        "|---|---:|---:|---|---|---|---|",
+    ]
+    for name in E161_PRIMARY_CONTRASTS:
+        row = decision["contrasts"][name]
+        stat = next(item["reward_per_step"] for item in analysis["effects"]
+                    if item["horizon"] == analysis["primary_horizon"] and item["contrast"] == name)
+        boot = stat.get("bootstrap_ci95_sensitivity")
+        boot_text = "not estimated" if not isinstance(boot, list) else f"[{_format(boot[0])}, {_format(boot[1])}]"
+        lines.append(
+            f"| {name} | {_format(row['estimate'])} | {_format(row['one_sided_95_lower'])} | "
+            f"[{_format(row['two_sided_95_ci'][0])}, {_format(row['two_sided_95_ci'][1])}] | "
+            f"{row['direction_pass']} | {row['point_estimate_at_or_above_threshold']} | {boot_text} |"
+        )
+    lines.extend(["", "Every configured seed remains in `analysis.json`; no old E130 result is pooled and no seed is excluded based on its significance or reward.",
+                  "", "## Per-regime reward contrasts", "",
+                  "These per-regime estimates include all three configured futures. `balanced` remains secondary.", "",
+                  "| future | contrast | reward / step | two-sided 95% Welch interval | seeds |",
+                  "|---|---|---:|---|---:|"])
+    for row in analysis["future_scoped_effects"]:
+        if row["horizon"] == analysis["primary_horizon"]:
+            stat = row["reward_per_step"]
+            lines.append(f"| {row['future_regime']} | {row['contrast']} | {_format(stat['mean'])} | {_interval(stat)} | {stat['seed_count']} |")
+    lines.extend(["", "## Nested window and first-256-step recovery", "",
+                  "The 1,536-step window and 6,144-step primary horizon are both retained by seed and regime. First-256-step recovery is reported per regime and in `analysis.json`.", "",
+                  "| horizon | contrast | reward / step | two-sided 95% Welch interval |",
+                  "|---:|---|---:|---|"])
+    for row in analysis["effects"]:
+        if row["horizon"] != analysis["primary_horizon"]:
+            stat = row["reward_per_step"]
+            lines.append(f"| {row['horizon']:,} | {row['contrast']} | {_format(stat['mean'])} | {_interval(stat)} |")
+    lines.extend(["", "| recovery population | future | contrast | reward / step |", "|---|---|---|---:|"])
+    for row in analysis.get("effects_summary", {}).get("recovery_future_effects", []):
+        stat = row["stat"]
+        lines.append(f"| {row['population']} | {row['future_regime']} | {row['contrast']} | {_format(stat['mean'])} |")
+    lines.extend(["", "## Fit, codec, eviction, update, byte, and cost evidence", "",
+                  "Training and holdout KL, source band counts, codec drift, source buffer and package bytes, slot evictions, rollout updates, and measured CPU costs are preserved in `analysis.json` by case, seed, future, replica, arm, and horizon where applicable.",
+                  f"- Raw CSV ledgers checked: {analysis['costs_recount']['raw_ledger_count']}; rollouts: {analysis['costs_recount']['total_rollouts_trained']:,}; minibatch updates: {analysis['costs_recount']['total_minibatch_updates']:,}.",
+                  f"- Evidence sidecar copies: {analysis['costs_recount']['evidence_buffer_bytes']['all_persisted_prefix_and_branch_package_copies']:,} bytes; complete package limit: {analysis['costs']['byte_budgets']['package_budget_bytes']:,} bytes.",
+                  f"- Measured campaign CPU: {analysis['costs']['measured_unique_prefix_plus_branch_cpu_s']:.3f} seconds.",
+                  "- Fit KL is diagnostic; it does not replace reward as the primary outcome.", "",
+                  "## Figure", "", "![E161 retention candidate analysis](figure.png)", "",
+                  "## Provenance", "",
+                  f"Summary SHA-256: {analysis['input_hashes']['summary_sha256']}  ",
+                  f"Frozen config canonical SHA-256: {analysis['input_hashes']['config_canonical_sha256']}  ",
+                  f"Source manifest canonical SHA-256: {analysis['input_hashes']['source_manifest_canonical_sha256']}  ",
+                  f"Runner SHA-256: {analysis['input_hashes']['runner_sha256'] or 'unavailable'}  ",
+                  f"Reporter SHA-256: {analysis['input_hashes']['reporter_sha256']}", ""])
+    return "\n".join(lines)
+
+
 def _markdown(analysis: Mapping[str, Any]) -> str:
+    if "e161" in str(analysis.get("analysis_role", "")).casefold():
+        return _markdown_e161(analysis)
     primary = analysis["primary_horizon"]
     uncertainty = (
         "Six deployment seeds are the independent units. Future regimes and replicas were paired within each seed, then averaged before the old-family-stratified bootstrap."
@@ -1711,7 +2080,8 @@ def analyze(input_path: str | Path, output_path: str | Path) -> dict[str, Any]:
     campaign_cost_audit = _audit_campaign_costs(summary, design, recount, cases, branches)
     effects = _compute_effects(observations, recovery, families, design["active"], design["config"], design["phase"])
     diagnostics = _diagnostics(cases, branches, families)
-    costs = _costs(cases, branches, recount)
+    is_e161 = _is_e161(design["config"])
+    costs = _costs(cases, branches, recount, arms=design["active"]["arms"], include_evictions=is_e161)
     source_hashes = _source_hashes(run_root, summary, summary_path, summary_sha)
     active = design["active"]
     expected = design["expected_counts"]
@@ -1756,18 +2126,38 @@ def analyze(input_path: str | Path, output_path: str | Path) -> dict[str, Any]:
         "campaign_cost_audit": campaign_cost_audit,
         "expected_counts": expected,
         "interpretation_limits": [
-            "The diagnostic compares five fixed arms under known identity and one saved write; it is not a deployed selector.",
-            "The early and late conditions jointly vary online history and state coverage, so their contrast is not an isolated age or fit-volume effect.",
+            ("The confirmation compares three fixed arms under known identity and one saved write; it is not a deployed selector."
+             if is_e161 else "The diagnostic compares five fixed arms under known identity and one saved write; it is not a deployed selector."),
+            ("The result applies to the frozen dynamics / late condition and does not identify a causal effect of age or fit volume."
+             if is_e161 else "The early and late conditions jointly vary online history and state coverage, so their contrast is not an isolated age or fit-volume effect."),
             "Fitted KL is a diagnostic and does not imply reward improvement.",
             "Future regimes and replicas are paired within seed; branches are not independent statistical units.",
             "No outcomes were used to adapt the candidate, analysis choices, or future conditions.",
-            "The run does not establish SOTA performance, a new organizer success, unknown-context discovery, repeated organizer learning, or tree/DAG superiority.",
+            ("Balanced is a secondary boundary; the primary estimand equally averages only old_major and new_major within seed."
+             if is_e161 else "The run does not establish SOTA performance, a new organizer success, unknown-context discovery, repeated organizer learning, or tree/DAG superiority."),
         ],
         "input_hashes": source_hashes,
         "external_audit_records": audit_records,
         "reporter_sha256": source_hashes["reporter_sha256"],
         "runner_costs": _json_safe(summary.get("costs", {})),
     }
+    if is_e161:
+        primary_futures = list(effects["primary_future_regimes"])
+        analysis["primary_future_regimes"] = primary_futures
+        analysis["secondary_future_regimes"] = [future for future in design["active"]["future_regimes"]
+                                                 if future not in primary_futures]
+        analysis["effects_summary"]["recovery_future_effects"] = effects["recovery_future_effects"]
+        analysis["scientific_decision"] = _e161_scientific_decision(effects, design["config"])
+        analysis["e161_statistical_plan"] = {
+            "independent_unit": "deployment seed",
+            "family_weighting": "equal mean of A and B",
+            "main_futures": primary_futures,
+            "secondary_futures": analysis["secondary_future_regimes"],
+            "future_replicate_aggregation": "mean paired difference over replicas within regime, then equal mean over main regimes",
+            "primary_contrasts": list(E161_PRIMARY_CONTRASTS),
+            "historical_results_included": False,
+            "significance_based_seed_exclusions": False,
+        }
     output = Path(output_path)
     if output.exists() and (not output.is_dir() or any(output.iterdir())):
         raise FileExistsError(f"preserve existing report output: {output}")
@@ -1775,7 +2165,7 @@ def analyze(input_path: str | Path, output_path: str | Path) -> dict[str, Any]:
     analysis["figure"] = _render_figure(output, analysis)
     reporter_copy = output / "reporter_sources" / Path(__file__).name
     reporter_copy.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(Path(__file__).resolve(), reporter_copy)
+    reporter_copy.write_bytes(Path(__file__).resolve().read_bytes())
     if _file_hash(reporter_copy) != source_hashes["reporter_sha256"]:
         raise RuntimeError("reporter source changed while preserving its exact executed version")
     analysis["reporter_source_path"] = str(reporter_copy.resolve())

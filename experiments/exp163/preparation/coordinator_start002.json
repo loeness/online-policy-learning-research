@@ -1,0 +1,60 @@
+{
+  "experiment_id": "E163",
+  "hypothesis_id": "H036",
+  "directive": "E163_RUN002_20261022_APPROVED",
+  "approved_date": "2026-10-22",
+  "approved_at_utc": "2026-10-22T06:57:03.725157+00:00",
+  "status": "APPROVED_ADDITIONAL_SINGLE_ATTEMPT_WITH_SAME_CAMPAIGN_RUNTIME_PRECHECKS",
+  "user_authorization": "User answered 授权追加一次重试预算 to the explicit question requesting one additional E163 repair002 attempt with 120 CPU seconds, 180 wall seconds, zero new interactions, validation owner via original SSH project scope.",
+  "resource_authorization_question_id": "call_61520c6f13ae40ea9084a78e0c77073d",
+  "reservation_id": "stage0_campaign002",
+  "prior_attempt_cost_status": "run001 ACCOUNTING_INVALID; complete CPU/wall UNKNOWN; original reservation retired; no balance reuse/reset",
+  "scientific_source_identity_sha256": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea",
+  "orchestration_identity_sha256": "b8df209ce3d89df2a4847b2b7e2da380e8d01b819e1f12f8ccde70782ad1353b",
+  "run_spec_sha256": "d5764b8091aba95b7223ee7cdcb18d752e123d17063bb0c936775753f6e8189d",
+  "archive_sha256": "11a23bab40e945b1d73252b2d75207c99882fc5b83eff2725127dae21044a3c9",
+  "authorization_payload": {
+    "coordinator_directive": "E163_RUN002_20261022_APPROVED",
+    "execution_authorized": true,
+    "experiment_id": "E163",
+    "limits": {
+      "aggregate_remote_project_bytes": 100000000000,
+      "campaign_wall_seconds": 180,
+      "candidate_fits": 32,
+      "cpu_seconds": 120,
+      "environment_interactions": 0,
+      "gpu_devices": 0,
+      "new_artifact_cache_temp_bytes": 268435456,
+      "numeric_threads_per_worker": 1,
+      "workers": 1
+    },
+    "run_spec_sha256": "d5764b8091aba95b7223ee7cdcb18d752e123d17063bb0c936775753f6e8189d"
+  },
+  "evidence_files_sha256": {
+    "freeze.json": "e0f959cd13e765ff3bb6fe66690c1a33c61f87e9bf7cd461835231c7e480ccbc",
+    "static_review.json": "9cb920119956b5e8b5231b18188d75a0c185a3af567b8008e0c6f7243ce974d0",
+    "reviewed_readiness.json": "72f390a5f0205f4f88641ff56812d30abdaccdaa4c2a91258f54618f264766f8",
+    "run_spec.json": "d5764b8091aba95b7223ee7cdcb18d752e123d17063bb0c936775753f6e8189d",
+    "transfer_manifest.json": "6c2437a17366e15955376867ed3317444fc7aff80905d8d3010810525cb304c7",
+    "launch_command.sh": "03662e9c5608238aa64a9f54dc8d4f7d557d37aaf4bc6427528ca0227d6a0cde"
+  },
+  "coordinator_acceptance_sha256": "a44699e12e6e8cbe866518abed0845c3605a6c81c5acdd4f3ef7e177bb94239c",
+  "conditions": [
+    "Fresh remote identity/path/capacity checks before allowlisted repair transfer and launch",
+    "Only robot within /data/robot/p001; new orchestration o002 and output run002; source s001 unchanged",
+    "Authorization file and run002 must be new; preserve o001/run001 and all failed evidence",
+    "Linux CPU lifecycle and stop prechecks within same newly authorized campaign before real fits",
+    "Fixed 16 prefixes x lambda0/1 = 32 fits, unchanged 12/16 gate; no holdout tuning/seed exclusion",
+    "One single-thread CPU worker, no GPU, no new interactions, 256MiB E163 artifact/cache/temp and 100GB total project cap",
+    "No automatic third attempt, StageA/new seeds/full stream or scientific changes"
+  ],
+  "resource_accounting": "New attempt 120CPU/180wall from fresh supervisor process startup, including same-campaign runtime prechecks, failures and finalization.115CPU/170wall safety stops retain5CPU/10wall footer margins within those limits.Observed costs and conservative tail bounds must be distinct; full cumulative E163 cost remains UNKNOWN because run001 cost was invalid. SSH/shell admission operations recorded separately.",
+  "remote_account": "robot",
+  "remote_root": "/data/robot/p001/e163",
+  "remote_entry_argv": [
+    "sh",
+    "/data/robot/p001/e163/o002/launch_command.sh"
+  ],
+  "execution_owner_thread_id": "01a1592f-90c2-74b1-bf2a-f6442d0c7397",
+  "result": "NOT_RUN_AT_APPROVAL"
+}

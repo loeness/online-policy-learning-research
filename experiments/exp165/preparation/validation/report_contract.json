@@ -1,0 +1,223 @@
+{
+  "contract_name": "E165 experiment-owned logical score report input and output",
+  "contract_version": 1,
+  "normalization_owner": "E165 experiment implementation",
+  "scientific_api_assumption": false,
+  "phase": "AUDIT-only; build_report consumes the normalized report payload after scores and cohort lock are fixed",
+  "input": {
+    "format": "e165_logical_scores_v1",
+    "source_identity_sha256": "Required non-empty string identifying the frozen source set; this report layer does not resolve or hash files.",
+    "cohort_lock_sha256": "Required 64-character SHA256 hex digest binding the sealed 16-prefix cohort.",
+    "prefix_count": 16,
+    "prefix_seed_order": [
+      26201,
+      26202,
+      26203,
+      26204,
+      26205,
+      26206,
+      26207,
+      26208,
+      26209,
+      26210,
+      26211,
+      26212,
+      26213,
+      26215,
+      26216,
+      26218
+    ],
+    "prefix_item": {
+      "seed": "Integer equal to the item position in prefix_seed_order; booleans are rejected.",
+      "prepared_id": "Required non-empty string shared by C, D, S0, and S1 metrics for this prefix.",
+      "b": "Finite numeric original C0 new-train-KL bound for this prefix.",
+      "training": {
+        "D": "Object with all four required fields below.",
+        "S0": "Object with all four required fields below.",
+        "S1": "Object with all four required fields below.",
+        "required_fields": [
+          "fullL",
+          "new_train_kl",
+          "old_train_kl",
+          "ridge"
+        ],
+        "value_provenance": "Each value is the saved training component for the final float32 candidate, accurately converted to float64. The report validates presence and finiteness; it cannot establish this provenance itself."
+      },
+      "candidate_sha256": {
+        "D": "Required 64-character SHA256 hex digest of D candidate parameter bytes.",
+        "S0": "Required 64-character SHA256 hex digest of S0 candidate parameter bytes.",
+        "S1": "Required 64-character SHA256 hex digest of S1 candidate parameter bytes."
+      },
+      "metrics": {
+        "C": "The original C h036_score_metrics_v1 object, lambda_value 0.",
+        "D": "The original D h036_score_metrics_v1 object, lambda_value 1.",
+        "S0": "The S0 h036_score_metrics_v1 object, lambda_value 1.",
+        "S1": "The S1 h036_score_metrics_v1 object, lambda_value 1."
+      },
+      "origins": {
+        "S0": [
+          "NEW_SCORE",
+          "REUSED_E163_D",
+          "ALIAS"
+        ],
+        "S1": [
+          "NEW_SCORE",
+          "REUSED_E163_D",
+          "ALIAS"
+        ]
+      },
+      "references": {
+        "C": "Required non-empty object preserving the original C artifact reference.",
+        "D": "Required non-empty object preserving the original D artifact reference.",
+        "S0": "Required non-empty object preserving the S0 score/artifact reference.",
+        "S1": "Required non-empty object preserving the S1 score/artifact reference."
+      }
+    },
+    "score_metrics": {
+      "format": "h036_score_metrics_v1",
+      "binding": "wildcard",
+      "seed": "Must equal the containing logical prefix seed.",
+      "prepared_id": "Must equal the containing prefix prepared_id; C, D, S0, and S1 must match exactly.",
+      "lambda_value": {
+        "C": 0,
+        "D": 1,
+        "S0": 1,
+        "S1": 1
+      },
+      "required_fresh_views": {
+        "pre_codec_fresh": [
+          "old_train",
+          "new_train",
+          "old_holdout",
+          "new_holdout"
+        ],
+        "encoded_fresh": [
+          "old_train",
+          "new_train",
+          "old_holdout",
+          "new_holdout"
+        ],
+        "W0_fresh": [
+          "old_train",
+          "new_train",
+          "old_holdout",
+          "new_holdout"
+        ]
+      },
+      "required_legacy_scalars": [
+        "K_old",
+        "K_new",
+        "K_new_W0",
+        "G_new"
+      ],
+      "identity_and_value_checks": {
+        "numeric_policy": "Required score/training scalars are finite JSON numbers; reject booleans, NaN, and infinities.",
+        "K_old": "Exactly equals encoded_fresh.old_holdout.",
+        "K_new": "Exactly equals encoded_fresh.new_holdout.",
+        "K_new_W0": "Exactly equals W0_fresh.new_holdout.",
+        "G_new": "Exactly equals K_new_W0 - K_new and encoded-fresh holdout W0_fresh.new_holdout - encoded_fresh.new_holdout.",
+        "W0_baseline": "For each prefix, C, D, S0, and S1 W0_fresh old/new train/holdout values must all match exactly. Each G_new view/split uses that metric object's same-split W0_fresh new value minus the arm's new value.",
+        "missing_fields": "Reject any missing required prefix, training, score, legacy, view, split, origin, or reference field."
+      }
+    },
+    "numeric_policy": "Finite JSON integers/floats only for required numeric values; booleans are not numbers.",
+    "additional_input_keys": "Not consumed by the report. Required canonical h036 fields and provenance objects are validated as stated."
+  },
+  "report": {
+    "format": "e165_exploratory_report_v1",
+    "status": "EXPLORATORY_ONLY",
+    "exploratory_only": true,
+    "logical_prefix_count": 16,
+    "pairing_unit": "logical_prefix",
+    "source_identity": "Echo source_identity_sha256 and cohort_lock_sha256 unchanged.",
+    "comparison_orientation": "to_arm minus from_arm",
+    "comparisons_only": [
+      "S1-S0",
+      "S1-D"
+    ],
+    "comparison_rows": "Each of the two comparison objects has per_prefix rows with seed, prepared_id, source references/candidate identities, training_changes, old_kl_changes, G_new_changes, and encoded_holdout_joint_direction.",
+    "training_comparison_fields": {
+      "per_prefix": "For each comparison and prefix, preserve from/to values and signed/absolute differences for fullL, new_train_kl, old_train_kl, and ridge.",
+      "summary": "Inside each comparison summary.training, report 16-prefix mean signed difference and mean absolute difference for every field. Do not assign a standalone better/worse direction to ridge."
+    },
+    "score_comparisons": {
+      "old_kl": {
+        "views": [
+          "pre_codec_fresh",
+          "encoded_fresh"
+        ],
+        "splits": [
+          "train",
+          "holdout"
+        ],
+        "lower_is_improvement": true
+      },
+      "G_new": {
+        "views": [
+          "pre_codec_fresh",
+          "encoded_fresh"
+        ],
+        "splits": [
+          "train",
+          "holdout"
+        ],
+        "definition": "same-split W0_fresh.new - arm.new",
+        "higher_is_improvement": true,
+        "is_reward": false
+      },
+      "per_prefix": "For every fixed metric/view/split, preserve signed delta (to minus from), absolute delta, and improved/degraded/unchanged classification.",
+      "summary": "Inside each comparison summary.old_kl / summary.G_new, report the full-16 mean signed delta, mean absolute delta, and improved/degraded/unchanged counts for every fixed metric/view/split. Unchanged means exact delta == 0; no tolerance."
+    },
+    "encoded_holdout_joint_direction_diagnostic": {
+      "definition": "Per-prefix and count within each comparison: encoded-fresh holdout old-KL delta < 0 and G_new delta > 0.",
+      "interpretation": "Descriptive direction only; no threshold or advancement rule."
+    },
+    "final32_witness": {
+      "comparison_basis": "S1 relative to D only; S1-S0 receives differences/directions only and has no witness predicate.",
+      "per_prefix_required_conditions": [
+        "S1 candidate_sha256 differs from D candidate_sha256.",
+        "S1.new_train_kl <= b + 1e-12.",
+        "S1.fullL < D.fullL - 1e-8.",
+        "S1.old_train_kl < D.old_train_kl - 1e-8."
+      ],
+      "output": "Preserve each condition as a boolean, per-prefix witnessed boolean, and full-16 witness_count. This reporting threshold does not select candidates or create a new candidate."
+    },
+    "encoded_train_bound_diagnostic": {
+      "arms": [
+        "S0",
+        "S1"
+      ],
+      "value": "metrics[arm].encoded_fresh.new_train",
+      "per_prefix": "Report K, b, signed_excess=K-b, violation=max(0,K-b), and feasible_with_tolerance=(K <= b + 1e-12).",
+      "summary": "Report feasible count, mean signed excess, and mean violation separately for S0 and S1.",
+      "prohibited": "Do not compute or require an additional encoded C0 score/baseline."
+    },
+    "encoded_holdout_joint_direction_diagnostic": {
+      "definition": "Descriptive only: for a given comparison, encoded-fresh holdout old-KL delta < 0 and G_new delta > 0.",
+      "output": "Preserve per-prefix booleans and count for S1-S0 and S1-D; no automatic threshold or advancement rule."
+    },
+    "C_reference_summary": {
+      "per_prefix": "Retain all 16 seed/prepared_id/reference entries, canonical C h036 score fields, legacy K_old/K_new/K_new_W0/G_new, all required raw W0 view values, and derived old_kl/G_new values used by this report.",
+      "descriptive_ratios": {
+        "S1_K_old_over_C_K_old": "Defined only when C.K_old > 1e-10.",
+        "S1_G_new_over_C_G_new": "Defined only when C.G_new > 1e-10. G_new is a KL-derived diagnostic, not reward."
+      },
+      "ratio_summary": "For each ratio, report defined count, full logical-prefix count, and mean over defined values (null if none). Keep all C per-prefix values even when a ratio is undefined."
+    },
+    "prohibited": [
+      "Arm selection or winner ranking.",
+      "Any upgrade, advancement, or progression decision.",
+      "A 12/16 gate or any other sample-count gate.",
+      "Reward conclusion or treating G_new/W0-derived gain as reward.",
+      "Treating metrics, views, arms, or artifacts within one seed as independent samples.",
+      "An encoded C0 score or an additional baseline comparison."
+    ],
+    "no_advancement_decision": true
+  },
+  "execution_boundary": {
+    "report_module": "Pure Python standard library/math; report construction only.",
+    "local_work": "Text/code/document editing and static syntax/JSON inspection only; do not import or call report.py locally.",
+    "authorized_use": "Only the separately admitted remote AUDIT phase may call build_report after the exact payload is bound.",
+    "scientific_runtime": "No scoring, model access, artifact loading, candidate recovery, fitting, or audit execution in this module."
+  }
+}

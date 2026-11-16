@@ -1,0 +1,26 @@
+{
+  "format": "e164_runner_static_review_v1",
+  "review_date": "2026-10-23",
+  "review_scope": "Targeted static re-review of the two previously reported runner fixes only; no imports, API calls, execution, or model/prefix access.",
+  "runner_path": "experiments/exp164/preparation/validation/runner.py",
+  "runner_sha256": "3e65c30c2b228ce2bdae68ee8c8c76b0b964159fe6f0968be44c43fc87122a20",
+  "prior_findings": [
+    {
+      "issue": "Mapped input files were verified, but prepare_inputs reopened fixed filenames in their common parent without proving those paths were the mapped files.",
+      "recheck": "PASS",
+      "evidence": "runner.py lines 279-288 now requires each verified path to equal prefix_dir / its fixed input name before calling prepare_inputs."
+    },
+    {
+      "issue": "Output setup and interpreter/environment checks ran outside the worker try block, so early failures could escape worker failure/state recording.",
+      "recheck": "PASS",
+      "evidence": "runner.py lines 165-188 initializes events to None and performs directory/log setup plus platform, environment, and Python checks inside try. Lines 439-459 preserve a nonzero failure result, attempt JSON records, print record-write failures to stderr for supervisor capture, and close events only when opened."
+    }
+  ],
+  "supplemental_check": {
+    "topic": "CPU-only build and resource declaration",
+    "recheck": "PASS",
+    "evidence": "After the one-thread checks, runner.py lines 252-253 rejects torch.version.cuda when non-null. Lines 254-261 record torch_build, torch_cuda_build, requested_device=cpu, gpu_devices_used=0, and environment_interactions=0 in environment.json."
+  },
+  "conclusion": "Both prior targeted fixes remain present. The supplemental CPU-build check and requested resource declarations are present. No other runner change was assessed.",
+  "execution_performed": false
+}

@@ -1,0 +1,63 @@
+{
+  "aggregate_project_apparent_bytes": 2905922916,
+  "bounded_campaign_cpu_seconds_upper": 5.268236,
+  "bounded_campaign_wall_seconds_upper": 77.52755812183022,
+  "campaign_start_source": "supervisor process start ticks from /proc/self/stat; includes Python interpreter startup, excludes any unobserved shell or SSH launcher",
+  "campaign_wall_seconds_before_final_footer": 67.52755812183022,
+  "child_wait4_records": [
+    {
+      "exit_code": 0,
+      "pid": 1850713,
+      "purpose": "cpu_descendant_accounting_precheck",
+      "start_ticks": 657596484,
+      "wait4_cpu_seconds_including_waited_descendants": 0.12206999999999998
+    }
+  ],
+  "completed_direct_children": 1,
+  "cpu_snapshot_before_final_footer": {
+    "live_owned_process_cpu_seconds_from_proc_stat": 0,
+    "live_owned_processes": [],
+    "reaped_wait4_cpu_seconds": 0.12206999999999998,
+    "supervisor_rusage_self_cpu_seconds": 0.146166,
+    "total_cpu_seconds": 0.268236
+  },
+  "cpu_total_scope": "supervisor RUSAGE_SELF + completed direct-child wait4 totals + live owned /proc counters; child wait4 descendants checked by in-campaign precheck",
+  "e_root_apparent_bytes": 633788,
+  "environment_interactions": 0,
+  "error": {
+    "exception_type": "SupervisorError",
+    "message": "RUSAGE_CHILDREN and recorded wait4 accounting differ",
+    "traceback": "Traceback (most recent call last):\n  File \"/data/robot/p001/e163/o001/supervisor.py\", line 1011, in run\n    self._launch_cpu_tree_precheck()\n  File \"/data/robot/p001/e163/o001/supervisor.py\", line 645, in _launch_cpu_tree_precheck\n    raise SupervisorError(\"RUSAGE_CHILDREN and recorded wait4 accounting differ\")\nSupervisorError: RUSAGE_CHILDREN and recorded wait4 accounting differ\n"
+  },
+  "evidence_note": "The final tiny footer is covered by the explicit reserve; command-lifetime cost excludes no claimed launcher because no external launcher counters are available.",
+  "experiment_id": "E163",
+  "final_footer_tail_measurement": "not observed after supervisor exit; explicitly bounded by the reported CPU and wall reserves",
+  "finalization_reserve": {
+    "byte_reserve": 65536,
+    "cpu_seconds": 5.0,
+    "wall_seconds": 10.0
+  },
+  "gpu_devices": 0,
+  "limits": {
+    "aggregate_remote_project_bytes": 100000000000,
+    "campaign_wall_seconds": 180,
+    "candidate_fits": 32,
+    "cpu_seconds": 120,
+    "environment_interactions": 0,
+    "gpu_devices": 0,
+    "new_artifact_cache_temp_bytes": 268435456,
+    "numeric_threads_per_worker": 1,
+    "workers": 1
+  },
+  "project_bytes_before_non_e163_baseline": 2905289128,
+  "real_fit_count": null,
+  "return_code": 2,
+  "safety_stops": {
+    "cpu_seconds": 115.0,
+    "wall_seconds": 170.0
+  },
+  "status": "ACCOUNTING_INVALID",
+  "wait4_audit_error": "SupervisorError: final wait4 sum differs from RUSAGE_CHILDREN",
+  "wait4_children_audit": null,
+  "worker_return_code": null
+}

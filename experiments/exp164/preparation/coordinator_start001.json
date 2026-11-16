@@ -1,0 +1,93 @@
+{
+  "format": "e164_coordinator_single_campaign_start_v1",
+  "experiment_id": "E164",
+  "hypothesis_id": "H036",
+  "directive": "E164_RUN001_20261023_APPROVED",
+  "approved_at_utc": "2026-10-23 02:09:46 UTC",
+  "status": "APPROVED_SINGLE_ATTEMPT_WITH_SAME_CAMPAIGN_PRECHECKS",
+  "authority": "The user's direct instruction to resume cooperation and perform validation; the coordinator selected and recorded the finite reviewed E164 envelope. No claim of a separate numerical user reply.",
+  "reservation_id": "acceptance_diag_campaign001",
+  "preparation_directive": "E164_PREPARE001_20261023_APPROVED",
+  "scientific_source_identity_sha256": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+  "scientific_manifest_sha256": "76073211ec4ff37af2677e0d3cae33c87e46a703a25c306ccb0257c03a2ef379",
+  "orchestration_identity_sha256": "8b2cf8c5a45c009a4955cac9303eb2a2d810f73944c4a0bdc285b9f3021dd3e0",
+  "run_spec_sha256": "40a1ac53ec03b2ac0eb0cea6004f962fccdc3d342490d2b67eef1b698f2dd303",
+  "admitted_transfer_manifest_sha256": "7d2527c6a26a1b9cb9e73f042fdf58e30c904d37b84333dbdec099baf4982e52",
+  "archive_sha256": "4a3b6346540578cc7c209bbca63b2871ddf61710728cc783f5db65e250111f1f",
+  "remote_receipt_sha256": "874974dad11950c4666e2296423c20211402cd954dcc116acf980b1f24cc59db",
+  "authorization_payload": {
+    "coordinator_directive": "E164_RUN001_20261023_APPROVED",
+    "execution_authorized": true,
+    "experiment_id": "E164",
+    "limits": {
+      "aggregate_remote_project_bytes": 100000000000,
+      "campaign_wall_seconds": 120,
+      "candidate_fit_calls": 5,
+      "cpu_seconds": 60,
+      "environment_interactions": 0,
+      "gpu_devices": 0,
+      "logical_paired_prefixes": 16,
+      "new_artifact_cache_temp_bytes": 67108864,
+      "new_complete_scoring_packages": 15,
+      "numeric_threads_per_worker": 1,
+      "workers": 1
+    },
+    "resource_authorized": true,
+    "run_spec_sha256": "40a1ac53ec03b2ac0eb0cea6004f962fccdc3d342490d2b67eef1b698f2dd303",
+    "single_attempt_reservation_id": "acceptance_diag_campaign001"
+  },
+  "authorization_file": {
+    "local_path": "experiments/exp164/preparation/authorization001.json",
+    "remote_path": "/data/robot/p001/e164/o001/authorization.json",
+    "sha256": "961e93533456dbe2ea5bc36109f42fd985eaca8a4959cfbb3436dcb7623c6f6a",
+    "transfer": "One additional exact allowlisted coordinator authorization control; create new without overwrite; recheck bytes/SHA before launch"
+  },
+  "readiness_review": {
+    "static_package": "PASS23 preparation entries/40 transfers/27 scientific files;155static+5artificial JSON groups",
+    "remote": "PASS40/40transfers and308/308exact reference bytes/SHA/resolved paths",
+    "dynamic_spec": "Only resource_authorized, project_bytes_before and admission_measured_utc differ from accepted unadmitted bytes; all other JSON fields equal",
+    "capacity_measured_utc": "2026-10-23T02:07:02.510147+00:00",
+    "project_bytes": 2918535090,
+    "non_e164_project_bytes": 2917056136,
+    "e164_bytes_before_receipt": 1478954,
+    "available_bytes": 956710055936,
+    "available_inodes": 934317488,
+    "planned_additional_peak_bytes": 32710053,
+    "scientific_calls_before_directive": 0
+  },
+  "remote_account": "robot",
+  "remote_root": "/data/robot/p001/e164",
+  "entry_argv": [
+    "sh",
+    "/data/robot/p001/e164/o001/launch_command.sh"
+  ],
+  "cwd": "/data/robot/p001/e164/s001",
+  "execution_owner_thread_id": "01a1592f-90c2-74b1-bf2a-f6442d0c7397",
+  "conditions": [
+    "Refresh needed dynamic capacity and verify exact unchanged accepted source/spec/authorization before launch; input mismatches stop, no silent spec changes",
+    "Launch once through a fresh supervisor child with parent wait; no exec replacement of an existing SSH shell",
+    "Same-campaign lifecycle and stopping prechecks must pass before the scientific worker",
+    "At most5originallambda1recoveries; any exact original replay mismatch stops the batch before new counterfactual holdout",
+    "Persist complete16logical cohort lock before any new scoring; all5actual V anchors must pass before UG/UR; count and deduplicate actual complete scores within15",
+    "Do not change scientific/runner/verifier code, limits, candidate rules or input list during this attempt",
+    "Return complete/partial original evidence and exact mirror plus independent audit/costs; preserve every failure",
+    "Update only execution job/counter/cost/receipt/reservation fields in E164 budget; no limit or scope expansion",
+    "No retry, new seed, lambda search, reward/StageA/production or structural expansion"
+  ],
+  "campaign_metering": {
+    "origin": "fresh supervisor birth ticks",
+    "safety_stops": {
+      "cpu_seconds": 55,
+      "wall_seconds": 110
+    },
+    "footer_reserve": {
+      "cpu_seconds": 5,
+      "wall_seconds": 10,
+      "bytes": 65536
+    },
+    "scope": "Startup, same-campaign prechecks, worker preparation/fits/scoring/logging, stop/reap and finalization reserve within60CPU/120wall",
+    "external_operations": "Parent shell/SSH/transfer/admission: operational elapsed separately; unmeasured CPU UNKNOWN"
+  },
+  "E163_budget_reuse": false,
+  "result": "NOT_RUN_AT_DIRECTIVE"
+}

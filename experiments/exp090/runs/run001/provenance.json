@@ -1,0 +1,86 @@
+{
+  "experiment_id": "E090",
+  "hypothesis_id": "H014",
+  "run_id": "run001",
+  "execution_status": "COMPLETED",
+  "producer_path": "outputs/write_parent_cumulative_validation",
+  "historical_command": [
+    "scripts/run_write_recycle.py",
+    "--phase",
+    "known",
+    "--selection",
+    "outputs/write_decision_selection/selection.json",
+    "--conditions",
+    "trial_gate_relaxed",
+    "reward_shared",
+    "--seeds",
+    "1049",
+    "1051",
+    "--bout-steps",
+    "1024",
+    "--workers",
+    "2",
+    "--no-recycle",
+    "--output",
+    "outputs/write_parent_cumulative_validation"
+  ],
+  "historical_command_evidence_paths": [
+    "outputs/write_execution_logs/failed_clone_attempt/followups_status.json"
+  ],
+  "reproduction_recipe_not_historical": "历史实际 argv 见 outputs/write_execution_logs/failed_clone_attempt/followups_status.json（pilot coordinator）；完整 cohort命令可按同文件字段复现，使用新输出目录。",
+  "historical_working_directory": "D:/MovedFromC/ChatGPT/online (visible in archived reports/logs; current checkout is C:/Users/EthanLi/Documents/ChatGPT/online)",
+  "historical_execution_commit_sha": null,
+  "commit_provenance_gap": "MISSING: source manifests contain per-file hashes but no full Git commit SHA. The archive context commit is not an execution commit.",
+  "source_snapshot_manifest_paths": [
+    "outputs/write_parent_cumulative_validation/seed_1051/trial_gate_relaxed/source_snapshot/manifest.json"
+  ],
+  "input_data_paths": [
+    {
+      "path": "data/pretrain_source.npz",
+      "sha256": "493c67dc07393a674deb6aa7ab5ba4feea3c1a48eacc16b37046a12606bc56f2"
+    },
+    {
+      "path": "data/foundation.pt",
+      "sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222"
+    },
+    {
+      "path": "outputs/write_decision_selection/selection.json",
+      "sha256": "17f739ee1c6d6278a7231fd8320ca4b2910ed422a972d3a3e74324a4eae58fac"
+    }
+  ],
+  "raw_output_paths": [
+    "outputs/write_parent_cumulative_validation"
+  ],
+  "report_paths": [
+    "outputs/write_parent_cumulative_validation_report/report.md",
+    "outputs/write_current_reports/write_parent_cumulative_validation/report.md",
+    "outputs/write_current_reports/index.json"
+  ],
+  "audit_paths": [
+    "outputs/write_parent_selection/selection.json",
+    "outputs/write_parent_selection/SKIPPED.json",
+    "outputs/write_current_reports/index.json"
+  ],
+  "figure_paths": [
+    "outputs/write_parent_cumulative_validation_report/write_stream_metrics.png",
+    "outputs/write_current_reports/write_parent_cumulative_validation/write_stream_metrics.png"
+  ],
+  "actual_cost": {
+    "total_interactions": 119364,
+    "training_steps": 98304,
+    "probe_steps": 9216,
+    "evaluation_steps": 11844
+  },
+  "code_hash_reference": "Per-file hashes are recorded in the linked source_snapshot/manifest.json; no separate executed-code snapshot was created during this import.",
+  "notes": "Legacy data, source snapshots, and outputs remain unchanged.",
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "producer_entrypoints": [
+    "scripts/run_write_recycle.py"
+  ],
+  "producer_path_semantics": "Historical artifact root; producer code entrypoints are recorded separately.",
+  "operational_status": "COMPLETED",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

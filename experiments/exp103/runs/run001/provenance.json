@@ -1,0 +1,51 @@
+{
+  "experiment_id": "E103",
+  "hypothesis_id": "H017",
+  "run_id": "run001",
+  "execution_status": "COMPLETED",
+  "producer_path": "outputs/retention_stream_stage2_exploratory",
+  "historical_command": null,
+  "historical_command_evidence_paths": [],
+  "reproduction_recipe_not_historical": "Invoke scripts/run_retention_stream.py with frozen main config and a new output directory; exact historical argv was not recovered.",
+  "historical_working_directory": "D:/MovedFromC/ChatGPT/online (visible in archived report paths; current checkout differs).",
+  "historical_execution_commit_sha": null,
+  "commit_provenance_gap": "MISSING: source snapshot has per-file hashes but no full execution SHA.",
+  "source_snapshot_manifest_paths": [
+    "outputs/retention_stream_stage2_exploratory/source_snapshot/manifest.json"
+  ],
+  "input_data_paths": [],
+  "raw_output_paths": [
+    "outputs/retention_stream_stage2_exploratory"
+  ],
+  "report_paths": [
+    "outputs/retention_stream_stage2_report_v2/report.md",
+    "outputs/retention_stream_stage2_report_v2/analysis.json"
+  ],
+  "audit_paths": [
+    "outputs/retention_stream_stage2_audit/artifact_audit.json"
+  ],
+  "figure_paths": [
+    "outputs/retention_stream_stage2_report_v2/figure.png",
+    "outputs/retention_stream_stage2_report_v2/figure.pdf"
+  ],
+  "actual_cost": {
+    "total_interactions": 737280,
+    "training_steps": 737280,
+    "evaluation_steps": 0,
+    "cpu_seconds": 892.06,
+    "wall_seconds": 461.48
+  },
+  "code_hash_reference": "outputs/retention_stream_stage2_exploratory/source_snapshot/manifest.json",
+  "data_provenance_gap": "MISSING: frozen config/source snapshot do not bind raw dataset path or checksum.",
+  "notes": "Single producer cohort invocation contains 30 seed×budget×method branches; pilots are separate experiments E101 and E102.",
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "producer_entrypoints": [
+    "scripts/run_retention_stream.py"
+  ],
+  "producer_path_semantics": "Historical artifact root; producer code entrypoints are recorded separately.",
+  "operational_status": "COMPLETED",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

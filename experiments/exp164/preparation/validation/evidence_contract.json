@@ -1,0 +1,144 @@
+{
+  "format": "e164_independent_evidence_contract_v1",
+  "state": "PENDING_RUNTIME_EVIDENCE",
+  "final_source_manifest_accepted": true,
+  "science_source": {
+    "manifest_path": "research/appendix/H036/delivery_v1/manifest.json",
+    "manifest_bytes": 13363,
+    "manifest_sha256": "76073211ec4ff37af2677e0d3cae33c87e46a703a25c306ccb0257c03a2ef379",
+    "source_identity_sha256": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+    "source_file_count": 27,
+    "source_bytes": 762031,
+    "bindings": {
+      "relative_path": "research/appendix/H036/ACCEPTANCE_BINDINGS_V1.json",
+      "bytes": 172892,
+      "sha256": "b13bfe7c9e3d51e0e82872e7d87eeb7e30cb89e21d55b68129f1fdf46147b860"
+    },
+    "diagnostic_config": {
+      "snapshot_path": "configs/h036_acceptance_diagnostic_v1.json",
+      "bytes": 892,
+      "raw_sha256": "c937165e6dc25e1640d8f7b7b80108558b41499f77d42d8501c34caf052cf93d",
+      "canonical_sha256": "f0d4e2b97dd0d7087d74885c8bab05a571e9ef646f249298547053dce4eba6a9"
+    },
+    "diagnostic_module": {
+      "snapshot_path": "src/online_rl/retention_acceptance_diagnostic.py",
+      "bytes": 52428,
+      "sha256": "f981a3d5e69a551e8eb5bd5062f76558a36a39189b1a5c193df5783a6e637318"
+    },
+    "replay_module": {
+      "snapshot_path": "src/online_rl/retention_acceptance_replay.py",
+      "bytes": 71918,
+      "sha256": "2ab24ed4a9eb05d131785692954d3ff8c71c116427805013011cae0d4035358e"
+    },
+    "execution_spec_required": true,
+    "resource_authorization_status": "PENDING"
+  },
+  "api": {
+    "signature": "verify_results(allowed_root, *, final_source_spec=None, launcher_evidence=None)",
+    "allowed_root": "Only the explicit result root supplied by the caller; fixed file names only; no directory discovery.",
+    "final_source_spec": "Caller supplies the separately reviewed e164_execution_spec_v1 object; every reference receipt actual_path, byte count, and SHA must match its fixed reference_map.",
+    "launcher_evidence": {
+      "root": "Separate absolute evidence root supplied by the caller.",
+      "launcher": {"path": "launcher.json", "bytes": "caller-bound", "sha256": "caller-bound"},
+      "launch_attempt": {"path": "launch_attempt.json", "bytes": "caller-bound", "sha256": "caller-bound"},
+      "raw_terminal_markers": ["launch_parent_pid", "launch_child_pid", "supervisor_exit_code", "ENTRY_RETURN_CODE"],
+      "source": "Must independently corroborate supervisor startup proof, supervisor state, and meter lifecycle."
+    },
+    "statuses": ["COMPLETE_VALID", "PENDING_RUNTIME_EVIDENCE", "INCOMPLETE", "INVALID"],
+    "no_default_pass": true
+  },
+  "root_files": {
+    "bindings": "bindings.json",
+    "reference_receipt": "reference_receipt.json",
+    "environment": "environment.json",
+    "recovery_manifest": "recovery_manifest.json",
+    "cohort": "cohort.json",
+    "anchor_permit": "anchor_permit.json",
+    "counterfactual_permit": "counterfactual_permit.json",
+    "aliases": "aliases.json",
+    "logical_scores": "logical_scores.json",
+    "scientific_report": "scientific_report.json",
+    "scientific_report_markdown": "scientific_report.md",
+    "worker_state": "state_worker.json",
+    "worker_events": "events_worker.jsonl",
+    "supervisor_state": "state.json",
+    "wait4": "wait4.jsonl",
+    "meter": "meter.jsonl"
+  },
+  "fixed_cohort": {
+    "seeds": [26201, 26202, 26203, 26204, 26205, 26206, 26207, 26208, 26209, 26210, 26211, 26212, 26213, 26215, 26216, 26218],
+    "recovery_seeds": [26204, 26206, 26209, 26212, 26213],
+    "reuse_seeds": [26201, 26202, 26203, 26205, 26207, 26208, 26210, 26211, 26215, 26216, 26218],
+    "reference_count": 308,
+    "arms": ["V", "UG", "UR"],
+    "array_labels": ["C0", "F64", "U64"],
+    "array_shape": [3, 3],
+    "trace_array_dtype": "<f8",
+    "probe_array_dtype": "<f4",
+    "trace_array_bytes": 72,
+    "probe_array_bytes": 36,
+    "trace_json": "cases/s{seed}/trace.json; candidates omitted",
+    "trace_artifacts": "cases/s{seed}/trace_artifacts.json",
+    "probe_metadata": "cases/s{seed}/lock.json; arrays omitted",
+    "probe_identity": "cases/s{seed}/lock_identity.json",
+    "preparation": "cases/s{seed}/preparation.json",
+    "probe_files": ["cases/s{seed}/probes/{label}/candidate.f32", "cases/s{seed}/probes/{label}/raw_cast.f32"]
+  },
+  "score_packages": {
+    "minimum_new_packages": 5,
+    "maximum_new_packages": 15,
+    "maximum_full_persistent_bytes": 262144,
+    "actor_bytes": 89,
+    "foundation_bytes": 55477,
+    "foundation_sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222",
+    "format": "e164_score_package_v1",
+    "metadata_file": "package.json",
+    "required_files": ["metrics.json", "selection_source.json", "actor.bin", "checkpoint.pt", "evidence.npz"]
+  },
+  "aliases": {
+    "format": "e164_score_aliases_v1",
+    "record_count": 48,
+    "origins": ["NEW_SCORE", "ALIAS", "REUSED_E163"],
+    "deduplication_identity": ["prepared_id", "candidate_raw_sha256"],
+    "new_seed_v_anchor_must_be_scored": true
+  },
+  "worker": {
+    "format": "e164_worker_state_v1",
+    "successful_status": "COMPLETE",
+    "fit_attempts": 5,
+    "fit_returns": 5,
+    "completed_fits": 5,
+    "logical_prefixes": 16,
+    "anchors_confirmed_count": 5,
+    "environment_interactions": 0,
+    "event_order": ["fit_started", "fit_returned", "trace_matched", "cohort_locked", "anchor_score_started", "score_completed", "anchors_confirmed", "counterfactual_score_started_or_alias", "report_completed"]
+  },
+  "metering": {
+    "cpu_limit_seconds": 60,
+    "wall_limit_seconds": 120,
+    "artifact_cache_temp_limit_bytes": 67108864,
+    "cpu_safety_stop_seconds": 55,
+    "wall_safety_stop_seconds": 110,
+    "footer_cpu_reserve_seconds": 5,
+    "footer_wall_reserve_seconds": 10,
+    "footer_byte_reserve": 65536,
+    "scope_origin": "fresh supervisor process birth ticks",
+    "included": "Python startup, in-campaign prechecks, worker preparation/fits/scoring/logging, stop/reap, and reserved footer; CPU is supervisor RUSAGE_SELF plus direct-child wait4 including waited descendants with live owned counters during execution.",
+    "outside_scope": ["parent launch shell", "SSH transport", "source/input transfer", "capacity/admission operations"],
+    "outside_cost_reporting": "External operational elapsed is disclosed separately when measured; external CPU is UNKNOWN and must never be represented as zero or included in the supervisor subtotal.",
+    "launcher_provenance_status": "PENDING_RUNTIME_EVIDENCE"
+  },
+  "verification_rules": {
+    "path_policy": "Caller supplies the sole allowed result root and a separate external launcher root. Resolve every explicit regular file and reject paths that escape their supplied root; do not scan directories or consume receipt-selected paths.",
+    "source_identity": "The accepted H036 method and manifest identities are fixed above. Require final_source_spec and exact per-key actual_path/bytes/SHA agreement before accepting the output tree.",
+    "opaque_model_policy": "Checkpoint, actor, and evidence/model payloads are checked by fixed path, byte count, and SHA only; do not deserialize original model references.",
+    "input_path_policy": "For each recovery seed, actor.bin, checkpoint.pt, and evidence.npz must be three colocated fixed-basename paths exactly matching final_source_spec.reference_map.",
+    "array_helper_hash": "SHA256(dtype ASCII + NUL + repr(shape) ASCII + NUL + exact little-endian C-order array bytes).",
+    "trace_digest": "SHA256(b'h036_selection_trace_v1\\0' + canonical compact sorted-key UTF-8 JSON identity + C0/F64/U64 label-NUL and exact bytes).",
+    "lock_digest": "SHA256(b'h036_acceptance_locked_v1\\0' + canonical lock metadata + V/UG/UR label-NUL, canonical probe metadata and raw_cast_candidate/candidate key-NUL plus exact bytes).",
+    "permit_digest": "Canonical compact sorted-key UTF-8 JSON SHA-256 after removing the respective permit_sha256, cohort_lock_sha256, manifest_sha256, or token_sha256 field.",
+    "report": "Independently recalculate finite metric deltas and counts from logical_scores.json; do not import report.py.",
+    "runtime": "Require exact successful worker, report, supervisor state, wait4, meter, CPU/wall/footer arithmetic, empty final child handles, and independent launcher PID/return-code evidence.",
+    "completion": "COMPLETE_VALID is prohibited when source spec, any fixed evidence, supervisor accounting, or external launcher proof is missing or inconsistent. No runtime was executed for this preparation state."
+  }
+}

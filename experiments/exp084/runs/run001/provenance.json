@@ -1,0 +1,60 @@
+{
+  "experiment_id": "E084",
+  "hypothesis_id": "H014",
+  "run_id": "run001",
+  "execution_status": "COMPLETED",
+  "producer_path": "outputs/write_decision_causal_control",
+  "historical_command": null,
+  "historical_command_evidence_paths": [],
+  "reproduction_recipe_not_historical": "历史完整 argv 未找到。重跑配方（非历史命令）：使用 scripts/run_write_control.py、冻结 cohort config 与新输出目录；旧 seed 仅作复现，不是新确认。",
+  "historical_working_directory": "D:/MovedFromC/ChatGPT/online (visible in archived reports/logs; current checkout is C:/Users/EthanLi/Documents/ChatGPT/online)",
+  "historical_execution_commit_sha": null,
+  "commit_provenance_gap": "MISSING: source manifests contain per-file hashes but no full Git commit SHA. The archive context commit is not an execution commit.",
+  "source_snapshot_manifest_paths": [
+    "outputs/write_decision_causal_control/seed_1019/trial_rollback/source_snapshot/manifest.json"
+  ],
+  "input_data_paths": [
+    {
+      "path": "data/pretrain_source.npz",
+      "sha256": "493c67dc07393a674deb6aa7ab5ba4feea3c1a48eacc16b37046a12606bc56f2"
+    },
+    {
+      "path": "data/foundation.pt",
+      "sha256": "e6a22024a83aa5f1f8699d44702007f31e0d3132fd1cc6ed3a0f0fdc538c7222"
+    }
+  ],
+  "raw_output_paths": [
+    "outputs/write_decision_causal_control"
+  ],
+  "report_paths": [
+    "outputs/write_decision_causal_report/report.md",
+    "outputs/write_decision_causal_report/analysis.json"
+  ],
+  "audit_paths": [
+    "outputs/write_decision_causal_control/summary.json"
+  ],
+  "figure_paths": [
+    "outputs/write_decision_causal_report/online_outcomes.png",
+    "outputs/write_decision_causal_report/evaluation_goal_rates.png",
+    "outputs/write_decision_causal_report/costs.png",
+    "outputs/write_decision_causal_report/capacity.png"
+  ],
+  "actual_cost": {
+    "total_interactions": 152067,
+    "training_steps": 122880,
+    "probe_steps": 4608,
+    "evaluation_steps": 24579
+  },
+  "code_hash_reference": "Per-file hashes are recorded in the linked source_snapshot/manifest.json; no separate executed-code snapshot was created during this import.",
+  "notes": "Legacy data, source snapshots, and outputs remain unchanged.",
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "producer_entrypoints": [
+    "scripts/run_write_control.py"
+  ],
+  "producer_path_semantics": "Historical artifact root; producer code entrypoints are recorded separately.",
+  "operational_status": "COMPLETED",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

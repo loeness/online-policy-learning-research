@@ -1,0 +1,47 @@
+{
+  "experiment_id": "E085",
+  "hypothesis_id": "H014",
+  "run_id": "run001",
+  "execution_status": "COMPLETED",
+  "producer_path": "outputs/write_decision_counterfactual",
+  "historical_command": null,
+  "historical_command_evidence_paths": [],
+  "reproduction_recipe_not_historical": "审计脚本可对被记录 formal artifacts 做只读重建；历史 argv/source snapshot 未找到。不得把后来结果反馈到原选择。",
+  "historical_working_directory": "D:/MovedFromC/ChatGPT/online (visible in archived reports/logs; current checkout is C:/Users/EthanLi/Documents/ChatGPT/online)",
+  "historical_execution_commit_sha": null,
+  "commit_provenance_gap": "MISSING: source manifests contain per-file hashes but no full Git commit SHA. The archive context commit is not an execution commit.",
+  "source_snapshot_manifest_paths": [],
+  "input_data_paths": [
+    "outputs/write_decision_formal",
+    "outputs/write_decision_formal_report/analysis.json"
+  ],
+  "raw_output_paths": [
+    "outputs/write_decision_counterfactual"
+  ],
+  "report_paths": [],
+  "audit_paths": [
+    "outputs/write_decision_counterfactual/summary.json",
+    "outputs/write_decision_archive_audit/evidence_performance.json"
+  ],
+  "figure_paths": [],
+  "actual_cost": {
+    "total_interactions": 42714,
+    "training_steps": 0,
+    "probe_steps": 0,
+    "evaluation_steps": 42714,
+    "cpu_s": 20.140625,
+    "wall_s": 20.5199756
+  },
+  "code_hash_reference": "MISSING: no source snapshot manifest was archived for this invocation.",
+  "notes": "Observer diagnostics read formal outputs and did not update the learner.",
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "producer_entrypoints": [
+    "scripts/audit_write_counterfactual.py"
+  ],
+  "producer_path_semantics": "Historical artifact root; producer code entrypoints are recorded separately.",
+  "operational_status": "COMPLETED",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}

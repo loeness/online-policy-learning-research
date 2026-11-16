@@ -1,0 +1,43 @@
+{
+  "experiment_id": "E165",
+  "hypothesis_id": "H036",
+  "registered_date": "2026-10-24",
+  "state": "CHECKS_PREPARATION_AUTHORIZED_EXECUTION_NOT_AUTHORIZED",
+  "resource_authorized": true,
+  "execution_authorized": false,
+  "authority_scope": "User explicitly requested the next round be designed by coordinator and algorithm and completed by validation, then requested resumption after a usage interruption. Coordinator adopts a finite independent numerical envelope for that work; numerical values were not separately specified by the user. Stage-specific exact directives remain required.",
+  "remote_account": "robot",
+  "remote_project_root": "/data/robot/p001",
+  "planned_execution_location": "/data/robot/p001/e165",
+  "execution_owner_thread_id": "01a1592f-90c2-74b1-bf2a-f6442d0c7397",
+  "planned_limits": {
+    "cpu_seconds": 120,
+    "cumulative_controlled_wall_seconds": 240,
+    "new_artifact_cache_temp_bytes": 134217728,
+    "aggregate_remote_project_bytes": 100000000000,
+    "workers": 1,
+    "numeric_threads_per_worker": 1,
+    "gpu_devices": 0,
+    "environment_interactions": 0,
+    "real_candidate_fit_calls": 0,
+    "candidate_recovery_calls": 0,
+    "real_full_training_oracle_evaluations": 336,
+    "new_complete_score_packages": 33,
+    "logical_paired_prefixes": 16
+  },
+  "planned_stage_limits": {
+    "CHECKS": {"cpu_seconds": 20, "wall_seconds": 60},
+    "DIAGNOSTIC": {"cpu_seconds": 80, "wall_seconds": 140},
+    "AUDIT": {"cpu_seconds": 20, "wall_seconds": 40}
+  },
+  "per_stage_footer_reserve_included": {"cpu_seconds": 5, "wall_seconds": 10},
+  "wall_definition": "Sum of fresh supervisor lifetimes for the three admitted controlled stages, including startup, same-stage checks, work, failures and footer. Not end-to-end elapsed time.",
+  "external_operations": "SSH, transfer, capacity/path admission and launch parent-shell operations reported separately; unmeasured CPU UNKNOWN.",
+  "prior_experiment_allowance_reused": false,
+  "spent": null,
+  "reservations": [{"reservation_id": "e165_round001", "status": "RESERVED_PREPARATION_ONLY", "cpu_seconds": 120, "cumulative_controlled_wall_seconds": 240, "new_artifact_cache_temp_bytes": 134217728, "environment_interactions": 0, "prior_allowance_reused": false}],
+  "active_reservation_id": "e165_round001",
+  "active_job": null,
+  "retry_rule": "One admitted attempt per stage; no automatic retries, relaxed limits, local fallback or extra candidates. Preserve failures and return to coordinator.",
+  "round_stop": "After validation delivery and both coordinator and algorithm analyses are completed, stop. No later experiment is authorized."
+}

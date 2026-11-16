@@ -1,0 +1,75 @@
+{
+  "experiment_id": "E161",
+  "hypothesis_id": "H026",
+  "authorization_date": "2026-10-21",
+  "authorization": "User requested execution of the quoted E161 design on the remote server.",
+  "limits": {
+    "environment_interactions": 2500000,
+    "cpu_seconds": 3600,
+    "campaign_wall_seconds": 2700,
+    "workers": 2,
+    "torch_threads_per_worker": 1,
+    "gpu_devices": 0,
+    "project_storage_bytes": 100000000000
+  },
+  "planned_environment_interactions": 2244608,
+  "spent": {
+    "environment_interactions": 2244608,
+    "cpu_seconds": 1086.4694720000002,
+    "campaign_wall_seconds": 832.0,
+    "measurement_status": "EXACT_PRODUCER_INTERACTIONS_AND_SUPERVISED_CPU_PLUS_ARCHIVE",
+    "cpu_components": {
+      "first_producer_and_failed_audit": 999.5186980000001,
+      "corrected_audit_and_frozen_analysis": 82.018105,
+      "artifact_hash_archive": 4.932669
+    },
+    "wall_scope": "first producer launch through final analysis completion, including repair gap; archive wall 7.6255s and transfer measured separately",
+    "software_preflight": "Zero environment interactions; software checks and SSH metadata queries are operational overhead outside measured experiment CPU."
+  },
+  "reservations": [
+    {
+      "id": "run001",
+      "state": "SETTLED",
+      "environment_interactions": 2244608,
+      "cpu_seconds": 3600,
+      "campaign_wall_seconds": 2700,
+      "created_utc": "2026-10-20T17:24:13.483415+00:00",
+      "source_bundle_sha256": "90f474cf993044649a409c395a706ccb9ad293121bf8810a5cf26bb1497f589e",
+      "source_manifest_sha256": "a4b8c5c0a531185f517ca85acf97ab42277218a8ca5d4c57919f069bc84e2979",
+      "remote_run": "/data/robot/p001/e161/run001",
+      "includes": "producer plus independent audit and frozen report; no automatic follow-up",
+      "remaining_reserved": {
+        "environment_interactions": 0,
+        "cpu_seconds": 0,
+        "campaign_wall_seconds": 0
+      },
+      "actual_cpu_seconds": 999.5186980000001
+    },
+    {
+      "id": "analysis002",
+      "state": "SETTLED",
+      "environment_interactions": 0,
+      "cpu_seconds": 2500,
+      "campaign_wall_seconds": 1947,
+      "source_bundle_sha256": "f0df678ee9b909b8af5d0e8a96e8b6f3a1dbb0f4653d265209ee037b09deebfd",
+      "reason": "One targeted Windows-to-Linux auditor path repair; unchanged raw data and frozen statistical plan. Retain original failed audit.",
+      "remaining_reserved": {
+        "environment_interactions": 0,
+        "cpu_seconds": 0,
+        "campaign_wall_seconds": 0
+      },
+      "actual_cpu_seconds": 82.018105
+    }
+  ],
+  "state": "COMPLETED",
+  "remote_project_root": "/data/robot/p001",
+  "active_job": null,
+  "retry_rule": "At most one technically justified seed-equivalent retry, only if all remaining planned work fits every remaining limit; never replace a valid adverse result.",
+  "next_decision": "STOP: fixed-size confirmation is INCONCLUSIVE; no extra seeds, H035 or full-stream run authorized by this result.",
+  "scientific_outcome": "INCONCLUSIVE",
+  "remaining": {
+    "environment_interactions": 255392,
+    "cpu_seconds": 2513.530528,
+    "campaign_wall_seconds": 1868.0
+  }
+}

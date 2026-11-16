@@ -1,0 +1,146 @@
+{
+  "format": "e164_verification_result_v1",
+  "status": "INCOMPLETE",
+  "final_source_manifest_accepted": true,
+  "runtime_evidence_status": "PENDING_RUNTIME_EVIDENCE",
+  "external_launcher_status": "PENDING_RUNTIME_EVIDENCE",
+  "metering_scope": {
+    "measured_origin": "fresh supervisor process birth ticks",
+    "measured_includes": "Python startup; in-campaign prechecks; worker preparation/fits/scoring/logging; stop/reap and reserved footer",
+    "measured_cpu": "RUSAGE_SELF plus direct-child wait4 including waited descendants, with live owned counters during execution",
+    "safety_stops": {
+      "cpu_seconds": 55.0,
+      "wall_seconds": 110.0
+    },
+    "footer_reserve": {
+      "cpu_seconds": 5.0,
+      "wall_seconds": 10.0,
+      "byte_reserve": 65536
+    },
+    "outside_scope": [
+      "parent launch shell",
+      "SSH transport",
+      "source/input transfer",
+      "capacity/admission operations"
+    ],
+    "outside_elapsed": "reported separately when independently measured; this verifier has no elapsed field and does not infer one",
+    "outside_cpu_seconds": "UNKNOWN, never reported as zero"
+  },
+  "checks": {
+    "source_binding": {
+      "source_identity_sha256": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+      "scientific_manifest_sha256": "76073211ec4ff37af2677e0d3cae33c87e46a703a25c306ccb0257c03a2ef379",
+      "binding_bytes": 172892,
+      "binding_sha256": "b13bfe7c9e3d51e0e82872e7d87eeb7e30cb89e21d55b68129f1fdf46147b860",
+      "reference_count": 308,
+      "local_json_reference_count": 148
+    },
+    "environment": {
+      "dependencies": {
+        "cloudpickle": "3.1.2",
+        "colorama": "0.4.6",
+        "contourpy": "1.4.0",
+        "cycler": "0.12.1",
+        "farama-notifications": "0.0.6",
+        "filelock": "4.1.1",
+        "fonttools": "4.66.1",
+        "fsspec": "2026.9.0",
+        "gymnasium": "1.2.2",
+        "iniconfig": "2.3.1",
+        "jinja2": "3.1.6",
+        "kiwisolver": "1.5.1",
+        "markupsafe": "3.0.4",
+        "matplotlib": "3.11.2",
+        "mpmath": "1.3.0",
+        "networkx": "3.7",
+        "numpy": "2.5.4",
+        "packaging": "26.3",
+        "pandas": "3.0.6",
+        "pillow": "12.3.0",
+        "pluggy": "1.6.0",
+        "psutil": "7.2.2",
+        "pygments": "2.21.0",
+        "pyparsing": "3.3.3",
+        "pytest": "9.1.1",
+        "python-dateutil": "2.9.0.post0",
+        "setuptools": "84.0.0",
+        "six": "1.17.0",
+        "stable-baselines3": "2.8.0",
+        "sympy": "1.14.0",
+        "torch": "2.8.0+cpu",
+        "typing-extensions": "4.16.0",
+        "tzdata": "2026.5"
+      },
+      "environment_interactions": 0,
+      "executable": "/data/robot/p001/env/bin/python",
+      "gpu_devices_used": 0,
+      "numeric_environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "MKL_NUM_THREADS": "1",
+        "MPLCONFIGDIR": "/data/robot/p001/e164/cache/mpl",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TEMP": "/data/robot/p001/e164/tmp",
+        "TMP": "/data/robot/p001/e164/tmp",
+        "TMPDIR": "/data/robot/p001/e164/tmp",
+        "TORCH_EXTENSIONS_DIR": "/data/robot/p001/e164/cache/ext",
+        "TORCH_HOME": "/data/robot/p001/e164/cache/torch",
+        "XDG_CACHE_HOME": "/data/robot/p001/e164/cache",
+        "XDG_CONFIG_HOME": "/data/robot/p001/e164/config",
+        "XDG_DATA_HOME": "/data/robot/p001/e164/state",
+        "XDG_STATE_HOME": "/data/robot/p001/e164/state"
+      },
+      "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+      "python": "3.12.15 (main, Oct 14 2026, 01:05:27) [Clang 23.1.3 ]",
+      "requested_device": "cpu",
+      "scientific_manifest_sha256": "76073211ec4ff37af2677e0d3cae33c87e46a703a25c306ccb0257c03a2ef379",
+      "scientific_modules": {
+        "online_rl.retention_acceptance_diagnostic": "/data/robot/p001/e164/s001/src/online_rl/retention_acceptance_diagnostic.py",
+        "online_rl.retention_acceptance_replay": "/data/robot/p001/e164/s001/src/online_rl/retention_acceptance_replay.py",
+        "online_rl.retention_protected_candidate": "/data/robot/p001/e164/s001/src/online_rl/retention_protected_candidate.py",
+        "online_rl.retention_protected_inputs": "/data/robot/p001/e164/s001/src/online_rl/retention_protected_inputs.py"
+      },
+      "source_identity_sha256": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+      "torch_build": "2.8.0+cpu",
+      "torch_cuda_build": null,
+      "torch_interop_threads": 1,
+      "torch_threads": 1
+    },
+    "recovery_and_cohort": {
+      "recovery_manifest_sha256": "bf9cf10cea79e299b09cf0478dfda65c28407b0fbae72a560687e4a7e2ac2469",
+      "cohort_lock_sha256": "6e512de82961b0eda644099ee84583017a0bdde6ff33cc306371dd9eab3d7b73",
+      "recovery_seeds": [
+        26204,
+        26206,
+        26209,
+        26212,
+        26213
+      ],
+      "reuse_seeds": [
+        26201,
+        26202,
+        26203,
+        26205,
+        26207,
+        26208,
+        26210,
+        26211,
+        26215,
+        26216,
+        26218
+      ]
+    }
+  },
+  "errors": [
+    "startup proof is missing rusage_children_post_auth_pre_fork"
+  ],
+  "allowed_root": "D:\\MovedFromC\\ChatGPT\\online\\experiments\\exp164\\runs\\run001\\remote",
+  "audit_elapsed_seconds": 0.1699800999922445,
+  "verifier_sha256": "b1622e02e340350dcb9591ff56079b01bfb466be952feba0001852c58693891b",
+  "posthoc_audit_mapping_correction": true,
+  "coordinator_acceptance": "../../preparation/coordinator_audit_correction002.json",
+  "original_invalid_audit_preserved": "../a001/audit_initial.json",
+  "intermediate_invalid_audit_preserved": "audit_intermediate001.json"
+}

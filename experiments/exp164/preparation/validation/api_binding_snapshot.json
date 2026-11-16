@@ -1,0 +1,145 @@
+{
+  "format": "e164_api_binding_snapshot_v1",
+  "captured_at": "2026-10-23T01:42:12.3283062+08:00",
+  "review_scope": "Static source and schema inspection only; no imports, scientific execution, data re-statistics, remote access, or transfer.",
+  "status": {
+    "source_manifest": "FROZEN",
+    "resource_authorized": false,
+    "execution_authorized": false,
+    "frozen_source_identity_sha256": "baae9a6a766518105a6d5b2e9bc64fef3488ff581870931cf83ff2d7b23a4c9a",
+    "manifest": {
+      "path": "research/appendix/H036/delivery_acceptance_v1/manifest.json",
+      "bytes": 13363,
+      "sha256": "76073211ec4ff37af2677e0d3cae33c87e46a703a25c306ccb0257c03a2ef379"
+    },
+    "verification": {
+      "path": "research/appendix/H036/delivery_acceptance_v1/verification.json",
+      "bytes": 6126,
+      "sha256": "2C909375C113679CC4A5123D300F47EAC9419C291AD9EEAAA5C28AB910C60A09",
+      "all_hashes_verified": true,
+      "working_source_matches_snapshot": true,
+      "snapshot_files": 27,
+      "snapshot_bytes": 762031
+    }
+  },
+  "inputs": {
+    "research/appendix/H036/METHOD_ACCEPTANCE_V1.md": {
+      "bytes": 9126,
+      "sha256": "DA69E8C30C31B22776E3865D3CCEF8CBCB6FBDFE1E4AE8C7D6DF0C66ADBA3082",
+      "authoritative_path": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/research/appendix/H036/METHOD_ACCEPTANCE_V1.md"
+    },
+    "research/appendix/H036/HANDOFF_ACCEPTANCE_V1.md": {
+      "bytes": 8717,
+      "sha256": "21398A4C0E73C16895EF8A1AF64C89C1EDCE36173852AE144FAA3AC1F7D38FF2",
+      "authoritative_path": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/research/appendix/H036/HANDOFF_ACCEPTANCE_V1.md"
+    },
+    "src/online_rl/retention_acceptance_replay.py": {
+      "bytes": 71918,
+      "sha256": "2AB24ED4A9EB05D131785692954D3FF8C71C116427805013011CAE0D4035358E",
+      "authoritative_path": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/src/online_rl/retention_acceptance_replay.py"
+    },
+    "src/online_rl/retention_acceptance_diagnostic.py": {
+      "bytes": 52428,
+      "sha256": "F981A3D5E69A551E8EB5BD5062F76558A36A39189B1A5C193DF5783A6E637318",
+      "authoritative_path": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/src/online_rl/retention_acceptance_diagnostic.py"
+    },
+    "research/appendix/H036/ACCEPTANCE_BINDINGS_V1.json": {
+      "bytes": 172892,
+      "sha256": "B13BFE7C9E3D51E0E82872E7D87EEB7E30CB89E21D55B68129F1FDF46147B860",
+      "authoritative_path": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/research/appendix/H036/ACCEPTANCE_BINDINGS_V1.json",
+      "format": "h036_acceptance_bindings_v1",
+      "v1_source_identity_sha256": "0685e20c095b4c49c12d04041e3857f19b584c062dbe3eea456af1561fa661ea"
+    }
+  },
+  "interfaces": [
+    {
+      "module": "online_rl.retention_acceptance_replay",
+      "name": "build_recovery_manifest",
+      "signature": "build_recovery_manifest(records_by_seed: Mapping[Any, Mapping[str, Any]], *, config: Any = None) -> dict[str, Any]",
+      "input_contract": "Exactly the fixed 16 old-D diagnostic records, keyed by seed; config must describe the accepted fixed cohort, five recovery seeds, 11 reuse cases, lambda 1, labels V/UG/UR, and the frozen selection rules.",
+      "return_keys": [
+        "format",
+        "config_sha256",
+        "v1_source_identity_sha256",
+        "cohort_seeds",
+        "recovery_seeds",
+        "reuse_seeds",
+        "replays",
+        "manifest_sha256"
+      ],
+      "nested_schema": "replays uses decimal-string seed keys. Each value contains format, F64, U64, same_float64_candidate, reuse_eligible, recovery_required, original_float32_identity, path_sha256, closure_count, and seed. F64/U64 are scalar records (index, fullL, newKL, oldKL, ridge, candidate_hash); original_float32_identity contains fallback_applied, selected_float32_candidate_sha256, candidate_sha256, prepared_id, and seed. No candidate arrays are returned.",
+      "selection_basis": "Exact F64/U64 candidate hashes plus the original float32 fallback status. Holdout, C0 markers, new probe outcomes, and score values do not choose recovery seeds.",
+      "source": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/src/online_rl/retention_acceptance_replay.py:515"
+    },
+    {
+      "module": "online_rl.retention_acceptance_replay",
+      "name": "lock_cohort",
+      "signature": "lock_cohort(manifest: Mapping[str, Any], recovered_locks: Mapping[Any, Any], reuse_bindings: Mapping[Any, Any]) -> dict[str, Any]",
+      "input_contract": "The verified recovery manifest; exactly five recovered entries in locked_probe_manifest form; the complete H036 ACCEPTANCE_BINDINGS_V1 JSON object.",
+      "return_keys": [
+        "format",
+        "seeds",
+        "recovery_seeds",
+        "cases",
+        "manifest_sha256",
+        "bindings_sha256",
+        "v1_source_identity_sha256",
+        "run002_provenance",
+        "run002_mirror_manifest",
+        "v1_manifest",
+        "foundation",
+        "original_scientific_files",
+        "cohort_lock_sha256"
+      ],
+      "nested_schema": "format is h036_acceptance_cohort_v1. cases uses decimal-string keys for all 16 seeds. Each case contains seed, reuse, logical_case, prepared_id, path_sha256, lock_sha256, binding, inputs, foundation, v1_source_identity_sha256, arms, and probes. Recovered cases carry locked V/UG/UR source and candidate identities; reused cases point each label to the original D metrics score_ref. Candidate arrays are not returned.",
+      "source": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/src/online_rl/retention_acceptance_replay.py:602"
+    },
+    {
+      "module": "online_rl.retention_acceptance_replay",
+      "name": "make_anchor_permit",
+      "signature": "make_anchor_permit(cohort: Mapping[str, Any]) -> dict[str, Any]",
+      "return_keys": ["format", "stage", "cohort", "permit_sha256"],
+      "return_values": "format=h036_acceptance_stage_permit_v1; stage=anchor. The embedded cohort is the complete verified cohort lock. The stage permits only V scoring for the five recovery cases.",
+      "source": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/src/online_rl/retention_acceptance_replay.py:747"
+    },
+    {
+      "module": "online_rl.retention_acceptance_replay",
+      "name": "confirm_anchors",
+      "signature": "confirm_anchors(cohort: Mapping[str, Any], anchor_scores: Mapping[Any, Any], expected_metrics_bytes: Mapping[Any, bytes], reuse_bindings: Mapping[str, Any]) -> dict[str, Any]",
+      "input_contract": "Exactly five V score records and five original D metrics files as raw bytes, keyed by recovery seed, plus the exact bindings object. Each score record needs metrics and deployment.actor_bytes (raw 89-byte actor bytes); deployment itself may alternatively be raw bytes.",
+      "checks": "Verifies old metrics raw byte count/SHA against the bound D artifact, 89-byte actor identity, prepared/candidate/foundation identities, exact canonical pre_codec_fresh, encoded_fresh, and W0_fresh objects, and exact G_new, K_new, K_new_W0, K_old fields. Resource/timing fields and the complete new metrics-file SHA are not compared.",
+      "return_keys": ["format", "stage", "cohort", "anchors_pass_token", "permit_sha256"],
+      "return_values": "format=h036_acceptance_stage_permit_v1; stage=counterfactual. anchors_pass_token binds cohort_lock_sha256 and has exactly five records, each with expected_metrics_sha, actual_metrics_canonical_sha, actor_sha, plus token_sha256.",
+      "source": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/src/online_rl/retention_acceptance_replay.py:782"
+    },
+    {
+      "module": "online_rl.retention_acceptance_replay",
+      "name": "validate_stage_permit",
+      "signature": "validate_stage_permit(permit: Mapping[str, Any], locked: Mapping[str, Any], label: str) -> None",
+      "behavior": "Checks permit and cohort digests, the full locked identity, recovery seed, and label-stage pairing. Anchor allows V only; counterfactual allows UG/UR only and requires the all-five anchor token.",
+      "source": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/src/online_rl/retention_acceptance_replay.py:911"
+    },
+    {
+      "module": "online_rl.retention_acceptance_diagnostic",
+      "name": "locked_probe_manifest",
+      "signature": "locked_probe_manifest(locked_probe: dict[str, Any]) -> dict[str, Any]",
+      "return_keys": ["seed", "prepared_id", "path_sha256", "lock_sha256", "logical_case", "binding", "probes"],
+      "nested_schema": "probes has exactly V, UG, UR. Each entry contains source metadata, candidate_sha256 (scientific helper identity), and raw_sha256 (exact float32 candidate-byte identity). The manifest is JSON-safe and deliberately excludes NumPy arrays.",
+      "source": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/src/online_rl/retention_acceptance_diagnostic.py:856"
+    },
+    {
+      "module": "online_rl.retention_acceptance_diagnostic",
+      "name": "encode_and_score_locked_probe",
+      "signature": "encode_and_score_locked_probe(prepared: dict[str, Any], locked_probe: dict[str, Any], label: str, *, stage_permit: dict[str, Any] | None = None) -> dict[str, Any]",
+      "input_contract": "A prepared h036_prepared_v1 object, the full in-memory lock (including arrays), label V/UG/UR, and a permit issued by replay. It validates prepared input/foundation identities against the cohort before invoking the original wildcard scorer.",
+      "return_schema": "The original scoring result with metrics and deployment payload, plus diagnostic_only=true and selection_source. selection_source contains label, selector, origin_index, candidate_origin_index, post_cast_gate_enabled, post_cast_gate_pass, fallback_applied, candidate_sha256, raw_sha256, trace_sha256, lock_sha256, cohort_lock_sha256, and stage. Preserve deployment.actor_bytes, checkpoint_bytes, and evidence_bytes verbatim when present; checkpoint bytes must not be serialized again.",
+      "source": "research/appendix/H036/delivery_acceptance_v1/source_snapshot/src/online_rl/retention_acceptance_diagnostic.py:884"
+    }
+  ],
+  "array_and_bytes_contract": {
+    "selection_trace": "candidates contains only C0/F64/U64 float64 arrays, each shape (3,3), C-order little-endian raw size 72 bytes. Scalar diagnostics and hashes are JSON-safe; the trace as a whole is not directly JSON-serializable.",
+    "locked_probes": "Each of V/UG/UR contains candidate and raw_cast_candidate float32 arrays, each shape (3,3), C-order little-endian raw size 36 bytes. candidate is the final post-gate point; raw_cast_candidate is the pre-fallback cast. Preserve both arrays and all non-array lock metadata.",
+    "hashes": "candidate_sha256 is the scientific helper hash over dtype.str, NUL, repr(shape), NUL, and C-order bytes. raw_sha256 is SHA-256 of canonical C-order raw array bytes only. They are distinct identities and neither replaces the other.",
+    "deployment": "Actor, checkpoint, and evidence bytes returned by the original scorer are deployment artifacts; persist them verbatim. Do not re-run torch.save on returned checkpoint bytes."
+  }
+}

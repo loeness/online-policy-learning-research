@@ -1,0 +1,278 @@
+--- validation/supervisor.py
++++ repair002/supervisor.py
+@@ -23,9 +23,9 @@
+ 
+ PROJECT = Path("/data/robot/p001")
+ E_ROOT = PROJECT / "e163"
+-ORCHESTRATION_ROOT = E_ROOT / "o001"
++ORCHESTRATION_ROOT = E_ROOT / "o002"
+ SOURCE_CWD = E_ROOT / "s001"
+-RUN_ROOT = E_ROOT / "run001"
++RUN_ROOT = E_ROOT / "run002"
+ PYTHON = PROJECT / "env/bin/python"
+ RUNNER = ORCHESTRATION_ROOT / "runner.py"
+ SPEC_PATH = ORCHESTRATION_ROOT / "run_spec.json"
+@@ -164,7 +164,7 @@
+     spec_path = _canonical(spec_path_value, "spec path", root=E_ROOT)
+     authorization_path = _canonical(authorization_path_value, "authorization path", root=E_ROOT)
+     if spec_path != SPEC_PATH or authorization_path != AUTHORIZATION_PATH:
+-        raise SupervisorError("spec and authorization must be the frozen o001 files")
++        raise SupervisorError("spec and authorization must be the frozen o002 files")
+     spec, spec_raw = _read_json(spec_path, "run spec")
+     authorization, _ = _read_json(authorization_path, "authorization")
+ 
+@@ -173,7 +173,7 @@
+     if spec.get("project_root") != str(PROJECT) or spec.get("e_root") != str(E_ROOT):
+         raise SupervisorError("run spec project roots differ from the allocated paths")
+     if spec.get("orchestration_root") != str(ORCHESTRATION_ROOT):
+-        raise SupervisorError("run spec orchestration root differs from o001")
++        raise SupervisorError("run spec orchestration root differs from o002")
+     if spec.get("source_cwd") != str(SOURCE_CWD) or spec.get("run_root") != str(RUN_ROOT):
+         raise SupervisorError("run spec source or run directory differs from the frozen paths")
+     if spec.get("python") != str(PYTHON):
+@@ -212,7 +212,7 @@
+     if not SOURCE_CWD.is_dir() or not ORCHESTRATION_ROOT.is_dir() or not RUNNER.is_file():
+         raise SupervisorError("source or orchestration directory is missing")
+     if RUN_ROOT.exists() or RUN_ROOT.is_symlink():
+-        raise SupervisorError("run001 already exists; refusing to overwrite campaign evidence")
++        raise SupervisorError("run002 already exists; refusing to overwrite campaign evidence")
+     _validate_environment(spec.get("environment"))
+     return spec, authorization, spec_path, authorization_path
+ 
+@@ -256,6 +256,62 @@
+         "voluntary_context_switches": int(usage.ru_nvcsw),
+         "involuntary_context_switches": int(usage.ru_nivcsw),
+     }
++
++
++def _capture_startup_proof() -> tuple[dict, list[str]]:
++    """Capture launch identity and process-local accounting before any fork."""
++    pid = os.getpid()
++    parent_pid = os.getppid()
++    expected_parent_raw = os.environ.get("E163_LAUNCH_PARENT_PID")
++    proof: dict = {
++        "supervisor_pid": pid,
++        "parent_pid": parent_pid,
++        "launch_parent_pid_env": expected_parent_raw,
++        "captured_before_supervisor_fork": True,
++    }
++    errors: list[str] = []
++    try:
++        proof["supervisor_start_ticks"] = int(_proc_stat(pid)["start_ticks"])
++    except (OSError, SupervisorError, ValueError) as exc:
++        proof["supervisor_start_ticks_error"] = f"{type(exc).__name__}: {exc}"
++        errors.append("supervisor start ticks could not be read")
++
++    try:
++        expected_parent_pid = int(expected_parent_raw) if expected_parent_raw is not None else None
++    except ValueError:
++        expected_parent_pid = None
++    proof["expected_parent_pid"] = expected_parent_pid
++    if expected_parent_pid is None or expected_parent_pid <= 1:
++        errors.append("E163_LAUNCH_PARENT_PID is missing or invalid")
++    elif expected_parent_pid != parent_pid:
++        errors.append("actual parent PID differs from E163_LAUNCH_PARENT_PID")
++    else:
++        try:
++            proof["parent_start_ticks"] = int(_proc_stat(expected_parent_pid)["start_ticks"])
++        except (OSError, SupervisorError, ValueError) as exc:
++            proof["parent_start_ticks_error"] = f"{type(exc).__name__}: {exc}"
++            errors.append("known launch parent start ticks could not be read")
++
++    if pid == parent_pid:
++        errors.append("supervisor replaced the launch shell instead of starting as a child")
++    if ("supervisor_start_ticks" in proof and "parent_start_ticks" in proof
++            and proof["supervisor_start_ticks"] < proof["parent_start_ticks"]):
++        errors.append("supervisor start ticks precede the launch parent")
++
++    try:
++        proof["rusage_sampling_phase"] = "POST_AUTHORIZATION_PRE_FORK"
++        proof["rusage_self_post_authorization_pre_fork"] = _ru_record(
++            resource.getrusage(resource.RUSAGE_SELF))
++        proof["rusage_children_post_authorization_pre_fork"] = _ru_record(
++            resource.getrusage(resource.RUSAGE_CHILDREN))
++    except (OSError, ValueError) as exc:
++        proof["rusage_start_error"] = f"{type(exc).__name__}: {exc}"
++        errors.append("initial process resource usage could not be read")
++    else:
++        child_usage = proof["rusage_children_post_authorization_pre_fork"]
++        if child_usage["user_seconds"] != 0.0 or child_usage["system_seconds"] != 0.0:
++            errors.append("initial RUSAGE_CHILDREN CPU must be exactly zero")
++    return proof, errors
+ 
+ 
+ def _storage_bytes(root: Path) -> int:
+@@ -316,11 +372,12 @@
+ 
+ class Campaign:
+     def __init__(self, spec: dict, authorization: dict, spec_path: Path,
+-                 authorization_path: Path):
++                 authorization_path: Path, startup_proof: dict):
+         self.spec = spec
+         self.authorization = authorization
+         self.spec_path = spec_path
+         self.authorization_path = authorization_path
++        self.startup_proof = startup_proof
+         self.ticks_per_second = int(os.sysconf("SC_CLK_TCK"))
+         if self.ticks_per_second <= 0:
+             raise SupervisorError("invalid kernel clock tick rate")
+@@ -345,17 +402,22 @@
+         self.wait_stream = None
+ 
+     def start(self) -> None:
+-        # run001 is unique; no campaign file is replaced.
++        # run002 is unique; no campaign file is replaced.
+         _validate_capacity(self.spec)
+         self.run_root.mkdir(mode=0o700)
+         self._ensure_runtime_directories()
+         self.meter_stream = self.meter_path.open("x", encoding="utf-8", buffering=1)
+         self.wait_stream = self.wait_path.open("x", encoding="utf-8", buffering=1)
+         self.last_storage_bytes = _storage_bytes(E_ROOT)
+-        self.record_event("campaign_started", campaign_start_source="supervisor /proc/self/stat start ticks",
++        self.record_event("campaign_started", campaign_start_source="new supervisor /proc/self/stat start ticks",
+                           supervisor_pid=os.getpid(), supervisor_start_ticks=self.own_start_ticks,
++                          parent_pid=self.startup_proof["parent_pid"],
++                          parent_start_ticks=self.startup_proof["parent_start_ticks"],
+                           ticks_per_second=self.ticks_per_second,
++                          startup_proof=self.startup_proof,
+                           self_rusage_at_record=_ru_record(resource.getrusage(resource.RUSAGE_SELF)),
++                          rusage_children_at_campaign_start=_ru_record(
++                              resource.getrusage(resource.RUSAGE_CHILDREN)),
+                           authorization_sha256=_sha256(self.authorization_path.read_bytes()),
+                           run_spec_sha256=_sha256(self.spec_path.read_bytes()),
+                           limits=EXPECTED_LIMITS)
+@@ -899,13 +961,38 @@
+         if self.handles:
+             raise SupervisorError("cannot finalize while a recorded child remains unreaped")
+         children = resource.getrusage(resource.RUSAGE_CHILDREN)
+-        wait4_total = self._children_cpu()
+-        rusage_total = _ru_cpu(children)
+-        if abs(wait4_total - rusage_total) > 0.03:
++        initial = self.startup_proof["rusage_children_post_authorization_pre_fork"]
++        initial_user = float(initial["user_seconds"])
++        initial_system = float(initial["system_seconds"])
++        final_user = float(children.ru_utime)
++        final_system = float(children.ru_stime)
++        wait4_user = sum(float(row["rusage"]["user_seconds"]) for row in self.completed)
++        wait4_system = sum(float(row["rusage"]["system_seconds"]) for row in self.completed)
++        delta_user = final_user - initial_user
++        delta_system = final_system - initial_system
++        if initial_user != 0.0 or initial_system != 0.0:
++            raise SupervisorError("initial RUSAGE_CHILDREN CPU was not zero")
++        if (abs(wait4_user - delta_user) > 0.03
++                or abs(wait4_system - delta_system) > 0.03):
+             raise SupervisorError("final wait4 sum differs from RUSAGE_CHILDREN")
+-        return {"wait4_sum_cpu_seconds": wait4_total,
+-                "rusage_children_cpu_seconds": rusage_total,
+-                "difference_seconds": abs(wait4_total - rusage_total)}
++        return {
++            "initial_rusage_children_cpu_seconds": {
++                "user": initial_user, "system": initial_system,
++            },
++            "final_rusage_children_cpu_seconds": {
++                "user": final_user, "system": final_system,
++            },
++            "rusage_children_delta_cpu_seconds": {
++                "user": delta_user, "system": delta_system,
++            },
++            "wait4_sum_cpu_seconds": {
++                "user": wait4_user, "system": wait4_system,
++            },
++            "difference_seconds": {
++                "user": abs(wait4_user - delta_user),
++                "system": abs(wait4_system - delta_system),
++            },
++        }
+ 
+     def finalize(self, status: str, *, return_code: int, error: dict | None = None) -> int:
+         for handle in list(self.handles.values()):
+@@ -959,7 +1046,7 @@
+                 "cpu_total_scope": "supervisor RUSAGE_SELF + completed direct-child wait4 totals + live owned /proc counters; child wait4 descendants checked by in-campaign precheck",
+                 "campaign_wall_seconds_before_final_footer": wall,
+                 "bounded_campaign_wall_seconds_upper": wall_upper,
+-                "campaign_start_source": "supervisor process start ticks from /proc/self/stat; includes Python interpreter startup, excludes any unobserved shell or SSH launcher",
++                "campaign_start_source": "new supervisor process start ticks from /proc/self/stat; includes Python interpreter startup; launch shell and SSH parent are recorded separately and excluded from the campaign clock",
+                 "limits": EXPECTED_LIMITS,
+                 "safety_stops": {"cpu_seconds": CPU_STOP_SECONDS, "wall_seconds": WALL_STOP_SECONDS},
+                 "finalization_reserve": {"cpu_seconds": FOOTER_CPU_RESERVE_SECONDS,
+@@ -1046,16 +1133,35 @@
+         spec, authorization, spec_path, authorization_path = _validate_spec_and_authorization(
+             args.spec, args.authorization)
+     except PermissionError as exc:
+-        print(f"E163 authorization refused: {exc}", file=sys.stderr)
++        print(_json_bytes({"kind": "authorization_refused",
++                           "message": str(exc)}).decode("utf-8"), file=sys.stderr)
+         return 3
+     except BaseException as exc:
+-        print(f"E163 preflight refused: {type(exc).__name__}: {exc}", file=sys.stderr)
++        print(_json_bytes({"kind": "preflight_refused",
++                           "exception_type": type(exc).__name__,
++                           "message": str(exc)}).decode("utf-8"), file=sys.stderr)
++        return 3
++    startup_proof = None
++    try:
++        startup_proof, startup_errors = _capture_startup_proof()
++        if startup_errors:
++            raise SupervisorError("; ".join(startup_errors))
++    except BaseException as exc:
++        failure = {"kind": "startup_precheck_failed",
++                   "exception_type": type(exc).__name__,
++                   "message": str(exc)}
++        if startup_proof is not None:
++            failure["startup_proof"] = startup_proof
++        print(_json_bytes(failure).decode("utf-8"), file=sys.stderr)
+         return 3
+     campaign = None
+     try:
+-        campaign = Campaign(spec, authorization, spec_path, authorization_path)
++        campaign = Campaign(spec, authorization, spec_path, authorization_path, startup_proof)
+     except BaseException as exc:
+-        print(f"E163 supervisor initialization failed: {type(exc).__name__}: {exc}", file=sys.stderr)
++        print(_json_bytes({"kind": "supervisor_initialization_failed",
++                           "startup_proof": startup_proof,
++                           "exception_type": type(exc).__name__,
++                           "message": str(exc)}).decode("utf-8"), file=sys.stderr)
+         return 3
+     return campaign.run()
+ 
+--- validation/runner.py
++++ repair002/runner.py
+@@ -61,9 +61,9 @@
+ 
+ 
+ def validate_authorization(spec_path, authorization_path):
+-    if (Path(spec_path) != E_ROOT / "o001/run_spec.json"
+-            or Path(authorization_path) != E_ROOT / "o001/authorization.json"):
+-        raise PermissionError("spec/authorization paths differ from frozen o001 placement")
++    if (Path(spec_path) != E_ROOT / "o002/run_spec.json"
++            or Path(authorization_path) != E_ROOT / "o002/authorization.json"):
++        raise PermissionError("spec/authorization paths differ from frozen o002 placement")
+     spec_bytes = safe(spec_path, E_ROOT).read_bytes()
+     spec = json.loads(spec_bytes)
+     auth = read_json(authorization_path)
+@@ -100,7 +100,7 @@
+     source = safe(spec["source_cwd"], E_ROOT)
+     run = safe(spec["run_root"], E_ROOT)
+     orchestration = safe(spec["orchestration_root"], E_ROOT)
+-    if source != E_ROOT / "s001" or run != E_ROOT / "run001" or orchestration != E_ROOT / "o001":
++    if source != E_ROOT / "s001" or run != E_ROOT / "run002" or orchestration != E_ROOT / "o002":
+         raise ValueError("unexpected frozen workspace placement")
+     run.mkdir(exist_ok=True)
+     started_cpu, started_wall = time.process_time(), time.monotonic()
+--- validation/launch_command.sh
++++ repair002/launch_command.sh
+@@ -17,4 +17,13 @@
+ export TORCH_HOME='/data/robot/p001/e163/cache/torch'
+ export TORCH_EXTENSIONS_DIR='/data/robot/p001/e163/cache/ext'
+ cd '/data/robot/p001/e163/s001'
+-exec '/data/robot/p001/env/bin/python' '-I' '-B' '/data/robot/p001/e163/o001/supervisor.py' '--spec' '/data/robot/p001/e163/o001/run_spec.json' '--authorization' '/data/robot/p001/e163/o001/authorization.json'
++E163_LAUNCH_PARENT_PID=$$ '/data/robot/p001/env/bin/python' '-I' '-B' '/data/robot/p001/e163/o002/supervisor.py' '--spec' '/data/robot/p001/e163/o002/run_spec.json' '--authorization' '/data/robot/p001/e163/o002/authorization.json' &
++childpid=$!
++printf 'launch_parent_pid=%s\nlaunch_child_pid=%s\n' "$$" "$childpid"
++if wait "$childpid"; then
++    rc=0
++else
++    rc=$?
++fi
++printf 'supervisor_exit_code=%s\n' "$rc"
++exit "$rc"

@@ -1,0 +1,47 @@
+diff --git a/src/online_rl/storage_decision.py b/src/online_rl/storage_decision.py
+index 3761f804..ac7f446d 100644
+--- a/src/online_rl/storage_decision.py
++++ b/src/online_rl/storage_decision.py
+@@ -20,10 +20,22 @@ HISTORY_TEMPLATES = {
+     "old_major": ((0, 0), (0, 1), (0, 2), (0, 0), (0, 1), (0, 2), (1, 0), (1, 1)),
+     "new_major": ((0, 0), (1, 0), (1, 1), (1, 2), (0, 1), (1, 2), (1, 0), (1, 1)),
+ }
++HISTORY_REGIME_ORDER = ("old_major", "new_major")
+ FUTURE_TEMPLATES = {
+     "old_major": ((0, 0), (0, 1), (0, 2), (1, 0), (0, 0), (0, 1), (0, 2), (1, 1), (0, 0), (0, 1), (0, 2), (1, 2)),
+     "new_major": ((1, 0), (1, 1), (1, 2), (0, 0), (1, 0), (1, 1), (1, 2), (0, 1), (1, 0), (1, 1), (1, 2), (0, 2)),
+ }
++FUTURE_REGIME_ORDER = ("old_major", "new_major", "balanced")
++
++
++def _ordered_nonempty_subset(values: Sequence[Any], allowed: Sequence[str], name: str) -> list[str]:
++    if isinstance(values, (str, bytes)):
++        raise ValueError(f"{name} must be a nonempty ordered subset of {tuple(allowed)}")
++    result = [str(value) for value in values]
++    expected_order = [value for value in allowed if value in result]
++    if not result or len(result) != len(set(result)) or result != expected_order:
++        raise ValueError(f"{name} must be a nonempty ordered subset of {tuple(allowed)}")
++    return result
+ 
+ 
+ def validate_config(config: Mapping[str, Any]) -> dict[str, Any]:
+@@ -53,15 +65,15 @@ def validate_config(config: Mapping[str, Any]) -> dict[str, Any]:
+             raise ValueError(f"{name} must be a positive multiple of rollout_steps")
+         result[name] = value
+     result["pair_kinds"] = list(result.get("pair_kinds", ("dynamics", "reward_conflict")))
+-    result["history_regimes"] = list(result.get("history_regimes", ("old_major", "new_major")))
+-    result["future_regimes"] = list(result.get("future_regimes", ("old_major", "new_major")))
++    result["history_regimes"] = list(result.get("history_regimes", HISTORY_REGIME_ORDER))
++    result["future_regimes"] = _ordered_nonempty_subset(
++        result.get("future_regimes", HISTORY_REGIME_ORDER), FUTURE_REGIME_ORDER, "future_regimes",
++    )
+     result["actions"] = list(result.get("actions", ACTIONS))
+     if not set(result["pair_kinds"]) or not set(result["pair_kinds"]) <= {"dynamics", "reward_conflict"}:
+         raise ValueError("pair_kinds must be a nonempty subset of dynamics and reward_conflict")
+     if not set(result["history_regimes"]) or not set(result["history_regimes"]) <= {"old_major", "new_major"}:
+         raise ValueError("history_regimes must be a nonempty subset of old_major and new_major")
+-    if not set(result["future_regimes"]) or not set(result["future_regimes"]) <= {"old_major", "new_major"}:
+-        raise ValueError("future_regimes must be a nonempty subset of old_major and new_major")
+     if tuple(result["actions"]) != ACTIONS:
+         raise ValueError(f"actions must be ordered as {ACTIONS}")
+     result.setdefault("seeds", [20101, 20107, 20113, 20117, 20123, 20129, 20143, 20149])

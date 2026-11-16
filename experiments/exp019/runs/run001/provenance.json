@@ -1,0 +1,44 @@
+{
+  "experiment_id": "E019",
+  "run_id": "run001",
+  "producer_path": "outputs/c1_supplement/source_retention/",
+  "configuration_and_protocol_paths": [
+    "docs/C1_TENSOR_ALTERNATIVES.md",
+    "docs/C1_CONTEXT_HEAD_ALTERNATIVE.md",
+    "docs/C1_SOURCE_BASIS_DERIVATION.md",
+    "outputs/c1_supplement/cohort_source_manifest.json",
+    "outputs/c1_supplement/alternative_results.md"
+  ],
+  "input_data_paths": [
+    "data/foundation.pt",
+    "data/pretrain_source.npz"
+  ],
+  "producer_artifact_paths": [
+    "outputs/c1_supplement/representation_alternatives/",
+    "outputs/c1_supplement/context_head_alternatives/",
+    "outputs/c1_supplement/source_retention/",
+    "outputs/c1_supplement/alternative_results.md"
+  ],
+  "source_provenance_paths": [
+    "outputs/c1_supplement/cohort_source_manifest.json"
+  ],
+  "reported_date": "unknown",
+  "operational_status": "COMPLETED",
+  "actual_cost": "18 formal runs × (63,488 training + 17,408 evaluation) = 1,456,128; matched W0 source probes add 10,752; validation interaction subtotal not fully reported",
+  "actual_execution_commit": null,
+  "execution_commit_explanation": "Supplement manifest records source hashes but not execution SHA. Archive context commit 81de4afd2d703d17c3953facb78fd04b19cb64a9 is import context only.",
+  "actual_execution_command": null,
+  "command_explanation": "Exact historical invocation not preserved.",
+  "retrospective_record": true,
+  "producer_entrypoints": [
+    "scripts/run_c1_supplement.py"
+  ],
+  "producer_path_semantics": "Historical artifact root, not code entrypoint. This retrospective cohort wrapper does not establish the exact number of original CLI invocations.",
+  "supporting_log_paths": [],
+  "schema_version": 1,
+  "registration_mode": "RETROSPECTIVE_IMPORT",
+  "imported_on": "2026-10-20",
+  "hypothesis_id": "H006",
+  "record_granularity": "RETROSPECTIVE_SOURCE_UNIT",
+  "record_granularity_note": "This historical wrapper indexes a saved cohort or attempt. Its native component paths, when available, define membership; a wrapper count is not an independently verified count of original CLI invocations."
+}
