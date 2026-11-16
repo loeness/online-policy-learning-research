@@ -1,0 +1,30 @@
+{
+  "hypothesis_id": "H036",
+  "experiment_id": "E164",
+  "accepted_date": "2026-10-23",
+  "state": "DIRECTION_ACCEPTED_FOR_LOCAL_IMPLEMENTATION_ONLY",
+  "direction": "Same trajectory F/U selectors, V/UG/UR two-gate decomposition,16logical pairs,11exact reuse,5missing-candidate recovery,15maximum new scoring packages; no learner structure change",
+  "evidence_sha256": {
+    "NEXT_DESIGN_20261023.md": "d83e0b4ea8a0a79e867c063bc66b46bec79fa92125e3f981a80392a717bb7bff",
+    "NEXT_SCALAR_REPLAY_20261023.json": "7d9e230971a18ad259e38204b3038c0d60d5193b8082ea496936595d8e3681ea",
+    "NEXT_REVIEW_20261023.md": "884b692caa6bd25c5df7fa18ae54263053c94bbaa53d37fb6d35af91443a598b",
+    "COORDINATOR_ACCEPTANCE_IMPLEMENTATION_20261023.md": "761e29dcdd9e25a1a61588d8c0b6640cf1b297e9731afb918ec84b5364763cbe"
+  },
+  "root_independent_static_review": "No substantive scientific attribution blocker; require complete reuse provenance bindings and exact h036_fit_v1 adapter fields at freeze. No model/SSH/numeric replay executed by root review.",
+  "implementation_files": [
+    "src/online_rl/retention_acceptance_replay.py",
+    "src/online_rl/retention_acceptance_diagnostic.py",
+    "configs/h036_acceptance_diagnostic_v1.json",
+    "tests/test_retention_acceptance_diagnostic.py"
+  ],
+  "protected": [
+    "original production modules",
+    "delivery_v1",
+    "E163 raw evidence,protocol,threshold and budget"
+  ],
+  "real_fit_or_new_score_authorized": false,
+  "ssh_transfer_or_precheck_authorized": false,
+  "numerical_budget_authorized": false,
+  "synthetic_engineering_checks_authorized": true,
+  "next": "Implement/freeze, independent review, concrete resource authorization and final coordinator execution admission"
+}

@@ -8,7 +8,6 @@ import hashlib
 import json
 import os
 import random
-import shutil
 import sys
 import time
 import traceback
@@ -49,15 +48,39 @@ STATES = ("early", "late")
 _ACTION_RNG_STREAM = mechanism._ACTION_RNG_STREAM
 _BEHAVIOR_RNG_STREAM = mechanism._BEHAVIOR_RNG_STREAM
 
-SOURCE_FILES = tuple(dict.fromkeys(
-    list(mechanism.SOURCE_FILES)
-    + [
-        Path("scripts/run_retention_candidate.py"),
-        Path("src/online_rl/retention_behavioral_candidate.py"),
-        Path("configs/retention_candidate.json"),
-        Path("docs/RETENTION_CANDIDATE_PROTOCOL.md"),
-    ]
-))
+SOURCE_FILES = (
+    Path("scripts/run_storage_decision.py"),
+    Path("scripts/run_knowledge_loop.py"),
+    Path("scripts/run_write_stream.py"),
+    Path("src/online_rl/storage_decision.py"),
+    Path("src/online_rl/score_calibration.py"),
+    Path("src/online_rl/retention_consolidation.py"),
+    Path("src/online_rl/consolidation_probe.py"),
+    Path("src/online_rl/write_decision_envs.py"),
+    Path("src/online_rl/write_decision_policy.py"),
+    Path("src/online_rl/shared_write_policy.py"),
+    Path("src/online_rl/shared_write_storage.py"),
+    Path("src/online_rl/write_decision_evidence.py"),
+    Path("src/online_rl/write_fast_evidence.py"),
+    Path("src/online_rl/c1_supplement_experiment.py"),
+    Path("src/online_rl/c1_tensor_controls.py"),
+    Path("src/online_rl/c1_policy.py"),
+    Path("src/online_rl/c1_envs.py"),
+    Path("src/online_rl/experiment.py"),
+    Path("src/online_rl/policy.py"),
+    Path("configs/storage_decision.json"),
+    Path("docs/STORAGE_DECISION_PROTOCOL.md"),
+    Path("scripts/run_retention_mechanism.py"),
+    Path("src/online_rl/envs.py"),
+    Path("src/online_rl/retention_stream_value.py"),
+    Path("configs/retention_mechanism.json"),
+    Path("docs/RETENTION_MECHANISM_PROTOCOL.md"),
+    Path("scripts/run_retention_candidate.py"),
+    Path("src/online_rl/retention_behavioral_candidate.py"),
+    Path("configs/retention_candidate.json"),
+    Path("docs/RETENTION_CANDIDATE_PROTOCOL.md"),
+)
+E161_SOURCE_FILES = (Path("configs/e161.json"), Path("configs/c1.json"))
 
 
 def _json_default(value: Any) -> Any:
@@ -80,6 +103,28 @@ def _sha(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _copy_bytes_verified(source: Path, target: Path) -> tuple[str, int]:
+    source_digest = _sha(source)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with source.open("rb") as source_stream, target.open("wb") as target_stream:
+        for block in iter(lambda: source_stream.read(1024 * 1024), b""):
+            target_stream.write(block)
+    copied_digest = _sha(target)
+    if _sha(source) != source_digest or copied_digest != source_digest:
+        raise RuntimeError(f"file changed while byte-copying: {source}")
+    return copied_digest, int(target.stat().st_size)
+
+
+def _canonical_subset(values: Sequence[Any], allowed: Sequence[str], name: str) -> list[str]:
+    if isinstance(values, (str, bytes)):
+        raise ValueError(f"{name} must be a nonempty ordered subset of {tuple(allowed)}")
+    result = [str(value) for value in values]
+    expected_order = [value for value in allowed if value in result]
+    if not result or len(result) != len(set(result)) or result != expected_order:
+        raise ValueError(f"{name} must be a nonempty ordered subset of {tuple(allowed)}")
+    return result
+
+
 def _candidate_array_hash(value: np.ndarray) -> str:
     array = np.ascontiguousarray(value, dtype=np.float32)
     digest = hashlib.sha256()
@@ -96,10 +141,8 @@ def validate_config(config: Mapping[str, Any]) -> dict[str, Any]:
     result = storage.validate_config(config)
     if result.get("history_regime_by_seed") != "old_major_if_even_else_new_major":
         raise ValueError("history_regime_by_seed must use the frozen parity rule")
-    if result.get("states") != list(STATES):
-        raise ValueError(f"states must be ordered as {STATES}")
-    if result.get("arms") != list(ARMS):
-        raise ValueError(f"arms must be ordered as {ARMS}")
+    result["states"] = _canonical_subset(result.get("states", ()), STATES, "states")
+    result["arms"] = _canonical_subset(result.get("arms", ()), ARMS, "arms")
     if int(result.get("bootstrap_steps", 0)) != 1024:
         raise ValueError("bootstrap_steps is frozen to 1024")
     if int(result.get("early_source_steps", 0)) != 1024:
@@ -308,8 +351,10 @@ def _snapshot_sources(output: Path, config_path: Path) -> dict[str, Any]:
     config_resolved = config_path.resolve()
     if config_resolved.is_relative_to(ROOT.resolve()):
         relative = Path(os.path.relpath(config_resolved, ROOT.resolve()))
+        if relative in E161_SOURCE_FILES:
+            paths.extend(path for path in E161_SOURCE_FILES if path not in paths)
         if relative not in paths:
-            paths.append(relative)
+            raise ValueError(f"configuration is outside the source snapshot allowlist: {relative}")
     for relative in paths:
         if any(part.casefold() in {"agent.md", "agents.md", "tmp"} for part in relative.parts):
             raise ValueError("private or temporary material is excluded from source snapshots")
@@ -317,12 +362,8 @@ def _snapshot_sources(output: Path, config_path: Path) -> dict[str, Any]:
         if not source.is_file():
             raise FileNotFoundError(f"required source snapshot file is missing: {relative}")
         target = snapshot / relative
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
-        source_digest, copy_digest = _sha(source), _sha(target)
-        if source_digest != copy_digest:
-            raise RuntimeError(f"source changed while snapshotting: {relative}")
-        files[relative.as_posix()] = {"sha256": copy_digest, "bytes": int(target.stat().st_size)}
+        copy_digest, copied_bytes = _copy_bytes_verified(source, target)
+        files[relative.as_posix()] = {"sha256": copy_digest, "bytes": copied_bytes}
     base = loop.load_base_config()
     foundation, dataset = Path(base["foundation"]), Path(base["dataset"])
     manifest = {
@@ -333,6 +374,20 @@ def _snapshot_sources(output: Path, config_path: Path) -> dict[str, Any]:
     }
     _write_json(snapshot / "manifest.json", manifest)
     return manifest
+
+
+def _experiment_provenance(config: Mapping[str, Any]) -> dict[str, Any]:
+    record: dict[str, Any] = {
+        "producer_protocol_path": PROTOCOL_PATH.relative_to(ROOT).as_posix(),
+        "producer_protocol_sha256": _sha(PROTOCOL_PATH),
+    }
+    if "e161" in str(config.get("analysis_role", "")).casefold():
+        plan_path = ROOT / "experiments" / "exp161" / "README.md"
+        if not plan_path.is_file():
+            raise FileNotFoundError(f"E161 plan provenance is missing: {plan_path}")
+        record["experiment_plan_path"] = plan_path.relative_to(ROOT).as_posix()
+        record["experiment_plan_sha256"] = _sha(plan_path)
+    return record
 
 
 def _evidence_arrays(owner_rows: Sequence[Sequence[Mapping[str, Any]]], rows_per_source: int) -> dict[str, np.ndarray]:
@@ -364,11 +419,10 @@ def _write_evidence_npz(path: Path, arrays: Mapping[str, np.ndarray]) -> dict[st
 
 
 def _copy_evidence(source: Path, target: Path, expected: Mapping[str, Any]) -> dict[str, Any]:
-    target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(source, target)
-    if target.stat().st_size != int(expected["bytes"]) or _sha(target) != str(expected["sha256"]):
+    copy_digest, copied_bytes = _copy_bytes_verified(source, target)
+    if copied_bytes != int(expected["bytes"]) or copy_digest != str(expected["sha256"]):
         raise RuntimeError("evidence sidecar changed while copying to a branch")
-    return {"path": target.name, "bytes": int(target.stat().st_size), "sha256": _sha(target)}
+    return {"path": target.name, "bytes": copied_bytes, "sha256": copy_digest}
 
 
 def _package_config(config: Mapping[str, Any], evidence_bytes: int) -> dict[str, Any]:
@@ -1603,6 +1657,8 @@ def run(
         else dict(config)
     )
     normalized = _phase_config(raw_config, pilot=pilot)
+    if "seed_status" in raw_config and raw_config["seed_status"] != "frozen":
+        raise ValueError("seed_status must be frozen before the candidate run can start")
     if seeds is not None:
         selected_seeds = [int(value) for value in seeds]
         if not selected_seeds or len(selected_seeds) != len(set(selected_seeds)):
@@ -1610,6 +1666,7 @@ def run(
         normalized["seeds"] = selected_seeds
         normalized = validate_config(normalized)
         normalized["phase"] = "pilot" if pilot else "main"
+    experiment_provenance = _experiment_provenance(normalized)
     configured_seed_pool = raw_config.get("pilot", {}).get("seeds", []) if pilot else raw_config["seeds"]
     if any(int(seed) not in set(int(value) for value in configured_seed_pool) for seed in normalized["seeds"]):
         raise ValueError("selected seeds must come from the frozen unused seed list")
@@ -1633,6 +1690,7 @@ def run(
         "config": normalized,
         "config_sha256": _sha(config_path) if config_path.is_file() else None,
         "protocol_sha256": _sha(PROTOCOL_PATH),
+        **experiment_provenance,
         "source_manifest": source_manifest,
         "expected_interactions": expected,
         "configured_expected_interactions": configured_expected,
@@ -1705,6 +1763,7 @@ def run(
         "config": normalized,
         "config_sha256": _sha(config_path) if config_path.is_file() else None,
         "protocol_sha256": _sha(PROTOCOL_PATH),
+        **experiment_provenance,
         "source_manifest": source_manifest,
         "seeds": list(normalized["seeds"]),
         "case_count": len(records),

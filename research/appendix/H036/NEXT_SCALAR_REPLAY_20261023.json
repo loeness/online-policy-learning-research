@@ -1,0 +1,2192 @@
+{
+  "format": "h036_design_scalar_replay_20261023",
+  "date": "2026-10-23 Asia/Singapore",
+  "scope": "design-support-only read of existing JSON scalars and candidate hashes; no model bytes, inference, fitting, environment, SSH or new E execution",
+  "original_E163_decision": "unchanged COMPLETE_VALID / NO_ADVANCEMENT 8/16",
+  "rules": {
+    "initial_index": 0,
+    "initial_objective": "diagnostics.initial_fullL",
+    "order": "closure.index ascending",
+    "tie": "fullL <= incumbent replaces, latest exact tie wins",
+    "filtered": "newKL <= initial_new_train_KL + 1e-12 then fullL <= incumbent",
+    "unrestricted": "fullL <= incumbent only",
+    "training_analog": "same .75 old/.5 new and 1e-10 guards applied to pre_codec_fresh train; explanatory, no new success rule"
+  },
+  "input_references": [
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26201/c/metrics.json",
+      "sha256": "1b9cb3f3ac8ea48c011940c72ee25d8766d0b53952979a5713b2b20907e46b89",
+      "bytes": 4101
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26201/d/metrics.json",
+      "sha256": "ef3e7f318e3d5c28d05497c29ea6cc56119ab47d6972446c9e223218f09aea2c",
+      "bytes": 4105
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26201/d/diagnostics.json",
+      "sha256": "49f141b67263b68c0bff0080a0141d244b7e83e6a523f302ac26efdc60488d3f",
+      "bytes": 26489
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26202/c/metrics.json",
+      "sha256": "313f9c1626593c38fd989dc7359bacbc354f57c75e4c067a56ec79905cb35acc",
+      "bytes": 4102
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26202/d/metrics.json",
+      "sha256": "d9f9b6b7c87d4d715d8f3bca836637f07b098818dfc607ef3ebb3c1bfd3cfafa",
+      "bytes": 4114
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26202/d/diagnostics.json",
+      "sha256": "329ea671de0a70cfd051caef29e48811ba6611b544659dba7f676ecf968a1c20",
+      "bytes": 28551
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26203/c/metrics.json",
+      "sha256": "441822c39ec85fc4fed06cfd39cc53ca5a3938a3577b08aea883c76e5234290e",
+      "bytes": 4108
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26203/d/metrics.json",
+      "sha256": "6bd86c38fbdd697e712a29c7e43df2bd398a201a24c4e2f1cf1c6d49b03d9994",
+      "bytes": 4120
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26203/d/diagnostics.json",
+      "sha256": "cba5b965b5bba87b3cb8482152cc43639d55551d03bff88628ad7ee951ad0f8d",
+      "bytes": 27731
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26204/c/metrics.json",
+      "sha256": "c87198cbb26e2c33a4e31ef457ba436cc44e54fa6bc1902da2ef00337869092e",
+      "bytes": 4110
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26204/d/metrics.json",
+      "sha256": "e4936cd33b63ad861344d852cc3e9c4e9ce53ceaf9af8d4b6761c4530a452ac6",
+      "bytes": 4127
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26204/d/diagnostics.json",
+      "sha256": "75ee40136b5df962473c3086785845c0869877103f66f04eac359d38d4aae099",
+      "bytes": 27822
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26205/c/metrics.json",
+      "sha256": "cf13f1f5b0da2591716607e78b1192ec21db87d4a55432ade8972abdeb1f1514",
+      "bytes": 4111
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26205/d/metrics.json",
+      "sha256": "410c0aefa129fb71890afbaf624101b03b5939af9dd1c8968de26bda9eb861c1",
+      "bytes": 4106
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26205/d/diagnostics.json",
+      "sha256": "705610483ec05a3362bd9f9e63254eb8599a92b2ab1910a8b7dee8039ff8d69a",
+      "bytes": 26524
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26206/c/metrics.json",
+      "sha256": "d143660b8bade79bc57e04e0487f9d02dad877dbcbbf946e6f00856d51a32911",
+      "bytes": 4099
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26206/d/metrics.json",
+      "sha256": "d63a633201ec6979d193dcb5f405f043998e8ba321be8cfc1704827689d69a15",
+      "bytes": 4132
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26206/d/diagnostics.json",
+      "sha256": "24b9c65d78d18509e09a15dc2001c7bd087328f384d68ae02180607a4cc083ca",
+      "bytes": 27155
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26207/c/metrics.json",
+      "sha256": "ce75c8d9f01692e54bf40dc49c371eeee0fc72c0d6405f863a798e748adee2e2",
+      "bytes": 4103
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26207/d/metrics.json",
+      "sha256": "ddc8fa09c729230b26d5946b06b3a5fe3c4a6c0e053f2d5ae186de104f26c64b",
+      "bytes": 4122
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26207/d/diagnostics.json",
+      "sha256": "766c05b14014de7953f00971b560e0afe66334b05d7bc7535a08ae673a20241e",
+      "bytes": 26902
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26208/c/metrics.json",
+      "sha256": "a3dc2757caf1d60227997e34b4ff9d251d37cdbf2b5f9b25ee78d85132e8836e",
+      "bytes": 4124
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26208/d/metrics.json",
+      "sha256": "6c77f6d337d49e51f055e143c011b54d53fcddc8a305072981029965cb718a1e",
+      "bytes": 4140
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26208/d/diagnostics.json",
+      "sha256": "3437f0b0b2420279e5395cf43899358c4b3c03a28c21d0c3da6a4aa5d3ff9ddc",
+      "bytes": 28074
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26209/c/metrics.json",
+      "sha256": "0e8769a42728e56c77a3296603873fabc6c71c59c9cf74c518ac3e32e807c1f3",
+      "bytes": 4106
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26209/d/metrics.json",
+      "sha256": "d3375ec4fa5f23e9b9a358f41cd2d8c204878e2b27896451615c11e22bb5ba8f",
+      "bytes": 4128
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26209/d/diagnostics.json",
+      "sha256": "b0f8b936e629bb7a7ba2a6b8daff2fefc3dd17465e6593918c08021dc1de3487",
+      "bytes": 26460
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26210/c/metrics.json",
+      "sha256": "d02175e18e1e5fb1cf791a5e8340e8991e73b3254cb30061a41c4b413910311e",
+      "bytes": 4123
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26210/d/metrics.json",
+      "sha256": "1bae043c72b02ef9d2fee0c46e4b523b9176fb1d7a0c11d2af3f5d141e8c43e6",
+      "bytes": 4123
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26210/d/diagnostics.json",
+      "sha256": "df66286227151b5ba763b57cde5cb7313633750dfb7f4b86552cedc74d82cb9f",
+      "bytes": 26289
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26211/c/metrics.json",
+      "sha256": "9561996292df2d13b3443344209822f9a3b951a73eff8ed6d8f122f6f8eb93c3",
+      "bytes": 4112
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26211/d/metrics.json",
+      "sha256": "ed00a23ea632de7d110d03a7fea2c15f2960f53c372ce72067096949152ab13e",
+      "bytes": 4121
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26211/d/diagnostics.json",
+      "sha256": "24ee2747dfef4b735acdbf2ec9b9c87d54f0bb64167714bfc1dcc02706692140",
+      "bytes": 27481
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26212/c/metrics.json",
+      "sha256": "b4c6ac8df60d8aaf0984cef3777328aae0192d2100cd5c9cdb0934b563e9a254",
+      "bytes": 4107
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26212/d/metrics.json",
+      "sha256": "bde3a88c0a1c6433d52fe417407a3487f3cbc0427ea06be981ad24900f16d622",
+      "bytes": 4127
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26212/d/diagnostics.json",
+      "sha256": "118a7e4c0e06fa287b0abae1fdbef8d0465f49c03ce20d505845833db1862c16",
+      "bytes": 26802
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26213/c/metrics.json",
+      "sha256": "88c83a74c797c298b716147de9b7114214c55246d4a0799300b4ed5f42593bd2",
+      "bytes": 4113
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26213/d/metrics.json",
+      "sha256": "d4bd6657e8c19ced6b52a9ec018b4715c48a4db8c1b5fdc5e3f0daae5de25ef4",
+      "bytes": 4137
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26213/d/diagnostics.json",
+      "sha256": "e5aaacf17d0982329008574a73f8df10ec28965b4d50ad7c6f48ed396a0707d9",
+      "bytes": 29132
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26215/c/metrics.json",
+      "sha256": "e3f9e99d78af20f2760679b7005486386950fd59dc899d826210629f678efc08",
+      "bytes": 4125
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26215/d/metrics.json",
+      "sha256": "d1f5c352afff6833e3ba06f96448ec80b8f6a8afdfee3550ef96b4aadd8e4f53",
+      "bytes": 4120
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26215/d/diagnostics.json",
+      "sha256": "bb2772083737ae8e3799c356c8ddd608dfd6e8329d6199aa1791a5fdee24b839",
+      "bytes": 27255
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26216/c/metrics.json",
+      "sha256": "dc7a8dfbe77a6c05430b9bf78bf87b8305a210d8959bfd014d37cc0167212fbe",
+      "bytes": 4109
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26216/d/metrics.json",
+      "sha256": "9d7187690b29ae368f3e50571445f2e8d6b13993228f513d98ef74638b2bfcfb",
+      "bytes": 4115
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26216/d/diagnostics.json",
+      "sha256": "5fc045da2ee8461905f55ba0b83b975f652691f2f29440685a3c889acac4a7cd",
+      "bytes": 26918
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26218/c/metrics.json",
+      "sha256": "471d5eaa8cc7828a00d8ed51fe0655719fa7811d9d8838fa1078aad92233ba24",
+      "bytes": 4112
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26218/d/metrics.json",
+      "sha256": "27afbd39d7cd080b3b8efffca4588787af91518dba7fc64f6a5c486c79a0cefa",
+      "bytes": 4112
+    },
+    {
+      "path": "experiments/exp163/runs/run002/remote/run002/cases/s26218/d/diagnostics.json",
+      "sha256": "da9d2b0bdc5f471e946cd670e0caf879db8f9aa7d43cabd0bf51b054e30e1997",
+      "bytes": 26817
+    }
+  ],
+  "rows": [
+    {
+      "seed": 26201,
+      "closure_count": 70,
+      "filtered": {
+        "index": 70,
+        "fullL": 0.23225172054144563,
+        "candidate_hash": "66b08cfe15d2cff7ee0441e0e24d1661a31efd5e4cf9c6b5c7a28645ff6b94ee"
+      },
+      "unrestricted": {
+        "index": 70,
+        "fullL": 0.23225172054144563,
+        "candidate_hash": "66b08cfe15d2cff7ee0441e0e24d1661a31efd5e4cf9c6b5c7a28645ff6b94ee"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.2089110833600599,
+      "train_analog_bounds": {
+        "old_max": 0.35843761740390623,
+        "new_max": 0.16485275530239082
+      },
+      "C0_bound_stricter_than_train_analog": false,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": false,
+      "pre_codec_holdout_pass": true,
+      "encoded_holdout_pass": true,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26202,
+      "closure_count": 76,
+      "filtered": {
+        "index": 76,
+        "fullL": 0.13249723202552738,
+        "candidate_hash": "ccd3d1a315f2729af0db14a1c8b8a86af855b52afdec4673fb9032f0bddc6ae0"
+      },
+      "unrestricted": {
+        "index": 76,
+        "fullL": 0.13249723202552738,
+        "candidate_hash": "ccd3d1a315f2729af0db14a1c8b8a86af855b52afdec4673fb9032f0bddc6ae0"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.19924637385549443,
+      "train_analog_bounds": {
+        "old_max": 2.7917702351907234,
+        "new_max": 0.14051760231783414
+      },
+      "C0_bound_stricter_than_train_analog": false,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": true,
+      "encoded_holdout_pass": true,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26203,
+      "closure_count": 73,
+      "filtered": {
+        "index": 73,
+        "fullL": 0.09672862872812366,
+        "candidate_hash": "3e7e7bc6ed6d18ee55439090d7d32a143ac9aed54c19c3706368b35674cac923"
+      },
+      "unrestricted": {
+        "index": 73,
+        "fullL": 0.09672862872812366,
+        "candidate_hash": "3e7e7bc6ed6d18ee55439090d7d32a143ac9aed54c19c3706368b35674cac923"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.11022427844075114,
+      "train_analog_bounds": {
+        "old_max": 0.17575274503604088,
+        "new_max": 0.12104125377911071
+      },
+      "C0_bound_stricter_than_train_analog": true,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 5,
+      "witnesses": [
+        {
+          "index": 8,
+          "candidate_hash": "8b5fbdcc1d41e10f7a00d27502159bfffd14605ec9899040dfa9a0f0b37613d5",
+          "fullL": 0.12082132634463537,
+          "oldKL": 0.00260829793829974,
+          "newKL": 0.11821235537437719
+        },
+        {
+          "index": 9,
+          "candidate_hash": "5c7f2e8048fea4ff3310ab63c994786c1d29e0e6e808ff3182cba5e730d17c8e",
+          "fullL": 0.11921707100864189,
+          "oldKL": 0.0007160650153659634,
+          "newKL": 0.1185003146475812
+        },
+        {
+          "index": 10,
+          "candidate_hash": "0d5cc3cf322d0d187d5ae01cd2e62d4c53589272ffca4a88388c177274b13699",
+          "fullL": 0.11850721460305773,
+          "oldKL": 0.0009069291512303088,
+          "newKL": 0.11759959740843756
+        },
+        {
+          "index": 11,
+          "candidate_hash": "ab44124bd868ad1fa4cfc288cb0eb0f87a2e9c137c2187834f3bafeebc309ca4",
+          "fullL": 0.11710529579542771,
+          "oldKL": 0.0012439608864220418,
+          "newKL": 0.11586065155375899
+        },
+        {
+          "index": 12,
+          "candidate_hash": "4466b5382da6fe2d7275bb0347ad3b0251bad166a6244c8d59a6a8e0ca7d6dbd",
+          "fullL": 0.11428125381616604,
+          "oldKL": 0.0018033844782953737,
+          "newKL": 0.11247714825749675
+        }
+      ],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": true,
+      "encoded_holdout_pass": true,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26204,
+      "closure_count": 71,
+      "filtered": {
+        "index": 1,
+        "fullL": 1.5126885410477806,
+        "candidate_hash": "c7ffb2089a977f5056efd0102ad03c10833fadf6f6683d7e93920c3688b5b8f3"
+      },
+      "unrestricted": {
+        "index": 71,
+        "fullL": 0.25299126138794276,
+        "candidate_hash": "3badb87648d9871e2a34726833e4bfe8d7ddeac733268e18c76634f02d0b5b67"
+      },
+      "same_float64_candidate": false,
+      "fullL_gap_filtered_minus_unrestricted": 1.2596972796598378,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.12983214268389912,
+      "train_analog_bounds": {
+        "old_max": 0.589010043472487,
+        "new_max": 0.19601693077362436
+      },
+      "C0_bound_stricter_than_train_analog": true,
+      "rejected_lower_fullL_than_incumbent": true,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": false,
+      "pre_codec_holdout_pass": false,
+      "encoded_holdout_pass": false,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26205,
+      "closure_count": 70,
+      "filtered": {
+        "index": 70,
+        "fullL": 0.23525238719033897,
+        "candidate_hash": "2ce3ab59b54fe34a60fe11bb5b298a0340286a9b90b1420d310106fcaaae32e4"
+      },
+      "unrestricted": {
+        "index": 70,
+        "fullL": 0.23525238719033897,
+        "candidate_hash": "2ce3ab59b54fe34a60fe11bb5b298a0340286a9b90b1420d310106fcaaae32e4"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.14695420251591307,
+      "train_analog_bounds": {
+        "old_max": 0.27073202319214895,
+        "new_max": 0.1497695931856946
+      },
+      "C0_bound_stricter_than_train_analog": true,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 1,
+      "witnesses": [
+        {
+          "index": 7,
+          "candidate_hash": "2e037aaaffdf07e99920c65afa6530b123f8c6970e980f88a17c1fcf2b7b97ec",
+          "fullL": 0.27628535086169126,
+          "oldKL": 0.1275746574347656,
+          "newKL": 0.14870902006416056
+        }
+      ],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": true,
+      "encoded_holdout_pass": true,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26206,
+      "closure_count": 69,
+      "filtered": {
+        "index": 1,
+        "fullL": 0.3650593323603046,
+        "candidate_hash": "a14d4abab488d5917afae5c265e59250c7dec86ede22dd3d4d86b9803854061e"
+      },
+      "unrestricted": {
+        "index": 69,
+        "fullL": 0.15844976030876523,
+        "candidate_hash": "5f1b7ed98bc727244c9c8706610198ae5e2c60f690b19ec86e0c3aeb3d47e5c9"
+      },
+      "same_float64_candidate": false,
+      "fullL_gap_filtered_minus_unrestricted": 0.20660957205153935,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.09025461904890791,
+      "train_analog_bounds": {
+        "old_max": 0.22942764218024148,
+        "new_max": 0.1620302562220857
+      },
+      "C0_bound_stricter_than_train_analog": true,
+      "rejected_lower_fullL_than_incumbent": true,
+      "training_only_rejected_witness_count": 67,
+      "witnesses": [
+        {
+          "index": 3,
+          "candidate_hash": "1f3170d42f45594bca2916ea2389a80736af9833747987d706e0ec1f02948b58",
+          "fullL": 0.2485384606669305,
+          "oldKL": 0.12729958442769038,
+          "newKL": 0.12123857992783496
+        },
+        {
+          "index": 4,
+          "candidate_hash": "784ee16eabdab6b044998b98aef1f1601331792ffa8cc5ee60315727cfd38892",
+          "fullL": 0.24058675870554214,
+          "oldKL": 0.12126794599082,
+          "newKL": 0.11931845408378383
+        },
+        {
+          "index": 5,
+          "candidate_hash": "5d4a81ecacb0511e09f62c2c95aaa0dfeb2c10afefa73f5ea51824785dcff2f5",
+          "fullL": 0.22422175191880747,
+          "oldKL": 0.08019260322526028,
+          "newKL": 0.14402781574374923
+        },
+        {
+          "index": 6,
+          "candidate_hash": "b1090ee348c80a36a9d1d6104ceb168e5226332d8ae7a4f85555321350a399e4",
+          "fullL": 0.20823150315809413,
+          "oldKL": 0.09421944867689365,
+          "newKL": 0.11401090674686176
+        },
+        {
+          "index": 7,
+          "candidate_hash": "de9f643beba43c7764e567f01933941f56c440d618b8b8f53601e5afc2330240",
+          "fullL": 0.19416637257745498,
+          "oldKL": 0.0867656956751752,
+          "newKL": 0.10739893790689223
+        },
+        {
+          "index": 8,
+          "candidate_hash": "195331a5813f6047c84e7d68f01c6f5afe69f7e5828596f9061a596bf3015d53",
+          "fullL": 0.19068250787419802,
+          "oldKL": 0.07438724702194768,
+          "newKL": 0.11629241665188864
+        },
+        {
+          "index": 9,
+          "candidate_hash": "ea99340694a06ce59bca8d20682994d0cbc63d47360c37ca927221a4e81e7a9a",
+          "fullL": 0.18937612357600372,
+          "oldKL": 0.07676429403165594,
+          "newKL": 0.1126092977226488
+        },
+        {
+          "index": 10,
+          "candidate_hash": "dd918a08507f996973a54b68b7630ca327d008ddf87b055111b0d8a31da2da2b",
+          "fullL": 0.1890457286191733,
+          "oldKL": 0.07793562936001797,
+          "newKL": 0.11110761364249865
+        },
+        {
+          "index": 11,
+          "candidate_hash": "478399fffb4d68c69d25e7eb2427dbc109a8350c5d32c0023636315772ee8074",
+          "fullL": 0.18902600137846595,
+          "oldKL": 0.07723652163652207,
+          "newKL": 0.11178695983407966
+        },
+        {
+          "index": 12,
+          "candidate_hash": "65cfe697310b569866e4ffc088e49828fdfc2e0ac4a70121bafea13b1bb25c2e",
+          "fullL": 0.18901579593825382,
+          "oldKL": 0.07714680836856252,
+          "newKL": 0.11186645414829383
+        },
+        {
+          "index": 13,
+          "candidate_hash": "e340560d1a5370f1e34c27dff1cf8c5552de059f4f62472da7cd6a893f826573",
+          "fullL": 0.18895331928763595,
+          "oldKL": 0.07656550745787223,
+          "newKL": 0.11238523630064517
+        },
+        {
+          "index": 14,
+          "candidate_hash": "c633c74e6c96de51b0e4157d85b65903da774649cd7d5fe6ace9d5ba4cf79932",
+          "fullL": 0.18886106419186807,
+          "oldKL": 0.0767837991291188,
+          "newKL": 0.11207460962020353
+        },
+        {
+          "index": 15,
+          "candidate_hash": "283eed91b4354e8a31bb822fa6cdf8f5fb8334a3af09af4656548dfc752655c4",
+          "fullL": 0.18877990399402972,
+          "oldKL": 0.07327847062432105,
+          "newKL": 0.11549855672198646
+        },
+        {
+          "index": 16,
+          "candidate_hash": "90f880ccbe36119e98e2b516f700ce671ea08b11f2daf81db2e00730cd98a59e",
+          "fullL": 0.18851838396350148,
+          "oldKL": 0.07584169618786582,
+          "newKL": 0.11267373414967957
+        },
+        {
+          "index": 17,
+          "candidate_hash": "770652a54295ff3a942edff024eb55d3e4d698e29dc9bce332d7eb795b84dd8d",
+          "fullL": 0.18815048985463992,
+          "oldKL": 0.07893944007076562,
+          "newKL": 0.10920781926744283
+        },
+        {
+          "index": 18,
+          "candidate_hash": "bf84ee755bce74e9afb41b89adf70ae58f744b6e8c6237fb3d55ef02f5b54709",
+          "fullL": 0.18771362737468375,
+          "oldKL": 0.08108766711630885,
+          "newKL": 0.10662194422937674
+        },
+        {
+          "index": 19,
+          "candidate_hash": "6e08f35dbf412654931b9dffbce7ac8de43ec164a8924fd13c2eaafa6ec50885",
+          "fullL": 0.186790738661843,
+          "oldKL": 0.08294570808923626,
+          "newKL": 0.10383788842753867
+        },
+        {
+          "index": 20,
+          "candidate_hash": "7e0b8c70ac8402fc67e5ab138dec336bcdf2d4b3e765ea7c07b207f82fa2075c",
+          "fullL": 0.18437820715672087,
+          "oldKL": 0.0845031630707247,
+          "newKL": 0.09985032876429142
+        },
+        {
+          "index": 21,
+          "candidate_hash": "3de63dde72e9849a2e487f21057e0c2bb6f1fca121c67f079329eb57c7169133",
+          "fullL": 0.17913835292863503,
+          "oldKL": 0.0838717301784751,
+          "newKL": 0.09515083404800048
+        },
+        {
+          "index": 22,
+          "candidate_hash": "66a81b57652a450892c39239df41af68d8e98c1a8ebb96c392e5e022beca200d",
+          "fullL": 0.17136536692896312,
+          "oldKL": 0.07794820275935974,
+          "newKL": 0.092966751058549
+        },
+        {
+          "index": 23,
+          "candidate_hash": "9857144db9f66324121d5dbffc3182acc1e95543455c0908ae68128d120db051",
+          "fullL": 0.18332698421443372,
+          "oldKL": 0.06616959143373453,
+          "newKL": 0.1154178726839754
+        },
+        {
+          "index": 24,
+          "candidate_hash": "878e198aeeb51e77fc908ca6c07ff01c1c83207be9516b6f2c1d1f6de2f03486",
+          "fullL": 0.1680230504966035,
+          "oldKL": 0.07222727545835109,
+          "newKL": 0.09501348163955253
+        },
+        {
+          "index": 25,
+          "candidate_hash": "28f418c5ef4e1d4b7be6366bb13edfb8b29b608947a85d6cbbb9deafa082e482",
+          "fullL": 0.16475283182070724,
+          "oldKL": 0.06365245597164515,
+          "newKL": 0.09998159831138369
+        },
+        {
+          "index": 26,
+          "candidate_hash": "d45f2796617a0168c679e84fd4b13900c87ad9c8f8775a1de4c056377e3a9ba4",
+          "fullL": 0.16432129135701098,
+          "oldKL": 0.05948759012976037,
+          "newKL": 0.10367615919456202
+        },
+        {
+          "index": 27,
+          "candidate_hash": "25f0f81f6548ae48b5520e5734c5697e7c223eb7d4c7ef6d0195008999d4d8c8",
+          "fullL": 0.16425345696630894,
+          "oldKL": 0.058140546623785906,
+          "newKL": 0.10499118853199878
+        },
+        {
+          "index": 28,
+          "candidate_hash": "923becce9fe97515f7170e0410db4262cc0e3533230caced41ae0ab964436b75",
+          "fullL": 0.16424414975563842,
+          "oldKL": 0.05798708749157746,
+          "newKL": 0.10514667887832274
+        },
+        {
+          "index": 29,
+          "candidate_hash": "7f09c41242da08a282c827bbb25f44432d1363cf6d1d6c057f7ea2cabdd9b697",
+          "fullL": 0.16423869104411215,
+          "oldKL": 0.05803211583700226,
+          "newKL": 0.10509371287121932
+        },
+        {
+          "index": 30,
+          "candidate_hash": "7a802e5deb36c5d1df19020c1fc9c9d0b3693b2cf143c946d5c145d57369617b",
+          "fullL": 0.1642346648745602,
+          "oldKL": 0.05808941214056842,
+          "newKL": 0.10502259635066677
+        },
+        {
+          "index": 31,
+          "candidate_hash": "8f5e6abadf8ed0a6981cbbdbe6b23a6c33826648267d3903fcd309136996aaa3",
+          "fullL": 0.16423417864918988,
+          "oldKL": 0.05824289033347712,
+          "newKL": 0.10484942615633097
+        },
+        {
+          "index": 32,
+          "candidate_hash": "a84409a47946996f57a28067946983c4d67794f7bc52192be7272cccbc6698ef",
+          "fullL": 0.16423108106962342,
+          "oldKL": 0.05817084024770479,
+          "newKL": 0.10491857365353255
+        },
+        {
+          "index": 33,
+          "candidate_hash": "3520f65e452ed1e1abef33a6c3ce6425ef58ab84c97b4b5cabc55aac31386bfd",
+          "fullL": 0.16422906703811269,
+          "oldKL": 0.05814774212198432,
+          "newKL": 0.1049379500525975
+        },
+        {
+          "index": 34,
+          "candidate_hash": "fc1372ba5f5a37fb66b0c7348515ae5a0a002b1252b7b94415fcc6c356cbaf51",
+          "fullL": 0.16422240328125093,
+          "oldKL": 0.05809503916003684,
+          "newKL": 0.10497542950752282
+        },
+        {
+          "index": 35,
+          "candidate_hash": "1dbe1437772468e1aeb6b0679ef7bcaaa6887543b4360f852e5c029aa26e14fc",
+          "fullL": 0.16420893382498852,
+          "oldKL": 0.05801421929642363,
+          "newKL": 0.10502391882141571
+        },
+        {
+          "index": 36,
+          "candidate_hash": "2fa9f53563fe447ea5c859ccd5f79986645fa7ea6c1995445695c4fae4df763d",
+          "fullL": 0.16417859126656364,
+          "oldKL": 0.057804799253987335,
+          "newKL": 0.10516011983264895
+        },
+        {
+          "index": 37,
+          "candidate_hash": "bc488b4121438a0474d399a82caeccca65055e3077542f88931ed313b76a85aa",
+          "fullL": 0.1641179495535077,
+          "oldKL": 0.057624945561126226,
+          "newKL": 0.10521188403355741
+        },
+        {
+          "index": 38,
+          "candidate_hash": "f6e5d55b7154c477b5ae8c74e2732f98f75ebe9043b85dda7ebaf4d54c34af22",
+          "fullL": 0.1639687854383663,
+          "oldKL": 0.05782587144991105,
+          "newKL": 0.10473361048511692
+        },
+        {
+          "index": 39,
+          "candidate_hash": "37cba800eee236838165e1e9635cd0eac6b4690b8040b9fac05223c944dfa8d0",
+          "fullL": 0.1638436295416154,
+          "oldKL": 0.05475955987908207,
+          "newKL": 0.1072379047829654
+        },
+        {
+          "index": 40,
+          "candidate_hash": "4b09ccfa7a6f0788b88bef6991ced8cac0710f454cc1d2135b99051cc064327a",
+          "fullL": 0.1633979284210388,
+          "oldKL": 0.057103977239359595,
+          "newKL": 0.10440073579967707
+        },
+        {
+          "index": 41,
+          "candidate_hash": "44f56135602c4a59526fef69a71a911a89ca4eabefc711a0bd599dd366cb9385",
+          "fullL": 0.16277027475249065,
+          "oldKL": 0.05941178382811858,
+          "newKL": 0.10135173909291736
+        },
+        {
+          "index": 42,
+          "candidate_hash": "f8ddc7924af315bb904cf5aab61d797e20fc12e2e1875fa4b4b8bf892bc9f5c2",
+          "fullL": 0.16195088895110207,
+          "oldKL": 0.06118788481472981,
+          "newKL": 0.09849505310262599
+        },
+        {
+          "index": 43,
+          "candidate_hash": "556a2cb95669a11749914c6854ca51c6d5acadb106d171fb9fe44e2a3c8ab305",
+          "fullL": 0.16107902796051893,
+          "oldKL": 0.06120803864724965,
+          "newKL": 0.09723197247209142
+        },
+        {
+          "index": 44,
+          "candidate_hash": "70249d1119c19cea8112629a946937cef0f5c4eaaa74a54b1c7dd24cec72c7df",
+          "fullL": 0.15974824131247578,
+          "oldKL": 0.059978978812308216,
+          "newKL": 0.09657951473765375
+        },
+        {
+          "index": 45,
+          "candidate_hash": "1cbe5a21c5554016187a38f6eec036abed42f57e7e3af4068fbe0129b287fd3b",
+          "fullL": 0.15929721797671093,
+          "oldKL": 0.059244234226742985,
+          "newKL": 0.09650698848946826
+        },
+        {
+          "index": 46,
+          "candidate_hash": "44a8a6dd6c7d549be4c2256b526664184694a30058e13e0505646aa0dd932c03",
+          "fullL": 0.15864353315248514,
+          "oldKL": 0.05751072484871263,
+          "newKL": 0.09759328871480855
+        },
+        {
+          "index": 47,
+          "candidate_hash": "ee8fc80938122811908480458b52a4a14da4d460c097c4923c497b4847f1b41b",
+          "fullL": 0.15851201311104812,
+          "oldKL": 0.056658231010136076,
+          "newKL": 0.0985470461245094
+        },
+        {
+          "index": 48,
+          "candidate_hash": "f01f8f4ef0348919e763bde61981ea52e87b8f8ca28ad366de5ec30ece16e0e9",
+          "fullL": 0.15845682125849986,
+          "oldKL": 0.056522148649378906,
+          "newKL": 0.09882646885617197
+        },
+        {
+          "index": 49,
+          "candidate_hash": "bb5d832f1c9bf10c2b577d374c8652e28a5249ea85ee51347adad5868ca06a53",
+          "fullL": 0.15845141722891357,
+          "oldKL": 0.05684951481184812,
+          "newKL": 0.09854002919138169
+        },
+        {
+          "index": 50,
+          "candidate_hash": "99fe59fa2fc1e6368ce0a0065ccce223f319b534ba34321f0e69fc6f096811b0",
+          "fullL": 0.15845068816909105,
+          "oldKL": 0.05687300586883744,
+          "newKL": 0.0985112707682318
+        },
+        {
+          "index": 51,
+          "candidate_hash": "174f94aefdb8e330980bbac6227e574ca4111e7972e3e11384280745bbf9f753",
+          "fullL": 0.15845055126864216,
+          "oldKL": 0.05688236710288302,
+          "newKL": 0.09850198068053101
+        },
+        {
+          "index": 52,
+          "candidate_hash": "5b57f1ff6c82f05214f1620510316823d001ef4dfc20cc28ccf7bd42f6953851",
+          "fullL": 0.15845053848601057,
+          "oldKL": 0.056888985758619864,
+          "newKL": 0.09849612534952462
+        },
+        {
+          "index": 53,
+          "candidate_hash": "5c51a259c052c68313e37da69fcb9c586f645dec05701c2989f19b0f56e0c095",
+          "fullL": 0.15845052419817315,
+          "oldKL": 0.05688879499334417,
+          "newKL": 0.09849789643417017
+        },
+        {
+          "index": 54,
+          "candidate_hash": "c39269c8558bfb14ee2e7f32de550b90fb1aeeac2731469d940d1c93321e5c79",
+          "fullL": 0.15845052520686512,
+          "oldKL": 0.05690358163360995,
+          "newKL": 0.09848479994978232
+        },
+        {
+          "index": 55,
+          "candidate_hash": "b58d2323fb86f5a662f094d91c1f313f6b3cdb9edbc4589b969b766f59496c41",
+          "fullL": 0.15845052263775541,
+          "oldKL": 0.056895270398905795,
+          "newKL": 0.09849215937496053
+        },
+        {
+          "index": 56,
+          "candidate_hash": "6c02c2c3775760c15abf3ead7eea02722906fdb0cda074c4b4deae42b3323b43",
+          "fullL": 0.15845052210124289,
+          "oldKL": 0.05689380459168464,
+          "newKL": 0.09849367967613132
+        },
+        {
+          "index": 57,
+          "candidate_hash": "4c99f36efa9f14b5bd83c6f9c999cc27b1d21feaa2f7913f8b37b6aa0076b59f",
+          "fullL": 0.15845052108029875,
+          "oldKL": 0.056891188715573734,
+          "newKL": 0.09849673566983116
+        },
+        {
+          "index": 58,
+          "candidate_hash": "426cdfda46020cd7cff94a0f91ae6a24cde554655b4d9fb4b18e7507016786a4",
+          "fullL": 0.15845051984092726,
+          "oldKL": 0.05688912498321583,
+          "newKL": 0.09849958435707452
+        },
+        {
+          "index": 59,
+          "candidate_hash": "0a5fa68413c27ac40bf2adf927ff92f58fece14b70c0a284716ee70918752877",
+          "fullL": 0.15845051795954906,
+          "oldKL": 0.05688732772159414,
+          "newKL": 0.0985026820628419
+        },
+        {
+          "index": 60,
+          "candidate_hash": "82416c0c9355fd3f93778e4218f9279b47f930aff68573054dfb40388f124ea3",
+          "fullL": 0.15845051352559508,
+          "oldKL": 0.05688503780675522,
+          "newKL": 0.09850613411607775
+        },
+        {
+          "index": 61,
+          "candidate_hash": "bbea8e12abf024c977020d28f1669bbf2cb1a2d1e3f0f7eb8e16a617ac4e80e7",
+          "fullL": 0.158450496426117,
+          "oldKL": 0.05688420046138612,
+          "newKL": 0.0985109410482944
+        },
+        {
+          "index": 62,
+          "candidate_hash": "723d0cc2475be3f9b9270b75918bed203a3f93f81d3b414da3e0b9da2196b19a",
+          "fullL": 0.1584504902907474,
+          "oldKL": 0.056847245980090264,
+          "newKL": 0.09855521955127472
+        },
+        {
+          "index": 63,
+          "candidate_hash": "74e79edef048b773fa63b95084bfe531d1a5b6977e2fd8a639245f0011787170",
+          "fullL": 0.1584504374533511,
+          "oldKL": 0.056866845464546054,
+          "newKL": 0.09853376629181754
+        },
+        {
+          "index": 64,
+          "candidate_hash": "937e3d531a93fdd1a5f5e60727c19d62bf81f9501a8000671a2fa59ffe732454",
+          "fullL": 0.15845032904132814,
+          "oldKL": 0.056895630971012495,
+          "newKL": 0.09850202270097197
+        },
+        {
+          "index": 65,
+          "candidate_hash": "09e9294a7c18f5c5408f0f6e85b7725dbc69a13adefccb7afc37ce71643ba46f",
+          "fullL": 0.1584501689744035,
+          "oldKL": 0.056920644729932926,
+          "newKL": 0.09847376520917075
+        },
+        {
+          "index": 66,
+          "candidate_hash": "c918fad36c95c2feffbd744e29cc8ee3e9607a05d4dcfd9b56306752a97a4c90",
+          "fullL": 0.15844999166471874,
+          "oldKL": 0.05693909870492285,
+          "newKL": 0.09845426267750257
+        },
+        {
+          "index": 67,
+          "candidate_hash": "60d52eb7dd9f31391b7ee7ccec2af38713028f471e89f69edaa96689474a9550",
+          "fullL": 0.15845013677968142,
+          "oldKL": 0.05683715907537506,
+          "newKL": 0.0985519358502185
+        },
+        {
+          "index": 68,
+          "candidate_hash": "65245694a7054ea7bafbc9004618f406dacb721a338e576d12b472bcebc76d0a",
+          "fullL": 0.15844991338444614,
+          "oldKL": 0.05690110361274438,
+          "newKL": 0.09849054190418974
+        },
+        {
+          "index": 69,
+          "candidate_hash": "5f1b7ed98bc727244c9c8706610198ae5e2c60f690b19ec86e0c3aeb3d47e5c9",
+          "fullL": 0.15844976030876523,
+          "oldKL": 0.056895067649563744,
+          "newKL": 0.09849719858855478
+        }
+      ],
+      "train_analog_pass": false,
+      "pre_codec_holdout_pass": false,
+      "encoded_holdout_pass": false,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26207,
+      "closure_count": 71,
+      "filtered": {
+        "index": 71,
+        "fullL": 0.09051695030621759,
+        "candidate_hash": "d201ae2e50bc437f3e99d78a2acb4401b0212d3f5860206aa88c27fd0ff6e869"
+      },
+      "unrestricted": {
+        "index": 71,
+        "fullL": 0.09051695030621759,
+        "candidate_hash": "d201ae2e50bc437f3e99d78a2acb4401b0212d3f5860206aa88c27fd0ff6e869"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.08092164929634804,
+      "train_analog_bounds": {
+        "old_max": 0.2145393030720284,
+        "new_max": 0.08838572873807755
+      },
+      "C0_bound_stricter_than_train_analog": true,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 2,
+      "witnesses": [
+        {
+          "index": 3,
+          "candidate_hash": "6427bc700e59b234286a5abc6b1ad4f8d24f189798bab0e35948ba326ce03fba",
+          "fullL": 0.1848481478171411,
+          "oldKL": 0.09931887537992594,
+          "newKL": 0.08552921493980609
+        },
+        {
+          "index": 4,
+          "candidate_hash": "260e321aad25c0e5feec06e5fd1daab70e0de6285da7471c61768f32c5ca3302",
+          "fullL": 0.16200574949442048,
+          "oldKL": 0.07423843552950594,
+          "newKL": 0.08776716570090701
+        }
+      ],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": true,
+      "encoded_holdout_pass": true,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26208,
+      "closure_count": 74,
+      "filtered": {
+        "index": 74,
+        "fullL": 0.10709472254218137,
+        "candidate_hash": "303f407c2923c6c670c78affd2e6002a471daddcb3f60d251b0543e660b2bf54"
+      },
+      "unrestricted": {
+        "index": 74,
+        "fullL": 0.10709472254218137,
+        "candidate_hash": "303f407c2923c6c670c78affd2e6002a471daddcb3f60d251b0543e660b2bf54"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.1260136535450564,
+      "train_analog_bounds": {
+        "old_max": 0.14376190648412224,
+        "new_max": 0.11436446453870829
+      },
+      "C0_bound_stricter_than_train_analog": false,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": false,
+      "encoded_holdout_pass": false,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26209,
+      "closure_count": 67,
+      "filtered": {
+        "index": 1,
+        "fullL": 0.6235361198835105,
+        "candidate_hash": "19e87d58878e282d4ae673739b2285f983f44e753126edee59b626ade9ea3252"
+      },
+      "unrestricted": {
+        "index": 67,
+        "fullL": 0.21709718459610122,
+        "candidate_hash": "de4557ecff2c8753e3cb97bfe85b6932293441be6cab72c80ee84092e95e837c"
+      },
+      "same_float64_candidate": false,
+      "fullL_gap_filtered_minus_unrestricted": 0.4064389352874093,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.1292125033776266,
+      "train_analog_bounds": {
+        "old_max": 0.5056300410163416,
+        "new_max": 0.16733431840169288
+      },
+      "C0_bound_stricter_than_train_analog": true,
+      "rejected_lower_fullL_than_incumbent": true,
+      "training_only_rejected_witness_count": 61,
+      "witnesses": [
+        {
+          "index": 5,
+          "candidate_hash": "5960e92d9fb9d4092ff17c705db473f11b5c5d7d7e2210b03d4c59f2e03dbc75",
+          "fullL": 0.27845183739910656,
+          "oldKL": 0.13771858317594762,
+          "newKL": 0.14073143012595707
+        },
+        {
+          "index": 8,
+          "candidate_hash": "233994cbe5697cdfdbad56b34df0d3631f838d18ec349e7fa4dfe97e597cf186",
+          "fullL": 0.23114530376170914,
+          "oldKL": 0.0668820040006597,
+          "newKL": 0.16425943153991326
+        },
+        {
+          "index": 9,
+          "candidate_hash": "8bb8c02c1b716e8dcb7a380291c74c4cb35b6c5323a71098f53cacbd479c811b",
+          "fullL": 0.22337670793366032,
+          "oldKL": 0.06742809161211229,
+          "newKL": 0.15594467813705581
+        },
+        {
+          "index": 10,
+          "candidate_hash": "63bfbdc5334dc3557c71e9ed03a72d6b3ea87bfaaf922efeee4bf3762943425b",
+          "fullL": 0.2189530347689743,
+          "oldKL": 0.06971685882704337,
+          "newKL": 0.14923212522610824
+        },
+        {
+          "index": 11,
+          "candidate_hash": "63bdb59d2117eee62839ce574f46c96761e37d321af52ee301abd81cb661979f",
+          "fullL": 0.21826390461393688,
+          "oldKL": 0.06738019966736464,
+          "newKL": 0.15087960296689945
+        },
+        {
+          "index": 12,
+          "candidate_hash": "1e8244174b97664894f005bd8fcdf488e7505f83bd3dba3122c975b8ff3da7f4",
+          "fullL": 0.21822921707099216,
+          "oldKL": 0.06684500809931371,
+          "newKL": 0.15138009956097165
+        },
+        {
+          "index": 13,
+          "candidate_hash": "1188a112b56b0cca7d3e380042a840129a7074d983f9bf6b7f5ce5b4e5ecf3a5",
+          "fullL": 0.21822784349600258,
+          "oldKL": 0.06691833289658441,
+          "newKL": 0.15130539587249248
+        },
+        {
+          "index": 14,
+          "candidate_hash": "b1abe02bc47b62755fe639946e39ebaac35017cbdcca1040a881b6556d68ac85",
+          "fullL": 0.21822602372009314,
+          "oldKL": 0.06703482571347116,
+          "newKL": 0.1511870791813031
+        },
+        {
+          "index": 15,
+          "candidate_hash": "8948c3e63a961a0032471adf19851ab70fe5abbd6baf2ac55afe87b5847b4885",
+          "fullL": 0.2182242346120612,
+          "oldKL": 0.06706751753996715,
+          "newKL": 0.15115259811129786
+        },
+        {
+          "index": 16,
+          "candidate_hash": "7e0ea30f57398ca6d516ddc0ab173fdfb4e9133723b233d3238a8285a631d46f",
+          "fullL": 0.21822373983364432,
+          "oldKL": 0.06704420704560833,
+          "newKL": 0.15117541195937562
+        },
+        {
+          "index": 17,
+          "candidate_hash": "5a80326e99695e1e42778f23050b1040a4dccccb87f5b81b38c1b8c5ea1f86e6",
+          "fullL": 0.2182234796958804,
+          "oldKL": 0.06699940555445576,
+          "newKL": 0.151219955233312
+        },
+        {
+          "index": 18,
+          "candidate_hash": "d6ce8e7f920452cf38d215d5235aaa009a68c5a697e57e4dce8ec3862a85c652",
+          "fullL": 0.21822324324353748,
+          "oldKL": 0.06696329056030043,
+          "newKL": 0.1512558350455182
+        },
+        {
+          "index": 19,
+          "candidate_hash": "ab2b5ecc906a16ace503858e42ad98f163736910916b9ae27eaedde93a1b8d6c",
+          "fullL": 0.21822259155796722,
+          "oldKL": 0.06689889923932418,
+          "newKL": 0.15131957647603456
+        },
+        {
+          "index": 20,
+          "candidate_hash": "70584bb9c6147a5f8216bf98f63cfa1ab40738e43602a53dc0d81fbad694e409",
+          "fullL": 0.21822095805722694,
+          "oldKL": 0.06679727380436397,
+          "newKL": 0.15141957026600203
+        },
+        {
+          "index": 21,
+          "candidate_hash": "0fcac4ae9fbe1b38cae867ff91b0980d21874e8f69b178071cc1b6e11d813531",
+          "fullL": 0.2182166590928944,
+          "oldKL": 0.06662957676617531,
+          "newKL": 0.15158296707303945
+        },
+        {
+          "index": 22,
+          "candidate_hash": "a0aa46725890326130093968684244fc4c8ac851069844f3b0bdb1cffabd50f6",
+          "fullL": 0.2182056668358853,
+          "oldKL": 0.06636408270335548,
+          "newKL": 0.1518374415924562
+        },
+        {
+          "index": 23,
+          "candidate_hash": "7bc8f2dd207b6a147664ab56a2003f3cb10240a0372693708b751516e4a59a44",
+          "fullL": 0.21817800453358155,
+          "oldKL": 0.06596124260341968,
+          "newKL": 0.15221241533413193
+        },
+        {
+          "index": 24,
+          "candidate_hash": "4d5d537799774fd58277fd14e1f424dcdb858160db68cbb9a884ecb45dcb3a51",
+          "fullL": 0.21811254201221153,
+          "oldKL": 0.06540614212274817,
+          "newKL": 0.15270078585016209
+        },
+        {
+          "index": 25,
+          "candidate_hash": "63b6c2bd9f582f6f17d9488897d98821f5891c863e9306049abbc4f0cb4cc8ef",
+          "fullL": 0.21797717754483903,
+          "oldKL": 0.06484965185774935,
+          "newKL": 0.15311552755561303
+        },
+        {
+          "index": 26,
+          "candidate_hash": "e2f9137697b863d6da247a7d20c09c906b4bbb6ab2fb92a02c4993d3930d2cc4",
+          "fullL": 0.21776469763277664,
+          "oldKL": 0.06455650664310857,
+          "newKL": 0.15317466686839126
+        },
+        {
+          "index": 27,
+          "candidate_hash": "0c9fd3109f6fd8f4b0bdcdef32ba5228821a68ace701a1d4d86d230e8127d53b",
+          "fullL": 0.22015134934309283,
+          "oldKL": 0.06887837958982318,
+          "newKL": 0.15117243580776013
+        },
+        {
+          "index": 28,
+          "candidate_hash": "145c2ab2e3836cfd95449e958bb701d67df876a8de7d8b26cbed224a5815632a",
+          "fullL": 0.2177442348060433,
+          "oldKL": 0.06481162571442742,
+          "newKL": 0.15289502992191623
+        },
+        {
+          "index": 29,
+          "candidate_hash": "5ff38eea6c462a67d7b8218fc77116d5880dbd47c3fec0aadefad2a3a8f7c38d",
+          "fullL": 0.21755045101181494,
+          "oldKL": 0.06522780430695227,
+          "newKL": 0.15225079560994162
+        },
+        {
+          "index": 30,
+          "candidate_hash": "ae6e69c80fc37d6410c04f11eed6e077d6d7b7551aa5f66b7074472dd356d0b0",
+          "fullL": 0.21747661425983444,
+          "oldKL": 0.06543191169021961,
+          "newKL": 0.151960553976948
+        },
+        {
+          "index": 31,
+          "candidate_hash": "cebf060c9de626decaef824c959697e6543c5f39f4553bafb1fe56b372e5cf1b",
+          "fullL": 0.21746459523580905,
+          "oldKL": 0.06598270586945433,
+          "newKL": 0.15140321322296962
+        },
+        {
+          "index": 32,
+          "candidate_hash": "cd4ef362d6353503627f272b25b24623a22ef77ed7c01699d5bc48b50f2f6c6c",
+          "fullL": 0.2174640891312944,
+          "oldKL": 0.06597011152663099,
+          "newKL": 0.15141760177760788
+        },
+        {
+          "index": 33,
+          "candidate_hash": "9f8e018e8c434f4f938b4bba2871c4eba32815575d50beacd5e7861cd2c77a70",
+          "fullL": 0.21746399534048813,
+          "oldKL": 0.06597694065469553,
+          "newKL": 0.1514113421731063
+        },
+        {
+          "index": 34,
+          "candidate_hash": "4b329df90ac3035dfbc9d2422dbd126cb6614ddbdfaded61efdd1286136e63db",
+          "fullL": 0.21746390924932213,
+          "oldKL": 0.06598385350698703,
+          "newKL": 0.15140467893056728
+        },
+        {
+          "index": 35,
+          "candidate_hash": "9350853a18ac49fa9386375af2b426df38e7a0027bd14337c831957945ca458d",
+          "fullL": 0.21746374607199193,
+          "oldKL": 0.06598493246439766,
+          "newKL": 0.15140367969046284
+        },
+        {
+          "index": 36,
+          "candidate_hash": "02ef175f061d011ba0fd914127829f6543e57e1282743727fd67b6ed67922683",
+          "fullL": 0.2174634371553631,
+          "oldKL": 0.06597804843729388,
+          "newKL": 0.1514103049235348
+        },
+        {
+          "index": 37,
+          "candidate_hash": "7ac37fb6ba4a7c3665db6e9bf1c094696ae5ffeeb89fc7d141d1d65f23bcd7b8",
+          "fullL": 0.21746250629666714,
+          "oldKL": 0.06600632445622298,
+          "newKL": 0.15138095226008377
+        },
+        {
+          "index": 38,
+          "candidate_hash": "7bcd19b06bb9fcf4242d55201d273fc85f700b1301098b318e6c742431c8c229",
+          "fullL": 0.2174601855890961,
+          "oldKL": 0.06589782765939284,
+          "newKL": 0.15148715061304327
+        },
+        {
+          "index": 39,
+          "candidate_hash": "94f4c34666447d98f3281f6a269e91b4b38171c63259a1cebde34dd140a8caae",
+          "fullL": 0.21745867623636225,
+          "oldKL": 0.06611114145005648,
+          "newKL": 0.15126827076745322
+        },
+        {
+          "index": 40,
+          "candidate_hash": "d5e9b42310c6e5ad8fd18441451c6bbdd746a9f56de756df6662dddf71cc58b3",
+          "fullL": 0.21745204018528613,
+          "oldKL": 0.06596784361399613,
+          "newKL": 0.15140583808042135
+        },
+        {
+          "index": 41,
+          "candidate_hash": "c1d50504589b83671c493dc28518c7746f6ab521768b46838f9d4724ac620581",
+          "fullL": 0.21742100001771084,
+          "oldKL": 0.06546972526976812,
+          "newKL": 0.1518730959124727
+        },
+        {
+          "index": 42,
+          "candidate_hash": "fec36d1edae5fd4aa65e8d68ab348efb4ae4d6aba62af917a63be79f3caa9121",
+          "fullL": 0.21737977521820512,
+          "oldKL": 0.0650967044113252,
+          "newKL": 0.1522004276267919
+        },
+        {
+          "index": 43,
+          "candidate_hash": "b01ef17644fdd09dca68eaef19a9e75db6fa88f79b65e2e0ae036628cb236681",
+          "fullL": 0.21730735519232022,
+          "oldKL": 0.0648384862252922,
+          "newKL": 0.15237123561012636
+        },
+        {
+          "index": 44,
+          "candidate_hash": "3659e2529048b120478ab6599b873dd37875c48458a017ead438581178fd8ab1",
+          "fullL": 0.2172163604559668,
+          "oldKL": 0.06453400873247467,
+          "newKL": 0.1525573695584418
+        },
+        {
+          "index": 45,
+          "candidate_hash": "20f74ae1f674a4013424808eb6bd32c331448b7d0b2c63155efc4d2bfb14078f",
+          "fullL": 0.21820869579151062,
+          "oldKL": 0.0668150503412927,
+          "newKL": 0.15100048615866415
+        },
+        {
+          "index": 46,
+          "candidate_hash": "926743018da1e6fae3385399c7bd46c16b04dcb21a574f875678f72532a7f7e0",
+          "fullL": 0.21719741274991522,
+          "oldKL": 0.06471964167804631,
+          "newKL": 0.15232927673455082
+        },
+        {
+          "index": 47,
+          "candidate_hash": "f7a7f55e9515c4092ec31a75b602ba9c90e5e4d105c6e35e6a3a171d71f0f318",
+          "fullL": 0.21718095697455392,
+          "oldKL": 0.0664869147830072,
+          "newKL": 0.15050740997674972
+        },
+        {
+          "index": 48,
+          "candidate_hash": "d052fe410f871ba38ea8da55e2358f3f3d0a1d4708a3d6b04f2c7acc61e1eb79",
+          "fullL": 0.21711901550268828,
+          "oldKL": 0.06543227778393129,
+          "newKL": 0.15150565701266663
+        },
+        {
+          "index": 49,
+          "candidate_hash": "95aaa07c7607e0959b93dd0c150a4066d8119974dbb081050dcf1bf52cc3ed6c",
+          "fullL": 0.21711144714520497,
+          "oldKL": 0.06539492036218358,
+          "newKL": 0.1515350590447784
+        },
+        {
+          "index": 50,
+          "candidate_hash": "b07831285598c9c6d0be1824714cb41af21695a76d6f27ddbb8bd0d017cad54b",
+          "fullL": 0.2171085721043212,
+          "oldKL": 0.0654485154104361,
+          "newKL": 0.15147751001615928
+        },
+        {
+          "index": 51,
+          "candidate_hash": "511e7e96dcdb677a4a472bc528b65f9c3406c34d6b768c08d2f5738f9d5ce77b",
+          "fullL": 0.2171055373285099,
+          "oldKL": 0.0654870044916676,
+          "newKL": 0.1514327710595239
+        },
+        {
+          "index": 52,
+          "candidate_hash": "d7c8101eb6e8808066d885cf0e7cee5f41c8e6a7e21f2cf4219daaed78672817",
+          "fullL": 0.21710059825160483,
+          "oldKL": 0.06530222842940672,
+          "newKL": 0.15160169222018188
+        },
+        {
+          "index": 53,
+          "candidate_hash": "1cb3b141b583764b1dfd0bd3e7d5de1fe5a7d8a512d57f6da6b20defe3dfbbea",
+          "fullL": 0.21709972578886494,
+          "oldKL": 0.06531762332888516,
+          "newKL": 0.15158149052922265
+        },
+        {
+          "index": 54,
+          "candidate_hash": "174580cffdc6dc127072e303fc9b41f9ade35d497cab08e5fa1578a7dbe811da",
+          "fullL": 0.21709930892696494,
+          "oldKL": 0.06531114532648143,
+          "newKL": 0.15158478703502049
+        },
+        {
+          "index": 55,
+          "candidate_hash": "31bf27e4ca6ae331c97eb2e882c549e1c1772bc51bd7aca68d3ef7c821f73bf6",
+          "fullL": 0.21709901383123537,
+          "oldKL": 0.06528944217999985,
+          "newKL": 0.1516041848735506
+        },
+        {
+          "index": 56,
+          "candidate_hash": "c5057d8f73f5cb5998072b9fec362aef7aa7bef86a6b6284447f731ea299ca70",
+          "fullL": 0.21709895266086948,
+          "oldKL": 0.06529930218795735,
+          "newKL": 0.1515932138941754
+        },
+        {
+          "index": 57,
+          "candidate_hash": "192bfb1b958ad18d471a9ee678d50fc9daa0f0373eb20c4c75fb043c0cd7586e",
+          "fullL": 0.21709894008787872,
+          "oldKL": 0.06528894273632709,
+          "newKL": 0.15160368968518104
+        },
+        {
+          "index": 58,
+          "candidate_hash": "107aacc6ff588171698b026e6a81cd6b20b5e1694e088a1002528ffc8993c3e3",
+          "fullL": 0.21709893703299366,
+          "oldKL": 0.0652919519733107,
+          "newKL": 0.15160082434390698
+        },
+        {
+          "index": 59,
+          "candidate_hash": "3111c49af055c17bfd42fc36357ff726de3bfa2503451b9f848b46b034aaa3ff",
+          "fullL": 0.21709893342160996,
+          "oldKL": 0.06529610689919377,
+          "newKL": 0.15159678197279347
+        },
+        {
+          "index": 60,
+          "candidate_hash": "f9060349ccff775b068ff21554a70b2cdf7756f3660ab7d81a48ec0b9af8d447",
+          "fullL": 0.2170989248784894,
+          "oldKL": 0.06530075242387406,
+          "newKL": 0.1515923418706036
+        },
+        {
+          "index": 61,
+          "candidate_hash": "4f724dbbedb3f510e1cad45e2801cf0e48b57447039b5f2e906960b4e9cce163",
+          "fullL": 0.21709890816555766,
+          "oldKL": 0.065306372150376,
+          "newKL": 0.15158706445690967
+        },
+        {
+          "index": 62,
+          "candidate_hash": "dbd061c61f101737438c1d46121e3ace34dff89d48eb731b5b02fe39f0d4485a",
+          "fullL": 0.2170988719529446,
+          "oldKL": 0.06530924211409742,
+          "newKL": 0.15158473852621884
+        },
+        {
+          "index": 63,
+          "candidate_hash": "16bfe8713b07a45916eb668f7a61695df76f33dc95325925deb3f39ec5b48b68",
+          "fullL": 0.2170988606291453,
+          "oldKL": 0.06535185578151531,
+          "newKL": 0.15154249954354596
+        },
+        {
+          "index": 64,
+          "candidate_hash": "3457eaad6c75fba6d6b8ba0503f8cada4ecc89316d25258fed59df37c4408bae",
+          "fullL": 0.21709871954768875,
+          "oldKL": 0.06533357313103051,
+          "newKL": 0.15156160759263035
+        },
+        {
+          "index": 65,
+          "candidate_hash": "1e44fd04ed7f06213777a0ab14cdbe43d4c53f509adb1d68b751d48a7cac8ecc",
+          "fullL": 0.21709850508035622,
+          "oldKL": 0.06531065832033334,
+          "newKL": 0.15158546473424772
+        },
+        {
+          "index": 66,
+          "candidate_hash": "f7ba7e696f5e4c1351530c52fd123e910d737f9db0fe5669672eb5c4412c9ef3",
+          "fullL": 0.21709800371186536,
+          "oldKL": 0.06527381111227801,
+          "newKL": 0.1516240254819691
+        },
+        {
+          "index": 67,
+          "candidate_hash": "de4557ecff2c8753e3cb97bfe85b6932293441be6cab72c80ee84092e95e837c",
+          "fullL": 0.21709718459610122,
+          "oldKL": 0.06524007171395742,
+          "newKL": 0.15165990290324388
+        }
+      ],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": true,
+      "encoded_holdout_pass": true,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26210,
+      "closure_count": 69,
+      "filtered": {
+        "index": 69,
+        "fullL": 0.1068840320161138,
+        "candidate_hash": "57d2030b7e6bf431fef73e7a219da4dbf501dad2440f729d52436d5e2f19a045"
+      },
+      "unrestricted": {
+        "index": 69,
+        "fullL": 0.1068840320161138,
+        "candidate_hash": "57d2030b7e6bf431fef73e7a219da4dbf501dad2440f729d52436d5e2f19a045"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.08934702959187686,
+      "train_analog_bounds": {
+        "old_max": 0.27436283782913956,
+        "new_max": 0.07189847385246351
+      },
+      "C0_bound_stricter_than_train_analog": false,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": false,
+      "pre_codec_holdout_pass": false,
+      "encoded_holdout_pass": false,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26211,
+      "closure_count": 73,
+      "filtered": {
+        "index": 73,
+        "fullL": 0.15874883940077142,
+        "candidate_hash": "3e7e005f6eaafcecea985d8bf264c0eb609d896fa5d9e0214770fe78ea1e52ec"
+      },
+      "unrestricted": {
+        "index": 73,
+        "fullL": 0.15874883940077142,
+        "candidate_hash": "3e7e005f6eaafcecea985d8bf264c0eb609d896fa5d9e0214770fe78ea1e52ec"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.13413362905762122,
+      "train_analog_bounds": {
+        "old_max": 0.3147484409716226,
+        "new_max": 0.11612868823054684
+      },
+      "C0_bound_stricter_than_train_analog": false,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": true,
+      "encoded_holdout_pass": true,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26212,
+      "closure_count": 68,
+      "filtered": {
+        "index": 1,
+        "fullL": 0.4230836038416451,
+        "candidate_hash": "03e130711e288042e891c2c3d3d8218a79d7f1471516133832d12620a066d131"
+      },
+      "unrestricted": {
+        "index": 68,
+        "fullL": 0.19679624952356228,
+        "candidate_hash": "c18b27cadbe3db98e03964293d78f02621571ec7ded04947bb508d0e05cea4b4"
+      },
+      "same_float64_candidate": false,
+      "fullL_gap_filtered_minus_unrestricted": 0.22628735431808283,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.09257678558521835,
+      "train_analog_bounds": {
+        "old_max": 0.5369519928891997,
+        "new_max": 0.19414956377172632
+      },
+      "C0_bound_stricter_than_train_analog": true,
+      "rejected_lower_fullL_than_incumbent": true,
+      "training_only_rejected_witness_count": 66,
+      "witnesses": [
+        {
+          "index": 3,
+          "candidate_hash": "65723382e0b322dae5657d71d26d7846b9b5367e2eb30c8945108b5edb1dc5c9",
+          "fullL": 0.2796117274061457,
+          "oldKL": 0.11627003519944082,
+          "newKL": 0.1633411794552774
+        },
+        {
+          "index": 4,
+          "candidate_hash": "ef3a8ec442d174eead2b54af1b3b9f3f6273d9aa28b5e601bfcc8b6951694078",
+          "fullL": 0.24242049737591131,
+          "oldKL": 0.05907942703834988,
+          "newKL": 0.18334009955534641
+        },
+        {
+          "index": 5,
+          "candidate_hash": "19515ac2f1ff1135b6b1bee7dc55e626bc85b8b7b347aedd5d1e279283dac4f5",
+          "fullL": 0.23620834406832625,
+          "oldKL": 0.07775368877733743,
+          "newKL": 0.1584538299014302
+        },
+        {
+          "index": 6,
+          "candidate_hash": "eafa710077e719b943a521e1606ea00934df1baa7a9e2c263cb622eea770d971",
+          "fullL": 0.23071002661642231,
+          "oldKL": 0.08520910673200885,
+          "newKL": 0.1455000661146112
+        },
+        {
+          "index": 7,
+          "candidate_hash": "10e779427da7d176ff1709c7ce3474564f61b34f43fcc21379c9a1673b0c8cd3",
+          "fullL": 0.2172497097137338,
+          "oldKL": 0.10778146856169607,
+          "newKL": 0.10946658749516475
+        },
+        {
+          "index": 8,
+          "candidate_hash": "26d4ff61a0c19e2bd61f2283eba82f27636874828eb4105163144bbffb91c849",
+          "fullL": 0.21148356495014614,
+          "oldKL": 0.09216859409433718,
+          "newKL": 0.11931310010159288
+        },
+        {
+          "index": 9,
+          "candidate_hash": "cb2b46a6fd0c44bdd4af00dcc1ba51b608a2dd4037d8b39a905787fa228c8fc0",
+          "fullL": 0.20957125737196025,
+          "oldKL": 0.0834695115345139,
+          "newKL": 0.1260994886646201
+        },
+        {
+          "index": 10,
+          "candidate_hash": "ff3bffe6e10533a24d8fc0f0d3974a32c726465cf0038890f1c5b20ca7ccad91",
+          "fullL": 0.20934308124212012,
+          "oldKL": 0.08334231960295363,
+          "newKL": 0.12599855499300672
+        },
+        {
+          "index": 11,
+          "candidate_hash": "5bcc8b3bb63d038b02ccacf51ea12a2c85f0b82571501a1309b874c68f88557a",
+          "fullL": 0.20880755629906114,
+          "oldKL": 0.08404235254921902,
+          "newKL": 0.12476293769673243
+        },
+        {
+          "index": 12,
+          "candidate_hash": "acb5e6bf7af5daf890bb08ac99a863d8832a7c0e6c39eb3833eb95fe69bd94dd",
+          "fullL": 0.20873242624378058,
+          "oldKL": 0.08527159811020751,
+          "newKL": 0.12345851576064873
+        },
+        {
+          "index": 13,
+          "candidate_hash": "be9d0015815046afb199cb61c12119e0503a9a6c8ee31661e9494d2385e7fd8a",
+          "fullL": 0.20869444047309055,
+          "oldKL": 0.08469309102720443,
+          "newKL": 0.12399899661484384
+        },
+        {
+          "index": 14,
+          "candidate_hash": "68aa4a26771b96ed5fe1a87222abe88367c7f09699ca2c1f50a5f755bd2b81df",
+          "fullL": 0.20869233355978695,
+          "oldKL": 0.08468543547054541,
+          "newKL": 0.12400454331065225
+        },
+        {
+          "index": 15,
+          "candidate_hash": "c81946730b8775203699d43b0a720f13c35a6da962dfac27dd8f881f22027853",
+          "fullL": 0.2086883004195522,
+          "oldKL": 0.0846992717393892,
+          "newKL": 0.12398666919508806
+        },
+        {
+          "index": 16,
+          "candidate_hash": "d640543beba483c1d8a012c71ad0f4ae5a03ba7528b631f4415bdda8bcf47cf9",
+          "fullL": 0.2086684974513254,
+          "oldKL": 0.08472265784731217,
+          "newKL": 0.12394346190936414
+        },
+        {
+          "index": 17,
+          "candidate_hash": "57704c981bf48ab43b3e1bfafdcccc0ab56552c4bddd25a1320bf36e4febba75",
+          "fullL": 0.20862710072373375,
+          "oldKL": 0.08475611924980832,
+          "newKL": 0.12386856902779725
+        },
+        {
+          "index": 18,
+          "candidate_hash": "6735060653fa38e745cc8c01c2e52b5464e0a09601496f9f5f71993be68db927",
+          "fullL": 0.2085111260903087,
+          "oldKL": 0.08469933769933474,
+          "newKL": 0.12380920099947496
+        },
+        {
+          "index": 19,
+          "candidate_hash": "47325b8a3116545df77fe7db6bf878d8ace3da78b3ab43cfaa42da76834d126c",
+          "fullL": 0.20824937678511643,
+          "oldKL": 0.08446560204885514,
+          "newKL": 0.12378020664804443
+        },
+        {
+          "index": 20,
+          "candidate_hash": "a6336819f44ceb63b990f00f90822524c4dfc84645acca94c8dd07053a75eb71",
+          "fullL": 0.20770764888011745,
+          "oldKL": 0.08420523211970374,
+          "newKL": 0.12349506854536957
+        },
+        {
+          "index": 21,
+          "candidate_hash": "66adaf7932c3f67ba89e58eda8f74c18d671200014abd2df1a8b29893b9a7854",
+          "fullL": 0.20601402677342265,
+          "oldKL": 0.07777318958207552,
+          "newKL": 0.12818719861368594
+        },
+        {
+          "index": 22,
+          "candidate_hash": "a95641826c7a800b7b9cc739f62e902d88166b5f8e2a7f3c52584703b63bf237",
+          "fullL": 0.20378792167405085,
+          "oldKL": 0.07864612466800282,
+          "newKL": 0.12500140356215197
+        },
+        {
+          "index": 23,
+          "candidate_hash": "34813c391dab8e9f4817db6edea6f667bec528403d6dc6f3bfb62a15ca94a4e8",
+          "fullL": 0.20124035295719347,
+          "oldKL": 0.07235419478282176,
+          "newKL": 0.12857603162248227
+        },
+        {
+          "index": 24,
+          "candidate_hash": "1a5ea579d6d4b5789168f22c7c69e8f11ea7a4bcc5ab9efe2382d22b82e0ea3f",
+          "fullL": 0.20096665892074497,
+          "oldKL": 0.07324051655243997,
+          "newKL": 0.12737973323840504
+        },
+        {
+          "index": 25,
+          "candidate_hash": "abe5ab1b1c2551e8713c7eaf35df87de3d0786f545d689a79461fb2dd509b320",
+          "fullL": 0.20088026053732314,
+          "oldKL": 0.07262555947976122,
+          "newKL": 0.12792358536068613
+        },
+        {
+          "index": 26,
+          "candidate_hash": "9f39ac86249d9f8ee6c3291a1c36f7fe1e64a8736db76f7d36518eae11e0b75f",
+          "fullL": 0.20087739013465414,
+          "oldKL": 0.07240936053561306,
+          "newKL": 0.12813907331235597
+        },
+        {
+          "index": 27,
+          "candidate_hash": "76948d8ce33b103db41fa8f61188664619c6dcf8cafac50734f6cbdee147f5e8",
+          "fullL": 0.20087476159258422,
+          "oldKL": 0.07234096067779952,
+          "newKL": 0.1282070841440874
+        },
+        {
+          "index": 28,
+          "candidate_hash": "09504cd8630b6fc76293d455ce6be636d487f481e25421ec5a9705819b32a01f",
+          "fullL": 0.2008727919301779,
+          "oldKL": 0.07249009468029047,
+          "newKL": 0.1280562902961962
+        },
+        {
+          "index": 29,
+          "candidate_hash": "184dc179ad2c4f03b4e30aec4091cd1cd9f98941388927a9e8de0b6820436a56",
+          "fullL": 0.2008721841556993,
+          "oldKL": 0.07251575858686551,
+          "newKL": 0.12802953219463017
+        },
+        {
+          "index": 30,
+          "candidate_hash": "dcc04aee7c835c0f03a3ca48362bd49838cc733601e02726018cea9582e13674",
+          "fullL": 0.20087139971343826,
+          "oldKL": 0.07257109680361667,
+          "newKL": 0.12797270747630524
+        },
+        {
+          "index": 31,
+          "candidate_hash": "41535a910cefc73bbe89bbbb1d5f97f3c40184a3e945d38d45af12ccf0bb8b49",
+          "fullL": 0.20086877138564296,
+          "oldKL": 0.07269372404719408,
+          "newKL": 0.12784567518210974
+        },
+        {
+          "index": 32,
+          "candidate_hash": "cf1c9c8e446bfe1e1627b650f8bb3e001fb49c639c119cca748edaa2d000dd18",
+          "fullL": 0.2008628711697289,
+          "oldKL": 0.07285107913273342,
+          "newKL": 0.1276791309627233
+        },
+        {
+          "index": 33,
+          "candidate_hash": "cc959b359f5a678fee7d9b50849e090d67f038b8bc13a410df41fce6016c28fa",
+          "fullL": 0.2008468204194751,
+          "oldKL": 0.07308656446532974,
+          "newKL": 0.1274203214539556
+        },
+        {
+          "index": 34,
+          "candidate_hash": "d11899b8d31c7ec0dc7f7efbe0323db04db1a5d2f972fbb3f4d603b5bab4c50b",
+          "fullL": 0.20080758561407452,
+          "oldKL": 0.07334485888539162,
+          "newKL": 0.12710686747381048
+        },
+        {
+          "index": 35,
+          "candidate_hash": "aac7abc9a5dd46cc4b4852656f6882eb7d3106c55a175109d8a531f2e9c57531",
+          "fullL": 0.2007138184214834,
+          "oldKL": 0.0735536561387877,
+          "newKL": 0.12677024015504157
+        },
+        {
+          "index": 36,
+          "candidate_hash": "44f1c1f1518cf6ede9fbc6c76f30b8020aa0f1d0cda336ff760f9381d2cae07f",
+          "fullL": 0.2005098877224371,
+          "oldKL": 0.07363553410703404,
+          "newKL": 0.12640911904939212
+        },
+        {
+          "index": 37,
+          "candidate_hash": "03318f90d74353b928ba883050e8eed0b8f646a86aa5789b3354c5377775fecb",
+          "fullL": 0.20119568177642655,
+          "oldKL": 0.07265053645916315,
+          "newKL": 0.12786136388115035
+        },
+        {
+          "index": 38,
+          "candidate_hash": "b9cb1b28cbdd3f71a8976e6098f71e620b321162ca8fc1af960a9f351245277a",
+          "fullL": 0.20041039003728406,
+          "oldKL": 0.07330168283962243,
+          "newKL": 0.12659279655183092
+        },
+        {
+          "index": 39,
+          "candidate_hash": "fca4e2cfcff3355caeb6596e0369e72c73483e07dbb84e0f46c175467a1d20ef",
+          "fullL": 0.20004674162196434,
+          "oldKL": 0.07245565280250411,
+          "newKL": 0.12694890667163566
+        },
+        {
+          "index": 40,
+          "candidate_hash": "06dad89dff93bbd431d6f99bced565815498efc559772a4d1260140a6548b9d5",
+          "fullL": 0.19958430432941782,
+          "oldKL": 0.07212550857926495,
+          "newKL": 0.12662830686982376
+        },
+        {
+          "index": 41,
+          "candidate_hash": "32b718744e73dcd3f1a17f11c9cdc072a45a5d4898cd10a45bb09750a66191bb",
+          "fullL": 0.1994319694960169,
+          "oldKL": 0.06751631153260727,
+          "newKL": 0.13097233547672804
+        },
+        {
+          "index": 42,
+          "candidate_hash": "c19747f4a386f7aeb40aff752b51aba966b314e2b261cd671cc6870968457228",
+          "fullL": 0.19930832106474677,
+          "oldKL": 0.06915027183376725,
+          "newKL": 0.1292664180796084
+        },
+        {
+          "index": 43,
+          "candidate_hash": "c5961dc6cf476aa875e5f2aa68016d9460a2a5cf6ff635a3c39fb0b77991d845",
+          "fullL": 0.19923724080101565,
+          "oldKL": 0.06980011735508856,
+          "newKL": 0.12857842939591488
+        },
+        {
+          "index": 44,
+          "candidate_hash": "843667f535d7a5fac09e2f73973f6695d189a25418c01f5d682c41d32aeab30c",
+          "fullL": 0.1990435197105614,
+          "oldKL": 0.07078678523834749,
+          "newKL": 0.12742255276685294
+        },
+        {
+          "index": 45,
+          "candidate_hash": "1c7f9c4c63263f2c7131428781e0e85e763bcc31f8ae562e5e24450f9b7c3604",
+          "fullL": 0.19862641195116218,
+          "oldKL": 0.073572825821933,
+          "newKL": 0.12416954456396022
+        },
+        {
+          "index": 46,
+          "candidate_hash": "a5d2adc0c4346264c1c083f88f4abad2b43de8fef81739a2f34f9ae3ca0955a3",
+          "fullL": 0.19814291511729268,
+          "oldKL": 0.0745240920217454,
+          "newKL": 0.12265400958627418
+        },
+        {
+          "index": 47,
+          "candidate_hash": "eaf6f4214d981e3f8e8776a46c45baab014fdad2f571f3f646f07d9359849bec",
+          "fullL": 0.19767797982519825,
+          "oldKL": 0.07493244518160419,
+          "newKL": 0.1215711470259252
+        },
+        {
+          "index": 48,
+          "candidate_hash": "c089a2e4a89432da1f9d31ea92d5ef601ba68afdca3ce73600daa58d992275f6",
+          "fullL": 0.1975485985643805,
+          "oldKL": 0.07340912774593703,
+          "newKL": 0.12289295983235887
+        },
+        {
+          "index": 49,
+          "candidate_hash": "fc08e210693ef750419693badda345241e8245ca30d6bf5a743c4f5d1bed2ae8",
+          "fullL": 0.19737174255164996,
+          "oldKL": 0.07427512713853465,
+          "newKL": 0.12173026844520032
+        },
+        {
+          "index": 50,
+          "candidate_hash": "941061090a0fe6874ac1796cca497ccdc7ea56a876abb97d4af6723f9d9765a1",
+          "fullL": 0.1973357709267498,
+          "oldKL": 0.07384062548189632,
+          "newKL": 0.12219168171899861
+        },
+        {
+          "index": 51,
+          "candidate_hash": "9eea08215e87838da779a98a4ae35e6f95d1b0d09ab65096c118871c2553f208",
+          "fullL": 0.19733564103201373,
+          "oldKL": 0.07383131235419273,
+          "newKL": 0.12220327057533911
+        },
+        {
+          "index": 52,
+          "candidate_hash": "b2bba237f8258d93b1ba748e1bad1df96aa1dbf3dc9314dd894eb9037bc364cf",
+          "fullL": 0.19733517318831764,
+          "oldKL": 0.07380027633146624,
+          "newKL": 0.12223158604584175
+        },
+        {
+          "index": 53,
+          "candidate_hash": "f689c984a5ac9387edfaf47c05c3c3416f207fc61dfc65a6134ef526eb18b747",
+          "fullL": 0.1973350691100457,
+          "oldKL": 0.073789793815325,
+          "newKL": 0.12224125287585241
+        },
+        {
+          "index": 54,
+          "candidate_hash": "374eb9051d6884aac833152fcaa0f4833789878910feecd3f63fc85e7c5947b4",
+          "fullL": 0.19733484071328866,
+          "oldKL": 0.07378640400430218,
+          "newKL": 0.12224374330742252
+        },
+        {
+          "index": 55,
+          "candidate_hash": "d04ec5fa3da8eac877078fe52126a7132ed71aaef5fe31d5ddf205266234c209",
+          "fullL": 0.19733425139259078,
+          "oldKL": 0.0737683181859971,
+          "newKL": 0.12226018986982368
+        },
+        {
+          "index": 56,
+          "candidate_hash": "18035a530598b609fbbd4b393853f148a9b411d0552fc5a25faba8de7d3cfb13",
+          "fullL": 0.19733240317116743,
+          "oldKL": 0.07384570091478507,
+          "newKL": 0.12217912103222009
+        },
+        {
+          "index": 57,
+          "candidate_hash": "98c778f0747df460d1b217e36b7c7be895b765f8d8435e01fd6078de8f4b8302",
+          "fullL": 0.19732867509963098,
+          "oldKL": 0.07368205295686539,
+          "newKL": 0.12234029014655451
+        },
+        {
+          "index": 58,
+          "candidate_hash": "58babc1dd82f72f67c4beb33696db2b8b24355295be20fd82a297b1160ea0bf4",
+          "fullL": 0.1973198615428236,
+          "oldKL": 0.0737644787215467,
+          "newKL": 0.1222550298385887
+        },
+        {
+          "index": 59,
+          "candidate_hash": "9095400aea1fa2419cb9342841b4dc46dad7fc8c7aef9fa494396b4587e0d7f1",
+          "fullL": 0.19728846369801667,
+          "oldKL": 0.07383952782922176,
+          "newKL": 0.12217293519720661
+        },
+        {
+          "index": 60,
+          "candidate_hash": "f03b8278b74c066e8cf5a1aad855fede97b5d9a1778feb50b814e71352434053",
+          "fullL": 0.19722203389440848,
+          "oldKL": 0.07367725979324002,
+          "newKL": 0.12232460031476781
+        },
+        {
+          "index": 61,
+          "candidate_hash": "bcdcc6aadc3786e24190f49f74f1f6eafbf813109ab20f577820f3ed3d3c244f",
+          "fullL": 0.1971232367533167,
+          "oldKL": 0.07376961623928124,
+          "newKL": 0.1222049658275494
+        },
+        {
+          "index": 62,
+          "candidate_hash": "5e2ff2486b87d9595419684236be8fe0d8d3f70d613379ac065d26a946825728",
+          "fullL": 0.19700347988046468,
+          "oldKL": 0.07352693144894837,
+          "newKL": 0.12239476142889694
+        },
+        {
+          "index": 63,
+          "candidate_hash": "b362c6dab09eb002249d6f4ad5e5f3adfbaec22f8047887417879bc46c0ac6d7",
+          "fullL": 0.19702521627354538,
+          "oldKL": 0.07434292377660309,
+          "newKL": 0.12161185641929662
+        },
+        {
+          "index": 64,
+          "candidate_hash": "4d4c5c880a0bc078ac810727ca41ab194783f9823ea14b50c52530cc8e32c949",
+          "fullL": 0.1969566025074993,
+          "oldKL": 0.07386742780379763,
+          "newKL": 0.12201315348504368
+        },
+        {
+          "index": 65,
+          "candidate_hash": "6b592c58ab95874b2cc085ad51e717d806c43f029ed16889fa4f0daad3ac7b20",
+          "fullL": 0.19690032690074713,
+          "oldKL": 0.07370507701915097,
+          "newKL": 0.12211997827302472
+        },
+        {
+          "index": 66,
+          "candidate_hash": "4b347ba9605eb4df70121713ad45af09ad0447173612b3ced0f6f5fcdf68d767",
+          "fullL": 0.19687964530729504,
+          "oldKL": 0.0734361461566747,
+          "newKL": 0.12234819302263347
+        },
+        {
+          "index": 67,
+          "candidate_hash": "225364d798a2aa0bf49bae906cd1fed78b3ceda3b92f6e59597b7572dae8f10c",
+          "fullL": 0.19684298667025057,
+          "oldKL": 0.07317497633835988,
+          "newKL": 0.12252504778401857
+        },
+        {
+          "index": 68,
+          "candidate_hash": "c18b27cadbe3db98e03964293d78f02621571ec7ded04947bb508d0e05cea4b4",
+          "fullL": 0.19679624952356228,
+          "oldKL": 0.07194523136967348,
+          "newKL": 0.1236199174910377
+        }
+      ],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": false,
+      "encoded_holdout_pass": false,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26213,
+      "closure_count": 75,
+      "filtered": {
+        "index": 1,
+        "fullL": 0.8773647669812564,
+        "candidate_hash": "acd9dc478a3994a276b8565e7ccabfa116c7c87c52d2fd6ce9e7cd3c8d6aa325"
+      },
+      "unrestricted": {
+        "index": 75,
+        "fullL": 0.27896072764730817,
+        "candidate_hash": "76c267e975d26cb702ae78e6be93f941f770f2e9d72b48a43a5c08effe24d367"
+      },
+      "same_float64_candidate": false,
+      "fullL_gap_filtered_minus_unrestricted": 0.5984040393339483,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.16415847984106485,
+      "train_analog_bounds": {
+        "old_max": 0.6792450788463027,
+        "new_max": 0.14576650462680757
+      },
+      "C0_bound_stricter_than_train_analog": false,
+      "rejected_lower_fullL_than_incumbent": true,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": false,
+      "pre_codec_holdout_pass": false,
+      "encoded_holdout_pass": false,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26215,
+      "closure_count": 72,
+      "filtered": {
+        "index": 72,
+        "fullL": 0.1859800156409742,
+        "candidate_hash": "a07ab483abc722c6d47cd58146b118f2c34bce5cd773fc50a04f4bbadbe873ee"
+      },
+      "unrestricted": {
+        "index": 72,
+        "fullL": 0.1859800156409742,
+        "candidate_hash": "a07ab483abc722c6d47cd58146b118f2c34bce5cd773fc50a04f4bbadbe873ee"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.17252110366054937,
+      "train_analog_bounds": {
+        "old_max": 0.6025879656527702,
+        "new_max": 0.16897793291768787
+      },
+      "C0_bound_stricter_than_train_analog": false,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": true,
+      "encoded_holdout_pass": true,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26216,
+      "closure_count": 71,
+      "filtered": {
+        "index": 71,
+        "fullL": 0.1505964515176343,
+        "candidate_hash": "a7ae1bacf3e2c291e1935ca26ab81b7cabc818af3a970cc4f6f63ae1cea32efd"
+      },
+      "unrestricted": {
+        "index": 71,
+        "fullL": 0.1505964515176343,
+        "candidate_hash": "a7ae1bacf3e2c291e1935ca26ab81b7cabc818af3a970cc4f6f63ae1cea32efd"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.21461710982189078,
+      "train_analog_bounds": {
+        "old_max": 1.2607957017074474,
+        "new_max": 0.15191182846916862
+      },
+      "C0_bound_stricter_than_train_analog": false,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": false,
+      "encoded_holdout_pass": false,
+      "U_parameters_or_new_scores_computed": false
+    },
+    {
+      "seed": 26218,
+      "closure_count": 70,
+      "filtered": {
+        "index": 70,
+        "fullL": 0.15332170331547437,
+        "candidate_hash": "3b400135c7a60b54bc89252c89c326e4a90101076e3b87558b1d7ced97b48e25"
+      },
+      "unrestricted": {
+        "index": 70,
+        "fullL": 0.15332170331547437,
+        "candidate_hash": "3b400135c7a60b54bc89252c89c326e4a90101076e3b87558b1d7ced97b48e25"
+      },
+      "same_float64_candidate": true,
+      "fullL_gap_filtered_minus_unrestricted": 0.0,
+      "original_float32_fallback": false,
+      "C0_new_train": 0.15620730937253588,
+      "train_analog_bounds": {
+        "old_max": 0.837760491214143,
+        "new_max": 0.14395832694019872
+      },
+      "C0_bound_stricter_than_train_analog": false,
+      "rejected_lower_fullL_than_incumbent": false,
+      "training_only_rejected_witness_count": 0,
+      "witnesses": [],
+      "train_analog_pass": true,
+      "pre_codec_holdout_pass": false,
+      "encoded_holdout_pass": false,
+      "U_parameters_or_new_scores_computed": false
+    }
+  ],
+  "summary": {
+    "prefix_count": 16,
+    "same_U_F_float64_identity_count": 11,
+    "missing_unrestricted_parameter_seed_ids": [
+      26204,
+      26206,
+      26209,
+      26212,
+      26213
+    ],
+    "C0_bound_stricter_than_train_analog_count": 7,
+    "rejected_training_witness_prefix_count": 6,
+    "train_vs_pre_codec_holdout": {
+      "train_pass_holdout_pass": 7,
+      "train_pass_holdout_fail": 4,
+      "train_fail_holdout_pass": 1,
+      "train_fail_holdout_fail": 4
+    },
+    "train_vs_encoded_holdout": {
+      "train_pass_holdout_pass": 7,
+      "train_pass_holdout_fail": 4,
+      "train_fail_holdout_pass": 1,
+      "train_fail_holdout_fail": 4
+    },
+    "historical_D_fit_cpu_subtotal_seconds": 0.5570865990000007,
+    "historical_missing_D_fit_cpu_subtotal_seconds": 0.17135489600000042
+  },
+  "limitations": [
+    "Hashes do not reconstruct missing coefficient bytes.",
+    "Training witnesses are not scored on holdout or codec.",
+    "No hypothetical result replaces the E163 gate.",
+    "Existing E161 holdout is reused exploratory evidence, not independent confirmation."
+  ]
+}

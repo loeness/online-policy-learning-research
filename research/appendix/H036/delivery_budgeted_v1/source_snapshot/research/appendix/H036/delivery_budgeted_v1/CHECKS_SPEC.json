@@ -1,0 +1,117 @@
+{
+  "format": "h036_e165_remote_checks_spec_v1",
+  "status": "PENDING",
+  "test_file": "tests/test_retention_budgeted_search.py",
+  "expected_test_nodeids": [
+    "tests/test_retention_budgeted_search.py::test_frozen_training_objective_matches_hand_computed_ridge",
+    "tests/test_retention_budgeted_search.py::test_training_view_projection_ignores_holdout_and_search_rejects_prepared",
+    "tests/test_retention_budgeted_search.py::test_anchor_loader_checks_raw_bytes_three_input_identity_and_path_boundary",
+    "tests/test_retention_budgeted_search.py::test_constraint_switch_changes_only_the_first_accepted_halving",
+    "tests/test_retention_budgeted_search.py::test_strict_tie_and_no_better_trial_keep_the_D_incumbent",
+    "tests/test_retention_budgeted_search.py::test_float32_cast_failure_falls_back_to_C0_without_trying_a_later_step",
+    "tests/test_retention_budgeted_search.py::test_nonfinite_oracle_value_raises_instead_of_becoming_a_fallback",
+    "tests/test_retention_budgeted_search.py::test_repeated_trial_requests_hit_cache_and_stay_under_the_21_miss_cap",
+    "tests/test_retention_budgeted_search.py::test_cohort_permit_and_scoring_adapter_bind_D_then_report_only_locked_probes"
+  ],
+  "expected_test_functions": [
+    "test_frozen_training_objective_matches_hand_computed_ridge",
+    "test_training_view_projection_ignores_holdout_and_search_rejects_prepared",
+    "test_anchor_loader_checks_raw_bytes_three_input_identity_and_path_boundary",
+    "test_constraint_switch_changes_only_the_first_accepted_halving",
+    "test_strict_tie_and_no_better_trial_keep_the_D_incumbent",
+    "test_float32_cast_failure_falls_back_to_C0_without_trying_a_later_step",
+    "test_nonfinite_oracle_value_raises_instead_of_becoming_a_fallback",
+    "test_repeated_trial_requests_hit_cache_and_stay_under_the_21_miss_cap",
+    "test_cohort_permit_and_scoring_adapter_bind_D_then_report_only_locked_probes"
+  ],
+  "expected_count": 9,
+  "pytest_dependencies": {
+    "conftest_dependencies": [],
+    "built_in_fixtures": ["monkeypatch", "tmp_path"]
+  },
+  "pytest_user_properties": {
+    "storage": "request.node.user_properties",
+    "emission_phase": "autouse_fixture_teardown",
+    "consumer": "remote_validation_receipt.junitxml_testcase_properties",
+    "values_are_integers": true,
+    "junitxml_final_values_required": true,
+    "unprefixed_actual_count_properties": [
+      "synthetic_full_training_oracle_evaluations",
+      "synthetic_complete_score_calls"
+    ]
+  },
+  "synthetic_call_envelope": {
+    "full_training_oracle_evaluations_upper_bound": 1,
+    "complete_score_calls_upper_bound": 0,
+    "actual_count_source": "pytest_user_properties",
+    "actual_count_properties": [
+      "synthetic_full_training_oracle_evaluations",
+      "synthetic_complete_score_calls"
+    ],
+    "upper_bounds_are_not_observed_counts": true
+  },
+  "receipt_interpretation": {
+    "property_source_label": "test_property",
+    "mock_property_source_label": "mock",
+    "real_helper_runtime_status_before_receipt": "UNKNOWN",
+    "upper_bounds_are_not_receipt_measurements": true
+  },
+  "real_call_limits": {
+    "fit_calls_upper_bound": 0,
+    "real_prefix_file_reads_upper_bound": 0,
+    "real_stage0_scorer_calls_upper_bound": 0,
+    "fit_and_scorer_guard": "Tests abort before entering a real fitter or stage0 scorer; corresponding properties count attempted calls, not completed calls.",
+    "real_budgeted_training_oracle_property": "e165.real_budgeted_training_oracle_calls",
+    "real_protected_objective_property": "e165.real_protected_objective_and_gradient_calls",
+    "real_owner_kl_diagnostics_property": "e165.real_owner_kl_diagnostics_calls",
+    "real_protected_fit_property": "e165.real_protected_fit_calls",
+    "real_behavioral_fit_property": "e165.real_behavioral_fit_calls",
+    "real_fit_total_property": "e165.real_fit_calls",
+    "real_stage0_scorer_property": "e165.real_stage0_scorer_calls"
+  },
+  "mock_call_declaration": {
+    "classification": "mock",
+    "training_oracle_calls_upper_bound": 102,
+    "complete_score_calls_upper_bound": 2,
+    "training_oracle_actual_count_property": "e165.mock_training_oracle_calls",
+    "complete_score_actual_count_property": "e165.mock_stage0_scorer_calls",
+    "per_test_training_oracle_upper_bounds": {
+      "test_frozen_training_objective_matches_hand_computed_ridge": 0,
+      "test_training_view_projection_ignores_holdout_and_search_rejects_prepared": 0,
+      "test_anchor_loader_checks_raw_bytes_three_input_identity_and_path_boundary": 0,
+      "test_constraint_switch_changes_only_the_first_accepted_halving": 5,
+      "test_strict_tie_and_no_better_trial_keep_the_D_incumbent": 19,
+      "test_float32_cast_failure_falls_back_to_C0_without_trying_a_later_step": 5,
+      "test_nonfinite_oracle_value_raises_instead_of_becoming_a_fallback": 4,
+      "test_repeated_trial_requests_hit_cache_and_stay_under_the_21_miss_cap": 3,
+      "test_cohort_permit_and_scoring_adapter_bind_D_then_report_only_locked_probes": 66
+    },
+    "per_test_complete_score_upper_bounds": {
+      "test_cohort_permit_and_scoring_adapter_bind_D_then_report_only_locked_probes": 2
+    },
+    "upper_bounds_are_not_observed_counts": true
+  },
+  "pytest_payload": {
+    "invocation": "pytest.main inside admitted CHECKS supervisor/worker; never invoke this payload outside the measured stage",
+    "pytest_main_args": [
+      "-p",
+      "no:cacheprovider",
+      "-c",
+      "/data/robot/p001/e165/o001/pytest.ini",
+      "--rootdir=/data/robot/p001/e165/s001",
+      "--confcutdir=/data/robot/p001/e165/s001",
+      "--noconftest",
+      "--basetemp=/data/robot/p001/e165/c001/t001",
+      "--junitxml=/data/robot/p001/e165/c001/junit.xml",
+      "/data/robot/p001/e165/s001/tests/test_retention_budgeted_search.py"
+    ],
+    "launch_entry": "/data/robot/p001/e165/o001/launch_checks.sh",
+    "worker": "/data/robot/p001/e165/o001/checks_entry.py",
+    "junitxml_path": "/data/robot/p001/e165/c001/junit.xml"
+  },
+  "receipt": {
+    "source_of_truth": "remote_validation_receipt",
+    "state": "PENDING",
+    "runtime_execution_authorized_by_this_spec": false
+  }
+}

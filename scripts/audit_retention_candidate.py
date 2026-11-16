@@ -15,7 +15,7 @@ import math
 import random
 import re
 import sys
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any, Mapping, Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,6 +64,7 @@ EXPECTED_SOURCE_FILES = {
     "configs/retention_mechanism.json",
     "docs/RETENTION_MECHANISM_PROTOCOL.md",
 }
+E161_SOURCE_FILES = {"configs/e161.json", "configs/c1.json"}
 EXPECTED_EVIDENCE_KEYS = {
     "observations", "owner_indices", "source_slots", "generations", "bouts", "global_steps",
 }
@@ -127,8 +128,21 @@ def _checkpoint(path: Path) -> dict[str, Any]:
 
 def _relative_file(root: Path, relative: str) -> Path | None:
     """Resolve a manifest path only if it stays inside ``root``."""
-    candidate = (root / Path(relative.replace("/", "\\"))).resolve()
-    resolved = root.resolve()
+    raw = str(relative)
+    if not raw or "\x00" in raw:
+        return None
+    posix = PurePosixPath(raw.replace("\\", "/"))
+    windows = PureWindowsPath(raw)
+    # Manifest paths are portable relative names. Reject traversal syntax even
+    # when a particular combination would happen to resolve back inside root.
+    if (posix.is_absolute() or windows.is_absolute() or windows.drive or windows.root
+            or not posix.parts or ".." in posix.parts):
+        return None
+    try:
+        candidate = root.joinpath(*posix.parts).resolve()
+        resolved = root.resolve()
+    except (OSError, RuntimeError, ValueError):
+        return None
     if candidate != resolved and resolved not in candidate.parents:
         return None
     return candidate
@@ -187,11 +201,15 @@ def _audit_source_snapshot(audit: Audit, summary: Mapping[str, Any]) -> int | No
                     "source manifest must contain a sources mapping")
         return None
     names = {str(name).replace("\\", "/") for name in sources}
-    audit.check(EXPECTED_SOURCE_FILES <= names, "source_manifest_required", str(manifest_path),
-                "snapshot omits sources required to reproduce the audit", missing=sorted(EXPECTED_SOURCE_FILES - names))
+    config = summary.get("config", {})
+    analysis_role = str(config.get("analysis_role", "")) if isinstance(config, Mapping) else ""
+    is_e161 = "e161" in analysis_role.casefold()
+    expected_sources = EXPECTED_SOURCE_FILES | (E161_SOURCE_FILES if is_e161 else set())
+    audit.check(expected_sources <= names, "source_manifest_required", str(manifest_path),
+                "snapshot omits sources required to reproduce the audit", missing=sorted(expected_sources - names))
     # The source list is an explicit allowlist. This catches accidental inclusion
     # of private instructions or unrelated user data even when the hash is valid.
-    allowed = EXPECTED_SOURCE_FILES
+    allowed = expected_sources
     audit.check(names <= allowed, "source_manifest_allowlist", str(manifest_path),
                 "source manifest includes a file outside the frozen audit allowlist",
                 extra=sorted(names - allowed))
@@ -239,7 +257,8 @@ def _audit_source_snapshot(audit: Audit, summary: Mapping[str, Any]) -> int | No
             audit.check(False, f"{label}_check", str(manifest_path),
                         f"{label} provenance could not be verified", error=repr(exc))
     source_by_name = {str(name).replace("\\", "/"): record for name, record in sources.items()}
-    for summary_field, source_name in (("config_sha256", "configs/retention_candidate.json"),
+    config_source = "configs/e161.json" if is_e161 else "configs/retention_candidate.json"
+    for summary_field, source_name in (("config_sha256", config_source),
                                        ("protocol_sha256", "docs/RETENTION_CANDIDATE_PROTOCOL.md")):
         expected_hash = source_by_name.get(source_name, {}).get("sha256")
         actual_hash = summary.get(summary_field)
@@ -764,14 +783,22 @@ def _expected_prefix_schedule(seed: int, pair_kind: str, state: str, history_reg
 
 def _expected_future_schedule(seed: int, pair_kind: str, future_regime: str,
                               start_bout: int, config: Mapping[str, Any]) -> list[dict[str, Any]]:
-    """Rebuild the predeclared minority/dominant/dominant future blocks."""
+    """Rebuild the frozen future schedule, including E161's balanced blocks."""
     from online_rl.storage_decision import pair_mapping, task_name
 
     mapping = pair_mapping(seed, pair_kind)
-    dominant = 0 if future_regime == "old_major" else 1
-    minority = 1 - dominant
+    if future_regime not in {"old_major", "new_major", "balanced"}:
+        raise ValueError(f"unknown future regime: {future_regime}")
+    if future_regime == "balanced":
+        if int(config["future_blocks"]) != 4:
+            raise ValueError("balanced future schedule requires four alternating blocks")
+        dominant_by_block = (0, 1, 0, 1)
+    else:
+        dominant = 0 if future_regime == "old_major" else 1
+        dominant_by_block = (dominant,) * int(config["future_blocks"])
     result: list[dict[str, Any]] = []
-    for block in range(int(config["future_blocks"])):
+    for block, dominant in enumerate(dominant_by_block):
+        minority = 1 - dominant
         variant = block % 3
         entries = ((minority, variant), (dominant, variant), (dominant, (variant + 1) % 3))
         for within_block, (group, current_variant) in enumerate(entries):
